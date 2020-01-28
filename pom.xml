@@ -1,0 +1,91 @@
+<project>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.pih.openmrs</groupId>
+    <artifactId>openmrs-config-pihsl</artifactId>
+    <name>PIH Sierra Leone OpenMRS Configuration</name>
+    <description>Top-Level configuration for PIH Sierra Leone OpenMRS distro</description>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <developers>
+        <developer>
+            <name>Partners In Health</name>
+        </developer>
+    </developers>
+
+    <organization>
+        <name>Partners In Health</name>
+        <url>http://pih.org</url>
+    </organization>
+
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/public</url>
+        </repository>
+    </repositories>
+
+    <build>
+        <filters>
+            <filter>${project.build.directory}/openmrs-packager-config/constants.properties</filter>
+        </filters>
+        <plugins>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.openmrs.maven.plugins</groupId>
+                <artifactId>openmrs-packager-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <id>generate-resource-filters</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>generate-resource-filters</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>compile-configurations</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile-configurations</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>package-configurations</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>package-configurations</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
+
+
