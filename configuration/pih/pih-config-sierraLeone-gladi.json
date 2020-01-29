@@ -1,0 +1,26 @@
+
+{
+  "components": [
+    "activeVisits",
+    "allergies",
+    "checkIn",
+    "clinicianDashboard",
+    "dataExports",
+    "idcardPrinting",
+    "labResults",
+    "labs",
+    "managePrinters",
+    "mchForms",
+    "myAccount",
+    "overviewReports",
+    "patientRegistration",
+    "primaryCare",
+    "relationships",
+    "systemAdministration",
+    "visitManagement",
+    "visitNote",
+    "vitals",
+    "dispensing"
+  ],
+  "idCardLabel": "Wellbody Clinic Dorma"
+}
