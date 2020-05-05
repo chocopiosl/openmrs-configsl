@@ -13,23 +13,23 @@ or "config-pihemr".
 Example directory structure:
 
 openmrs-config-pihemr
-openmrs-config-zl
+openmrs-config-pihsl
 
 or
 
 config-pihemr
-config-zl
+config-pihsl
 
 ### Steps to deploy new changes to your local development server
 
 Run "./install.sh [serverId]" where [serverId] is the name of the SDK server you are deploying to.  This will first build 
-the config-pihemr project, then build the config-zl project, (pulling in any changes to config-pihemr),
+the config-pihemr project, then build the config-pihsl project, (pulling in any changes to config-pihemr),
 and finally deploying the changes to the server specified by [serverId].
 
 #### To enable watching, you run the following:
 
 "./watch.sh [serverId]" where [serverId] is the name of the SDK server you are deploying too.  This will watch
-*both* the config-pihemr and config-zl projects for changes and redeploy when there are changes.  It runs
+*both* the config-pihemr and config-pihsl projects for changes and redeploy when there are changes.  It runs
 indefinitely, so you will need to cancel it with a "Ctrl-C".
 
 
@@ -42,7 +42,7 @@ In order to facilitate deploying configurations easily into an OpenMRS SDK serve
 to either of the above commands to specify that the compiled configuration should also be copied to an existing 
 OpenMRS SDK server:
 
-`mvn clean compile -DserverId=zl` - Will compile as above, and copy the resulting configuration to `~/openmrs/zl/configuration`
+`mvn clean compile -DserverId=pihsl` - Will compile as above, and copy the resulting configuration to `~/openmrs/pihsl/configuration`
 
 If the configuration package you are building will be depended upon by another configuration package, you must "install" it
 in order for the other package to be able to pick it up.
