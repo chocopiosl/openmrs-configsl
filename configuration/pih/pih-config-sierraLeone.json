@@ -13,7 +13,7 @@
   "visitsPageWithSpecificUrl": "/pihcore/visit/visit.page?patient={{patient.uuid}}&visit={{visit.uuid}}#/overview",
   "providerIdentifierPrefix": "W",
 
-  "dispositionConfig": "pih-dispositions-sierraLeone.json",
+  "dispositionConfig": "file:configuration/pih/pih-dispositions-sierraLeone.json",
   "addressConfig": {
     "manualFields": ["address2"],
     "shortcutField": "stateProvince"
