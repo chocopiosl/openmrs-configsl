@@ -22,5 +22,4 @@ designs:
 config:
   category: "dataExport"
   order: 10
-  components:
-     - "allDataExports"
+
