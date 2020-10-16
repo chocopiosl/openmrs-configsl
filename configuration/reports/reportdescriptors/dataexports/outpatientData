@@ -1,7 +1,7 @@
 key: "sloutpatientdataexport"
 uuid: "b2212f22-21e3-43bd-8e88-7f1e83d43920"
-name: "mirebalaisreports.sloutpatientdataexport.name"
-description: "mirebalaisreports.sloutpatientdataexport.description"
+name: "Outpatient Data"
+description: "Outpatient Data"
 parameters:
   - key: "startDate"
     type: "java.util.Date"
