@@ -19,11 +19,11 @@ create temporary table temp_report
     age_at_encounter            int, 
     gender                      char(1),
     patient_address             varchar(1000),
-    Occupation 					varchar(50),
+    occupation 			varchar(255),
     height                      double,
     weight                      double,
     z_score                     double,
-    muac                        double,   
+    muac_in_cm                  double,   
     type_of_visit               varchar(255),
     fp_offered_and_accepted     varchar(255),
     malaria_rdt                 varchar(255),
@@ -98,13 +98,15 @@ update temp_report set patient_name = person_name(patient_id);
 update temp_report set gender = gender(patient_id);
 update temp_report set Patient_primary_id = patient_identifier(patient_id, metadata_uuid('org.openmrs.module.emrapi', 'emr.primaryIdentifierType'));
 update temp_report set patient_address = person_address(patient_id);
--- update temp_report set Occupation = main_Occupation(patient_id);
+update temp_report
+  inner join obs o on obs_id = latestObs(patient_id, concept_from_mapping('PIH','1304'),null)
+set occupation = concept_name(value_coded,'en');
 
 ## pull in observations from that visit
 update temp_report set height = obs_from_visit_value_numeric(Visit_id,'CIEL',5090);
 update temp_report set weight = obs_from_visit_value_numeric(Visit_id,'CIEL',5089);
 update temp_report set z_score = obs_from_visit_value_numeric(Visit_id,'CIEL',162584);
-update temp_report set muac = obs_from_visit_value_numeric(Visit_id,'PIH',7956);
+update temp_report set muac_in_cm = obs_from_visit_value_numeric(Visit_id,'PIH',7956)/10;
 update temp_report set type_of_visit = obs_from_visit_value_coded_list(Visit_id,'PIH',8879,@locale);  
 update temp_report set malaria_rdt= obs_from_visit_value_coded_list(Visit_id,'CIEL',1643,@locale);
 update temp_report set fp_offered_and_accepted = obs_from_visit_value_coded_list(Visit_id,'CIEL','1382',@locale); 
