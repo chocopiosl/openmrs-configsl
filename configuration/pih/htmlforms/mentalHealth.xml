@@ -245,12 +245,12 @@
 
                 // set the encounter location to the visit location
                 // this is to prevent assigning to encounter a location different than its visit location, except Mirebalais Hospital which has just one location
-                var mirebalaisVisitLocationUuid = 'a084f714-a536-473b-94e6-ec317b152b43'
+                var sierraLeoneVisitLocationUuid = '8d6c993e-c2cc-11de-8d13-0010c6dffd0f'
                 var visitLocationUuid = '<lookup expression="visit.visit.location.uuid"/>';
                 var visitLocationId = '<lookup expression="visit.visit.location.id"/>';
 
                 $(function() {
-                    if(visitLocationId != '' &amp;&amp; visitLocationUuid != mirebalaisVisitLocationUuid) {
+                    if(visitLocationId != '' &amp;&amp; visitLocationUuid != sierraLeoneVisitLocationUuid) {
                         setValue('encounterLocation.value', visitLocationId);
 
                         getField('encounterLocation.value').change(function() {
@@ -267,7 +267,7 @@
 
                 beforeSubmit.push(function() {
                     var encounterLocationId = getValue('encounterLocation.value');
-                    if (encounterLocationId !== visitLocationId &amp;&amp; visitLocationUuid != mirebalaisVisitLocationUuid) {
+                    if (encounterLocationId !== visitLocationId &amp;&amp; visitLocationUuid != sierraLeoneVisitLocationUuid) {
                         getField('encounterLocation.error').text("<uimessage code='mirebalais.encounterLocation.hasToMatch.visitLocation'/>").show();
                         return false;
                     } else {
@@ -391,8 +391,8 @@
     <section id="mh_refer" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.mentalhealth.referral">
 
-        <!-- Program enrollment -->
-        <enrollInProgram programId="Mental Health" locationTag="Program Location" />
+        <!-- ToDo:  Program enrollment
+        <enrollInProgram programId="Mental Health" locationTag="Visit Location" /> -->
 
         <div class="section-container">
             <div class="two-columns">
