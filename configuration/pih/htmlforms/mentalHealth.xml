@@ -241,42 +241,6 @@
 
         <!-- users with retroConsultNote privilege can edit provider, location, and date for both retro and active visits -->
         <includeIf velocityTest="$user.hasPrivilege('Task: emr.retroConsultNote')">
-            <script type="text/javascript">
-
-                // set the encounter location to the visit location
-                // this is to prevent assigning to encounter a location different than its visit location, except Mirebalais Hospital which has just one location
-                var sierraLeoneVisitLocationUuid = '8d6c993e-c2cc-11de-8d13-0010c6dffd0f'
-                var visitLocationUuid = '<lookup expression="visit.visit.location.uuid"/>';
-                var visitLocationId = '<lookup expression="visit.visit.location.id"/>';
-
-                $(function() {
-                    if(visitLocationId != '' &amp;&amp; visitLocationUuid != sierraLeoneVisitLocationUuid) {
-                        setValue('encounterLocation.value', visitLocationId);
-
-                        getField('encounterLocation.value').change(function() {
-                            var location = getValue('encounterLocation.value');
-                            if (location !== visitLocationId) {
-                                getField('encounterLocation.error').text("<uimessage code='mirebalais.encounterLocation.hasToMatch.visitLocation'/>").show();
-                            } else {
-                                getField('encounterLocation.error').hide();
-                            }
-                        });
-                    }
-                });
-
-
-                beforeSubmit.push(function() {
-                    var encounterLocationId = getValue('encounterLocation.value');
-                    if (encounterLocationId !== visitLocationId &amp;&amp; visitLocationUuid != sierraLeoneVisitLocationUuid) {
-                        getField('encounterLocation.error').text("<uimessage code='mirebalais.encounterLocation.hasToMatch.visitLocation'/>").show();
-                        return false;
-                    } else {
-                      return true;
-                    }
-                    return false;
-                });
-
-            </script>
             <div id="who-when-where">
                 <p id="who">
                     <label>
