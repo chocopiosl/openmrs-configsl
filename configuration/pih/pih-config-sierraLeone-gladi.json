@@ -21,7 +21,8 @@
     "visitNote",
     "vitals",
     "dispensing",
-    "mentalHealth"
+    "mentalHealth",
+    "programs"
   ],
   "idCardLabel": "Wellbody Clinic Dorma"
 }

@@ -27,6 +27,7 @@
     "Login Location": ["Wellbody Clinic", "Wellbody MCH"],
     "Maternal and Child Location": ["Wellbody Clinic", "Wellbody MCH"],
     "Medical Record Location": ["Wellbody Clinic", "Wellbody MCH"],
+    "Mental Health": ["Wellbody Clinic", "Wellbody MCH"],
     "Program Location": ["Wellbody Clinic", "Wellbody MCH"],
     "Registration Location": ["Wellbody Clinic", "Wellbody MCH"],
     "Vitals Location": ["Wellbody Clinic", "Wellbody MCH"]
