@@ -171,6 +171,15 @@
         .simple-form-ui select {
             min-width: unset;
         }
+
+        form input[type="radio"], .form input[type="radio"] {
+            float: none;
+            display: inline-block;
+        }
+
+        .side-by-side label {
+            display: inline-block;
+        }
     </style>
 
     <ifMode mode="VIEW" include="false">
@@ -392,228 +401,349 @@
         </div>
     </section>
 
-<!--Patients History and exposures -->
-<section id="mh_patientHistory" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-         headerCode="pihcore.patientHistoryExposure">
+    <!--Patients History and exposures -->
+    <section id="mh_patientHistory" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.patientHistoryExposure">
 
-    <div class="section-container">
-    <div class="two-columns">
-      <p>
-                      <label>
-                          <uimessage code="pihcore.mch.hivTest"/>
-                      </label>
-                      <obs conceptId="PIH:1040"
-                           style="radio" answerConceptIds="PIH:YES,PIH:NO"
-                           answerCodes="Yes,No"  answerSeparator=""/>
-                      <obs conceptId="PIH:2516" labelCode="pihcore.hiv.startDateARV" />
-                      <obs conceptId="PIH:3052" labelCode="TB Smear Result" />
+        <div class="section-container">
+            <div class="two-columns">
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="pihcore.mch.hivTest"/>
+                    </label>
+                    <obs conceptId="PIH:1040"
+                         style="radio" answerConceptIds="PIH:YES,PIH:NO"
+                         answerCodes="Yes,No" answerSeparator=""/>
+                    <br/>
 
-        </p>
-        <div>
-        <p>
-                  <label>
-                      <uimessage code="pihcore.patientsHistoryOfDrugUse" />:
-                  </label>
-                  <repeat with="['CIEL:70468'],['PIH:12391'],['PIH:5841']">
-                          <obs conceptId="PIH:HISTORY OF ILLEGAL DRUGS" answerConceptId="{0}"
-                               style="checkbox"/>
-                  </repeat>
-                  <obs conceptId="PIH:HISTORY OF ILLEGAL DRUGS" answerConceptId="PIH:OTHER"
-                      style="checkbox" commentFieldLabel=" " />
+                    <obs conceptId="PIH:2516" labelCode="pihcore.hiv.startDateARV"/>
+                    <br/>
 
-                      <label>
-                          <uimessage code="pihcore.lab.pulmonaryTuberculosisTestDone"/>
-                      </label>
-                      <obs conceptId="PIH:1547"
-                           style="checkbox" answerConceptIds="PIH:YES,PIH:NO"
-                           answerCodes="Yes,No" answerSeparator=""/>
-          </p>
+                    <obs conceptId="PIH:3052" labelCode="TB Smear Result"/>
+
+                    <label>
+                        <uimessage code="pihcore.extraPulmonaryTB"/>
+                    </label>
+                    <obs conceptId="PIH:1547"
+                         style="radio" answerConceptIds="PIH:YES,PIH:NO"
+                         answerCodes="Yes,No" answerSeparator=""/>
+                </p>
+
+                <p>
+                    <label>
+                        <uimessage code="pihcore.exposures"/>
+                    </label>
+
+                    <!-- ToDo:  This is likely not the right question:  History of illegal drugs
+                          Replaced with Substance abuse (CIEL:112603)-->
+                    <repeat with="['CIEL:159449'],['PIH:12391'],['PIH:5841']">
+                        <obs conceptId="CIEL:112603" answerConceptId="{0}"
+                             style="checkbox"/>
+
+                    </repeat>
+                    <obs conceptId="CIEL:112603" answerConceptId="PIH:OTHER"
+                         style="checkbox" commentFieldLabel=" "/>
+
+                </p>
+                <br/><br/>
+
+
+            </div>
+        </div>
+    </section>
+
+    <section id="habits" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.habits">
+        <div class="section-container">
+            <div class="two-columns">
+                <!-- Alcohol use -->
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="pihcore.habits.alcohol"/>:
+                    </label>
+                    <obs conceptId="CIEL:159449" answerConceptIds="CIEL:159450,CIEL:159452"
+                         answerCodes="Current,Past"
+                         answerSeparator="" style="radio"/>
+                    <br/>
+                    <label>
+                        <uimessage code="pihcore.habits.daysPerWeek"/>:
+                    </label>
+                    <span class="small">
+                        <obs conceptId="PIH:2243" showUnits="pihcore.units.daysPerWeek" />
+                    </span>
+                    <br/>
+                    <label>
+                        <uimessage code="pihcore.habits.drinksPerDay"/>:
+                    </label>
+                    <span class="small">
+                        <obs conceptId="PIH:2246" showUnits="pihcore.units.drinksPerDay" />
+                    </span>
+                    <br/>
+                    <label>
+                        <uimessage code="pihcore.habits.alcoholType"/>:
+                    </label>
+                    <span class="small">
+                        <obs conceptId="CIEL:159453" answerConceptId="CIEL:5622" answerCode="pihcore.other"
+                             showCommentField="true" commentFieldCode="" />
+                    </span>
+                </p>
             </div>
 
-    </div>
-    </div>
-</section>
+            <div class="two-columns">
+                <!-- Cannabis use -->
+                <p class="side-by-side">
+                    <label>
+                        Jamba (Marijuana):
+                    </label>
+                    <obs conceptId="PIH:12391" answerConceptIds="CIEL:159450,CIEL:159452"
+                         answerCodes="Current,Past"
+                         answerSeparator="" style="radio"/>
 
-<!--Family History-->
-<section id="mh_familyhistory" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-         headerCode="zl.consultNote.familyHistory.title">
-  <div class="section-container">
-    <label>
-        <uimessage code="ui.i18n.Program.name.69e6a46d-674e-4281-99a0-4004f293ee57"/>
-    </label>
-    <obs conceptId="PIH:155"
-         style="radio" answerConceptIds="PIH:YES,PIH:NO"
-         answerCodes="Yes,No"  answerSeparator="" required="true"/>
+                    <br/><br/>
+                    <label>
+                        <uimessage code="pihcore.habits.ifYesDuration"/>
+                    </label>
+                    <span class="small">
+                        <obs conceptId="PIH:13239" showUnits="pihcore.units.years" />
+                    </span>
+                </p>
+            </div>
+            <br/><br/>
 
-    <label>
-       <uimessage code="pihcore.familyHistoryMentalIllness"/>
-    </label>
-    <obs conceptId="CIEL:140526"
-        style="radio" answerConceptIds="PIH:YES,PIH:NO"
-        answerCodes="Yes,No"  answerSeparator="" required="true"/>
+            <div class="two-columns">
+                <!-- Drug use -->
+                <p class="side-by-side">
+                    <label><uimessage code="pihcore.habits.drugs"/>:
+                    </label>
+                    <obs conceptId="CIEL:162556" answerConceptIds="CIEL:159450,CIEL:159452"
+                         answerCodes="Current,Past"
+                         answerSeparator="" style="radio"/>
 
-        <label>
-           <uimessage code="pihcore.behavioralproblems"/>
-        </label>
-        <obs conceptId="CIEL:137668	"
-            style="radio" answerConceptIds="PIH:YES,PIH:NO"
-            answerCodes="Yes,No"  answerSeparator="" required="true"/>
+                    <br/><br/><br/>
+                    <label>
+                        <uimessage code="pihcore.habits.ifYesDuration"/>
+                    </label>
+                    <span class="small">
+                        <obs conceptId="PIH:12997" showUnits="pihcore.units.years"/>
+                    </span>
+                    <br/>
+                    <label>
+                        <uimessage code="pihcore.habits.drugName"/>
+                    </label>
+                    <span class="small">
+                        <obs conceptId="PIH:6489"/>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </section>
 
-  </div>
-</section>
 
+    <!--Family History-->
+    <section id="mh_familyhistory" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="zl.consultNote.familyHistory.title">
+        <div class="section-container">
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="ui.i18n.Program.name.69e6a46d-674e-4281-99a0-4004f293ee57"/>
+                </label>
+                <obs conceptId="CIEL:152450"
+                     style="radio" answerConceptIds="PIH:YES,PIH:NO"
+                     answerCodes="Yes,No" answerSeparator="" required="true"/>
+                <br/>
 
-<!--Current drug use-->
-<section id="mh_currentuse" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-         headerCode="pihcore.current.label">
-         <div class="section-container">
-           <label>
-               <uimessage code="History of marijuana use"/>
-           </label>
-           <obs conceptId="PIH:12391"
-                style="radio" answerConceptIds="PIH:YES,PIH:NO"
-                answerCodes="Yes,No"  answerSeparator="" required="true"/>
+                <label>
+                    <uimessage code="pihcore.mentalIllness"/>
+                </label>
+                <obs conceptId="CIEL:140526"
+                     style="radio" answerConceptIds="PIH:YES,PIH:NO"
+                     answerCodes="Yes,No" answerSeparator="" required="true"/>
+                <br/>
+
+                <label>
+                    <uimessage code="pihcore.behavioralProblems"/>
+                </label>
+                <obs conceptId="CIEL:152465"
+                     style="radio" answerConceptIds="PIH:YES,PIH:NO"
+                     answerCodes="Yes,No" answerSeparator="" required="true"/>
+            </p>
+        </div>
+    </section>
+
+    <!--Current drug use-->
+    <section id="mh_currentuse" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.current.label">
+        <div class="section-container">
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="History of marijuana use"/>
+                </label>
+                <obs conceptId="PIH:12391"
+                     style="radio" answerConceptIds="PIH:YES,PIH:NO"
+                     answerCodes="Yes,No" answerSeparator="" required="true"/>
+                <br/>
 
                 <label>
                     <uimessage code="pihcore.ncd.hx_alcohol_use"/>
                 </label>
-                <obs conceptId="CIEL:70468"
+                <obs conceptId="CIEL:159449"
                      style="radio" answerConceptIds="PIH:YES,PIH:NO"
-                     answerCodes="Yes,No"  answerSeparator="" required="true"/>
+                     answerCodes="Yes,No" answerSeparator="" required="true"/>
+                <br/>
 
-                 <obs conceptId="PIH:2546" answerConceptId="PIH:OTHER"
-                         style="checkbox" commentFieldLabel=" " />
-         </div>
-</section>
-<!--presentingFeatures-->
-<section id="mh_presentingFeatures" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-         headerCode="pihcore.presentingFeatures">
-         <div class="section-container">
-           <p>
-               <label>
-                   <uimessage code="pihcore.presentingFeatures"/>:
-               </label>
-               <repeat with="['CIEL:139146'],['CIEL:137668'],['CIEL:137646'],['CIEL:165554'],['PIH:206']">
-                   <obs conceptId="PIH:11505" answerConceptId="{0}"
-                        style="checkbox"/>
-               </repeat>
-             <obs conceptId="PIH:11505" answerConceptId="PIH:OTHER"
-                 style="checkbox" commentFieldLabel=" " />
-           </p>
+                <obs conceptId="PIH:2546" answerConceptId="PIH:OTHER"
+                     style="checkbox" commentFieldLabel=""/>
+            </p>
+        </div>
+    </section>
 
+    <!--presentingFeatures-->
+    <section id="mh_presentingFeatures" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.presentingFeatures">
+        <div class="section-container">
+            <p>
+                <label>
+                    <uimessage code="pihcore.presentingFeatures"/>:
+                </label>
+                <repeat with="['CIEL:139146'],['CIEL:137668'],['CIEL:137646'],['CIEL:165554'],['PIH:206']">
+                    <obs conceptId="PIH:11505" answerConceptId="{0}"
+                         style="checkbox"/>
+                </repeat>
+                <obs conceptId="PIH:11505" answerConceptId="PIH:OTHER"
+                     style="checkbox" commentFieldLabel=" "/>
+            </p>
+        </div>
+    </section>
 
-       </div>
+    <!---Mental state exam -->
+    <section id="mh_mentalStateExam" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.exam.mental_exam.title">
+        <div class="section-container">
+            <label>
+                <uimessage code="pihcore.exam.mental_exam.title"/>:
+            </label>
+            <repeat with="['CIEL:119537'],['CIEL:166050'],['CIEL:137668'],['CIEL:137646'],['CIEL:119570'],['CIEL:139146'],['CIEL:166051']">
+                <obs conceptId="CIEL:163043" answerConceptId="{0}"
+                     style="checkbox"/>
+            </repeat>
+            <obs conceptId="PIH:HISTORY OF ILLEGAL DRUGS" answerConceptId="PIH:OTHER"
+                 style="checkbox" commentFieldLabel=" "/>
+        </div>
+    </section>
 
+    <!--Suicide Risk-->
+    <section id="mh-suicide" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.mentalhealth.suicideEval">
+        <div class="section-container">
 
+            <table>
+                <tr>
+                    <th></th>
+                    <th>
+                        <label>
+                            <uimessage code="pihcore.mentalhealth.suicideIdea"/>
+                        </label>
+                    </th>
+                    <th>
+                        <label>
+                            <uimessage code="pihcore.mentalhealth.suicideAttempt"/>
+                        </label>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <label>
+                            <uimessage code="pihcore.past.label"/>
+                        </label>
+                    </th>
+                    <td>
+                        <p class="side-by-side">
+                            <obs conceptId="CIEL:1628" style="radio" answerConceptIds="PIH:YES,PIH:NO"
+                                 answerCodes="Yes,No" answerSeparator="" required="true"/>
+                        </p>
+                    </td>
+                    <td>
+                        <!-- History of suicide attempt -->
+                        <p class="side-by-side">
+                            <obs conceptId="CIEL:1628" style="radio" answerConceptIds="PIH:YES,PIH:NO"
+                                 answerCodes="Yes,No" answerSeparator="" required="true"/>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label>
+                            <uimessage code="pihcore.current.label"/>
+                        </label>
+                    </th>
+                    <td>
+                        <!-- Suicidal ideation -->
+                        <p class="side-by-side">
+                            <obs conceptId="PIH:Mental health diagnosis" style="radio" answerConceptIds="PIH:YES,PIH:NO"
+                                 answerCodes="Yes,No" answerSeparator="" required="true"/>
+                        </p>
+                    </td>
+                    <td>
+                        <!-- Suicide attempt -->
+                        <p class="side-by-side">
+                            <obs conceptId="PIH:Mental health diagnosis" style="radio" answerConceptIds="PIH:YES,PIH:NO"
+                                 answerCodes="Yes,No" answerSeparator="" required="true"/>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                    </td>
+                    <td>
 
-</section>
-<!---Mental state exam -->
-<section id="mh_mentalStateExam" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-         headerCode="pihcore.exam.mental_exam.title">
-         <div class="section-container">
-           <label>
-               <uimessage code="pihcore.exam.mental_exam.title" />:
-           </label>
-           <repeat with="['CIEL:119537'],['CIEL:166050'],['CIEL:137668'],['CIEL:137646'],['CIEL:119570'],['CIEL:139146'],['CIEL:166051']">
-                   <obs conceptId="CIEL:163043" answerConceptId="{0}"
-                        style="checkbox"/>
-           </repeat>
-           <obs conceptId="PIH:HISTORY OF ILLEGAL DRUGS" answerConceptId="PIH:OTHER"
-               style="checkbox" commentFieldLabel=" " />
-         </div>
-</section>
+                        <!-- Date of suicide attempt -->
+                        <label>
+                            <uimessage code="pihcore.mentalhealth.dateSuicideAttempt"/>
+                        </label>
+                        <obs conceptId="CIEL:165530"/>
+                    </td>
+                </tr>
+            </table>
 
-<!--Suicide Risk-->
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Psychosocial counseling"/>
+                </label>
+                <obs conceptId="PIH:PSYCHOSOCIAL COUNSELING" style="radio" answerConceptIds="PIH:YES,PIH:NO"
+                     answerCodes="Yes,No" answerSeparator=""/>
+            </p>
+        </div>
+    </section>
 
-<section id="mh-suicide" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-         headerCode="pihcore.mentalhealth.suicideEval">
-    <div class="section-container">
+    <!--Diagnoses-->
+    <section id="mh-diagnoses" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.diagnoses.label">
+        <div class="section-container">
+            <div class="two-columns">
+                <p>
+                    <obs conceptId="PIH:Mental health diagnosis" answerConceptSetIds="PIH:HUM Psychological diagnosis"
+                         style="autocomplete"/>
+                </p>
+                <p>
+                    <obs conceptId="PIH:Mental health diagnosis" answerConceptSetIds="PIH:HUM Psychological diagnosis"
+                         style="autocomplete"/>
+                </p>
+                <p>
+                    <obs conceptId="PIH:Mental health diagnosis" answerConceptSetIds="PIH:HUM Psychological diagnosis"
+                         style="autocomplete"/>
+                </p>
+                <p>
+                    <obs conceptId="PIH:Mental health diagnosis" answerConceptSetIds="PIH:HUM Psychological diagnosis"
+                         style="autocomplete"/>
+                </p>
+                <obs conceptId="PIH:Mental health diagnosis" answerConceptId="PIH:OTHER"
+                     style="checkbox" commentFieldLabel=""/>
+            </div>
+        </div>
+    </section>
 
-        <table>
-            <tr>
-                <th></th>
-                <th>
-                    <label><uimessage code="pihcore.mentalhealth.suicideIdea"/></label>
-                </th>
-                <th>
-                    <label><uimessage code="pihcore.mentalhealth.suicideAttempt"/></label>
-                </th>
-            </tr>
-            <tr>
-                <th><label><uimessage code="pihcore.past.label"/></label></th>
-                <td>
-                    <obs conceptId="CIEL:1628" style="radio" answerConceptIds="PIH:YES,PIH:NO"
-                      answerCodes="Yes,No"  answerSeparator="" required="true"/>
-                </td>
-                <td>
-                    <!-- History of suicide attempt -->
-                    <obs conceptId="CIEL:1628" style="radio" answerConceptIds="PIH:YES,PIH:NO"
-                      answerCodes="Yes,No"  answerSeparator="" required="true"/>
-                </td>
-            </tr>
-            <tr>
-                <th><label><uimessage code="pihcore.current.label"/></label></th>
-                <td>
-                    <!-- Suicidal ideation -->
-                    <obs conceptId="PIH:Mental health diagnosis" style="radio" answerConceptIds="PIH:YES,PIH:NO"
-                      answerCodes="Yes,No"  answerSeparator="" required="true"/>
-                </td>
-                <td>
-                    <!-- Suicide attempt -->
-                    <obs conceptId="PIH:Mental health diagnosis" style="radio" answerConceptIds="PIH:YES,PIH:NO"
-                      answerCodes="Yes,No"  answerSeparator="" required="true"/>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                </td>
-                <td>
-
-                    <!-- Date of suicide attempt -->
-                    <label>
-                        <uimessage code="pihcore.mentalhealth.dateSuicideAttempt"/>
-                    </label>
-                    <obs conceptId="CIEL:165530"/>
-                </td>
-            </tr>
-        </table>
-
-        <label>
-            <uimessage code="Psychosocial counseling"/>
-        </label>
-        <obs conceptId="PIH:PSYCHOSOCIAL COUNSELING" style="radio" answerConceptIds="PIH:YES,PIH:NO"
-          answerCodes="Yes,No"  answerSeparator=""/>
-    </div>
-</section>
-<!--Diagnoses-->
-<section id="mh-diagnoses" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-         headerCode="pihcore.diagnoses.label">
-    <div class="section-container">
-    <div class="two-columns">
-        <p>
-            <obs conceptId="PIH:Mental health diagnosis" answerConceptSetIds="PIH:HUM Psychological diagnosis"
-                 style="autocomplete"/>
-        </p>
-        <p>
-            <obs conceptId="PIH:Mental health diagnosis" answerConceptSetIds="PIH:HUM Psychological diagnosis"
-                 style="autocomplete"/>
-        </p>
-        <p>
-        <obs conceptId="PIH:Mental health diagnosis" answerConceptSetIds="PIH:HUM Psychological diagnosis"
-             style="autocomplete"/>
-        </p>
-        <p>
-        <obs conceptId="PIH:Mental health diagnosis" answerConceptSetIds="PIH:HUM Psychological diagnosis"
-             style="autocomplete"/>
-        </p>
-        <obs conceptId="PIH:2546" answerConceptId="PIH:OTHER"
-                style="checkbox" commentFieldLabel=" " />
-    </div>
-  </div>
-</section>
-
-<!--Improvement-->
+    <!--Improvement-->
     <section id="mh_improvements" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Improvement">
 
@@ -906,15 +1036,13 @@
                 <br/>
             </includeIf>
 
-                <p>
-                  <label>
-                      <uimessage code="pihcore.mentalhealth.hasCHW"/>
-                  </label>
-                  <obs conceptId="PIH:3293" style="radio" answerConceptIds="PIH:YES,PIH:NO"
-                    answerCodes="Yes,No"  answerSeparator="" required="true"/>
-
-
-                </p>
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="pihcore.mentalhealth.hasCHW"/>
+                </label>
+                <obs conceptId="PIH:3293" style="radio" answerConceptIds="PIH:YES,PIH:NO"
+                     answerCodes="Yes,No" answerSeparator="" required="true"/>
+            </p>
 
 
             <p>
