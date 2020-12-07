@@ -544,7 +544,7 @@
             </p>
         </fieldset>
 
-        <fieldset class="required">
+        <fieldset >
             <legend><uimessage code="mirebalais.vitals.height.title"/></legend>
             <h3><uimessage code="mirebalais.vitals.height.title"/></h3>
 
@@ -556,7 +556,7 @@
 
         </fieldset>
 
-        <fieldset class="required">
+        <fieldset >
             <legend><uimessage code="mirebalais.vitals.weight.title"/></legend>
             <h3><uimessage code="mirebalais.vitals.weight.title"/></h3>
 
@@ -658,7 +658,7 @@
                 <p class="left">
                     <uimessage code="mirebalais.vitals.or"/>
                 </p>
-            </ifMode>--> 
+            </ifMode>-->
 
             <p class="left">
                 <obs conceptId="PIH:TEMPERATURE (C)" id="temperature_c" showUnits="emr.units.degreesCelsius" unitsCssClass="append-to-value"/>
@@ -675,16 +675,7 @@
             </p>
         </fieldset>
 
-        <fieldset class="required">
-            <legend><uimessage code="mirebalais.vitals.respiratoryRate.title"/></legend>
-            <h3><uimessage code="mirebalais.vitals.respiratoryRate.title"/></h3>
-
-            <p>
-                <obs conceptId="PIH:RESPIRATORY RATE" id="respiratory_rate" showUnits="emr.units.perMinute" unitsCssClass="append-to-value"/>
-            </p>
-        </fieldset>
-
-        <fieldset field-separator=" / " class="required">
+        <fieldset field-separator=" / ">
             <legend><uimessage code="mirebalais.vitals.bloodPressure.title"/></legend>
             <h3><uimessage code="mirebalais.vitals.bloodPressure.title"/></h3>
 
@@ -698,6 +689,16 @@
                 <obs conceptId="PIH:DIASTOLIC BLOOD PRESSURE" id="bp_diastolic"/>
             </p>
         </fieldset>
+
+        <fieldset class="required">
+            <legend><uimessage code="mirebalais.vitals.respiratoryRate.title"/></legend>
+            <h3><uimessage code="mirebalais.vitals.respiratoryRate.title"/></h3>
+
+            <p>
+                <obs conceptId="PIH:RESPIRATORY RATE" id="respiratory_rate" showUnits="emr.units.perMinute" unitsCssClass="append-to-value"/>
+            </p>
+        </fieldset>
+
 
         <fieldset class="required">
             <legend><uimessage code="mirebalais.vitals.o2sat.title"/></legend>
@@ -750,7 +751,7 @@
 
         <!-- only show z score if patient is less than 5 years old (on the encounterDate) -->
         <includeIf velocityTest="(5 > $patient.getAge($encounter.getEncounterDatetime()))">
-            <fieldset class="required">
+            <fieldset >
                 <legend><uimessage code="mirebalais.vitals.zscore.title"/></legend>
                 <h3><uimessage code="mirebalais.vitals.zscore.title"/></h3>
 
@@ -799,11 +800,11 @@
     <section id="tb_screening" sectionTag="section" headerStyle="title" headerCode="pihcore.tbscreen.title">
     <!--TB screening taken from /haiti/hiv/zl/vct.xml-->
         <!-- !! make sure this fieldset template stays aligned with field order below or data with be inaccurate !! -->
-         <fieldset display-template="{{#if field.[0]}}{{ message 'pihcore.tbscreen.feverSweats' }}: {{field.[0]}}, {{/if}}{{#if field.[1]}}{{ message 'pihcore.tbscreen.wtLoss3kg' }}: {{field.[1]}}, {{/if}}{{#if field.[2]}}{{ message 'pihcore.tbscreen.cough' }}: {{field.[2]}}, {{/if}}{{#if field.[3]}}{{ message 'pihcore.tbscreen.bloodyCough' }}: {{field.[3]}} {{/if}}" class="required">
+         <fieldset display-template="{{#if field.[0]}}{{ message 'pihcore.tbscreen.cough' }}: {{field.[0]}}, {{/if}}{{#if field.[1]}}{{ message 'pihcore.tbscreen.nightsweat' }}: {{field.[1]}}, {{/if}}{{#if field.[2]}}{{ message 'pihcore.tbscreen.weightloss' }}: {{field.[3]}} {{/if}}" class="required">
              <legend><uimessage code="pihcore.tbscreen.title"/></legend>
              <h3><uimessage code="pihcore.tbscreen.title"/><p>If any questions answered Yes request AFB test</p></h3>
             <table>
-                <repeat with="['Fever and night sweats > 2 weeks','11565'], ['Lost of appetite','868'], ['Weight Loss >3kg','11566'],['cough > 2 weeks','11567'],['Chest Pain','1579']">
+                <repeat with="['Cough > 2 weeks','11567'], ['Fever','5945'], ['Night Sweat','6029'],['Weight Loss','6477']">
                    <tr>
                        <!-- TB symptom -->
                        <td>

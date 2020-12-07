@@ -233,9 +233,22 @@
                     <obs conceptId="CIEL:164401" answerConceptId="CIEL:1065"
                          style="checkbox"/>
                 </p>
+                <p>
+                    <label>
+                        <uimessage code="pihcore.neonatalDeath"/>
+                    </label>
+                    <obs conceptId="CIEL:115374" required="true"/>
+                </p>
+                <p>
+                    <label>
+                        <uimessage code="pihcore.stillBirth"/>
+                    </label>
+                    <obs conceptId="CIEL:140399" required="true"/>
+                </p>
+
                 <br/><br/><br/><br/>
                 <br/><br/><br/><br/>
-                <br/><br/><br/><br/>
+            
 
                 <!-- Mental Health
                     <label>
@@ -324,8 +337,21 @@
                     <obs conceptId="CIEL:1825" required="true"/>
                 </p>
             </div>
-
             <div class="two-columns">
+              <p>
+                  <label>
+                      <uimessage code="pihcore.fundalHeight"/>
+                  </label>
+                  <obs conceptId="CIEL:1439"/>
+              </p>
+              <p>
+                  <label>
+                      <uimessage code="pihcore.fetalHeartRate"/>
+                  </label>
+                  <obs conceptId="CIEL:1440"/>
+              </p>
+            </div>
+            <div class="four-columns">
                 <!-- Last menstrual period (LMP or DDR) -->
                 <p>
                     <label>
@@ -376,7 +402,6 @@
                          id="apptDate" required="true" />
                 </span>
             </p>
-
         </div>
     </section>
 
