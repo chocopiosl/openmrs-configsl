@@ -300,7 +300,6 @@
                     <obs conceptId="CIEL:164401" answerConceptId="CIEL:1065"
                          style="checkbox" />
                 </p>
-            <br/>
 
             <div id="calculated-edd-and-gestational" class="two-columns hidden">
                 <p>
@@ -327,28 +326,40 @@
                 </p>
 
             </div>
-
             <div class="two-columns">
-                <p>
-                    <label>
-                        <uimessage code="pihcore.pregnancy.dueDate"/>
-                    </label>
-                    <span class="small">
-                        <obs conceptId="CIEL:5596" allowFutureDates="true"/>
-                    </span>
-                </p>
-                <br/>
-
-                <p>
-                    <label>
-                        <uimessage code="pihcore.consult.returnVisitDate"/>
-                    </label>
-                    <span class="small">
-                        <obs conceptId="PIH:RETURN VISIT DATE" allowFutureDates="true"
-                             id="apptDate" required="true" />
-                    </span>
-                </p>
-
+              <p>
+                  <label>
+                      <uimessage code="pihcore.fundalHeight"/>
+                  </label>
+                  <obs conceptId="CIEL:1439" required="true"/>
+              </p>
+              <p>
+                  <label>
+                      <uimessage code="pihcore.fetalHeartRate"/>
+                  </label>
+                  <obs conceptId="CIEL:1440" required="true"/>
+              </p>
+            </div>
+            <div class="two-columns">
+              <p>
+                  <label>
+                      <uimessage code="pihcore.pregnancy.dueDate"/>
+                  </label>
+                  <span class="small">
+                      <obs conceptId="CIEL:5596" allowFutureDates="true"/>
+                  </span>
+              </p>
+            </div>
+            <div class="two-columns">
+              <p>
+                  <label>
+                      <uimessage code="pihcore.consult.returnVisitDate"/>
+                  </label>
+                  <span class="small">
+                      <obs conceptId="PIH:RETURN VISIT DATE" allowFutureDates="true"
+                           id="apptDate"/>
+                  </span>
+              </p>
             </div>
         </div>
     </section>
