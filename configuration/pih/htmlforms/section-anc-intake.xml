@@ -234,19 +234,21 @@
                          style="checkbox"/>
                 </p>
                 <p>
+                    <!-- for the Mother, Count of babies delivered who died as neonatal -->
                     <label>
-                        <uimessage code="pihcore.neonatalDeath"/>
+                        <uimessage code="pihcore.mch.numberNeonatalDeath"/>
                     </label>
-                    <obs conceptId="CIEL:115374" required="true"/>
+                    <obs conceptId="PIH:13241" required="true"/>
                 </p>
                 <p>
+                    <!-- for the mother, count of stillbirths -->
                     <label>
-                        <uimessage code="pihcore.stillBirth"/>
+                        <uimessage code="pihcore.mch.numberPriorStillbirth"/>
                     </label>
-                    <obs conceptId="CIEL:140399" required="true"/>
+                    <obs conceptId="CIEL:160077" required="true"/>
                 </p>
 
-                <br/><br/><br/><br/>
+                <br/><br/>
                 <br/><br/><br/><br/>
             
 
