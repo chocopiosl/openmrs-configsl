@@ -1,8 +1,5 @@
 {
-
-  "welcomeMessage": "Wellbody Clinic",
   "browserWarning": "Please use the <b>Google Chrome</b> browser",
-  "dossierIdentifierPrefix": "WBA",
 
   "country": "SIERRA_LEONE",
   "site": "OTHER",
@@ -11,27 +8,13 @@
   "dashboardUrl": "/coreapps/clinicianfacing/patient.page?patientId={{patientId}}&app=pih.app.clinicianDashboard",
   "visitsPageUrl": "/pihcore/visit/visit.page?patient={{patient.uuid}}#/visitList",
   "visitsPageWithSpecificUrl": "/pihcore/visit/visit.page?patient={{patient.uuid}}&visit={{visit.uuid}}#/overview",
-  "providerIdentifierPrefix": "W",
 
   "dispositionConfig": "file:configuration/pih/pih-dispositions-sierraLeone.json",
   "addressConfig": {
     "manualFields": ["address2"],
     "shortcutField": "stateProvince"
   },
-  "locationTags": {
-    "Visit Location": ["Wellbody"],
-    "Archives Location": ["Wellbody Clinic", "Wellbody MCH"],
-    "Check-In Location": ["Wellbody Clinic", "Wellbody MCH"],
-    "Consult Note Location": ["Wellbody Clinic", "Wellbody MCH"],
-    "Dispensing Location": ["Wellbody Clinic", "Wellbody MCH"],
-    "Login Location": ["Wellbody Clinic", "Wellbody MCH"],
-    "Maternal and Child Location": ["Wellbody Clinic", "Wellbody MCH"],
-    "Medical Record Location": ["Wellbody Clinic", "Wellbody MCH"],
-    "Mental Health Location": ["Wellbody Clinic", "Wellbody MCH"],
-    "Program Location": ["Wellbody Clinic", "Wellbody MCH"],
-    "Registration Location": ["Wellbody Clinic", "Wellbody MCH"],
-    "Vitals Location": ["Wellbody Clinic", "Wellbody MCH"]
-  },
+
   "registrationConfig": {
     "allowUnknownPatients": false,
     "allowManualEntryOfPrimaryIdentifier": false,
@@ -52,5 +35,6 @@
       }
     }
   },
+
   "idCardLocale": "en"
 }
