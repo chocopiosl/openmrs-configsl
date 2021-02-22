@@ -1,21 +1,22 @@
 {
-  "welcomeMessage": "Wellbody Clinic",
-  "dossierIdentifierPrefix": "WBA",
-  "providerIdentifierPrefix": "W",
+  "welcomeMessage": "KGH",
+  "providerIdentifierPrefix": "K",
+
+  "site": "KGH",
 
   "locationTags": {
-    "Visit Location": ["Wellbody"],
-    "Archives Location": ["Wellbody Clinic", "Wellbody MCH"],
-    "Check-In Location": ["Wellbody Clinic", "Wellbody MCH"],
-    "Consult Note Location": ["Wellbody Clinic", "Wellbody MCH"],
-    "Dispensing Location": ["Wellbody Clinic", "Wellbody MCH"],
-    "Login Location": ["Wellbody Clinic", "Wellbody MCH"],
-    "Maternal and Child Location": ["Wellbody Clinic", "Wellbody MCH"],
-    "Medical Record Location": ["Wellbody Clinic", "Wellbody MCH"],
-    "Mental Health Location": ["Wellbody Clinic", "Wellbody MCH"],
-    "Program Location": ["Wellbody Clinic", "Wellbody MCH"],
-    "Registration Location": ["Wellbody Clinic", "Wellbody MCH"],
-    "Vitals Location": ["Wellbody Clinic", "Wellbody MCH"]
+    "Visit Location": ["KGH"],
+    "Archives Location": ["KGH"],
+    "Check-In Location": ["KGH"],
+    "Consult Note Location": ["KGH"],
+    "Dispensing Location": ["KGH"],
+    "Login Location": ["KGH"],
+    "Maternal and Child Location": ["KGH"],
+    "Medical Record Location": ["KGH"],
+    "Mental Health Location": ["KGH"],
+    "Program Location": ["KGH"],
+    "Registration Location": ["KGH"],
+    "Vitals Location": ["KGH"]
   },
 
   "components": [
@@ -42,5 +43,5 @@
     "mentalHealth",
     "programs"
   ],
-  "idCardLabel": "Wellbody Clinic Dorma"
+  "idCardLabel": "KGH"
 }

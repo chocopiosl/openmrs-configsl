@@ -5,6 +5,8 @@
   "dossierIdentifierPrefix": "WBA",
   "providerIdentifierPrefix": "W",
 
+  "site": "WELLBODY",
+
   "locationTags": {
     "Visit Location": ["Wellbody"],
     "Archives Location": ["Wellbody Clinic", "Wellbody MCH"],
