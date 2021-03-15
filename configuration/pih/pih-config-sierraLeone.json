@@ -2,7 +2,7 @@
   "browserWarning": "Please use the <b>Google Chrome</b> browser",
 
   "country": "SIERRA_LEONE",
-  "site": "OTHER",
+  "site": "WELLBODY",
 
   "scheduleBackupReports": "false",
   "dashboardUrl": "/coreapps/clinicianfacing/patient.page?patientId={{patientId}}&app=pih.app.clinicianDashboard",
