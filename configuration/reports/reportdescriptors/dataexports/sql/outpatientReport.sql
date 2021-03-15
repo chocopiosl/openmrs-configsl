@@ -1,6 +1,3 @@
-set @startDate='2020-01-09';
-set @endDate='2020-12-10';
-
 set @locale = global_property_value('default_locale', 'en');
 
 SELECT encounter_type_id into @dispensingEnc from encounter_type where uuid= '8ff50dea-18a1-4609-b4c9-3f8f2d611b84';
