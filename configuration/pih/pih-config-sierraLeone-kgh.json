@@ -6,18 +6,18 @@
 
   "locationTags": {
     "Visit Location": ["KGH"],
-    "Archives Location": ["KGH"],
-    "Check-In Location": ["KGH"],
-    "Consult Note Location": ["KGH"],
-    "Dispensing Location": ["KGH"],
-    "ED Triage Location": ["KGH"],
-    "Login Location": ["KGH"],
-    "Maternal and Child Location": ["KGH"],
-    "Medical Record Location": ["KGH"],
-    "Mental Health Location": ["KGH"],
-    "Program Location": ["KGH"],
-    "Registration Location": ["KGH"],
-    "Vitals Location": ["KGH"]
+    "Archives Location": ["KGH Triage"],
+    "Check-In Location": ["KGH Triage"],
+    "Consult Note Location": ["KGH Triage"],
+    "Dispensing Location": ["KGH Triage"],
+    "ED Triage Location": ["KGH Triage"],
+    "Login Location": ["KGH Triage"],
+    "Maternal and Child Location": ["KGH Triage"],
+    "Medical Record Location": ["KGH Triage"],
+    "Mental Health Location": ["KGH Triage"],
+    "Program Location": ["KGH Triage"],
+    "Registration Location": ["KGH Triage"],
+    "Vitals Location": ["KGH Triage"]
   },
 
   "components": [
