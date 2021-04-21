@@ -822,7 +822,7 @@
 
                     <render drug="PIH:914" name="Chlorpromazine" />
                     <render drug="PIH:4047" name="Haloperidol" />
-                    <render drug="927" name="Fluphenazine" />
+                    <render drug="CIEL:76558" name="Fluphenazine" />
                     <render drug="PIH:920" name="Carbamazepine" />
                     <render drug="PIH:4060" name="Sodium Valproate" />
                     <render drug="CIEL:83405" name="Risperidone" />
