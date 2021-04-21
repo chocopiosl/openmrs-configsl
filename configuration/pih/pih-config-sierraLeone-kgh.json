@@ -5,19 +5,7 @@
   "site": "KGH",
 
   "locationTags": {
-    "Visit Location": ["KGH"],
-    "Archives Location": ["KGH Triage"],
-    "Check-In Location": ["KGH Triage"],
-    "Consult Note Location": ["KGH Triage"],
-    "Dispensing Location": ["KGH Triage"],
-    "ED Triage Location": ["KGH Triage"],
-    "Login Location": ["KGH Triage"],
-    "Maternal and Child Location": ["KGH Triage"],
-    "Medical Record Location": ["KGH Triage"],
-    "Mental Health Location": ["KGH Triage"],
-    "Program Location": ["KGH Triage"],
-    "Registration Location": ["KGH Triage"],
-    "Vitals Location": ["KGH Triage"]
+    "Login Location": ["KGH Triage"]
   },
 
   "components": [
