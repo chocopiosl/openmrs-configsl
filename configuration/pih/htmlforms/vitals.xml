@@ -802,7 +802,7 @@
         <!-- !! make sure this fieldset template stays aligned with field order below or data with be inaccurate !! -->
          <fieldset display-template="{{#if field.[0]}}{{ message 'pihcore.tbscreen.cough' }}: {{field.[0]}}, {{/if}}{{#if field.[1]}}{{ message 'pihcore.tbscreen.nightsweat' }}: {{field.[1]}}, {{/if}}{{#if field.[2]}}{{ message 'pihcore.tbscreen.weightloss' }}: {{field.[3]}} {{/if}}" class="required">
              <legend><uimessage code="pihcore.tbscreen.title"/></legend>
-             <h3><uimessage code="pihcore.tbscreen.title"/><p>If any questions answered Yes request AFB test</p></h3>
+             <h3><uimessage code="pihcore.tbscreen.title"/><p>If at least two questions answers yes</p></h3>
             <table>
                 <repeat with="['Cough > 2 weeks','11567'], ['Fever','5945'], ['Night Sweat','6029'],['Weight Loss','6477']">
                    <tr>
