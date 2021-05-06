@@ -248,6 +248,14 @@
                     <obs conceptId="CIEL:160077" required="true"/>
                 </p>
 
+                <p>
+                    <!-- for the mother, next of kin -->
+                    <label>
+                        <uimessage code="pihcore.mch.nextofkin"/>
+                    </label>
+                    <obs conceptId="CIEL:162729"/>
+                </p>
+
                 <br/><br/>
                 <br/><br/><br/><br/>
             
