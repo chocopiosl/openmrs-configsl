@@ -198,8 +198,8 @@
                     if (returnVisitDate  &amp;&amp; returnVisitDate != getValue('return-visit-date.value')) {
                         setValue('return-visit-date.value','');  // reset return visit date if change to encounter date makes it invalid
                         alert('<uimessage code="pihcore.mentalhealth.returnVisitDateResetWarning"/>');
-                    }-->
-                }
+                    }
+                }-->
 
                 getField('encounterDate.value').change(setMinReturnVisitDate);
 
