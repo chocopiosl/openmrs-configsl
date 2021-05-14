@@ -1,0 +1,3 @@
+Uuid,Void/Retire,Name,Description
+${encounterType.sierraLeoneOutpatientInitial.uuid},,Sierra Leone Outpatient Initial,The outpatient intake form for Sierra Leone
+${encounterType.sierraLeoneOutpatientFollowup.uuid},,Sierra Leone Outpatient Followup,The outpatient visit form for Sierra Leone

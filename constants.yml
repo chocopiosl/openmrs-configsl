@@ -1,0 +1,13 @@
+# Patient Identifier Types
+patientIdentifierType:
+  wellbodyEmrId:
+    uuid: "1a2acce0-7426-11e5-a837-0800200c9a66"
+  kghEmrId:
+    uuid: "c09a1d24-7162-11eb-8aa6-0242ac110002"
+
+# Encounter Types
+encounterType:
+  sierraLeoneOutpatientInitial:
+    uuid: "7d5853d4-67b7-4742-8492-fcf860690ed5"
+  sierraLeoneOutpatientFollowup:
+    uuid: "d8a038b5-90d2-43dc-b94b-8338b76674f3"

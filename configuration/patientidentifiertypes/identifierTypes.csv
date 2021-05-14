@@ -1,0 +1,3 @@
+Uuid,Void/Retire,Name,Description,Required,Format,Format description,Validator,Location behavior,Uniqueness behavior
+${patientIdentifierType.wellbodyEmrId.uuid},,Wellbody EMR ID,A unique identifier issued to all patients in the Wellbody EMR.,FALSE,,,,NOT_USED,
+${patientIdentifierType.kghEmrId.uuid},,KGH EMR ID,A unique identifier issued to all patients in the KGH EMR.,FALSE,,,,NOT_USED,
