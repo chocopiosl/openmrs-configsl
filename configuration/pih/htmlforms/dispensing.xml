@@ -112,6 +112,27 @@
             };
             const patientUuid = '<lookup expression="patient.uuid"/>';
 
+            var currentEncounterDate = new Date();
+            var encounterDate = '<lookup expression="encounter.getEncounterDatetime().getTime()"/>';
+            if (typeof encounterDate !== "undefined" &amp;&amp; encounterDate !== null &amp;&amp; (encounterDate.length > 0)) {
+                currentEncounterDate = new Date(+encounterDate);
+            } else {
+                // look for the encounterDate datepicker widget
+                var encounterDateValue = jq("#encounterDate .hasDatepicker");
+                if (encounterDateValue) {
+                  var getDate = encounterDateValue.datepicker('getDate');
+                  if (getDate) {
+                    currentEncounterDate = new Date(getDate);
+                  }
+                }
+            }
+            
+            // move encounter date up 1 day, so we could catch all recent prescriptions, including those on the same day as the current encounter( usually, they have a midnight datetime)
+            currentEncounterDate.setDate(currentEncounterDate.getDate() + 1 );
+           
+            var sevenDaysBefore = new Date(currentEncounterDate); 
+            sevenDaysBefore.setDate(currentEncounterDate.getDate() - 8 );
+                
             jq.getJSON(apiBaseUrl + "/obs", {
                 concept: prescriptionConstructUuid,
                 patient: patientUuid,
@@ -121,21 +142,32 @@
                   if (data.results.length &gt; 0) {
                       for (let index = 0; index &lt; data.results.length; ++index) {
                         let medObs = data.results[index];
-                        let encounterProvider = '';
                         
-                        for (let p = 0; p &lt; medObs.encounter.encounterProviders.length; ++p) {
-                            if ( encounterProvider.length &gt; 0 ) {
-                                encounterProvider = encounterProvider + '; ';
-                            }
-                            encounterProvider =  encounterProvider +  medObs.encounter.encounterProviders[p].provider.person.display;
-                        }
                         let medDate = new Date(medObs.obsDatetime);   
+                        if (medDate.getTime() &gt; currentEncounterDate.getTime()) {
+                            // if the prescription date is more recent than the current encounter date then skip it                           
+                            continue;
+                        }
+                        if (medDate.getTime() &lt; sevenDaysBefore.getTime()) {
+                            // the REST API returns obs in descending order by date, and we only want to display
+                            // prescriptions from the last seven days, therefore when we reach the first prescription that 
+                            // is older than 7 days from the current encounter date, we stop processing the list of obs and exit this loop
+                            break;
+                        }
                         let medName = '';
                         let medQuantity = 0;
                         let medDose = '';
                         let medFreq = '';
                         let medDuration = 0;
                         let medDurationUnits = '';
+
+                        let encounterProvider = '';
+                        for (let p = 0; p &lt; medObs.encounter.encounterProviders.length; ++p) {
+                            if ( encounterProvider.length &gt; 0 ) {
+                                encounterProvider = encounterProvider + '; ';
+                            }
+                            encounterProvider =  encounterProvider +  medObs.encounter.encounterProviders[p].provider.person.display;
+                        }
 
                         for (let j = 0; j &lt; medObs.groupMembers.length; ++j) {
                             let member = medObs.groupMembers[j];
