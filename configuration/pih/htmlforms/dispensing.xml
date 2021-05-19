@@ -88,7 +88,103 @@
             }
             return numErrors == 0 &amp;&amp; numDispensed > 0;
         });
+
+        $j(document).ready(function() {
+            
+            const contextPath = window.location.href.split('/')[3];
+            const apiBaseUrl =  "/" + contextPath + "/ws/rest/v1";
+
+            const prescriptionConstructUuid = '9ab17798-1486-4d56-9218-e3578646a772';
+            const medicationNameUuid= '3cd9491e-26fe-102b-80cb-0017a47871b2';
+            const mhMedUuid= 'f541afbd-db59-4c48-88da-ce17b8184963';
+            const quantityUuid= '160856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
+            const dosingUnitUuid= '986de2e7-9c9a-473a-8afc-d4b41aa08706';
+            const frequencyUuid= 'a15c95ff-236f-488f-a879-f19fc982bbe6';
+            const durationUuid= '159368AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
+            const timeUnitsUuid= 'f1904502-319d-4681-9030-e642111e7ce2';
+            
+            const dateFormat = {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit"
+            };
+            const patientUuid = '<lookup expression="patient.uuid"/>';
+
+            jq.getJSON(apiBaseUrl + "/obs", {
+                concept: prescriptionConstructUuid,
+                patient: patientUuid,
+                v: 'custom:(uuid,id,display,obsDatetime,concept:(uuid,id,name:(display)),groupMembers:(uuid,id,display,concept:(uuid,id,display),value),encounter:(uuid,id,encounterProviders:(uuid,provider:(uuid,display,person:(uuid,display)),encounterRole:(uuid,name,display))))'
+              },
+              function( data ){
+                  if (data.results.length &gt; 0) {
+                      for (let index = 0; index &lt; data.results.length; ++index) {
+                        let medObs = data.results[index];
+                        let encounterProvider = '';
+                        
+                        for (let p = 0; p &lt; medObs.encounter.encounterProviders.length; ++p) {
+                            if ( encounterProvider.length &gt; 0 ) {
+                                encounterProvider = encounterProvider + '; ';
+                            }
+                            encounterProvider =  encounterProvider +  medObs.encounter.encounterProviders[p].provider.person.display;
+                        }
+                        let medDate = new Date(medObs.obsDatetime);   
+                        let medName = '';
+                        let medQuantity = 0;
+                        let medDose = '';
+                        let medFreq = '';
+                        let medDuration = 0;
+                        let medDurationUnits = '';
+
+                        for (let j = 0; j &lt; medObs.groupMembers.length; ++j) {
+                            let member = medObs.groupMembers[j];
+                            if (member.concept.uuid === medicationNameUuid || member.concept.uuid === mhMedUuid) {
+                                medName = member.value.display;
+                            } else if (member.concept.uuid === quantityUuid) {
+                                medQuantity = member.value;
+                            } else if (member.concept.uuid === dosingUnitUuid) {
+                                medDose = member.value.display;
+                            } else if (member.concept.uuid === frequencyUuid) {
+                                medFreq = member.value.display;
+                            } else if (member.concept.uuid === durationUuid) {
+                                medDuration = member.value;
+                            } else if (member.concept.uuid === timeUnitsUuid) {
+                                medDurationUnits = member.value.display;
+                            }
+                        }
+                          
+                        jq("#prescriptionTable tbody").append('<tr><td>' + medDate.toLocaleString("en-US", dateFormat) + '</td>' 
+                            + '<td>' + encounterProvider + '</td>' 
+                            + '<td>' + medName + '</td>'  
+                            + '<td>' + medQuantity + ' ' + medDose + '</td>' 
+                            + '<td>' + medFreq + '</td>' 
+                            + '<td>' + (medDuration &gt; 0 ? medDuration : '') + ' ' + medDurationUnits + '</td></tr>');
+                      }                  
+                  }
+            });
+
+        });
     </script>
+
+   <h2>
+        <uimessage code="Last medication prescribed for this patient"/>
+    </h2>
+   <table id="prescriptionTable">
+        <thead>
+            <tr>
+                <th><uimessage code="coreapps.patientDashBoard.date"/> </th>
+                <th><uimessage code="Prescriber"/> </th>
+                <th><uimessage code="dispensing.medication.name"/> </th>
+                <th><uimessage code="dispensing.medication.dose"/> </th>
+                <th><uimessage code="dispensing.medication.frequency"/> </th>
+                <th><uimessage code="dispensing.medication.duration"/> </th>            
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <br/><br/>
 
     <ifMode mode="VIEW" include="false">
         <h2>
