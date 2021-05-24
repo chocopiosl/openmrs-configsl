@@ -51,7 +51,7 @@
             </fieldset>
 
             <fieldset>
-                <!-- TODO: may need to make this not-hidden if we ever support multiple Visit Locations on a single server; otherwise will fail if attempting to log in the patient from a different location than the active visit -->
+                <!-- TODO: may need to make this not-hidden if we ever support multiple Visit Locations on a single server; if so, will likely need to break up check-in locations tags by server -->
                 <encounterLocation default="SessionAttribute:emrContext.sessionLocationId" tags="Check-In Location"/>
             </fieldset>
         </div>
