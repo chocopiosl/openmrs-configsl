@@ -41,6 +41,7 @@
 
         <div class="hidden">
             <fieldset class="required">
+                <!-- TODO: will need to make this not-hidden if we ever support multiple Visit Locations on a single server -->
                 <encounterLocation type="hidden" default="SessionAttribute:emrContext.sessionLocationId" required="true" tags="Check-In Location"/>
             </fieldset>
         </div>
