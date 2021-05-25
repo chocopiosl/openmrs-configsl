@@ -1,4 +1,9 @@
 <htmlform formUuid="ba22eda5-148d-456e-8adc-f36247d1f7c3" formName="Dispensing" formEncounterType="8ff50dea-18a1-4609-b4c9-3f8f2d611b84" formVersion="1.0" class="dispensing-form">
+    
+    <style type="text/css">
+
+    </style>
+    
     <script type="text/javascript">
         var $j = jQuery;
 
@@ -89,6 +94,78 @@
             return numErrors == 0 &amp;&amp; numDispensed > 0;
         });
 
+        $j(document).on('click', ".dispenseBtn", function() {
+    
+            let dispenseBtn = $j(this);
+            let parentTr = $j(this).closest('tr');
+            let doseQuantAttr = $j(parentTr).attr("data-dose-q");   
+            let doseUnitAttr = $j(parentTr).attr("data-dose-unit");
+            let frequencyAttr = $j(parentTr).attr("data-frequency");
+            let durationAttr = $j(parentTr).attr("data-duration");
+            let durationUnitAttr = $j(parentTr).attr("data-duration-unit");
+            let drugIdAttr = $j(parentTr).attr("data-drug-id");
+            let  medName = $j(this).closest('tr').find("td.medicationName").text();
+            
+            // find the first Medication in the dispense form
+            let medFieldsetCollection = $j(document).find('fieldset.medication');
+            if ( medFieldsetCollection.length &gt; 0 ) { 
+                for (let index = 0; index &lt; medFieldsetCollection.length; ++index) {
+                    let medNameSpan = $j(medFieldsetCollection[index]).find('span.medication-name');
+                    if ( medNameSpan.length &gt; 0 ) {
+                        let medNameInput = $j(medNameSpan[0]).find('input.ui-autocomplete-input');
+                        if ( medNameInput.val().length &lt; 1 ) {
+                            // we found the first non empty medication name input
+                            medNameInput.val(medName);
+                            let drugIdInput = $j(medNameSpan[0]).find('input[type="hidden"]');
+                            
+                            drugIdInput.val('Drug:' + drugIdAttr);
+                            let doseInputSpan = $j(medFieldsetCollection[index]).find('span.doseInput');
+                            if ( doseInputSpan.length &gt; 0 ) { 
+                                $j(doseInputSpan[0]).find('input[type="text"]').val(doseQuantAttr);
+                            }
+                            let doseUnitSpan = $j(medFieldsetCollection[index]).find('span.select-arrow');
+                            if ( doseUnitSpan.length &gt; 0 ) { 
+                                let selectUnit= $j(doseUnitSpan[0]).find('select');
+                                $j(selectUnit).find('option').each( function() { 
+                                    if ( $j(this).text() == doseUnitAttr ) { 
+                                        $j(this).attr('selected', 'selected'); 
+                                    } 
+                                });
+                            }
+                            let frequencySpan = $j(medFieldsetCollection[index]).find('span.frequency');
+                            if ( frequencySpan.length &gt; 0 ) {
+                                let selectUnit= $j(frequencySpan[0]).find('select');
+                                $j(selectUnit).find('option').each( function() { 
+                                    if (  frequencyAttr.startsWith( $j(this).text()) ) { 
+                                        $j(this).attr('selected', 'selected'); 
+                                    } 
+                                });                                
+                            }
+                            let durationSpan = $j(medFieldsetCollection[index]).find('span.duration');
+                            if ( durationSpan.length &gt; 0 ) { 
+                                $j(durationSpan[0]).find('input[type="text"]').val(durationAttr);
+                            }
+                            let durationUnitSpan = $j(medFieldsetCollection[index]).find('span.duration-unit');
+                            if ( durationUnitSpan.length &gt; 0 ) { 
+                                let selectUnit= $j(durationUnitSpan[0]).find('select');
+                                $j(selectUnit).find('option').each( function() { 
+                                    if ( $j(this).text() == durationUnitAttr ) { 
+                                        $j(this).attr('selected', 'selected'); 
+                                    } 
+                                });
+                            }
+                            $j(dispenseBtn).attr('disabled', true);
+                            $j(parentTr).css('background', '#dee2e6');
+                            $j(parentTr).css('font-style', 'italic');
+                            
+                            break;
+                        }                        
+                    }
+                }               
+            }            
+        });
+</script>
+<script type="text/javascript">
         $j(document).ready(function() {
 
             const contextPath = window.location.href.split('/')[3];
@@ -136,9 +213,10 @@
             jq.getJSON(apiBaseUrl + "/obs", {
                 concept: prescriptionConstructUuid,
                 patient: patientUuid,
-                v: 'custom:(uuid,id,display,obsDatetime,concept:(uuid,id,name:(display)),groupMembers:(uuid,id,display,concept:(uuid,id,display),value),encounter:(uuid,id,encounterProviders:(uuid,provider:(uuid,display,person:(uuid,display)),encounterRole:(uuid,name,display))))'
+                v: 'custom:(uuid,id,display,obsDatetime,concept:(uuid,id,name:(display)),groupMembers:(uuid,id,display,concept:(uuid,id,display),valueDrug:(id,uuid,name),value),encounter:(uuid,id,encounterProviders:(uuid,provider:(uuid,display,person:(uuid,display)),encounterRole:(uuid,name,display))))'
               },
-              function( data ){
+              function( data ) {
+                  let emptyTable = true;
                   if (data.results.length &gt; 0) {
                       for (let index = 0; index &lt; data.results.length; ++index) {
                         let medObs = data.results[index];
@@ -173,6 +251,7 @@
                             let member = medObs.groupMembers[j];
                             if (member.concept.uuid === medicationNameUuid || member.concept.uuid === mhMedUuid) {
                                 medName = member.value.display;
+                                drugId = ( member.valueDrug != null ) ? member.valueDrug.id : null;
                             } else if (member.concept.uuid === quantityUuid) {
                                 medQuantity = member.value;
                             } else if (member.concept.uuid === dosingUnitUuid) {
@@ -185,38 +264,49 @@
                                 medDurationUnits = member.value.display;
                             }
                         }
-
-                        jq("#prescriptionTable tbody").append('<tr><td>' + medDate.toLocaleString("en-US", dateFormat) + '</td>'
-                            + '<td>' + encounterProvider + '</td>'
-                            + '<td>' + medName + '</td>'
-                            + '<td>' + medQuantity + ' ' + medDose + '</td>'
-                            + '<td>' + medFreq + '</td>'
-                            + '<td>' + (medDuration &gt; 0 ? medDuration : '') + ' ' + medDurationUnits + '</td></tr>');
-                      }
+                        emptyTable = false;  
+                        jq("#prescriptionTable tbody").append('<tr data-dose-q="' + medQuantity + '" data-dose-unit="' + medDose + '" data-frequency="' + medFreq + '" data-duration="' + medDuration + '" data-duration-unit="' + medDurationUnits + '" data-drug-id="' + drugId +'"><td>' + medDate.toLocaleString("en-US", dateFormat) + '</td>' 
+                            + '<td>' + encounterProvider + '</td>' 
+                            + '<td class="medicationName">' + medName + '</td>'  
+                            + '<td>' + medQuantity + ' ' + medDose + '</td>' 
+                            + '<td>' + medFreq + '</td>' 
+                            + '<td>' + (medDuration &gt; 0 ? medDuration : '') + ' ' + medDurationUnits + '</td>' 
+                            + '<td>' + '<button class="dispenseBtn">Dispense</button>' + '</td></tr>');
+                      }                  
                   }
-            });
-
+                  if ( emptyTable === true ) {
+                    jq("#prescriptionTable tbody").append('<tr><td>' + '<uimessage code="uicommons.dataTable.emptyTable"/>' + '</td>' 
+                        + '<td></td>' 
+                        + '<td></td>'  
+                        + '<td></td>' 
+                        + '<td></td>' 
+                        + '<td></td><td></td></tr>');
+                  }
+            });           
         });
-    </script>
 
-   <h2>
-        <uimessage code="Last medication prescribed for this patient"/>
-    </h2>
-   <table id="prescriptionTable">
-        <thead>
-            <tr>
-                <th><uimessage code="coreapps.patientDashBoard.date"/> </th>
-                <th><uimessage code="Prescriber"/> </th>
-                <th><uimessage code="dispensing.medication.name"/> </th>
-                <th><uimessage code="dispensing.medication.dose"/> </th>
-                <th><uimessage code="dispensing.medication.frequency"/> </th>
-                <th><uimessage code="dispensing.medication.duration"/> </th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-    <br/><br/>
+</script>
+    <ifMode mode="VIEW" include="false">
+        <h2>
+            <uimessage code="Last medication prescribed for this patient"/>
+        </h2>
+        <table id="prescriptionTable">
+            <thead>
+                <tr>
+                    <th><uimessage code="coreapps.patientDashBoard.date"/> </th>
+                    <th><uimessage code="Prescriber"/> </th>
+                    <th><uimessage code="dispensing.medication.name"/> </th>
+                    <th><uimessage code="dispensing.medication.dose"/> </th>
+                    <th><uimessage code="dispensing.medication.frequency"/> </th>
+                    <th><uimessage code="dispensing.medication.duration"/> </th>      
+                    <th></th>      
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <br/><br/>
+    </ifMode>
 
     <ifMode mode="VIEW" include="false">
         <h2>
