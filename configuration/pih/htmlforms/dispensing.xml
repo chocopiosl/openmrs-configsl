@@ -127,7 +127,7 @@
                             if ( doseUnitSpan.length &gt; 0 ) { 
                                 let selectUnit= $j(doseUnitSpan[0]).find('select');
                                 $j(selectUnit).find('option').each( function() { 
-                                    if ( $j(this).text() == doseUnitAttr ) { 
+                                    if ( $j(this).text() == doseUnitAttr || $j(this).text().startsWith(doseUnitAttr)) { 
                                         $j(this).attr('selected', 'selected'); 
                                     } 
                                 });
