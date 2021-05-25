@@ -96,16 +96,18 @@
         });
 
         $j(document).on('click', ".dispenseBtn", function() {
-            var that = this;
-            console.log("dispenseBtn!");
+    
             let parentTr = $j(this).closest('tr');
-            let doseQuantAttr = $j(parentTr).attr("data-dose-q");
-            console.log("doseQuantAttr= " + doseQuantAttr);
+            let doseQuantAttr = $j(parentTr).attr("data-dose-q");   
+            let doseUnitAttr = $j(parentTr).attr("data-dose-unit");
+            let frequencyAttr = $j(parentTr).attr("data-frequency");
+            let durationAttr = $j(parentTr).attr("data-duration");
+            let durationUnitAttr = $j(parentTr).attr("data-duration-unit");
+            let drugIdAttr = $j(parentTr).attr("data-drug-id");
             let  medName = $j(this).closest('tr').find("td.medicationName").text();
-            console.log("medName = " + medName);
+            
             // find the first Medication in the dispense form
             let medFieldsetCollection = $j(document).find('fieldset.medication');
-            debugger
             if ( medFieldsetCollection.length &gt; 0 ) { 
                 for (let index = 0; index &lt; medFieldsetCollection.length; ++index) {
                     let medNameSpan = $j(medFieldsetCollection[index]).find('span.medication-name');
@@ -114,19 +116,49 @@
                         if ( medNameInput.val().length &lt; 1 ) {
                             // we found the first non empty medication name input
                             medNameInput.val(medName);
+                            let drugIdInput = $j(medNameSpan[0]).find('input[type="hidden"]');
+                            console.log("Drug = " + 'Drug:' + drugIdAttr);
+                            drugIdInput.val('Drug:' + drugIdAttr);
                             let doseInputSpan = $j(medFieldsetCollection[index]).find('span.doseInput');
                             if ( doseInputSpan.length &gt; 0 ) { 
                                 $j(doseInputSpan[0]).find('input[type="text"]').val(doseQuantAttr);
+                            }
+                            let doseUnitSpan = $j(medFieldsetCollection[index]).find('span.select-arrow');
+                            if ( doseUnitSpan.length &gt; 0 ) { 
+                                let selectUnit= $j(doseUnitSpan[0]).find('select');
+                                $j(selectUnit).find('option').each( function() { 
+                                    if ( $j(this).text() == doseUnitAttr ) { 
+                                        $j(this).attr('selected', 'selected'); 
+                                    } 
+                                });
+                            }
+                            let frequencySpan = $j(medFieldsetCollection[index]).find('span.frequency');
+                            if ( frequencySpan.length &gt; 0 ) {
+                                let selectUnit= $j(frequencySpan[0]).find('select');
+                                $j(selectUnit).find('option').each( function() { 
+                                    if (  frequencyAttr.startsWith( $j(this).text()) ) { 
+                                        $j(this).attr('selected', 'selected'); 
+                                    } 
+                                });                                
+                            }
+                            let durationSpan = $j(medFieldsetCollection[index]).find('span.duration');
+                            if ( durationSpan.length &gt; 0 ) { 
+                                $j(durationSpan[0]).find('input[type="text"]').val(durationAttr);
+                            }
+                            let durationUnitSpan = $j(medFieldsetCollection[index]).find('span.duration-unit');
+                            if ( durationUnitSpan.length &gt; 0 ) { 
+                                let selectUnit= $j(durationUnitSpan[0]).find('select');
+                                $j(selectUnit).find('option').each( function() { 
+                                    if ( $j(this).text() == durationUnitAttr ) { 
+                                        $j(this).attr('selected', 'selected'); 
+                                    } 
+                                });
                             }
                             break;
                         }                        
                     }
                 }               
-            }
-            // let medNameSpan = $j(medFieldset).find('span.medication-name');
-
-            // $j(medFieldset).each(function(index) { console.log($j(this).find('span.medication-name'));})
-            
+            }            
         });
 
         $j(document).ready(function() {
@@ -177,7 +209,7 @@
             jq.getJSON(apiBaseUrl + "/obs", {
                 concept: prescriptionConstructUuid,
                 patient: patientUuid,
-                v: 'custom:(uuid,id,display,obsDatetime,concept:(uuid,id,name:(display)),groupMembers:(uuid,id,display,concept:(uuid,id,display),value),encounter:(uuid,id,encounterProviders:(uuid,provider:(uuid,display,person:(uuid,display)),encounterRole:(uuid,name,display))))'
+                v: 'custom:(uuid,id,display,obsDatetime,concept:(uuid,id,name:(display)),groupMembers:(uuid,id,display,concept:(uuid,id,display),valueDrug:(id,uuid,name),value),encounter:(uuid,id,encounterProviders:(uuid,provider:(uuid,display,person:(uuid,display)),encounterRole:(uuid,name,display))))'
               },
               function( data ) {
                   let emptyTable = true;
@@ -215,6 +247,7 @@
                             let member = medObs.groupMembers[j];
                             if (member.concept.uuid === medicationNameUuid || member.concept.uuid === mhMedUuid) {
                                 medName = member.value.display;
+                                drugId = ( member.valueDrug != null ) ? member.valueDrug.id : null;
                             } else if (member.concept.uuid === quantityUuid) {
                                 medQuantity = member.value;
                             } else if (member.concept.uuid === dosingUnitUuid) {
@@ -228,7 +261,7 @@
                             }
                         }
                         emptyTable = false;  
-                        jq("#prescriptionTable tbody").append('<tr data-dose-q="' + medQuantity + '"><td>' + medDate.toLocaleString("en-US", dateFormat) + '</td>' 
+                        jq("#prescriptionTable tbody").append('<tr data-dose-q="' + medQuantity + '" data-dose-unit="' + medDose + '" data-frequency="' + medFreq + '" data-duration="' + medDuration + '" data-duration-unit="' + medDurationUnits + '" data-drug-id="' + drugId +'"><td>' + medDate.toLocaleString("en-US", dateFormat) + '</td>' 
                             + '<td>' + encounterProvider + '</td>' 
                             + '<td class="medicationName">' + medName + '</td>'  
                             + '<td>' + medQuantity + ' ' + medDose + '</td>' 
