@@ -1,8 +1,7 @@
 <htmlform formUuid="ba22eda5-148d-456e-8adc-f36247d1f7c3" formName="Dispensing" formEncounterType="8ff50dea-18a1-4609-b4c9-3f8f2d611b84" formVersion="1.0" class="dispensing-form">
     
     <style type="text/css">
-        
-    
+
     </style>
     
     <script type="text/javascript">
@@ -97,6 +96,7 @@
 
         $j(document).on('click', ".dispenseBtn", function() {
     
+            let dispenseBtn = $j(this);
             let parentTr = $j(this).closest('tr');
             let doseQuantAttr = $j(parentTr).attr("data-dose-q");   
             let doseUnitAttr = $j(parentTr).attr("data-dose-unit");
@@ -117,7 +117,7 @@
                             // we found the first non empty medication name input
                             medNameInput.val(medName);
                             let drugIdInput = $j(medNameSpan[0]).find('input[type="hidden"]');
-                            console.log("Drug = " + 'Drug:' + drugIdAttr);
+                            
                             drugIdInput.val('Drug:' + drugIdAttr);
                             let doseInputSpan = $j(medFieldsetCollection[index]).find('span.doseInput');
                             if ( doseInputSpan.length &gt; 0 ) { 
@@ -154,13 +154,18 @@
                                     } 
                                 });
                             }
+                            $j(dispenseBtn).attr('disabled', true);
+                            $j(parentTr).css('background', '#dee2e6');
+                            $j(parentTr).css('font-style', 'italic');
+                            
                             break;
                         }                        
                     }
                 }               
             }            
         });
-
+</script>
+<script type="text/javascript">
         $j(document).ready(function() {
             
             const contextPath = window.location.href.split('/')[3];
@@ -278,32 +283,30 @@
                         + '<td></td>' 
                         + '<td></td><td></td></tr>');
                   }
-            });
-            
-           
+            });           
         });
-    </script>
-
-   <h2>
-        <uimessage code="Last medication prescribed for this patient"/>
-    </h2>
-   <table id="prescriptionTable">
-        <thead>
-            <tr>
-                <th><uimessage code="coreapps.patientDashBoard.date"/> </th>
-                <th><uimessage code="Prescriber"/> </th>
-                <th><uimessage code="dispensing.medication.name"/> </th>
-                <th><uimessage code="dispensing.medication.dose"/> </th>
-                <th><uimessage code="dispensing.medication.frequency"/> </th>
-                <th><uimessage code="dispensing.medication.duration"/> </th>      
-                <th></th>      
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-    <br/><br/>
-
+</script>
+    <ifMode mode="VIEW" include="false">
+        <h2>
+            <uimessage code="Last medication prescribed for this patient"/>
+        </h2>
+        <table id="prescriptionTable">
+            <thead>
+                <tr>
+                    <th><uimessage code="coreapps.patientDashBoard.date"/> </th>
+                    <th><uimessage code="Prescriber"/> </th>
+                    <th><uimessage code="dispensing.medication.name"/> </th>
+                    <th><uimessage code="dispensing.medication.dose"/> </th>
+                    <th><uimessage code="dispensing.medication.frequency"/> </th>
+                    <th><uimessage code="dispensing.medication.duration"/> </th>      
+                    <th></th>      
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <br/><br/>
+    </ifMode>
     <ifMode mode="VIEW" include="false">
         <h2>
             <uimessage code="mirebalais.dispensing.dispensing"/>
