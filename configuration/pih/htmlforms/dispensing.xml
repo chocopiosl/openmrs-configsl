@@ -167,7 +167,7 @@
 </script>
 <script type="text/javascript">
         $j(document).ready(function() {
-            
+
             const contextPath = window.location.href.split('/')[3];
             const apiBaseUrl =  "/" + contextPath + "/ws/rest/v1";
 
@@ -179,7 +179,7 @@
             const frequencyUuid= 'a15c95ff-236f-488f-a879-f19fc982bbe6';
             const durationUuid= '159368AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
             const timeUnitsUuid= 'f1904502-319d-4681-9030-e642111e7ce2';
-            
+
             const dateFormat = {
                 day: "numeric",
                 month: "short",
@@ -203,14 +203,13 @@
                   }
                 }
             }
-            
+
             // move encounter date up 1 day, so we could catch all recent prescriptions, including those on the same day as the current encounter( usually, they have a midnight datetime)
             currentEncounterDate.setDate(currentEncounterDate.getDate() + 1 );
-           
-            var sevenDaysBefore = new Date(currentEncounterDate); 
+
+            var sevenDaysBefore = new Date(currentEncounterDate);
             sevenDaysBefore.setDate(currentEncounterDate.getDate() - 8 );
 
-                
             jq.getJSON(apiBaseUrl + "/obs", {
                 concept: prescriptionConstructUuid,
                 patient: patientUuid,
@@ -221,15 +220,15 @@
                   if (data.results.length &gt; 0) {
                       for (let index = 0; index &lt; data.results.length; ++index) {
                         let medObs = data.results[index];
-                        
-                        let medDate = new Date(medObs.obsDatetime);   
+
+                        let medDate = new Date(medObs.obsDatetime);
                         if (medDate.getTime() &gt; currentEncounterDate.getTime()) {
-                            // if the prescription date is more recent than the current encounter date then skip it                           
+                            // if the prescription date is more recent than the current encounter date then skip it
                             continue;
                         }
                         if (medDate.getTime() &lt; sevenDaysBefore.getTime()) {
                             // the REST API returns obs in descending order by date, and we only want to display
-                            // prescriptions from the last seven days, therefore when we reach the first prescription that 
+                            // prescriptions from the last seven days, therefore when we reach the first prescription that
                             // is older than 7 days from the current encounter date, we stop processing the list of obs and exit this loop
                             break;
                         }
@@ -285,6 +284,7 @@
                   }
             });           
         });
+
 </script>
     <ifMode mode="VIEW" include="false">
         <h2>
@@ -307,6 +307,7 @@
         </table>
         <br/><br/>
     </ifMode>
+
     <ifMode mode="VIEW" include="false">
         <h2>
             <uimessage code="mirebalais.dispensing.dispensing"/>
@@ -336,6 +337,7 @@
                     <encounterProviderAndRole default="currentUser"
                                               providerRoles="8fd1552e-6cb9-4719-b198-23a2c512a073,7ec19cca-f563-4cee-940f-effec16b3b80"
                                               encounterRole="bad21515-fd04-4ff6-bfcd-78456d12f168" required="true"/>
+                    <!-- TODO: will need to make this not-hidden if we ever support multiple Visit Locations on a single server -->
                     <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"/>
                 </div>
 
