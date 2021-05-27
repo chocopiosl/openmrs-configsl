@@ -16,7 +16,7 @@
                 // medication-instructions is optional
                 // duration and duration-units are optional if frequency = STAT
                 // everything else is required
-                var empty = !jqEl.val() &amp;&amp; jqEl.siblings('input[type="hidden"]').length == 0 || jqEl.siblings('input[type="hidden"]').attr("value") == "";
+                var empty = !jqEl.val() &amp;&amp; jqEl.siblings('input[type="hidden"]').length == 0 || jqEl.siblings('input[type="hidden"]').attr("value") == "" || jqEl.siblings('input[type="hidden"]').attr("value") == "Drug:null";
                 var optional = false;
                 if (jqEl.closest('.medication-instructions').length) {
                     optional = true;
@@ -31,7 +31,7 @@
 
             $('fieldset.medication').each(function() {
                 var numEmptyFields = 0;
-                var numFilledFields = 0;
+                var numFilledFields = 0;               
                 $(this).find('input:not(:last), select').each(function() {
                     $(this).removeClass('emptyValue');
 
@@ -62,6 +62,7 @@
                     $(this).find('.field-error').first().html("<uimessage code="dispensing.error.missingRequiredFields"/>").show();
 
                     $('.medication input.emptyValue, .medication select.emptyValue').on('blur', function() {
+                       
                         if ($(this).val()) {
                             if($(this).hasClass('illegalValue')) {
                                 $(this).removeClass('emptyValue');
