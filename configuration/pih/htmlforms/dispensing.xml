@@ -94,6 +94,90 @@
             return numErrors == 0 &amp;&amp; numDispensed > 0;
         });
 
+        var calculateDispensedQuantity = function(dose, frequency, duration, durationUnit) {
+        
+            let doseInt =  parseInt(dose, 10);        
+            let frequencyInt = 1;
+        
+            if (frequency.startsWith('OD')) {
+                // once daily
+                frequencyInt = 1;
+            } else if (frequency.startsWith('BID')) {
+                // twice daily
+                frequencyInt = 2;
+            } else if (frequency.startsWith('TID')) {
+                // thrice daily
+                frequencyInt = 3;
+            } else if (frequency.startsWith('QID')) {
+                // four times daily
+                frequencyInt = 4;
+            } else if (frequency.startsWith('5D')) {
+                // 5 times daily
+                frequencyInt = 5;
+            } else if (frequency.startsWith('6D')) {
+                // 6 times daily
+                frequencyInt = 6;
+            } else if (frequency.startsWith('7D')) {
+                // 7 times daily
+                frequencyInt = 7;
+            } else if (frequency.startsWith('8D')) {
+                // 8 times daily
+                frequencyInt = 8;
+            } else if (frequency.startsWith('9D')) {
+                // 9 times daily
+                frequencyInt = 9;
+            } else if (frequency.startsWith('OM')) {
+                // morning
+                frequencyInt = 1;
+            } else if (frequency.startsWith('ON')) {
+                // night
+                frequencyInt = 1;
+            } else if (frequency.startsWith('SOS')) {
+                // on as as needed basis
+                frequencyInt = 1;
+            } else if (frequency.startsWith('STAT')) {
+                // immediately
+                frequencyInt = 1;
+            } else if (frequency.startsWith('Q2H')) {
+                // every 2 hours
+                frequencyInt = 12;
+            } else if (frequency.startsWith('Q3H')) {
+                // every 3 hours
+                frequencyInt = 8;
+            }else if (frequency.startsWith('Q4H')) {
+                // every 4 hours
+                frequencyInt = 6;
+            }else if (frequency.startsWith('Q6H')) {
+                // every 6 hours
+                frequencyInt = 4;
+            }else if (frequency.startsWith('Q12H')) {
+                // every 12 hours
+                frequencyInt = 2;
+            }
+            
+            let durationInt = parseInt(duration);
+            let durationUnitInt = 0;
+            switch(durationUnit.toLowerCase()) {
+                case 'hours': 
+                    durationUnitInt = 1/24;
+                    break;
+                case 'days': 
+                    durationUnitInt = 1;
+                    break;
+                case 'weeks': 
+                    durationUnitInt = 7;
+                    break;   
+                case 'months': 
+                    durationUnitInt = 7 * 4;
+                    break;           
+                default: 
+                    durationUnitInt = 1;
+            }           
+            let amount = Math.ceil(doseInt * frequencyInt * durationInt * durationUnitInt);
+
+            return amount;
+        }
+
         $j(document).on('click', ".dispenseBtn", function() {
     
             let dispenseBtn = $j(this);
@@ -154,6 +238,13 @@
                                     } 
                                 });
                             }
+                            let amount = calculateDispensedQuantity(doseQuantAttr, frequencyAttr, durationAttr, durationUnitAttr);                            
+
+                            let amountSpan = $j(medFieldsetCollection[index]).find('span.amountInput');
+                            if ( amountSpan.length &gt; 0 ) { 
+                                $j(amountSpan[0]).find('input[type="text"]').val(amount);
+                            }
+
                             $j(dispenseBtn).attr('disabled', true);
                             $j(parentTr).css('background', '#dee2e6');
                             $j(parentTr).css('font-style', 'italic');
@@ -207,8 +298,8 @@
             // move encounter date up 1 day, so we could catch all recent prescriptions, including those on the same day as the current encounter( usually, they have a midnight datetime)
             currentEncounterDate.setDate(currentEncounterDate.getDate() + 1 );
 
-            var sevenDaysBefore = new Date(currentEncounterDate);
-            sevenDaysBefore.setDate(currentEncounterDate.getDate() - 8 );
+            var twoDaysBefore = new Date(currentEncounterDate);
+            twoDaysBefore.setDate(currentEncounterDate.getDate() - 3 );
 
             jq.getJSON(apiBaseUrl + "/obs", {
                 concept: prescriptionConstructUuid,
@@ -226,7 +317,7 @@
                             // if the prescription date is more recent than the current encounter date then skip it
                             continue;
                         }
-                        if (medDate.getTime() &lt; sevenDaysBefore.getTime()) {
+                        if (medDate.getTime() &lt; twoDaysBefore.getTime()) {
                             // the REST API returns obs in descending order by date, and we only want to display
                             // prescriptions from the last seven days, therefore when we reach the first prescription that
                             // is older than 7 days from the current encounter date, we stop processing the list of obs and exit this loop
@@ -436,7 +527,7 @@
                     <label>
                         <uimessage code="mirebalais.dispensing.medicationAmount"/>
                     </label>
-                    <obs id="amount{0}" conceptId="PIH:9071"/>
+                    <obs id="amount{0}" class="amountInput" conceptId="PIH:9071"/>
                 </p>
                 <p>
                     <label>
