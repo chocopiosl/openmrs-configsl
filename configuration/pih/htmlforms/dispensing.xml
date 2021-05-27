@@ -460,14 +460,14 @@
                 <label>
                     <uimessage code="dispensing.medication.typeOfPrescription"/>
                 </label>
-                <obs id="Timing of hospital prescription" required="true" class="select-arrow" conceptId="PIH:9292"/>
+                <obs id="Timing of hospital prescription" required="true" class="select-arrow" conceptId="PIH:9292" defaultValue="PIH:Discharge"/>
             </span>
             <span class="input-container">
                 <label>
                     <uimessage code="dispensing.medication.locationOfPrescription"/>
                 </label>
 
-                <obs id="Discharge location" required="true" style="location" class="select-arrow" conceptId="PIH:9293" />
+                <obs id="Discharge location" required="true" style="location" class="select-arrow" conceptId="PIH:9293" defaultValue="SessionAttribute:emrContext.sessionLocationId"/>
             </span>
             <span class="input-container provider">
                 <label>
