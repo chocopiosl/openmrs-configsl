@@ -561,6 +561,16 @@
         </div>
     </section>
 
+    <section id="clinical_impressions_comment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.consult.clinicalImpressions">
+        <div class="section-container">
+            <p>
+                <obs conceptId="PIH:CLINICAL IMPRESSION COMMENTS"
+                     labelCode="pihcore.comment" style="textarea" rows="5"/>
+            </p>
+        </div>
+    </section>
+
     <!---Mental state exam -->
     <section id="mh_mentalStateExam" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.exam.mental_exam.title">
@@ -819,22 +829,22 @@
                         </template>
 
                         <!-- Using concepts (class=drug), not OpenMRS drugs
-                            <render drug="PIH:914" name="Chlorpromazine" />
-                            <render drug="PIH:4047" name="Haloperidol" />
-                            <render drug="CIEL:76558" name="Fluphenazine" />
-                            <render drug="PIH:920" name="Carbamazepine" />
-                            <render drug="PIH:4060" name="Sodium Valproate" />
-                            <render drug="CIEL:83405" name="Risperidone" />
-                            <render drug="PIH:4045" name="Fluoxetine" />
-                            <render drug="CIEL:81025" name="Olanzapine" />
-                            <render drug="PIH:921" name="Diphenyhydramine" />
-                            <render drug="PIH:238" name="Phenobarbital" />
-                            <render drug="PIH:273" name="Phenytoin" />
-                            <render drug="PIH:931" name="Amitryptillin" />
-                            <render drug="PIH:247" name="Diazepam" />
-                            <render drug="CIEL:85463" name="Trihexyphenidyl" />
-                            <render drug="CIEL:79982" name="Mirtazapine" />
-                            <render drug="CIEL:82990" name="Quetiapine" />
+                            <render concept="PIH:914" name="Chlorpromazine" />
+                            <render concept="PIH:4047" name="Haloperidol" />
+                            <render concept="CIEL:76558" name="Fluphenazine" />
+                            <render concept="PIH:920" name="Carbamazepine" />
+                            <render concept="PIH:4060" name="Sodium Valproate" />
+                            <render concept="CIEL:83405" name="Risperidone" />
+                            <render concept="PIH:4045" name="Fluoxetine" />
+                            <render concept="CIEL:81025" name="Olanzapine" />
+                            <render concept="PIH:921" name="Diphenyhydramine" />
+                            <render concept="PIH:238" name="Phenobarbital" />
+                            <render concept="PIH:273" name="Phenytoin" />
+                            <render concept="PIH:931" name="Amitryptillin" />
+                            <render concept="PIH:247" name="Diazepam" />
+                            <render concept="CIEL:85463" name="Trihexyphenidyl" />
+                            <render concept="CIEL:79982" name="Mirtazapine" />
+                            <render concept="CIEL:82990" name="Quetiapine" />
                         -->
 
                         <render drug="6a2a96d1-c01f-48d3-b3b9-2741bce4e064" name="ChlorpromazineHCl25mgt"/>
