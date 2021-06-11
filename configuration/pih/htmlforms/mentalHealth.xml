@@ -558,9 +558,39 @@
                          style="checkbox"/>
                 </repeat>
                 <obs conceptId="PIH:11505" answerConceptId="PIH:OTHER"
-                     style="checkbox" />
+                     style="checkbox" commentFieldLabel=" "/>
 
-                     <textarea rows="5" cols="30">  </textarea>
+
+
+
+            </p>
+        </div>
+    </section>
+
+<!--
+<section id="pihcore.comment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+headerCode="Patient Plan Comment">
+ 
+<p>
+  <label>
+      <uimessage code="pihcore.comment"/>:
+  </label>
+  <obs conceptId="PIH:PATIENT PLAN COMMENTS" style="textarea" rows="10"/>
+</p>
+
+ 
+<obs conceptId="PIH:CLINICAL IMPRESSION COMMENTS" 
+     labelCode="pihcore.comment" 
+     style="textarea" rows="5"/>
+
+</section>
+-->
+
+ <section id="clinical_impressions_comment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.consult.clinicalImpressions">
+        <div class="section-container">
+            <p>
+               <obs conceptId="PIH:CLINICAL IMPRESSION COMMENTS" labelCode="pihcore.comment" style="textarea" rows="5"/>
             </p>
         </div>
     </section>
@@ -577,12 +607,8 @@
                      style="checkbox"/>
             </repeat>
             <obs conceptId="PIH:HISTORY OF ILLEGAL DRUGS" answerConceptId="PIH:OTHER"
-                 style="checkbox"/>
-                <textarea rows="5" cols="30">  </textarea>
-                  
+                 style="checkbox" commentFieldLabel=" "/>
         </div>
-
-
     </section>
 
     <!--Suicide Risk-->
@@ -878,10 +904,7 @@
                 <label>
                     <uimessage code="pihcore.exam.comment"/>:
                 </label>
-                
-
-                <textarea rows="5" cols="30">  </textarea>
-
+                <obs conceptId="PIH:Medication comments (text)"/>
             </p>
         </div>
 
