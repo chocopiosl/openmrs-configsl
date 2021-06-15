@@ -300,8 +300,7 @@
                                      conceptId="PIH:Dosing units coded"
                                      answerConceptIds="CIEL:161553,CIEL:161554,CIEL:162263,PIH:APPLICATION,CIEL:1608,CIEL:1513,CIEL:162356,CIEL:162366,CIEL:162370,PIH:Pump,PIH:SACHET,CIEL:162264"
                                      answerCodes="pihcore.visitNote.plan.medication.units.mg,pihcore.visitNote.plan.medication.units.g,pihcore.visitNote.plan.medication.units.mL,pihcore.visitNote.plan.medication.units.application,pihcore.visitNote.plan.medication.units.capsule,pihcore.visitNote.plan.medication.units.tablet,pihcore.visitNote.plan.medication.units.drop,pihcore.visitNote.plan.medication.units.mcg,pihcore.visitNote.plan.medication.units.patch,pihcore.visitNote.plan.medication.units.pump,pihcore.visitNote.plan.medication.units.sachet,pihcore.visitNote.plan.medication.units.IU"/>
-                                <!-- answers="mg,g,mL,Application,Capsule,Comprimé,Goutte,Microgramme,Patch,Pompe,Sachet,Unités internationals" -->
-
+                                <!-- answers="mg,g,mL,Application,Capsule,Tablet,Drop,Microgram,Patch,Pump,Sachet,IU" -->
                             </p>
 
                             <p class="inline">
