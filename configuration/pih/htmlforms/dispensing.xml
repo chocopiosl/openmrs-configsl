@@ -1,9 +1,9 @@
 <htmlform formUuid="ba22eda5-148d-456e-8adc-f36247d1f7c3" formName="Dispensing" formEncounterType="8ff50dea-18a1-4609-b4c9-3f8f2d611b84" formVersion="1.0" class="dispensing-form">
-    
+
     <style type="text/css">
 
     </style>
-    
+
     <script type="text/javascript">
         var $j = jQuery;
 
@@ -31,7 +31,7 @@
 
             $('fieldset.medication').each(function() {
                 var numEmptyFields = 0;
-                var numFilledFields = 0;               
+                var numFilledFields = 0;
                 $(this).find('input:not(:last), select').each(function() {
                     $(this).removeClass('emptyValue');
 
@@ -62,7 +62,7 @@
                     $(this).find('.field-error').first().html("<uimessage code="dispensing.error.missingRequiredFields"/>").show();
 
                     $('.medication input.emptyValue, .medication select.emptyValue').on('blur', function() {
-                       
+
                         if ($(this).val()) {
                             if($(this).hasClass('illegalValue')) {
                                 $(this).removeClass('emptyValue');
@@ -95,105 +95,21 @@
             return numErrors == 0 &amp;&amp; numDispensed > 0;
         });
 
-        var calculateDispensedQuantity = function(dose, frequency, duration, durationUnit) {
-        
-            let doseInt =  parseInt(dose, 10);        
-            let frequencyInt = 1;
-        
-            if (frequency.startsWith('OD')) {
-                // once daily
-                frequencyInt = 1;
-            } else if (frequency.startsWith('BID')) {
-                // twice daily
-                frequencyInt = 2;
-            } else if (frequency.startsWith('TID')) {
-                // thrice daily
-                frequencyInt = 3;
-            } else if (frequency.startsWith('QID')) {
-                // four times daily
-                frequencyInt = 4;
-            } else if (frequency.startsWith('5D')) {
-                // 5 times daily
-                frequencyInt = 5;
-            } else if (frequency.startsWith('6D')) {
-                // 6 times daily
-                frequencyInt = 6;
-            } else if (frequency.startsWith('7D')) {
-                // 7 times daily
-                frequencyInt = 7;
-            } else if (frequency.startsWith('8D')) {
-                // 8 times daily
-                frequencyInt = 8;
-            } else if (frequency.startsWith('9D')) {
-                // 9 times daily
-                frequencyInt = 9;
-            } else if (frequency.startsWith('OM')) {
-                // morning
-                frequencyInt = 1;
-            } else if (frequency.startsWith('ON')) {
-                // night
-                frequencyInt = 1;
-            } else if (frequency.startsWith('SOS')) {
-                // on as as needed basis
-                frequencyInt = 1;
-            } else if (frequency.startsWith('STAT')) {
-                // immediately
-                frequencyInt = 1;
-            } else if (frequency.startsWith('Q2H')) {
-                // every 2 hours
-                frequencyInt = 12;
-            } else if (frequency.startsWith('Q3H')) {
-                // every 3 hours
-                frequencyInt = 8;
-            }else if (frequency.startsWith('Q4H')) {
-                // every 4 hours
-                frequencyInt = 6;
-            }else if (frequency.startsWith('Q6H')) {
-                // every 6 hours
-                frequencyInt = 4;
-            }else if (frequency.startsWith('Q12H')) {
-                // every 12 hours
-                frequencyInt = 2;
-            }
-            
-            let durationInt = parseInt(duration);
-            let durationUnitInt = 0;
-            switch(durationUnit.toLowerCase()) {
-                case 'hours': 
-                    durationUnitInt = 1/24;
-                    break;
-                case 'days': 
-                    durationUnitInt = 1;
-                    break;
-                case 'weeks': 
-                    durationUnitInt = 7;
-                    break;   
-                case 'months': 
-                    durationUnitInt = 7 * 4;
-                    break;           
-                default: 
-                    durationUnitInt = 1;
-            }           
-            let amount = Math.ceil(doseInt * frequencyInt * durationInt * durationUnitInt);
-
-            return amount;
-        }
-
         $j(document).on('click', ".dispenseBtn", function() {
-    
+
             let dispenseBtn = $j(this);
             let parentTr = $j(this).closest('tr');
-            let doseQuantAttr = $j(parentTr).attr("data-dose-q");   
+            let doseQuantAttr = $j(parentTr).attr("data-dose-q");
             let doseUnitAttr = $j(parentTr).attr("data-dose-unit");
             let frequencyAttr = $j(parentTr).attr("data-frequency");
             let durationAttr = $j(parentTr).attr("data-duration");
             let durationUnitAttr = $j(parentTr).attr("data-duration-unit");
             let drugIdAttr = $j(parentTr).attr("data-drug-id");
             let  medName = $j(this).closest('tr').find("td.medicationName").text();
-            
+
             // find the first Medication in the dispense form
             let medFieldsetCollection = $j(document).find('fieldset.medication');
-            if ( medFieldsetCollection.length &gt; 0 ) { 
+            if ( medFieldsetCollection.length &gt; 0 ) {
                 for (let index = 0; index &lt; medFieldsetCollection.length; ++index) {
                     let medNameSpan = $j(medFieldsetCollection[index]).find('span.medication-name');
                     if ( medNameSpan.length &gt; 0 ) {
@@ -202,59 +118,53 @@
                             // we found the first non empty medication name input
                             medNameInput.val(medName);
                             let drugIdInput = $j(medNameSpan[0]).find('input[type="hidden"]');
-                            
+
                             drugIdInput.val('Drug:' + drugIdAttr);
                             let doseInputSpan = $j(medFieldsetCollection[index]).find('span.doseInput');
-                            if ( doseInputSpan.length &gt; 0 ) { 
+                            if ( doseInputSpan.length &gt; 0 ) {
                                 $j(doseInputSpan[0]).find('input[type="text"]').val(doseQuantAttr);
                             }
                             let doseUnitSpan = $j(medFieldsetCollection[index]).find('span.select-arrow');
-                            if ( doseUnitSpan.length &gt; 0 ) { 
+                            if ( doseUnitSpan.length &gt; 0 ) {
                                 let selectUnit= $j(doseUnitSpan[0]).find('select');
-                                $j(selectUnit).find('option').each( function() { 
-                                    if ( $j(this).text() == doseUnitAttr || $j(this).text().startsWith(doseUnitAttr)) { 
-                                        $j(this).attr('selected', 'selected'); 
-                                    } 
+                                $j(selectUnit).find('option').each( function() {
+                                    if ( $j(this).text() == doseUnitAttr || $j(this).text().startsWith(doseUnitAttr)) {
+                                        $j(this).attr('selected', 'selected');
+                                    }
                                 });
                             }
                             let frequencySpan = $j(medFieldsetCollection[index]).find('span.frequency');
                             if ( frequencySpan.length &gt; 0 ) {
                                 let selectUnit= $j(frequencySpan[0]).find('select');
-                                $j(selectUnit).find('option').each( function() { 
-                                    if (  frequencyAttr.startsWith( $j(this).text()) ) { 
-                                        $j(this).attr('selected', 'selected'); 
-                                    } 
-                                });                                
+                                $j(selectUnit).find('option').each( function() {
+                                    if (  frequencyAttr.startsWith( $j(this).text()) ) {
+                                        $j(this).attr('selected', 'selected');
+                                    }
+                                });
                             }
                             let durationSpan = $j(medFieldsetCollection[index]).find('span.duration');
-                            if ( durationSpan.length &gt; 0 ) { 
+                            if ( durationSpan.length &gt; 0 ) {
                                 $j(durationSpan[0]).find('input[type="text"]').val(durationAttr);
                             }
                             let durationUnitSpan = $j(medFieldsetCollection[index]).find('span.duration-unit');
-                            if ( durationUnitSpan.length &gt; 0 ) { 
+                            if ( durationUnitSpan.length &gt; 0 ) {
                                 let selectUnit= $j(durationUnitSpan[0]).find('select');
-                                $j(selectUnit).find('option').each( function() { 
-                                    if ( $j(this).text() == durationUnitAttr ) { 
-                                        $j(this).attr('selected', 'selected'); 
-                                    } 
+                                $j(selectUnit).find('option').each( function() {
+                                    if ( $j(this).text() == durationUnitAttr ) {
+                                        $j(this).attr('selected', 'selected');
+                                    }
                                 });
-                            }
-                            let amount = calculateDispensedQuantity(doseQuantAttr, frequencyAttr, durationAttr, durationUnitAttr);                            
-
-                            let amountSpan = $j(medFieldsetCollection[index]).find('span.amountInput');
-                            if ( amountSpan.length &gt; 0 ) { 
-                                $j(amountSpan[0]).find('input[type="text"]').val(amount);
                             }
 
                             $j(dispenseBtn).attr('disabled', true);
                             $j(parentTr).css('background', '#dee2e6');
                             $j(parentTr).css('font-style', 'italic');
-                            
+
                             break;
-                        }                        
+                        }
                     }
-                }               
-            }            
+                }
+            }
         });
 </script>
 <script type="text/javascript">
@@ -356,25 +266,25 @@
                                 medDurationUnits = member.value.display;
                             }
                         }
-                        emptyTable = false;  
-                        jq("#prescriptionTable tbody").append('<tr data-dose-q="' + medQuantity + '" data-dose-unit="' + medDose + '" data-frequency="' + medFreq + '" data-duration="' + medDuration + '" data-duration-unit="' + medDurationUnits + '" data-drug-id="' + drugId +'"><td>' + medDate.toLocaleString("en-US", dateFormat) + '</td>' 
-                            + '<td>' + encounterProvider + '</td>' 
-                            + '<td class="medicationName">' + medName + '</td>'  
-                            + '<td>' + medQuantity + ' ' + medDose + '</td>' 
-                            + '<td>' + medFreq + '</td>' 
-                            + '<td>' + (medDuration &gt; 0 ? medDuration : '') + ' ' + medDurationUnits + '</td>' 
+                        emptyTable = false;
+                        jq("#prescriptionTable tbody").append('<tr data-dose-q="' + medQuantity + '" data-dose-unit="' + medDose + '" data-frequency="' + medFreq + '" data-duration="' + medDuration + '" data-duration-unit="' + medDurationUnits + '" data-drug-id="' + drugId +'"><td>' + medDate.toLocaleString("en-US", dateFormat) + '</td>'
+                            + '<td>' + encounterProvider + '</td>'
+                            + '<td class="medicationName">' + medName + '</td>'
+                            + '<td>' + medQuantity + ' ' + medDose + '</td>'
+                            + '<td>' + medFreq + '</td>'
+                            + '<td>' + (medDuration &gt; 0 ? medDuration : '') + ' ' + medDurationUnits + '</td>'
                             + '<td>' + '<button class="dispenseBtn">Dispense</button>' + '</td></tr>');
-                      }                  
+                      }
                   }
                   if ( emptyTable === true ) {
-                    jq("#prescriptionTable tbody").append('<tr><td>' + '<uimessage code="uicommons.dataTable.emptyTable"/>' + '</td>' 
-                        + '<td></td>' 
-                        + '<td></td>'  
-                        + '<td></td>' 
-                        + '<td></td>' 
+                    jq("#prescriptionTable tbody").append('<tr><td>' + '<uimessage code="uicommons.dataTable.emptyTable"/>' + '</td>'
+                        + '<td></td>'
+                        + '<td></td>'
+                        + '<td></td>'
+                        + '<td></td>'
                         + '<td></td><td></td></tr>');
                   }
-            });           
+            });
         });
 
 </script>
@@ -390,8 +300,8 @@
                     <th><uimessage code="dispensing.medication.name"/> </th>
                     <th><uimessage code="dispensing.medication.dose"/> </th>
                     <th><uimessage code="dispensing.medication.frequency"/> </th>
-                    <th><uimessage code="dispensing.medication.duration"/> </th>      
-                    <th></th>      
+                    <th><uimessage code="dispensing.medication.duration"/> </th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
