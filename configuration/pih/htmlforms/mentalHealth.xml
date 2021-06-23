@@ -858,7 +858,8 @@
                         <render drug="355b9a8a-6e4e-4db8-a2cd-64f61456ef53" name="SodiumValproate100mgv"/>
                         <render drug="bb5094d6-efdd-458e-ab4e-f9916cd904ab" name="Risperidone2mgt"/>
                         <render drug="7f7178bd-a1f8-44dd-85a9-02e49065e56b" name="FluoxetineHCl20mgt"/>
-                        <render drug="9c9f85ed-945a-4701-9c4e-1548023e68de" name="Olanzapine"/>
+                        <render drug="9c9f85ed-945a-4701-9c4e-1548023e68de" name="Olanzapine5mg"/>
+                        <render drug="6192369d-c0fe-4d11-86b9-7765940ae73d" name="Olanzapine10mg"/>
                         <render drug="81694757-3336-4195-ac6b-ea574b9b8597" name="DiphenhydramineHCl25mgt"/>
                         <render drug="b476d417-800f-4e2e-89ec-09de8fd07607" name="DiphenhydramineHCl50mga"/>
                         <render drug="c6a90f40-fce4-11e9-8f0b-362b9e155667" name="Phenobarb30mgt" />
