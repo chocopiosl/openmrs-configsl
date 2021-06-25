@@ -1,5 +1,5 @@
- -- set @startDate='2021-06-10';
- -- set @endDate='2021-06-10';
+-- set @startDate='2021-01-01';
+-- set @endDate='2021-06-30';
 
 set @locale = global_property_value('default_locale', 'en');
 select encounter_type_id into @mh from encounter_type where uuid = 'a8584ab8-cc2a-11e5-9956-625662870761';
@@ -121,12 +121,18 @@ create temporary table temp_mh
     fluoxetine_hydrochloride_tab_duration double,
     fluoxetine_hydrochloride_tab_dur_units varchar(50),
     fluoxetine_hydrochloride_tab_route varchar(50),  
-    olanzapine_tab_dose double,
-    olanzapine_tab_dose_units varchar(50),
-    olanzapine_tab_freq varchar(50),
-    olanzapine_tab_duration double,
-    olanzapine_tab_dur_units varchar(50),
-    olanzapine_tab_route varchar(50),
+    olanzapine_5mg_tab_dose double,
+    olanzapine_5mg_tab_dose_units varchar(50),
+    olanzapine_5mg_tab_freq varchar(50),
+    olanzapine_5mg_tab_duration double,
+    olanzapine_5mg_tab_dur_units varchar(50),
+    olanzapine_5mg_tab_route varchar(50),
+    olanzapine_10mg_tab_dose double,
+    olanzapine_10mg_tab_dose_units varchar(50),
+    olanzapine_10mg_tab_freq varchar(50),
+    olanzapine_10mg_tab_duration double,
+    olanzapine_10mg_tab_dur_units varchar(50),
+    olanzapine_10mg_tab_route varchar(50),
     diphenhydramine_hydrochloride_tab_dose double,
     diphenhydramine_hydrochloride_tab_dose_units varchar(50),
     diphenhydramine_hydrochloride_tab_freq varchar(50),
@@ -432,12 +438,20 @@ update temp_mh set fluoxetine_hydrochloride_tab_dur_units = obs_from_group_id_va
 update temp_mh set fluoxetine_hydrochloride_tab_route = obs_from_group_id_value_coded_list(obs_group_id_with_drug_answer(encounter_id,@drug_id),'PIH','12651',@locale);
 
 set @drug_id = drugId('9c9f85ed-945a-4701-9c4e-1548023e68de');
-update temp_mh set olanzapine_tab_dose = obs_from_group_id_value_numeric(obs_group_id_with_drug_answer(encounter_id,@drug_id),'CIEL','160856');
-update temp_mh set olanzapine_tab_dose_units = obs_from_group_id_value_coded_list(obs_group_id_with_drug_answer(encounter_id,@drug_id),'PIH','10744',@locale);
-update temp_mh set olanzapine_tab_freq = obs_from_group_id_value_coded_list(obs_group_id_with_drug_answer(encounter_id,@drug_id),'PIH','9363',@locale);
-update temp_mh set olanzapine_tab_duration = obs_from_group_id_value_numeric(obs_group_id_with_drug_answer(encounter_id,@drug_id),'CIEL','159368');
-update temp_mh set olanzapine_tab_dur_units = obs_from_group_id_value_coded_list(obs_group_id_with_drug_answer(encounter_id,@drug_id),'PIH','6412',@locale);
-update temp_mh set olanzapine_tab_route = obs_from_group_id_value_coded_list(obs_group_id_with_drug_answer(encounter_id,@drug_id),'PIH','12651',@locale);
+update temp_mh set olanzapine_5mg_tab_dose = obs_from_group_id_value_numeric(obs_group_id_with_drug_answer(encounter_id,@drug_id),'CIEL','160856');
+update temp_mh set olanzapine_5mg_tab_dose_units = obs_from_group_id_value_coded_list(obs_group_id_with_drug_answer(encounter_id,@drug_id),'PIH','10744',@locale);
+update temp_mh set olanzapine_5mg_tab_freq = obs_from_group_id_value_coded_list(obs_group_id_with_drug_answer(encounter_id,@drug_id),'PIH','9363',@locale);
+update temp_mh set olanzapine_5mg_tab_duration = obs_from_group_id_value_numeric(obs_group_id_with_drug_answer(encounter_id,@drug_id),'CIEL','159368');
+update temp_mh set olanzapine_5mg_tab_dur_units = obs_from_group_id_value_coded_list(obs_group_id_with_drug_answer(encounter_id,@drug_id),'PIH','6412',@locale);
+update temp_mh set olanzapine_5mg_tab_route = obs_from_group_id_value_coded_list(obs_group_id_with_drug_answer(encounter_id,@drug_id),'PIH','12651',@locale);
+
+set @drug_id = drugId('6192369d-c0fe-4d11-86b9-7765940ae73d');
+update temp_mh set olanzapine_10mg_tab_dose = obs_from_group_id_value_numeric(obs_group_id_with_drug_answer(encounter_id,@drug_id),'CIEL','160856');
+update temp_mh set olanzapine_10mg_tab_dose_units = obs_from_group_id_value_coded_list(obs_group_id_with_drug_answer(encounter_id,@drug_id),'PIH','10744',@locale);
+update temp_mh set olanzapine_10mg_tab_freq = obs_from_group_id_value_coded_list(obs_group_id_with_drug_answer(encounter_id,@drug_id),'PIH','9363',@locale);
+update temp_mh set olanzapine_10mg_tab_duration = obs_from_group_id_value_numeric(obs_group_id_with_drug_answer(encounter_id,@drug_id),'CIEL','159368');
+update temp_mh set olanzapine_10mg_tab_dur_units = obs_from_group_id_value_coded_list(obs_group_id_with_drug_answer(encounter_id,@drug_id),'PIH','6412',@locale);
+update temp_mh set olanzapine_10mg_tab_route = obs_from_group_id_value_coded_list(obs_group_id_with_drug_answer(encounter_id,@drug_id),'PIH','12651',@locale);
 
 set @drug_id = drugId('81694757-3336-4195-ac6b-ea574b9b8597');
 update temp_mh set diphenhydramine_hydrochloride_tab_dose = obs_from_group_id_value_numeric(obs_group_id_with_drug_answer(encounter_id,@drug_id),'CIEL','160856');
