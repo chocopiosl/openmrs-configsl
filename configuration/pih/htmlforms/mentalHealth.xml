@@ -582,7 +582,7 @@
                 <obs conceptId="CIEL:163043" answerConceptId="{0}"
                      style="checkbox"/>
             </repeat>
-            <obs conceptId="PIH:HISTORY OF ILLEGAL DRUGS" answerConceptId="PIH:OTHER"
+            <obs conceptId="CIEL:163043" answerConceptId="PIH:OTHER"
                  style="checkbox" commentFieldLabel=" "/>
         </div>
     </section>
