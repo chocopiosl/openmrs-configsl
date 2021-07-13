@@ -127,9 +127,17 @@
                             code="pihcore.visitNote.plan.medications.error.noDuration"/>. ").show();
                     }
 
-
-
                 });
+
+                // validate that if a disposition has been selected, all the fields associated with that disposition have also been filled out
+                jq('#disposition .field-error').first().html('').hide(); // hide any previous error
+                if (jq('#disposition select:first').val() != '' &amp;&amp;
+                    (jq('#disposition select:visible').is(function() { return jq(this).val() == ''; })
+                    || jq('#disposition input:visible').is(function() { return jq(this).val() == ''; }))) {
+                        jq('#disposition .field-error').first().append('<uimessage code="pihcore.errors.fieldsAssociatedWithDisposition"/>').show();
+                    valid = false;
+                }
+
                 return valid;
 
             });
@@ -170,7 +178,12 @@
                 jq('#show-more-medications-button').show();
             });
 
-            })
+
+            jq('#disposition select:first').change(function() {
+                jq('#disposition .field-error').first().html('').hide(); // hide any previous error if disposition is changed
+            });
+
+        })
 
         </script>
     </ifMode>
