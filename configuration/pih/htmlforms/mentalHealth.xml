@@ -613,15 +613,18 @@
                         </label>
                     </th>
                     <td>
+                        <!-- History of suicidal thoughts/ideation -->
                         <p class="side-by-side">
-                            <obs conceptId="CIEL:1628" style="radio" answerConceptIds="PIH:YES,PIH:NO"
+                            <!-- Todo:  Change report from CIEL:1628 to CIEL:165529 -->
+                            <obs conceptId="CIEL:165529" style="radio" answerConceptIds="PIH:YES,PIH:NO"
                                  answerCodes="Yes,No" answerSeparator="" required="true"/>
                         </p>
                     </td>
                     <td>
                         <!-- History of suicide attempt -->
                         <p class="side-by-side">
-                            <obs conceptId="CIEL:1628" style="radio" answerConceptIds="PIH:YES,PIH:NO"
+                            <!-- Todo:  Change report from CIEL:1628 to CIEL:129176 -->
+                            <obs conceptId="CIEL:129176" style="radio" answerConceptIds="PIH:YES,PIH:NO"
                                  answerCodes="Yes,No" answerSeparator="" required="true"/>
                         </p>
                     </td>
@@ -635,14 +638,16 @@
                     <td>
                         <!-- Suicidal ideation -->
                         <p class="side-by-side">
-                            <obs conceptId="PIH:Mental health diagnosis" style="radio" answerConceptIds="PIH:YES,PIH:NO"
+                            <!-- Todo:  Change from PIH:Mental health diagnosis to CIEL:125562 -->
+                            <obs conceptId="CIEL:125562" style="radio" answerConceptIds="PIH:YES,PIH:NO"
                                  answerCodes="Yes,No" answerSeparator="" required="true"/>
                         </p>
                     </td>
                     <td>
                         <!-- Suicide attempt -->
                         <p class="side-by-side">
-                            <obs conceptId="PIH:Mental health diagnosis" style="radio" answerConceptIds="PIH:YES,PIH:NO"
+                            <!-- Todo:  Change from PIH:Mental health diagnosis to CIEL:148143 -->
+                            <obs conceptId="CIEL:148143" style="radio" answerConceptIds="PIH:YES,PIH:NO"
                                  answerCodes="Yes,No" answerSeparator="" required="true"/>
                         </p>
                     </td>
