@@ -290,17 +290,14 @@ update temp_mh set clinical_impressions = obs_value_text(encounter_id, 'PIH','13
 -- mental state exam
 update temp_mh set mental_state_exam_findings = obs_value_coded_list(encounter_id, 'CIEL','163043',@locale);
 
--- the following will not work for now. Currently it looks like concept PIH:HISTORY OF ILLEGAL DRUGS is being used, which seems wrong (ticket SL-212)
+-- other mental state finding
 update temp_mh set other_mental_state_exam_finding = obs_comments(encounter_id, 'CIEL','163043', 'PIH','OTHER'); 
 
 -- suicidal evaluation
--- holding off on the following columns until the concepts are fixed (ticket SL-211)
-/*
-past_suicidal_ideation
-past_suicidal_attempt
-current_suicidal_ideation
-current_suicidal_attempt
- */
+update temp_mh set past_suicidal_ideation = obs_value_coded_list(encounter_id, 'CIEL','165529',@locale);
+update temp_mh set past_suicidal_attempt = obs_value_coded_list(encounter_id, 'CIEL','129176',@locale);
+update temp_mh set current_suicidal_ideation = obs_value_coded_list(encounter_id, 'CIEL','125562',@locale);
+update temp_mh set current_suicidal_attempt = obs_value_coded_list(encounter_id, 'CIEL','148143',@locale);
 update temp_mh set date_latest_suicidal_attempt = obs_value_datetime(encounter_id, 'CIEL','165530');
 update temp_mh set psychosocial_counseling = obs_value_coded_list(encounter_id, 'PIH','5490',@locale);
 
