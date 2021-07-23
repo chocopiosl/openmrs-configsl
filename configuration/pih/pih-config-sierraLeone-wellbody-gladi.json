@@ -6,24 +6,24 @@
     "checkIn",
     "clinicianDashboard",
     "dataExports",
+    "dispensing",
     "idcardPrinting",
     "labResults",
     "labs",
     "managePrinters",
     "markPatientDead",
     "mchForms",
+    "mentalHealth",
     "myAccount",
     "overviewReports",
     "patientRegistration",
     "primaryCare",
+    "programs",
     "relationships",
     "systemAdministration",
     "visitManagement",
     "visitNote",
-    "vitals",
-    "dispensing",
-    "mentalHealth",
-    "programs"
+    "vitals"
   ],
   "extraIdentifierTypes": [
     "c09a1d24-7162-11eb-8aa6-0242ac110002"
