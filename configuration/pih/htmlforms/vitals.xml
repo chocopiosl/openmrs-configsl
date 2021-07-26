@@ -20,7 +20,9 @@
         window.messages = window.messages || { };
         window.messages['pihcore.vitals.sierraLeone.confused'] = '<uimessage code="pihcore.vitals.sierraLeone.confused"/>';
         window.messages['pihcore.tbscreen.feverSweats'] = '<uimessage code="pihcore.tbscreen.feverSweats"/>';
+        window.messages['pihcore.tbscreen.nightsweat'] = '<uimessage code="pihcore.tbscreen.nightsweat"/>';
         window.messages['pihcore.tbscreen.wtLoss3kg'] = '<uimessage code="pihcore.tbscreen.wtLoss3kg"/>';
+        window.messages['pihcore.tbscreen.wtLoss'] = '<uimessage code="pihcore.tbscreen.wtLoss"/>';
         window.messages['pihcore.tbscreen.cough'] = '<uimessage code="pihcore.tbscreen.cough"/>';
         window.messages['pihcore.tbscreen.bloodyCough'] = '<uimessage code="pihcore.tbscreen.bloodyCough"/>';
     </script>
@@ -512,6 +514,7 @@
                                                       required="true"/>
                         </div>
                     </includeIf>
+                    <br/>
 
                     <label>
                         <uimessage code="emr.locationRequired"/>
@@ -522,6 +525,7 @@
                                                tags="Vitals Location"/>
                         </field>
                     </span>
+                    <br/>
 
                     <label>
                         <uimessage code="emr.patientDashBoard.date"/>
@@ -603,6 +607,7 @@
                         answerConceptIds="CIEL:160282,CIEL:162645,CIEL:162644,PIH:6784"
                         answerLabels="Awake (alert),Responds to voice,Responds to pain,Staring and unresponsive" />
                 </field>
+                <br/>
 
                 <div class="checkboxRadio">
                     <obsgroup groupingConceptId="PIH:Response triage symptom">
@@ -801,7 +806,7 @@
     <section id="tb_screening" sectionTag="section" headerStyle="title" headerCode="pihcore.tbscreen.title">
     <!--TB screening taken from /haiti/hiv/zl/vct.xml-->
         <!-- !! make sure this fieldset template stays aligned with field order below or data with be inaccurate !! -->
-         <fieldset display-template="{{#if field.[0]}}{{ message 'pihcore.tbscreen.cough' }}: {{field.[0]}}, {{/if}}{{#if field.[1]}}{{ message 'pihcore.tbscreen.nightsweat' }}: {{field.[1]}}, {{/if}}{{#if field.[2]}}{{ message 'pihcore.tbscreen.weightloss' }}: {{field.[3]}} {{/if}}" class="required">
+         <fieldset display-template="{{#if field.[0]}}{{ message 'pihcore.tbscreen.cough' }}: {{field.[0]}}, {{/if}}{{#if field.[1]}}{{ message 'pihcore.tbscreen.nightsweat' }}: {{field.[1]}}, {{/if}}{{#if field.[2]}}{{ message 'pihcore.tbscreen.wtLoss' }}: {{field.[3]}} {{/if}}" class="required">
              <legend><uimessage code="pihcore.tbscreen.title"/></legend>
              <h3><uimessage code="pihcore.tbscreen.title"/><p>If at least two questions answers yes</p></h3>
             <table>
