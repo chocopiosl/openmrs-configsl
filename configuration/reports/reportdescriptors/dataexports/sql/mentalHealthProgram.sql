@@ -11,8 +11,8 @@ set @zlds_score = concept_from_mapping('CIEL', '163225');
 set @whodas_score = concept_from_mapping('CIEL', '163226');
 set @seizures = concept_from_mapping('PIH', 'Number of seizures in the past month');
 set @medication = concept_from_mapping('PIH', 'Mental health medication');
-set @mh_intervention =  concept_from_mapping('PIH', 'Mental health intervention');
 set @return_visit_date = concept_from_mapping('PIH', 'RETURN VISIT DATE');
+
 
 create temporary table temp_mentalhealth_program
 (
@@ -40,9 +40,6 @@ baseline_seizure_number double,
 baseline_seizure_date date,
 latest_medication_given text,
 latest_medication_date date,
-latest_intervention text,
-other_intervention text,
-last_intervention_date date,
 last_visit_date date,
 next_scheduled_visit_date date,
 patient_came_within_14_days_appt varchar(50),
@@ -228,46 +225,6 @@ inner join temp_obs t on t.temp_id =
 set tmh.latest_medication_given = t.medications,
 	tmh.latest_medication_date = date(t.encounter_datetime);
 
--- latest intervention (uses the same temp table as the latest score)
-drop temporary table if exists temp_obs;
-CREATE TEMPORARY TABLE temp_obs
-(	temp_id int(11) AUTO_INCREMENT,
-	patient_program_id int(11),
-	encounter_id int(11),
-	encounter_datetime datetime,
-	coded varchar(1000),
-	non_coded varchar(255),
-	PRIMARY KEY (temp_id) );
-
-insert into  temp_obs (patient_program_id, encounter_id,encounter_datetime,coded,non_coded)
-SELECT 	t.patient_program_id,
-		e.encounter_id,
-		e.encounter_datetime,
-		GROUP_CONCAT(concept_name(o.value_coded,@locale)),
-		max(o.comments)
-from temp_mentalhealth_program t
-inner join encounter e on e.patient_id = t.patient_id and e.encounter_type = @encounter_type and e.voided = 0
-	and date(e.encounter_datetime) >= date(t.date_enrolled) and (date(e.encounter_datetime) <= date(t.date_completed) or t.date_completed is null)
-inner join obs o on o.encounter_id  = e.encounter_id and o.voided = 0 
-	and o.concept_id in (@mh_intervention, @other_noncoded)
-group by patient_program_id, encounter_id, encounter_datetime
-;
-
-drop temporary table if exists temp_obs_dup;
-CREATE TEMPORARY TABLE temp_obs_dup
-select * from temp_obs;
-
-create index t_encounter_datetime_index on temp_obs_dup (encounter_datetime);
-create index t_obs_id_temp_id on temp_obs_dup (temp_id);
-
-update temp_mentalhealth_program tmh
-inner join temp_obs t on t.temp_id =
-	(select temp_id from temp_obs_dup t2 
-	where t2.patient_program_id = tmh.patient_program_id
-  	order by t2.encounter_datetime desc limit 1)
-set tmh.latest_intervention = t.coded,
-	tmh.other_intervention = t.non_coded;
-
 -- Last Visit Date  (uses the same temp table as the latest score)
 drop temporary table if exists temp_obs;
 CREATE TEMPORARY TABLE temp_obs
@@ -367,9 +324,6 @@ baseline_seizure_number,
 baseline_seizure_date,
 latest_medication_given,
 latest_medication_date,
-latest_intervention,
-other_intervention,
-last_intervention_date,
 last_visit_date,
 next_scheduled_visit_date,
 three_months_since_latest_return_date,
