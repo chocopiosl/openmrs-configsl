@@ -416,7 +416,7 @@
 
         </div>
         </section>
-    <!-- </includeIf> -->
+    </includeIf>
 
     <!-- Show sexual activities/family planning - if encounter type is NCD Intake -->
     <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'" >
