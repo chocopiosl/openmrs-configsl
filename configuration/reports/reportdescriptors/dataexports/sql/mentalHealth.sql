@@ -37,7 +37,7 @@ create temporary table temp_mh
     family_behavioral_problems varchar(255),
     presenting_features varchar(1000),
     other_presenting_features varchar(255),
-    clinical_impressions varchar(255),
+    clinical_impressions text,
     mental_state_exam_findings varchar(1000),
     other_mental_state_exam_finding varchar(255),
     past_suicidal_ideation varchar(255),
