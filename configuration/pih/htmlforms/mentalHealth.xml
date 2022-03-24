@@ -412,7 +412,7 @@
 
                     <obs conceptId="PIH:2516" labelCode="pihcore.hiv.startDateARV"/>
 
-                    <label>TB Smear Result</label>
+                    <label>TB smear result</label>
                     <obs conceptId="PIH:3052"
                         style="radio"
                         answerConceptIds="CIEL:703,CIEL:664"
@@ -503,7 +503,6 @@
                 <label>
                     <uimessage code="Traditional medicine" />:
                 </label>
-                <br/>
                 <obs conceptId="PIH:13242" answerConceptIds="CIEL:159450,CIEL:159452,CIEL:1090"
                      answerCodes="Current,Past,Never"
                      answerSeparator="" style="radio"/>
@@ -574,6 +573,45 @@
     <section id="mh_mentalStateExam" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.exam.mental_exam.title">
         <div class="section-container">
+            <p class="side-by-side">
+                <label>
+                    Alertness
+                </label>
+                <obs conceptId="CIEL:122943" style="radio"
+                     answerConceptIds="CIEL:160282,CIEL:141762,CIEL:123818"
+                     answerCodes="Alert,Somnolent,Unconscious" />
+            </p>
+
+            <label>
+                Orientation status
+            </label>
+            <obs conceptId="CIEL:167084" style="checkbox"
+                 answerConceptId="CIEL:167081"
+                 answerCode="Oriented to person" />
+            <obs conceptId="CIEL:167084" style="checkbox"
+                 answerConceptId="CIEL:167082"
+                 answerCode="Oriented to place" />
+            <obs conceptId="CIEL:167084" style="checkbox"
+                 answerConceptId="CIEL:167083"
+                 answerCode="Oriented to time" />
+            <br/>
+
+            <label>
+                Appearance
+            </label>
+
+            <repeat>
+                <template>
+                    <obs conceptId="CIEL:167092" style="checkbox"
+                         answerConceptId="CIEL:{acID}"
+                         answerCode="{name}"/>
+                </template>
+                <render acID="159438" name="Neat" />
+                <render acID="114413" name="Overweight" />
+                <render acID="124905" name="Thin" />
+            </repeat>
+            <br/>
+
             <label>
                 <uimessage code="pihcore.exam.mental_exam.title"/>:
             </label>
@@ -729,37 +767,47 @@
             <br/>
             -->
 
-            <label>
-                <uimessage code="pihcore.mentalhealth.epilepsySeizureFrequency"/>:
-            </label>
 
             <obsgroup groupingConceptId="CIEL:161245">
-                <span class="small">
-                    <obs conceptId="PIH:6797"/>
-                    <uimessage code="permonth"/>
-                </span>
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="pihcore.mentalhealth.epilepsySeizureFrequency"/>:
+                    </label>
+                    <span class="small">
+                        <obs conceptId="PIH:6797"/>
+                        <uimessage code="permonth"/>
+                    </span>
+                </p>
+            </obsgroup>
 
+            <p class="side-by-side">
                 <label>
                     <uimessage code="pihcore.mentalhealth.cgis"/>:
                 </label>
                 <span class="small">
-                    <obs conceptId="CIEL:163222"/>
+                    <obs conceptId="CIEL:163222" style="radio"
+                         answers="1,2,3,4,5,6,7"
+                         answerLabels="1=Normal,2=Borderline ill,3=Mildly ill,4=Moderately ill,5=Markedly ill,6=Severely ill,7=Most extreme" />
                 </span>
+            </p>
 
+            <p class="side-by-side">
                 <label>
                     <uimessage code="pihcore.mentalhealth.cgii"/>:
                 </label>
                 <span class="small">
                     <obs conceptId="CIEL:163223"/>
                 </span>
+            </p>
 
+            <p class="side-by-side">
                 <label>
                     <uimessage code="pihcore.mentalhealth.cgie"/>:
                 </label>
                 <span class="small">
                     <obs conceptId="CIEL:163224"/>
                 </span>
-            </obsgroup>
+            </p>
         </div>
 </section>
 
