@@ -573,6 +573,7 @@
     <section id="mh_mentalStateExam" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.exam.mental_exam.title">
         <div class="section-container">
+            <div class="two-columns">
             <p class="side-by-side">
                 <label>
                     Alertness
@@ -610,17 +611,106 @@
                 <render acID="114413" name="Overweight" />
                 <render acID="124905" name="Thin" />
             </repeat>
+             <br/>
+           
+            <label>
+                Mood
+            </label>
+
+            <repeat>
+                <template>
+                    <obs conceptId="CIEL:167099	" style="checkbox"
+                         answerConceptId="CIEL:{acID}"
+                         answerCode="{name}"/>
+                </template>
+                <render acID="119537" name="Depressed"/>
+                <render acID="167100" name="Neutral"/>
+                <render acID="166050" name="Elevated"/>
+                <render acID="121543" name="Anxious"/>
+                <render acID="6023" name="Irritable"/>
+            </repeat>
+            <br/>
+
+             <label>
+                Affect
+            </label>
+
+            <repeat>
+                <template>
+                    <obs conceptId="CIEL:167101	" style="checkbox"
+                         answerConceptId="CIEL:{acID}"
+                         answerCode="{name}"/>
+                </template>
+                <render acID="167102" name="Appropriate"/>
+                <render acID="167103" name="Labile"/>
+                <render acID="167104" name="Restricted"/>
+                <render acID="167105" name="Flat"/>
+            </repeat>
+            <br/>
+             <label>
+                Thought process
+            </label>
+
+            <repeat>
+                <template>
+                    <obs conceptId="CIEL:167106	" style="checkbox"
+                         answerConceptId="CIEL:{acID}"
+                         answerCode="{name}"/>
+                </template>
+                <render acID="167108" name="Goal oriented"/>
+                <render acID="167109" name="Linear"/>
+                <render acID="167107" name="Circumferential"/>
+                <render acID="167110" name="Tangential"/>
+                <render acID="167111" name="Flight of ideas"/>
+            </repeat>
             <br/>
 
             <label>
-                <uimessage code="pihcore.exam.mental_exam.title"/>:
+                Thought content
             </label>
-            <repeat with="['CIEL:119537'],['CIEL:166050'],['CIEL:137668'],['CIEL:137646'],['CIEL:119570'],['CIEL:139146'],['CIEL:166051']">
-                <obs conceptId="CIEL:163043" answerConceptId="{0}"
-                     style="checkbox"/>
+
+            <repeat>
+                <template>
+                    <obs conceptId="CIEL:167112	" style="checkbox"
+                         answerConceptId="CIEL:{acID}"
+                         answerCode="{name}"/>
+                </template>
+                <render acID="142600" name="Delusions"/>
+                <render acID="167113" name="Denies suicidal ideation"/>
+                <render acID="167114" name="Denies homicidal ideation"/>
+                <render acID="130853" name="Paranoia"/>
+                <render acID="133436" name="Negativistic"/>
             </repeat>
-            <obs conceptId="CIEL:163043" answerConceptId="PIH:OTHER"
-                 style="checkbox" commentFieldLabel=" "/>
+            <br/>
+
+             <p class="side-by-side">
+                <label>
+                    Insight
+                </label>
+                <obs conceptId="CIEL:167115" style="radio"
+                     answerConceptIds="CIEL:159406,CIEL:159405,CIEL:159407"
+                     answerCodes="Fair,Good,Poor" />
+            </p>
+
+            <p class="side-by-side">
+                <label>
+                    Judgment
+                </label>
+                <obs conceptId="CIEL:167116" style="radio"
+                     answerConceptIds="CIEL:159406,CIEL:159405,CIEL:159407"
+                     answerCodes="Fair,Good,Poor" />
+            </p>
+            <br/>
+            <p class="comment-label">
+                    <uimessage code="pihcore.exam.comment"/>
+                </p>
+            
+            <p class="comment-field">
+                    <p>
+                        <obs conceptId="CIEL:161011" rows="5" cols="25" />
+                    </p>
+                </p>
+            </div>
         </div>
     </section>
 
@@ -796,7 +886,9 @@
                     <uimessage code="pihcore.mentalhealth.cgii"/>:
                 </label>
                 <span class="small">
-                    <obs conceptId="CIEL:163223"/>
+                    <obs conceptId="CIEL:163223" style="radio"
+                         answers="1,2,3,4,5,6,7"
+                         answerLabels="1=Normal,2=Borderline ill,3=Mildly ill,4=Moderately ill,5=Markedly ill,6=Severely ill,7=Most extreme"/>
                 </span>
             </p>
 
@@ -805,7 +897,9 @@
                     <uimessage code="pihcore.mentalhealth.cgie"/>:
                 </label>
                 <span class="small">
-                    <obs conceptId="CIEL:163224"/>
+                    <obs conceptId="CIEL:163224" style="radio"
+                         answers="1,2,3,4,5,6,7"
+                         answerLabels="1=Normal,2=Borderline ill,3=Mildly ill,4=Moderately ill,5=Markedly ill,6=Severely ill,7=Most extreme"/>
                 </span>
             </p>
         </div>
