@@ -519,24 +519,24 @@
                     <uimessage code="ui.i18n.Program.name.69e6a46d-674e-4281-99a0-4004f293ee57"/>
                 </label>
                 <obs conceptId="CIEL:152450"
-                     style="radio" answerConceptIds="PIH:YES,PIH:NO"
-                     answerCodes="Yes,No" answerSeparator="" required="true"/>
+                     style="radio" answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                     answerCodes="Yes,No,Unknown" answerSeparator="" required="true"/>
                 <br/>
 
                 <label>
                     <uimessage code="pihcore.mentalIllness"/>
                 </label>
                 <obs conceptId="CIEL:140526"
-                     style="radio" answerConceptIds="PIH:YES,PIH:NO"
-                     answerCodes="Yes,No" answerSeparator="" required="true"/>
+                     style="radio" answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                     answerCodes="Yes,No,Unknown" answerSeparator="" required="true"/>
                 <br/>
 
                 <label>
                     <uimessage code="pihcore.behavioralProblems"/>
                 </label>
                 <obs conceptId="CIEL:152465"
-                     style="radio" answerConceptIds="PIH:YES,PIH:NO"
-                     answerCodes="Yes,No" answerSeparator="" required="true"/>
+                     style="radio" answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                     answerCodes="Yes,No,Unknown" answerSeparator="" required="true"/>
             </p>
         </div>
     </section>
@@ -707,7 +707,7 @@
             
             <p class="comment-field">
                     <p>
-                        <obs conceptId="CIEL:161011" rows="5" cols="25" />
+                        <obs conceptId="CIEL:163044" rows="5" cols="25" />
                     </p>
                 </p>
             </div>
