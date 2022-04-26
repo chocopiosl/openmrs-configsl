@@ -23,7 +23,8 @@
     "systemAdministration",
     "visitManagement",
     "visitNote",
-    "vitals"
+    "vitals",
+    "vitalsHomepageApp"
   ],
   "extraIdentifierTypes": [
     "c09a1d24-7162-11eb-8aa6-0242ac110002"

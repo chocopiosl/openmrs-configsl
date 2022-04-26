@@ -34,7 +34,8 @@
     "systemAdministration",
     "visitManagement",
     "visitNote",
-    "vitals"
+    "vitals",
+    "vitalsHomepageApp"
   ],
   "idCardLabel": "Wellbody Clinic Dorma",
 

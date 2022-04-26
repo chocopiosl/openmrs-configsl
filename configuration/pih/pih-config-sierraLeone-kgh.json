@@ -33,7 +33,8 @@
     "systemAdministration",
     "visitManagement",
     "visitNote",
-    "vitals"
+    "vitals",
+    "vitalsHomepageApp"
   ],
   "idCardLabel": "KGH",
 
