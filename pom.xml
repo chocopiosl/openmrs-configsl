@@ -6,7 +6,7 @@
     <name>PIH Sierra Leone OpenMRS Configuration</name>
     <description>Top-Level configuration for PIH Sierra Leone OpenMRS distro</description>
     <url>https://github.com/PIH/openmrs-config-pihsl</url>
-    <version>1.8.1</version>
+    <version>1.8.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <organization>
