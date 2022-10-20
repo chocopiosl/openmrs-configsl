@@ -14,7 +14,7 @@ designs:
       "blacklistRegex": "[^\\p{InBasicLatin}\\p{L}]"
       "dateFormat": "dd-MMM-yyyy HH:mm:ss"
 config:
-  category: "DATA_EXPORT"
+  category: "dataExport"
   order: 72
   components:
     - "mentalHealth"
