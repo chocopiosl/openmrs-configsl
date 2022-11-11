@@ -1,3 +1,5 @@
 Uuid,Void/Retire,Name,Description
 ${encounterType.sierraLeoneOutpatientInitial.uuid},,Sierra Leone Outpatient Initial,The outpatient intake form for Sierra Leone
 ${encounterType.sierraLeoneOutpatientFollowup.uuid},,Sierra Leone Outpatient Followup,The outpatient visit form for Sierra Leone
+${encounterType.sierraLeoneMchDeliveryRegister.uuid},,Sierra Leone delivery register,The maternal delivery register for Sierra Leone
+${encounterType.sierraLeoneMchNewbornRegister.uuid},,Sierra Leone newborn register,The newborn (SCBU) register for Sierra Leone

@@ -14,6 +14,8 @@
     "managePrinters",
     "markPatientDead",
     "mchForms",
+    "mchGAINMaternal",
+    "mchGAINNewborn",
     "mentalHealth",
     "myAccount",
     "ncd",

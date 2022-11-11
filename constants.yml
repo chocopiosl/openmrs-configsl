@@ -11,3 +11,7 @@ encounterType:
     uuid: "7d5853d4-67b7-4742-8492-fcf860690ed5"
   sierraLeoneOutpatientFollowup:
     uuid: "d8a038b5-90d2-43dc-b94b-8338b76674f3"
+  sierraLeoneMchDeliveryRegister:
+    uuid: "9cc89b83-e32f-410a-947d-aeb3bda37571"
+  sierraLeoneMchNewbornRegister:
+    uuid: "3790ecc6-bc63-48f8-9104-f81dc90ee21c"
