@@ -12,7 +12,8 @@
   ~ Copyright (C) OpenMRS, LLC.  All Rights Reserved.
   -->
 
-<htmlform id="gain-maternal-register" class="simple-form-ui" formUuid="e8bdd24e-0fba-4fe9-969f-316f70722c39"
+<htmlform id="gain-maternal-register"
+          formUuid="e8bdd24e-0fba-4fe9-969f-316f70722c39"
           htmlformUuid="0936a6eb-1a0e-4c80-b1e9-b4e1a3ae1822"
           formName="Maternity and Delivery Register"
           formEncounterType="9cc89b83-e32f-410a-947d-aeb3bda37571" formVersion="1.0">
@@ -79,10 +80,6 @@
             width: 100%;
         }
 
-        .simple-form-ui select, .simple-form-ui form select {
-            min-width: 70px;
-        }
-
         .side-by-side label {
             display: inline-block;
         }
@@ -90,6 +87,22 @@
         form input[type="radio"], .form input[type="radio"] {
             float: none;
             display: inline-block;
+        }
+
+        .three-columns, .two-columns {
+            display: table;
+            height: 100%;
+            width: 100%;
+        }
+
+        .two-columns > div {
+            display: table-cell;
+            width: 50%;
+        }
+
+        .three-columns > div {
+            display: table-cell;
+            width: 33%;
         }
 
         <ifMode mode="VIEW" include="false">
@@ -207,23 +220,32 @@
                 <obs conceptId="CIEL:1640"/>
             </p>
 
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="Gravida"/>
-                </label>
-                <obs conceptId="CIEL:5624"/>
-                <br/>
-                <label>
-                    <uimessage code="Parity"/>
-                </label>
-                <obs conceptId="CIEL:1053"/>
-                <br/>
-                <label>
-                    <uimessage code="Gestational age"/>
-                </label>
-                <!-- ToDo: Change concept to allow decimal -->
-                <obs conceptId="CIEL:1409"/>
-            </p>
+            <div class="three-columns">
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="pihcore.mch.grava"/>
+                        </label>
+                        <obs conceptId="CIEL:5624" />
+                    </p>
+                </div>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="pihcore.mch.para"/>
+                        </label>
+                        <obs conceptId="CIEL:1053"/>
+                    </p>
+                </div>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="Gestational age"/>
+                        </label>
+                        <obs conceptId="CIEL:165425"/>
+                    </p>
+                </div>
+            </div>
 
             <label>
                 <uimessage code="PAC (PostAbortion Care) type"/>

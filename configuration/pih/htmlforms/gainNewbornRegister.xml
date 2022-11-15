@@ -12,7 +12,8 @@
   ~ Copyright (C) OpenMRS, LLC.  All Rights Reserved.
   -->
 
-<htmlform id="gain-maternal-register" class="simple-form-ui" formUuid="a165541e-9745-4891-b6d7-b8374575e63e"
+<htmlform id="gain-maternal-register"
+          formUuid="a165541e-9745-4891-b6d7-b8374575e63e"
           htmlformUuid="e2874caa-9ca9-431b-97ab-2952923fa85b"
           formName="SBCU Newborn Register"
           formEncounterType="3790ecc6-bc63-48f8-9104-f81dc90ee21c" formVersion="1.0">
