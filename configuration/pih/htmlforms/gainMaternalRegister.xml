@@ -105,6 +105,11 @@
             width: 33%;
         }
 
+        .four-columns > div {
+            display: table-cell;
+            width: 33%;
+        }
+
         <ifMode mode="VIEW" include="false">
             .date-one-line {
                 display: flex;
@@ -270,6 +275,7 @@
                 <uimessage code="Presentation and position"/>
             </label>
             <obs conceptId="CIEL:160090"/>
+        <!-- ToDo:  Add free-text for other -->
 
         </div>
     </section>
@@ -287,13 +293,17 @@
                 <label>
                     <uimessage code="Delivery type"/>
                 </label>
-                <obs conceptId="PIH:11663" style="radio" answerConceptIds="CIEL:1170,CIEL:159902,CIEL:155884"/>
+                <obs conceptId="PIH:11663" style="radio"
+                     answerConceptIds="CIEL:1170,CIEL:166425,CIEL:155884"
+                     answerCodes="Normal,Assisted (vacuum, instrument, etc),C-section"/>
 
                 <br/>
                 <label>
                     <uimessage code="Delivery outcome"/>
                 </label>
-                <obs conceptId="CIEL:159917" style="radio" answerConceptIds="CIEL:151849,CIEL:159916,CIEL:135436"/>
+                <obs conceptId="CIEL:159917" style="radio"
+                     answerConceptIds="CIEL:151849,CIEL:159916,CIEL:135436"
+                     answerCodes="Alive,FSB,MSB"/>
 
                 <br/>
                 <label>
@@ -312,31 +322,44 @@
 
     <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Newborn condition">
         <div class="section-container">
+            <div class="four-columns">
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="Alive"/>
+                        </label>
+                        <obs conceptId="CIEL:1571" style="radio" answerConceptIds="CIEL:1065,CIEL:1066"/>
+                    </p>
+                </div>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="Sex"/>
+                        </label>
+                        <obs conceptId="CIEL:1587" style="radio"
+                             answerConceptIds="CIEL:1534,CIEL:1535"
+                             answerCodes="M,F"/>
+                    </p>
+                </div>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="(Birth) Weight (kg)"/>
+                        </label>
+                        <obs conceptId="CIEL:5916"/>
+                    </p>
+                </div>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="APGAR score"/>
+                        </label>
+                        <obs conceptId="CIEL:1504"/>
+                    </p>
+                </div>
+            </div>
+
             <p class="side-by-side">
-                <label>
-                    <uimessage code="Alive"/>
-                </label>
-                <obs conceptId="CIEL:1571" style="radio" answerConceptIds="CIEL:1065,CIEL:1066"/>
-
-                <br/>
-                <label>
-                    <uimessage code="Sex"/>
-                </label>
-                <obs conceptId="CIEL:1587" style="radio" answerConceptIds="CIEL:1534,CIEL:1535"/>
-
-                <br/>
-                <label>
-                    <uimessage code="(Birth) Weight (kg)"/>
-                </label>
-                <obs conceptId="CIEL:5916"/>
-
-                <br/>
-                <label>
-                    <uimessage code="APGAR score"/>
-                </label>
-                <obs conceptId="CIEL:1504"/>
-
-                <br/>
                 <label>
                     <uimessage code="Breastfeeding initiated within 1 hour after birth"/>
                 </label>
@@ -359,7 +382,7 @@
     </section>
 
     <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="Postpartum family planning">
+             headerCode="Post-partum family planning">
         <div class="section-container">
             <p class="side-by-side">
                 <label>
@@ -387,9 +410,6 @@
                 </span>
             </p>
             <p class="side-by-side">
-                <label>
-                    <uimessage code="Discharge, Referral, or Death"/>
-                </label>
                 <obs conceptId="PIH:8620" style="radio"
                      answerConceptIds="CIEL:1692,PIH:11521,CIEL:159"/>
             </p>
