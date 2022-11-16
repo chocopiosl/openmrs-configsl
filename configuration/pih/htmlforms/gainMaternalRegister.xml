@@ -248,6 +248,9 @@
                             <uimessage code="Gestational age"/>
                         </label>
                         <obs conceptId="CIEL:165425"/>
+                        <label>
+                            <uimessage code="Decimal represents number of days.  For example, 37.4 = 37 weeks + 4 days."/>
+                        </label>
                     </p>
                 </div>
             </div>
@@ -271,12 +274,13 @@
                 </label>
                 <obs conceptId="CIEL:163444"/>
             </p>
-            <label>
-                <uimessage code="Presentation and position"/>
-            </label>
-            <!-- ToDo: checkboxes?  change list? -->
-            <obs conceptId="CIEL:160090"/>
-
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Presentation and position:"/>
+                </label>
+                <br/>
+                <obs conceptId="CIEL:160090" style="radio"/>
+            </p>
             <!-- ToDo:  Add free-text for other? -->
         </div>
     </section>
@@ -450,14 +454,20 @@
 
     <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Delivery conducted by">
         <div class="section-container">
-            <label>
-                <uimessage code="HCW Name"/>
-            </label>
-            <!-- ToDo: Should this be free-text? -->
-            <obs conceptId="PIH:6592"/>
-            <label>
-                <uimessage code="HCW Cadre"/>
-            </label><!-- ToDo: obs conceptId="?"/ -->
+            <obsgroup groupingConceptId="CIEL:163391">
+                <label>
+                    <uimessage code="HCW Name"/>
+                </label>
+                <!-- ToDo: Should this be free-text? -->
+                <obs conceptId="PIH:6592"/>
+
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="HCW Cadre"/>
+                    </label>
+                    <obs conceptId="CIEL:1573" style="radio" />
+                </p>
+            </obsgroup>
         </div>
     </section>
 
