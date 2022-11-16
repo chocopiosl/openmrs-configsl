@@ -377,8 +377,7 @@
                 </strong>
                 <repeat>
                     <template>
-                        <!-- ToDo: change ID to PIH:14391 -->
-                        <obsgroup groupingConceptId="CIEL:159947">
+                        <obsgroup groupingConceptId="PIH:14391">
                             <obs id="initial-diagnosis-{numero}" conceptId="PIH:DIAGNOSIS"
                                  answerClasses="Diagnosis,Finding,Symptom,Symptom/Finding" style="autocomplete"/>
                         </obsgroup>
