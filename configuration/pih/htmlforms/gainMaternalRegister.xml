@@ -89,7 +89,7 @@
             display: inline-block;
         }
 
-        .three-columns, .two-columns {
+        .four-columns, .three-columns, .two-columns {
             display: table;
             height: 100%;
             width: 100%;
@@ -107,7 +107,7 @@
 
         .four-columns > div {
             display: table-cell;
-            width: 33%;
+            width: 25%;
         }
 
         <ifMode mode="VIEW" include="false">
@@ -274,9 +274,10 @@
             <label>
                 <uimessage code="Presentation and position"/>
             </label>
+            <!-- ToDo: checkboxes?  change list? -->
             <obs conceptId="CIEL:160090"/>
-        <!-- ToDo:  Add free-text for other -->
 
+            <!-- ToDo:  Add free-text for other? -->
         </div>
     </section>
 
@@ -370,14 +371,46 @@
 
     <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Maternal diagnosis">
         <div class="section-container">
-            <label>
-                <uimessage code="Initial diagnosis"/>
-            </label>
-            <!-- ToDo: obs conceptId="new"/ -->
-            <label>
-                <uimessage code="Final diagnosis"/>
-            </label>
-            <!-- ToDo: obs conceptId="reuse"/ -->
+            <p class="side-by-site">
+                <strong>
+                    <uimessage code="Initial diagnosis"/>
+                </strong>
+                <repeat>
+                    <template>
+                        <!-- ToDo: change ID to PIH:14391 -->
+                        <obsgroup groupingConceptId="CIEL:159947">
+                            <obs id="initial-diagnosis-{numero}" conceptId="PIH:DIAGNOSIS"
+                                 answerClasses="Diagnosis,Finding,Symptom,Symptom/Finding" style="autocomplete"/>
+                        </obsgroup>
+                    </template>
+                    <render numero="1" />
+                    <render numero="2" />
+                    <render numero="3" />
+                </repeat>
+                <obsgroup groupingConceptId="CIEL:159947">
+                    <obs id="initial-diagnosis-non-coded" conceptId="CIEL:161602" labelText="other (free-text):" />
+                </obsgroup>
+            </p>
+
+            <p class="side-by-site">
+                <strong>
+                    <uimessage code="Final diagnosis"/>
+                </strong>
+                <repeat>
+                    <template>
+                        <obsgroup groupingConceptId="CIEL:159947">
+                            <obs id="final-diagnosis-{numero}" conceptId="PIH:DIAGNOSIS"
+                                 answerClasses="Diagnosis,Finding,Symptom,Symptom/Finding" style="autocomplete"/>
+                        </obsgroup>
+                    </template>
+                    <render numero="1" />
+                    <render numero="2" />
+                    <render numero="3" />
+                </repeat>
+                <obsgroup groupingConceptId="CIEL:159947">
+                    <obs id="final-diagnosis-non-coded" conceptId="CIEL:161602" labelText="other (free-text):" />
+                </obsgroup>
+            </p>
         </div>
     </section>
 
