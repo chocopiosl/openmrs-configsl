@@ -277,15 +277,20 @@
                 <uimessage code="Chart #/ Patient #"/>
             </label>
             <obs conceptId="CIEL:164803"/>
+
             <label>
                 <uimessage code="Name of mother/ caregiver"/>
             </label>
+            <!-- ToDo:  Looukup mother or caregiver name -->
+
             <label>
                 <uimessage code="Telephone # of mother/ caregiver"/>
             </label>
+            <!-- ToDo:  Lookup mother phone number -->
+
             <p class="date-one-line">
                 <label>
-                    <uimessage code="Date &amp; Time of Arrival"/>
+                    <uimessage code="Date &amp; time of arrival"/>
                 </label>
                 <obs conceptId="CIEL:159622"/>
             </p>
@@ -295,6 +300,7 @@
     <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Referral Reason">
         <div class="section-container">
+            <!-- ToDo:  Complete this section -->
             <label>
                 <uimessage code="Referred From"/>
             </label><!--obs conceptId=""/-->
@@ -331,18 +337,27 @@
                 </label>
                 <obs conceptId="CIEL:1640"/>
             </p>
-            <label>
-                <uimessage code="Age at admission (days)"/>
-            </label>
-            <obs conceptId="PIH:14393"/>
-            <label>
-                <uimessage code="Age at admission (hours)"/>
-            </label>
-            <obs conceptId="PIH:14394"/>
-            <label>
-                <uimessage code="Sex"/>
-            </label>
-            <obs conceptId="CIEL:1587"/>
+
+            <p>
+                <label>
+                    <uimessage code="Age at admission (days)"/>
+                </label>
+                <obs conceptId="PIH:14393"/>
+                <label>
+                    <uimessage code="Age at admission (hours)"/>
+                </label>
+                <obs conceptId="PIH:14394"/>
+            </p>
+
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Sex"/>
+                </label>
+                <obs conceptId="CIEL:1587" style="radio"
+                     answerConceptIds="CIEL:1534,CIEL:1535"
+                     answerCodes="M,F"/>
+            </p>
+
             <label>
                 <uimessage code="Weight at admission (kg)"/>
             </label>
@@ -359,10 +374,12 @@
                 <obs conceptId="CIEL:163774" style="radio"/>
             </p>
 
-            <label>
-                <uimessage code="Which facility?"/>
-            </label>
-            <obs conceptId="PIH:12365"/>
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Which facility?"/>
+                </label>
+                <obs conceptId="PIH:12365" style="radio"/>
+            </p>
                 <!--
                  conceptId="PIH:14400"/>
                  conceptId="PIH:14401"/>
@@ -379,10 +396,12 @@
                  conceptId="CIEL:5622"/>
                  conceptId="CIEL:163531"/> -->
 
-            <label>
-                <uimessage code="Number of ANCs"/>
-            </label>
-            <obs conceptId="CIEL:1590"/>
+            <p>
+                <label>
+                    <uimessage code="Number of ANCs"/>
+                </label>
+                <obs conceptId="CIEL:1590"/>
+            </p>
 
             <p class="side-by-side">
 
@@ -392,112 +411,134 @@
                 <obs conceptId="PIH:11663" style="radio"
                      answerConceptIds="CIEL:1170,CIEL:166425,CIEL:155884"
                      answerCodes="Normal,Assisted (vacuum or instrument),C-section"/>
-
             </p>
 
-            <label>
-                <uimessage code="Diagnosis at delivery unit prior to admission at SCBU"/>
-            </label>
-            <repeat>
-                <template>
-                    <obsgroup groupingConceptId="PIH:14391">
-                        <obs conceptId="PIH:DIAGNOSIS" style="checkbox" answerConceptId="{prior-dx}"/>
-                    </obsgroup>
-                </template>
+            <p>
+                <label>
+                    <uimessage code="Diagnosis at delivery unit prior to admission at SCBU"/>
+                </label>
+                <repeat>
+                    <template>
+                        <obsgroup groupingConceptId="PIH:14391">
+                            <obs conceptId="PIH:DIAGNOSIS" style="checkbox" answerConceptId="{prior-dx}"/>
+                        </obsgroup>
+                    </template>
 
-                <render prior-dx="CIEL:159908"/>
-                <render prior-dx="CIEL:116222"/>
-                <render prior-dx="PIH:7557"/>
-                <render prior-dx="CIEL:140476"/>
-                <render prior-dx="CIEL:115368"/>
+                    <render prior-dx="CIEL:159908"/>
+                    <render prior-dx="CIEL:116222"/>
+                    <render prior-dx="PIH:7557"/>
+                    <render prior-dx="CIEL:140476"/>
+                    <render prior-dx="CIEL:115368"/>
+
+                    <render prior-dx="CIEL:137998"/>
+                    <render prior-dx="CIEL:145047"/>
+                    <render prior-dx="CIEL:5622"/>
+                </repeat>
                 <!-- ToDo:  Add abnormal blood glucose:  render prior-dx="CIEL:147125"/ -->
-                <render prior-dx="CIEL:137998"/>
-                <render prior-dx="CIEL:145047"/>
-                <render prior-dx="CIEL:5622"/>
-            </repeat>
-            <!-- ToDo:  Add other text -->
+                <!-- ToDo:  Add other text -->
+            </p>
 
-            <label>
-                <uimessage code="Treatment provided at delivery unit prior to admission at SCBU"/>
-            </label>
-            <!-- ToDo:  add warmer, supportive care
-            <repeat>
-                <template>
-                    <obs conceptId="PIH:3513" style="checkbox" answerConceptId="{prior-tx}"/>
-                </template>
-                
-                <render prior-tx="CIEL:164174"/>
-                <render prior-tx="x"/>
-                <render prior-tx="CIEL:164173"/>
-                <render prior-tx="CIEL:167422"/>
-                <render prior-tx="CIEL:71101"/>
-                <render prior-tx="PIH:4037"/>
-                <render prior-tx="CIEL:5622"/>
-            </repeat>  -->
+            <p>
+                <label>
+                    <uimessage code="Treatment provided at delivery unit prior to admission at SCBU"/>
+                </label>
+                <!-- ToDo:  add warmer, supportive care -->
+                <repeat>
+                    <template>
+                        <obs conceptId="PIH:3513" style="checkbox" answerConceptId="{prior-tx}"/>
+                    </template>
 
-            <label>
-                <uimessage code="APGAR score at time at 5 minutes after birth (0-10, unknown)"/>
-            </label>
-            <obs conceptId="CIEL: 159604"/>
-            
+                    <render prior-tx="CIEL:164174"/>
+                    <render prior-tx="CIEL:167724"/>
+                    <render prior-tx="CIEL:164173"/>
+                    <render prior-tx="CIEL:167422"/>
+                    <render prior-tx="CIEL:71101"/>
+                    <render prior-tx="PIH:4037"/>
+                    <render prior-tx="CIEL:5622"/>
+                </repeat>
+            </p>
+
+            <p>
+                <label>
+                    <uimessage code="APGAR score at time at 5 minutes after birth (0-10, unknown)"/>
+                </label>
+                <obs conceptId="CIEL: 159604"/>
+            </p>
+
             <p class="side-by-side">
                 <label>
                     <uimessage code="Assisted ventilation at birth"/>
                 </label>
-                <obs conceptId="CIEL:162131" answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"/>
+                <obs conceptId="CIEL:162131" style="radio"
+                     answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"/>
             </p>
 
-            <label>
-                <uimessage code="Birth weight (kg)"/>
-            </label>
-            <obs conceptId="CIEL:5916"/>
-            
-            <label>
-                <uimessage code="Gestation age"/>
-            </label>
-            <obs conceptId="CIEL:165425"/>
-            
-            <label>
-                <uimessage code="Diagnosis at admission"/>
-            </label>
-            <repeat>
-                <template>
-                    <obs conceptId="PIH:12564" style="checkbox" answerConceptId="{admission-dx}"/>
-                </template>
+            <p>
+                <label>
+                    <uimessage code="Birth weight (kg)"/>
+                </label>
+                <obs conceptId="CIEL:5916"/>
+            </p>
 
-                <render admission-dx="CIEL:127638"/>
-                <render admission-dx="PIH:7557"/>
-                <render admission-dx="CIEL:226"/>
-                <render admission-dx="CIEL:114100"/>
-                <render admission-dx="CIEL:115835"/>
-                <render admission-dx="CIEL:162641"/>
-                <render admission-dx="CIEL:143849"/>
-                <render admission-dx="CIEL:115368"/>
-                <render admission-dx="CIEL:822"/>
-                <render admission-dx="CIEL:124954"/>
-                <render admission-dx="CIEL:5622"/>
-            </repeat>
+            <p>
+                <label>
+                    <uimessage code="Gestation age"/>
+                </label>
+                <obs conceptId="CIEL:165425"/>
+                <label>
+                    <i>
+                    <uimessage code="Decimal represents number of days.  For example, 37.4 = 37 weeks + 4 days."/>
+                    </i>
+                </label>
+            </p>
 
-            <!-- ToDo:  Check the answers
-            <label>
-                <uimessage code="Management"/>
-            </label>
-            <repeat>
-                <template>
-                    <obs conceptId="CIEL:165995" style="checkbox" answerConceptId="{management}"/>
-                </template>
+            <p>
+                <label>
+                    <uimessage code="Diagnosis at admission"/>
+                </label>
+                <repeat>
+                    <template>
+                        <obs conceptId="PIH:12564" style="checkbox" answerConceptId="{admission-dx}"/>
+                    </template>
 
-                <render management="CIEL:167422"/>
-                <render management="CIEL:164174"/>
-                <render management="CIEL:162738"/>
-                <render management="CIEL:165944"/>
-                <render management="CIEL:161911"/>
-                <render management="CIEL:1063"/>
-                <render management="CIEL:161651"/>
-                <render management="CIEL:1187"/>
-                <render management="CIEL:5622"/>
-            </repeat>
-            -->
+                    <render admission-dx="CIEL:127638"/>
+                    <render admission-dx="PIH:7557"/>
+                    <render admission-dx="CIEL:226"/>
+                    <render admission-dx="CIEL:114100"/>
+                    <render admission-dx="CIEL:115835"/>
+                    <render admission-dx="CIEL:113841"/>
+                    <render admission-dx="CIEL:143849"/>
+                    <render admission-dx="CIEL:115368"/>
+                    <render admission-dx="CIEL:822"/>
+                    <render admission-dx="CIEL:124954"/>
+                    <render admission-dx="CIEL:5622"/>
+                </repeat>
+            </p>
+            <!-- ToDo:  Add other free-text -->
+
+            <!-- ToDo:  Check the answers -->
+            <p>
+                <label>
+                    <uimessage code="Management"/>
+                </label>
+                <repeat>
+                    <template>
+                        <obs conceptId="CIEL:165995" style="checkbox" answerConceptId="{management}"/>
+                    </template>
+
+                    <render management="CIEL:167422"/>
+                    <render management="CIEL:164174"/>
+                    <render management="CIEL:162738"/>
+                    <render management="CIEL:165944"/>
+                    <render management="CIEL:161911"/>
+                    <render management="CIEL:1063"/>
+                    <render management="CIEL:161651"/>
+                    <render management="CIEL:1187"/>
+                    <render management="CIEL:5622"/>
+                </repeat>
+                <!-- ToDo:  Add other free-text -->
+            </p>
+
         </div>
     </section>
 
@@ -507,25 +548,32 @@
 
             <p class="side-by-side">
                 <label>
-                    <uimessage code="Outcome of admission at SBCU"/>
+                    <uimessage code="Outcome of admission at SBCU:"/>
                 </label>
                 <obs conceptId="PIH:8620" style="radio"
                      answerConceptIds="CIEL:1692,PIH:11521,CIEL:1694,CIEL:159"/>
             </p>
 
-            <label>
+            <strong>
                 <uimessage code="Death Outcome"/>
-            </label>
+            </strong>
             <obsgroup groupingConceptId="CIEL:163528">
-                <label>
-                    <uimessage code="Date and time of death"/>
-                </label>
-                <obs conceptId="PIH:14399"/>
-                <label>
-                    <uimessage code="Cause of death/ mortality"/>
-                </label>
-                <obs conceptId="CIEL:159482" style="radio"
-                     answerConceptIds="CIEL:127638,PIH:7557,CIEL:226,CIEL:114100,CIEL:114100,CIEL:162641,CIEL:1067"/>
+                <p class="date-one-line">
+                    <label>
+                        <uimessage code="Date and time of death"/>
+                    </label>
+                    <obs conceptId="PIH:14399"/>
+                </p>
+
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="Cause of death/ mortality"/>
+                    </label>
+                    <br/>
+                    <obs conceptId="CIEL:159482" style="radio"
+                         answerConceptIds="CIEL:127638,PIH:7557,CIEL:226,CIEL:114100,CIEL:114100,CIEL:113841,CIEL:1067"/>
+                </p>
+
                 <label>
                     <uimessage code="if other cause of death, specify:"/>
                 </label>
@@ -535,20 +583,24 @@
                     <uimessage code="Age at death (days)"/>
                 </label>
                 <obs conceptId="PIH:14393"/>
+
                 <label>
                     <uimessage code="Weight at time of death (kg)"/>
                 </label>
                 <obs conceptId="CIEL:5089"/>
             </obsgroup>
 
-            <label>
-                <uimessage code="If alive, date of discharge, or LAMA, or referral"/>
-            </label>
-            <obs conceptId="CIEL:1641"/>
+            <p class="date-one-line">
+                <label>
+                    <uimessage code="If alive, date of discharge, or LAMA, or referral"/>
+                </label>
+                <obs conceptId="CIEL:1641"/>
+            </p>
+
             <label>
                 <uimessage code="Name of staff/in-charge of completing the information"/>
             </label>
-            <obs conceptId=""/>
+            <!-- ToDo:  Add obs conceptId=""/ -->
         </div>
     </section>
 
