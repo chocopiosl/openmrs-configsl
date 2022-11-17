@@ -153,7 +153,7 @@
     <ifMode mode="VIEW" include="false">
         <h2>
             <label>
-                <uimessage code="Maternity and delivery register"/>
+                <uimessage code="Maternity and Delivery Register"/>
             </label>
         </h2>
 
