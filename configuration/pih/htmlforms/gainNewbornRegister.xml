@@ -400,7 +400,9 @@
             </label>
             <repeat>
                 <template>
-                    <obs conceptId="PIH:14391" style="checkbox" answerConceptId="{prior-dx}"/>
+                    <obsgroup groupingConceptId="PIH:14391">
+                        <obs conceptId="PIH:DIAGNOSIS" style="checkbox" answerConceptId="{prior-dx}"/>
+                    </obsgroup>
                 </template>
 
                 <render prior-dx="CIEL:159908"/>
@@ -408,28 +410,30 @@
                 <render prior-dx="PIH:7557"/>
                 <render prior-dx="CIEL:140476"/>
                 <render prior-dx="CIEL:115368"/>
-                <render prior-dx="CIEL:147125"/>
+                <!-- ToDo:  Add abnormal blood glucose:  render prior-dx="CIEL:147125"/ -->
                 <render prior-dx="CIEL:137998"/>
                 <render prior-dx="CIEL:145047"/>
                 <render prior-dx="CIEL:5622"/>
             </repeat>
+            <!-- ToDo:  Add other text -->
 
             <label>
                 <uimessage code="Treatment provided at delivery unit prior to admission at SCBU"/>
             </label>
+            <!-- ToDo:  add warmer, supportive care
             <repeat>
                 <template>
                     <obs conceptId="PIH:3513" style="checkbox" answerConceptId="{prior-tx}"/>
                 </template>
                 
                 <render prior-tx="CIEL:164174"/>
-                <render prior-tx="new"/>
+                <render prior-tx="x"/>
                 <render prior-tx="CIEL:164173"/>
                 <render prior-tx="CIEL:167422"/>
                 <render prior-tx="CIEL:71101"/>
                 <render prior-tx="PIH:4037"/>
                 <render prior-tx="CIEL:5622"/>
-            </repeat>
+            </repeat>  -->
 
             <label>
                 <uimessage code="APGAR score at time at 5 minutes after birth (0-10, unknown)"/>
@@ -474,6 +478,7 @@
                 <render admission-dx="CIEL:5622"/>
             </repeat>
 
+            <!-- ToDo:  Check the answers
             <label>
                 <uimessage code="Management"/>
             </label>
@@ -492,6 +497,7 @@
                 <render management="CIEL:1187"/>
                 <render management="CIEL:5622"/>
             </repeat>
+            -->
         </div>
     </section>
 
@@ -545,7 +551,7 @@
             <obs conceptId=""/>
         </div>
     </section>
-    
+
     <ifMode mode="VIEW" include="false">
         <div id="buttons">
             <submit submitClass="confirm right" submitCode="mirebalais.save"/>
