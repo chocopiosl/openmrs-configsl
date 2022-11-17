@@ -470,7 +470,17 @@
                     <label>
                         <uimessage code="HCW Cadre:"/>
                     </label>
-                    <obs conceptId="CIEL:1573" style="radio" />
+                    <obs id="hcw-cadre" conceptId="CIEL:1573" style="radio">
+                        <controls>
+                            <when value="CIEL:5622" thenDisplay="#other-role"/>
+                        </controls>
+                    </obs>
+                    <div id="other-role">
+                        <label>
+                            <uimessage code="zl.ifOtherSpecify"/>
+                        </label>
+                        <obs conceptId="PIH:14415"/>
+                    </div>
                 </p>
             </obsgroup>
         </div>
