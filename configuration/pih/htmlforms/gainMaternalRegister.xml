@@ -281,7 +281,12 @@
                 <br/>
                 <obs conceptId="CIEL:160090" style="radio"/>
             </p>
-            <!-- ToDo:  Add free-text for other? -->
+            <p>
+                <label>
+                    <uimessage code="zl.ifOtherSpecify"/>
+                </label>
+                <obs conceptId="PIH:14414"/>
+            </p>
         </div>
     </section>
 
@@ -300,7 +305,7 @@
                 </label>
                 <obs conceptId="PIH:11663" style="radio"
                      answerConceptIds="CIEL:1170,CIEL:166425,CIEL:155884"
-                     answerCodes="Normal,Assisted (vacuum, instrument, etc),C-section"/>
+                     answerCodes="Normal,Assisted (vacuum or instrument),C-section"/>
 
                 <br/>
                 <label>
@@ -390,7 +395,7 @@
                     <render numero="2" />
                     <render numero="3" />
                 </repeat>
-                <obsgroup groupingConceptId="CIEL:159947">
+                <obsgroup groupingConceptId="PIH:14391">
                     <obs id="initial-diagnosis-non-coded" conceptId="CIEL:161602" labelText="other (free-text):" />
                 </obsgroup>
             </p>
@@ -463,7 +468,7 @@
 
                 <p class="side-by-side">
                     <label>
-                        <uimessage code="HCW Cadre"/>
+                        <uimessage code="HCW Cadre:"/>
                     </label>
                     <obs conceptId="CIEL:1573" style="radio" />
                 </p>
