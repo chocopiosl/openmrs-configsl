@@ -372,13 +372,17 @@
                 </div>
             </div>
 
-            <p>
+            <p class="side-by-side">
                 <label>
                     <uimessage code="Referral reason (autocomplete)"/>
                 </label>
                 <obs conceptId="CIEL:159860" style="autocomplete"
-                     answerConceptSetIds="PIH:HUM pediatric diagnosis" />
-                <!-- ToDo:  Add other non-coded reason -->
+                     answerConceptSetIds="PIH:HUM pediatric diagnosis"/>
+                <!-- other non-coded reason -->
+                <label>
+                    <uimessage code="Other referral reason (free-text)"/>
+                </label>
+                <obs conceptId="CIEL:164359"/>
             </p>
 
             <p class="side-by-side">
@@ -387,7 +391,12 @@
                 </label>
                 <obs conceptId="PIH:10635" style="radio"
                      answerConceptIds="CIEL:1555,PIH:DOCTOR,PIH:NURSE,PIH:SOCIAL WORKER SERVICE,CIEL:5622"/>
-                <!-- ToDo:  Add other non-coded role? -->
+                <!-- other non-coded role -->
+                <br/>
+                <label>
+                    <uimessage code="if other, specify:"/>
+                </label>
+                <obs conceptId="PIH:14415"/>
             </p>
         </div>
     </section>
@@ -459,21 +468,21 @@
                 </label>
                 <obs conceptId="PIH:12365" style="radio"/>
             </p>
-                <!--
-                 conceptId="PIH:14400"/>
-                 conceptId="PIH:14401"/>
-                 conceptId="PIH:14402"/>
-                 conceptId="PIH:14403"/>
-                 conceptId="PIH:14404"/>
-                 conceptId="PIH:14405"/>
-                 conceptId="PIH:14406"/>
-                 conceptId="PIH:14407"/>
-                 conceptId="PIH:14408"/>
-                 conceptId="PIH:14409"/>
-                 conceptId="PIH:12366"/>
-                 conceptId="PIH:12367"/>
-                 conceptId="CIEL:5622"/>
-                 conceptId="CIEL:163531"/> -->
+            <!--
+             conceptId="PIH:14400"/>
+             conceptId="PIH:14401"/>
+             conceptId="PIH:14402"/>
+             conceptId="PIH:14403"/>
+             conceptId="PIH:14404"/>
+             conceptId="PIH:14405"/>
+             conceptId="PIH:14406"/>
+             conceptId="PIH:14407"/>
+             conceptId="PIH:14408"/>
+             conceptId="PIH:14409"/>
+             conceptId="PIH:12366"/>
+             conceptId="PIH:12367"/>
+             conceptId="CIEL:5622"/>
+             conceptId="CIEL:163531"/> -->
 
             <p>
                 <label>
@@ -511,15 +520,14 @@
                     <render prior-dx="CIEL:147125"/>
                     <render prior-dx="CIEL:137998"/>
                     <render prior-dx="CIEL:145047"/>
-                    <render prior-dx="CIEL:5622"/>
                 </repeat>
-            </p>
-            <p>
-                <label>
-                    <uimessage code="Other diagnosis at delivery unit prior to admission at SCBU"/>
-                </label>
                 <obsgroup groupingConceptId="PIH:14391">
-                    <obs conceptId="CIEL:161602" />
+                    <obs conceptId="PIH:DIAGNOSIS" style="checkbox"
+                         answerConceptId="CIEL:5622"/>
+                    <label>
+                        <uimessage code="if other, specify:"/>
+                    </label>
+                    <obs conceptId="CIEL:161602"/>
                 </obsgroup>
             </p>
 
@@ -540,20 +548,26 @@
                     <render prior-tx="PIH:4037"/>
                     <render prior-tx="CIEL:5622"/>
                 </repeat>
+                <obs conceptId="PIH:3513" style="checkbox"
+                     answerConceptId="CIEL:5622" commentFieldCode="if other, specify:"/>
             </p>
 
             <p class="side-by-side">
                 <label>
                     <uimessage code="APGAR score at time at 1 minutes after birth (0-10, unknown)"/>
                 </label>
-                    <obs conceptId="PIH:14419"/>
-                <!-- ToDo: add checkbox for unknown -->
+                <obs conceptId="PIH:14419"/>
+                <obs conceptId="PIH:12377" style="checkbox"
+                     answerConceptId="CIEL:1067" answerCode="unknown"/>
                 <br/>
+                <br/>
+
                 <label>
                     <uimessage code="APGAR score at time at 5 minutes after birth (0-10, unknown)"/>
                 </label>
                 <obs conceptId="CIEL: 159604"/>
-                <!-- ToDo: add checkbox for unknown -->
+                <obs conceptId="PIH:11932" style="checkbox"
+                     answerConceptId="CIEL:1067" answerCode="unknown"/>
             </p>
 
             <p class="side-by-side">
@@ -578,7 +592,7 @@
                 <obs conceptId="CIEL:165425"/>
                 <label>
                     <i>
-                    <uimessage code="Decimal represents number of days.  For example, 37.4 = 37 weeks + 4 days."/>
+                        <uimessage code="Decimal represents number of days.  For example, 37.4 = 37 weeks + 4 days."/>
                     </i>
                 </label>
             </p>
@@ -602,10 +616,10 @@
                     <render admission-dx="CIEL:115368"/>
                     <render admission-dx="CIEL:822"/>
                     <render admission-dx="CIEL:124954"/>
-                    <render admission-dx="CIEL:5622"/>
                 </repeat>
+                <obs conceptId="PIH:12564" style="checkbox"
+                     answerConceptId="CIEL:5622" commentFieldCode="if other, specify:"/>
             </p>
-            <!-- ToDo:  Add other free-text -->
 
             <p>
                 <label>
@@ -624,9 +638,9 @@
                     <render management="CIEL:1063"/>
                     <render management="CIEL:161651"/>
                     <render management="CIEL:1187"/>
-                    <render management="CIEL:5622"/>
                 </repeat>
-                <!-- ToDo:  Add other free-text -->
+                <obs conceptId="CIEL:165995" style="checkbox"
+                     answerConceptId="CIEL:5622" commentFieldCode="if other, specify:"/>
             </p>
 
         </div>
@@ -687,10 +701,12 @@
                 <obs conceptId="CIEL:1641"/>
             </p>
 
-            <label>
-                <uimessage code="Name of staff/in-charge of completing the information"/>
-            </label>
-            <!-- ToDo:  Add obs conceptId=""/ -->
+            <p>
+                <label>
+                    <uimessage code="Name of staff/in-charge of completing the information"/>
+                </label>
+                <obs conceptId="PIH:2594"/>
+            </p>
         </div>
     </section>
 
