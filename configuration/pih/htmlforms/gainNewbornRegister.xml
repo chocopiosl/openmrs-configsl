@@ -269,24 +269,43 @@
     <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Registration of Newborn">
         <div class="section-container">
-            <label>
-                <uimessage code="Name of baby"/>
-            </label>
-            <obs conceptId="CIEL:1586"/>
-            <label>
-                <uimessage code="Chart #/ Patient #"/>
-            </label>
-            <obs conceptId="CIEL:164803"/>
+            <p>
+                <label>
+                    <uimessage code="Name of baby"/>
+                </label>
+                <obs conceptId="CIEL:1586"/>
+                <label>
+                    <uimessage code="Chart #/ Patient #"/>
+                </label>
+                <obs conceptId="CIEL:164803"/>
+            </p>
 
-            <label>
-                <uimessage code="Name of mother/ caregiver"/>
-            </label>
-            <!-- ToDo:  Looukup mother or caregiver name -->
+            <p class="side-by-side">
 
-            <label>
-                <uimessage code="Telephone # of mother/ caregiver"/>
-            </label>
-            <!-- ToDo:  Lookup mother phone number -->
+                <div class="two-columns">
+                    <div>
+                        <label>
+                            <uimessage code="Mother:"/>
+                        </label>
+                        <lookup expression="patient.personName"/>
+                        <br/>
+                        Telephone:  <lookup expression="personAttributes.get('Telephone Number')"/>
+                    </div>
+
+                    <div>
+                        <label>
+                            <uimessage code="or Caregiver:"/>
+
+                        </label>
+                        <obsgroup groupingConceptId="PIH:13182">
+                            Name: <obs conceptId="PIH:2724" />
+                            Telephone: <obs conceptId="PIH:6194"/>
+                        </obsgroup>
+
+                    </div>
+                </div>
+
+            </p>
 
             <p class="date-one-line">
                 <label>
@@ -300,16 +319,76 @@
     <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Referral Reason">
         <div class="section-container">
-            <!-- ToDo:  Complete this section -->
-            <label>
-                <uimessage code="Referred From"/>
-            </label><!--obs conceptId=""/-->
-            <label>
-                <uimessage code="Referral Reason"/>
-            </label><!--obs conceptId=""/-->
-            <label>
-                <uimessage code="Referred By"/>
-            </label><!--obs conceptId=""/-->
+
+            <strong>
+                <uimessage code="Referred from"/>
+            </strong>
+            <div class="two-columns">
+                <div>
+                    <label>
+                        <uimessage code="pihcore.refer.internal"/>
+                    </label>
+
+                    <repeat>
+                        <template>
+                            <obs conceptId="PIH:Type of referring service"
+                                 style="checkbox"
+                                 answerConceptId="{point}" answerCode="{message}"/>
+                        </template>
+
+                        <render point="PIH:ANTENATAL CLINIC" message="pihcore.location.maternal"
+                                comment="Womens Health clinic"/>
+                        <render point="CIEL:165048" message="pihcore.testLocation.pedWard" comment="Pediatrics"/>
+                        <render point="CIEL:160473" message="pihcore.location.ed" comment="Emergency"/>
+                    </repeat>
+
+                    <obs conceptId="PIH:Type of referring service" style="checkbox"
+                         answerConceptId="PIH:OTHER" commentFieldLabel=""/>
+                </div>
+
+                <div>
+                    <p>
+                        <label>
+                            <uimessage code="pihcore.refer.external"/>
+                        </label>
+                        <obs conceptId="PIH:Type of referring service" style="checkbox"
+                             answerConceptId="PIH:11956" commentFieldLabel=""/>
+                        <obs conceptId="PIH:Type of referring service" style="checkbox"
+                             answerConceptId="PIH:8856"
+                             answerCode="Non-PIH supported site" commentFieldLabel=""/>
+                    </p>
+
+                    <p>
+                        <label>
+                            <uimessage code="pihcore.refer.community"/>
+                        </label>
+
+                        <obs conceptId="PIH:Type of referring service" style="checkbox"
+                             answerConceptId="CIEL:1555"/>
+                        <obs conceptId="PIH:Type of referring service" style="checkbox"
+                             answerConceptId="PIH:11965"/>
+                    </p>
+
+                </div>
+            </div>
+
+            <p>
+                <label>
+                    <uimessage code="Referral reason (autocomplete)"/>
+                </label>
+                <obs conceptId="CIEL:159860" style="autocomplete"
+                     answerConceptSetIds="PIH:HUM pediatric diagnosis" />
+                <!-- ToDo:  Add other non-coded reason -->
+            </p>
+
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Referred by"/>
+                </label>
+                <obs conceptId="PIH:10635" style="radio"
+                     answerConceptIds="CIEL:1555,PIH:DOCTOR,PIH:NURSE,PIH:SOCIAL WORKER SERVICE,CIEL:5622"/>
+                <!-- ToDo:  Add other non-coded role? -->
+            </p>
         </div>
     </section>
 
@@ -429,20 +508,25 @@
                     <render prior-dx="PIH:7557"/>
                     <render prior-dx="CIEL:140476"/>
                     <render prior-dx="CIEL:115368"/>
-
+                    <render prior-dx="CIEL:147125"/>
                     <render prior-dx="CIEL:137998"/>
                     <render prior-dx="CIEL:145047"/>
                     <render prior-dx="CIEL:5622"/>
                 </repeat>
-                <!-- ToDo:  Add abnormal blood glucose:  render prior-dx="CIEL:147125"/ -->
-                <!-- ToDo:  Add other text -->
+            </p>
+            <p>
+                <label>
+                    <uimessage code="Other diagnosis at delivery unit prior to admission at SCBU"/>
+                </label>
+                <obsgroup groupingConceptId="PIH:14391">
+                    <obs conceptId="CIEL:161602" />
+                </obsgroup>
             </p>
 
             <p>
                 <label>
                     <uimessage code="Treatment provided at delivery unit prior to admission at SCBU"/>
                 </label>
-                <!-- ToDo:  add warmer, supportive care -->
                 <repeat>
                     <template>
                         <obs conceptId="PIH:3513" style="checkbox" answerConceptId="{prior-tx}"/>
@@ -458,11 +542,18 @@
                 </repeat>
             </p>
 
-            <p>
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="APGAR score at time at 1 minutes after birth (0-10, unknown)"/>
+                </label>
+                    <obs conceptId="PIH:14419"/>
+                <!-- ToDo: add checkbox for unknown -->
+                <br/>
                 <label>
                     <uimessage code="APGAR score at time at 5 minutes after birth (0-10, unknown)"/>
                 </label>
                 <obs conceptId="CIEL: 159604"/>
+                <!-- ToDo: add checkbox for unknown -->
             </p>
 
             <p class="side-by-side">
@@ -516,7 +607,6 @@
             </p>
             <!-- ToDo:  Add other free-text -->
 
-            <!-- ToDo:  Check the answers -->
             <p>
                 <label>
                     <uimessage code="Management"/>
