@@ -459,8 +459,20 @@
                 <label>
                     <uimessage code="Place of delivery"/>
                 </label>
-                <obs conceptId="CIEL:163774" style="radio"
-                     answerConceptIds="CIEL:1589,PIH:Community health,PIH:12368,CIEL:5622"/>
+                <obs id="delivery-place" conceptId="CIEL:163774" style="radio"
+                     answerConceptIds="CIEL:1589,CIEL:1536,PIH:12368,CIEL:5622">
+                    <controls>
+                        <when value="CIEL:5622" thenDisplay="#other-delivery-place"/>
+                    </controls>
+                </obs>
+
+                <div id="other-delivery-place">
+                    <label>
+                        <uimessage code="zl.ifOtherSpecify"/>
+                    </label>
+                    <obs conceptId="PIH:1389"/>
+                </div>
+
             </p>
 
             <p class="side-by-side">
