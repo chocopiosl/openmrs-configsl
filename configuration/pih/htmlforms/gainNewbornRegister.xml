@@ -338,7 +338,7 @@
 
                         <render point="PIH:ANTENATAL CLINIC" message="pihcore.location.maternal"
                                 comment="Womens Health clinic"/>
-                        <render point="CIEL:165048" message="pihcore.testLocation.pedWard" comment="Pediatrics"/>
+                        <render point="PIH:MATERNITY WARD" message="Maternity ward" comment="Maternity"/>
                         <render point="CIEL:160473" message="pihcore.location.ed" comment="Emergency"/>
                     </repeat>
 
@@ -390,7 +390,7 @@
                     <uimessage code="Referred by"/>
                 </label>
                 <obs conceptId="PIH:10635" style="radio"
-                     answerConceptIds="CIEL:1555,PIH:DOCTOR,PIH:NURSE,PIH:SOCIAL WORKER SERVICE,CIEL:5622"/>
+                     answerConceptIds="CIEL:1555,PIH:DOCTOR,CIEL:1578,PIH:NURSE,PIH:SOCIAL WORKER SERVICE,CIEL:1575,CIEL:5622"/>
                 <!-- other non-coded role -->
                 <br/>
                 <label>
@@ -459,30 +459,18 @@
                 <label>
                     <uimessage code="Place of delivery"/>
                 </label>
-                <obs conceptId="CIEL:163774" style="radio"/>
+                <obs conceptId="CIEL:163774" style="radio"
+                     answerConceptIds="CIEL:1589,PIH:Community health,PIH:12368,CIEL:5622"/>
             </p>
 
             <p class="side-by-side">
                 <label>
                     <uimessage code="Which facility?"/>
                 </label>
-                <obs conceptId="PIH:12365" style="radio"/>
+                <obs conceptId="PIH:12365" style="radio"
+                     answerConceptIds="PIH:14400,PIH:14401,PIH:14402,PIH:14403,PIH:14404,PIH:14405,PIH:14406,PIH:14407,PIH:14408,PIH:14409,PIH:12366,PIH:12367,CIEL:5622"/>
             </p>
-            <!--
-             conceptId="PIH:14400"/>
-             conceptId="PIH:14401"/>
-             conceptId="PIH:14402"/>
-             conceptId="PIH:14403"/>
-             conceptId="PIH:14404"/>
-             conceptId="PIH:14405"/>
-             conceptId="PIH:14406"/>
-             conceptId="PIH:14407"/>
-             conceptId="PIH:14408"/>
-             conceptId="PIH:14409"/>
-             conceptId="PIH:12366"/>
-             conceptId="PIH:12367"/>
-             conceptId="CIEL:5622"/>
-             conceptId="CIEL:163531"/> -->
+           <!-- ToDo: Add conceptId="CIEL:163531"/ -->
 
             <p>
                 <label>
@@ -546,7 +534,7 @@
                     <render prior-tx="CIEL:167422"/>
                     <render prior-tx="CIEL:71101"/>
                     <render prior-tx="PIH:4037"/>
-                    <render prior-tx="CIEL:5622"/>
+                    <render prior-tx="CIEL:162738"/>
                 </repeat>
                 <obs conceptId="PIH:3513" style="checkbox"
                      answerConceptId="CIEL:5622" commentFieldCode="if other, specify:"/>

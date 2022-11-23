@@ -382,7 +382,7 @@
         <div class="section-container">
             <p class="side-by-site">
                 <strong>
-                    <uimessage code="Initial diagnosis"/>
+                    <uimessage code="Initial diagnosis (autocomplete)"/>
                 </strong>
                 <repeat>
                     <template>
@@ -402,7 +402,7 @@
 
             <p class="side-by-site">
                 <strong>
-                    <uimessage code="Final diagnosis"/>
+                    <uimessage code="Final diagnosis (autocomplete)"/>
                 </strong>
                 <repeat>
                     <template>
