@@ -378,6 +378,7 @@
                 </label>
                 <obs conceptId="CIEL:159860" style="autocomplete"
                      answerConceptSetIds="PIH:HUM pediatric diagnosis"/>
+
                 <!-- other non-coded reason -->
                 <label>
                     <uimessage code="Other referral reason (free-text)"/>
@@ -389,14 +390,20 @@
                 <label>
                     <uimessage code="Referred by"/>
                 </label>
-                <obs conceptId="PIH:10635" style="radio"
-                     answerConceptIds="CIEL:1555,PIH:DOCTOR,CIEL:1578,PIH:NURSE,PIH:SOCIAL WORKER SERVICE,CIEL:1575,CIEL:5622"/>
+                <obs id="referrer-role" conceptId="PIH:10635" style="radio"
+                     answerConceptIds="CIEL:1555,PIH:DOCTOR,CIEL:1578,PIH:NURSE,PIH:SOCIAL WORKER SERVICE,CIEL:1575,CIEL:5622">
                 <!-- other non-coded role -->
-                <br/>
-                <label>
-                    <uimessage code="if other, specify:"/>
-                </label>
-                <obs conceptId="PIH:14415"/>
+                    <controls>
+                        <when value="CIEL:5622" thenDisplay="#other-referrer"/>
+                    </controls>
+                </obs>
+
+                <div id="other-referrer">
+                    <label>
+                        <uimessage code="if other, specify:"/>
+                    </label>
+                    <obs conceptId="PIH:14415"/>
+                </div>
             </p>
         </div>
     </section>
@@ -654,45 +661,51 @@
                 <label>
                     <uimessage code="Outcome of admission at SBCU:"/>
                 </label>
-                <obs conceptId="PIH:8620" style="radio"
-                     answerConceptIds="CIEL:1692,PIH:11521,CIEL:1694,CIEL:159"/>
+                <obs id="outcome-admission" conceptId="PIH:8620" style="radio"
+                     answerConceptIds="CIEL:1692,PIH:11521,CIEL:1694,CIEL:159">
+                    <controls>
+                        <when value="CIEL:159" thenDisplay="#sbcu-death"/>
+                    </controls>
+                </obs>
+
+                <div id="sbcu-death">
+                    <strong>
+                        <uimessage code="Death Outcome"/>
+                    </strong>
+                    <obsgroup groupingConceptId="CIEL:163528">
+                        <p class="date-one-line">
+                            <label>
+                                <uimessage code="Date and time of death"/>
+                            </label>
+                            <obs conceptId="PIH:14399"/>
+                        </p>
+
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Cause of death/ mortality"/>
+                            </label>
+                            <br/>
+                            <obs conceptId="CIEL:159482" style="radio"
+                                 answerConceptIds="CIEL:127638,PIH:7557,CIEL:226,CIEL:114100,CIEL:114100,CIEL:113841,CIEL:1067"/>
+                        </p>
+
+                        <label>
+                            <uimessage code="if other cause of death, specify:"/>
+                        </label>
+                        <obs conceptId="CIEL:160218"/>
+
+                        <label>
+                            <uimessage code="Age at death (days)"/>
+                        </label>
+                        <obs conceptId="PIH:14393"/>
+
+                        <label>
+                            <uimessage code="Weight at time of death (kg)"/>
+                        </label>
+                        <obs conceptId="CIEL:5089"/>
+                    </obsgroup>
+                </div>
             </p>
-
-            <strong>
-                <uimessage code="Death Outcome"/>
-            </strong>
-            <obsgroup groupingConceptId="CIEL:163528">
-                <p class="date-one-line">
-                    <label>
-                        <uimessage code="Date and time of death"/>
-                    </label>
-                    <obs conceptId="PIH:14399"/>
-                </p>
-
-                <p class="side-by-side">
-                    <label>
-                        <uimessage code="Cause of death/ mortality"/>
-                    </label>
-                    <br/>
-                    <obs conceptId="CIEL:159482" style="radio"
-                         answerConceptIds="CIEL:127638,PIH:7557,CIEL:226,CIEL:114100,CIEL:114100,CIEL:113841,CIEL:1067"/>
-                </p>
-
-                <label>
-                    <uimessage code="if other cause of death, specify:"/>
-                </label>
-                <obs conceptId="CIEL:160218"/>
-
-                <label>
-                    <uimessage code="Age at death (days)"/>
-                </label>
-                <obs conceptId="PIH:14393"/>
-
-                <label>
-                    <uimessage code="Weight at time of death (kg)"/>
-                </label>
-                <obs conceptId="CIEL:5089"/>
-            </obsgroup>
 
             <p class="date-one-line">
                 <label>
