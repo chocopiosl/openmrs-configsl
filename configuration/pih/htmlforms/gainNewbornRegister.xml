@@ -311,7 +311,7 @@
                 <label>
                     <uimessage code="Date &amp; time of arrival"/>
                 </label>
-                <obs conceptId="CIEL:159622"/>
+                <obs conceptId="CIEL:159622" allowFutureDates="true"/>
             </p>
         </div>
     </section>
@@ -415,7 +415,7 @@
                 <label>
                     <uimessage code="Time"/>
                 </label>
-                <obs conceptId="PIH:14398"/>
+                <obs conceptId="PIH:14398" allowFutureDates="true"/>
             </p>
             <label>
                 <uimessage code="Name of the provider"/>
@@ -430,7 +430,7 @@
                 <label>
                     <uimessage code="Admission date/time"/>
                 </label>
-                <obs conceptId="CIEL:1640"/>
+                <obs conceptId="CIEL:1640" allowFutureDates="true"/>
             </p>
 
             <p>
@@ -677,7 +677,7 @@
                             <label>
                                 <uimessage code="Date and time of death"/>
                             </label>
-                            <obs conceptId="PIH:14399"/>
+                            <obs conceptId="PIH:14399" allowFutureDates="true"/>
                         </p>
 
                         <p class="side-by-side">
@@ -711,7 +711,7 @@
                 <label>
                     <uimessage code="If alive, date of discharge, or LAMA, or referral"/>
                 </label>
-                <obs conceptId="CIEL:1641"/>
+                <obs conceptId="CIEL:1641" allowFutureDates="true" />
             </p>
 
             <p>
