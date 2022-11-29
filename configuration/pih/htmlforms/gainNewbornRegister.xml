@@ -177,14 +177,6 @@
                                            tags="Consult Note Location"/>
                     </span>
                 </p>
-                <p id="when">
-                    <label>
-                        <uimessage code="emr.patientDashBoard.date"/>
-                    </label>
-                    <span>
-                        <encounterDate id="encounterDate" default="now"/>
-                    </span>
-                </p>
             </div>
         </includeIf>
 
@@ -212,14 +204,6 @@
                     <span>
                         <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"
                                            tags="Consult Note Location"/>
-                    </span>
-                </p>
-                <p id="when">
-                    <label>
-                        <uimessage code="emr.patientDashBoard.date"/>
-                    </label>
-                    <span>
-                        <encounterDate id="encounterDate" default="now"/>
                     </span>
                 </p>
             </div>
@@ -304,14 +288,15 @@
 
                     </div>
                 </div>
-
             </p>
 
-            <p class="date-one-line">
+            <p id="when" class="date-one-line">
                 <label>
                     <uimessage code="Date &amp; time of arrival"/>
                 </label>
-                <obs conceptId="CIEL:159622" allowFutureDates="true"/>
+                <span>
+                    <encounterDate id="encounterDate" showTime="true" default="now"/>
+                </span>
             </p>
         </div>
     </section>
