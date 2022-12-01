@@ -5,7 +5,7 @@
   "site": "KGH",
 
   "locationTags": {
-    "Login Location": ["KGH Triage"]
+    "Login Location": ["KGH Triage", "KGH GAIN"]
   },
 
   "components": [
