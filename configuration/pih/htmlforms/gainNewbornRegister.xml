@@ -174,7 +174,7 @@
                     </label>
                     <span>
                         <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"
-                                           tags="Consult Note Location"/>
+                                           tags="Maternal and Child Location"/>
                     </span>
                 </p>
             </div>
@@ -203,7 +203,7 @@
                     </label>
                     <span>
                         <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"
-                                           tags="Consult Note Location"/>
+                                           tags="Maternal and Child Location"/>
                     </span>
                 </p>
             </div>
