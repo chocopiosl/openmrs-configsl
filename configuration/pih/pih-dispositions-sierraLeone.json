@@ -8,10 +8,25 @@
     "additionalObs": []
   },
   {
-    "uuid": "referToKGH",
-    "name": "disposition.emrapi.referToKGH",
-    "conceptCode": "PIH:Transfer out of hospital",
+    "uuid": "discharge",
+    "type": "DISCHARGE",
+    "name": "disposition.emrapi.discharge",
+    "conceptCode": "PIH:DISCHARGED",
     "additionalObs": []
+  },
+  {
+    "uuid": "transferOutOfHospital",
+    "name": "disposition.emrapi.transferOutOfHospital",
+    "conceptCode": "PIH:Transfer out of hospital",
+    "additionalObs": [
+      {
+        "label": "disposition.emrapi.transferOutOfHospital.sites",
+        "conceptCode": "PIH: 14424",
+        "params": {
+          "id": "transferExternalLocation"
+        }
+      }
+    ]
   },
   {
     "uuid": "medsPrescribed",
