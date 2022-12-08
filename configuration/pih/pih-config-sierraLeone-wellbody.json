@@ -8,7 +8,7 @@
   "site": "WELLBODY",
 
   "locationTags": {
-    "Login Location": ["Wellbody Clinic", "Wellbody MCH"]
+    "Login Location": ["Wellbody Clinic", "Wellbody MCH", "Wellbody GAIN"]
   },
 
   "components": [

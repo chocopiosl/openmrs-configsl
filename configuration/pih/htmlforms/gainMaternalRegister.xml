@@ -450,12 +450,7 @@
                     <encounterDate id="encounterDate" default="now"/>
                 </span>
             </p>
-            <!--
-            <p class="side-by-side">
-                <obs conceptId="PIH:8620" style="radio"
-                     answerConceptIds="CIEL:1692,PIH:11521,CIEL:159"/>
 
-            </p> -->
             <p id="disposition">
                 <encounterDisposition />
             </p>

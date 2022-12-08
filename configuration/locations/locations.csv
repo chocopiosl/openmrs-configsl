@@ -1,7 +1,8 @@
 UUID,Void/Retire,Name,Description,Parent,Tag|Archives Location,Tag|Check-In Location,Tag|Consult Note Location,Tag|Dispensing Location,Tag|ED Triage Location,Tag|Labs Component Location,Tag|Maternal and Child Location,Tag|Medical Record Location,Tag|Mental Health Location,Tag|Program Location,Tag|Registration Location,Tag|Visit Location,Tag|Vitals Location,Tag|NCD Consult Location
 0561303b-9868-4a1d-933d-fe52ce1b8c9f,,Wellbody,Wellbody,,,,,,,,,,,,,TRUE,,
 b6733150-7426-11e5-a837-0800200c9a66,,Wellbody Clinic,Wellbody Clinic,Wellbody,TRUE,TRUE,TRUE,TRUE,,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,,TRUE,TRUE
-dac348b7-2ece-47ad-b80a-140fc6788706,,Wellbody MCH,Wellbody MCH,Wellbody,TRUE,TRUE,TRUE,TRUE,,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,,TRUE,TRUE
+dac348b7-2ece-47ad-b80a-140fc6788706,,Wellbody MCH,Wellbody MCH,Wellbody,TRUE,TRUE,TRUE,TRUE,,TRUE,TRUE,TRUE,,TRUE,TRUE,,TRUE,
+93b8750b-b986-4023-a533-6116477f7936,,Wellbody GAIN,Wellbody GAIN (nursing),Wellbody,TRUE,TRUE,TRUE,,,,TRUE,TRUE,,TRUE,TRUE,,TRUE,
 074b2ab0-716a-11eb-8aa6-0242ac110002,,KGH,KGH,,,,,,,,,,,,,TRUE,,
 2bcb9215-8cd6-11eb-b7be-0242ac110002,,KGH Triage,KGH Triage,KGH,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,,TRUE,TRUE,TRUE,TRUE,,TRUE,
 5981f962-6eec-453d-89ce-2f9ac48d096f,,KGH GAIN,GAIN (Nursing) for KGH MCH,KGH,TRUE,TRUE,,,,,TRUE,TRUE,,TRUE,TRUE,,,
