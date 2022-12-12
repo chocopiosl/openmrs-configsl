@@ -471,10 +471,20 @@
                 <label>
                     <uimessage code="Which facility?"/>
                 </label>
-                <obs conceptId="PIH:12365" style="radio"
-                     answerConceptIds="PIH:14400,PIH:14401,PIH:14402,PIH:14403,PIH:14404,PIH:14405,PIH:14406,PIH:14407,PIH:14408,PIH:14409,PIH:12366,PIH:12367,CIEL:5622"/>
+                <obs id="which-facility" conceptId="PIH:12365" style="radio"
+                     answerConceptIds="PIH:14400,PIH:14401,PIH:14402,PIH:14403,PIH:14404,PIH:14405,PIH:14406,PIH:14407,PIH:14408,PIH:14409,PIH:12366,PIH:12367,CIEL:5622">
+                    <controls>
+                        <when value="CIEL:5622" thenDisplay="#other-facility"/>
+                    </controls>
+                </obs>
+
+                <div id="other-facility">
+                    <label>
+                        <uimessage code="zl.ifOtherSpecify"/>
+                    </label>
+                    <obs conceptId="CIEL:163531"/>
+                </div>
             </p>
-           <!-- ToDo: Add conceptId="CIEL:163531"/ -->
 
             <p>
                 <label>
