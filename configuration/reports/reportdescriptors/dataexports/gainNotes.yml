@@ -25,3 +25,6 @@ designs:
 config:
   category: "dataExport"
   order: 75
+  components:
+    - "mchGAINMaternal"
+    - "mchGAINNewborn"
