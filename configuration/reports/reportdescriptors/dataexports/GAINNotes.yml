@@ -1,0 +1,29 @@
+key: "GAINNotes" 
+uuid: "8d414e98-3be5-4411-9784-2a5c551d4e53" 
+name: "mirebalaisreports.GAINNotes.name"
+description: "mirebalaisreports.GAINNotes.description"
+parameters:
+  - key: "startDate"
+    type: "java.util.Date"
+    label: "reporting.parameter.startDate"
+  - key: "endDate"
+    type: "java.util.Date"
+    label: "reporting.parameter.endDate"
+datasets:
+  - key: "GAINNotes"
+    type: "sql"
+    config: "sql/gainMaternalRegister.sql"
+  - key: "ObGynExam"
+    type: "sql"
+    config: "sql/gainSBCURegister.sql"    
+designs:
+  - type: "csv"
+    properties:
+      "characterEncoding": "ISO-8859-1"
+      "blacklistRegex": "[^\\p{InBasicLatin}\\p{L}]"
+      "dateFormat": "dd-MMM-yyyy HH:mm:ss"
+config:
+  category: "dataExport"
+  order: 75
+  components:
+    - "mch"
