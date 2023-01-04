@@ -1,7 +1,7 @@
 key: "GAINNotes" 
 uuid: "8d414e98-3be5-4411-9784-2a5c551d4e53" 
-name: "mirebalaisreports.GAINNotes.name"
-description: "mirebalaisreports.GAINNotes.description"
+name: "GAIN Notes"
+description: "GAIN Notes"
 parameters:
   - key: "startDate"
     type: "java.util.Date"
