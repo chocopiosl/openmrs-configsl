@@ -10,10 +10,10 @@ parameters:
     type: "java.util.Date"
     label: "reporting.parameter.endDate"
 datasets:
-  - key: "GAINNotes"
+  - key: "GAINMaternalRegister"
     type: "sql"
     config: "sql/gainMaternalRegister.sql"
-  - key: "ObGynExam"
+  - key: "GAINSBCURegister"
     type: "sql"
     config: "sql/gainSBCURegister.sql"    
 designs:
