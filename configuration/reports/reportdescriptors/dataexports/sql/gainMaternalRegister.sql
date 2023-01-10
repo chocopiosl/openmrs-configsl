@@ -19,7 +19,7 @@ encounter_location	       varchar(255),
 admission_datetime	       datetime,
 gravida 			       int,
 parity				       int,
-gestational_age		       int,
+gestational_age		       double,
 pac_type			       varchar(255),
 labor_start_datetime       datetime,
 pres_and_position	       varchar(255),
@@ -29,6 +29,7 @@ delivery_type		       varchar(255),
 delivery_outcome	       varchar(255),
 partograph_used 	       bit,
 uterotonic_given	       bit,
+baby_alive                 bit,
 baby_sex			       varchar(255),
 baby_weight			       double,
 APGAR				       int,
@@ -41,8 +42,10 @@ couselled_fp		       bit,
 received_fp			       bit,
 disposition			       varchar(255),
 HCW_Name			       text,
-HCW_Cadre			       varchar(255)  
+HCW_Cadre			       varchar(255), 
+HCW_Cadre_other            text
 );
+
 
 insert into temp_maternal(patient_id, encounter_id, encounter_datetime, date_entered, creator, encounter_location_id)   
 select e.patient_id,  e.encounter_id, e.encounter_datetime, e.date_created, e.creator, e.location_id  from encounter e
@@ -107,6 +110,9 @@ set partograph_used = obs_value_coded_as_boolean(encounter_id, 'PIH','13964');
 update temp_maternal 
 set uterotonic_given = obs_value_coded_as_boolean(encounter_id, 'PIH','14373');
 
+update temp_maternal 
+set baby_alive = obs_value_coded_as_boolean(encounter_id, 'PIH','1571');
+
 update temp_maternal
 set baby_sex = obs_value_coded_list(encounter_id, 'PIH','13055',@locale);
 
@@ -133,6 +139,9 @@ set HCW_Name = obs_value_text(encounter_id, 'PIH','6592');
 
 update temp_maternal
 set HCW_Cadre = obs_value_coded_list(encounter_id, 'PIH','14411',@locale);
+
+update temp_maternal
+set HCW_Cadre_other = obs_value_text(encounter_id, 'PIH','14415');
 
 -- initial, final diagnoses
 set @prior_dx_construct = concept_from_mapping('PIH','14391');
@@ -190,6 +199,7 @@ delivery_type,
 delivery_outcome,
 partograph_used,
 uterotonic_given,
+baby_alive,
 baby_sex,
 baby_weight,
 APGAR,
@@ -202,5 +212,6 @@ couselled_fp,
 received_fp,
 disposition,
 HCW_Name,
-HCW_Cadre
+HCW_Cadre,
+HCW_Cadre_other
 from temp_maternal;

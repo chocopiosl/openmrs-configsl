@@ -23,6 +23,7 @@ referred_non_PIH_site	    text,
 referral_reason			    varchar(255),
 referral_reason_other	    text,
 referred_by				    varchar(255),
+referred_by_other			text,
 management_datetime		    datetime,
 provider 				    varchar(255),
 admission_datetime		    datetime,
@@ -31,7 +32,9 @@ admission_age_hours		    int,
 baby_sex				    varchar(255),
 baby_admission_weight	    double,
 delivery_place			    varchar(255),
+delivery_place_other        text,
 delivery_facility		    varchar(255),
+delivery_facility_other	    text,
 number_of_anc			    int,
 delivery_mode			    varchar(255),
 prior_diagnoses_coded	    varchar(1000),
@@ -50,6 +53,7 @@ admission_problems_other	text,
 supportive_care			    varchar(1000),
 supportive_care_other	    text,
 sbcu_outcome			    varchar(255),
+death_construct_obs_id		int(11),
 death_outcome			    bit,
 death_datetime			    datetime,
 cause_of_death			    varchar(255),
@@ -103,6 +107,9 @@ update temp_sbcu
 set referred_by = obs_value_coded_list(encounter_id, 'PIH','10635',@locale);
 
 update temp_sbcu 
+set referred_by_other = obs_value_text(encounter_id, 'PIH','14415');
+
+update temp_sbcu 
 set management_datetime = obs_value_datetime(encounter_id, 'PIH','14398');
 
 update temp_sbcu 
@@ -111,8 +118,9 @@ set provider = obs_value_text(encounter_id, 'PIH','13326');
 update temp_sbcu 
 set admission_datetime = obs_value_datetime(encounter_id, 'PIH','12240');
 
-update temp_sbcu 
-set admission_age_days = obs_value_numeric(encounter_id, 'PIH','14393');
+update temp_sbcu t
+inner join obs o on o.encounter_id = t.encounter_id and o.voided = 0 and o.concept_id = concept_from_mapping('PIH','14393') and o.obs_group_id is null
+set t.admission_age_days = value_numeric;
 
 update temp_sbcu 
 set admission_age_hours = obs_value_numeric(encounter_id, 'PIH','14394');
@@ -127,7 +135,13 @@ update temp_sbcu
 set delivery_place = obs_value_coded_list(encounter_id, 'PIH','11348',@locale);
 
 update temp_sbcu 
+set delivery_place_other = obs_value_text(encounter_id, 'PIH','1389');
+
+update temp_sbcu 
 set delivery_facility = obs_value_coded_list(encounter_id, 'PIH','12365',@locale);
+
+update temp_sbcu 
+set delivery_facility_other = obs_value_text(encounter_id, 'PIH','11307');
 
 update temp_sbcu 
 set number_of_anc = obs_value_numeric(encounter_id, 'PIH','13321');
@@ -237,19 +251,22 @@ update temp_sbcu
 set death_outcome = if(sbcu_outcome = concept_name(concept_from_mapping('PIH','8619'),@locale),1,null);
 
 update temp_sbcu 
-set death_datetime = obs_value_datetime(encounter_id, 'PIH','14399');
+set death_construct_obs_id = obs_id(encounter_id, 'PIH',11140,0);
 
 update temp_sbcu 
-set cause_of_death = obs_value_coded_list(encounter_id, 'PIH','3355',@locale);
+set death_datetime = obs_from_group_id_value_datetime(death_construct_obs_id, 'PIH','14399');
 
 update temp_sbcu 
-set other_cause = obs_value_text(encounter_id, 'PIH','9715');
+set cause_of_death = obs_from_group_id_value_coded_list(death_construct_obs_id, 'PIH','3355',@locale);
 
 update temp_sbcu 
-set death_age_days = obs_value_numeric(encounter_id, 'PIH','14393');
+set other_cause = obs_from_group_id_value_text(death_construct_obs_id, 'PIH','9715');
 
 update temp_sbcu 
-set death_weight = obs_value_numeric(encounter_id, 'PIH','5089');
+set death_age_days = obs_from_group_id_value_numeric(death_construct_obs_id, 'PIH','14393');
+
+update temp_sbcu 
+set death_weight = obs_from_group_id_value_numeric(death_construct_obs_id, 'PIH','5089');
 
 update temp_sbcu 
 set discharge_datetime = obs_value_datetime(encounter_id, 'PIH','3800');
@@ -272,6 +289,7 @@ referred_non_PIH_site,
 referral_reason,
 referral_reason_other,
 referred_by,
+referred_by_other,
 management_datetime,
 provider,
 admission_datetime,
@@ -280,7 +298,9 @@ admission_age_hours,
 baby_sex,
 baby_admission_weight,
 delivery_place,
+delivery_place_other,
 delivery_facility,
+delivery_facility_other,
 number_of_anc,
 delivery_mode,
 prior_diagnoses_coded,
@@ -308,4 +328,3 @@ death_weight,
 discharge_datetime,
 staff_completing
 from temp_sbcu;
-
