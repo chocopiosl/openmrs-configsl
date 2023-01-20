@@ -15,7 +15,7 @@
 <htmlform id="gain-maternal-register"
           formUuid="a165541e-9745-4891-b6d7-b8374575e63e"
           htmlformUuid="e2874caa-9ca9-431b-97ab-2952923fa85b"
-          formName="SBCU Newborn Register"
+          formName="SCBU Newborn Register"
           formEncounterType="3790ecc6-bc63-48f8-9104-f81dc90ee21c" formVersion="1.0">
 
     <style type="text/css">
@@ -152,7 +152,7 @@
     <ifMode mode="VIEW" include="false">
         <h2>
             <label>
-                <uimessage code="SBCU Newborn Register"/>
+                <uimessage code="SCBU Newborn Register"/>
             </label>
         </h2>
 
@@ -654,16 +654,16 @@
 
             <p class="side-by-side">
                 <label>
-                    <uimessage code="Outcome of admission at SBCU:"/>
+                    <uimessage code="Outcome of admission at SCBU:"/>
                 </label>
                 <obs id="outcome-admission" conceptId="PIH:8620" style="radio"
                      answerConceptIds="CIEL:1692,PIH:11521,CIEL:1694,CIEL:159">
                     <controls>
-                        <when value="CIEL:159" thenDisplay="#sbcu-death"/>
+                        <when value="CIEL:159" thenDisplay="#scbu-death"/>
                     </controls>
                 </obs>
 
-                <div id="sbcu-death">
+                <div id="scbu-death">
                     <strong>
                         <uimessage code="Death Outcome"/>
                     </strong>

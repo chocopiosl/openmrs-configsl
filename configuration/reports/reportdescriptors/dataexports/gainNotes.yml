@@ -13,9 +13,9 @@ datasets:
   - key: "GAINMaternalRegister"
     type: "sql"
     config: "sql/gainMaternalRegister.sql"
-  - key: "GAINSBCURegister"
+  - key: "GAINSCBURegister"
     type: "sql"
-    config: "sql/gainSBCURegister.sql"    
+    config: "sql/gainSCBURegister.sql"
 designs:
   - type: "csv"
     properties:
