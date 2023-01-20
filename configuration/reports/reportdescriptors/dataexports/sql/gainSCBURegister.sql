@@ -52,7 +52,7 @@ admission_problems		    varchar(1000),
 admission_problems_other	text,
 supportive_care			    varchar(1000),
 supportive_care_other	    text,
-sbcu_outcome			    varchar(255),
+scbu_outcome			    varchar(255),
 death_construct_obs_id		int(11),
 death_outcome			    bit,
 death_datetime			    datetime,
@@ -245,10 +245,10 @@ update temp_sbcu t
 set supportive_care_other = obs_comments(t.encounter_id, 'PIH','12943','PIH','5622');
 
 update temp_sbcu 
-set sbcu_outcome = obs_value_coded_list(encounter_id, 'PIH','8620',@locale);
+set scbu_outcome = obs_value_coded_list(encounter_id, 'PIH','8620',@locale);
 
 update temp_sbcu 
-set death_outcome = if(sbcu_outcome = concept_name(concept_from_mapping('PIH','8619'),@locale),1,null);
+set death_outcome = if(scbu_outcome = concept_name(concept_from_mapping('PIH','8619'),@locale),1,null);
 
 update temp_sbcu 
 set death_construct_obs_id = obs_id(encounter_id, 'PIH',11140,0);
@@ -318,7 +318,7 @@ admission_problems,
 admission_problems_other,
 supportive_care,
 supportive_care_other,
-sbcu_outcome,
+scbu_outcome,
 death_outcome,
 death_datetime,
 cause_of_death,
