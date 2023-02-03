@@ -1,5 +1,10 @@
 
 {
+
+  "locationTags": {
+    "Login Location": ["Wellbody Clinic", "Wellbody MCH", "Wellbody GAIN", "Wellbody NCD"]
+  },
+
   "components": [
     "activeVisits",
     "allergies",
