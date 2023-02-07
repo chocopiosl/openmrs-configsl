@@ -397,7 +397,7 @@
                             <uimessage code="HIV"/>
                         </label>
                         <obs conceptId="CIEL:1169"
-                             answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
+                             answerConceptIds="CIEL:703,CIEL:664" style="radio"/>
                     </p>
                 </div>
                 <div>
