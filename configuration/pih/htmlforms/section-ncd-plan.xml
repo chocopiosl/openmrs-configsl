@@ -84,6 +84,61 @@
         </div>
     </section>
 
+    <style type="text/css">
+
+        #test-orders {
+            padding-top padding-bottom: 0px;
+            line-height: 0.1;
+        }
+
+        #test-orders .orderwidget-orderable-section {
+            border-bottom: none;
+        }
+
+        #test-orders .orderwidget-existing-order-section {
+            display:none;
+        }
+
+        #test-orders .orderwidget-section-header {
+            padding-bottom: 25px;
+        }
+    </style>
+    <br/>
+
+    <section id="test-orders" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.lab.lab_tests.title">
+
+        <div class="section-container">
+            <order orderType="52a447d3-a64a-11e3-9aeb-50e549534c5e" format="select"
+                   selectLabel="pihcore.labOrder.addAnotherLab">
+                <orderTemplate>
+                    <orderProperty name="action" label="pihcore.action">
+                        <option value="NEW" label="pihcore.new"/>
+                    </orderProperty>
+
+                    <div style="padding:0px;font-weight:bold;">
+                        <orderProperty name="concept" label="" style="radio">
+                            <option value="3cd4e194-26fe-102b-80cb-0017a47871b2" label="Glucose" />
+                            <option value="3cd4374e-26fe-102b-80cb-0017a47871b2" label="Creatinine" />
+                            <option value="3cd76b58-26fe-102b-80cb-0017a47871b2" label="Na" />
+                            <option value="3cd76ce8-26fe-102b-80cb-0017a47871b2" label="K" />
+
+                            <option value="3ccc7158-26fe-102b-80cb-0017a47871b2" label="Hb" />
+                            <option value="3cd2a906-26fe-102b-80cb-0017a47871b2" label="Leukocytes" />
+                            <option value="3cd3d038-26fe-102b-80cb-0017a47871b2" label="Platelets" />
+                        </orderProperty>
+
+                        <div style="display:none;">
+                            <orderProperty name="urgency" value="ROUTINE"/>
+                            <orderProperty name="previousOrder"/>
+                            <orderProperty name="careSetting" value="OUTPATIENT"/>
+                        </div>
+                    </div>
+                </orderTemplate>
+            </order>
+        </div>
+    </section>
+
     <section id="radiology-orders" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.rad_order.title">
         <div class="section-container">
@@ -92,43 +147,42 @@
                     <strong>X-ray</strong>
                     <br/>
 
-                    <repeat with="['Chest 1 view','Chest'],
-                                  ['Abdomen 1 view','Abdominal'],
-                                  ['Skull 2 views','Skull'],
-                                  ['Other bone','Other bone'],
-                                  ['Dental','Dental']">
+                    <repeat with="['CIEL:1118','Not done'],
+                                  ['CIEL:1115','Normal'],
+                                  ['PIH:5158','Cardiomegaly'],
+                                  ['CIEL:139069','Heart failure'],
+                                  ['CIEL:5622','Other']">
 
-                        <obs conceptId="PIH:Radiology image ordered"
-                             answerConceptId="PIH:{0} (XRay)"
+                        <obs conceptId="CIEL:12"
+                             answerConceptId="{0}"
                              answerLabel="{1}"
                              style="checkbox"/>
                     </repeat>
 
-                    <obs conceptId="PIH:Radiology image ordered"
-                         answerConceptId="PIH:Other (XRay)" answerLabel="Other (XRay)"
-                         style="checkbox"
-                         showCommentField="true" commentFieldLabel=""/>
+                    <label>if other, specify:</label>
+                    <obs conceptId="CIEL:1392" style="text"/>
                 </div>
+
                 <div>
-
-                    <strong>Ultrasound</strong>
+                    <strong>EKG</strong>
                     <br/>
-                    <repeat with="['Abdomen (US)','Abdominal'],
-                                  ['Transthoracic echocardiogram','Cardiac'],
-                                  ['Obstetric (US)','Obstetric'],
-                                  ['Soft tissue (US)','Soft tissue'],
-                                  ['FAST (US)','FAST']">
 
-                        <obs conceptId="PIH:Radiology image ordered"
-                             answerConceptId="PIH:{0}"
-                             answerLabel="{1}"
-                             style="checkbox"/>
+                    <repeat with="['1118','Not done'],
+                                  ['1115','Normal'],
+                                  ['135971','Left ventricular hypertrophy'],
+                                  ['148203','Atrial Fibrillation'],
+                                  ['5622','Other']">
+
+                        <obsgroup groupingConceptId="PIH:3403">
+                            <obs conceptId="CIEL:159565"
+                                 answerConceptId="CIEL:{0}"
+                                 answerLabel="{1}"
+                                 style="checkbox"/>
+                        </obsgroup>
                     </repeat>
 
-                    <obs conceptId="PIH:Radiology image ordered"
-                         answerConceptId="PIH:Other (US)" answerLabel="Other (XRay)"
-                         style="checkbox"
-                         showCommentField="true" commentFieldLabel=""/>
+                    <label>if other, specify:</label>
+                    <obs conceptId="CIEL:159573" style="text"/>
                 </div>
             </div>
         </div>
