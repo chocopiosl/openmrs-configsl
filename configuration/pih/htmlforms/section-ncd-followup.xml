@@ -417,7 +417,7 @@
                     <uimessage code="Missing doses of medication in the last week" />
                 </label>
                 <obs conceptId="CIEL:167819" style="radio"
-                     answerConceptIds="CIEL:1065,CIEL:1066" />
+                     answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067" />
             </p>
 
             <p class="side-by-side">
@@ -425,7 +425,7 @@
                     <uimessage code="Aware and understanding the disease" />
                 </label>
                 <obs conceptId="CIEL:167021" style="radio"
-                     answerConceptIds="CIEL:1065,CIEL:1066" />
+                     answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067" />
             </p>
 
             <p class="side-by-side">
@@ -433,7 +433,7 @@
                     <uimessage code="Controlled diseases" />
                 </label>
                 <obs conceptId="PIH:11506" style="radio"
-                     answerConceptIds="CIEL:1065,CIEL:1066" />
+                     answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067" />
             </p>
 
             <p>
