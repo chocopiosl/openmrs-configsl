@@ -2,7 +2,7 @@
 {
 
   "locationTags": {
-    "Login Location": ["Wellbody Clinic", "Wellbody MCH", "Wellbody GAIN", "Wellbody NCD"]
+    "Login Location": ["Wellbody Clinic", "Wellbody MCH", "Wellbody GAIN", "Wellbody NCD", "Wellbody Mental Health","KGH Triage"]
   },
 
   "components": [
@@ -13,6 +13,9 @@
     "dataExports",
     "dispensing",
     "echocardiogram",
+    "edConsult",
+    "edTriage",
+    "edTriageQueue",
     "idcardPrinting",
     "labResults",
     "labs",

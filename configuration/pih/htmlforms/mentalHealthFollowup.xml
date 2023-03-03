@@ -12,11 +12,11 @@
   ~ Copyright (C) OpenMRS, LLC.  All Rights Reserved.
   -->
 
-<htmlform id="mh-assessment" class="simple-form-ui"
-          formUuid="a8584dd8-cc2a-11e5-9956-625662870761"
-          htmlformUuid="a8584f5e-cc2a-11e5-9956-625662870761"
-          formName="Mental Health Intake"
-          formEncounterType="a8584ab8-cc2a-11e5-9956-625662870761" formVersion="1.0">
+<htmlform id="mh-followup" class="simple-form-ui"
+          formUuid="33f2ec65-2ac5-4841-a627-10a76b2bb32c"
+          htmlformUuid="511d18d8-d70e-44ba-9f0c-9e6f784121ac"
+          formName="Mental Health Follow-up"
+          formEncounterType="9d701a81-bb83-40ea-9efc-af50f05575f2" formVersion="1.0">
 
     <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.ApplyDispositionAction"/>
 
@@ -243,7 +243,7 @@
     <ifMode mode="VIEW" include="false">
         <h2>
             <label>
-                <uimessage code="pih.task.mentalHealthIntake.label"/>
+                <uimessage code="pih.task.mentalHealthFU.label"/>
             </label>
         </h2>
 
@@ -357,44 +357,9 @@
         </includeIf>
     </ifMode>
 
-    <!-- The form -->
-    <section id="mh_refer" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="pihcore.mentalhealth.referral">
+    <enrollInProgram programId="Mental Health" locationTag="Visit Location" />
 
-        <enrollInProgram programId="Mental Health" locationTag="Visit Location" />
-
-        <div class="section-container">
-            <div class="two-columns">
-                <p>
-                    <label>
-                        <uimessage code="pihcore.mentalhealth.referredBy" />:
-                    </label>
-                    <repeat with="['PIH:Teacher'],['PIH:TRADITIONAL HEALER'],['PIH:VILLAGE HEALTH WORKER'],['PIH:11783'],['CIEL:978'],['PIH:Other medical service']">
-                            <obs conceptId="PIH:Role of referring person" answerConceptId="{0}"
-                                 style="checkbox"/>
-                    </repeat>
-                    <obs conceptId="PIH:Role of referring person" answerConceptId="PIH:OTHER"
-                        style="checkbox" commentFieldLabel=" " />
-                </p>
-
-                <p>
-                    <label>
-                        <uimessage code="pihcore.mentalhealth.internalReferredBy" />:
-                    </label>
-
-                    <repeat with="['PIH:DOCTOR'],['PIH:NURSE'],['PIH:SOCIAL WORKER SERVICE	']">
-                        <obs conceptId="PIH:Type of referral role" answerConceptId="{0}"
-                                 style="checkbox"/>
-                    </repeat>
-                    <obs conceptId="PIH:Type of referral role" answerConceptId="PIH:OTHER"
-                         style="checkbox" commentFieldLabel=" " />
-                </p>
-                <br/><br/>
-            </div>
-        </div>
-    </section>
-
-    <!--Patients History and exposures -->
+    <!-- ToDo: Replace with lookups (Patient history)
     <section id="mh_patientHistory" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.patientHistoryExposure">
 
@@ -431,7 +396,7 @@
 
         <div class="section-container">
             <div class="two-columns">
-                <!-- Alcohol use -->
+
                 <p class="side-by-side">
                     <label>
                         <uimessage code="Alcohol"/>:
@@ -450,7 +415,6 @@
             </div>
 
             <div class="two-columns">
-                <!-- Cannabis use -->
                 <p class="side-by-side">
                     <label>
                         Jamba (Marijuana):
@@ -470,7 +434,7 @@
             </div>
 
             <div class="two-columns">
-                <!-- Drug use -->
+
                 <p class="side-by-side">
                     <label>
                         <uimessage code="Other drugs"/>:
@@ -497,7 +461,6 @@
                 </p>
             </div>
 
-            <!-- Drug use -->
             <p class="side-by-side">
                 <label>
                     <uimessage code="Traditional medicine" />:
@@ -508,8 +471,9 @@
             </p>
         </div>
     </section>
+    -->
 
-    <!--Family History-->
+    <!--ToDo: Lookup Family History
     <section id="mh_familyhistory" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="zl.consultNote.familyHistory.title">
         <div class="section-container">
@@ -539,6 +503,7 @@
             </p>
         </div>
     </section>
+    -->
 
     <!--presentingFeatures-->
     <section id="mh_presentingFeatures" sectionTag="fieldset" headerTag="legend" headerStyle="title"
@@ -832,13 +797,14 @@
         </div>
     </section>
 
-    <!--Improvement-->
+    <!-- Improvement -->
     <section id="mh_improvements" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Improvement">
 
         <div class="section-container">
 
             <!-- ToDo:  Add later with UHM-4171
+            Lookup values
             <label>
                 <uimessage code="pihcore.mentalhealth.depressionScreening"/>
             </label>
@@ -855,7 +821,6 @@
 
             <br/>
             -->
-
 
             <obsgroup groupingConceptId="CIEL:161245">
                 <p class="side-by-side">

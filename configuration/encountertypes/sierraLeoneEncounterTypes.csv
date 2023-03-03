@@ -3,3 +3,4 @@ ${encounterType.sierraLeoneOutpatientInitial.uuid},,Sierra Leone Outpatient Init
 ${encounterType.sierraLeoneOutpatientFollowup.uuid},,Sierra Leone Outpatient Followup,The outpatient visit form for Sierra Leone
 ${encounterType.sierraLeoneMchDeliveryRegister.uuid},,Maternity and Delivery Register,The maternal delivery register for Sierra Leone
 ${encounterType.sierraLeoneMchNewbornRegister.uuid},,SCBU Newborn Register,The newborn (SCBU) register for Sierra Leone
+${encounterType.mentalHealthFollowup.uuid},,Mental Health Follow-up,The followup form for mental health
