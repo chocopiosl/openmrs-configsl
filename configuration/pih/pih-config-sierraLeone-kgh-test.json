@@ -1,0 +1,37 @@
+{
+  "locationTags": {
+    "Login Location": ["KGH Triage", "KGH GAIN", "KGH NCD"]
+  },
+
+  "components": [
+    "activeVisits",
+    "allergies",
+    "checkIn",
+    "clinicianDashboard",
+    "dataExports",
+    "dispensing",
+    "edTriage",
+    "edTriageQueue",
+    "idcardPrinting",
+    "labResults",
+    "labs",
+    "managePrinters",
+    "markPatientDead",
+    "mchForms",
+    "mchGAINMaternal",
+    "mchGAINNewborn",
+    "mentalHealth",
+    "myAccount",
+    "ncd",
+    "overviewReports",
+    "patientRegistration",
+    "primaryCare",
+    "programs",
+    "relationships",
+    "systemAdministration",
+    "visitManagement",
+    "visitNote",
+    "vitals",
+    "vitalsHomepageApp"
+  ]
+}
