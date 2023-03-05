@@ -2,7 +2,7 @@
 {
 
   "locationTags": {
-    "Login Location": ["Wellbody Clinic", "Wellbody MCH", "Wellbody GAIN", "Wellbody NCD", "Wellbody Mental Health","KGH Triage"]
+    "Login Location": ["Wellbody Clinic", "Wellbody MCH", "Wellbody GAIN", "Wellbody NCD", "Wellbody Mental Health"]
   },
 
   "components": [
