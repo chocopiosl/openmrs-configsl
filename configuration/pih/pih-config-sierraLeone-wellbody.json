@@ -8,7 +8,7 @@
   "site": "WELLBODY",
 
   "locationTags": {
-    "Login Location": ["Wellbody Clinic", "Wellbody MCH" ]
+    "Login Location": ["Wellbody Clinic", "Wellbody MCH", "Wellbody NCD" ]
   },
 
   "components": [
@@ -27,6 +27,7 @@
     "mchGAINMaternal",
     "mentalHealth",
     "myAccount",
+    "ncd",
     "overviewReports",
     "patientRegistration",
     "primaryCare",
