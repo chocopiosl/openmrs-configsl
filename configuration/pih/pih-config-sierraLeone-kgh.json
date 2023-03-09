@@ -70,7 +70,8 @@
       "type": "birthdate",
       "label": "coreapps.birthdate",
       "width": "100px"
-    },    {
+    },
+    {
       "type": "identifier",
       "value": "1a2acce0-7426-11e5-a837-0800200c9a66",
       "label": "ui.i18n.PatientIdentifierType.name.1a2acce0-7426-11e5-a837-0800200c9a66",
