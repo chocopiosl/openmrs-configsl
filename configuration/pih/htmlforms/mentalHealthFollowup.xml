@@ -48,121 +48,125 @@
         }
 
         #where > input[type=text] {
-        display: inline-block;
+            display: inline-block;
         }
 
         .narrow {
-        width: 200px;
+            width: 200px;
         }
 
         .field-error {
-        color: #ff6666;
-        font-size: 1.1em;
-        display: block;
+            color: #ff6666;
+            font-size: 1.1em;
+            display: block;
         }
 
-        .two-columns {
-            column-count: 2;
-            -webkit-column-count: 2;
-            -moz-column-count: 2;
+        .three-columns, .two-columns {
+            display: table;
+            height: 100%;
+            width: 100%;
         }
 
-        .three-columns {
-            column-count: 3;
-            -webkit-column-count: 3;
-            -moz-column-count: 3;
+        .two-columns > div {
+            display: table-cell;
+            width: 50%;
+        }
+
+        .three-columns > div {
+            display: table-cell;
+            width: 33%;
         }
 
         .simple-form-ui input {
-        min-width: 80%
+            min-width: 80%
         }
 
         form fieldset {
-        min-width: 90%;
-        display: block;
+            min-width: 90%;
+            display: block;
         }
 
         #calculated-waist-hip-ratio {
-        font-weight: bold;
-        font-size: 1.4em;
+            font-weight: bold;
+            font-size: 1.4em;
         }
 
         .encounter-summary-container #calculated-ratio {
-        font-size: 1em;
-        font-weight: normal;
+            font-size: 1em;
+            font-weight: normal;
         }
 
         #encounterDate input {
-        min-width: 15%
+            min-width: 15%
         }
 
         .half-size-text {
-        color: #ff6666;
-        font-size: 50%;
-        display: block;
+            color: #ff6666;
+            font-size: 50%;
+            display: block;
         }
 
         .section-container {
-        background: #F2F2F2;
-        box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
-        padding: 10px 5px 10px 15px;
-        line-height: 1.5em; /*add this for vertical spacing between elements*/
+            background: #F2F2F2;
+            box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
+            padding: 10px 5px 10px 15px;
+            line-height: 1.5em; /*add this for vertical spacing between elements*/
         }
 
         .section-container input[type="checkbox"] {
-        margin: 0px 5px; /*changed values to vertical, horizontal*/
-        top:5px; /*added to offset the checkbox position to line up*/
+            margin: 0px 5px; /*changed values to vertical, horizontal*/
+            top:5px; /*added to offset the checkbox position to line up*/
         }
 
         .section-container label { /*new definition to override labels inside section-containers*/
-        margin: 0px;
+            margin: 0px;
         }
 
        - .section {
-        width: 100%;
+            width: 100%;
         }
 
         textarea {
-        width: 95%;
+            width: 95%;
         }
 
         /* line 56, ../../../compass/sass/dispensing.scss */
         fieldset.medication2 p.inline2 select {
-        width: 100px;
+            width: 100px;
         }
         /* line 61, ../../../compass/sass/dispensing.scss */
         fieldset.medication2 .select-arrow2 {
-        overflow: hidden;
+            overflow: hidden;
         }
         /* line 64, ../../../compass/sass/dispensing.scss */
         fieldset.medication2 .select-arrow2:after {
-        margin-top: 0;
+            margin-top: 0;
         }
         /* line 68, ../../../compass/sass/dispensing.scss */
         fieldset.medication2 .select-arrow2 select {
-        min-width: 0;
-        min-width: 70px;
-        padding-right: 19px;
-        padding-left: 5px;
+            min-width: 0;
+            min-width: 70px;
+            padding-right: 19px;
+            padding-left: 5px;
         }
         /* line 76, ../../../compass/sass/dispensing.scss */
         fieldset.medication2 .doseInput2 {
-        display: inline-block;
-        vertical-align: top;
+            display: inline-block;
+            vertical-align: top;
         }
         /* line 80, ../../../compass/sass/dispensing.scss */
         fieldset.medication2 .doseInput2 input, fieldset.medication .doseInput2 select {
-        display: inline;
-        min-width: 0;
+            display: inline;
+            min-width: 0;
         }
         /* line 85, ../../../compass/sass/dispensing.scss */
         fieldset.medication2 .doseInput2 input {
-        display: block;
-        width: 50px;
+            display: block;
+            width: 50px;
         }
         /* line 90, ../../../compass/sass/dispensing.scss */
         fieldset.medication2 .doseInput2 select {
-        width: 70px;
+            width: 70px;
         }
 
         .simple-form-ui input {
@@ -187,7 +191,9 @@
 
             jq(function() {
 
-                // return appointment date can never be before encounter date
+            let serverEncounterDate = '<lookup complexExpression="#if ($encounter) #set ($encounterDate = $encounter.encounterDatetime) #else #set ($encounterDate = $visit.startDatetime) #end"/>';
+
+            // return appointment date can never be before encounter date
                 var setMinReturnVisitDate = function () {
 
                     var returnVisitDate = getValue('return-visit-date.value');
@@ -359,152 +365,6 @@
 
     <enrollInProgram programId="Mental Health" locationTag="Visit Location" />
 
-    <!-- ToDo: Replace with lookups (Patient history)
-    <section id="mh_patientHistory" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="pihcore.patientHistoryExposure">
-
-        <div class="section-container">
-            <div class="two-columns">
-                <p class="side-by-side">
-                    <label>
-                        <uimessage code="pihcore.mch.hivTest"/>
-                    </label>
-                    <obs conceptId="PIH:1040"
-                         style="radio" answerConceptIds="PIH:YES,PIH:NO"
-                         answerCodes="Yes,No" answerSeparator=""/>
-                    <br/>
-
-                    <obs conceptId="PIH:2516" labelCode="pihcore.hiv.startDateARV"/>
-
-                    <label>TB smear result</label>
-                    <obs conceptId="PIH:3052"
-                        style="radio"
-                        answerConceptIds="CIEL:703,CIEL:664"
-                         />
-                    <br/>
-
-                    <label>
-                        <uimessage code="pihcore.extraPulmonaryTB"/>
-                    </label>
-                    <obs conceptId="PIH:1547"
-                         style="radio" answerConceptIds="PIH:YES,PIH:NO"
-                         answerCodes="Yes,No" answerSeparator=""/>
-                </p>
-            </div>
-        </div>
-        <br/>
-
-        <div class="section-container">
-            <div class="two-columns">
-
-                <p class="side-by-side">
-                    <label>
-                        <uimessage code="Alcohol"/>:
-                    </label>
-                    <obs conceptId="CIEL:159449" answerConceptIds="CIEL:159450,CIEL:159452,CIEL:1090"
-                         answerCodes="Current,Past,Never"
-                         answerSeparator="" style="radio"/>
-                    <br/><br/>
-                    <label>
-                        <uimessage code="pihcore.habits.ifYesDuration"/>
-                    </label>
-                    <span class="small">
-                        <obs conceptId="PIH:2241" showUnits="pihcore.units.years" />
-                    </span>
-                </p>
-            </div>
-
-            <div class="two-columns">
-                <p class="side-by-side">
-                    <label>
-                        Jamba (Marijuana):
-                    </label>
-                    <obs conceptId="PIH:12391" answerConceptIds="CIEL:159450,CIEL:159452,CIEL:1090"
-                         answerCodes="Current,Past,Never"
-                         answerSeparator="" style="radio"/>
-
-                    <br/><br/>
-                    <label>
-                        <uimessage code="pihcore.habits.ifYesDuration"/>
-                    </label>
-                    <span class="small">
-                        <obs conceptId="PIH:13239" showUnits="pihcore.units.years" />
-                    </span>
-                </p>
-            </div>
-
-            <div class="two-columns">
-
-                <p class="side-by-side">
-                    <label>
-                        <uimessage code="Other drugs"/>:
-                    </label>
-                    <obs conceptId="CIEL:162556" answerConceptIds="CIEL:159450,CIEL:159452,CIEL:1090"
-                         answerCodes="Current,Past,Never"
-                         answerSeparator="" style="radio"/>
-                    <br/>
-
-                    <label>
-                        <uimessage code="pihcore.habits.drugName"/>
-                    </label>
-                    <span class="small">
-                        <obs conceptId="PIH:6489"/>
-                    </span>
-
-                    <br/><br/><br/>
-                    <label>
-                        <uimessage code="pihcore.habits.ifYesDuration"/>
-                    </label>
-                    <span class="small">
-                        <obs conceptId="PIH:12997" showUnits="pihcore.units.years"/>
-                    </span>
-                </p>
-            </div>
-
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="Traditional medicine" />:
-                </label>
-                <obs conceptId="PIH:13242" answerConceptIds="CIEL:159450,CIEL:159452,CIEL:1090"
-                     answerCodes="Current,Past,Never"
-                     answerSeparator="" style="radio"/>
-            </p>
-        </div>
-    </section>
-    -->
-
-    <!--ToDo: Lookup Family History
-    <section id="mh_familyhistory" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="zl.consultNote.familyHistory.title">
-        <div class="section-container">
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="ui.i18n.Program.name.69e6a46d-674e-4281-99a0-4004f293ee57"/>
-                </label>
-                <obs conceptId="CIEL:152450"
-                     style="radio" answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
-                     answerCodes="Yes,No,Unknown" answerSeparator="" required="true"/>
-                <br/>
-
-                <label>
-                    <uimessage code="pihcore.mentalIllness"/>
-                </label>
-                <obs conceptId="CIEL:140526"
-                     style="radio" answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
-                     answerCodes="Yes,No,Unknown" answerSeparator="" required="true"/>
-                <br/>
-
-                <label>
-                    <uimessage code="pihcore.behavioralProblems"/>
-                </label>
-                <obs conceptId="CIEL:152465"
-                     style="radio" answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
-                     answerCodes="Yes,No,Unknown" answerSeparator="" required="true"/>
-            </p>
-        </div>
-    </section>
-    -->
-
     <!--presentingFeatures-->
     <section id="mh_presentingFeatures" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.presentingFeatures">
@@ -538,142 +398,145 @@
              headerCode="pihcore.exam.mental_exam.title">
         <div class="section-container">
             <div class="two-columns">
-            <p class="side-by-side">
-                <label>
-                    Alertness
-                </label>
-                <obs conceptId="CIEL:122943" style="radio"
-                     answerConceptIds="CIEL:160282,CIEL:141762,CIEL:123818"
-                     answerCodes="Alert,Somnolent,Unconscious" />
-            </p>
-
-            <label>
-                Orientation status
-            </label>
-            <obs conceptId="CIEL:167084" style="checkbox"
-                 answerConceptId="CIEL:167081"
-                 answerCode="Oriented to person" />
-            <obs conceptId="CIEL:167084" style="checkbox"
-                 answerConceptId="CIEL:167082"
-                 answerCode="Oriented to place" />
-            <obs conceptId="CIEL:167084" style="checkbox"
-                 answerConceptId="CIEL:167083"
-                 answerCode="Oriented to time" />
-            <br/>
-
-            <label>
-                Appearance
-            </label>
-
-            <repeat>
-                <template>
-                    <obs conceptId="CIEL:167092" style="checkbox"
-                         answerConceptId="CIEL:{acID}"
-                         answerCode="{name}"/>
-                </template>
-                <render acID="159438" name="Neat" />
-                <render acID="114413" name="Overweight" />
-                <render acID="124905" name="Thin" />
-            </repeat>
-             <br/>
-           
-            <label>
-                Mood
-            </label>
-
-            <repeat>
-                <template>
-                    <obs conceptId="CIEL:167099	" style="checkbox"
-                         answerConceptId="CIEL:{acID}"
-                         answerCode="{name}"/>
-                </template>
-                <render acID="119537" name="Depressed"/>
-                <render acID="167100" name="Neutral"/>
-                <render acID="166050" name="Elevated"/>
-                <render acID="121543" name="Anxious"/>
-                <render acID="6023" name="Irritable"/>
-            </repeat>
-            <br/>
-
-             <label>
-                Affect
-            </label>
-
-            <repeat>
-                <template>
-                    <obs conceptId="CIEL:167101	" style="checkbox"
-                         answerConceptId="CIEL:{acID}"
-                         answerCode="{name}"/>
-                </template>
-                <render acID="167102" name="Appropriate"/>
-                <render acID="167103" name="Labile"/>
-                <render acID="167104" name="Restricted"/>
-                <render acID="167105" name="Flat"/>
-            </repeat>
-            <br/>
-             <label>
-                Thought process
-            </label>
-
-            <repeat>
-                <template>
-                    <obs conceptId="CIEL:167106	" style="checkbox"
-                         answerConceptId="CIEL:{acID}"
-                         answerCode="{name}"/>
-                </template>
-                <render acID="167108" name="Goal oriented"/>
-                <render acID="167109" name="Linear"/>
-                <render acID="167107" name="Circumferential"/>
-                <render acID="167110" name="Tangential"/>
-                <render acID="167111" name="Flight of ideas"/>
-            </repeat>
-            <br/>
-
-            <label>
-                Thought content
-            </label>
-
-            <repeat>
-                <template>
-                    <obs conceptId="CIEL:167112	" style="checkbox"
-                         answerConceptId="CIEL:{acID}"
-                         answerCode="{name}"/>
-                </template>
-                <render acID="142600" name="Delusions"/>
-                <render acID="167113" name="Denies suicidal ideation"/>
-                <render acID="167114" name="Denies homicidal ideation"/>
-                <render acID="130853" name="Paranoia"/>
-                <render acID="133436" name="Negativistic"/>
-            </repeat>
-            <br/>
-
-             <p class="side-by-side">
-                <label>
-                    Insight
-                </label>
-                <obs conceptId="CIEL:167115" style="radio"
-                     answerConceptIds="CIEL:159406,CIEL:159405,CIEL:159407"
-                     answerCodes="Fair,Good,Poor" />
-            </p>
-
-            <p class="side-by-side">
-                <label>
-                    Judgment
-                </label>
-                <obs conceptId="CIEL:167116" style="radio"
-                     answerConceptIds="CIEL:159406,CIEL:159405,CIEL:159407"
-                     answerCodes="Fair,Good,Poor" />
-            </p>
-            <br/>
-            <p class="comment-label">
-                    <uimessage code="pihcore.exam.comment"/>
-                </p>
-            
-            <p class="comment-field">
-                    <p>
-                        <obs conceptId="CIEL:163044" rows="5" cols="25" />
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            Alertness
+                        </label>
+                        <obs conceptId="CIEL:122943" style="radio"
+                             answerConceptIds="CIEL:160282,CIEL:141762,CIEL:123818"
+                             answerCodes="Alert,Somnolent,Unconscious"/>
                     </p>
-                </p>
+
+                    <label>
+                        Orientation status
+                    </label>
+                    <obs conceptId="CIEL:167084" style="checkbox"
+                         answerConceptId="CIEL:167081"
+                         answerCode="Oriented to person"/>
+                    <obs conceptId="CIEL:167084" style="checkbox"
+                         answerConceptId="CIEL:167082"
+                         answerCode="Oriented to place"/>
+                    <obs conceptId="CIEL:167084" style="checkbox"
+                         answerConceptId="CIEL:167083"
+                         answerCode="Oriented to time"/>
+                    <br/>
+
+                    <label>
+                        Appearance
+                    </label>
+
+                    <repeat>
+                        <template>
+                            <obs conceptId="CIEL:167092" style="checkbox"
+                                 answerConceptId="CIEL:{acID}"
+                                 answerCode="{name}"/>
+                        </template>
+                        <render acID="159438" name="Neat"/>
+                        <render acID="114413" name="Overweight"/>
+                        <render acID="124905" name="Thin"/>
+                    </repeat>
+                    <br/>
+
+                    <label>
+                        Mood
+                    </label>
+
+                    <repeat>
+                        <template>
+                            <obs conceptId="CIEL:167099	" style="checkbox"
+                                 answerConceptId="CIEL:{acID}"
+                                 answerCode="{name}"/>
+                        </template>
+                        <render acID="119537" name="Depressed"/>
+                        <render acID="167100" name="Neutral"/>
+                        <render acID="166050" name="Elevated"/>
+                        <render acID="121543" name="Anxious"/>
+                        <render acID="6023" name="Irritable"/>
+                    </repeat>
+                    <br/>
+
+                    <label>
+                        Affect
+                    </label>
+
+                    <repeat>
+                        <template>
+                            <obs conceptId="CIEL:167101	" style="checkbox"
+                                 answerConceptId="CIEL:{acID}"
+                                 answerCode="{name}"/>
+                        </template>
+                        <render acID="167102" name="Appropriate"/>
+                        <render acID="167103" name="Labile"/>
+                        <render acID="167104" name="Restricted"/>
+                        <render acID="167105" name="Flat"/>
+                    </repeat>
+                </div>
+                <div>
+                    <label>
+                        Thought process
+                    </label>
+
+                    <repeat>
+                        <template>
+                            <obs conceptId="CIEL:167106	" style="checkbox"
+                                 answerConceptId="CIEL:{acID}"
+                                 answerCode="{name}"/>
+                        </template>
+                        <render acID="167108" name="Goal oriented"/>
+                        <render acID="167109" name="Linear"/>
+                        <render acID="167107" name="Circumferential"/>
+                        <render acID="167110" name="Tangential"/>
+                        <render acID="167111" name="Flight of ideas"/>
+                    </repeat>
+                    <br/>
+
+                    <label>
+                        Thought content
+                    </label>
+
+                    <repeat>
+                        <template>
+                            <obs conceptId="CIEL:167112	" style="checkbox"
+                                 answerConceptId="CIEL:{acID}"
+                                 answerCode="{name}"/>
+                        </template>
+                        <render acID="142600" name="Delusions"/>
+                        <render acID="167113" name="Denies suicidal ideation"/>
+                        <render acID="167114" name="Denies homicidal ideation"/>
+                        <render acID="130853" name="Paranoia"/>
+                        <render acID="133436" name="Negativistic"/>
+                    </repeat>
+                    <br/>
+
+                    <p class="side-by-side">
+                        <label>
+                            Insight
+                        </label>
+                        <obs conceptId="CIEL:167115" style="radio"
+                             answerConceptIds="CIEL:159406,CIEL:159405,CIEL:159407"
+                             answerCodes="Fair,Good,Poor"/>
+                    </p>
+
+                    <p class="side-by-side">
+                        <label>
+                            Judgment
+                        </label>
+                        <obs conceptId="CIEL:167116" style="radio"
+                             answerConceptIds="CIEL:159406,CIEL:159405,CIEL:159407"
+                             answerCodes="Fair,Good,Poor"/>
+                    </p>
+                    <br/>
+                    <p class="comment-label">
+                        <uimessage code="pihcore.exam.comment"/>
+                    </p>
+
+                    <p class="comment-field">
+                        <p>
+                            <obs conceptId="CIEL:163044" rows="5" cols="25"/>
+                        </p>
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -776,22 +639,26 @@
                 <obs conceptId="PIH:Mental health diagnosis" answerConceptSetIds="PIH:HUM Psychological diagnosis"
                      style="autocomplete" required="true"/>
             </p>
+
             <div class="three-columns">
-                <p>
+                <div>
                     <obs conceptId="PIH:Mental health diagnosis" answerConceptSetIds="PIH:HUM Psychological diagnosis"
                          style="autocomplete"/>
-                </p>
-                <p>
+                </div>
+                <div>
                     <obs conceptId="PIH:Mental health diagnosis" answerConceptSetIds="PIH:HUM Psychological diagnosis"
                          style="autocomplete"/>
-                </p>
-                <p>
+                </div>
+                <div>
                     <obs conceptId="PIH:Mental health diagnosis" answerConceptSetIds="PIH:HUM Psychological diagnosis"
                          style="autocomplete"/>
-                </p>
+                </div>
             </div>
+            <br/>
+
             <p>
                 <obs conceptId="PIH:Mental health diagnosis" answerConceptId="PIH:OTHER"
+                     answerCode="Other diagnosis"
                      style="checkbox" commentFieldLabel=""/>
             </p>
         </div>
@@ -802,72 +669,74 @@
              headerCode="Improvement">
 
         <div class="section-container">
+            <div class="two-columns">
+                <div>
+                    <obsgroup groupingConceptId="CIEL:161245">
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="pihcore.mentalhealth.epilepsySeizureFrequency"/>:
+                            </label>
+                            <span class="small">
+                                <obs conceptId="PIH:6797"/>
+                                <uimessage code="permonth"/>
+                            </span>
+                        </p>
+                    </obsgroup>
+                </div>
+                <div>
+                    <!-- Previous number of seizures per month -->
+                    <includeIf velocityTest="$fn.latestObs('PIH:6797')">
+                        <i>
+                            <p class="side-by-side" style="color:grey">
+                                <label>
+                                    <uimessage code="Previous seizure frequency"/>:
+                                </label>
+                                <lookup complexExpression="$fn.latestObs('PIH:6797', $encounterDate).valueNumeric"/>
+                                <uimessage code="permonth"/>
+                                <br/>
+                                (<lookup expression="fn.latestObs('PIH:6797', $encounterDate).obsDatetime"/>)
+                            </p>
+                        </i>
+                        <br/>
+                    </includeIf>
+                </div>
+            </div>
 
-            <!-- ToDo:  Add later with UHM-4171
-            Lookup values
-            <label>
-                <uimessage code="pihcore.mentalhealth.depressionScreening"/>
-            </label>
+            <!-- CGI scores-->
+            <repeat>
+                <template>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="pihcore.mentalhealth.{nickname}"/>:
+                        </label>
+                        <span class="small">
+                            <obs conceptId="{scoreId}" style="radio"
+                                 answers="1,2,3,4,5,6,7"
+                                 answerLabels="1=Normal,2=Borderline ill,3=Mildly ill,4=Moderately ill,5=Markedly ill,6=Severely ill,7=Most extreme"/>
+                        </span>
+                    </p>
 
-            <obs conceptId="CIEL:165554" style="checkbox"
-                 answerConceptId="CIEL:165536"
-                 answerCode="pihcore.mentalhealth.sadOrDepressed" />
-            <obs conceptId="CIEL:165554" style="checkbox"
-                 answerConceptId="CIEL:165537"
-                 answerCode="pihcore.mentalhealth.lostInterest" />
-            <obs conceptId="CIEL:165554" style="checkbox"
-                 answerConceptId="CIEL:165538"
-                 answerCode="pihcore.mentalhealth.suspDepression" />
+                    <includeIf velocityTest="$fn.latestObs('{scoreId}')">
+                        <i>
+                            <p class="side-by-side" style="color:grey">
+                                <label>
+                                    <uimessage code="Previous {name} score"/>:
+                                </label>
+                                <lookup complexExpression="$fn.latestObs('{scoreId}', $encounterDate).valueNumeric"/>
+                                (<lookup expression="fn.latestObs('{scoreId}', $encounterDate).obsDatetime"/>)
+                            </p>
+                        </i>
+                        <hr/>
+                    </includeIf>
 
-            <br/>
-            -->
+                </template>
+                <render name="CGI-S" scoreId="CIEL:163222" nickname="cgis"/>
+                <render name="CGI-I" scoreId="CIEL:163223" nickname="cgii"/>
+                <render name="CGI-E" scoreId="CIEL:163224" nickname="cgie"/>
+            </repeat>
 
-            <obsgroup groupingConceptId="CIEL:161245">
-                <p class="side-by-side">
-                    <label>
-                        <uimessage code="pihcore.mentalhealth.epilepsySeizureFrequency"/>:
-                    </label>
-                    <span class="small">
-                        <obs conceptId="PIH:6797"/>
-                        <uimessage code="permonth"/>
-                    </span>
-                </p>
-            </obsgroup>
-
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="pihcore.mentalhealth.cgis"/>:
-                </label>
-                <span class="small">
-                    <obs conceptId="CIEL:163222" style="radio"
-                         answers="1,2,3,4,5,6,7"
-                         answerLabels="1=Normal,2=Borderline ill,3=Mildly ill,4=Moderately ill,5=Markedly ill,6=Severely ill,7=Most extreme" />
-                </span>
-            </p>
-
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="pihcore.mentalhealth.cgii"/>:
-                </label>
-                <span class="small">
-                    <obs conceptId="CIEL:163223" style="radio"
-                         answers="1,2,3,4,5,6,7"
-                         answerLabels="1=Normal,2=Borderline ill,3=Mildly ill,4=Moderately ill,5=Markedly ill,6=Severely ill,7=Most extreme"/>
-                </span>
-            </p>
-
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="pihcore.mentalhealth.cgie"/>:
-                </label>
-                <span class="small">
-                    <obs conceptId="CIEL:163224" style="radio"
-                         answers="1,2,3,4,5,6,7"
-                         answerLabels="1=Normal,2=Borderline ill,3=Mildly ill,4=Moderately ill,5=Markedly ill,6=Severely ill,7=Most extreme"/>
-                </span>
-            </p>
         </div>
-</section>
+    </section>
 
 <!--Medication-->
     <section id="mh-meds-v2" sectionTag="fieldset" headerTag="legend" headerStyle="title"
@@ -938,25 +807,6 @@
                             </obsgroup>
                         </template>
 
-                        <!-- Using concepts (class=drug), not OpenMRS drugs
-                            <render concept="PIH:914" name="Chlorpromazine" />
-                            <render concept="PIH:4047" name="Haloperidol" />
-                            <render concept="CIEL:76558" name="Fluphenazine" />
-                            <render concept="PIH:920" name="Carbamazepine" />
-                            <render concept="PIH:4060" name="Sodium Valproate" />
-                            <render concept="CIEL:83405" name="Risperidone" />
-                            <render concept="PIH:4045" name="Fluoxetine" />
-                            <render concept="CIEL:81025" name="Olanzapine" />
-                            <render concept="PIH:921" name="Diphenyhydramine" />
-                            <render concept="PIH:238" name="Phenobarbital" />
-                            <render concept="PIH:273" name="Phenytoin" />
-                            <render concept="PIH:931" name="Amitryptillin" />
-                            <render concept="PIH:247" name="Diazepam" />
-                            <render concept="CIEL:85463" name="Trihexyphenidyl" />
-                            <render concept="CIEL:79982" name="Mirtazapine" />
-                            <render concept="CIEL:82990" name="Quetiapine" />
-                        -->
-
                         <render drug="6a2a96d1-c01f-48d3-b3b9-2741bce4e064" name="ChlorpromazineHCl25mgt"/>
                         <render drug="526d37fd-d378-441d-8af4-423a46447cbc" name="ChlorpromazineHclSolution"/>
                         <render drug="671d7b24-6266-4af5-a998-4997f2cd6d48" name="HaloperidolOily"/>
@@ -1004,32 +854,29 @@
         <div class="section-container">
 
             <includeIf velocityTest="$patient.gender == 'F' ">
+                <!-- Pregnant -->
+                <obs conceptId="CIEL:5272" toggle="pregnant"
+                     answerConceptId="CIEL:1065"
+                     answerCode="pihcore.pregnancy.status"
+                     style="checkbox"/>
 
-                    <!-- Pregnant -->
-                    <obs conceptId="CIEL:5272" toggle="pregnant"
-                         answerConceptId="CIEL:1065"
-                         answerCode="pihcore.pregnancy.status"
-                         style="checkbox"/>
-
-                    <div class="two-columns">
-                        <div id="pregnant">
-                            <p>
-                                <!-- DPR? -->
-                                <label>
-                                    <uimessage code="pihcore.pregnancy.lastPeriod"/>
-                                </label>
-                                <obs conceptId="CIEL:1427"/>
-                            </p>
-
-                            <p>
-                                <!-- DPA -->
-                                <label>
-                                    <uimessage code="pihcore.pregnancy.dueDate"/>
-                                </label>
-                                <obs conceptId="CIEL:5596" allowFutureDates="true"/>
-                            </p>
-                        </div>
+                <div id="pregnant" class="two-columns">
+                    <div>
+                        <!-- DPR? -->
+                        <label>
+                            <uimessage code="pihcore.pregnancy.lastPeriod"/>
+                        </label>
+                        <obs conceptId="CIEL:1427"/>
                     </div>
+
+                    <div>
+                        <!-- DPA -->
+                        <label>
+                            <uimessage code="pihcore.pregnancy.dueDate"/>
+                        </label>
+                        <obs conceptId="CIEL:5596" allowFutureDates="true"/>
+                    </div>
+                </div>
                 <br/>
             </includeIf>
 

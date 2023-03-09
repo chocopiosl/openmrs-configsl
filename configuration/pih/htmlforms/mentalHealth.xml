@@ -61,16 +61,20 @@
         display: block;
         }
 
-        .two-columns {
-            column-count: 2;
-            -webkit-column-count: 2;
-            -moz-column-count: 2;
+        .three-columns, .two-columns {
+            display: table;
+            height: 100%;
+            width: 100%;
         }
 
-        .three-columns {
-            column-count: 3;
-            -webkit-column-count: 3;
-            -moz-column-count: 3;
+        .two-columns > div {
+            display: table-cell;
+            width: 50%;
+        }
+
+        .three-columns > div {
+            display: table-cell;
+            width: 33%;
         }
 
         .simple-form-ui input {
@@ -186,6 +190,16 @@
         <script type="text/javascript">
 
             jq(function() {
+
+                const lastPeriodDateConcept = '<lookup expression="fn.getConcept('CIEL:1427').uuid"/>';
+                const dueDateConcept = '<lookup expression="fn.getConcept('CIEL:5596').uuid"/>';
+
+                var encounterDate = '<lookup expression="encounter.getEncounterDatetime().getTime()"/>';
+
+                // setUpEdd(
+                //     '<lookup expression="encounter.getEncounterDatetime().getTime()"/>',
+                //     '<uimessage code="pihcore.weeks"/>'
+                // );
 
                 // return appointment date can never be before encounter date
                 var setMinReturnVisitDate = function () {
@@ -340,7 +354,8 @@
                                 <uimessage code="emr.locationRequired"/>
                             </label>
                             <span>
-                                <encounterLocation default="SessionAttribute:emrContext.sessionLocationId" tags="Mental Health Location"/>
+                                <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"
+                                                   tags="Mental Health Location"/>
                             </span>
                         </td>
                         <td>
@@ -365,7 +380,7 @@
 
         <div class="section-container">
             <div class="two-columns">
-                <p>
+                <div>
                     <label>
                         <uimessage code="pihcore.mentalhealth.referredBy" />:
                     </label>
@@ -375,9 +390,9 @@
                     </repeat>
                     <obs conceptId="PIH:Role of referring person" answerConceptId="PIH:OTHER"
                         style="checkbox" commentFieldLabel=" " />
-                </p>
+                </div>
 
-                <p>
+                <div>
                     <label>
                         <uimessage code="pihcore.mentalhealth.internalReferredBy" />:
                     </label>
@@ -388,8 +403,7 @@
                     </repeat>
                     <obs conceptId="PIH:Type of referral role" answerConceptId="PIH:OTHER"
                          style="checkbox" commentFieldLabel=" " />
-                </p>
-                <br/><br/>
+                </div>
             </div>
         </div>
     </section>
@@ -400,31 +414,37 @@
 
         <div class="section-container">
             <div class="two-columns">
-                <p class="side-by-side">
-                    <label>
-                        <uimessage code="pihcore.mch.hivTest"/>
-                    </label>
-                    <obs conceptId="PIH:1040"
-                         style="radio" answerConceptIds="PIH:YES,PIH:NO"
-                         answerCodes="Yes,No" answerSeparator=""/>
-                    <br/>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="pihcore.mch.hivTest"/>
+                        </label>
+                        <obs conceptId="PIH:1040"
+                             style="radio" answerConceptIds="PIH:YES,PIH:NO"
+                             answerCodes="Yes,No" answerSeparator=""/>
+                        <br/>
 
-                    <obs conceptId="PIH:2516" labelCode="pihcore.hiv.startDateARV"/>
+                        <obs conceptId="PIH:2516" labelCode="pihcore.hiv.startDateARV"/>
+                    </p>
+                </div>
 
-                    <label>TB smear result</label>
-                    <obs conceptId="PIH:3052"
-                        style="radio"
-                        answerConceptIds="CIEL:703,CIEL:664"
-                         />
-                    <br/>
+                <div>
+                    <p class="side-by-side">
 
-                    <label>
-                        <uimessage code="pihcore.extraPulmonaryTB"/>
-                    </label>
-                    <obs conceptId="PIH:1547"
-                         style="radio" answerConceptIds="PIH:YES,PIH:NO"
-                         answerCodes="Yes,No" answerSeparator=""/>
-                </p>
+                        <label>TB smear result</label>
+                        <obs conceptId="PIH:3052"
+                             style="radio"
+                             answerConceptIds="CIEL:703,CIEL:664"/>
+                        <br/>
+
+                        <label>
+                            <uimessage code="pihcore.extraPulmonaryTB"/>
+                        </label>
+                        <obs conceptId="PIH:1547"
+                             style="radio" answerConceptIds="PIH:YES,PIH:NO"
+                             answerCodes="Yes,No" answerSeparator=""/>
+                    </p>
+                </div>
             </div>
         </div>
         <br/>
@@ -432,69 +452,84 @@
         <div class="section-container">
             <div class="two-columns">
                 <!-- Alcohol use -->
-                <p class="side-by-side">
-                    <label>
-                        <uimessage code="Alcohol"/>:
-                    </label>
-                    <obs conceptId="CIEL:159449" answerConceptIds="CIEL:159450,CIEL:159452,CIEL:1090"
-                         answerCodes="Current,Past,Never"
-                         answerSeparator="" style="radio"/>
-                    <br/><br/>
-                    <label>
-                        <uimessage code="pihcore.habits.ifYesDuration"/>
-                    </label>
-                    <span class="small">
-                        <obs conceptId="PIH:2241" showUnits="pihcore.units.years" />
-                    </span>
-                </p>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="Alcohol"/>:
+                        </label>
+                        <obs conceptId="CIEL:159449" answerConceptIds="CIEL:159450,CIEL:159452,CIEL:1090"
+                             answerCodes="Current,Past,Never"
+                             answerSeparator="" style="radio"/>
+                    </p>
+                </div>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="pihcore.habits.ifYesDuration"/>
+                        </label>
+                        <span class="small">
+                            <obs conceptId="PIH:2241" showUnits="pihcore.units.years"/>
+                        </span>
+                    </p>
+                </div>
             </div>
 
             <div class="two-columns">
                 <!-- Cannabis use -->
-                <p class="side-by-side">
-                    <label>
-                        Jamba (Marijuana):
-                    </label>
-                    <obs conceptId="PIH:12391" answerConceptIds="CIEL:159450,CIEL:159452,CIEL:1090"
-                         answerCodes="Current,Past,Never"
-                         answerSeparator="" style="radio"/>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            Jamba (Marijuana):
+                        </label>
+                        <obs conceptId="PIH:12391" answerConceptIds="CIEL:159450,CIEL:159452,CIEL:1090"
+                             answerCodes="Current,Past,Never"
+                             answerSeparator="" style="radio"/>
+                    </p>
+                </div>
 
-                    <br/><br/>
-                    <label>
-                        <uimessage code="pihcore.habits.ifYesDuration"/>
-                    </label>
-                    <span class="small">
-                        <obs conceptId="PIH:13239" showUnits="pihcore.units.years" />
-                    </span>
-                </p>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="pihcore.habits.ifYesDuration"/>
+                        </label>
+                        <span class="small">
+                            <obs conceptId="PIH:13239" showUnits="pihcore.units.years"/>
+                        </span>
+                    </p>
+                </div>
             </div>
 
             <div class="two-columns">
                 <!-- Drug use -->
-                <p class="side-by-side">
-                    <label>
-                        <uimessage code="Other drugs"/>:
-                    </label>
-                    <obs conceptId="CIEL:162556" answerConceptIds="CIEL:159450,CIEL:159452,CIEL:1090"
-                         answerCodes="Current,Past,Never"
-                         answerSeparator="" style="radio"/>
-                    <br/>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="Other drugs"/>:
+                        </label>
+                        <obs conceptId="CIEL:162556" answerConceptIds="CIEL:159450,CIEL:159452,CIEL:1090"
+                             answerCodes="Current,Past,Never"
+                             answerSeparator="" style="radio"/>
+                        <br/>
 
-                    <label>
-                        <uimessage code="pihcore.habits.drugName"/>
-                    </label>
-                    <span class="small">
-                        <obs conceptId="PIH:6489"/>
-                    </span>
+                        <label>
+                            <uimessage code="pihcore.habits.drugName"/>
+                        </label>
+                        <span class="small">
+                            <obs conceptId="PIH:6489"/>
+                        </span>
+                    </p>
+                </div>
 
-                    <br/><br/><br/>
-                    <label>
-                        <uimessage code="pihcore.habits.ifYesDuration"/>
-                    </label>
-                    <span class="small">
-                        <obs conceptId="PIH:12997" showUnits="pihcore.units.years"/>
-                    </span>
-                </p>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="pihcore.habits.ifYesDuration"/>
+                        </label>
+                        <span class="small">
+                            <obs conceptId="PIH:12997" showUnits="pihcore.units.years"/>
+                        </span>
+                    </p>
+                </div>
             </div>
 
             <!-- Drug use -->
@@ -573,142 +608,145 @@
              headerCode="pihcore.exam.mental_exam.title">
         <div class="section-container">
             <div class="two-columns">
-            <p class="side-by-side">
-                <label>
-                    Alertness
-                </label>
-                <obs conceptId="CIEL:122943" style="radio"
-                     answerConceptIds="CIEL:160282,CIEL:141762,CIEL:123818"
-                     answerCodes="Alert,Somnolent,Unconscious" />
-            </p>
-
-            <label>
-                Orientation status
-            </label>
-            <obs conceptId="CIEL:167084" style="checkbox"
-                 answerConceptId="CIEL:167081"
-                 answerCode="Oriented to person" />
-            <obs conceptId="CIEL:167084" style="checkbox"
-                 answerConceptId="CIEL:167082"
-                 answerCode="Oriented to place" />
-            <obs conceptId="CIEL:167084" style="checkbox"
-                 answerConceptId="CIEL:167083"
-                 answerCode="Oriented to time" />
-            <br/>
-
-            <label>
-                Appearance
-            </label>
-
-            <repeat>
-                <template>
-                    <obs conceptId="CIEL:167092" style="checkbox"
-                         answerConceptId="CIEL:{acID}"
-                         answerCode="{name}"/>
-                </template>
-                <render acID="159438" name="Neat" />
-                <render acID="114413" name="Overweight" />
-                <render acID="124905" name="Thin" />
-            </repeat>
-             <br/>
-           
-            <label>
-                Mood
-            </label>
-
-            <repeat>
-                <template>
-                    <obs conceptId="CIEL:167099	" style="checkbox"
-                         answerConceptId="CIEL:{acID}"
-                         answerCode="{name}"/>
-                </template>
-                <render acID="119537" name="Depressed"/>
-                <render acID="167100" name="Neutral"/>
-                <render acID="166050" name="Elevated"/>
-                <render acID="121543" name="Anxious"/>
-                <render acID="6023" name="Irritable"/>
-            </repeat>
-            <br/>
-
-             <label>
-                Affect
-            </label>
-
-            <repeat>
-                <template>
-                    <obs conceptId="CIEL:167101	" style="checkbox"
-                         answerConceptId="CIEL:{acID}"
-                         answerCode="{name}"/>
-                </template>
-                <render acID="167102" name="Appropriate"/>
-                <render acID="167103" name="Labile"/>
-                <render acID="167104" name="Restricted"/>
-                <render acID="167105" name="Flat"/>
-            </repeat>
-            <br/>
-             <label>
-                Thought process
-            </label>
-
-            <repeat>
-                <template>
-                    <obs conceptId="CIEL:167106	" style="checkbox"
-                         answerConceptId="CIEL:{acID}"
-                         answerCode="{name}"/>
-                </template>
-                <render acID="167108" name="Goal oriented"/>
-                <render acID="167109" name="Linear"/>
-                <render acID="167107" name="Circumferential"/>
-                <render acID="167110" name="Tangential"/>
-                <render acID="167111" name="Flight of ideas"/>
-            </repeat>
-            <br/>
-
-            <label>
-                Thought content
-            </label>
-
-            <repeat>
-                <template>
-                    <obs conceptId="CIEL:167112	" style="checkbox"
-                         answerConceptId="CIEL:{acID}"
-                         answerCode="{name}"/>
-                </template>
-                <render acID="142600" name="Delusions"/>
-                <render acID="167113" name="Denies suicidal ideation"/>
-                <render acID="167114" name="Denies homicidal ideation"/>
-                <render acID="130853" name="Paranoia"/>
-                <render acID="133436" name="Negativistic"/>
-            </repeat>
-            <br/>
-
-             <p class="side-by-side">
-                <label>
-                    Insight
-                </label>
-                <obs conceptId="CIEL:167115" style="radio"
-                     answerConceptIds="CIEL:159406,CIEL:159405,CIEL:159407"
-                     answerCodes="Fair,Good,Poor" />
-            </p>
-
-            <p class="side-by-side">
-                <label>
-                    Judgment
-                </label>
-                <obs conceptId="CIEL:167116" style="radio"
-                     answerConceptIds="CIEL:159406,CIEL:159405,CIEL:159407"
-                     answerCodes="Fair,Good,Poor" />
-            </p>
-            <br/>
-            <p class="comment-label">
-                    <uimessage code="pihcore.exam.comment"/>
-                </p>
-            
-            <p class="comment-field">
-                    <p>
-                        <obs conceptId="CIEL:163044" rows="5" cols="25" />
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            Alertness
+                        </label>
+                        <obs conceptId="CIEL:122943" style="radio"
+                             answerConceptIds="CIEL:160282,CIEL:141762,CIEL:123818"
+                             answerCodes="Alert,Somnolent,Unconscious"/>
                     </p>
-                </p>
+
+                    <label>
+                        Orientation status
+                    </label>
+                    <obs conceptId="CIEL:167084" style="checkbox"
+                         answerConceptId="CIEL:167081"
+                         answerCode="Oriented to person"/>
+                    <obs conceptId="CIEL:167084" style="checkbox"
+                         answerConceptId="CIEL:167082"
+                         answerCode="Oriented to place"/>
+                    <obs conceptId="CIEL:167084" style="checkbox"
+                         answerConceptId="CIEL:167083"
+                         answerCode="Oriented to time"/>
+                    <br/>
+
+                    <label>
+                        Appearance
+                    </label>
+
+                    <repeat>
+                        <template>
+                            <obs conceptId="CIEL:167092" style="checkbox"
+                                 answerConceptId="CIEL:{acID}"
+                                 answerCode="{name}"/>
+                        </template>
+                        <render acID="159438" name="Neat"/>
+                        <render acID="114413" name="Overweight"/>
+                        <render acID="124905" name="Thin"/>
+                    </repeat>
+                    <br/>
+
+                    <label>
+                        Mood
+                    </label>
+
+                    <repeat>
+                        <template>
+                            <obs conceptId="CIEL:167099	" style="checkbox"
+                                 answerConceptId="CIEL:{acID}"
+                                 answerCode="{name}"/>
+                        </template>
+                        <render acID="119537" name="Depressed"/>
+                        <render acID="167100" name="Neutral"/>
+                        <render acID="166050" name="Elevated"/>
+                        <render acID="121543" name="Anxious"/>
+                        <render acID="6023" name="Irritable"/>
+                    </repeat>
+                    <br/>
+
+                    <label>
+                        Affect
+                    </label>
+
+                    <repeat>
+                        <template>
+                            <obs conceptId="CIEL:167101	" style="checkbox"
+                                 answerConceptId="CIEL:{acID}"
+                                 answerCode="{name}"/>
+                        </template>
+                        <render acID="167102" name="Appropriate"/>
+                        <render acID="167103" name="Labile"/>
+                        <render acID="167104" name="Restricted"/>
+                        <render acID="167105" name="Flat"/>
+                    </repeat>
+                </div>
+                <div>
+                    <label>
+                        Thought process
+                    </label>
+
+                    <repeat>
+                        <template>
+                            <obs conceptId="CIEL:167106	" style="checkbox"
+                                 answerConceptId="CIEL:{acID}"
+                                 answerCode="{name}"/>
+                        </template>
+                        <render acID="167108" name="Goal oriented"/>
+                        <render acID="167109" name="Linear"/>
+                        <render acID="167107" name="Circumferential"/>
+                        <render acID="167110" name="Tangential"/>
+                        <render acID="167111" name="Flight of ideas"/>
+                    </repeat>
+                    <br/>
+
+                    <label>
+                        Thought content
+                    </label>
+
+                    <repeat>
+                        <template>
+                            <obs conceptId="CIEL:167112	" style="checkbox"
+                                 answerConceptId="CIEL:{acID}"
+                                 answerCode="{name}"/>
+                        </template>
+                        <render acID="142600" name="Delusions"/>
+                        <render acID="167113" name="Denies suicidal ideation"/>
+                        <render acID="167114" name="Denies homicidal ideation"/>
+                        <render acID="130853" name="Paranoia"/>
+                        <render acID="133436" name="Negativistic"/>
+                    </repeat>
+                    <br/>
+
+                    <p class="side-by-side">
+                        <label>
+                            Insight
+                        </label>
+                        <obs conceptId="CIEL:167115" style="radio"
+                             answerConceptIds="CIEL:159406,CIEL:159405,CIEL:159407"
+                             answerCodes="Fair,Good,Poor"/>
+                    </p>
+
+                    <p class="side-by-side">
+                        <label>
+                            Judgment
+                        </label>
+                        <obs conceptId="CIEL:167116" style="radio"
+                             answerConceptIds="CIEL:159406,CIEL:159405,CIEL:159407"
+                             answerCodes="Fair,Good,Poor"/>
+                    </p>
+                    <br/>
+                    <p class="comment-label">
+                        <uimessage code="pihcore.exam.comment"/>
+                    </p>
+
+                    <p class="comment-field">
+                        <p>
+                            <obs conceptId="CIEL:163044" rows="5" cols="25"/>
+                        </p>
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -764,7 +802,6 @@
                     <td>
                         <!-- Suicidal ideation -->
                         <p class="side-by-side">
-                            <!-- Todo:  Change from PIH:Mental health diagnosis to CIEL:125562 -->
                             <obs conceptId="CIEL:125562" style="radio" answerConceptIds="PIH:YES,PIH:NO"
                                  answerCodes="Yes,No" answerSeparator="" required="true"/>
                         </p>
@@ -772,7 +809,6 @@
                     <td>
                         <!-- Suicide attempt -->
                         <p class="side-by-side">
-                            <!-- Todo:  Change from PIH:Mental health diagnosis to CIEL:148143 -->
                             <obs conceptId="CIEL:148143" style="radio" answerConceptIds="PIH:YES,PIH:NO"
                                  answerCodes="Yes,No" answerSeparator="" required="true"/>
                         </p>
@@ -812,21 +848,24 @@
                      style="autocomplete" required="true"/>
             </p>
             <div class="three-columns">
-                <p>
+                <div>
                     <obs conceptId="PIH:Mental health diagnosis" answerConceptSetIds="PIH:HUM Psychological diagnosis"
                          style="autocomplete"/>
-                </p>
-                <p>
+                </div>
+                <div>
                     <obs conceptId="PIH:Mental health diagnosis" answerConceptSetIds="PIH:HUM Psychological diagnosis"
                          style="autocomplete"/>
-                </p>
-                <p>
+                </div>
+                <div>
                     <obs conceptId="PIH:Mental health diagnosis" answerConceptSetIds="PIH:HUM Psychological diagnosis"
                          style="autocomplete"/>
-                </p>
+                </div>
             </div>
+            <br/>
+
             <p>
                 <obs conceptId="PIH:Mental health diagnosis" answerConceptId="PIH:OTHER"
+                     answerCode="Other diagnosis"
                      style="checkbox" commentFieldLabel=""/>
             </p>
         </div>
@@ -855,7 +894,6 @@
 
             <br/>
             -->
-
 
             <obsgroup groupingConceptId="CIEL:161245">
                 <p class="side-by-side">
@@ -973,25 +1011,6 @@
                             </obsgroup>
                         </template>
 
-                        <!-- Using concepts (class=drug), not OpenMRS drugs
-                            <render concept="PIH:914" name="Chlorpromazine" />
-                            <render concept="PIH:4047" name="Haloperidol" />
-                            <render concept="CIEL:76558" name="Fluphenazine" />
-                            <render concept="PIH:920" name="Carbamazepine" />
-                            <render concept="PIH:4060" name="Sodium Valproate" />
-                            <render concept="CIEL:83405" name="Risperidone" />
-                            <render concept="PIH:4045" name="Fluoxetine" />
-                            <render concept="CIEL:81025" name="Olanzapine" />
-                            <render concept="PIH:921" name="Diphenyhydramine" />
-                            <render concept="PIH:238" name="Phenobarbital" />
-                            <render concept="PIH:273" name="Phenytoin" />
-                            <render concept="PIH:931" name="Amitryptillin" />
-                            <render concept="PIH:247" name="Diazepam" />
-                            <render concept="CIEL:85463" name="Trihexyphenidyl" />
-                            <render concept="CIEL:79982" name="Mirtazapine" />
-                            <render concept="CIEL:82990" name="Quetiapine" />
-                        -->
-
                         <render drug="6a2a96d1-c01f-48d3-b3b9-2741bce4e064" name="ChlorpromazineHCl25mgt"/>
                         <render drug="526d37fd-d378-441d-8af4-423a46447cbc" name="ChlorpromazineHclSolution"/>
                         <render drug="671d7b24-6266-4af5-a998-4997f2cd6d48" name="HaloperidolOily"/>
@@ -1040,31 +1059,67 @@
 
             <includeIf velocityTest="$patient.gender == 'F' ">
 
-                    <!-- Pregnant -->
-                    <obs conceptId="CIEL:5272" toggle="pregnant"
-                         answerConceptId="CIEL:1065"
-                         answerCode="pihcore.pregnancy.status"
-                         style="checkbox"/>
+                <!-- Pregnant -->
+                <obs conceptId="CIEL:5272" toggle="pregnant"
+                     answerConceptId="CIEL:1065"
+                     answerCode="pihcore.pregnancy.status"
+                     style="checkbox"/>
 
-                    <div class="two-columns">
-                        <div id="pregnant">
-                            <p>
-                                <!-- DPR? -->
-                                <label>
-                                    <uimessage code="pihcore.pregnancy.lastPeriod"/>
-                                </label>
-                                <obs conceptId="CIEL:1427"/>
-                            </p>
-
-                            <p>
-                                <!-- DPA -->
-                                <label>
-                                    <uimessage code="pihcore.pregnancy.dueDate"/>
-                                </label>
-                                <obs conceptId="CIEL:5596" allowFutureDates="true"/>
-                            </p>
-                        </div>
+                <div id="pregnant" class="two-columns">
+                    <div>
+                            <label>
+                                <uimessage code="pihcore.pregnancy.lastPeriod"/>
+                            </label>
+                            <obs conceptId="CIEL:1427"/>
                     </div>
+                    <div>
+                            <label>
+                                <uimessage code="pihcore.pregnancy.dueDate"/>
+                            </label>
+                            <obs conceptId="CIEL:5596" allowFutureDates="true"/>
+                    </div>
+                </div>
+
+                <!-- ToDo:  Fix this
+                <div id="pregnant" class="two-columns">
+                    <div>
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="pihcore.pregnancy.lastPeriod"/>
+                            </label>
+                            <span id="obgyn_initial_lastPeriodDate" class="emptyValue"></span>
+                        </p>
+                    </div>
+
+                    <div>
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="pihcore.pregnancy.dueDate"/>
+                            </label>
+                            <span id="obgyn_initial_edd" class="emptyValue"></span>
+                        </p>
+                    </div>
+                </div>
+
+                <div id="calculated-edd-and-gestational" class="two-columns hidden">
+                    <div>
+                        <span id="calculated-gestational-age-wrapper">
+                            <span id="calculated-gestational-age-label">
+                                <uimessage code="pihcore.calculatedGestationalAge"/>:&#160;
+                            </span>
+                            <span id='calculated-gestational-age-value' class="calculated-gestational-age-value value"></span>
+                        </span>
+                    </div>
+                    <div>
+                        <span id="calculated-edd-wrapper">
+                            <span id="calculated-edd-label">
+                                <uimessage code="pihcore.calculatedEstimatedDeliveryDate"/>:&#160;
+                            </span><br/>
+                            <span id='calculated-edd' class="calculated-edd value"></span>
+                        </span>
+                    </div>
+                </div>
+                            -->
                 <br/>
             </includeIf>
 
