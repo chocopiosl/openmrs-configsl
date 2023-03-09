@@ -1,6 +1,7 @@
 {
   "locationTags": {
-    "Login Location": ["KGH Triage", "KGH MCH", "KGH NCD", "KGH Mental Health" ]
+    "Login Location": ["KGH Triage", "KGH MCH", "KGH NCD", "KGH Mental Health" ],
+    "Program Location": [ "KGH MCH", "KGH NCD", "KGH Mental Health" ]
   },
 
   "components": [
