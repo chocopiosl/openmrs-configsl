@@ -191,8 +191,6 @@
 
             jq(function() {
 
-            let serverEncounterDate = '<lookup complexExpression="#if ($encounter) #set ($encounterDate = $encounter.encounterDatetime) #else #set ($encounterDate = $visit.startDatetime) #end"/>';
-
             // return appointment date can never be before encounter date
                 var setMinReturnVisitDate = function () {
 
@@ -684,25 +682,26 @@
                     </obsgroup>
                 </div>
                 <div>
+
                     <!-- Previous number of seizures per month -->
-                    <includeIf velocityTest="$fn.latestObs('PIH:6797')">
-                        <i>
-                            <p class="side-by-side" style="color:grey">
-                                <label>
-                                    <uimessage code="Previous seizure frequency"/>:
-                                </label>
-                                <lookup complexExpression="$fn.latestObs('PIH:6797', $encounterDate).valueNumeric"/>
-                                <uimessage code="permonth"/>
-                                <br/>
-                                (<lookup expression="fn.latestObs('PIH:6797', $encounterDate).obsDatetime"/>)
-                            </p>
-                        </i>
+                    <includeIf velocityTest="$fn.latestObs('PIH:6797', $encounterDate)">
+                        <p class="side-by-side small">
+                            <label style="color:grey; font-style: italic;">
+                                <uimessage code="Previous seizure frequency"/>:
+
+                            <lookup expression="fn.latestObs('PIH:6797', $encounterDate).valueNumeric"/>
+                            <uimessage code="permonth"/>
+                            <br/>
+                            (<lookup expression="fn.latestObs('PIH:6797', $encounterDate).obsDatetime"/>)
+                            </label>
+                        </p>
                         <br/>
                     </includeIf>
                 </div>
             </div>
 
             <!-- CGI scores-->
+            <!-- ToDo: Fix CGI-E and don't show future data -->
             <repeat>
                 <template>
                     <p class="side-by-side">
@@ -711,28 +710,34 @@
                         </label>
                         <span class="small">
                             <obs conceptId="{scoreId}" style="radio"
-                                 answers="1,2,3,4,5,6,7"
-                                 answerLabels="1=Normal,2=Borderline ill,3=Mildly ill,4=Moderately ill,5=Markedly ill,6=Severely ill,7=Most extreme"/>
+                                 answers="{numbs}"
+                                 answerLabels="{numbLabs}"/>
                         </span>
                     </p>
 
-                    <includeIf velocityTest="$fn.latestObs('{scoreId}')">
-                        <i>
-                            <p class="side-by-side" style="color:grey">
-                                <label>
-                                    <uimessage code="Previous {name} score"/>:
-                                </label>
-                                <lookup complexExpression="$fn.latestObs('{scoreId}', $encounterDate).valueNumeric"/>
+                    <includeIf velocityTest="$fn.latestObs('{scoreId}', $encounterDate)">
+                        <p class="side-by-side small">
+                            <label style="color:grey; font-style: italic;">
+                                <uimessage code="Previous {name} score"/>:
+                                <lookup  expression="fn.latestObs('{scoreId}', $encounterDate).valueNumeric"/>
                                 (<lookup expression="fn.latestObs('{scoreId}', $encounterDate).obsDatetime"/>)
-                            </p>
-                        </i>
+                            </label>
+                        </p>
+
                         <hr/>
                     </includeIf>
 
                 </template>
-                <render name="CGI-S" scoreId="CIEL:163222" nickname="cgis"/>
-                <render name="CGI-I" scoreId="CIEL:163223" nickname="cgii"/>
-                <render name="CGI-E" scoreId="CIEL:163224" nickname="cgie"/>
+                <render name="CGI-S" scoreId="CIEL:163222" nickname="cgis"
+                        numbs="1,2,3,4,5,6,7"
+                        numbLabs="1=Normal,2=Borderline ill,3=Mildly ill,4=Moderately ill,5=Markedly ill,6=Severely ill,7=Most extreme" />
+                <render name="CGI-I" scoreId="CIEL:163223" nickname="cgii"
+                        numbs="1,2,3,4,5,6,7"
+                        numbLabs="1=Normal,2=Borderline ill,3=Mildly ill,4=Moderately ill,5=Markedly ill,6=Severely ill,7=Most extreme" />
+                <render name="CGI-E" scoreId="CIEL:163224" nickname="cgie"
+                        numbs="1,2,3,4"
+                        numbLabs="1=Marked/Vast improvement,2=Moderate/Decided improvement,3=Minimal/Slight improvement,4=Unchanged or worse" />
+
             </repeat>
 
         </div>
@@ -761,7 +766,7 @@
                  commentFieldLabel=""/>
         </div>
     </section>
-    
+
     <!--Medication-->
     <section id="mh-meds-v2" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.visitNote.plan.medication">
