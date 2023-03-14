@@ -877,24 +877,6 @@
 
         <div class="section-container">
 
-            <!-- ToDo:  Add later with UHM-4171
-            <label>
-                <uimessage code="pihcore.mentalhealth.depressionScreening"/>
-            </label>
-
-            <obs conceptId="CIEL:165554" style="checkbox"
-                 answerConceptId="CIEL:165536"
-                 answerCode="pihcore.mentalhealth.sadOrDepressed" />
-            <obs conceptId="CIEL:165554" style="checkbox"
-                 answerConceptId="CIEL:165537"
-                 answerCode="pihcore.mentalhealth.lostInterest" />
-            <obs conceptId="CIEL:165554" style="checkbox"
-                 answerConceptId="CIEL:165538"
-                 answerCode="pihcore.mentalhealth.suspDepression" />
-
-            <br/>
-            -->
-
             <obsgroup groupingConceptId="CIEL:161245">
                 <p class="side-by-side">
                     <label>
@@ -940,9 +922,33 @@
                 </span>
             </p>
         </div>
-</section>
+    </section>
 
-<!--Medication-->
+    <section id="mh-interventions" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.mentalhealth.interventions">
+        <div class="section-container">
+            <repeat with="['CIEL:167213','Common Elements Treatment Approach (CETA)'],
+                          ['PIH:14533','Motivational interviewing'],
+                          ['CIEL:165973','Psychological First Aid (PFA)'],
+                          ['CIEL:165424','Cognitive Behavioral Therapy (CBT)'],
+                          ['PIH:PSYCHOSOCIAL COUNSELING','Psychosocial counseling'],
+                          ['PIH:Interpersonal Therapy','Interpersonal psychotherapy'],
+                          ['PIH:Relaxation','Relaxation'],
+                          ['CIEL:165484','Deep breathing techniques'],
+                          ['CIEL:165485','Progressive muscle relaxation'],
+                          ['PIH:Psychoeducation','Psychoeducation'],
+                          ['PIH:Parenting skills','Parenting skills training'],
+                          ['PIH:Grief counseling','Grief counseling']">
+                <obs conceptId="PIH:Mental health intervention" answerConceptId="{0}"
+                     answerCode="{1}"/>
+            </repeat>
+
+            <obs conceptId="PIH:Mental health intervention" answerConceptId="PIH:OTHER"
+                 commentFieldLabel=""/>
+        </div>
+    </section>
+
+    <!--Medication-->
     <section id="mh-meds-v2" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.visitNote.plan.medication">
         <div class="section-container">
