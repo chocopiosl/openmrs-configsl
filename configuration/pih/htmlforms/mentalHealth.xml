@@ -916,9 +916,10 @@
                     <uimessage code="pihcore.mentalhealth.cgie"/>:
                 </label>
                 <span class="small">
+                    <!-- ToDo: Update the CGI-E score -->
                     <obs conceptId="CIEL:163224" style="radio"
-                         answers="1,2,3,4,5,6,7"
-                         answerLabels="1=Normal,2=Borderline ill,3=Mildly ill,4=Moderately ill,5=Markedly ill,6=Severely ill,7=Most extreme"/>
+                         answers="1,2,3,4"
+                         answerLabels="1=Normal,2=Borderline ill,3=Mildly ill,4=Moderately ill"/>
                 </span>
             </p>
         </div>
