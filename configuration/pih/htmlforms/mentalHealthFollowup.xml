@@ -689,10 +689,10 @@
                             <label style="color:grey; font-style: italic;">
                                 <uimessage code="Previous seizure frequency"/>:
 
-                            <lookup expression="fn.latestObs('PIH:6797', $encounterDate).valueNumeric"/>
-                            <uimessage code="permonth"/>
-                            <br/>
-                            (<lookup expression="fn.latestObs('PIH:6797', $encounterDate).obsDatetime"/>)
+                                <lookup expression="fn.latestObs('PIH:6797', $encounterDate).valueNumeric"/>
+                                <uimessage code="permonth"/>
+                                <br/>
+                                (<lookup expression="fn.latestObs('PIH:6797', $encounterDate).obsDatetime"/>)
                             </label>
                         </p>
                         <br/>
