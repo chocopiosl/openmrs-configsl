@@ -910,15 +910,78 @@
 
             <p class="side-by-side">
                 <label>
-                    <uimessage code="pihcore.mentalhealth.cgie"/>:
+                    <uimessage code="pihcore.mentalhealth.cgie"/> (0-16):
                 </label>
                 <span class="small">
-                    <!-- ToDo: Update the CGI-E score -->
-                    <obs conceptId="CIEL:163224" style="radio"
-                         answers="1,2,3,4"
-                         answerLabels="1=Normal,2=Borderline ill,3=Mildly ill,4=Moderately ill"/>
+                    <obs conceptId="CIEL:163224" />
                 </span>
             </p>
+
+            <table>
+                <tr>
+                    <th colspan="6">CGI-Efficacy index: Rate this item on the basis of drug effect only</th>
+                </tr>
+                <tr>
+                    <td colspan="6">Select the terms which best describe the degrees of therapeutic effect and side effects and record the number in the box where the two
+                        items intersect. EXAMPLE: Therapeutic effect is rated as ‘Moderate’ and side effects are judged ‘Do not significantly interfere with patient’s functioning’.
+                    </td>
+                </tr>
+
+                <tr>
+                    <th colspan="2">Therapeutic effect</th>
+                    <th colspan="4"> Side effects</th>
+                </tr>
+
+                <tr>
+                    <td colspan="2"></td>
+                    <td>None</td>
+                    <td>Do not significantly interfere with patient’s functioning</td>
+                    <td>Significantly interferes with patient’s functioning </td>
+                    <td>Outweighs therapeutic effect</td>
+                </tr>
+
+                <tr>
+                    <th>Marked</th>
+                    <td>Vast improvement. Complete or nearly complete remission of all symptoms</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                </tr>
+
+                <tr>
+                    <th>Moderate</th>
+                    <td>Decided improvement. Partial remission of symptoms</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                </tr>
+
+                <tr>
+                    <th>Minimal</th>
+                    <td>Slight improvement which doesn’t alter status of care of patient</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                </tr>
+
+                <tr>
+                    <th>Unchanged or worse</th>
+                    <td></td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                </tr>
+
+                <tr>
+                    <th colspan="2">Not assessed = 0</th>
+                    <td colspan="4"></td>
+                </tr>
+            </table>
+
         </div>
     </section>
 
