@@ -191,7 +191,10 @@
 
             jq(function() {
 
-            // return appointment date can never be before encounter date
+                var encounterDate = '<lookup expression="encounter.getEncounterDatetime().getTime()"/>';
+                setUpEdd(encounterDate, '<uimessage code="pihcore.weeks"/>');
+
+                // return appointment date can never be before encounter date
                 var setMinReturnVisitDate = function () {
 
                     var returnVisitDate = getValue('return-visit-date.value');
@@ -895,7 +898,7 @@
                         <label>
                             <uimessage code="pihcore.pregnancy.lastPeriod"/>
                         </label>
-                        <obs conceptId="CIEL:1427"/>
+                        <obs id="lastPeriodDate" conceptId="CIEL:1427"/>
                     </div>
 
                     <div>
@@ -903,9 +906,29 @@
                         <label>
                             <uimessage code="pihcore.pregnancy.dueDate"/>
                         </label>
-                        <obs conceptId="CIEL:5596" allowFutureDates="true"/>
+                        <obs id="edd" conceptId="CIEL:5596" allowFutureDates="true"/>
                     </div>
                 </div>
+
+                <div class="two-columns hidden calculated-edd-and-gestational" id="calculated-edd-and-gestational">
+                    <div>
+                        <span id="calculated-gestational-age-wrapper">
+                            <span id="calculated-gestational-age-label">
+                                <uimessage code="pihcore.calculatedGestationalAge"/>:&#160;
+                            </span>
+                            <span id='calculated-gestational-age-value' class="calculated-gestational-age-value value"></span>
+                        </span>
+                    </div>
+                    <div>
+                        <span id="calculated-edd-wrapper">
+                            <span id="calculated-edd-label">
+                                <uimessage code="pihcore.calculatedEstimatedDeliveryDate"/>:&#160;
+                            </span><br/>
+                            <span id='calculated-edd' class="calculated-edd value"></span>
+                        </span>
+                    </div>
+                </div>
+
                 <br/>
             </includeIf>
 

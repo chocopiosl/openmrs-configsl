@@ -196,10 +196,7 @@
 
                 var encounterDate = '<lookup expression="encounter.getEncounterDatetime().getTime()"/>';
 
-                // setUpEdd(
-                //     '<lookup expression="encounter.getEncounterDatetime().getTime()"/>',
-                //     '<uimessage code="pihcore.weeks"/>'
-                // );
+                setUpEdd(encounterDate, '<uimessage code="pihcore.weeks"/>');
 
                 // return appointment date can never be before encounter date
                 var setMinReturnVisitDate = function () {
@@ -1077,38 +1074,17 @@
                             <label>
                                 <uimessage code="pihcore.pregnancy.lastPeriod"/>
                             </label>
-                            <obs conceptId="CIEL:1427"/>
+                            <obs id="lastPeriodDate" conceptId="CIEL:1427"/>
                     </div>
                     <div>
                             <label>
                                 <uimessage code="pihcore.pregnancy.dueDate"/>
                             </label>
-                            <obs conceptId="CIEL:5596" allowFutureDates="true"/>
+                            <obs id="edd" conceptId="CIEL:5596" allowFutureDates="true"/>
                     </div>
                 </div>
 
-                <!-- ToDo:  Fix this
-                <div id="pregnant" class="two-columns">
-                    <div>
-                        <p class="side-by-side">
-                            <label>
-                                <uimessage code="pihcore.pregnancy.lastPeriod"/>
-                            </label>
-                            <span id="obgyn_initial_lastPeriodDate" class="emptyValue"></span>
-                        </p>
-                    </div>
-
-                    <div>
-                        <p class="side-by-side">
-                            <label>
-                                <uimessage code="pihcore.pregnancy.dueDate"/>
-                            </label>
-                            <span id="obgyn_initial_edd" class="emptyValue"></span>
-                        </p>
-                    </div>
-                </div>
-
-                <div id="calculated-edd-and-gestational" class="two-columns hidden">
+                <div class="two-columns hidden calculated-edd-and-gestational" id="calculated-edd-and-gestational">
                     <div>
                         <span id="calculated-gestational-age-wrapper">
                             <span id="calculated-gestational-age-label">
@@ -1126,7 +1102,7 @@
                         </span>
                     </div>
                 </div>
-                            -->
+
                 <br/>
             </includeIf>
 
