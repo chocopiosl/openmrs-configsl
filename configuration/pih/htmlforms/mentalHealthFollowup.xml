@@ -686,19 +686,21 @@
             </div>
             <div>
                 <!-- Previous number of seizures per month -->
-                <includeIf velocityTest="$fn.latestObs('PIH:6797', $encounterDate)">
-                    <p class="side-by-side small">
-                        <label style="color:grey; font-style: italic;">
-                            <uimessage code="Previous seizure frequency"/>:
+                <ifMode mode="VIEW" include="false">
+                    <includeIf velocityTest="$fn.latestObs('PIH:6797', $encounterDate)">
+                        <p class="side-by-side small">
+                            <label style="color:grey; font-style: italic;">
+                                <uimessage code="Previous seizure frequency"/>:
 
-                            <lookup expression="fn.latestObs('PIH:6797', $encounterDate).valueNumeric"/>
-                            <uimessage code="permonth"/>
+                                <lookup expression="fn.latestObs('PIH:6797', $encounterDate).valueNumeric"/>
+                                <uimessage code="permonth"/>
 
-                            (<lookup expression="fn.latestObs('PIH:6797', $encounterDate).obsDatetime"/>)
-                        </label>
-                    </p>
-                    <br/>
-                </includeIf>
+                                (<lookup expression="fn.latestObs('PIH:6797', $encounterDate).obsDatetime"/>)
+                            </label>
+                        </p>
+                        <br/>
+                    </includeIf>
+                </ifMode>
             </div>
 
 
@@ -720,17 +722,19 @@
                         </span>
                     </p>
 
-                    <includeIf velocityTest="$fn.latestObs('{scoreId}', $encounterDate)">
-                        <p class="side-by-side small">
-                            <label style="color:grey; font-style: italic;">
-                                <uimessage code="Previous {name} score"/>:
-                                <lookup  expression="fn.latestObs('{scoreId}', $encounterDate).valueNumeric"/>
-                                (<lookup expression="fn.latestObs('{scoreId}', $encounterDate).obsDatetime"/>)
-                            </label>
-                        </p>
+                    <ifMode mode="VIEW" include="false">
+                        <includeIf velocityTest="$fn.latestObs('{scoreId}', $encounterDate)">
+                            <p class="side-by-side small">
+                                <label style="color:grey; font-style: italic;">
+                                    <uimessage code="Previous {name} score"/>:
+                                    <lookup  expression="fn.latestObs('{scoreId}', $encounterDate).valueNumeric"/>
+                                    (<lookup expression="fn.latestObs('{scoreId}', $encounterDate).obsDatetime"/>)
+                                </label>
+                            </p>
 
-                        <hr/>
-                    </includeIf>
+                            <hr/>
+                        </includeIf>
+                    </ifMode>
 
                 </template>
                 <render name="CGI-S (Severity)" scoreId="CIEL:163222" nickname="cgis" alias="Severity"
