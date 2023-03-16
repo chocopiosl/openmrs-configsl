@@ -670,51 +670,52 @@
              headerCode="Improvement">
 
         <div class="section-container">
-            <div class="two-columns">
-                <div>
-                    <obsgroup groupingConceptId="CIEL:161245">
-                        <p class="side-by-side">
-                            <label>
-                                <uimessage code="pihcore.mentalhealth.epilepsySeizureFrequency"/>:
-                            </label>
-                            <span class="small">
-                                <obs conceptId="PIH:6797"/>
-                                <uimessage code="permonth"/>
-                            </span>
-                        </p>
-                    </obsgroup>
-                </div>
-                <div>
+            <div>
+                <obsgroup groupingConceptId="CIEL:161245">
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="pihcore.mentalhealth.epilepsySeizureFrequency"/>:
+                        </label>
+                        <span class="small">
+                            <obs conceptId="PIH:6797"/>
+                            <uimessage code="permonth"/>
+                        </span>
+                    </p>
+                </obsgroup>
+            </div>
+            <div>
+                <!-- Previous number of seizures per month -->
+                <includeIf velocityTest="$fn.latestObs('PIH:6797', $encounterDate)">
+                    <p class="side-by-side small">
+                        <label style="color:grey; font-style: italic;">
+                            <uimessage code="Previous seizure frequency"/>:
 
-                    <!-- Previous number of seizures per month -->
-                    <includeIf velocityTest="$fn.latestObs('PIH:6797', $encounterDate)">
-                        <p class="side-by-side small">
-                            <label style="color:grey; font-style: italic;">
-                                <uimessage code="Previous seizure frequency"/>:
+                            <lookup expression="fn.latestObs('PIH:6797', $encounterDate).valueNumeric"/>
+                            <uimessage code="permonth"/>
 
-                                <lookup expression="fn.latestObs('PIH:6797', $encounterDate).valueNumeric"/>
-                                <uimessage code="permonth"/>
-                                <br/>
-                                (<lookup expression="fn.latestObs('PIH:6797', $encounterDate).obsDatetime"/>)
-                            </label>
-                        </p>
-                        <br/>
-                    </includeIf>
-                </div>
+                            (<lookup expression="fn.latestObs('PIH:6797', $encounterDate).obsDatetime"/>)
+                        </label>
+                    </p>
+                    <br/>
+                </includeIf>
             </div>
 
+
             <!-- CGI scores-->
-            <!-- ToDo: Fix CGI-E and don't show future data -->
+            <!-- ToDo: don't show future data -->
             <repeat>
                 <template>
                     <p class="side-by-side">
                         <label>
-                            <uimessage code="pihcore.mentalhealth.{nickname}"/>:
+                            <uimessage code="pihcore.mentalhealth.{nickname}"/>
+                            (<uimessage code="{alias}"/>):
                         </label>
-                        <span class="small">
+                        <br/>
+                        <span>
                             <obs conceptId="{scoreId}" style="radio"
                                  answers="{numbs}"
-                                 answerLabels="{numbLabs}"/>
+                                 answerLabels="{numbLabs}"
+                                 answerSeparator="&lt;br&gt;" />
                         </span>
                     </p>
 
@@ -731,15 +732,15 @@
                     </includeIf>
 
                 </template>
-                <render name="CGI-S" scoreId="CIEL:163222" nickname="cgis"
-                        numbs="1,2,3,4,5,6,7"
-                        numbLabs="1=Normal,2=Borderline ill,3=Mildly ill,4=Moderately ill,5=Markedly ill,6=Severely ill,7=Most extreme" />
-                <render name="CGI-I" scoreId="CIEL:163223" nickname="cgii"
-                        numbs="1,2,3,4,5,6,7"
-                        numbLabs="1=Normal,2=Borderline ill,3=Mildly ill,4=Moderately ill,5=Markedly ill,6=Severely ill,7=Most extreme" />
-                <render name="CGI-E" scoreId="CIEL:163224" nickname="cgie"
-                        numbs="1,2,3,4"
-                        numbLabs="1=Marked/Vast improvement,2=Moderate/Decided improvement,3=Minimal/Slight improvement,4=Unchanged or worse" />
+                <render name="CGI-S (Severity)" scoreId="CIEL:163222" nickname="cgis" alias="Severity"
+                        numbs="0,1,2,3,4,5,6,7"
+                        numbLabs="0 = Not assessed,1 = Normal,2 = Borderline mentally ill,3 = Mildly ill,4 = Moderately ill,5 = Markedly ill,6 = Severely ill,7 = Most extreme" />
+                <render name="CGI-I (Improvement)" scoreId="CIEL:163223" nickname="cgii" alias="Improvement"
+                        numbs="0,1,2,3,4,5,6,7"
+                        numbLabs="0 = Not assessed,1 = Very much improved,2 = Much improved,3 = Minimally improved,4 = No change,5 = Minimally worse,6 = Much worse,7 = Very much worse" />
+                <render name="CGI-E (Efficacy)" scoreId="CIEL:163224" nickname="cgie" alias="Efficacy"
+                        numbs="0,1,2,3"
+                        numbLabs="0 = None,1 = Do not significantly interfere with patient FUNCTIONING,2 = Significantly interfere with patient FUNCTIONING,3 = Outweighs Therapeutic effects with patient's FUNCTIONING" />
 
             </repeat>
 
