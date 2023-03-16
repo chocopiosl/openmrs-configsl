@@ -18,6 +18,7 @@
           formName="Mental Health Follow-up"
           formEncounterType="9d701a81-bb83-40ea-9efc-af50f05575f2" formVersion="1.0">
 
+    <lookup complexExpression="#if ($encounter) #set ($encounterDate = $encounter.encounterDatetime) #else #set ($encounterDate = $visit.startDatetime) #end"/>
     <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.ApplyDispositionAction"/>
 
     <translations defaultLocale="fr">
