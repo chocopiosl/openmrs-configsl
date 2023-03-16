@@ -1,5 +1,5 @@
- set @startDate='2023-03-01';
- set @endDate='2023-03-16';
+-- set @startDate='2023-03-01';
+-- set @endDate='2023-03-16';
 
 set @locale = global_property_value('default_locale', 'en');
 select encounter_type_id into @mhIntake from encounter_type where uuid = 'a8584ab8-cc2a-11e5-9956-625662870761';
