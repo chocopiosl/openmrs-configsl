@@ -2,7 +2,8 @@
 -- set @endDate='2021-06-30';
 
 set @locale = global_property_value('default_locale', 'en');
-select encounter_type_id into @mh from encounter_type where uuid = 'a8584ab8-cc2a-11e5-9956-625662870761';
+select encounter_type_id into @mhIntake from encounter_type where uuid = 'a8584ab8-cc2a-11e5-9956-625662870761';
+select encounter_type_id into @mhFollowup from encounter_type where uuid = '9d701a81-bb83-40ea-9efc-af50f05575f2';
 
 drop temporary table if exists temp_mh;
 create temporary table temp_mh
@@ -46,6 +47,7 @@ create temporary table temp_mh
     current_suicidal_attempt varchar(255),
     date_latest_suicidal_attempt datetime,
     psychosocial_counseling varchar(255),
+    interventions varchar(255),
     diagnosis_1 varchar(255),
     diagnosis_2 varchar(255), 
     diagnosis_3 varchar(255),
@@ -236,7 +238,7 @@ select
     e.visit_id
 from
     encounter e
-where e.encounter_type =@mh
+where e.encounter_type in (@mhIntake, @mhFollowup)
       and date(e.encounter_datetime) >= date(@startDate)
       and date(e.encounter_datetime) <= date(@endDate)
 ;
@@ -300,6 +302,9 @@ update temp_mh set current_suicidal_ideation = obs_value_coded_list(encounter_id
 update temp_mh set current_suicidal_attempt = obs_value_coded_list(encounter_id, 'CIEL','148143',@locale);
 update temp_mh set date_latest_suicidal_attempt = obs_value_datetime(encounter_id, 'CIEL','165530');
 update temp_mh set psychosocial_counseling = obs_value_coded_list(encounter_id, 'PIH','5490',@locale);
+
+-- interventions
+update temp_mh set interventions = obs_value_coded_list(encounter_id, 'PIH', 'Mental health intervention', @locale);
 
 -- diagnoses
 
