@@ -189,35 +189,37 @@
 
                 <!-- ToDo: HTML-689 Use message properties for state labels for translations -->
                 <!-- ToDo: If we want to use radio buttons, we need to change the styling/css or stateSeparator tag -->
-                <!-- ToDo: UHM-3888 Fix workflow/states before this can be used
+                <!-- ToDo: UHM-3888 Fix workflow/states before this can be used -->
                 <workflowState workflowId="51579bce-bf3a-11e7-abc4-cec278b6b50a"
                                stateIds="51579e44-bf3a-11e7-abc4-cec278b6b50a, 51579fde-bf3a-11e7-abc4-cec278b6b50a, 5157a15a-bf3a-11e7-abc4-cec278b6b50a"
                                labelCode="51579bce-bf3a-11e7-abc4-cec278b6b50a.custom.title"
-                               stateLabels="Contrôlé,Non contrôlé,Compliqué"
+                               stateLabels="Controlled,Uncontrolled,Complicated"
                                type="dropdown" />
-                               -->
             </p>
 
-            <!-- this section is ONLY included for NCD intake encounter -->
-            <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
+            <!-- this section is ONLY included for NCD intake encounter
+            <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'"> -->
 
-                <p class="side-by-side">
-                    <label>
-                        <uimessage code="pihcore.ncd.info.aware"/>
-                        <br/>
-                    </label>
-                    <obs conceptId="PIH:Known chronic disease before referral" style="radio"
-                         answerConceptIds="PIH:YES,PIH:NO" />
-                </p>
+            <repeat>
+                <template>
+                    <p>
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="{xId}"/>
+                            </label>
+                            <obs conceptId="{message}" style="radio"
+                                 answerConceptIds="PIH:YES,PIH:NO" />
+                        </p>
+                    </p>
+                </template>
+                <render message="CIEL:1898"   xId="Patient condition improved"/>
+                <render message="CIEL:164075" xId="Overall treatment adherence"/>
+                <render message="CIEL:167819" xId="Missed doses in past week"/>
+                <render message="CIEL:167021" xId="Aware and understands the disease"/>
+                <render message="PIH:14465"   xId="Understands treatment"/>
 
-                <p class="side-by-side">
-                    <label>
-                        <uimessage code="pihcore.ncd.info.prior_treatment"/>
-                        <br/>
-                    </label>
-                    <obs conceptId="PIH:Prior treatment for chronic disease" style="radio"
-                         answerConceptIds="PIH:YES,PIH:NO"/>
-                </p>
+            </repeat>
+
 
                 <!-- ToDo: Replace with workflow/state? -->
                 <p class="side-by-side">
@@ -229,8 +231,6 @@
                          answerConceptIds="PIH:YES,PIH:NO" answerCodes="yes,no"
                          answerSeparator=""/>
                 </p>
-            </includeIf>
-
 
             <label>
                 <uimessage code="pihcore.ncd.category"/>
@@ -271,35 +271,6 @@
                      style="radio" conceptLabels="yes,no" labelText=""/>
             </p>
 
-            <div class="two-columns">
-                <div>
-                    <label>
-                        <uimessage code="pihcore.ncd.vitals.waist_cm"/>
-                        (<uimessage code="pihcore.ncd.vitals.waist_cm.instructions"/>)
-                    </label>
-                    <span class="small">
-                        <obs conceptId="CIEL:163080" id="waist_cm" showUnits="true"/>
-                    </span>
-                </div>
-
-                <div>
-                    <label>
-                        <uimessage code="pihcore.ncd.vitals.hip_cm"/>
-                    </label>
-                    <span class="small">
-                        <obs conceptId="CIEL:163081" id="hip_cm" showUnits="true"/>
-                    </span>
-                </div>
-            </div>
-
-            <p>
-                <span id="calculated-ratio-wrapper">
-                    <uimessage code="pihcore.ncd.vitals.waist_hip_ratio"/>
-                    <uimessage code="pihcore.ncd.vitals.waist_hip_ratio.comment"/>:
-                    <span id='calculated-waist-hip-ratio'>
-                    </span>
-                </span>
-            </p>
         </div>
     </section>
 

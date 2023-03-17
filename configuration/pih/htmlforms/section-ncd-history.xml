@@ -195,7 +195,7 @@
 
     <ifMode mode="VIEW" include="false">
         <h1>
-            <uimessage code="NCD Patient Card (Header)"/>
+            <uimessage code="NCD Patient Card"/>
         </h1>
     </ifMode>
 
@@ -205,7 +205,7 @@
             <div class="three-columns">
                 <div>
                     <label>
-                        <uimessage code="NCD Clinic" />
+                        <uimessage code="NCD ID" />
                     </label>
                 </div>
 
@@ -337,104 +337,117 @@
     </section>
 
     <section id="diagnosis" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="Diagnosis / Risk Factors">
+             headerCode="Hospitalization">
         <div class="section-container-color">
-            <h3>
-                <uimessage code="pihcore.diagnosis.label"/>
-            </h3>
+            <obsgroup groupingConceptId="PIH:HOSPITALIZATION CONSTRUCT">
+                <div class="two-columns">
+                    <div>
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Hospitalization since last visit"/>
+                            </label>
+                            <obs conceptId="CIEL:976" style="radio"
+                                 answerConceptIds="CIEL:1065,CIEL:1066"/>
+                            <br/>
+
+                            <label>
+                                <uimessage code="Discharge date"/>
+                            </label>
+                            <obs conceptId="CIEL:1641" allowTime="false"/>
+                        </p>
+                    </div>
+                    <div>
+
+                        <label>
+                            <uimessage code="Findings during hospitalization"/>
+                        </label>
+                        <obs conceptId="PIH:6899" style="textarea" rows="3"/>
+                    </div>
+                </div>
+            </obsgroup>
+        </div>
+    </section>
+
+    <section id="risk-factors" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Risk Factors">
+        <div class="section-container-color two-columns">
+            <div>
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="Alcohol"/>
+                    </label>
+                    <obs conceptId="CIEL:159449"
+                         answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
+                    <br/>
+
+                    <label>
+                        <uimessage code="Smoking"/>
+                    </label>
+                    <obs conceptId="CIEL:163731"
+                         answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
+                    <br/>
+
+                    <label>
+                        <uimessage code="Excessive salt"/>
+                    </label>
+                    <obs conceptId="PIH:14452"
+                         answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
+                    <br/>
+
+                    <label>
+                        <uimessage code="Maggi / Seasoning"/>
+                    </label>
+                    <obs conceptId="PIH:14453"
+                         answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
+                </p>
+            </div>
+
+            <div>
+                <label>
+                    <uimessage code="Other risk factors"/>
+                </label>
+                <obs conceptId="PIH:12999" rows="4"/>
+            </div>
+        </div>
+    </section>
+
+    <section id="co-morbid" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.comorbidities.label">
+        <div class="section-container-color">
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Active TB"/>
+                </label>
+                <obs conceptId="CIEL:164500"
+                     answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
+                <br/>
+
+                <label>
+                    <uimessage code="HIV"/>
+                </label>
+                <obs conceptId="CIEL:1169"
+                     answerConceptIds="CIEL:703,CIEL:664" style="radio"/>
+            </p>
+        </div>
+    </section>
+
+    <section id="diagnosis" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Diagnosis">
+        <div class="section-container-color">
+
             <div id="data-collection">
                 <encounterDiagnosesByObs selectedDiagnosesTarget="#encounter-diagnoses-target"/>
             </div>
         </div>
+    </section>
 
-        <div class="section-container">
-            <div class="two-columns">
-                <div>
-                    <h3>
-                        <uimessage code="pihcore.riskFactors"/>
-                    </h3>
-                    <p class="side-by-side">
-                        <label>
-                            <uimessage code="Alcohol"/>
-                        </label>
-                        <obs conceptId="CIEL:159449"
-                             answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
-                        <br/>
-
-                        <label>
-                            <uimessage code="Smoking"/>
-                        </label>
-                        <obs conceptId="CIEL:163731"
-                             answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
-                        <br/>
-
-                        <label>
-                            <uimessage code="Excessive salt"/>
-                        </label>
-                        <obs conceptId="PIH:14452"
-                             answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
-                        <br/>
-
-                        <label>
-                            <uimessage code="Maggi / Seasoning"/>
-                        </label>
-                        <obs conceptId="PIH:14453"
-                             answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
-                    </p>
-
-                    <h3>
-                        <uimessage code="pihcore.comorbidities.label"/>
-                    </h3>
-                    <p class="side-by-side">
-                        <label>
-                            <uimessage code="Active TB"/>
-                        </label>
-                        <obs conceptId="CIEL:164500"
-                             answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
-                        <br/>
-
-                        <label>
-                            <uimessage code="HIV"/>
-                        </label>
-                        <obs conceptId="CIEL:1169"
-                             answerConceptIds="CIEL:703,CIEL:664" style="radio"/>
-                    </p>
-                </div>
-                <div>
-
-                    <label>
-                        <uimessage code="Other risk factors"/>
-                    </label>
-                    <obs conceptId="PIH:12999" rows="4"/>
-                </div>
-            </div>
-
-            <p>
-                <label>
-                    <uimessage code="Reason to be evaluated in the NCD clinic (describe)"/>
-                </label>
-                <obs conceptId="CIEL:164359" rows="4"/>
-            </p>
-
-
-            <div class="two-columns">
-                <div>
-                    <p class="side-by-side">
-                        <label>
-                            <uimessage code="Hospitalization because of the condition"/>
-                        </label>
-                        <obs conceptId="CIEL:976" style="radio"
-                             answerConceptIds="CIEL:1065,CIEL:1066"/>
-                    </p>
-                </div>
-                <div>
-
-                    <label>
-                        <uimessage code="Findings during hospitalization"/>
-                    </label>
-                    <obs conceptId="PIH:6899" style="textarea"/>
-                </div>
-            </div>
+    <section id="reason-for-visit" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Reason for visit">
+        <div class="section-container-color">
+            <label>
+                <uimessage code="Reason evaluated in the NCD clinic"/>
+            </label>
+            <obs conceptId="CIEL:164359" rows="4"/>
         </div>
     </section>
 
