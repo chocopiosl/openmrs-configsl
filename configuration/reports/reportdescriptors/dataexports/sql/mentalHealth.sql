@@ -14,6 +14,7 @@ create temporary table temp_mh
     age_at_encounter int,
     address varchar(1000),
     encounter_id int,
+    encounter_type varchar(255),
     visit_id int,
     encounter_datetime datetime,
     provider varchar(255),
@@ -229,12 +230,14 @@ insert into temp_mh (
     patient_id,
     encounter_id,
     encounter_datetime,
+    encounter_type,
     visit_id
 )
 select
     e.patient_id,
     e.encounter_id,
     e.encounter_datetime,
+    encounter_type_name_from_id(e.encounter_type), 
     e.visit_id
 from
     encounter e
