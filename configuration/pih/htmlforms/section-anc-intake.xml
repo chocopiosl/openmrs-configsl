@@ -179,14 +179,7 @@
                 });
 
                 updateEdd();
-            });
-        </script>
-    </ifMode>
 
-    <ifMode mode="VIEW" include="false">
-
-        <script type="text/javascript">
-            jq(document).ready(function() {
                 // handlers for next and submit buttons, see nextAndSubmitButtons.js
                 setUpNextAndSubmitButtons();
             });
