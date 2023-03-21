@@ -723,12 +723,12 @@
                     </p>
 
                     <ifMode mode="VIEW" include="false">
-                        <includeIf velocityTest="$fn.latestObs('{scoreId}', $encounterDate)">
+                        <includeIf velocityTest="$fn.latestObs('{scoreId}', $fn.aMomentBefore($encounterDate))">
                             <p class="side-by-side small">
                                 <label style="color:grey; font-style: italic;">
                                     <uimessage code="Previous {name} score"/>:
-                                    <lookup  expression="fn.latestObs('{scoreId}', $encounterDate).valueNumeric"/>
-                                    (<lookup expression="fn.latestObs('{scoreId}', $encounterDate).obsDatetime"/>)
+                                    <lookup  expression="fn.latestObs('{scoreId}', $fn.aMomentBefore($encounterDate)).valueNumeric"/>
+                                    (<lookup expression="fn.latestObs('{scoreId}', $fn.aMomentBefore($encounterDate)).obsDatetime"/>)
                                 </label>
                             </p>
 
