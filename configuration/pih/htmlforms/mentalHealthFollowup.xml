@@ -687,15 +687,15 @@
             <div>
                 <!-- Previous number of seizures per month -->
                 <ifMode mode="VIEW" include="false">
-                    <includeIf velocityTest="$fn.latestObs('PIH:6797', $encounterDate)">
+                    <includeIf velocityTest="$fn.latestObs('PIH:6797', $fn.aMomentBefore($encounterDate))">
                         <p class="side-by-side small">
                             <label style="color:grey; font-style: italic;">
                                 <uimessage code="Previous seizure frequency"/>:
 
-                                <lookup expression="fn.latestObs('PIH:6797', $encounterDate).valueNumeric"/>
+                                <lookup expression="fn.latestObs('PIH:6797', $fn.aMomentBefore($encounterDate)).valueNumeric"/>
                                 <uimessage code="permonth"/>
 
-                                (<lookup expression="fn.latestObs('PIH:6797', $encounterDate).obsDatetime"/>)
+                                (<lookup expression="fn.latestObs('PIH:6797', $fn.aMomentBefore($encounterDate)).obsDatetime"/>)
                             </label>
                         </p>
                         <br/>
