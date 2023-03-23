@@ -199,6 +199,7 @@
         </h1>
     </ifMode>
 
+    <!-- ToDo: Removed this section
     <section id="ncd-ids" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Identifiers">
         <div class="section-container">
@@ -223,6 +224,7 @@
             </div>
         </div>
     </section>
+    -->
 
     <section id="details" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Patient Details">

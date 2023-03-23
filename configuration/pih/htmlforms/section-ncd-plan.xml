@@ -75,14 +75,16 @@
         </h1>
     </ifMode>
 
-    <section id="clinical-management-plan" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="pihcore.consult.clinicalManagementPlan">
+    <section id="drug-orders" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Treatment plan">
         <div class="section-container">
             <p>
-                <obs conceptId="CIEL:162749" style="textarea" rows="5" id="clinical-management-plan"/>
+                <obs conceptId="CIEL:163104" style="textarea" rows="5" id="treatment-plan" />
             </p>
         </div>
+
     </section>
+
 
     <style type="text/css">
 
@@ -171,6 +173,8 @@
                                   ['1115','Normal'],
                                   ['135971','Left ventricular hypertrophy'],
                                   ['148203','Atrial Fibrillation'],
+                                  ['135972','Dilated left ventricle'],
+                                  ['157472','Left ventricle depressed'],
                                   ['5622','Other']">
 
                         <obsgroup groupingConceptId="PIH:3403">
@@ -225,10 +229,11 @@
 
     </style>
 
+    <!-- Use later for organizing meds by diagnosis
     <section id="meds" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.ncd.meds">
         <div class="section-container">
             <p>
-                <!-- Cardiovascular -->
+
                 <label>
                     <b>
                         <uimessage code="pihcore.exam.cardiac_exam"/>
@@ -260,7 +265,6 @@
                     </obsgroup>
                 </repeat>
 
-                <!-- Endocrine -->
                 <label>
                     <b>
                         <uimessage code="pihcore.endocrine"/>
@@ -281,6 +285,7 @@
 
         </div>
     </section>
+    -->
 
     <section id="drug-orders" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.visitNote.orders.medications">
@@ -348,9 +353,15 @@
     </section>
 
     <section id="disposition-section" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.consult.clinicalImpressions">
+        <div class="section-container">
+            <obs conceptId="CIEL:162749" style="textarea" rows="8"/>
+        </div>
+    </section>
+
+    <section id="disposition-section" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="coreapps.consult.disposition">
         <div class="section-container">
-
             <div class="two-columns">
                 <div>
                     <label>
