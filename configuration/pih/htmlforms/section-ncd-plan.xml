@@ -166,20 +166,23 @@
                 </div>
 
                 <div>
-                    <strong>EKG</strong>
+                    <strong>
+                        <uimessage code="Echocardiogram findings"/>
+                    </strong>
                     <br/>
 
-                    <repeat with="['1118','Not done'],
-                                  ['1115','Normal'],
-                                  ['135971','Left ventricular hypertrophy'],
-                                  ['148203','Atrial Fibrillation'],
-                                  ['135972','Dilated left ventricle'],
-                                  ['157472','Left ventricle depressed'],
-                                  ['5622','Other']">
+                    <!-- ToDo: replace PIH mapping with CIEL:168041 -->
+                    <repeat with="['CIEL:1118','Not done'],
+                                  ['CIEL:1115','Normal'],
+                                  ['CIEL:135971','Left ventricular hypertrophy'],
+                                  ['CIEL:148203','Atrial Fibrillation'],
+                                  ['CIEL:135972','Dilated left ventricle'],
+                                  ['PIH:14580','Depressed left ventricle'],
+                                  ['CIEL:5622','Other']">
 
                         <obsgroup groupingConceptId="PIH:3403">
                             <obs conceptId="CIEL:159565"
-                                 answerConceptId="CIEL:{0}"
+                                 answerConceptId="{0}"
                                  answerLabel="{1}"
                                  style="checkbox"/>
                         </obsgroup>

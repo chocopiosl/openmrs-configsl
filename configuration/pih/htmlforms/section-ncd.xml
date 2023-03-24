@@ -581,27 +581,6 @@
                 <obs conceptId="PIH:11971"/>
             </p>
 
-            <!-- hypertension followup only -->
-            <includeIf velocityTest="$encounter.encounterType.uuid == '5cbfd6a2-92d9-4ad0-b526-9d29bfe1d10c'">
-                <strong>
-                    <uimessage code="Echocardiogram findings"/>
-                </strong>
-                <repeat>
-                    <template>
-                        <p>
-                            <obs conceptId="CIEL:159567" style="checkbox"
-                                 answerConceptId="{acid}" answerCode="{ansLabel}"/>
-                        </p>
-                    </template>
-                    <render acid="CIEL:1118" ansLabel="Not done"/>
-                    <render acid="CIEL:1115" ansLabel="Normal"/>
-                    <render acid="CIEL:135971" ansLabel="Left ventricular hypertrophy"/>
-                    <render acid="CIEL:148203" ansLabel="Atrial fibrillation"/>
-                    <render acid="CIEL:135972" ansLabel="Dialated left ventricle"/>
-                    <render acid="CIEL:157472" ansLabel="Left ventricle depressed"/>
-                </repeat>
-            </includeIf>
-
             <strong>
                 <uimessage code="Complications related to hypertension"/>
             </strong>
