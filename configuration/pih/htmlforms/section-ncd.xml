@@ -748,13 +748,14 @@
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Chronic lung disease">
         <div id="respire" class="section-container">
 
-            <p>
+            <p class="side-by-side">
                 <label>
                     <uimessage code="pihcore.ncd.puffsPerWk"/>
                 </label>
-                <obs conceptId="PIH:Puffs per week of relief inhaler (coded)"
+                <br/>
+                <obs conceptId="PIH:Puffs per week of relief inhaler (coded)" style="radio"
                      answerConceptIds="PIH:1905,PIH:2100,PIH:11992,PIH:1602"
-                     style="radio" answerSeparator=""/>
+                     answerSeparator="&lt;br /&gt;"/>
             </p>
 
             <table>
@@ -854,13 +855,16 @@
                     </tr>
                     <tr>
                         <td valign="top">
-                            <label>
-                                <uimessage code="pihcore.ncd.copdClass"/>
-                            </label>
-                            <obs conceptId="PIH:COPD group classification" style="radio"
-                                 answerConceptIds="CIEL:165441,CIEL:165442,CIEL:165443,CIEL:165444"
-                                 answerCodes="pihcore.gradeA,pihcore.gradeB,pihcore.gradeC,pihcore.gradeD"
-                                 answerSeparator=""/>
+                            <p class="side-by-side">
+                                <strong>
+                                    <uimessage code="pihcore.ncd.copdClass"/>
+                                </strong>
+                                <br/>
+                                <obs conceptId="PIH:COPD group classification" style="radio"
+                                     answerConceptIds="CIEL:165441,CIEL:165442,CIEL:165443,CIEL:165444"
+                                     answerCodes="pihcore.gradeA,pihcore.gradeB,pihcore.gradeC,pihcore.gradeD"
+                                     answerSeparator="&lt;br /&gt;&lt;br /&gt;"/>
+                            </p>
                         </td>
                         <td colspan="3">
                             <dl>
@@ -911,13 +915,14 @@
 
             <br/>
 
-            <div>
+            <p class="side-by-side">
                 <label>
                     <uimessage code="pihcore.ncd.inhalerEd"/>
                 </label>
-                <obs conceptId="PIH:7399" style="radio" answerConceptIds="PIH:YES,PIH:NO"
-                     answerCodes="yes,no" answerSeparator=""/>
-            </div>
+                <obs conceptId="PIH:7399" style="radio"
+                     answerConceptIds="PIH:YES,PIH:NO"
+                     answerCodes="yes,no"/>
+            </p>
 
             <div>
                 <label>

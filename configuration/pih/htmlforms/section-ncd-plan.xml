@@ -149,10 +149,16 @@
                     <strong>X-ray</strong>
                     <br/>
 
+                    <!--                                   ['CIEL:141342','Emphysema'],
+                                                  ['PIH:14586','Interstitial lung patterns'],
+                    -->
                     <repeat with="['CIEL:1118','Not done'],
                                   ['CIEL:1115','Normal'],
                                   ['PIH:5158','Cardiomegaly'],
                                   ['CIEL:139069','Heart failure'],
+
+
+                                  ['PIH:14582','Post TB changes'],
                                   ['CIEL:5622','Other']">
 
                         <obs conceptId="CIEL:12"
@@ -167,17 +173,16 @@
 
                 <div>
                     <strong>
-                        <uimessage code="Echocardiogram findings"/>
+                        <uimessage code="Electrocardiogram (EKG) findings"/>
                     </strong>
                     <br/>
 
-                    <!-- ToDo: replace PIH mapping with CIEL:168041 -->
                     <repeat with="['CIEL:1118','Not done'],
                                   ['CIEL:1115','Normal'],
                                   ['CIEL:135971','Left ventricular hypertrophy'],
                                   ['CIEL:148203','Atrial Fibrillation'],
                                   ['CIEL:135972','Dilated left ventricle'],
-                                  ['PIH:14580','Depressed left ventricle'],
+                                  ['CIEL:168041','Depressed left ventricle'],
                                   ['CIEL:5622','Other']">
 
                         <obsgroup groupingConceptId="PIH:3403">
@@ -189,7 +194,29 @@
                     </repeat>
 
                     <label>if other, specify:</label>
+                    <obs conceptId="CIEL:160845" style="text"/>
+
+                    <!-- Echocardiogram -->
+                    <br/>
+                    <strong>
+                        <uimessage code="Echocardiogram findings"/>
+                    </strong>
+                    <br/>
+
+                    <repeat with="['CIEL:1118','Not done'],
+                              ['CIEL:1115','Normal'],
+                              ['PIH:COR PULMONALE','Cor pulmonale'],
+                              ['CIEL:5622','Other']">
+
+                        <obs conceptId="CIEL:159567"
+                             answerConceptId="{0}"
+                             answerLabel="{1}"
+                             style="checkbox"/>
+                    </repeat>
+
+                    <label>if other, specify:</label>
                     <obs conceptId="CIEL:159573" style="text"/>
+
                 </div>
             </div>
         </div>

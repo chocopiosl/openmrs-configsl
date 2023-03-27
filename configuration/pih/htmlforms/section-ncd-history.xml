@@ -348,14 +348,26 @@
                             <label>
                                 <uimessage code="Hospitalization since last visit"/>
                             </label>
-                            <obs conceptId="CIEL:976" style="radio"
-                                 answerConceptIds="CIEL:1065,CIEL:1066"/>
+                            <obs id="hospital-stay" conceptId="CIEL:976" style="radio"
+                                 answerConceptIds="CIEL:1065,CIEL:1066">
+                                <controls>
+                                    <when value="CIEL:1065" thenDisplay="#num-hospital"/>
+                                </controls>
+                            </obs>
                             <br/>
 
-                            <label>
-                                <uimessage code="Discharge date"/>
-                            </label>
-                            <obs conceptId="CIEL:1641" allowTime="false"/>
+                            <div id="num-hospital">
+                                <label>
+                                    <uimessage code="Number of hospitalizations since last visit"/>
+                                </label>
+                                <obs conceptId="CIEL:1773" />
+                                <br/>
+
+                                <label>
+                                    <uimessage code="Discharge date"/>
+                                </label>
+                                <obs conceptId="CIEL:1641" allowTime="false"/>
+                            </div>
                         </p>
                     </div>
                     <div>
@@ -386,6 +398,34 @@
                         <uimessage code="Smoking"/>
                     </label>
                     <obs conceptId="CIEL:163731"
+                         answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
+                    <br/>
+
+                    <label>
+                        <uimessage code="Indoor cooking"/>
+                    </label>
+                    <obs conceptId="CIEL:159365"
+                         answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
+                    <br/>
+
+                    <label>
+                        <uimessage code="History of pulmonary TB"/>
+                    </label>
+                    <obs conceptId="PIH:14582"
+                         answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
+                    <br/>
+
+                    <label>
+                        <uimessage code="Occupational exposure"/>
+                    </label>
+                    <obs conceptId="PIH:14583"
+                         answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
+                    <br/>
+
+                    <label>
+                        <uimessage code="Seasonal allergies"/>
+                    </label>
+                    <obs conceptId="PIH:14584"
                          answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
                     <br/>
 
