@@ -182,10 +182,8 @@
                 <render message="CIEL:167021" xId="Aware and understands the disease"/>
                 <render message="PIH:14465"   xId="Understands treatment"/>
             </repeat>
-
         </div>
     </section>
-
 
     <section id="ncd_vitals" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.ncd.vitals">
@@ -517,61 +515,61 @@
                 </p>
             </includeIf>
 
-                <table>
-                    <tr>
-                        <th width="40%">
-                            <label>
-                                <uimessage code="pihcore.stage.label"/>
-                            </label>
-                        </th>
-                        <th>
-                            <label>
-                                <uimessage code="pihcore.bloodPressure.label"/>
-                            </label>
-                        </th>
-                        <th>
-                            <label>
-                                <uimessage code="pihcore.suggestedTreatment.label"/>
-                            </label>
-                        </th>
-                    </tr>
+            <table>
+                <tr>
+                    <th width="40%">
+                        <label>
+                            <uimessage code="pihcore.stage.label"/>
+                        </label>
+                    </th>
+                    <th>
+                        <label>
+                            <uimessage code="pihcore.bloodPressure.label"/>
+                        </label>
+                    </th>
+                    <th>
+                        <label>
+                            <uimessage code="pihcore.suggestedTreatment.label"/>
+                        </label>
+                    </th>
+                </tr>
 
-                        <tr>
-                            <td>
-                                <p class="side-by-side">
-                                    <obs conceptId="CIEL:165583" style="radio"
-                                         answerConceptIds="CIEL:165206,CIEL:165203,CIEL:165204"
-                                         answerSeparator="&lt;br /&gt;&lt;br /&gt;"/>
-                                </p>
-                            </td>
-                            <td>
-                                <label>
-                                    <uimessage code="Pre (&lt;140/90)" />
-                                </label>
-                                <br/>
-                                <label>
-                                    <uimessage code="Mild/Stage 1 (140/90&amp;nbsp;- 159/99)" />
-                                </label>
-                                <br/>
-                                <label>
-                                    <uimessage code="Moderate/Stage 2 (&gt;160/100)" />
-                                </label>
-                            </td>
-                            <td>
-                                <label>
-                                    <uimessage code="Repeat BP measurement" />
-                                </label>
-                                <br/>
-                                <label>
-                                    <uimessage code="change lifestyle; repeat BP in 6-12 months; start anti-hypertensive drug at low dose" />
-                                </label>
-                                <br/>
-                                <label>
-                                    <uimessage code="proteinuria and glucosuria lab tests; start 2 antihypertensives at minimal dose." />
-                                </label>
-                            </td>
-                        </tr>
-                </table>
+                    <tr>
+                        <td>
+                            <p class="side-by-side">
+                                <obs conceptId="CIEL:165583" style="radio"
+                                     answerConceptIds="CIEL:165206,CIEL:165203,CIEL:165204"
+                                     answerSeparator="&lt;br /&gt;&lt;br /&gt;"/>
+                            </p>
+                        </td>
+                        <td>
+                            <label>
+                                <uimessage code="Pre (&lt;140/90)" />
+                            </label>
+                            <br/>
+                            <label>
+                                <uimessage code="Mild/Stage 1 (140/90&amp;nbsp;- 159/99)" />
+                            </label>
+                            <br/>
+                            <label>
+                                <uimessage code="Moderate/Stage 2 (&gt;160/100)" />
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                <uimessage code="Repeat BP measurement" />
+                            </label>
+                            <br/>
+                            <label>
+                                <uimessage code="change lifestyle; repeat BP in 6-12 months; start anti-hypertensive drug at low dose" />
+                            </label>
+                            <br/>
+                            <label>
+                                <uimessage code="proteinuria and glucosuria lab tests; start 2 antihypertensives at minimal dose." />
+                            </label>
+                        </td>
+                    </tr>
+            </table>
 
             <br/>
             <p>
@@ -594,7 +592,7 @@
                         <render acid="CIEL:111103" ansLabel="Stroke"/>
                         <render acid="CIEL:145438" ansLabel="Chronic kidney disease (CKD)"/>
                         <render acid="CIEL:139069" ansLabel="Heart failure"/>
-                        <render acid="CIEL:5622" ansLabel="Other"/>
+                        <render acid="CIEL:5622"   ansLabel="Other"/>
                     </repeat>
                 </div>
                 <div>
@@ -622,10 +620,6 @@
                     </template>
                     <render cid="CIEL:1898" messg="Better controlled" />
                     <render cid="PIH:14464" messg="Disease controlled (BP less than equal 150/80)" />
-                    <render cid="CIEL:164075" messg="Adherence to treatment (TTO)" />
-                    <render cid="CIEL:167819" messg="Missed doses in the last week" />
-                    <render cid="CIEL:167021" messg="Aware and understand the disease" />
-                    <render cid="PIH:14465" messg="Understanding treatment (TTO)" />
                 </repeat>
             </includeIf>
 
@@ -747,17 +741,6 @@
 
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Chronic lung disease">
         <div id="respire" class="section-container">
-
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="pihcore.ncd.puffsPerWk"/>
-                </label>
-                <br/>
-                <obs conceptId="PIH:Puffs per week of relief inhaler (coded)" style="radio"
-                     answerConceptIds="PIH:1905,PIH:2100,PIH:11992,PIH:1602"
-                     answerSeparator="&lt;br /&gt;"/>
-            </p>
-
             <table>
                 <tr>
                     <th width="30%">
@@ -821,105 +804,123 @@
                     </tr>
                 </repeat>
 
-                    <tr>
-                        <!-- Bronchiectasis -->
-                        <td>
-                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                                <obs conceptId="PIH:DIAGNOSIS" answerConceptId="CIEL:121011"
-                                     style="checkbox"/>
-                            </obsgroup>
-                        </td>
-                        <td>
-                            <label>
-                                <uimessage code="pihcore.symp.phlegm.label"/>
-                            </label>
-                        </td>
-                        <td></td>
-                        <td>
-                            <label>
-                                <uimessage code="pihcore.ncd.resp.bronchiectTreatment.label"/>
-                            </label>
-                        </td>
-                    </tr>
+                <tr>
+                    <!-- Bronchiectasis -->
+                    <td>
+                        <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                            <obs conceptId="PIH:DIAGNOSIS" answerConceptId="CIEL:121011"
+                                 style="checkbox"/>
+                        </obsgroup>
+                    </td>
+                    <td>
+                        <label>
+                            <uimessage code="pihcore.symp.phlegm.label"/>
+                        </label>
+                    </td>
+                    <td></td>
+                    <td>
+                        <label>
+                            <uimessage code="pihcore.ncd.resp.bronchiectTreatment.label"/>
+                        </label>
+                    </td>
+                </tr>
 
-                    <tr>
-                        <!-- Other COPD -->
-                        <td colspan="3">
-                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                                <obs conceptId="PIH:DIAGNOSIS" answerConceptId="CIEL:1295"
-                                     style="checkbox"
-                                     answerCode="pihcore.ncd.otherCOPD" commentFieldLabel=""/>
-                            </obsgroup>
-                        </td>
-                        <td>Ipratropium, Beclomethasone</td>
-                    </tr>
-                    <tr>
-                        <td valign="top">
-                            <p class="side-by-side">
-                                <strong>
-                                    <uimessage code="pihcore.ncd.copdClass"/>
-                                </strong>
-                                <br/>
-                                <obs conceptId="PIH:COPD group classification" style="radio"
-                                     answerConceptIds="CIEL:165441,CIEL:165442,CIEL:165443,CIEL:165444"
-                                     answerCodes="pihcore.gradeA,pihcore.gradeB,pihcore.gradeC,pihcore.gradeD"
-                                     answerSeparator="&lt;br /&gt;&lt;br /&gt;"/>
-                            </p>
-                        </td>
-                        <td colspan="3">
-                            <dl>
-                                <repeat with="['A'],['B'],['C'],['D']">
-                                    <dt>
-                                        <uimessage code="pihcore.grade{0}"/>
-                                    </dt>
-                                    <dd>
-                                        <uimessage code="pihcore.ncd.copdGrade{0}"/>
-                                    </dd>
-                                </repeat>
-                            </dl>
-                            <label>
-                                <uimessage code="pihcore.ncd.laba"/><br/>
-                                <uimessage code="pihcore.ncd.lama"/>
-                            </label>
-                        </td>
-                    </tr>
+                <tr>
+                    <!-- Other COPD -->
+                    <td colspan="3">
+                        <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                            <obs conceptId="PIH:DIAGNOSIS" answerConceptId="CIEL:1295"
+                                 style="checkbox"
+                                 answerCode="pihcore.ncd.otherCOPD" commentFieldLabel=""/>
+                        </obsgroup>
+                    </td>
+                    <td>Ipratropium, Beclomethasone</td>
+                </tr>
+                <tr>
+                    <td valign="top">
+                        <p class="side-by-side">
+                            <strong>
+                                <uimessage code="pihcore.ncd.copdClass"/>
+                            </strong>
+                            <br/>
+                            <obs conceptId="PIH:COPD group classification" style="radio"
+                                 answerConceptIds="CIEL:165441,CIEL:165442,CIEL:165443,CIEL:165444"
+                                 answerCodes="pihcore.gradeA,pihcore.gradeB,pihcore.gradeC,pihcore.gradeD"
+                                 answerSeparator="&lt;br /&gt;&lt;br /&gt;"/>
+                        </p>
+                    </td>
+                    <td colspan="3">
+                        <dl>
+                            <repeat with="['A'],['B'],['C'],['D']">
+                                <dt>
+                                    <uimessage code="pihcore.grade{0}"/>
+                                </dt>
+                                <dd>
+                                    <uimessage code="pihcore.ncd.copdGrade{0}"/>
+                                </dd>
+                            </repeat>
+                        </dl>
+                        <label>
+                            <uimessage code="pihcore.ncd.laba"/><br/>
+                            <uimessage code="pihcore.ncd.lama"/>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="4">
+                        <uimessage code="GINA assessment asthma control " />
+                        <i>(In past 4 weeks)</i>
+                    </th>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <repeat>
+                            <template>
+                                <p class="side-by-side">
+                                    <label>
+                                        <uimessage code="{message}"/>
+                                    </label>
+                                    <obs conceptId="PIH:{ginaId}" style="radio"
+                                         answerConceptIds="PIH:YES,PIH:NO"
+                                         answerCodes="yes,no"/>
+                                </p>
 
-                <!-- this section is ONLY included for NCD intake encounter -->
-                <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
-                    <tr>
-                        <th colspan="4">
-                            <label>
-                                <uimessage code="pihcore.comorbidities.label"/>
-                            </label>
-                        </th>
-                    </tr>
-
-                    <repeat with="['Diphenhydramine','PIH:RHINITIS'],
-                                  ['pihcore.gerdTreatment.label','PIH:GASTROESOPHAGEAL REFLUX'],
-                                  ['blank.label','CIEL:119051']">
-                        <tr>
-                            <td colspan="3">
-                                <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                                    <obs conceptId="PIH:DIAGNOSIS" answerConceptId="{1}" style="checkbox"/>
-                                </obsgroup>
-                            </td>
-                            <td>
-                                <label>
-                                    <uimessage code="{0}"/>
-                                </label>
-                            </td>
-                        </tr>
-                    </repeat>
-                </includeIf>
+                            </template>
+                            <render ginaId="11803" message="Datetime symptoms more than twice a week" />
+                            <render ginaId="11991" message="Inhaler for symptoms more than twice a week" />
+                            <render ginaId="11925" message="Activity limitations due to asthma" />
+                            <render ginaId="11731" message="Night waking due to asthma" />
+                        </repeat>
+                    </td>
+                </tr>
             </table>
 
             <br/>
 
             <p class="side-by-side">
                 <label>
+                    <uimessage code="pihcore.ncd.puffsPerWk"/>
+                </label>
+                <br/>
+                <obs conceptId="PIH:Puffs per week of relief inhaler (coded)" style="radio"
+                     answerConceptIds="PIH:1905,PIH:2100,PIH:11992,PIH:1602"
+                     answerSeparator="&lt;br /&gt;"/>
+            </p>
+
+            <p class="side-by-side">
+                <label>
                     <uimessage code="pihcore.ncd.inhalerEd"/>
                 </label>
                 <obs conceptId="PIH:7399" style="radio"
+                     answerConceptIds="PIH:YES,PIH:NO"
+                     answerCodes="yes,no"/>
+            </p>
+
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Good inhaler technique"/>
+                </label>
+                <obs conceptId="PIH:7397" style="radio"
                      answerConceptIds="PIH:YES,PIH:NO"
                      answerCodes="yes,no"/>
             </p>
