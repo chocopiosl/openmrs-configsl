@@ -305,32 +305,40 @@
 
             <br/>
 
-            <strong>
-                <uimessage code="Diagnosis on discharge"/>
-            </strong>
-            <p>
-                <repeat>
-                    <template>
-                        <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                            <obs conceptId="PIH:DIAGNOSIS" answerConceptId="{diagId}" style="checkbox"/>
-                        </obsgroup>
-                    </template>
-                    <render diagId="CIEL:142460" diagName="Diabetes with hyperosmolar coma" />
-                    <render diagId="CIEL:142452" diagName="Diabetic foot" />
-                    <render diagId="CIEL:142454" diagName="DKA with coma" />
-                    <render diagId="CIEL:122714" diagName="DKA without coma" />
-                    <render diagId="CIEL:138291" diagName="Hyperglycemia" />
-                </repeat>
-            </p>
+            <div class="two-columns">
+                <div>
+                    <strong>
+                        <uimessage code="Diagnosis on discharge"/>
+                    </strong>
+                    <br/>
+                    <repeat>
+                        <template>
+                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                <obs conceptId="PIH:DIAGNOSIS" answerConceptId="{diagId}" style="checkbox"/>
+                            </obsgroup>
+                        </template>
+                        <render diagId="CIEL:142460" diagName="Diabetes with hyperosmolar coma" />
+                        <render diagId="CIEL:142452" diagName="Diabetic foot" />
+                        <render diagId="CIEL:142454" diagName="DKA with coma" />
+                        <render diagId="CIEL:122714" diagName="DKA without coma" />
+                        <render diagId="CIEL:138291" diagName="Hyperglycemia" />
+                    </repeat>
+                </div>
 
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="DM Treatment on discharge" />
-                </label>
-                <obs id="dm-treatment" conceptId="PIH:14468" style="radio"
-                     answerConceptIds="CIEL:78056,CIEL:167915"
-                     answerCodes="Insulin,Oral anti-diabetic" />
-            </p>
+                <div>
+                    <strong>
+                        <uimessage code="DM Treatment on discharge" />
+                    </strong>
+                    <br/>
+                    <obs conceptId="PIH:14468" style="checkbox"
+                         answerConceptId="CIEL:78056"
+                         answerCode="Insulin" />
+                    <obs conceptId="PIH:14468" style="checkbox"
+                         answerConceptId="CIEL:167915"
+                         answerCode="Oral anti-diabetic" />
+                </div>
+            </div>
+            <br/>
 
             <strong>
                 <uimessage code="Fundoscopy"/>
@@ -350,14 +358,28 @@
                     <label>
                         <uimessage code="Fundoscopy results" />
                     </label>
-                    <obs conceptId="CIEL:167917" style="radio"
-                         answerConceptIds="CIEL:1115,CIEL:1116" />
+                    <obs id="fun-abnorm" conceptId="CIEL:167917" style="radio"
+                         answerConceptIds="CIEL:1115,CIEL:1116">
+                        <controls>
+                            <when value="CIEL:1116" thenDisplay="#fun-findings" />
+                        </controls>
+                    </obs>
 
-                    <br/>
-                    <label>
-                        <uimessage code="Fundoscopy diagnosis" />
-                    </label>
-                    <!-- ToDo:  Add concept -->
+                    <div id="fun-findings">
+                        <repeat>
+                            <template>
+                                <obs conceptId="CIEL:167917" style="checkbox"
+                                     answerConceptId="CIEL:{funId}" />
+                            </template>
+                            <render funId="142429" message="Diabetic retinopathy" />
+                            <render funId="113271" message="Retinal detachment" />
+                            <render funId="124755" message="Thrombosis of retinal vein" />
+                            <render funId="142820" message="Deep retinal hemorrhage" />
+                            <render funId="143265" message="Cotton wool spots" />
+                            <render funId="119109" message="Optic nerve disease" />
+                        </repeat>
+                    </div>
+
                 </p>
             </p>
 
