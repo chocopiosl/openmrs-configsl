@@ -801,7 +801,7 @@
                     <!-- ToDo: Improve formatting; Add placeholders/suggestions for un-entered inputs; Fix toggles -->
                     <repeat>
                         <template>
-                            <obsgroup groupingConceptId="PIH:Prescription construct">
+                            <obsgroup groupingConceptId="PIH:Prescription construct" showIfEmpty="false">
                             <tr>
                                 <td id="{name}-rx" colspan="6">
                                     <obs conceptId="PIH:Mental health medication"
