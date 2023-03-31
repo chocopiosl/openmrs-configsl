@@ -1,6 +1,4 @@
-
 {
-
   "welcomeMessage": "Wellbody Clinic",
   "dossierIdentifierPrefix": "WBA",
   "providerIdentifierPrefix": "W",
@@ -42,7 +40,8 @@
   "idCardLabel": "Wellbody Clinic Dorma",
 
   "extraIdentifierTypes": [
-    "c09a1d24-7162-11eb-8aa6-0242ac110002"
+    "${patientIdentifierType.kghEmrId.uuid}",
+    "${patientIdentifierType.ncdId.uuid}"
   ],
   "findPatientColumnConfig": [
     {
