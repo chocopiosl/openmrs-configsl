@@ -395,63 +395,6 @@
              headerCode="Risk Factors">
         <div class="section-container-color two-columns">
             <div>
-                <p class="side-by-side">
-                    <label>
-                        <uimessage code="Alcohol"/>
-                    </label>
-                    <obs conceptId="CIEL:159449"
-                         answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
-                    <br/>
-
-                    <label>
-                        <uimessage code="Smoking"/>
-                    </label>
-                    <obs conceptId="CIEL:163731"
-                         answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
-                    <br/>
-
-                    <label>
-                        <uimessage code="Indoor cooking"/>
-                    </label>
-                    <obs conceptId="CIEL:159365"
-                         answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
-                    <br/>
-
-                    <label>
-                        <uimessage code="History of pulmonary TB"/>
-                    </label>
-                    <obs conceptId="PIH:14582"
-                         answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
-                    <br/>
-
-                    <label>
-                        <uimessage code="Occupational exposure"/>
-                    </label>
-                    <obs conceptId="PIH:14583"
-                         answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
-                    <br/>
-
-                    <label>
-                        <uimessage code="Seasonal allergies"/>
-                    </label>
-                    <obs conceptId="PIH:14584"
-                         answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
-                    <br/>
-
-                    <label>
-                        <uimessage code="Excessive salt"/>
-                    </label>
-                    <obs conceptId="PIH:14452"
-                         answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
-                    <br/>
-
-                    <label>
-                        <uimessage code="Maggi / Seasoning"/>
-                    </label>
-                    <obs conceptId="PIH:14453"
-                         answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
-                </p>
-
                 <repeat>
                     <template>
                         <p class="side-by-side">
@@ -463,6 +406,14 @@
                                  answerCodes="yes,no" />
                         </p>
                     </template>
+                    <render qId="CIEL:159449" questionName="Alcohol" />
+                    <render qId="CIEL:163731" questionName="Smoking" />
+                    <render qId="CIEL:159365" questionName="Indoor cooking" />
+                    <render qId="PIH:14582"   questionName="History of pulmonary TB" />
+                    <render qId="CIEL:167822" questionName="Occupational exposure" />
+                    <render qId="PIH:14584"   questionName="Seasonal allergies" />
+                    <render qId="CIEL:167877" questionName="Excessive salt" />
+                    <render qId="CIEL:167878" questionName="Maggi / Seasoning" />
                     <render qId="CIEL:167998" questionName="On ACE inhibitors" />
                  </repeat>
             </div>
