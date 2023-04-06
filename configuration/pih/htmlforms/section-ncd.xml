@@ -834,7 +834,7 @@
                 </repeat>
             </table>
 
-                <h3>COPD</h3>
+            <h3>COPD</h3>
             <div class="two-columns">
                 <div>
                     <strong>
@@ -844,6 +844,17 @@
                         <obs conceptId="PIH:COPD group classification" style="radio"
                              answerConceptIds="CIEL:165441,CIEL:165442,CIEL:165443,CIEL:165444"
                              answerCodes="pihcore.gradeA,pihcore.gradeB,pihcore.gradeC,pihcore.gradeD"
+                             answerSeparator="&lt;br /&gt;"/>
+                    </p>
+
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="On medication with" />
+                        </label>
+                        <br/>
+                        <obs conceptId="PIH:14603" style="radio"
+                             answerConceptIds="PIH:14604,PIH:14605,PIH:14606,PIH:14607,PIH:14608,PIH:14609"
+                             answerCodes="SABA,SAMA,LABA,LAMA,Oral steroid, Steroid inhaler"
                              answerSeparator="&lt;br /&gt;"/>
                     </p>
                 </div>
@@ -867,15 +878,44 @@
                 </div>
             </div>
 
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="On medication with" />
-                </label>
-                <br/>
-                <obs conceptId="PIH:14603" style="radio"
-                     answerConceptIds="PIH:14604,PIH:14605,PIH:14606,PIH:14607,PIH:14608,PIH:14609"
-                     answerCodes="SABA,SAMA,LABA,LAMA,Oral steroid, Steroid inhaler" />
-            </p>
+            <strong>
+                <uimessage code="COPD evaluation" />
+            </strong>
+
+            <obsgroup groupingConceptId="PIH:14620">
+                <repeat>
+                    <template>
+                        <p class="side-by-side">
+                            <obs style="radio"
+                                 conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
+                                 conceptLabels="yes,no,unsure" answerConceptId="{copdId}" labelText="{copdSym}"/>
+                        </p>
+                    </template>
+                    <render copdId="CIEL:122496" copdSym="Dyspnea" />
+                    <render copdId="CIEL:124665" copdSym="Chest tightness" />
+                    <render copdId="CIEL:5209"   copdSym="Wheezing" />
+                    <render copdId="CIEL:143264" copdSym="Cough" />
+                    <render copdId="CIEL:5957"   copdSym="Productive cough" />
+                </repeat>
+
+                <repeat>
+                    <template>
+                        <p class="side-by-side">
+                            <obs conceptId="{copdId}" style="radio"
+                                 answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
+                                 answerCodes="yes,no,unsure"  labelText="{copdSym}"/>
+                        </p>
+                    </template>
+                    <render copdId="PIH:14622"   copdSym="Increased inhaler use" />
+                    <render copdId="PIH:14623"   copdSym="Wheeze during exam" />
+                    <render copdId="CIEL:158939" copdSym="Smoking cessation" />
+                    <render copdId="PIH:11925"   copdSym="Activity limitation" />
+                    <render copdId="PIH:14626"   copdSym="Night waking due to dyspnea" />
+                    <render copdId="CIEL:166093" copdSym="COPD exacerbation" />
+                    <render copdId="PIH:14626"   copdSym="If exacerbation, hospitalization needed?" />
+                </repeat>
+
+            </obsgroup>
 
             <h3>Asthma</h3>
 
@@ -885,26 +925,27 @@
                         <uimessage code="GINA assessment asthma control " />
                     </strong>
                     <i>(In the past 4 weeks)</i>
-                    <repeat>
-                        <template>
-                            <p class="side-by-side">
-                                <label>
-                                    <uimessage code="{message}"/>
-                                </label>
-                                <br/>
-                                <obs conceptId="PIH:{ginaId}" style="radio"
-                                     answerConceptIds="PIH:YES,PIH:NO"
-                                     answerCodes="yes,no"/>
-                            </p>
-                        </template>
-                        <render ginaId="14618" message="Exacerbations (more than or equal to 1)" />
-                        <render ginaId="11803" message="Datetime symptoms more than twice a week" />
-                        <render ginaId="11991" message="Inhaler for symptoms more than twice a week" />
-                        <render ginaId="11925" message="Activity limitations due to asthma" />
-                        <render ginaId="11731" message="Night waking due to asthma" />
-                        <render ginaId="14619" message="Triggers cause exacerbation of asthma" />
-
-                    </repeat>
+                    <obsgroup groupingConceptId="PIH:14587">
+                        <repeat>
+                            <template>
+                                <p class="side-by-side">
+                                    <label>
+                                        <uimessage code="{message}"/>
+                                    </label>
+                                    <br/>
+                                    <obs conceptId="PIH:{ginaId}" style="radio"
+                                         answerConceptIds="PIH:YES,PIH:NO"
+                                         answerCodes="yes,no"/>
+                                </p>
+                            </template>
+                            <render ginaId="14618" message="Exacerbations (more than or equal to 1)" />
+                            <render ginaId="11803" message="Datetime symptoms more than twice a week" />
+                            <render ginaId="11991" message="Inhaler for symptoms more than twice a week" />
+                            <render ginaId="11925" message="Activity limitations due to asthma" />
+                            <render ginaId="11731" message="Night waking due to asthma" />
+                            <render ginaId="14619" message="Triggers cause exacerbation of asthma" />
+                        </repeat>
+                    </obsgroup>
                 </div>
                 <div>
                     <p class="side-by-side">
