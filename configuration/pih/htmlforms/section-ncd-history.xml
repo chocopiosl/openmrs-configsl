@@ -370,12 +370,21 @@
                             </div>
                         </p>
                     </div>
-                    <div>
 
+                    <div>
                         <label>
                             <uimessage code="Findings during hospitalization"/>
                         </label>
                         <obs conceptId="PIH:6899" style="textarea" rows="3"/>
+
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Chronic lung disease screening tool during hospitalization" />
+                            </label>
+                            <br/>
+                            <obs conceptId="PIH:14602" style="radio"
+                                 answerConceptIds="CIEL:703,CIEL:664,CIEL:1118" />
+                        </p>
                     </div>
                 </div>
             </obsgroup>
@@ -442,6 +451,20 @@
                     <obs conceptId="PIH:14453"
                          answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
                 </p>
+
+                <repeat>
+                    <template>
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="{questionName}"/>
+                            </label>
+                            <obs conceptId="{qId}" style="radio"
+                                 answerConceptIds="PIH:YES,PIH:NO"
+                                 answerCodes="yes,no" />
+                        </p>
+                    </template>
+                    <render qId="CIEL:167998" questionName="On ACE inhibitors" />
+                 </repeat>
             </div>
 
             <div>
@@ -453,23 +476,59 @@
         </div>
     </section>
 
-    <section id="co-morbid" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+    <section id="comorbitity" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.comorbidities.label">
-        <div class="section-container-color">
+        <div class="section-container">
             <p class="side-by-side">
-                <label>
-                    <uimessage code="Active TB"/>
-                </label>
-                <obs conceptId="CIEL:164500"
-                     answerConceptIds="CIEL:1065,CIEL:1066" style="radio"/>
-                <br/>
-
-                <label>
-                    <uimessage code="HIV"/>
-                </label>
-                <obs conceptId="CIEL:1169"
-                     answerConceptIds="CIEL:703,CIEL:664" style="radio"/>
+                <repeat>
+                    <template>
+                        <label>
+                            <uimessage code="{name}"/>
+                        </label>
+                        <obs conceptId="{comorbId}"
+                             answerConceptIds="{answIds}" style="radio"/>
+                        <br/>
+                    </template>
+                    <render comorbId="CIEL:1169" answIds="CIEL:703,CIEL:664,CIEL:1067" name="HIV" />
+                </repeat>
             </p>
+
+            <p class="side-by-side">
+                <obs id="underlying-comorbidity" style="radio" conceptId="CIEL:166020"
+                     labelCode="pihcore.comorbidities.label"
+                     answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067">
+                    <controls>
+                        <when value="CIEL:1065" thenDisplay="#comorbitities" />
+                    </controls>
+                </obs>
+
+                <div id="comorbitities">
+                    <div class="two-columns-old">
+                        <repeat with="['Diabetes','CIEL:119481'],
+                                      ['Hypertension','CIEL:117399'],
+                                      ['Epilepsy','CIEL:155'],
+                                      ['Sickle cell','CIEL:117703'],
+                                      ['Rheumatic heart disease','CIEL:113227'],
+                                      ['HIV','CIEL:138405'],
+                                      ['Chronic kidney disease','CIEL:145438'],
+                                      ['Asthma','CIEL:121375'],
+                                      ['Chronic pulmonary disease','CIEL:1295'],
+                                      ['Active TB','CIEL:164500'],
+                                      ['Cardiomyopathy','CIEL:5016'],
+                                      ['Stroke','CIEL:111103'],
+                                      ['Obesity','CIEL:115115'],
+                                      ['Malnutrition','CIEL:115122'],
+                                      ['Psychosis','CIEL:113517'],
+                                      ['Substance abuse','CIEL:112603']">
+                            <obs conceptId="CIEL:162747" style="checkbox"
+                                 answerConceptId="{1}" answerCode="{0}"/>
+                        </repeat>
+                    </div>
+                    <obs conceptId="CIEL:162747" answerConceptId="CIEL:5622"
+                         commentFieldCode="zl.ifOtherSpecify" />
+                </div>
+            </p>
+
         </div>
     </section>
 
