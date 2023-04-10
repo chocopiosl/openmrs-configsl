@@ -1,5 +1,5 @@
  {
-    "@openmrs/esm-patient-registration-app": {
+  "@openmrs/esm-patient-registration-app": {
     "sections": [
       "demographics", "contact", "social", "identifiers"
     ],
@@ -167,6 +167,13 @@
     "registrationObs": {
       "encounterTypeUuid": "${encounterType.PATIENT_REGISTRATION.uuid}",
       "encounterProviderRoleUuid": "${encounterRole.administrativeClerk.uuid}"
+    }
+  },
+  "@openmrs/esm-primary-navigation-app": {
+    "logo": {
+      "src": "site/logo.png",
+      "alt": "Partners In Health - Sierra Leone",
+      "name": "Partners In Health - Sierra Leone"
     }
   }
 }
