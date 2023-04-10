@@ -187,5 +187,13 @@
       "alt": "Partners In Health - Sierra Leone",
       "name": "Partners In Health - Sierra Leone"
     }
-  }
+  },
+   "@openmrs/esm-patient-search-app": {
+     "defaultIdentifierTypes": [
+       "${patientIdentifierType.wellbodyEmrId.uuid}",
+       "${patientIdentifierType.kghEmrId.uuid}",
+       "${patientIdentifierType.ncdId.uuid}"
+     ]
+   }
 }
+
