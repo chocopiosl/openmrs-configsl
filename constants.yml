@@ -4,6 +4,8 @@ patientIdentifierType:
     uuid: "1a2acce0-7426-11e5-a837-0800200c9a66"
   kghEmrId:
     uuid: "c09a1d24-7162-11eb-8aa6-0242ac110002"
+  ncdId:
+    uuid: "badec513-cfbb-11ed-8b1c-0242ac120002"
 
 # Encounter Types
 encounterType:

@@ -765,9 +765,31 @@
         <div id="respire" class="section-container">
             <table>
                 <tr>
+                    <th colspan="3">
+                        <label>
+                            <uimessage code="Parenchymal lung diseases" />
+                        </label>
+                    </th>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <repeat>
+                            <template>
+                                <obs conceptId="PIH:14599" style="checkbox"
+                                     answerConceptId="{parId}" answerCode="{message}" />
+                            </template>
+                            <render parId="CIEL:116711" message="Diffuse parenchymal and interstitial" />
+                            <render parId="PIH:14601"   message="Post infection (ie. TB)" />
+                            <render parId="CIEL:167822" message="Occupation" />
+                            <render parId="CIEL:5622"   message="Other" />
+                        </repeat>
+                    </td>
+                </tr>
+
+                <tr>
                     <th width="30%">
                         <label>
-                            <uimessage code="pihcore.diagnosis.label"/>
+                            <uimessage code="Obstructive lung diseases "/>
                         </label>
                     </th>
                     <th>
@@ -777,148 +799,211 @@
                     </th>
                     <th>
                         <label>
-                            <uimessage code="pihcore.nighttime_symptoms"/>
-                        </label>
-                    </th>
-                    <th>
-                        <label>
                             <uimessage code="pihcore.suggestedTreatment.label"/>
                         </label>
                     </th>
                 </tr>
 
-                <tr>
-                    <td colspan="4">
-                        <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                            <obs conceptId="PIH:DIAGNOSIS" answerConceptId="CIEL:121375"
-                                 answerCode="pihcore.ncd.probablyAsthma" style="checkbox"/>
-                        </obsgroup>
-                    </td>
-                </tr>
+                <repeat>
+                    <template>
+                        <tr>
+                            <td>
+                                <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                    <obs conceptId="PIH:DIAGNOSIS" answerConceptId="{ncdId}"
+                                         style="checkbox"/>
+                                </obsgroup>
+                            </td>
+                            <td>
+                                <label>
+                                    <uimessage code="{symp}"/>
+                                </label>
+                            </td>
+                            <td>
+                                <label>
+                                    <uimessage code="{sugTreat}"/>
+                                </label>
+                            </td>
+                        </tr>
+                    </template>
+                    <render ncdId="CIEL:1295" message="COPD" symp=""
+                            sugTreat="Ipratropium, Beclomethasone" />
+                    <render ncdId="CIEL:121375" message="Asthma" symp=""
+                            sugTreat="Salbutamol, Beclomethasone, or Prednisolone"/>
+                    <render ncdId="CIEL:121011" message="Bronchiectasis" symp="pihcore.symp.phlegm.label"
+                            sugTreat="pihcore.ncd.resp.bronchiectTreatment.label"/>
+                </repeat>
+            </table>
 
-                <repeat with="['intermittent','le2xpw','no','CIEL:153753'],
-                              ['mildPersist','gt2xpw','pihcore.sympNt.12xpm.label','PIH:Mild persistent asthma'],
-                              ['modPersist','1xpd','pihcore.sympNt.34xpm.label','CIEL:134026'],
-                              ['sevPersist','gt1pd','pihcore.sympNt.gt1xpw.label','CIEL:113018'],
-                              ['sevUncontrol','crisis','pihcore.sympNt.gt1xpw.label','PIH:Severe uncontrolled asthma']">
+            <h3>COPD</h3>
+            <div class="two-columns">
+                <div>
+                    <strong>
+                        <uimessage code="pihcore.ncd.copdClass"/>
+                    </strong>
+                    <p class="side-by-side">
+                        <obs conceptId="PIH:COPD group classification" style="radio"
+                             answerConceptIds="CIEL:165441,CIEL:165442,CIEL:165443,CIEL:165444"
+                             answerCodes="pihcore.gradeA,pihcore.gradeB,pihcore.gradeC,pihcore.gradeD"
+                             answerSeparator="&lt;br /&gt;"/>
+                    </p>
 
-                    <tr>
-                        <td>
-                            <!-- ToDo:  Do we want to use obsgroup here? -->
-                            <obs conceptId="PIH:Asthma classification"
-                                 answerConceptId="{3}"/>
-                        </td>
-                        <td>
-                            <label>
-                                <uimessage code="pihcore.symp.{1}.label"/>
-                            </label>
-                        </td>
-                        <td>
-                            <label>
-                                <uimessage code="{2}"/>
-                            </label>
-                        </td>
-                        <td>
-                            <label>
-                                <uimessage code="pihcore.ncd.resp.{0}Treatment.label"/>
-                            </label>
-                        </td>
-                    </tr>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="On medication with" />
+                        </label>
+                        <br/>
+                        <obs conceptId="PIH:14603" style="radio"
+                             answerConceptIds="PIH:14604,PIH:14605,PIH:14606,PIH:14607,PIH:14608,PIH:14609"
+                             answerCodes="SABA,SAMA,LABA,LAMA,Oral steroid, Steroid inhaler"
+                             answerSeparator="&lt;br /&gt;"/>
+                    </p>
+                </div>
+                <div>
+
+                    <dl>
+                        <repeat with="['A'],['B'],['C'],['D']">
+                            <dt>
+                                <uimessage code="pihcore.grade{0}"/>
+                            </dt>
+                            <dd>
+                                <uimessage code="pihcore.ncd.copdGrade{0}"/>
+                            </dd>
+                        </repeat>
+                    </dl>
+                    <label>
+                        <uimessage code="pihcore.ncd.laba"/>
+                        <br/>
+                        <uimessage code="pihcore.ncd.lama"/>
+                    </label>
+                </div>
+            </div>
+
+            <strong>
+                <uimessage code="COPD evaluation" />
+            </strong>
+
+            <obsgroup groupingConceptId="PIH:14620">
+                <repeat>
+                    <template>
+                        <p class="side-by-side">
+                            <obs style="radio"
+                                 conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
+                                 conceptLabels="yes,no,unsure" answerConceptId="{copdId}" labelText="{copdSym}"/>
+                        </p>
+                    </template>
+                    <render copdId="CIEL:122496" copdSym="Dyspnea" />
+                    <render copdId="CIEL:124665" copdSym="Chest tightness" />
+                    <render copdId="CIEL:5209"   copdSym="Wheezing" />
+                    <render copdId="CIEL:143264" copdSym="Cough" />
+                    <render copdId="CIEL:5957"   copdSym="Productive cough" />
                 </repeat>
 
-                <tr>
-                    <!-- Bronchiectasis -->
-                    <td>
-                        <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                            <obs conceptId="PIH:DIAGNOSIS" answerConceptId="CIEL:121011"
-                                 style="checkbox"/>
-                        </obsgroup>
-                    </td>
-                    <td>
-                        <label>
-                            <uimessage code="pihcore.symp.phlegm.label"/>
-                        </label>
-                    </td>
-                    <td></td>
-                    <td>
-                        <label>
-                            <uimessage code="pihcore.ncd.resp.bronchiectTreatment.label"/>
-                        </label>
-                    </td>
-                </tr>
-
-                <tr>
-                    <!-- Other COPD -->
-                    <td colspan="3">
-                        <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                            <obs conceptId="PIH:DIAGNOSIS" answerConceptId="CIEL:1295"
-                                 style="checkbox"
-                                 answerCode="pihcore.ncd.otherCOPD" commentFieldLabel=""/>
-                        </obsgroup>
-                    </td>
-                    <td>Ipratropium, Beclomethasone</td>
-                </tr>
-                <tr>
-                    <td valign="top">
+                <repeat>
+                    <template>
                         <p class="side-by-side">
-                            <strong>
-                                <uimessage code="pihcore.ncd.copdClass"/>
-                            </strong>
-                            <br/>
-                            <obs conceptId="PIH:COPD group classification" style="radio"
-                                 answerConceptIds="CIEL:165441,CIEL:165442,CIEL:165443,CIEL:165444"
-                                 answerCodes="pihcore.gradeA,pihcore.gradeB,pihcore.gradeC,pihcore.gradeD"
-                                 answerSeparator="&lt;br /&gt;&lt;br /&gt;"/>
+                            <obs conceptId="{copdId}" style="radio"
+                                 answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
+                                 answerCodes="yes,no,unsure"  labelText="{copdSym}"/>
                         </p>
-                    </td>
-                    <td colspan="3">
-                        <dl>
-                            <repeat with="['A'],['B'],['C'],['D']">
-                                <dt>
-                                    <uimessage code="pihcore.grade{0}"/>
-                                </dt>
-                                <dd>
-                                    <uimessage code="pihcore.ncd.copdGrade{0}"/>
-                                </dd>
-                            </repeat>
-                        </dl>
-                        <label>
-                            <uimessage code="pihcore.ncd.laba"/><br/>
-                            <uimessage code="pihcore.ncd.lama"/>
-                        </label>
-                    </td>
-                </tr>
-                <tr>
-                    <th colspan="4">
+                    </template>
+                    <render copdId="PIH:14622"   copdSym="Increased inhaler use" />
+                    <render copdId="PIH:14623"   copdSym="Wheeze during exam" />
+                    <render copdId="CIEL:158939" copdSym="Smoking cessation" />
+                    <render copdId="PIH:11925"   copdSym="Activity limitation" />
+                    <render copdId="PIH:14626"   copdSym="Night waking due to dyspnea" />
+                    <render copdId="CIEL:166093" copdSym="COPD exacerbation" />
+                    <render copdId="PIH:14626"   copdSym="If exacerbation, hospitalization needed?" />
+                </repeat>
+
+            </obsgroup>
+
+            <h3>Asthma</h3>
+
+            <div class="two-columns">
+                <div>
+                    <strong>
                         <uimessage code="GINA assessment asthma control " />
-                        <i>(In past 4 weeks)</i>
-                    </th>
-                </tr>
-                <tr>
-                    <td colspan="4">
+                    </strong>
+                    <i>(In the past 4 weeks)</i>
+                    <obsgroup groupingConceptId="PIH:14587">
                         <repeat>
                             <template>
                                 <p class="side-by-side">
                                     <label>
                                         <uimessage code="{message}"/>
                                     </label>
+                                    <br/>
                                     <obs conceptId="PIH:{ginaId}" style="radio"
                                          answerConceptIds="PIH:YES,PIH:NO"
                                          answerCodes="yes,no"/>
                                 </p>
-
                             </template>
+                            <render ginaId="14618" message="Exacerbations (more than or equal to 1)" />
                             <render ginaId="11803" message="Datetime symptoms more than twice a week" />
                             <render ginaId="11991" message="Inhaler for symptoms more than twice a week" />
                             <render ginaId="11925" message="Activity limitations due to asthma" />
                             <render ginaId="11731" message="Night waking due to asthma" />
+                            <render ginaId="14619" message="Triggers cause exacerbation of asthma" />
                         </repeat>
-                    </td>
-                </tr>
-            </table>
+                    </obsgroup>
+                </div>
+                <div>
+                    <p class="side-by-side">
+                        <strong>
+                            <uimessage code="Asthma severity"/>
+                        </strong>
+                        <obs conceptId="PIH:7405" style="radio"
+                             answerConceptIds="CIEL:1498,CIEL:1499,CIEL:1500"
+                             answerSeparator="&lt;br /&gt;"/>
+                    </p>
+                </div>
+            </div>
 
-            <br/>
+            <h3>
+                <uimessage code="Spirometry" />
+            </h3>
 
+            <obsgroup groupingConceptId="PIH:14610">
+                <div class="two-columns">
+                    <div>
+                        <obs conceptId="CIEL:163724" labelText="Date" allowTime="false"/>
+                    </div>
+                    <div>
+                        <repeat>
+                            <template>
+                                <obs conceptId="{spiroId}" labelText="{spironame}"/>
+                            </template>
+                            <render spiroId="PIH:14611" spironame="FEV1"/>
+                            <render spiroId="PIH:14612" spironame="FVC"/>
+                        </repeat>
+
+                        <repeat>
+                            <template>
+                                <p class="side-by-side">
+                                    <obs conceptId="{spiroId}" labelText="{spironame}" style="radio"
+                                         answerConceptIds="{answIds}"/>
+                                </p>
+                            </template>
+                            <render spiroId="PIH:14613" spironame="FEV1/FVC"
+                                    answIds="CIEL:1115,CIEL:164471,CIEL:164470"/>
+                            <render spiroId="PIH:14614" spironame="Post-bronchodilator" answIds="CIEL:703,CIEL:664"/>
+                        </repeat>
+                    </div>
+                </div>
+            </obsgroup>
+
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Spirometry progress" />
+                </label>
+                <obs conceptId="PIH:14617" style="radio"
+                     answerConceptIds="CIEL:162677,CIEL:162678,CIEL:162679" />
+            </p>
+
+
+            <h3>
+                <uimessage code="Inhaler" />
+            </h3>
             <p class="side-by-side">
                 <label>
                     <uimessage code="pihcore.ncd.puffsPerWk"/>
@@ -958,6 +1043,33 @@
 
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Chronic kidney disease">
         <div id="kidney_failure" class="section-container">
+
+            <div class="two-columns">
+                <div>
+                    <strong>
+                        CKD Stage
+                    </strong>
+                    <p class="side-by-side">
+                        <obs conceptId="CIEL:165570" style="radio"
+                             answerConceptIds="CIEL:120575,CIEL:120574,CIEL:120579,CIEL:120578,CIEL:120577"
+                             answerLabels="Stage 1,Stage 2,Stage 3,Stage 4,Stage 5"
+                             answerSeparator="&lt;br /&gt;" />
+                    </p>
+                </div>
+                <div>
+                    <label>
+                        Stage 1: with normal or high GFR (GFR &gt; 90 mL/min)
+                        <br/>Stage 2: Mild CKD (GFR = 60-89 mL/min)
+                        <br/>Stage 3: Moderate CKD (GFR = 45-59 mL/min)
+                        <br/>Stage 3B: Moderate CKD (GFR = 30-44 mL/min)
+                        <br/>Stage 4: Severe CKD (GFR = 15-29 mL/min)
+                        <br/>Stage 5: End Stage CKD (GFR &lt; 15 mL/min)
+                    </label>
+
+                </div>
+            </div>
+
+
         </div>
     </section>
 

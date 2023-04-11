@@ -1,0 +1,199 @@
+ {
+   "openmrs/esm-login-app": {
+     "chooseLocation": {
+       "enabled" : true,
+       "useLoginLocationTag": true,
+       "numberToShow": 5
+     },
+     "logo": {
+       "src": "site/logo.png",
+       "alt": "Partners In Health - Sierra Leone"
+     }
+
+   },
+  "@openmrs/esm-patient-registration-app": {
+    "sections": [
+      "demographics", "contact", "social", "identifiers"
+    ],
+    "sectionDefinitions": [
+      {
+        "id": "demographics",
+        "name": "Demographics",
+        "fields": [
+          "name", "gender", "dob", "mothers_name"
+        ]
+      },
+      {
+        "id": "contact",
+        "name": "Contact Info",
+        "fields": [
+          "address", "phone"
+        ]
+      },
+      {
+        "id": "social",
+        "name": "Social",
+        "fields": [
+          "occupation"
+        ]
+      },
+      {
+        "id": "identifiers",
+        "name": "Identifiers",
+        "fields": [
+          "id"
+        ]
+      }
+    ],
+    "fieldDefinitions": [
+      {
+        "id": "mothers_name",
+        "type": "person attribute",
+        "uuid": "${personAttributeType.MOTHERS_FIRST_NAME.uuid}",
+        "label": "Mother's First Name"
+      },
+      {
+        "id": "phone",
+        "type": "person attribute",
+        "uuid": "${personAttributeType.TELEPHONE_NUMBER.uuid}",
+        "label": "Phone Number"
+      },
+      {
+        "id": "occupation",
+        "type": "obs",
+        "uuid": "${concept.occupation.uuid}",
+        "label": "Occupation",
+        "customConceptAnswers": [
+          {
+            "uuid": "${concept.civilServant.uuid}",
+            "label": "Civil servant"
+          } ,
+          {
+            "uuid": "${concept.commerce.uuid}",
+            "label": "Commerce"
+          },
+          {
+            "uuid": "${concept.motorcycletaxi.uuid}",
+            "label": "Commercial bike rider"
+          },
+          {
+            "uuid":"${concept.cowherd.uuid}",
+            "label": "Cowherd"
+          },
+          {
+            "uuid":"${concept.driver.uuid}",
+            "label": "Driver"
+          },
+          {
+            "uuid":"${concept.factoryWorker.uuid}",
+            "label": "Factory worker"
+          },
+          {
+            "uuid":"${concept.farmer.uuid}",
+            "label": "Farmer"
+          },
+          {
+            "uuid":"${concept.fisherman.uuid}",
+            "label": "Fisherman"
+          },
+          {
+            "uuid":"${concept.fruitOrVegetableVendor.uuid}",
+            "label": "Fruit or vegetable vendor"
+          },
+          {
+            "uuid":"${concept.healthCareWorker.uuid}",
+            "label": "Health care worker"
+          },
+          {
+            "uuid":"${concept.housework.uuid}",
+            "label": "Housework"
+          },
+          {
+            "uuid":"${concept.houseworkFieldwork.uuid}",
+            "label": "Housework/Fieldwork"
+          },
+          {
+            "uuid":"${concept.manualLaborer.uuid}",
+            "label": "Manual Laborer"
+          },
+          {
+            "uuid":"${concept.marketVendor.uuid}",
+            "label": "Market Vendor"
+          },
+          {
+            "uuid":"${concept.military.uuid}",
+            "label": "Military"
+          },
+          {
+            "uuid":"${concept.miner.uuid}",
+            "label": "Miner"
+          },
+          {
+            "uuid":"${concept.police.uuid}",
+            "label": "Police"
+          },
+          {
+            "uuid":"${concept.professional.uuid}",
+            "label": "Professional"
+          },
+          {
+            "uuid":"${concept.retired.uuid}",
+            "label": "Retired"
+          },
+          {
+            "uuid":"${concept.shopOwner.uuid}",
+            "label": "Shop owner"
+          },
+          {
+            "uuid":"${concept.student.uuid}",
+            "label": "Student"
+          },
+          {
+            "uuid":"${concept.teacher.uuid}",
+            "label": "Teacher"
+          },
+          {
+            "uuid":"${concept.unemployed.uuid}",
+            "label": "Unemployed"
+          },
+          {
+            "uuid":"${concept.otherNonCoded.uuid}",
+            "label": "Other"
+          }
+        ]
+      }
+    ],
+    "fieldConfigurations": {
+      "name": {
+        "displayMiddleName": true,
+        "unidentifiedPatient": false
+      },
+      "address": {
+        "useAddressHierarchy": {
+          "enabled": true,
+          "useQuickSearch": true,
+          "searchAddressByLevel": true
+        }
+      }
+    },
+    "registrationObs": {
+      "encounterTypeUuid": "${encounterType.PATIENT_REGISTRATION.uuid}",
+      "encounterProviderRoleUuid": "${encounterRole.administrativeClerk.uuid}"
+    }
+  },
+  "@openmrs/esm-primary-navigation-app": {
+    "logo": {
+      "src": "site/logo.png",
+      "alt": "Partners In Health - Sierra Leone",
+      "name": "Partners In Health - Sierra Leone"
+    }
+  },
+   "@openmrs/esm-patient-search-app": {
+     "defaultIdentifierTypes": [
+       "${patientIdentifierType.wellbodyEmrId.uuid}",
+       "${patientIdentifierType.kghEmrId.uuid}",
+       "${patientIdentifierType.ncdId.uuid}"
+     ]
+   }
+}
+

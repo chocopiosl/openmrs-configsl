@@ -41,7 +41,8 @@
   "idCardLabel": "KGH",
 
   "extraIdentifierTypes": [
-    "1a2acce0-7426-11e5-a837-0800200c9a66"
+    "${patientIdentifierType.wellbodyEmrId.uuid}",
+    "${patientIdentifierType.ncdId.uuid}"
   ],
   "findPatientColumnConfig": [
     {
