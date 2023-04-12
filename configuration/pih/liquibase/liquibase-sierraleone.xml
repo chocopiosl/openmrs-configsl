@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="20220411-fix-encounters-not-slotted-in-visits" author="ddesimone">
+         <preConditions onFail="MARK_RAN">
+             <sqlCheck expectedResult="0">
+                select count(*)
+                from encounter e
+                inner join encounter_type et on et.encounter_type_id = e.encounter_type 
+                where e.visit_id is null
+                and e.voided = 0
+                and encounter_type not in
+                (select encounter_type_id from encounter_type where uuid in
+                ('10db3139-07c0-4766-b4e5-a41b01363145','1545d7ff-60f1-485e-9c95-5740b8e6634b','873f968a-73a8-4f9c-ac78-9f4778b751b6',
+                '4d77916a-0620-11e5-a6c0-1697f925ec7b','5b1b4a4e-0084-4137-87db-dba76c784439','74cef0a6-2801-11e6-b67b-9e71128cae77','d5ca53a7-d3b5-44ac-9aa2-1491d2a4b4e9',
+                '873f968a-73a8-4f9c-ac78-9f4778b751b6','39C09928-0CAB-4DBA-8E48-39C631FA4286','b3a0e3ad-b80c-4f3f-9626-ace1ced7e2dd'));
+             </sqlCheck>
+         </preConditions>
+         <comment>
+            SL-306 fix Wellbody encounters not slotted into visits
+         </comment>
+         <sqlFile endDelimiter=";" path="sql/fix_encounters_without_visits.sql" relativeToChangelogFile="true" stripComments="true"/>
+    </changeSet>
+
+</databaseChangeLog>
