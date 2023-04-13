@@ -31,7 +31,9 @@ drop temporary table if exists temp_visits;
 CREATE temporary table temp_visits
 	select v.visit_id , v.patient_id , v.date_started , v.date_stopped
 	from visit v
-	inner join temp_no_visits t on t.patient_id = v.patient_id  and date(v.date_stopped) = date(t.encounter_datetime) ;
+	inner join temp_no_visits t on t.patient_id = v.patient_id  
+		and ((date(v.date_stopped) = date(t.encounter_datetime))
+			or (v.date_started <= t.encounter_datetime and v.date_stopped >=t.encounter_datetime)) ;
 
 drop temporary table if exists temp_visits2;
 CREATE temporary table temp_visits2
@@ -73,7 +75,8 @@ update visit v
 inner join temp_fixed_visits t on t.visit_id = v.visit_id
 set v.date_stopped = t.encounter_datetime,
 	date_changed = now(),
-	changed_by = (select user_id from users where system_id = 'admin');
+	changed_by = (select user_id from users where system_id = 'admin')
+where v.date_stopped < t.encounter_datetime;
 
 -- slot encounters into visits
 update encounter e 
