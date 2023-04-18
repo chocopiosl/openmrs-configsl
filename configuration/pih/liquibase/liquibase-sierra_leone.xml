@@ -18,7 +18,11 @@
 			(select encounter_type_id from encounter_type where uuid in
 			('10db3139-07c0-4766-b4e5-a41b01363145','1545d7ff-60f1-485e-9c95-5740b8e6634b','873f968a-73a8-4f9c-ac78-9f4778b751b6',
 			'4d77916a-0620-11e5-a6c0-1697f925ec7b','5b1b4a4e-0084-4137-87db-dba76c784439','74cef0a6-2801-11e6-b67b-9e71128cae77','d5ca53a7-d3b5-44ac-9aa2-1491d2a4b4e9',
-			'873f968a-73a8-4f9c-ac78-9f4778b751b6','39C09928-0CAB-4DBA-8E48-39C631FA4286','b3a0e3ad-b80c-4f3f-9626-ace1ced7e2dd'));
+			'873f968a-73a8-4f9c-ac78-9f4778b751b6','39C09928-0CAB-4DBA-8E48-39C631FA4286','b3a0e3ad-b80c-4f3f-9626-ace1ced7e2dd'))
+			and exists 
+				(select 1 from visit v where e.patient_id = v.patient_id  
+				and ((date(v.date_stopped) = date(e.encounter_datetime))
+					or (v.date_started <= e.encounter_datetime and v.date_stopped >=e.encounter_datetime)));
             	</sqlCheck>
 	     </not>
          </preConditions>
