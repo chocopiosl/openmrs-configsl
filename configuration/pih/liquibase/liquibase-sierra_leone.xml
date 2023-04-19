@@ -5,7 +5,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="20220411-fix-encounters-not-slotted-in-visits" author="ddesimone">
+    <changeSet id="20230411-fix-encounters-not-slotted-in-visits" author="ddesimone">
          <preConditions onFail="MARK_RAN">
              <not>
 	     	<sqlCheck expectedResult="0">
@@ -22,7 +22,7 @@
 			and exists 
 				(select 1 from visit v where e.patient_id = v.patient_id  
 				and ((date(v.date_stopped) = date(e.encounter_datetime))
-					or (v.date_started <= e.encounter_datetime and v.date_stopped >=e.encounter_datetime)));
+					or (v.date_started &lt;= e.encounter_datetime and v.date_stopped &gt;=e.encounter_datetime)));
             	</sqlCheck>
 	     </not>
          </preConditions>
