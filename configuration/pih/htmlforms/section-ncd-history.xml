@@ -349,7 +349,7 @@
                                 <uimessage code="Hospitalization since last visit"/>
                             </label>
                             <obs id="hospital-stay" conceptId="CIEL:976" style="radio"
-                                 answerConceptIds="CIEL:1065,CIEL:1066">
+                                 answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067">
                                 <controls>
                                     <when value="CIEL:1065" thenDisplay="#num-hospital"/>
                                 </controls>
@@ -364,9 +364,9 @@
                                 <br/>
 
                                 <label>
-                                    <uimessage code="Discharge date"/>
+                                    <uimessage code="Number of days"/>
                                 </label>
-                                <obs conceptId="CIEL:1641" allowTime="false"/>
+                                <obs conceptId="PIH:2872" showUnits="true" />
                             </div>
                         </p>
                     </div>
