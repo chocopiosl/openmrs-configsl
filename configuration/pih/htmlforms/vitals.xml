@@ -25,53 +25,59 @@
         window.messages['pihcore.tbscreen.cough'] = '<uimessage code="pihcore.tbscreen.cough"/>';
     </script>
 
-<style>
+    <style>
         .encounter-summary-container {
-        font-size: 1em;
-        font-weight: normal;
+            font-size: 1em;
+            font-weight: normal;
         }
     </style>
 
-    <style type="text/css">
     <ifMode mode="VIEW" include="false">
+        <style type="text/css">
 
-    #tbEval {
-    display: inline-block;
-    width: 5;
-        vertical-align: top;
-    }
-
-    form input[type="radio"], form input[type="radio"]
-    .form input[type="radio"], .form input[type="radio"] {
-    float: none;
-    display: inline-block;
-    }
-
-    form label, .form label {
-    display: inline-block;
-    }
-
-    .checkboxGroup {
-    padding 30px;
-    }
-
-    .selectFromList {
-    padding-right:30px;
-    padding-left:30px;
-    width: 120px;
-    }
-
-    .two-columns {
-    column-count: 2;
-    -webkit-column-count: 2;
-    -moz-column-count: 2;
-    }
-
-   - .section {
-        width: 100%;
+        #tbEval {
+            display: inline-block;
+            width: 5;
+            vertical-align: top;
         }
+
+        form input[type="radio"], form input[type="radio"]
+        .form input[type="radio"], .form input[type="radio"] {
+            float: none;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        #vitals-form .append-to-value {
+            padding-left: 5px;
+            margin: 10px 10px;
+        }
+
+        form label, .form label {
+            display: inline-block;
+        }
+
+        .checkboxGroup {
+            padding 30px;
+        }
+
+        .selectFromList {
+            padding-right:30px;
+            padding-left:30px;
+            width: 120px;
+        }
+
+        .two-columns {
+            column-count: 2;
+            -webkit-column-count: 2;
+            -moz-column-count: 2;
+        }
+
+       - .section {
+            width: 100%;
+            }
+        </style>
     </ifMode>
-    </style>
 
 
     <ifMode mode="VIEW" include="true">
@@ -132,32 +138,28 @@
                 padding-left: 5px;
             }
 
-        .two-columns {
-            column-count: 2;
-            -webkit-column-count: 2;
-            -moz-column-count: 2;
-        }
+            .two-columns {
+                column-count: 2;
+                -webkit-column-count: 2;
+                -moz-column-count: 2;
+            }
 
+            .section-container {
+                background: #F2F2F2;
+                box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
+                padding: 10px 5px 10px 15px;
+                line-height: 1.5em; /*add this for vertical spacing between elements*/
+            }
 
+            .section-container input[type="checkbox"] {
+                margin: 0px 5px; /*changed values to vertical, horizontal*/
+                top:5px; /*added to offset the checkbox position to line up*/
+            }
 
-   	.section-container {
-        background: #F2F2F2;
-        box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
-        padding: 10px 5px 10px 15px;
-        line-height: 1.5em; /*add this for vertical spacing between elements*/
-        }
-
-        .section-container input[type="checkbox"] {
-        margin: 0px 5px; /*changed values to vertical, horizontal*/
-        top:5px; /*added to offset the checkbox position to line up*/
-        }
-
-        .section-container label { /*new definition to override labels inside section-containers*/
-        margin: 0px;
-        }
-
-
-</style>
+            .section-container label { /*new definition to override labels inside section-containers*/
+                margin: 0px;
+            }
+        </style>
 
     </ifMode>
 
@@ -549,24 +551,22 @@
 
         <fieldset >
             <legend><uimessage code="mirebalais.vitals.height.title"/></legend>
-            <h3><uimessage code="mirebalais.vitals.height.title"/></h3>
-
-            <!-- only show/handle the lbs field if we are in 'ENTER' or 'EDIT' mode -->
+            <h3><uimessage code="mirebalais.vitals.height.title"/> <font style="color:red">(required)</font></h3>
 
             <p class="left">
-                <obs conceptId="PIH:HEIGHT (CM)" id="height_cm" showUnits="emr.units.centimeters" unitsCssClass="append-to-value"/>
+                <obs conceptId="PIH:HEIGHT (CM)" id="height_cm"
+                     showUnits="emr.units.centimeters" unitsCssClass="append-to-value" />
             </p>
 
         </fieldset>
 
         <fieldset >
             <legend><uimessage code="mirebalais.vitals.weight.title"/></legend>
-            <h3><uimessage code="mirebalais.vitals.weight.title"/></h3>
-
-            <!-- only show/handle the lbs field if we are in 'ENTER' or 'EDIT' mode -->
+            <h3><uimessage code="mirebalais.vitals.weight.title"/> <font style="color:red">(required)</font></h3>
 
             <p class="left">
-                <obs conceptId="PIH:WEIGHT (KG)" id="weight_kg" showUnits="emr.units.kilograms" unitsCssClass="append-to-value"/>
+                <obs conceptId="PIH:WEIGHT (KG)" id="weight_kg"
+                     showUnits="emr.units.kilograms" unitsCssClass="append-to-value"/>
             </p>
 
         </fieldset>
@@ -597,40 +597,37 @@
         </includeIf >
         <fieldset display-template="{{#if field.[0]}}{{field.[0]}}, {{/if}}{{#if field.[1]}}{{ message 'pihcore.vitals.sierraLeone.confused' }}: {{field.[1]}}, {{/if}}{{#if field.[2]}}{{ message 'pihcore.vitals.sierraLeone.confused' }}: {{field.[2]}} {{/if}}" class="required">
             <legend><uimessage code="mirebalais.vitals.LevelOfConsciousness.title"/></legend>
-            <!--taken from haiti/hiv/isanteplus VisiteDeSuivi.xml -->
-            <h3><uimessage code="mirebalais.vitals.LevelOfConsciousness.title"/></h3>
+            <h3><uimessage code="mirebalais.vitals.LevelOfConsciousness.title"/> <font style="color:red">(required)</font></h3>
             <p>
                 <field>
-                    <obs conceptId="PIH:10674" id="consciousness_level"  answerSeparator="&lt;br&gt;"
-                        answerConceptIds="CIEL:160282,CIEL:162645,CIEL:162644,PIH:6784"
+                    <obs conceptId="PIH:10674" id="consciousness_level" answerSeparator="&lt;br&gt;"
+                        answerConceptIds="CIEL:160282,CIEL:162645,CIEL:162644,PIH:6784" style="radio"
                         answerLabels="Awake (alert),Responds to voice,Responds to pain,Staring and unresponsive" />
                 </field>
                 <br/>
 
                 <div class="checkboxRadio">
                     <obsgroup groupingConceptId="PIH:Response triage symptom">
-                    <h3><uimessage code="pihcore.vitals.sierraLeone.confused"/></h3>
-                    <field>
-                        <obs conceptId="PIH:SYMPTOM PRESENT" answerConceptId="PIH:CONFUSION"
-                             answerCode="Yes" answerSeparator="" labelText=""/><br></br>
-                    </field>
-                    <field>
-                        <obs conceptId="PIH:SYMPTOM ABSENT" answerConceptId="PIH:CONFUSION"
-                             answerCode="No" answerSeparator="" labelText=""/>
-                    </field>
-                    <br/>
+                        <h3><uimessage code="pihcore.vitals.sierraLeone.confused"/> <font style="color:red">(required)</font></h3>
 
-                    <script type="text/javascript">
-                        /* Configure divs with class checkboxRadio to toggle the checkboxes as if they're radio buttons */
-                        jQuery(document).on('click', ".checkboxRadio input[type$='checkbox']", function() {
-                            var that = this;
-                            jQuery(this).closest('.checkboxRadio').find("input[type$='checkbox']").each(function () {
-                                if (jQuery(this).attr('id') != jQuery(that).attr('id')) {
-                                    jQuery(this).prop("checked", false);
-                                }
+                        <field>
+                            <obs conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT" style="radio"
+                                 answerConceptId="PIH:CONFUSION" labelText=""
+                                 conceptLabels="yes,no" answerSeparator="" />
+                        </field>
+                        <br/>
+
+                        <script type="text/javascript">
+                            /* Configure divs with class checkboxRadio to toggle the checkboxes as if they're radio buttons */
+                            jQuery(document).on('click', ".checkboxRadio input[type$='checkbox']", function() {
+                                var that = this;
+                                jQuery(this).closest('.checkboxRadio').find("input[type$='checkbox']").each(function () {
+                                    if (jQuery(this).attr('id') != jQuery(that).attr('id')) {
+                                        jQuery(this).prop("checked", false);
+                                    }
+                                });
                             });
-                        });
-                    </script>
+                        </script>
                     </obsgroup>
                 </div>
             </p>
@@ -816,7 +813,7 @@
                        </td>
                        <td>
                            <field>
-                               <obs conceptIds="PIH:11563,PIH:11564"
+                               <obs conceptIds="PIH:11563,PIH:11564" style="radio"
                                     answerConceptId="PIH:{1}" conceptLabels="Yes, No" labelText=""/>
                            </field>
                        </td>
