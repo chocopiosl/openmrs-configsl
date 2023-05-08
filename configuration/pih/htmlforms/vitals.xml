@@ -540,12 +540,12 @@
             </includeIf>
         </ifMode>
 
-        <fieldset class="required">
+        <fieldset>
             <legend><uimessage code="mirebalais.vitals.complaint.title"/></legend>
-            <h3><uimessage code="mirebalais.vitals.complaint.title"/></h3>
+            <h3><uimessage code="mirebalais.vitals.complaint.title"/> <font style="color:red">(required)</font></h3>
 
             <p>
-                <obs conceptId="CIEL:160531" id="chief_complaint"/>
+                <obs conceptId="CIEL:160531" id="chief_complaint" required="true"/>
             </p>
         </fieldset>
 
@@ -595,14 +595,14 @@
             </fieldset>
 
         </includeIf >
-        <fieldset display-template="{{#if field.[0]}}{{field.[0]}}, {{/if}}{{#if field.[1]}}{{ message 'pihcore.vitals.sierraLeone.confused' }}: {{field.[1]}}, {{/if}}{{#if field.[2]}}{{ message 'pihcore.vitals.sierraLeone.confused' }}: {{field.[2]}} {{/if}}" class="required">
+        <fieldset display-template="{{#if field.[0]}}{{field.[0]}}, {{/if}}{{#if field.[1]}}{{ message 'pihcore.vitals.sierraLeone.confused' }}: {{field.[1]}}, {{/if}}{{#if field.[2]}}{{ message 'pihcore.vitals.sierraLeone.confused' }}: {{field.[2]}} {{/if}}">
             <legend><uimessage code="mirebalais.vitals.LevelOfConsciousness.title"/></legend>
-            <h3><uimessage code="mirebalais.vitals.LevelOfConsciousness.title"/> <font style="color:red">(required)</font></h3>
+            <h3><uimessage code="mirebalais.vitals.LevelOfConsciousness.title"/> <font style="color:red"> (required)</font></h3>
             <p>
                 <field>
                     <obs conceptId="PIH:10674" id="consciousness_level" answerSeparator="&lt;br&gt;"
                         answerConceptIds="CIEL:160282,CIEL:162645,CIEL:162644,PIH:6784" style="radio"
-                        answerLabels="Awake (alert),Responds to voice,Responds to pain,Staring and unresponsive" />
+                        answerLabels="Awake (alert),Responds to voice,Responds to pain,Staring and unresponsive" required="true"/>
                 </field>
                 <br/>
 
@@ -632,20 +632,20 @@
                 </div>
             </p>
             </fieldset>
-	    <fieldset class="required">
+	    <fieldset>
             <legend><uimessage code="mirebalais.vitals.mobility.title"/></legend>
             <!--taken from haiti/hiv/isanteplus VisiteDeSuivi.xml -->
-            <h3><uimessage code="mirebalais.vitals.mobility.title"/></h3>
+            <h3><uimessage code="mirebalais.vitals.mobility.title"/><font style="color:red"> (required)</font></h3>
                 <p class="left">
-                    <obs conceptId="CIEL:162753" id="mobility_level" answerSeparator="&lt;br&gt;"
-                        answerConceptIds="CIEL:162750,CIEL:162751,CIEL:162752"
+                    <obs conceptId="CIEL:162753" id="mobility_level" style="radio" answerSeparator="&lt;br&gt;"
+                        answerConceptIds="CIEL:162750,CIEL:162751,CIEL:162752" required="true"
                         answerLabels="Able to walk without assistance,Able to walk with assistance,Wheelchair/Stretcher"/>
                 </p>
         </fieldset>
 
-        <fieldset field-separator=" " class="required">
+        <fieldset field-separator=" ">
             <legend><uimessage code="mirebalais.vitals.temperature.title"/></legend>
-            <h3><uimessage code="mirebalais.vitals.temperature.title"/></h3>
+            <h3><uimessage code="mirebalais.vitals.temperature.title"/> <font style="color:red"> (required)</font> </h3>
 
             <!-- only show/handle the fahrenheit field if we are in 'ENTER' or 'EDIT' mode -->
            <!--<ifMode mode="VIEW" include="false">
@@ -662,17 +662,17 @@
             </ifMode>-->
 
             <p class="left">
-                <obs conceptId="PIH:TEMPERATURE (C)" id="temperature_c" showUnits="emr.units.degreesCelsius" unitsCssClass="append-to-value"/>
+                <obs conceptId="PIH:TEMPERATURE (C)" id="temperature_c" showUnits="emr.units.degreesCelsius" unitsCssClass="append-to-value" required="true"/>
             </p>
 
         </fieldset>
 
-        <fieldset class="required">
-            <legend><uimessage code="mirebalais.vitals.heartRate.title"/></legend>
+        <fieldset>
+            <legend><uimessage code="mirebalais.vitals.heartRate.title"/> <font style="color:red"> (required)</font> </legend>
             <h3><uimessage code="mirebalais.vitals.heartRate.title"/></h3>
 
             <p>
-                <obs conceptId="PIH:PULSE" id="heart_rate" showUnits="emr.units.perMinute" unitsCssClass="append-to-value"/>
+                <obs conceptId="PIH:PULSE" id="heart_rate" showUnits="emr.units.perMinute" unitsCssClass="append-to-value" required="true"/>
             </p>
         </fieldset>
 
@@ -691,22 +691,22 @@
             </p>
         </fieldset>
 
-        <fieldset class="required">
+        <fieldset>
             <legend><uimessage code="mirebalais.vitals.respiratoryRate.title"/></legend>
-            <h3><uimessage code="mirebalais.vitals.respiratoryRate.title"/></h3>
+            <h3><uimessage code="mirebalais.vitals.respiratoryRate.title"/> <font style="color:red"> (required)</font></h3>
 
             <p>
-                <obs conceptId="PIH:RESPIRATORY RATE" id="respiratory_rate" showUnits="emr.units.perMinute" unitsCssClass="append-to-value"/>
+                <obs conceptId="PIH:RESPIRATORY RATE" id="respiratory_rate" showUnits="emr.units.perMinute" unitsCssClass="append-to-value" required="true"/>
             </p>
         </fieldset>
 
 
-        <fieldset class="required">
+        <fieldset>
             <legend><uimessage code="mirebalais.vitals.o2sat.title"/></legend>
-            <h3><uimessage code="mirebalais.vitals.o2sat.title"/></h3>
+            <h3><uimessage code="mirebalais.vitals.o2sat.title"/> <font style="color:red">(required)</font> </h3>
 
             <p>
-                <obs conceptId="PIH:BLOOD OXYGEN SATURATION" id="o2_sat" showUnits="emr.units.percent" unitsCssClass="append-to-value"/>
+                <obs conceptId="PIH:BLOOD OXYGEN SATURATION" id="o2_sat" showUnits="emr.units.percent" unitsCssClass="append-to-value" required="true"/>
             </p>
         </fieldset>
 
@@ -801,9 +801,10 @@
     <section id="tb_screening" sectionTag="section" headerStyle="title" headerCode="pihcore.tbscreen.title">
     <!--TB screening taken from /haiti/hiv/zl/vct.xml-->
         <!-- !! make sure this fieldset template stays aligned with field order below or data with be inaccurate !! -->
-         <fieldset display-template="{{#if field.[0]}}{{ message 'pihcore.tbscreen.cough' }}: {{field.[0]}}, {{/if}}{{#if field.[1]}}{{ message 'pihcore.fever' }}: {{field.[1]}}, {{/if}} {{#if field.[2]}}{{ message 'pihcore.tbscreen.nightsweat' }}: {{field.[2]}}, {{/if}}{{#if field.[3]}}{{ message 'pihcore.tbscreen.wtLoss' }}: {{field.[3]}} {{/if}}" class="required">
+         <fieldset display-template="{{#if field.[0]}}{{ message 'pihcore.tbscreen.cough' }}: {{field.[0]}}, {{/if}}{{#if field.[1]}}{{ message 'pihcore.fever' }}: {{field.[1]}}, {{/if}} {{#if field.[2]}}{{ message 'pihcore.tbscreen.nightsweat' }}: {{field.[2]}}, {{/if}}{{#if field.[3]}}{{ message 'pihcore.tbscreen.wtLoss' }}: {{field.[3]}} {{/if}}">
              <legend><uimessage code="pihcore.tbscreen.title"/></legend>
-             <h3><uimessage code="pihcore.tbscreen.title"/><p>If at least two questions answers yes</p></h3>
+             <h3><uimessage code="pihcore.tbscreen.title"/> <font style="color:red">(required)</font>
+                 <p>If at least two questions answers yes</p></h3>
             <table>
                 <repeat with="['Cough > 2 weeks','11567'], ['Fever','5945'], ['Night Sweat','6029'],['Weight Loss','6477']">
                    <tr>
@@ -814,7 +815,7 @@
                        <td>
                            <field>
                                <obs conceptIds="PIH:11563,PIH:11564" style="radio"
-                                    answerConceptId="PIH:{1}" conceptLabels="Yes, No" labelText=""/>
+                                    answerConceptId="PIH:{1}" conceptLabels="Yes, No" labelText="" required="true"/>
                            </field>
                        </td>
                    </tr>
