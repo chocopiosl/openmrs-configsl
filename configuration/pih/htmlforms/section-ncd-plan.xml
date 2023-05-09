@@ -394,8 +394,7 @@
                     <label>
                         <uimessage code="Next appointment date"/>
                     </label>
-                    <obs conceptId="PIH:RETURN VISIT DATE" allowFutureDates="true" allowPastDates="false" id="apptDate"
-                         required="false"/>
+                    <obs conceptId="PIH:RETURN VISIT DATE" allowFutureDates="true" allowPastDates="false" id="apptDate" required="false"/>
 
                     <label>
                         <uimessage code="Next re-filling date"/>
