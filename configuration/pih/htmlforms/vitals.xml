@@ -551,7 +551,7 @@
 
         <fieldset >
             <legend><uimessage code="mirebalais.vitals.height.title"/></legend>
-            <h3><uimessage code="mirebalais.vitals.height.title"/> <font style="color:red">(required)</font></h3>
+            <h3><uimessage code="mirebalais.vitals.height.title"/></h3>
 
             <p class="left">
                 <obs conceptId="PIH:HEIGHT (CM)" id="height_cm"
@@ -562,7 +562,7 @@
 
         <fieldset >
             <legend><uimessage code="mirebalais.vitals.weight.title"/></legend>
-            <h3><uimessage code="mirebalais.vitals.weight.title"/> <font style="color:red">(required)</font></h3>
+            <h3><uimessage code="mirebalais.vitals.weight.title"/></h3>
 
             <p class="left">
                 <obs conceptId="PIH:WEIGHT (KG)" id="weight_kg"
@@ -678,7 +678,7 @@
 
         <fieldset field-separator=" / ">
             <legend><uimessage code="mirebalais.vitals.bloodPressure.title"/></legend>
-            <h3><uimessage code="mirebalais.vitals.bloodPressure.title"/> <font style="color:red">(required)</font></h3>
+            <h3><uimessage code="mirebalais.vitals.bloodPressure.title"/></h3>
 
             <p class="left">
                 <obs conceptId="PIH:SYSTOLIC BLOOD PRESSURE" id="bp_systolic"/>
