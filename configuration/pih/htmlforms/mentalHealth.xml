@@ -18,6 +18,7 @@
           formName="Mental Health Intake"
           formEncounterType="a8584ab8-cc2a-11e5-9956-625662870761" formVersion="1.0">
 
+    <!-- Post submission action -->
     <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.ApplyDispositionAction"/>
 
     <translations defaultLocale="fr">
