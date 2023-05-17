@@ -531,14 +531,28 @@
             </div>
 
             <!-- Drug use -->
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="Traditional medicine" />:
-                </label>
-                <obs conceptId="PIH:13242" answerConceptIds="CIEL:159450,CIEL:159452,CIEL:1090"
-                     answerCodes="Current,Past,Never"
-                     answerSeparator="" style="radio"/>
-            </p>
+            <div class="two-columns">
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="Traditional medicine"/>:
+                        </label>
+                        <obs conceptId="PIH:13242" answerConceptIds="CIEL:159450,CIEL:159452,CIEL:1090"
+                             answerCodes="Current,Past,Never"
+                             answerSeparator="" style="radio"/>
+                    </p>
+                </div>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="pihcore.socioEconomic.homeless"/>:
+                        </label>
+                        <obs conceptId="PIH:14697" answerConceptIds="CIEL:159450,CIEL:159452,CIEL:1090"
+                             answerCodes="Current,Past,Never"
+                             answerSeparator="" style="radio"/>
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 
