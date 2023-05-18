@@ -328,6 +328,17 @@
 
     <enrollInProgram programId="Mental Health" locationTag="Visit Location" />
 
+    <section id="housing" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Housing">
+        <div class="section-container">
+            <p>
+                <!-- Homeless -->
+                <obs conceptId="CIEL:163577" style="checkbox"
+                     answerConceptId="CIEL:163468" />
+            </p>
+        </div>
+    </section>
+
     <!--presentingFeatures-->
     <section id="mh_presentingFeatures" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.presentingFeatures">
