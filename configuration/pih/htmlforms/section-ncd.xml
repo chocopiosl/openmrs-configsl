@@ -437,66 +437,75 @@
                             </td>
                         </tr>
                     </table>
-                    <br/>
                 </div>
+                <br/>
 
-                <table>
-                    <tr>
-                        <td>
-
-                            <div>
-                                <label>
-                                    <uimessage code="mirebalais.vitals.bloodPressure.short.title"/>
-                                </label>
-                                <span class="small">
-                                    <ifMode mode="VIEW" include="true">
-                                        <span class="append-to-value">
-                                            <obs conceptId="CIEL:5085" id="bp_systolic"/>
-                                        </span>
-                                        <span class="append-to-value">/</span>
-                                        <span class="append-to-value">
-                                            <obs conceptId="CIEL:5086" id="bp_diastolic"/>
-                                        </span>
-                                        <span class="append-to-value">mm/Hg</span>
-                                    </ifMode>
-                                    <ifMode mode="VIEW" include="false">
-                                        <span class="append-to-value left">
-                                            <obs conceptId="CIEL:5085" id="bp_systolic"/>
-                                        </span>
-                                        <span class="append-to-value left">/</span>
-                                        <span class="append-to-value left">
-                                            <obs conceptId="CIEL:5086" id="bp_diastolic"/>
-                                        </span>
-                                        <span class="append-to-value">mm/Hg</span>
-                                    </ifMode>
+                <div class="three-columns">
+                    <div>
+                        <label>
+                            <uimessage code="mirebalais.vitals.bloodPressure.short.title"/>
+                        </label>
+                        <span class="small">
+                            <ifMode mode="VIEW" include="true">
+                                <span class="append-to-value">
+                                    <obs conceptId="CIEL:5085" id="bp_systolic"/>
                                 </span>
-                            </div>
-                        </td>
-                        <td>
+                                <span class="append-to-value">/</span>
+                                <span class="append-to-value">
+                                    <obs conceptId="CIEL:5086" id="bp_diastolic"/>
+                                </span>
+                                <span class="append-to-value">mm/Hg</span>
+                            </ifMode>
+                            <ifMode mode="VIEW" include="false">
+                                <span class="append-to-value left">
+                                    <obs conceptId="CIEL:5085" id="bp_systolic"/>
+                                </span>
+                                <span class="append-to-value left">/</span>
+                                <span class="append-to-value left">
+                                    <obs conceptId="CIEL:5086" id="bp_diastolic"/>
+                                </span>
+                                <span class="append-to-value">mm/Hg</span>
+                            </ifMode>
+                        </span>
+                    </div>
+                    <div>
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Glucose fingerstick" />
+                            </label>
+                            <br/>
+                            <obs conceptId="PIH:6689" style="radio"
+                                 answerConceptIds="CIEL:1065,CIEL:1066"
+                                 answerCodes="FBG,RBG" answerSeparator="&lt;br /&gt;" />
+                        </p>
+
+                        <!-- only show MUAC if patient is less than 13 years old (on the encounterDate)-->
+                        <includeIf velocityTest="(13 > $patient.getAge($encounter.getEncounterDatetime()))">
                             <p class="side-by-side">
                                 <label>
-                                    <uimessage code="Glucose fingerstick" />
+                                    <uimessage code="MUAC"/>
                                 </label>
                                 <br/>
-                                <obs conceptId="PIH:6689" style="radio"
-                                     answerConceptIds="CIEL:1065,CIEL:1066"
-                                     answerCodes="FBG,RBG" answerSeparator="&lt;br /&gt;" />
-                            </p>
-                        </td>
-                        <td>
-                            <p class="side-by-side">
-                                <label>
-                                    <uimessage code="BMI results"/>
-                                </label>
-                                <br/>
-                                <obs id="bmi-results" conceptId="CIEL:167092" style="radio"
-                                     answerConceptIds="CIEL:167090,CIEL:114413,CIEL:115115,CIEL:133952"
-                                     answerCodes="Normal (BMI 18.5 - 24.9),Overweight (BMI 25.0 - 29.9),Moderate obese (BMI 30.0 - 34.9),Severe obese (BMI 35.0 - 39.9)"
+                                <obs id="muac-results" conceptId="CIEL:160908" style="radio"
+                                     answerConceptIds="CIEL:127778,CIEL:160910,CIEL:160909"
+                                     answerCodes="red,yellow,green"
                                      answerSeparator="&lt;br /&gt;"/>
                             </p>
-                        </td>
-                    </tr>
-                </table>
+                        </includeIf>
+                    </div>
+                    <div>
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="BMI results"/>
+                            </label>
+                            <br/>
+                            <obs id="bmi-results" conceptId="CIEL:167092" style="radio"
+                                 answerConceptIds="CIEL:167090,CIEL:114413,CIEL:115115,CIEL:133952"
+                                 answerCodes="Normal (BMI 18.5 - 24.9),Overweight (BMI 25.0 - 29.9),Moderate obese (BMI 30.0 - 34.9),Severe obese (BMI 35.0 - 39.9)"
+                                 answerSeparator="&lt;br /&gt;"/>
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
 
