@@ -851,55 +851,65 @@
 
             <table>
                 <tr>
-                    <th width="40%">
+                    <th width="30%">
                         <label>
                             <uimessage code="pihcore.stage.label"/>
                         </label>
                     </th>
                     <th>
                         <label>
-                            <uimessage code="pihcore.bloodPressure.label"/>
+                            <uimessage code="mirebalais.vitals.systolic.bp.title"/>
                         </label>
                     </th>
                     <th>
                         <label>
-                            <uimessage code="pihcore.suggestedTreatment.label"/>
+                            <uimessage code="mirebalais.vitals.diastolic.bp.title"/>
                         </label>
                     </th>
                 </tr>
 
                     <tr>
-                        <td>
+                        <td valign="top">
                             <p class="side-by-side">
                                 <obs conceptId="CIEL:165583" style="radio"
                                      answerConceptIds="CIEL:165206,CIEL:165203,CIEL:165204"
+                                     answerCodes="Pre-HTN,1 (Mild),2 (Moderate)"
                                      answerSeparator="&lt;br /&gt;&lt;br /&gt;"/>
                             </p>
                         </td>
                         <td>
                             <label>
-                                <uimessage code="Pre (&lt;140/90)" />
+                                <uimessage code="&gt; 130 - 139" />
                             </label>
                             <br/>
                             <label>
-                                <uimessage code="Mild/Stage 1 (140/90&amp;nbsp;- 159/99)" />
+                                <uimessage code="&gt; 140 - 159" />
                             </label>
                             <br/>
                             <label>
-                                <uimessage code="Moderate/Stage 2 (&gt;160/100)" />
+                                <uimessage code="&gt; 160" />
+                            </label>
+
+                            <br/>
+                            <label>
+                                <uimessage code="&gt; 180 (Oral medication and refer to the ward for observation)" />
                             </label>
                         </td>
                         <td>
                             <label>
-                                <uimessage code="Repeat BP measurement" />
+                                <uimessage code="&gt; 85 - 89" />
                             </label>
                             <br/>
                             <label>
-                                <uimessage code="change lifestyle; repeat BP in 6-12 months; start anti-hypertensive drug at low dose" />
+                                <uimessage code="&gt; 90 - 99" />
                             </label>
                             <br/>
                             <label>
-                                <uimessage code="proteinuria and glucosuria lab tests; start 2 antihypertensives at minimal dose." />
+                                <uimessage code="&gt; 100" />
+                            </label>
+                            <br/>
+                            <label>
+                                <uimessage code="&gt; 120 (Oral medication and refer to the ward for observation)" />
                             </label>
                         </td>
                     </tr>

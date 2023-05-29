@@ -379,12 +379,25 @@
         </div>
     </section>
 
-    <section id="disposition-section" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+    <section id="clinical-impress" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.consult.clinicalImpressions">
         <div class="section-container">
             <obs conceptId="CIEL:162749" style="textarea" rows="8"/>
         </div>
     </section>
+
+    <style type="text/css">
+        <ifMode mode="EDIT">
+            #disposition-maybe small {
+                font-size: 100%;
+                display: block;
+            }
+
+            #disposition-maybe span {
+                padding-left: 15px;
+            }
+        </ifMode>
+    </style>
 
     <section id="disposition-section" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="coreapps.consult.disposition">
