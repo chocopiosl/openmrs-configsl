@@ -975,50 +975,56 @@
         <div id="heart_failure" class="section-container">
             <div class="two-columns">
                 <div>
-                    <strong>
-                        <uimessage code="pihcore.ncd.hf.categories"/>
-                    </strong>
-                    <br/>
+                    <p class="side-by-side">
+                        <strong>
+                            <uimessage code="pihcore.ncd.hf.categories"/>
+                        </strong>
 
-                    <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                        <obs conceptId="PIH:DIAGNOSIS"
-                             answerConceptIds="CIEL:5016,CIEL:134082,PIH:3071,PIH:12231,PIH:4000,CIEL:130562,CIEL:5622"
-                             style="radio" answerSeparator=""/>
-                    </obsgroup>
+                        <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                            <obs conceptId="PIH:DIAGNOSIS"
+                                 answerConceptIds="CIEL:5016,CIEL:134082,PIH:3071,PIH:12231,PIH:4000,CIEL:130562,CIEL:5622"
+                                 style="radio"
+                                 answerSeparator="&lt;br /&gt;"/>
+                        </obsgroup>
+                        <br/><br/>
 
-                    <label>
-                        <uimessage code="pihcore.ncd.cardiomyopathy"/>
-                    </label>
-                    <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                        <obs conceptId="PIH:DIAGNOSIS"
-                             answerConceptIds="CIEL:113918,CIEL:163712,CIEL:142317,CIEL:139529,CIEL:5016"
-                             answerCodes="pihcore.ncd.ppCardioMy,pihcore.ncd.hivCardioMy,pihcore.ncd.alcCardioMy,pihcore.ncd.iscCardioMy,pihcore.ncd.otherCardioMy"
-                             style="radio" answerSeparator=""/>
-                    </obsgroup>
-                    <br/>
+                        <label>
+                            <uimessage code="pihcore.ncd.cardiomyopathy"/>
+                        </label>
+                        <br/>
+                        <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                            <obs conceptId="PIH:DIAGNOSIS"
+                                 answerConceptIds="CIEL:113918,CIEL:163712,CIEL:142317,CIEL:139529,CIEL:5016"
+                                 answerCodes="pihcore.ncd.ppCardioMy,pihcore.ncd.hivCardioMy,pihcore.ncd.alcCardioMy,pihcore.ncd.iscCardioMy,pihcore.ncd.otherCardioMy"
+                                 style="radio"
+                                 answerSeparator="&lt;br /&gt;"/>
+                        </obsgroup>
+                    </p>
                 </div>
 
                 <div>
-                    <label>
-                        <uimessage code="pihcore.ncd.hf.severity"/>
-                    </label>
-                    <obs conceptId="PIH:NYHA CLASS"
-                         answerConceptIds="PIH:NYHA CLASS 1,PIH:NYHA CLASS 2,PIH:NYHA CLASS 3,PIH:NYHA CLASS 4"
-                         style="radio" answerSeparator=""/>
-                    <br/>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="pihcore.ncd.hf.severity"/>
+                        </label>
+                        <br/>
+                        <obs conceptId="PIH:NYHA CLASS"
+                             answerConceptIds="PIH:NYHA CLASS 1,PIH:NYHA CLASS 2,PIH:NYHA CLASS 3,PIH:NYHA CLASS 4"
+                             style="radio"
+                             answerSeparator="&lt;br /&gt;"/>
+                        <br/><br/>
 
-                    <label>
-                        <uimessage code="pihcore.ncd.hf.vol_status"/>
-                    </label>
-                    <obs conceptId="PIH:PATIENTS FLUID MANAGEMENT"
-                         answerConceptIds="PIH:HYPERVOLEMIC,PIH:EUVOLEMIC,PIH:HYPOVOLEMIC"
-                         style="radio" answerSeparator=""/>
-                    <br/>
+                        <label>
+                            <uimessage code="pihcore.ncd.hf.vol_status"/>
+                        </label>
+                        <br/>
+                        <obs conceptId="PIH:PATIENTS FLUID MANAGEMENT" style="radio"
+                             answerConceptIds="PIH:HYPERVOLEMIC,PIH:EUVOLEMIC,PIH:HYPOVOLEMIC" />
+                    </p>
 
                     <obs conceptId="PIH:11926" answerConceptId="PIH:YES"
                          answerCode="pihcore.ncd.improbable"/>
                 </div>
-                <br/><br/><br/>
             </div>
 
             <br/>
@@ -1049,9 +1055,11 @@
                                 <uimessage code="pihcore.echo.{0}"/>
                             </label>
                         </td>
-                        <td width="50%">
-                            <obs conceptId="{1}" answerConceptIds="{2},{3}"
-                                 style="radio" answerSeparator=""/>
+                        <td>
+                            <p class="side-by-side">
+                                <obs conceptId="{1}" answerConceptIds="{2},{3}"
+                                     style="radio" />
+                            </p>
                         </td>
                     </tr>
                 </repeat>
@@ -1063,10 +1071,11 @@
                         </label>
                     </td>
                     <td>
-                        <obs conceptId="CIEL:165253" style="radio"
-                             answerConceptIds="PIH:SATISFACTORY,PIH:UNSATISFACTORY SAMPLE"
-                             answerCodes="pihcore.adequate,pihcore.inadequate"
-                             answerSeparator=""/>
+                        <p class="side-by-side">
+                            <obs conceptId="CIEL:165253" style="radio"
+                                 answerConceptIds="PIH:SATISFACTORY,PIH:UNSATISFACTORY SAMPLE"
+                                 answerCodes="pihcore.adequate,pihcore.inadequate" />
+                        </p>
                     </td>
                 </tr>
                 <tr>
@@ -1363,7 +1372,7 @@
         </div>
     </section>
 
-    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Chronic kidney disease">
+    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Chronic kidney disease (CKD)/Nephrotic Syndrome">
         <div id="kidney_failure" class="section-container">
 
             <div class="two-columns">
@@ -1380,7 +1389,7 @@
                 </div>
                 <div>
                     <label>
-                        Stage 1: with normal or high GFR (GFR &gt; 90 mL/min)
+                        <br/>Stage 1: with normal or high GFR (GFR &gt; 90 mL/min)
                         <br/>Stage 2: Mild CKD (GFR = 60-89 mL/min)
                         <br/>Stage 3: Moderate CKD (GFR = 45-59 mL/min)
                         <br/>Stage 3B: Moderate CKD (GFR = 30-44 mL/min)
