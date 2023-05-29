@@ -303,9 +303,21 @@
                 <div>
                     <p class="side-by-side">
                         <label>
-                            <uimessage code="Days of lost schooling (related diseases)" />
+                            <uimessage code="Missed school" />
                         </label>
-                        <obs conceptId="PIH:14446" />
+                        <obs id="missed-school" conceptId="PIH:5629" style="radio"
+                             answerConceptIds="CIEL:1065,CIEL:1066">
+                            <controls>
+                                <when value="CIEL:1065" thenDisplay="#days-missed"/>
+                            </controls>
+                        </obs>
+
+                        <div id="days-missed">
+                            <label>
+                                <uimessage code="Days of lost schooling (related diseases)" />
+                            </label>
+                            <obs conceptId="PIH:14446" />
+                        </div>
                     </p>
                 </div>
             </div>
@@ -372,7 +384,7 @@
                                 <label>
                                     <uimessage code="Number of days"/>
                                 </label>
-                                <obs conceptId="PIH:2872" showUnits="true" />
+                                <obs conceptId="PIH:2872" showUnits="emr.units.days" unitsCssClass="append-to-value" />
                             </div>
                         </p>
                     </div>

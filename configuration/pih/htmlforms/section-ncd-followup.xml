@@ -215,6 +215,50 @@
                          answerConceptIds="PIH:1246,PIH:12612,PIH:6192"
                          answerCodes="Scheduled,Non scheduled,Urgent"/>
                 </p>
+
+                <div class="two-columns">
+                    <div>
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Social support" />
+                            </label>
+                            <obs id="social-support" conceptId="CIEL:163766" style="radio"
+                                 answerConceptIds="CIEL:1065,CIEL:1066">
+                                <controls>
+                                    <when value="CIEL:1065" thenDisplay="#specify-support"/>
+                                </controls>
+                            </obs>
+
+                            <div id="specify-support">
+                                <label>if yes, specify support:</label>
+                                <obs conceptId="PIH:2156" answerConceptId="PIH:990"   answerCode="Transport" />
+                                <obs conceptId="PIH:2156" answerConceptId="PIH:1400"  answerCode="Food" />
+                                <obs conceptId="PIH:2156" answerConceptId="PIH:2863"  answerCode="School" />
+                                <obs conceptId="PIH:2156" answerConceptId="CIEL:5622" answerCode="Other" commentFieldCode="specify other support"/>
+                            </div>
+                        </p>
+                    </div>
+                    <div>
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Missed school" />
+                            </label>
+                            <obs id="missed-school" conceptId="PIH:5629" style="radio"
+                                 answerConceptIds="CIEL:1065,CIEL:1066">
+                                <controls>
+                                    <when value="CIEL:1065" thenDisplay="#days-missed"/>
+                                </controls>
+                            </obs>
+
+                            <div id="days-missed">
+                                <label>
+                                    <uimessage code="Days of lost schooling (related diseases)" />
+                                </label>
+                                <obs conceptId="PIH:14446" />
+                            </div>
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
     </includeIf>
