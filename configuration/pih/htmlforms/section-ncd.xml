@@ -713,25 +713,48 @@
             <strong>
                 <uimessage code="Diabetes followup indicators"/>
             </strong>
-            <repeat>
-                <template>
+
+            <div class="two-columns">
+                <div>
+                    <repeat>
+                        <template>
+                            <p class="side-by-side">
+                                <label>
+                                    <uimessage code="{questionName}"/>
+                                </label>
+                                <obs conceptId="{qId}" style="radio"
+                                     answerConceptIds="PIH:YES,PIH:NO"
+                                     answerCodes="yes,no" />
+                            </p>
+                        </template>
+                        <render qId="PIH:6756"    questionName="On insulin" />
+                        <render qId="CIEL:167998" questionName="On ACE inhibitors" />
+                        <render qId="CIEL:167957" questionName="Severe hypoglycemia in last month" />
+                        <render qId="CIEL:167956" questionName="Glycometer (home)" />
+                        <render qId="CIEL:167919" questionName="Ability to read and manage glycometer" />
+                        <render qId="PIH:14709"   questionName="Patient adjusted insulin based on glucometer" />
+                    </repeat>
+
                     <p class="side-by-side">
                         <label>
-                            <uimessage code="{questionName}"/>
+                            <uimessage code="Indications on ACE inhibitors"/><br/>
+                            <uimessage code="(proteinuria present; BP &gt;= 135/75)"/>
                         </label>
-                        <obs conceptId="{qId}" style="radio"
+                        <obs conceptId="CIEL:168000" style="radio"
                              answerConceptIds="PIH:YES,PIH:NO"
                              answerCodes="yes,no" />
                     </p>
-                </template>
-                <render qId="PIH:6756"    questionName="On insulin" />
-                <render qId="CIEL:167998" questionName="On ACE inhibitors" />
-                <render qId="CIEL:167957" questionName="Severe hypoglycemia in last month" />
-                <render qId="CIEL:167956" questionName="Glycometer (home)" />
-                <render qId="CIEL:167919" questionName="Ability to read and manage glycometer" />
-                <render qId="PIH:14709"   questionName="Patient adjusted insulin based on glucometer" />
-                <render qId="CIEL:168000" questionName="Indications on ACE inhibitors (proteinuria present; BP &gt;= 135/75)" />
-            </repeat>
+                </div>
+                <div>
+                    <br/><br/><br/>
+                    <label>
+                        <uimessage code="Number of hypoglycemic episodes (past 30 days)"/>
+                    </label>
+                    <p class="narrow">
+                        <obs conceptId="PIH:14708"/>
+                    </p>
+                </div>
+            </div>
 
             <!-- ToDo:  From Haiti but not on SL paper.  Remove? -->
             <br/>
