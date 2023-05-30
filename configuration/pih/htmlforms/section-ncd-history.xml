@@ -384,16 +384,18 @@
                                 <label>
                                     <uimessage code="Number of days"/>
                                 </label>
-                                <obs conceptId="PIH:2872" showUnits="emr.units.days" unitsCssClass="append-to-value" />
+                                <obs conceptId="PIH:2872" showUnits="coreapps.days" unitsCssClass="append-to-value" />
                             </div>
                         </p>
                     </div>
 
                     <div>
-                        <label>
-                            <uimessage code="Findings during hospitalization"/>
-                        </label>
-                        <obs conceptId="PIH:6899" style="textarea" rows="3"/>
+                        <p>
+                            <label>
+                                <uimessage code="Diagnosis during hospitalization"/>
+                            </label>
+                            <obs conceptId="PIH:6899" style="textarea" rows="3"/>
+                        </p>
 
                         <p class="side-by-side">
                             <label>
@@ -402,6 +404,20 @@
                             <br/>
                             <obs conceptId="PIH:14602" style="radio"
                                  answerConceptIds="CIEL:703,CIEL:664,CIEL:1118" />
+                        </p>
+
+                        <p>
+                            <label>
+                                <uimessage code="Creatinine (at discharge)" />
+                            </label>
+                            <obs conceptId="CIEL:790" showUnits="true" />
+                        </p>
+
+                        <p>
+                            <label>
+                                <uimessage code="Treatment (at discharge)" />
+                            </label>
+                            <obs conceptId="PIH:14715" />
                         </p>
                     </div>
                 </div>
@@ -433,6 +449,8 @@
                     <render qId="CIEL:167877" questionName="Excessive salt" />
                     <render qId="CIEL:167878" questionName="Maggi / Seasoning" />
                     <render qId="CIEL:167998" questionName="On ACE inhibitors" />
+                    <render qId="PIH:14712"   questionName="On NSAIDs" />
+                    <render qId="PIH:14713"   questionName="On Nephrotoxic drugs" />
                  </repeat>
             </div>
 
