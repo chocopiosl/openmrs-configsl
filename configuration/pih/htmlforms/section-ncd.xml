@@ -592,7 +592,7 @@
                 <div>
                     <repeat>
                         <template>
-                            <obs conceptId="PIH:14485" style="checkbox"
+                            <obs id="complications-dm" conceptId="PIH:14485" style="checkbox"
                                  answerConceptId="{acid}" answerCode="{ansLabel}"/>
                         </template>
                         <render acid="CIEL:142452" ansLabel="Diabetic foot"/>
@@ -603,15 +603,30 @@
                         <render acid="CIEL:145438" ansLabel="CKD"/>
                         <render acid="CIEL:120860" ansLabel="Catarata"/>
                         <render acid="CIEL:150807" ansLabel="Sexual dysfunction"/>
-                        <render acid="CIEL:1107" ansLabel="None"/>
+                        <render acid="PIH:14706"   ansLabel="Injection site"/>
+                        <render acid="CIEL:1107"   ansLabel="None"/>
                     </repeat>
+                    <div id="other-complications-dm" >
+                        <label>
+                            <uimessage code="if other complications, specify"/>
+                        </label>
+                        <obs conceptId="PIH:14711"/>
+                    </div>
                 </div>
-                <div>
-                    <!-- ToDo:  Add free-text for other DM complications
+                <div id="injection-site" >
                     <label>
-                        <uimessage code="if other, specify"/>
+                        <uimessage code="Complications at injection site"/>
                     </label>
-                    <obs conceptId="PIH:xx"/> -->
+                    <repeat>
+                        <template>
+                            <obs conceptId="PIH:14706" style="checkbox"
+                                 answerConceptId="{cid}" answerCode="{answerLabel}"/>
+                        </template>
+                        <render cid="PIH:14705"   answerLabel="Lipohypertrophy" />
+                        <render cid="CIEL:137300" answerLabel="Infection" />
+                        <render cid="CIEL:156567" answerLabel="Hematoma" />
+                        <render cid="CIEL:5622"   answerLabel="Other" />
+                    </repeat>
                 </div>
             </div>
 
@@ -714,6 +729,7 @@
                 <render qId="CIEL:167957" questionName="Severe hypoglycemia in last month" />
                 <render qId="CIEL:167956" questionName="Glycometer (home)" />
                 <render qId="CIEL:167919" questionName="Ability to read and manage glycometer" />
+                <render qId="PIH:14709"   questionName="Patient adjusted insulin based on glucometer" />
                 <render qId="CIEL:168000" questionName="Indications on ACE inhibitors (proteinuria present; BP &gt;= 135/75)" />
             </repeat>
 
