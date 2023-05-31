@@ -112,6 +112,25 @@
             display: inline-block;
         }
 
+        .list-inline label, .list-inline input[type="radio"], .list-inline span,
+        .list-inline-wide label, .list-inline-wide input[type="radio"], .list-inline-wide span,
+        .list-inline-extra-wide label, .list-inline-extra-wide input[type="radio"], .list-inline-extra-wide span {
+            display: inline-block;
+            float: none;
+        }
+
+        .list-inline label:first-child {
+            width: 220px;
+        }
+
+        .list-inline-wide label:first-child {
+            width: 320px;
+        }
+
+        .list-inline-extra-wide label:first-child {
+            width: 420px;
+        }
+
         label {
             padding: 0px 3px 0px 0px
         }
@@ -168,7 +187,7 @@
                 <render category="PIH:HYPERTENSION" nickname="htn" code="Hypertension"/>
                 <render category="PIH:HEART FAILURE" nickname="heart_failure" code="Heart failure"/>
                 <render category="PIH:Chronic respiratory disease program" nickname="respire" code="Chronic lung disease" />
-                <render category="PIH:RENAL FAILURE" nickname="kidney_failure" code="Chronic kidney disease"/>
+                <render category="CIEL:145438" nickname="kidney_failure" code="Chronic kidney disease"/>
                 <render category="PIH:3714" nickname="cirrhosis" code="Liver cirrhosis" />
                 <render category="CIEL:160849" nickname="palliative" code="Palliative care"/>
                 <render category="PIH:Sickle-Cell Anemia" nickname="sickle" code="Sickle cell"/>
@@ -282,7 +301,7 @@
                 <repeat>
                     <template>
                         <p>
-                            <p class="side-by-side">
+                            <p class="list-inline-wide">
                                 <label>
                                     <uimessage code="{xId}"/>
                                 </label>
@@ -1435,10 +1454,52 @@
                         <br/>Stage 4: Severe CKD (GFR = 15-29 mL/min)
                         <br/>Stage 5: End Stage CKD (GFR &lt; 15 mL/min)
                     </label>
-
                 </div>
             </div>
 
+            <strong>
+                <uimessage code="CKD followup indicators"/>
+            </strong>
+
+            <div>
+                <repeat>
+                    <template>
+                        <p class="side-by-side">
+                            <obsgroup groupingConceptId="PIH:1292" showIfEmpty="false">
+                                <obs style="radio"
+                                     conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT"
+                                     conceptLabels="yes,no" answerConceptId="{qId}" labelText="{symptName}"/>
+                            </obsgroup>
+                        </p>
+                    </template>
+                    <render qId="CIEL:460"    symptName="Edema" />
+                    <render qId="CIEL:121629" symptName="Anemia" />
+                    <render qId="CIEL:117441" symptName="Hyperlipidemia" />
+                </repeat>
+            </div>
+
+            <div>
+                <obsgroup groupingConceptId="PIH:14717" showIfEmpty="false" >
+                    <repeat>
+                        <template>
+                            <p class="list-inline">
+                                <label>
+                                    <uimessage code="{questionName}"/>
+                                </label>
+                                <obs conceptId="{qId}" style="radio"
+                                     answerConceptIds="PIH:YES,PIH:NO"
+                                     answerCodes="yes,no" />
+                            </p>
+                        </template>
+                        <render qId="PIH:14716"   questionName="HTN controlled" />
+                        <render qId="PIH:14718"   questionName="Stable creatinine level" />
+                        <render qId="PIH:14719"   questionName="Dialysis referral" />
+                        <render qId="PIH:14720"   questionName="On dialysis" />
+                        <render qId="CIEL:128340" questionName="Proteinuria" />
+                        <render qId="PIH:14721"   questionName="CKD relapse" />
+                    </repeat>
+                </obsgroup>
+            </div>
 
         </div>
     </section>
