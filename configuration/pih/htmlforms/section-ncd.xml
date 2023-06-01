@@ -130,7 +130,7 @@
                                    stateIds="51579e44-bf3a-11e7-abc4-cec278b6b50a, 51579fde-bf3a-11e7-abc4-cec278b6b50a, 5157a15a-bf3a-11e7-abc4-cec278b6b50a"
                                    labelCode="51579bce-bf3a-11e7-abc4-cec278b6b50a.custom.title"
                                    stateLabels="Controlled,Uncontrolled,Complicated"
-                                   type="dropdown" />
+                                   type="checkbox" />
                 </div>
             </div>
 
@@ -143,7 +143,7 @@
 
                 <template>
                     <obs conceptId="PIH:NCD category" answerConceptId="{category}" answerCode="{code}"
-                         toggle="{nickname}" style="checkbox"/>
+                         toggle="{nickname}" style="dropdown"/>
                 </template>
 
                 <render category="PIH:DIABETES" nickname="diabetes" code="Diabetes"/>
@@ -191,7 +191,7 @@
             <p class="side-by-side">
                 <label>Obesity</label>
                 <obs conceptIds="PIH:1293,PIH:1734" answerConceptId="CIEL:115115"
-                     style="checkbox" conceptLabels="yes,no" labelText=""/>
+                     style="radio" conceptLabels="yes,no" labelText=""/>
             </p>
 
             <p class="side-by-side">
