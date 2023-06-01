@@ -191,7 +191,7 @@
             <p class="side-by-side">
                 <label>Obesity</label>
                 <obs conceptIds="PIH:1293,PIH:1734" answerConceptId="CIEL:115115"
-                     style="radio" conceptLabels="yes,no" labelText=""/>
+                     style="checkbox" conceptLabels="yes,no" labelText=""/>
             </p>
 
             <p class="side-by-side">
