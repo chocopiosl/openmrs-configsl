@@ -156,7 +156,7 @@
                 <render category="PIH:Sickle-Cell Anemia" nickname="sickle" code="Sickle cell"/>
             </repeat>
             <obs conceptId="PIH:NCD category" answerConceptId="PIH:OTHER"
-                 style="dropdown" toggle="other"
+                 style="checkbox" toggle="other"
                  showCommentField="true" commentFieldLabel=" "/>
         </div>
     </section>
