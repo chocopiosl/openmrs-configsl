@@ -303,9 +303,21 @@
                 <div>
                     <p class="side-by-side">
                         <label>
-                            <uimessage code="Days of lost schooling (related diseases)" />
+                            <uimessage code="Missed school" />
                         </label>
-                        <obs conceptId="PIH:14446" />
+                        <obs id="missed-school" conceptId="PIH:5629" style="radio"
+                             answerConceptIds="CIEL:1065,CIEL:1066">
+                            <controls>
+                                <when value="CIEL:1065" thenDisplay="#days-missed"/>
+                            </controls>
+                        </obs>
+
+                        <div id="days-missed">
+                            <label>
+                                <uimessage code="Days of lost schooling (related diseases)" />
+                            </label>
+                            <obs conceptId="PIH:14446" />
+                        </div>
                     </p>
                 </div>
             </div>
@@ -338,10 +350,10 @@
         </div>
     </section>
 
-    <section id="diagnosis" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+    <section id="hospital" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Hospitalization">
         <div class="section-container-color">
-            <obsgroup groupingConceptId="PIH:HOSPITALIZATION CONSTRUCT">
+            <obsgroup groupingConceptId="PIH:HOSPITALIZATION CONSTRUCT" showIfEmpty="false">
                 <div class="two-columns">
                     <div>
                         <p class="side-by-side">
@@ -358,6 +370,12 @@
 
                             <div id="num-hospital">
                                 <label>
+                                    <uimessage code="mirebalais.dischargeNote.dischargeDate.label"/>
+                                </label>
+                                <obs conceptId="CIEL:1641" allowTime="false" />
+                                <br/>
+
+                                <label>
                                     <uimessage code="Number of hospitalizations since last visit"/>
                                 </label>
                                 <obs conceptId="CIEL:1773" />
@@ -366,16 +384,18 @@
                                 <label>
                                     <uimessage code="Number of days"/>
                                 </label>
-                                <obs conceptId="PIH:2872" showUnits="true" />
+                                <obs conceptId="PIH:2872" showUnits="coreapps.days" unitsCssClass="append-to-value" />
                             </div>
                         </p>
                     </div>
 
                     <div>
-                        <label>
-                            <uimessage code="Findings during hospitalization"/>
-                        </label>
-                        <obs conceptId="PIH:6899" style="textarea" rows="3"/>
+                        <p>
+                            <label>
+                                <uimessage code="Diagnosis during hospitalization"/>
+                            </label>
+                            <obs conceptId="PIH:6899" style="textarea" rows="3"/>
+                        </p>
 
                         <p class="side-by-side">
                             <label>
@@ -384,6 +404,20 @@
                             <br/>
                             <obs conceptId="PIH:14602" style="radio"
                                  answerConceptIds="CIEL:703,CIEL:664,CIEL:1118" />
+                        </p>
+
+                        <p>
+                            <label>
+                                <uimessage code="Creatinine (at discharge)" />
+                            </label>
+                            <obs conceptId="CIEL:790" showUnits="true" />
+                        </p>
+
+                        <p>
+                            <label>
+                                <uimessage code="Treatment (at discharge)" />
+                            </label>
+                            <obs conceptId="PIH:14715" />
                         </p>
                     </div>
                 </div>
@@ -415,6 +449,8 @@
                     <render qId="CIEL:167877" questionName="Excessive salt" />
                     <render qId="CIEL:167878" questionName="Maggi / Seasoning" />
                     <render qId="CIEL:167998" questionName="On ACE inhibitors" />
+                    <render qId="PIH:14712"   questionName="On NSAIDs" />
+                    <render qId="PIH:14713"   questionName="On Nephrotoxic drugs" />
                  </repeat>
             </div>
 
@@ -482,6 +518,26 @@
 
         </div>
     </section>
+
+    <style type="text/css">
+        <ifMode mode="VIEW" include="false">
+            #data-collection {
+                display: inline-block;
+                width: 58%;
+                vertical-align: top;
+            }
+
+            #encounter-diagnoses-target {
+                display: inline-block;
+                width: 40%;
+                vertical-align: top;
+            }
+
+            #encounter-diagnoses-app {
+                margin-bottom: 20px;
+            }
+        </ifMode>
+    </style>
 
     <section id="diagnosis" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Diagnosis">

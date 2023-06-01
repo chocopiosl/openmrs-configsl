@@ -34,6 +34,8 @@
         "id": "social",
         "name": "Social",
         "fields": [
+          "birthplace",
+          "civilStatus",
           "occupation"
         ]
       },
@@ -57,6 +59,44 @@
         "type": "person attribute",
         "uuid": "${personAttributeType.TELEPHONE_NUMBER.uuid}",
         "label": "Phone Number"
+      },
+      {
+        "id": "birthplace",
+        "type": "obs",
+        "uuid": "${concept.birthplace.uuid}",
+        "label": "Place of Birth"
+      },
+      {
+        "id": "civilStatus",
+        "type": "obs",
+        "uuid": "${concept.civilStatus.uuid}",
+        "label": "Civil Status",
+        "customConceptAnswers": [
+          {
+            "uuid": "${concept.singleOrChild.uuid}",
+            "label": "Single"
+          } ,
+          {
+            "uuid": "${concept.married.uuid}",
+            "label": "Married"
+          },
+          {
+            "uuid": "${concept.livingWithPartner.uuid}",
+            "label": "Living with Partner"
+          },
+          {
+            "uuid": "${concept.separated.uuid}",
+            "label": "Separated"
+          },
+          {
+            "uuid": "${concept.divorced.uuid}",
+            "label": "Divorced"
+          },
+          {
+            "uuid": "${concept.widowed.uuid}",
+            "label": "Widowed"
+          }
+        ]
       },
       {
         "id": "occupation",
@@ -176,6 +216,10 @@
         }
       }
     },
+    "defaultPatientIdentifierTypes": [
+      "${patientIdentifierType.wellbodyEmrId.uuid}",
+      "${patientIdentifierType.kghEmrId.uuid}"
+    ],
     "registrationObs": {
       "encounterTypeUuid": "${encounterType.PATIENT_REGISTRATION.uuid}",
       "encounterProviderRoleUuid": "${encounterRole.administrativeClerk.uuid}"

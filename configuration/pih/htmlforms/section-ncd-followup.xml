@@ -40,6 +40,16 @@
             width: 33%;
         }
 
+        .four-columns > div {
+            display: table-cell;
+            width: 25%;
+        }
+
+        .five-columns > div {
+            display: table-cell;
+            width: 20%;
+        }
+
         .two-columns-old {
             column-count: 2;
             -webkit-column-count: 2;
@@ -79,6 +89,14 @@
             width: 100%;
         }
     </style>
+
+    <translations defaultLocale="en">
+        <code name="o2Sat">
+            <variant locale="en" value="O&lt;sub&gt;2&lt;/sub&gt; Sat"/>
+            <variant locale="fr" value="SpO&lt;sub&gt;2&lt;/sub&gt;"/>
+            <variant locale="es" value="SatO&lt;sub&gt;2&lt;/sub&gt;"/>
+        </code>
+    </translations>
 
     <ifMode mode="VIEW" include="false">
         <h1>
@@ -197,6 +215,50 @@
                          answerConceptIds="PIH:1246,PIH:12612,PIH:6192"
                          answerCodes="Scheduled,Non scheduled,Urgent"/>
                 </p>
+
+                <div class="two-columns">
+                    <div>
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Social support" />
+                            </label>
+                            <obs id="social-support" conceptId="CIEL:163766" style="radio"
+                                 answerConceptIds="CIEL:1065,CIEL:1066">
+                                <controls>
+                                    <when value="CIEL:1065" thenDisplay="#specify-support"/>
+                                </controls>
+                            </obs>
+
+                            <div id="specify-support">
+                                <label>if yes, specify support:</label>
+                                <obs conceptId="PIH:2156" answerConceptId="PIH:990"   answerCode="Transport" />
+                                <obs conceptId="PIH:2156" answerConceptId="PIH:1400"  answerCode="Food" />
+                                <obs conceptId="PIH:2156" answerConceptId="PIH:2863"  answerCode="School" />
+                                <obs conceptId="PIH:2156" answerConceptId="CIEL:5622" answerCode="Other" commentFieldCode="specify other support"/>
+                            </div>
+                        </p>
+                    </div>
+                    <div>
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Missed school" />
+                            </label>
+                            <obs id="missed-school" conceptId="PIH:5629" style="radio"
+                                 answerConceptIds="CIEL:1065,CIEL:1066">
+                                <controls>
+                                    <when value="CIEL:1065" thenDisplay="#days-missed"/>
+                                </controls>
+                            </obs>
+
+                            <div id="days-missed">
+                                <label>
+                                    <uimessage code="Days of lost schooling (related diseases)" />
+                                </label>
+                                <obs conceptId="PIH:14446" />
+                            </div>
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
     </includeIf>
@@ -226,7 +288,35 @@
 
                     <tr>
                         <td>
-                            <div class="three-columns">
+                            <div class="five-columns">
+                                <div>
+                                    <label>
+                                        <uimessage code="mirebalais.vitals.bloodPressure.title"/>&amp;nbsp;
+                                    </label>
+                                    <span class="small">
+                                        <span id="last_bp_systolic" class="obs-field">
+                                            <span class="emptyValue">____</span>
+                                        </span>
+                                        <span class="append-to-value">/</span>
+                                        <span id="last_bp_diastolic" class="obs-field">
+                                            <span class="emptyValue">____</span>
+                                        </span>
+                                        <span class="append-to-value">mm/Hg</span>
+                                    </span>
+                                </div>
+
+                                <div>
+                                    <label>
+                                        <uimessage code="mirebalais.vitals.respiratoryRate.title"/>
+                                    </label>
+                                    <span class="small">
+                                        <span id="last_respiratory_rate" class="obs-field">
+                                            <span class="emptyValue">____</span>
+                                        </span>
+                                        <span class="append-to-value">/min</span>
+                                    </span>
+                                </div>
+
                                 <div>
                                     <label>
                                         <uimessage code="mirebalais.vitals.weight.title"/>
@@ -238,6 +328,7 @@
                                         <span class="append-to-value">kg</span>
                                     </span>
                                 </div>
+
                                 <div>
                                     <label>
                                         <uimessage code="mirebalais.vitals.height.title"/>
@@ -267,8 +358,8 @@
 
                     <tr>
                         <td>
-                            <div class="three-columns">
-
+                            <div class="five-columns">
+                                <div></div>
                                 <div>
                                     <label>
                                         <uimessage code="mirebalais.vitals.heartRate.title"/>
@@ -283,7 +374,7 @@
 
                                 <div>
                                     <label>
-                                        <uimessage code="mirebalais.vitals.o2sat.title"/>
+                                        <uimessage code="o2Sat"/>
                                     </label>
                                     <span class="small">
                                         <span id="last_o2_sat" class="obs-field">
@@ -304,108 +395,87 @@
                                         <span class="append-to-value">°C</span>
                                     </span>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="three-columns">
-
-                                <div>
-                                    <label>
-                                        <uimessage code="mirebalais.vitals.bloodPressure.title"/>&amp;nbsp;
-                                    </label>
-                                    <span class="small">
-                                        <span id="last_bp_systolic" class="obs-field">
-                                            <span class="emptyValue">____</span>
-                                        </span>
-                                        <span class="append-to-value">/</span>
-                                        <span id="last_bp_diastolic" class="obs-field">
-                                            <span class="emptyValue">____</span>
-                                        </span>
-                                        <span class="append-to-value">mm/Hg</span>
-                                    </span>
-                                </div>
-
-
-                                <div>
-                                    <label>
-                                        <uimessage code="mirebalais.vitals.respiratoryRate.title"/>
-                                    </label>
-                                    <span class="small">
-                                        <span id="last_respiratory_rate" class="obs-field">
-                                            <span class="emptyValue">____</span>
-                                        </span>
-                                        <span class="append-to-value">/min</span>
-                                    </span>
-                                </div>
                                 <div></div>
-
                             </div>
                         </td>
                     </tr>
                 </table>
-                <br/>
+            </div>
+            <br/>
 
-                <table>
-                    <tr>
-                        <td>
+            <div class="three-columns">
+                <div>
+                    <label>
+                        <uimessage code="mirebalais.vitals.bloodPressure.short.title"/>
+                    </label>
+                    <span class="small">
+                        <ifMode mode="VIEW" include="true">
+                            <span class="append-to-value">
+                                <obs conceptId="CIEL:5085" id="bp_systolic"/>
+                            </span>
+                            <span class="append-to-value">/</span>
+                            <span class="append-to-value">
+                                <obs conceptId="CIEL:5086" id="bp_diastolic"/>
+                            </span>
+                            <span class="append-to-value">mm/Hg</span>
+                        </ifMode>
+                        <ifMode mode="VIEW" include="false">
+                            <span class="append-to-value left">
+                                <obs conceptId="CIEL:5085" id="bp_systolic"/>
+                            </span>
+                            <span class="append-to-value left">/</span>
+                            <span class="append-to-value left">
+                                <obs conceptId="CIEL:5086" id="bp_diastolic"/>
+                            </span>
+                            <span class="append-to-value">mm/Hg</span>
+                        </ifMode>
+                    </span>
+                </div>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="Glucose fingerstick" />
+                        </label>
+                        <br/>
+                        <obs conceptId="PIH:6689" style="radio"
+                             answerConceptIds="CIEL:1065,CIEL:1066"
+                             answerCodes="FBG,RBG" answerSeparator="&lt;br /&gt;" />
+                    </p>
 
-                            <div>
-                                <label>
-                                    <uimessage code="mirebalais.vitals.bloodPressure.short.title"/>
-                                </label>
-                                <span class="small">
-                                    <ifMode mode="VIEW" include="true">
-                                        <span class="append-to-value">
-                                            <obs conceptId="CIEL:5085" id="bp_systolic"/>
-                                        </span>
-                                        <span class="append-to-value">/</span>
-                                        <span class="append-to-value">
-                                            <obs conceptId="CIEL:5086" id="bp_diastolic"/>
-                                        </span>
-                                        <span class="append-to-value">mm/Hg</span>
-                                    </ifMode>
-                                    <ifMode mode="VIEW" include="false">
-                                        <span class="append-to-value left">
-                                            <obs conceptId="CIEL:5085" id="bp_systolic"/>
-                                        </span>
-                                        <span class="append-to-value left">/</span>
-                                        <span class="append-to-value left">
-                                            <obs conceptId="CIEL:5086" id="bp_diastolic"/>
-                                        </span>
-                                        <span class="append-to-value">mm/Hg</span>
-                                    </ifMode>
-                                </span>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="side-by-side">
-                                <label>
-                                    <uimessage code="Glucose fingerstick" />
-                                </label>
-                                <br/>
-                                <obs conceptId="PIH:6689" style="radio"
-                                     answerConceptIds="CIEL:1065,CIEL:1066"
-                                     answerCodes="FBG,RBG" answerSeparator="&lt;br /&gt;" />
-                            </p>
-                        </td>
-                        <td>
-                            <p class="side-by-side">
-                                <label>
-                                    <uimessage code="BMI results"/>
-                                </label>
-                                <br/>
-                                <obs id="bmi-results" conceptId="CIEL:167092" style="radio"
-                                     answerConceptIds="CIEL:167090,CIEL:114413,CIEL:115115,CIEL:133952"
-                                     answerCodes="Normal (BMI 18.5 - 24.9),Overweight (BMI 25.0 - 29.9),Moderate obese (BMI 30.0 - 34.9),Severe obese (BMI 35.0 - 39.9)"
-                                     answerSeparator="&lt;br /&gt;"/>
-                            </p>
-                        </td>
-                    </tr>
-                </table>
+                    <!-- only show MUAC if patient is less than 13 years old (on the encounterDate)-->
+                    <includeIf velocityTest="(13 > $patient.getAge($encounter.getEncounterDatetime()))">
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="MUAC"/>
+                            </label>
+                            <br/>
+                            <obs id="muac-results" conceptId="CIEL:160908" style="radio"
+                                 answerConceptIds="CIEL:127778,CIEL:160910,CIEL:160909"
+                                 answerCodes="red,yellow,green"
+                                 answerSeparator="&lt;br /&gt;"/>
+                        </p>
+                    </includeIf>
+                </div>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="BMI results"/>
+                        </label>
+                        <br/>
+                        <obs id="bmi-results" conceptId="CIEL:167092" style="radio"
+                             answerConceptIds="CIEL:167090,CIEL:114413,CIEL:115115,CIEL:133952"
+                             answerCodes="Normal (BMI 18.5 - 24.9),Overweight (BMI 25.0 - 29.9),Moderate obese (BMI 30.0 - 34.9),Severe obese (BMI 35.0 - 39.9)"
+                             answerSeparator="&lt;br /&gt;"/>
 
-        </div>
+                        <br/><br/>
+                        <obsgroup groupingConceptId="PIH:1292" showIfEmpty="false">
+                            <obs style="radio"
+                                 conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT"
+                                 conceptLabels="yes,no" answerConceptId="CIEL:115115" labelText="Obesity"/>
+                        </obsgroup>
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 

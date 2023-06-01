@@ -131,45 +131,6 @@
             width: 95%;
         }
 
-        /* line 56, ../../../compass/sass/dispensing.scss */
-        fieldset.medication2 p.inline2 select {
-            width: 100px;
-        }
-        /* line 61, ../../../compass/sass/dispensing.scss */
-        fieldset.medication2 .select-arrow2 {
-            overflow: hidden;
-        }
-        /* line 64, ../../../compass/sass/dispensing.scss */
-        fieldset.medication2 .select-arrow2:after {
-            margin-top: 0;
-        }
-        /* line 68, ../../../compass/sass/dispensing.scss */
-        fieldset.medication2 .select-arrow2 select {
-            min-width: 0;
-            min-width: 70px;
-            padding-right: 19px;
-            padding-left: 5px;
-        }
-        /* line 76, ../../../compass/sass/dispensing.scss */
-        fieldset.medication2 .doseInput2 {
-            display: inline-block;
-            vertical-align: top;
-        }
-        /* line 80, ../../../compass/sass/dispensing.scss */
-        fieldset.medication2 .doseInput2 input, fieldset.medication .doseInput2 select {
-            display: inline;
-            min-width: 0;
-        }
-        /* line 85, ../../../compass/sass/dispensing.scss */
-        fieldset.medication2 .doseInput2 input {
-            display: block;
-            width: 50px;
-        }
-        /* line 90, ../../../compass/sass/dispensing.scss */
-        fieldset.medication2 .doseInput2 select {
-            width: 70px;
-        }
-
         .simple-form-ui input {
             min-width: unset;
         }
@@ -366,6 +327,17 @@
     </ifMode>
 
     <enrollInProgram programId="Mental Health" locationTag="Visit Location" />
+
+    <section id="housing" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Housing">
+        <div class="section-container">
+            <p>
+                <!-- Homeless -->
+                <obs conceptId="CIEL:163577" style="checkbox"
+                     answerConceptId="CIEL:163468" />
+            </p>
+        </div>
+    </section>
 
     <!--presentingFeatures-->
     <section id="mh_presentingFeatures" sectionTag="fieldset" headerTag="legend" headerStyle="title"
@@ -776,13 +748,25 @@
         </div>
     </section>
 
+    <ifMode mode="VIEW" include="false">
+        <style>
+            .doseInput select, .frequency select, .duration-unit select {
+                width: 100px;
+            }
+
+            .route select {
+                width: 150px;
+            }
+        </style>
+    </ifMode>
+
     <!--Medication-->
-    <section id="mh-meds-v2" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+    <section id="medication" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.visitNote.plan.medication">
         <div class="section-container">
 
             <!-- ToDo:  Introduce the new modelling in the next release -->
-                <table style="table-layout:fixed">
+                <table>
                     <tr>
                         <th colspan="2">
                             <uimessage code="pihcore.visitNote.plan.dose"/>
@@ -807,10 +791,10 @@
                                     <obs conceptId="PIH:Mental health medication"
                                          answerDrugId="{drug}"
                                          style="checkbox"
-                                         toggle="{id: '{name}-rx-dose', style: 'dim'}" class="medication-checkbox"/>
+                                         toggle="{id: '{name}-rx-details', style: 'hidden'}" class="medication-checkbox"/>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr id="{name}-rx-details">
                                     <td id="{name}-rx-dose" align="right">
                                         <obs id="dose-{name}" class="doseInput" conceptId="CIEL:160856" placeholder="dose"/>
                                     </td>

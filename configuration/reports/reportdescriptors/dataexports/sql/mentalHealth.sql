@@ -1,5 +1,5 @@
 -- set @startDate='2021-01-01';
--- set @endDate='2021-06-30';
+-- set @endDate='2023-05-22';
 
 set @locale = global_property_value('default_locale', 'en');
 select encounter_type_id into @mhIntake from encounter_type where uuid = 'a8584ab8-cc2a-11e5-9956-625662870761';
@@ -22,6 +22,8 @@ create temporary table temp_mh
     other_community_referral varchar(255), 
     referred_by_facility varchar(255),
     other_facility_referral varchar(255),
+    history_of_homelessness varchar(100),
+    housing_type varchar(100), 
     hiv_test varchar(255),
     ARV_start_date datetime,
     TB_smear_result varchar(255),
@@ -279,6 +281,10 @@ update temp_mh set other_drug_history = obs_value_coded_list(encounter_id, 'PIH'
 update temp_mh set other_drug_duration = obs_value_numeric(encounter_id, 'PIH','12997');
 update temp_mh set other_drug_name = obs_value_text(encounter_id, 'PIH','6489');
 update temp_mh set traditional_medicine_history = obs_value_coded_list(encounter_id, 'PIH','13242',@locale);
+
+-- homeless
+ update temp_mh set history_of_homelessness = obs_value_coded_list(encounter_id, 'PIH','14697',@locale);
+ update temp_mh set housing_type = obs_value_coded_list(encounter_id, 'CIEL', 163577, @locale);
 
 -- family history
 update temp_mh set family_epilepsy = obs_value_coded_list(encounter_id, 'CIEL','152450',@locale);
