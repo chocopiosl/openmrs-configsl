@@ -130,7 +130,7 @@
                                    stateIds="51579e44-bf3a-11e7-abc4-cec278b6b50a, 51579fde-bf3a-11e7-abc4-cec278b6b50a, 5157a15a-bf3a-11e7-abc4-cec278b6b50a"
                                    labelCode="51579bce-bf3a-11e7-abc4-cec278b6b50a.custom.title"
                                    stateLabels="Controlled,Uncontrolled,Complicated"
-                                   type="checkbox" />
+                                   type="dropdown" />
                 </div>
             </div>
 
@@ -156,7 +156,7 @@
                 <render category="PIH:Sickle-Cell Anemia" nickname="sickle" code="Sickle cell"/>
             </repeat>
             <obs conceptId="PIH:NCD category" answerConceptId="PIH:OTHER"
-                 style="checkbox" toggle="other"
+                 style="dropdown" toggle="other"
                  showCommentField="true" commentFieldLabel=" "/>
         </div>
     </section>
