@@ -663,7 +663,6 @@
                              answerConceptIds="CIEL:5016,CIEL:134082,PIH:3071,PIH:12231,PIH:4000,CIEL:130562,CIEL:5622"
                              style="radio" answerSeparator=""/>
                     </obsgroup>
-                    <div class="side-by-side">
                     <label>
                         <uimessage code="pihcore.ncd.cardiomyopathy"/>
                     </label>
