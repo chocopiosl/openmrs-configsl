@@ -1038,28 +1038,129 @@
                             <uimessage code="Main diagnosis"/>
                         </strong>
 
-                        <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                            <obs conceptId="PIH:DIAGNOSIS"
-                                 answerConceptIds="CIEL:5016,CIEL:113227,CIEL:127376,CIEL:119092,CIEL:120148,CIEL:124800,CIEL:119956"
-                                 style="radio"
-                                 answerSeparator="&lt;br /&gt;"/>
-                        </obsgroup>
-                        <br/><br/>
+                        <repeat>
+                            <template>
+                                <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                    <obs conceptId="PIH:DIAGNOSIS" style="checkbox"
+                                         answerConceptId="{diagId}"
+                                         toggle="{tag}"/>
+                                </obsgroup>
+                                <br/>
+                            </template>
+                            <render diagId="CIEL:5016"   tag="cardiomyopathy" answers="" />
+                            <render diagId="CIEL:113227" tag="rheumaticHeart" answers="" />
+                            <render diagId="CIEL:127376" tag="rtHeartFail" answers="" />
+                            <render diagId="CIEL:119092" tag="pericardDisease" answers="" />
+                            <render diagId="CIEL:120148" tag="arrythmia" answers="" />
+                            <render diagId="CIEL:124800" tag="thromboemb" answers="" />
+                            <render diagId="CIEL:119956" tag="congenitalHeart" answers="" />
+                        </repeat>
 
-                        <label>
-                            <uimessage code="pihcore.ncd.cardiomyopathy"/>
-                        </label>
-                        <br/>
-                        <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                            <obs conceptId="PIH:DIAGNOSIS"
-                                 answerConceptIds="CIEL:113918,CIEL:163712,CIEL:142317,CIEL:139529,CIEL:5016"
-                                 answerCodes="pihcore.ncd.ppCardioMy,pihcore.ncd.hivCardioMy,pihcore.ncd.alcCardioMy,pihcore.ncd.iscCardioMy,pihcore.ncd.otherCardioMy"
-                                 style="radio"
-                                 answerSeparator="&lt;br /&gt;"/>
-                        </obsgroup>
                     </p>
                 </div>
-                <div></div>
+                <div>
+                    <div id="cardiomyopathy">
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="pihcore.ncd.cardiomyopathy"/>
+                            </label>
+                            <br/>
+                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                <obs conceptId="PIH:DIAGNOSIS" style="radio"
+                                     answerConceptIds="CIEL:139529,CIEL:142317,CIEL:113918,CIEL:163712,CIEL:5016"
+                                     answerSeparator="&lt;br /&gt;" />
+                                <!-- answerCodes="Ischemic,pihcore.ncd.ppCardioMy,pihcore.ncd.hivCardioMy,pihcore.ncd.alcCardioMy,pihcore.ncd.iscCardioMy,pihcore.ncd.otherCardioMy"-->
+                            </obsgroup>
+                        </p>
+                    </div>
+
+                    <div id="rheumaticHeart">
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Rheumatic/Degenerative heart disease"/>
+                            </label>
+                            <br/><!-- Add CIEL:127436,CIEL:127454 -->
+                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                <obs conceptId="PIH:DIAGNOSIS" style="radio"
+                                     answerConceptIds="CIEL:127437,CIEL:115735, CIEL:121532,CIEL:148546"
+                                     answerSeparator="&lt;br /&gt;" />
+                            </obsgroup>
+                        </p>
+                    </div>
+
+                    <div id="rtHeartFail">
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Right heart failure"/>
+                            </label>
+                            <br/>
+                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                <obs conceptId="PIH:DIAGNOSIS" style="radio"
+                                     answerConceptIds="PIH:COR PULMONALE,CIEL:117152"
+                                     answerSeparator="&lt;br /&gt;" />
+                            </obsgroup>
+                        </p>
+                    </div>
+
+                    <div id="pericardDisease">
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Pericardiadial diseases"/>
+                            </label>
+                            <br/>
+                            <!-- ToDo:  Add CIEL:124033,CIEL:159343
+                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                <obs conceptId="PIH:DIAGNOSIS" style="radio"
+                                     answerConceptIds="CIEL:124033,CIEL:159343"
+                                     answerSeparator="&lt;br /&gt;" />
+                            </obsgroup> -->
+                        </p>
+                    </div>
+
+                    <div id="arrythmia">
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Arrythmia"/>
+                            </label>
+                            <br/>
+                            <!-- ToDo:  Add CIEL:148202 -->
+                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                <obs conceptId="PIH:DIAGNOSIS" style="radio"
+                                     answerConceptIds="CIEL:148203"
+                                     answerSeparator="&lt;br /&gt;" />
+                            </obsgroup>
+                        </p>
+                    </div>
+
+                    <div id="thromboemb">
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Thromboembolic"/>
+                            </label>
+                            <br/>
+                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                <obs conceptId="PIH:DIAGNOSIS" style="radio"
+                                     answerConceptIds="CIEL:113504,CIEL:119624"
+                                     answerSeparator="&lt;br /&gt;" />
+                            </obsgroup>
+                        </p>
+                    </div>
+
+                    <div id="congenitalHeart">
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Congenital heart disease"/>
+                            </label>
+                            <br/>
+                            <!--
+                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                <obs conceptId="PIH:DIAGNOSIS" style="radio"
+                                     answerConceptIds="CIEL:127437.CIEL:115735, CIEL:121532,CIEL:148546"
+                                     answerSeparator="&lt;br /&gt;" />
+                            </obsgroup> -->
+                        </p>
+                    </div>
+                </div>
 
             </div>
 
