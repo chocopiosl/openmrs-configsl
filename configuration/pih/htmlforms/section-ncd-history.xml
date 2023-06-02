@@ -43,6 +43,25 @@
             display: inline-block;
         }
 
+        .list-inline label, .list-inline input[type="radio"], .list-inline span,
+        .list-inline-wide label, .list-inline-wide input[type="radio"], .list-inline-wide span,
+        .list-inline-extra-wide label, .list-inline-extra-wide input[type="radio"], .list-inline-extra-wide span {
+            display: inline-block;
+            float: none;
+        }
+
+        .list-inline label:first-child {
+            width: 220px;
+        }
+
+        .list-inline-wide label:first-child {
+            width: 320px;
+        }
+
+        .list-inline-extra-wide label:first-child {
+            width: 420px;
+        }
+
         label {
             padding: 0px 3px 0px 0px
         }
@@ -387,6 +406,7 @@
                                 <obs conceptId="PIH:2872" showUnits="coreapps.days" unitsCssClass="append-to-value" />
                             </div>
                         </p>
+
                     </div>
 
                     <div>
@@ -422,6 +442,23 @@
                     </div>
                 </div>
             </obsgroup>
+
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Hospitalized for heart failure" />
+                </label>
+                <br/>
+                <obs conceptId="PIH:3133" style="radio"
+                     answerConceptIds="CIEL:1065,CIEL:1066" />
+            </p>
+
+            <p>
+                <obsgroup groupingConceptId="CIEL:160714" showIfEmpty="false">
+                    <obs conceptId="CIEL:1651" style="checkbox"
+                         answerConceptId="CIEL:159567"
+                         answerCode="Echocardiogram performed"/>
+                </obsgroup>
+            </p>
         </div>
     </section>
 
@@ -431,7 +468,7 @@
             <div>
                 <repeat>
                     <template>
-                        <p class="side-by-side">
+                        <p class="list-inline">
                             <label>
                                 <uimessage code="{questionName}"/>
                             </label>
@@ -451,7 +488,19 @@
                     <render qId="CIEL:167998" questionName="On ACE inhibitors" />
                     <render qId="PIH:14712"   questionName="On NSAIDs" />
                     <render qId="PIH:14713"   questionName="On Nephrotoxic drugs" />
+                    <render qId="CIEL:140231" questionName="Family history of cardiac disease" />
+
                  </repeat>
+
+                <p class="list-inline">
+                    <label>
+                        <uimessage code="Pregnancy"/>
+                    </label>
+                    <obs conceptId="CIEL:1434" style="yes_no"
+                         noLabel="no" yesLabel="yes"/>
+                </p>
+
+
             </div>
 
             <div>

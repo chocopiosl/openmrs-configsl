@@ -1035,12 +1035,12 @@
                 <div>
                     <p class="side-by-side">
                         <strong>
-                            <uimessage code="pihcore.ncd.hf.categories"/>
+                            <uimessage code="Main diagnosis"/>
                         </strong>
 
                         <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
                             <obs conceptId="PIH:DIAGNOSIS"
-                                 answerConceptIds="CIEL:5016,CIEL:134082,PIH:3071,PIH:12231,PIH:4000,CIEL:130562,CIEL:5622"
+                                 answerConceptIds="CIEL:5016,CIEL:113227,CIEL:127376,CIEL:119092,CIEL:120148,CIEL:124800,CIEL:119956"
                                  style="radio"
                                  answerSeparator="&lt;br /&gt;"/>
                         </obsgroup>
@@ -1059,33 +1059,86 @@
                         </obsgroup>
                     </p>
                 </div>
+                <div></div>
 
-                <div>
-                    <p class="side-by-side">
-                        <label>
-                            <uimessage code="pihcore.ncd.hf.severity"/>
-                        </label>
-                        <br/>
-                        <obs conceptId="PIH:NYHA CLASS"
-                             answerConceptIds="PIH:NYHA CLASS 1,PIH:NYHA CLASS 2,PIH:NYHA CLASS 3,PIH:NYHA CLASS 4"
-                             style="radio"
-                             answerSeparator="&lt;br /&gt;"/>
-                        <br/><br/>
-
-                        <label>
-                            <uimessage code="pihcore.ncd.hf.vol_status"/>
-                        </label>
-                        <br/>
-                        <obs conceptId="PIH:PATIENTS FLUID MANAGEMENT" style="radio"
-                             answerConceptIds="PIH:HYPERVOLEMIC,PIH:EUVOLEMIC,PIH:HYPOVOLEMIC" />
-                    </p>
-
-                    <obs conceptId="PIH:11926" answerConceptId="PIH:YES"
-                         answerCode="pihcore.ncd.improbable"/>
-                </div>
             </div>
 
             <br/>
+
+            <div>
+                <strong>
+                    <uimessage code="Heart failure follow up indicators"/>
+                </strong>
+                <obsgroup groupingConceptId="PIH:14724">
+
+                    <label>
+                        <uimessage code="If systolic function is depressed, treatment class:"/>
+                    </label>
+                    <div class="two-columns">
+                        <repeat>
+                            <template>
+                                <div>
+                                    <p class="side-by-side">
+                                        <label>
+                                            <uimessage code="{messg}" />
+                                        </label>
+                                        <obs conceptId="{cid}" style="radio"
+                                             answerConceptIds="CIEL:1065,CIEL:1066"
+                                             answerCodes="yes,no"/>
+                                    </p>
+                                </div>
+                            </template>
+                            <render cid="PIH:14531" short="ACE" messg="On ACE inhibitors" />
+                            <render cid="PIH:14723" short="BBs" messg="On beta-blockers" />
+                        </repeat>
+                    </div>
+                </obsgroup>
+
+            </div>
+
+            <div>
+                <p class="side-by-side">
+                    <strong>
+                        <uimessage code="pihcore.ncd.hf.nyhaClassification"/>
+                    </strong>
+
+                    <obs conceptId="PIH:NYHA CLASS" style="radio"
+                         answerConceptIds="PIH:NYHA CLASS 1,PIH:NYHA CLASS 2,PIH:NYHA CLASS 3,PIH:NYHA CLASS 4"
+                         answerCodes="I (No limitations),II (Comfortable with moderate exercise),III (Comfortable resting),IV (Not comfortable resting)"
+                         answerSeparator="&lt;br /&gt;"/>
+                </p>
+
+                    <strong>
+                        <uimessage code="Cardiac surgery"/>
+                    </strong>
+                    <obsgroup groupingConceptId="CIEL:160714" showIfEmpty="false">
+                        <div class="three-columns">
+                            <div>
+                                <obs conceptId="CIEL:1651" style="checkbox"
+                                     answerConceptId="PIH:7827"
+                                     answerCode="Cardiac surgery performed"/>
+                            </div>
+                            <div>
+                                <obs conceptId="CIEL:160715" allowTime="false"
+                                     labelText="Date of surgery" />
+                            </div>
+                            <div>
+                                <obs conceptId="CIEL:160716" labelText="Surgery complications" />
+                            </div>
+                        </div>
+                    </obsgroup>
+                <br/>
+
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="pihcore.ncd.hf.vol_status"/>
+                    </label>
+                    <obs conceptId="PIH:PATIENTS FLUID MANAGEMENT" style="radio"
+                         answerConceptIds="PIH:HYPERVOLEMIC,PIH:EUVOLEMIC,PIH:HYPOVOLEMIC" />
+                </p>
+
+            </div>
+
             <div>
                 <label>
                     <uimessage code="pihcore.remarks"/>:
