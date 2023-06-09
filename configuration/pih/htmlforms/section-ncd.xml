@@ -1106,12 +1106,12 @@
                     <div id="pericardDisease">
                         <p class="side-by-side">
                             <label>
-                                <uimessage code="Pericardiadial diseases"/>
+                                <uimessage code="Pericardial diseases"/>
                             </label>
                             <br/>
                             <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
                                 <obs conceptId="PIH:DIAGNOSIS" style="radio"
-                                     answerConceptIds="CIEL:124033,CIEL:159343,CIEL:124033,CIEL:159343"
+                                     answerConceptIds="CIEL:124033,CIEL:159343"
                                      answerSeparator="&lt;br /&gt;" />
                             </obsgroup>
                         </p>
@@ -1148,20 +1148,20 @@
                     <div id="congenitalHeart">
                         <p class="side-by-side">
                             <label>
-                                <uimessage code="Congenital heart disease"/>
+                                <uimessage code="Congenital heart disease, specify:"/>
                             </label>
                             <br/>
-                            <!-- ToDo: Add concept -->
+                            <obs conceptId="PIH:14742"/>
                         </p>
                     </div>
 
                     <div id="unknownHeart">
                         <p class="side-by-side">
                             <label>
-                                <uimessage code="Unknown"/>
+                                <uimessage code="Unknown, specify:"/>
                             </label>
                             <br/>
-                            <!-- ToDo: Add concept -->
+                            <obs conceptId="PIH:14742"/>
                         </p>
                     </div>
                 </div>
