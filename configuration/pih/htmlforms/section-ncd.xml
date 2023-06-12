@@ -1035,57 +1035,267 @@
                 <div>
                     <p class="side-by-side">
                         <strong>
-                            <uimessage code="pihcore.ncd.hf.categories"/>
+                            <uimessage code="Main diagnosis"/>
                         </strong>
 
-                        <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                            <obs conceptId="PIH:DIAGNOSIS"
-                                 answerConceptIds="CIEL:5016,CIEL:134082,PIH:3071,PIH:12231,PIH:4000,CIEL:130562,CIEL:5622"
-                                 style="radio"
-                                 answerSeparator="&lt;br /&gt;"/>
-                        </obsgroup>
-                        <br/><br/>
+                        <repeat>
+                            <template>
+                                <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                    <obs conceptId="PIH:DIAGNOSIS" style="checkbox"
+                                         answerConceptId="{diagId}"
+                                         toggle="{tag}"/>
+                                </obsgroup>
+                                <br/>
+                            </template>
+                            <render diagId="CIEL:5016"   tag="cardiomyopathy" answers="" />
+                            <render diagId="CIEL:113227" tag="rheumaticHeart" answers="" />
+                            <render diagId="CIEL:127376" tag="rtHeartFail" answers="" />
+                            <render diagId="CIEL:119092" tag="pericardDisease" answers="" />
+                            <render diagId="CIEL:120148" tag="arrythmia" answers="" />
+                            <render diagId="CIEL:124800" tag="thromboemb" answers="" />
+                            <render diagId="CIEL:119956" tag="congenitalHeart" answers="" />
+                            <render diagId="PIH:12231"   tag="unknownHeart" answers="" />
+                        </repeat>
 
-                        <label>
-                            <uimessage code="pihcore.ncd.cardiomyopathy"/>
-                        </label>
-                        <br/>
-                        <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                            <obs conceptId="PIH:DIAGNOSIS"
-                                 answerConceptIds="CIEL:113918,CIEL:163712,CIEL:142317,CIEL:139529,CIEL:5016"
-                                 answerCodes="pihcore.ncd.ppCardioMy,pihcore.ncd.hivCardioMy,pihcore.ncd.alcCardioMy,pihcore.ncd.iscCardioMy,pihcore.ncd.otherCardioMy"
-                                 style="radio"
-                                 answerSeparator="&lt;br /&gt;"/>
-                        </obsgroup>
                     </p>
                 </div>
-
                 <div>
-                    <p class="side-by-side">
-                        <label>
-                            <uimessage code="pihcore.ncd.hf.severity"/>
-                        </label>
-                        <br/>
-                        <obs conceptId="PIH:NYHA CLASS"
-                             answerConceptIds="PIH:NYHA CLASS 1,PIH:NYHA CLASS 2,PIH:NYHA CLASS 3,PIH:NYHA CLASS 4"
-                             style="radio"
-                             answerSeparator="&lt;br /&gt;"/>
-                        <br/><br/>
+                    <div id="cardiomyopathy">
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="pihcore.ncd.cardiomyopathy"/>
+                            </label>
+                            <br/>
+                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                <obs conceptId="PIH:DIAGNOSIS" style="radio"
+                                     answerConceptIds="CIEL:139529,CIEL:142317,CIEL:113918,CIEL:163712,CIEL:5016,CIEL:168116"
+                                     answerSeparator="&lt;br /&gt;" />
+                                <!-- answerCodes="Ischemic,pihcore.ncd.ppCardioMy,pihcore.ncd.hivCardioMy,pihcore.ncd.alcCardioMy,pihcore.ncd.iscCardioMy,pihcore.ncd.otherCardioMy"-->
+                            </obsgroup>
+                        </p>
+                    </div>
 
-                        <label>
-                            <uimessage code="pihcore.ncd.hf.vol_status"/>
-                        </label>
-                        <br/>
-                        <obs conceptId="PIH:PATIENTS FLUID MANAGEMENT" style="radio"
-                             answerConceptIds="PIH:HYPERVOLEMIC,PIH:EUVOLEMIC,PIH:HYPOVOLEMIC" />
-                    </p>
+                    <div id="rheumaticHeart">
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Rheumatic/Degenerative heart disease"/>
+                            </label>
+                            <br/>
+                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                <obs conceptId="PIH:DIAGNOSIS" style="radio"
+                                     answerConceptIds="CIEL:127437,CIEL:115735,CIEL:127436,CIEL:121532,CIEL:148546,CIEL:127454"
+                                     answerSeparator="&lt;br /&gt;" />
+                            </obsgroup>
+                        </p>
+                    </div>
 
-                    <obs conceptId="PIH:11926" answerConceptId="PIH:YES"
-                         answerCode="pihcore.ncd.improbable"/>
+                    <div id="rtHeartFail">
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Right heart failure"/>
+                            </label>
+                            <br/>
+                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                <obs conceptId="PIH:DIAGNOSIS" style="radio"
+                                     answerConceptIds="PIH:COR PULMONALE,CIEL:117152"
+                                     answerSeparator="&lt;br /&gt;" />
+                            </obsgroup>
+                        </p>
+                    </div>
+
+                    <div id="pericardDisease">
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Pericardial diseases"/>
+                            </label>
+                            <br/>
+                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                <obs conceptId="PIH:DIAGNOSIS" style="radio"
+                                     answerConceptIds="CIEL:124033,CIEL:159343"
+                                     answerSeparator="&lt;br /&gt;" />
+                            </obsgroup>
+                        </p>
+                    </div>
+
+                    <div id="arrythmia">
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Arrythmia"/>
+                            </label>
+                            <br/>
+                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                <obs conceptId="PIH:DIAGNOSIS" style="radio"
+                                     answerConceptIds="CIEL:148203,CIEL:148202"
+                                     answerSeparator="&lt;br /&gt;" />
+                            </obsgroup>
+                        </p>
+                    </div>
+
+                    <div id="thromboemb">
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Thromboembolic"/>
+                            </label>
+                            <br/>
+                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                <obs conceptId="PIH:DIAGNOSIS" style="radio"
+                                     answerConceptIds="CIEL:113504,CIEL:119624"
+                                     answerSeparator="&lt;br /&gt;" />
+                            </obsgroup>
+                        </p>
+                    </div>
+
+                    <div id="congenitalHeart">
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Congenital heart disease, specify:"/>
+                            </label>
+                            <br/>
+                            <obs conceptId="PIH:14742"/>
+                        </p>
+                    </div>
+
+                    <div id="unknownHeart">
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Unknown, specify:"/>
+                            </label>
+                            <br/>
+                            <obs conceptId="PIH:14742"/>
+                        </p>
+                    </div>
                 </div>
+
             </div>
 
             <br/>
+
+            <div>
+                <strong>
+                    <uimessage code="Heart failure followup indicators"/>
+                </strong>
+
+                <div>
+                    <repeat>
+                        <template>
+                            <p class="list-inline">
+                                <obsgroup groupingConceptId="PIH:14733" showIfEmpty="false">
+                                    <obs style="radio"
+                                         conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
+                                         conceptLabels="yes,no,unknown" answerConceptId="{qId}" labelText="{symptName}"/>
+                                </obsgroup>
+                            </p>
+                        </template>
+                        <render qId="CIEL:122496" symptName="Dyspnea" />
+                        <render qId="CIEL:131689" symptName="Orthopnea" />
+                        <render qId="CIEL:130783" symptName="Paroxysmal nocturnal dyspnea" />
+                        <render qId="CIEL:130166" symptName="Pitting edema" />
+                        <render qId="CIEL:127640" symptName="Crackles" />
+                        <render qId="CIEL:136394" symptName="Jugular distension" />
+                        <!-- <render qId="CIEL:" symptName="Loud murmur" /> -->
+                        <render qId="CIEL:119664" symptName="Decompensated" />
+                    </repeat>
+                </div>
+
+                <obsgroup groupingConceptId="PIH:14724">
+                    <p class="list-inline-wide">
+                        <label>
+                            <uimessage code="Volume status"/>
+                        </label>
+                        <obs conceptId="CIEL:159574" style="radio"
+                             answerConceptIds="CIEL:159575,CIEL:117315,CIEL:138099" />
+                    </p>
+
+                    <div>
+                        <repeat>
+                            <template>
+                                <p class="list-inline-wide">
+                                    <label>
+                                        <uimessage code="{questionName}"/>
+                                    </label>
+                                    <obs conceptId="{qId}" style="radio"
+                                         answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                                         answerCodes="yes,no,unknown" />
+                                </p>
+                            </template>
+                            <render qId="CIEL:168115" questionName="Low salt adherence diet" />
+                            <render qId="CIEL:1788"   questionName="Refer for admission" />
+                            <render qId="PIH:14738"   questionName="Refer for surgery evaluation" />
+                            <render qId="PIH:14739"   questionName="Endocarditis prevention therapy" />
+                            <render qId="PIH:14740"   questionName="Echocardiogram improvement" />
+                            <render qId="PIH:14741"   questionName="Ability to titrate diuretic" />
+                        </repeat>
+
+                    </div>
+
+                    <label>
+                        <uimessage code="If systolic function is depressed, treatment class:"/>
+                    </label>
+                    <div class="two-columns">
+                        <repeat>
+                            <template>
+                                <div>
+                                    <p class="side-by-side">
+                                        <label>
+                                            <uimessage code="{messg}" />
+                                        </label>
+                                        <obs conceptId="{cid}" style="radio"
+                                             answerConceptIds="CIEL:1065,CIEL:1066"
+                                             answerCodes="yes,no"/>
+                                    </p>
+                                </div>
+                            </template>
+                            <render cid="PIH:14531" short="ACE" messg="On ACE inhibitors" />
+                            <render cid="PIH:14723" short="BBs" messg="On beta-blockers" />
+                        </repeat>
+                    </div>
+                </obsgroup>
+
+            </div>
+
+            <div>
+                <p class="side-by-side">
+                    <strong>
+                        <uimessage code="pihcore.ncd.hf.nyhaClassification"/>
+                    </strong>
+
+                    <obs conceptId="PIH:NYHA CLASS" style="radio"
+                         answerConceptIds="PIH:NYHA CLASS 1,PIH:NYHA CLASS 2,PIH:NYHA CLASS 3,PIH:NYHA CLASS 4"
+                         answerCodes="I (No limitations),II (Comfortable with moderate exercise),III (Comfortable resting),IV (Not comfortable resting)"
+                         answerSeparator="&lt;br /&gt;"/>
+                </p>
+
+                    <strong>
+                        <uimessage code="Cardiac surgery"/>
+                    </strong>
+                    <obsgroup groupingConceptId="CIEL:160714" showIfEmpty="false">
+                        <div class="three-columns">
+                            <div>
+                                <obs conceptId="CIEL:1651" style="checkbox"
+                                     answerConceptId="PIH:7827"
+                                     answerCode="Cardiac surgery performed"/>
+                            </div>
+                            <div>
+                                <obs conceptId="CIEL:160715" allowTime="false"
+                                     labelText="Date of surgery" />
+                            </div>
+                            <div>
+                                <obs conceptId="CIEL:160716" labelText="Surgery complications" />
+                            </div>
+                        </div>
+                    </obsgroup>
+                <br/>
+
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="pihcore.ncd.hf.vol_status"/>
+                    </label>
+                    <obs conceptId="PIH:PATIENTS FLUID MANAGEMENT" style="radio"
+                         answerConceptIds="PIH:HYPERVOLEMIC,PIH:EUVOLEMIC,PIH:HYPOVOLEMIC" />
+                </p>
+
+            </div>
+
             <div>
                 <label>
                     <uimessage code="pihcore.remarks"/>:
@@ -1465,7 +1675,7 @@
                 <repeat>
                     <template>
                         <p class="side-by-side">
-                            <obsgroup groupingConceptId="PIH:1292" showIfEmpty="false">
+                            <obsgroup groupingConceptId="PIH:14732" showIfEmpty="false">
                                 <obs style="radio"
                                      conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT"
                                      conceptLabels="yes,no" answerConceptId="{qId}" labelText="{symptName}"/>
@@ -1478,8 +1688,8 @@
                 </repeat>
             </div>
 
-            <div>
-                <obsgroup groupingConceptId="PIH:14717" showIfEmpty="false" >
+            <obsgroup groupingConceptId="PIH:14717" showIfEmpty="false" >
+                <div>
                     <repeat>
                         <template>
                             <p class="list-inline">
@@ -1498,8 +1708,9 @@
                         <render qId="CIEL:128340" questionName="Proteinuria" />
                         <render qId="PIH:14721"   questionName="CKD relapse" />
                     </repeat>
-                </obsgroup>
-            </div>
+
+                </div>
+            </obsgroup>
 
         </div>
     </section>
