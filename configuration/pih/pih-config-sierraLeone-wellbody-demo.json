@@ -1,0 +1,40 @@
+{
+  "locationTags": {
+    "Login Location": ["Wellbody Clinic", "Wellbody MCH", "Wellbody NCD", "Wellbody Mental Health", "KGH Triage"],
+    "Program Location": ["Wellbody MCH", "Wellbody NCD", "Wellbody Mental Health"]
+  },
+  "components": [
+    "activeVisits",
+    "allergies",
+    "checkIn",
+    "clinicianDashboard",
+    "dataExports",
+    "dispensing",
+    "echocardiogram",
+    "edConsult",
+    "edTriage",
+    "edTriageQueue",
+    "idcardPrinting",
+    "labResults",
+    "labs",
+    "managePrinters",
+    "markPatientDead",
+    "mchForms",
+    "mchGAINMaternal",
+    "mentalHealth",
+    "myAccount",
+    "ncd",
+    "overviewReports",
+    "patientDocuments",
+    "patientRegistration",
+    "primaryCare",
+    "programs",
+    "relationships",
+    "spaPreview",
+    "systemAdministration",
+    "visitManagement",
+    "visitNote",
+    "vitals",
+    "vitalsHomepageApp"
+  ]
+}
