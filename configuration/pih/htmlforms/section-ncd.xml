@@ -212,6 +212,7 @@
                 const diastolicBPConceptUuid = '3ce93694-26fe-102b-80cb-0017a47871b2';
                 const hrConceptUuid = '3ce93824-26fe-102b-80cb-0017a47871b2';
                 const temperatureConceptUuid = '3ce939d2-26fe-102b-80cb-0017a47871b2';
+                const muacConceptUuid = 'e3e03a93-de7f-41ea-b8f2-60b220b970e9';
                 const respiratoryRateConceptUuid = '3ceb11f8-26fe-102b-80cb-0017a47871b2';
                 const o2SatConceptUuid = '3ce9401c-26fe-102b-80cb-0017a47871b2';
 
@@ -264,7 +265,10 @@
                                     } else if (obs.concept.uuid === temperatureConceptUuid) {
                                         jq("#last_temperature_c").text(obs.value);
                                         jq("#last_temperature_c").removeClass("emptyValue").addClass("value");
-                                    } else if (obs.concept.uuid === respiratoryRateConceptUuid) {
+                                    } else if (obs.concept.uuid === muacConceptUuid) {
+                                        jq("#last_muac_mm").text(obs.value);
+                                        jq("#last_muac_mm").removeClass("emptyValue").addClass("value");
+                                    }  else if (obs.concept.uuid === respiratoryRateConceptUuid) {
                                         jq("#last_respiratory_rate").text(obs.value);
                                         jq("#last_respiratory_rate").removeClass("emptyValue").addClass("value");
                                     } else if (obs.concept.uuid === o2SatConceptUuid) {
@@ -451,7 +455,17 @@
                                             <span class="append-to-value">°C</span>
                                         </span>
                                     </div>
-                                    <div></div>
+                                    <div>
+                                        <label>
+                                            <uimessage code="mirebalais.vitals.muac.navigation.title"/>
+                                        </label>
+                                        <span class="small">
+                                            <span id="last_muac_mm" class="obs-field">
+                                                <span class="emptyValue">____</span>
+                                            </span>
+                                            <span class="append-to-value"><uimessage code="emr.units.millimeters"/></span>
+                                        </span>
+                                    </div>
                                 </div>
                             </td>
                         </tr>
