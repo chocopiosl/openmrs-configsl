@@ -1082,11 +1082,18 @@
                             <br/>
                             <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
                                 <obs conceptId="PIH:DIAGNOSIS" style="radio"
-                                     answerConceptIds="CIEL:139529,CIEL:142317,CIEL:113918,CIEL:163712,CIEL:5016,CIEL:168116"
+                                     answerConceptIds="CIEL:139529,CIEL:142317,CIEL:113918,CIEL:163712,CIEL:168116,CIEL:168128,PIH:14748"
                                      answerSeparator="&lt;br /&gt;" />
-                                <!-- answerCodes="Ischemic,pihcore.ncd.ppCardioMy,pihcore.ncd.hivCardioMy,pihcore.ncd.alcCardioMy,pihcore.ncd.iscCardioMy,pihcore.ncd.otherCardioMy"-->
-                            </obsgroup>
+                             </obsgroup>
+                            <br/>
+                            <obs conceptId="PIH:14752" style="checkbox"
+                                 answerConceptId="PIH:14753" answerCode="unknown" />
+                            <br/>
+                            <obs conceptId="PIH:14752" style="checkbox"
+                                 answerConceptId="PIH:14754" answerCode="other" />
+                            <obs conceptId="PIH:14754" style="text" />
                         </p>
+
                     </div>
 
                     <div id="rheumaticHeart">
@@ -1097,7 +1104,7 @@
                             <br/>
                             <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
                                 <obs conceptId="PIH:DIAGNOSIS" style="radio"
-                                     answerConceptIds="CIEL:127437,CIEL:115735,CIEL:127436,CIEL:121532,CIEL:148546,CIEL:127454"
+                                     answerConceptIds="CIEL:127437,CIEL:115735,CIEL:127436,CIEL:121532,CIEL:148546,CIEL:127454,PIH:14750"
                                      answerSeparator="&lt;br /&gt;" />
                             </obsgroup>
                         </p>
@@ -1114,6 +1121,10 @@
                                      answerConceptIds="PIH:COR PULMONALE,CIEL:117152"
                                      answerSeparator="&lt;br /&gt;" />
                             </obsgroup>
+
+                            <br/>
+                            <obs conceptId="PIH:14752" style="checkbox"
+                                 answerConceptId="PIH:14755" answerCode="unknown" />
                         </p>
                     </div>
 
@@ -1125,7 +1136,7 @@
                             <br/>
                             <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
                                 <obs conceptId="PIH:DIAGNOSIS" style="radio"
-                                     answerConceptIds="CIEL:124033,CIEL:159343"
+                                     answerConceptIds="CIEL:124033,CIEL:168127,CIEL:159343"
                                      answerSeparator="&lt;br /&gt;" />
                             </obsgroup>
                         </p>
@@ -1156,6 +1167,11 @@
                                      answerConceptIds="CIEL:113504,CIEL:119624"
                                      answerSeparator="&lt;br /&gt;" />
                             </obsgroup>
+
+                            <br/>
+                            <obs conceptId="PIH:14752" style="checkbox"
+                                 answerConceptId="PIH:14756" answerCode="other" />
+                            <obs conceptId="PIH:14756" style="text" />
                         </p>
                     </div>
 
@@ -1172,7 +1188,7 @@
                     <div id="unknownHeart">
                         <p class="side-by-side">
                             <label>
-                                <uimessage code="Unknown, specify:"/>
+                                <uimessage code="Unknown suspected, specify:"/>
                             </label>
                             <br/>
                             <obs conceptId="PIH:14742"/>
@@ -1206,7 +1222,7 @@
                         <render qId="CIEL:130166" symptName="Pitting edema" />
                         <render qId="CIEL:127640" symptName="Crackles" />
                         <render qId="CIEL:136394" symptName="Jugular distension" />
-                        <!-- <render qId="CIEL:" symptName="Loud murmur" /> -->
+                        <render qId="PIH:14751"   symptName="Loud murmur" />
                         <render qId="CIEL:119664" symptName="Decompensated" />
                     </repeat>
                 </div>
