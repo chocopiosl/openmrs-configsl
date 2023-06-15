@@ -456,6 +456,8 @@
                                         </span>
                                     </div>
                                     <div>
+                                        <!-- only show MUAC if patient is less than 13 years old (on the encounterDate)-->
+                                        <includeIf velocityTest="(13 > $patient.getAge($encounter.getEncounterDatetime()))">
                                         <label>
                                             <uimessage code="mirebalais.vitals.muac.navigation.title"/>
                                         </label>
@@ -465,6 +467,7 @@
                                             </span>
                                             <span class="append-to-value"><uimessage code="emr.units.millimeters"/></span>
                                         </span>
+                                        </includeIf>
                                     </div>
                                 </div>
                             </td>
