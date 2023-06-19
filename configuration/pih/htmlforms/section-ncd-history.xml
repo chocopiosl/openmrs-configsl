@@ -573,6 +573,8 @@
                                       ['Active TB','CIEL:164500'],
                                       ['Cardiomyopathy','CIEL:5016'],
                                       ['Stroke','CIEL:111103'],
+                                      ['Hepatitis B','CIEL:111759'],
+                                      ['Hepatitis C','CIEL:156590'],
                                       ['Obesity','CIEL:115115'],
                                       ['Malnutrition','CIEL:115122'],
                                       ['Psychosis','CIEL:113517'],

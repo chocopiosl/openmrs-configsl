@@ -145,6 +145,26 @@
         <script type="text/javascript">
             jq(function() {
 
+                jq('.symptom-checkbox > input:checkbox').each(function(idx, it){
+                    if(jq(it).not(':checked')){
+                        jq(it).closest("td").siblings().find(":input").each(function(i, el){
+                            jq(el).attr("disabled", "disabled");
+                        });
+                    }
+
+                    jq(it).change(function(){
+                        if(jq(this).is(':checked')){
+                            jq(this).closest("td").siblings().find(":input").each(function(i, el){
+                                jq(el).removeAttr("disabled");
+                            });
+                        } else {
+                            jq(this).closest("td").siblings().find(":input").each(function(i, el){
+                                jq(el).val('').attr("disabled", "disabled");
+                            });
+                        }
+                    });
+                });
+
                 // handlers for next and submit buttons, see nextAndSubmitButtons.js
                 setUpNextAndSubmitButtons();
 
@@ -1807,14 +1827,95 @@
 
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Palliative care">
         <div id="palliative" class="section-container">
+
+            <strong>
+                <uimessage code="Palliative followup indicators"/>
+            </strong>
+
+            <table>
+                <repeat>
+                    <template>
+                        <obsgroup groupingConceptId="CIEL:1727" showIfEmpty="false">
+                            <tr>
+                                <td id="{symptName}-symp" colspan="3">
+                                    <obs conceptId="CIEL:1728" style="checkbox"
+                                         answerConceptId="{qId}"
+                                         toggle="{id: '{symptName}-details', style: 'hidden'}" class="symptom-checkbox"/>
+                                </td>
+                            </tr>
+                            <tr id="{symptName}-details" >
+                                <td></td>
+                                <td>
+                                    <p class="list-inline">
+                                        <obs conceptId="CIEL:162676" style="radio"
+                                             answerConceptIds="CIEL:1107,CIEL:162677,CIEL:162678,CIEL:162679"
+                                             answerCodes="No,Better,Worse,Same" />
+                                    </p>
+                                </td>
+                                <td>
+                                    <!-- ToDo: Uncomment with latest clinical mds pkg
+                                    <p class="list-inline">
+                                        <obs conceptId="PIH:14768" style="radio"
+                                             answerConceptIds="PIH:11507,PIH:11508" />
+                                    </p>
+                                    -->
+                                </td>
+                            </tr>
+
+                        </obsgroup>
+                    </template>
+                    <render qId="CIEL:114403" symptName="Pain" />
+                    <render qId="CIEL:5978"   symptName="Nausea" />
+                    <render qId="CIEL:996"    symptName="Constipation" />
+                    <render qId="CIEL:116743" symptName="Insomnia" />
+                    <render qId="CIEL:5226"   symptName="Weakness" />
+                    <render qId="CIEL:136443" symptName="Jaundice" />
+                    <render qId="CIEL:122496" symptName="Dyspnea" />
+                </repeat>
+            </table>
+            <br/><br/>
+
             <p class="list-inline">
-                <label>
+                <strong>
                     <uimessage code="pihcore.oncologyConsult.ecog_performance_status" />
-                </label>
+                </strong>
                 <obs conceptId="CIEL:160379" style="radio"
                      answers="0,1,2,3,4,5"
                      answerLabels="0,1,2,3,4,5"/>
+
+
+            <ifMode mode="VIEW" include="false">
+
+                    <table align="left" style="font-size:small">
+                        <tr>
+                            <td>0</td>
+                            <td><uimessage code="pihcore.oncologyConsult.performance_status_0"/></td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td><uimessage code="pihcore.oncologyConsult.performance_status_1"/></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><uimessage code="pihcore.oncologyConsult.performance_status_2"/></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><uimessage code="pihcore.oncologyConsult.performance_status_3"/></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><uimessage code="pihcore.oncologyConsult.performance_status_4"/></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td><uimessage code="pihcore.oncologyConsult.performance_status_5"/></td>
+                        </tr>
+                    </table>
+
+            </ifMode>
             </p>
+
         </div>
     </section>
 
