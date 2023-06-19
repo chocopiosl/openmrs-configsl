@@ -371,7 +371,9 @@
 
     <section id="hospital" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Hospitalization">
-        <div class="section-container-color">
+        <div class="section-container">
+            <!-- ToDo: Check with Marta about controls and reorganize with obsgroup -->
+
             <obsgroup groupingConceptId="PIH:HOSPITALIZATION CONSTRUCT" showIfEmpty="false">
                 <div class="two-columns">
                     <div>
@@ -404,12 +406,38 @@
                                     <uimessage code="Number of days"/>
                                 </label>
                                 <obs conceptId="PIH:2872" showUnits="coreapps.days" unitsCssClass="append-to-value" />
+
+
                             </div>
                         </p>
 
                     </div>
 
                     <div>
+                        <br/>
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Hospitalized for heart failure" />
+                            </label>
+                            <br/>
+                            <obs conceptId="PIH:3133" style="radio"
+                                 answerConceptIds="CIEL:1065,CIEL:1066" />
+                        </p>
+
+                        <p>
+                            <label>
+                                <uimessage code="NCD diagnosis which caused hospitalization" />
+                            </label>
+                            <repeat>
+                                <template>
+                                    <obs conceptId="PIH:12476" style="checkbox"
+                                         answerConceptId="{answId}" answerCode="{name}" />
+                                </template>
+                                <render answId="CIEL:139069" name="Heart failure"/>
+                                <render answId="CIEL:120576" name="Chronic renal failure"/>
+                            </repeat>
+                        </p>
+
                         <p>
                             <label>
                                 <uimessage code="Diagnosis during hospitalization"/>
@@ -427,6 +455,14 @@
                         </p>
 
                         <p>
+                            <obsgroup groupingConceptId="CIEL:160714" showIfEmpty="false">
+                                <obs conceptId="CIEL:1651" style="checkbox"
+                                     answerConceptId="CIEL:159567"
+                                     answerCode="Echocardiogram performed"/>
+                            </obsgroup>
+                        </p>
+
+                        <p>
                             <label>
                                 <uimessage code="Creatinine (at discharge)" />
                             </label>
@@ -439,26 +475,11 @@
                             </label>
                             <obs conceptId="PIH:14715" />
                         </p>
+
                     </div>
                 </div>
             </obsgroup>
 
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="Hospitalized for heart failure" />
-                </label>
-                <br/>
-                <obs conceptId="PIH:3133" style="radio"
-                     answerConceptIds="CIEL:1065,CIEL:1066" />
-            </p>
-
-            <p>
-                <obsgroup groupingConceptId="CIEL:160714" showIfEmpty="false">
-                    <obs conceptId="CIEL:1651" style="checkbox"
-                         answerConceptId="CIEL:159567"
-                         answerCode="Echocardiogram performed"/>
-                </obsgroup>
-            </p>
         </div>
     </section>
 

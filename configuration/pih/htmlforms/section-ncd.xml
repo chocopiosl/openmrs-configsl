@@ -754,7 +754,7 @@
                 <div>
                     <repeat>
                         <template>
-                            <p class="side-by-side">
+                            <p class="list-inline-wide">
                                 <label>
                                     <uimessage code="{questionName}"/>
                                 </label>
@@ -771,7 +771,7 @@
                         <render qId="PIH:14709"   questionName="Patient adjusted insulin based on glucometer" />
                     </repeat>
 
-                    <p class="side-by-side">
+                    <p class="list-inline-wide">
                         <label>
                             <uimessage code="Indications on ACE inhibitors"/><br/>
                             <uimessage code="(proteinuria present; BP &gt;= 135/75)"/>
@@ -1532,10 +1532,14 @@
 
                 <repeat>
                     <template>
-                        <p class="side-by-side">
+                        <p class="list-inline-wide">
+                            <label>
+                                <uimessage code="{copdSym}" />
+                            </label>
+
                             <obs conceptId="{copdId}" style="radio"
                                  answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
-                                 answerCodes="yes,no,unsure"  labelText="{copdSym}"/>
+                                 answerCodes="yes,no,unsure" />
                         </p>
                     </template>
                     <render copdId="PIH:14622"   copdSym="Increased inhaler use" />
@@ -1675,6 +1679,54 @@
 
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Chronic kidney disease (CKD)/Nephrotic Syndrome">
         <div id="kidney_failure" class="section-container">
+
+            <p>
+                <label>
+                    <uimessage code="Chronic renal failure secondary to:" />
+                </label>
+                <repeat>
+                    <template>
+                        <obs conceptId="PIH:14765" style="checkbox"
+                             answerConceptId="{answId}" />
+
+                    </template>
+                    <render answId="CIEL:117399" diagName="htn" />
+                    <render answId="CIEL:119481" diagName="dm" />
+                    <render answId="CIEL:1067"   diagName="unknown" />
+                    <render answId="CIEL:155008" diagName="NSAID" />
+                    <render answId="CIEL:149486" diagName="acuteTubularNecrosis" />
+                    <render answId="CIEL:117780" diagName="Glomerulonephritis" />
+                </repeat>
+
+                <!-- Other free-text -->
+                <obs conceptId="PIH:14765" style="checkbox"
+                     answerConceptId="CIEL:5622"
+                     answerCode="pihcore.other"
+                     showCommentField="true" commentFieldCode="zl.ifOtherSpecify" />
+            </p>
+
+            <p>
+                <label>
+                    <uimessage code="Nephrotic syndrome likely related with:" />
+                </label>
+                <repeat>
+                    <template>
+                        <obs conceptId="PIH:14766" style="checkbox"
+                             answerConceptId="{answId}"
+                             answerCode="{diagName}"/>
+
+                    </template>
+                    <render answId="CIEL:115745" diagName="Minimal changes" />
+                    <!-- ToDo:
+                    <render answId="PIH:14767" diagName="Membraneous glomerulonephritis" /> -->
+                </repeat>
+
+                <!-- other free-text -->
+                <obs conceptId="PIH:14766" style="checkbox"
+                     answerConceptId="CIEL:5622"
+                     answerCode="pihcore.other"
+                     showCommentField="true" commentFieldCode="zl.ifOtherSpecify" />
+            </p>
 
             <div class="two-columns">
                 <div>

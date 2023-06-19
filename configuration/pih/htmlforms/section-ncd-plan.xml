@@ -120,8 +120,11 @@
 
                     <div style="padding:0px;font-weight:bold;">
                         <orderProperty name="concept" label="" style="radio">
+                            <option value="3cd3bd5a-26fe-102b-80cb-0017a47871b2" label="Total protein" />
                             <option value="3cd4e194-26fe-102b-80cb-0017a47871b2" label="Glucose" />
                             <option value="3cd4374e-26fe-102b-80cb-0017a47871b2" label="Creatinine" />
+                            <option value="3cd4aa12-26fe-102b-80cb-0017a47871b2" label="Urea" />
+                            <option value="161132AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="GFR" />
                             <option value="3cd76b58-26fe-102b-80cb-0017a47871b2" label="Na" />
                             <option value="3cd76ce8-26fe-102b-80cb-0017a47871b2" label="K" />
 
@@ -203,6 +206,9 @@
                     <repeat with="['CIEL:1118','Not done'],
                               ['CIEL:1115','Normal'],
                               ['PIH:COR PULMONALE','Cor pulmonale'],
+                              ['CIEL:135971','Left ventricular hypertrophy'],
+                              ['CIEL:135972','Dilated left ventricle'],
+                              ['CIEL:168041','Depressed left ventricle'],
                               ['CIEL:5622','Other']">
 
                         <obs conceptId="CIEL:159567"
