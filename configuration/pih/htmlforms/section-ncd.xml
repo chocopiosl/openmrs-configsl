@@ -1755,6 +1755,14 @@
 
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Palliative care">
         <div id="palliative" class="section-container">
+            <p class="list-inline">
+                <label>
+                    <uimessage code="pihcore.oncologyConsult.ecog_performance_status" />
+                </label>
+                <obs conceptId="CIEL:160379" style="radio"
+                     answers="0,1,2,3,4,5"
+                     answerLabels="0,1,2,3,4,5"/>
+            </p>
         </div>
     </section>
 
