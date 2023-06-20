@@ -152,14 +152,15 @@
                     <strong>X-ray</strong>
                     <br/>
 
-                    <repeat with="['CIEL:1118','Not done'],
-                                  ['CIEL:1115','Normal'],
-                                  ['PIH:5158','Cardiomegaly'],
+                    <repeat with="['CIEL:1118',  'Not done'],
+                                  ['CIEL:1115',  'Normal'],
+                                  ['PIH:5158',   'Cardiomegaly'],
                                   ['CIEL:139069','Heart failure'],
                                   ['CIEL:141342','Emphysema'],
-                                  ['PIH:14586','Interstitial lung patterns'],
-                                  ['PIH:14582','Post TB changes'],
-                                  ['CIEL:5622','Other']">
+                                  ['PIH:14586',  'Interstitial lung patterns'],
+                                  ['PIH:14582',  'Post TB changes'],
+                                  ['CIEL:138099','Volume overload'],
+                                  ['CIEL:5622',  'Other']">
 
                         <obs conceptId="CIEL:12"
                              answerConceptId="{0}"

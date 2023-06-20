@@ -843,81 +843,6 @@
                 </div>
             </div>
 
-            <table>
-                <tr>
-                    <th colspan="4">
-                        <label>
-                            <uimessage code="pihcore.ncd.diabetes.footCare.title"/>
-                        </label>
-                    </th>
-                </tr>
-
-                <tr>
-                    <td colspan="4">
-                        <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                            <obs conceptId="PIH:DIAGNOSIS" answerConceptId="CIEL:118983"
-                                 style="checkbox"/>
-                        </obsgroup>
-
-                        <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                            <obs conceptId="PIH:DIAGNOSIS" answerConceptId="CIEL:163411"
-                                 style="checkbox"/>
-                        </obsgroup>
-
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        <label>
-                            <uimessage code="pihcore.risk"/>
-                        </label>
-                    </th>
-                    <th width="30%">
-                        <label>
-                            <uimessage code="pihcore.definition"/>
-                        </label>
-                    </th>
-                    <th width="40%">
-                        <label>
-                            <uimessage code="pihcore.suggestedTreatment.label"/>
-                        </label>
-                    </th>
-                    <th>
-                        <label>
-                            <uimessage code="pihcore.followUp"/>
-                        </label>
-                    </th>
-                </tr>
-
-                <!-- Foot care classification -->
-                <repeat with="['0','CIEL:160769'],
-                              ['1','CIEL:160771'],
-                              ['2','CIEL:160774'],
-                              ['3','CIEL:160778']">
-                    <tr>
-                        <td>
-                            <obs conceptId="PIH:Foot care classification"
-                                 answerConceptId="{1}" style="checkbox"
-                                 answerCode="{0}"/>
-                        </td>
-                        <td>
-                            <label>
-                                <uimessage code="pih.ncd.footRisk{0}"/>
-                            </label>
-                        </td>
-                        <td>
-                            <label>
-                                <uimessage code="pih.ncd.footRisk{0}Treatment"/>
-                            </label>
-                        </td>
-                        <td>
-                            <label>
-                                <uimessage code="pih.ncd.footRisk{0}Follow"/>
-                            </label>
-                        </td>
-                    </tr>
-                </repeat>
-            </table>
             <p>
                 <label>
                     <uimessage code="pihcore.remarks"/>:
@@ -1737,8 +1662,7 @@
 
                     </template>
                     <render answId="CIEL:115745" diagName="Minimal changes" />
-                    <!-- ToDo:
-                    <render answId="PIH:14767" diagName="Membraneous glomerulonephritis" /> -->
+                    <render answId="PIH:14767" diagName="Membraneous glomerulonephritis" />
                 </repeat>
 
                 <!-- other free-text -->
@@ -1832,6 +1756,15 @@
                 <uimessage code="Palliative followup indicators"/>
             </strong>
 
+            <p class="list-inline-wide">
+                <label>
+                    <uimessage code="Counselling done" />
+                </label>
+                <obs conceptId="CIEL:165310" style="radio"
+                     answerConceptIds="CIEL:1267,CIEL:1118"
+                     answerCodes="yes,no"/>
+            </p>
+
             <table>
                 <repeat>
                     <template>
@@ -1853,12 +1786,10 @@
                                     </p>
                                 </td>
                                 <td>
-                                    <!-- ToDo: Uncomment with latest clinical mds pkg
                                     <p class="list-inline">
                                         <obs conceptId="PIH:14768" style="radio"
                                              answerConceptIds="PIH:11507,PIH:11508" />
                                     </p>
-                                    -->
                                 </td>
                             </tr>
 
@@ -1914,6 +1845,38 @@
                     </table>
 
             </ifMode>
+            </p>
+            <br/><br/>
+
+            <p class="list-inline">
+                <label>
+                    <uimessage code="Hospitalization required" />
+                </label>
+                <obs id="palliative-hosp" style="radio"
+                     conceptId="CIEL:1788" answerConceptIds="CIEL:1065,CIEL:1066">
+                    <controls>
+                        <when value="CIEL:1065" thenDisplay="#hosp-pall-reason" />
+                    </controls>
+                </obs>
+
+                <div id="hosp-pall-reason">
+                    <label>Reasons for hospitalization</label>
+
+                    <repeat>
+                        <template>
+                            <obs conceptId="CIEL:1887" style="checkbox"
+                                 answerConceptId="{qId}"/>
+                        </template>
+                        <render qId="CIEL:142412" symptName="Diarrhea" />
+                        <render qId="CIEL:122983" symptName="Vomiting" />
+                        <render qId="PIH:7103"    symptName="Uncontrolled pain" />
+                    </repeat>
+
+                    <obs conceptId="CIEL:1887" style="checkbox"
+                         answerConceptId="CIEL:5622"
+                         answerCode="pihcore.other"
+                         showCommentField="true" commentFieldCode="zl.ifOtherSpecify" />
+                </div>
             </p>
 
         </div>
