@@ -1846,10 +1846,10 @@
 
             </ifMode>
             </p>
-            <br/><br/>
 
             <p class="list-inline">
                 <label>
+                    <br/>
                     <uimessage code="Hospitalization required" />
                 </label>
                 <obs id="palliative-hosp" style="radio"

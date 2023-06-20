@@ -454,47 +454,34 @@
             <!-- ToDo: Check with Marta about controls and reorganize with obsgroup -->
 
             <obsgroup groupingConceptId="PIH:HOSPITALIZATION CONSTRUCT" showIfEmpty="false">
-                <div class="two-columns">
+
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="Hospitalization since last visit"/>
+                    </label>
+                    <obs id="hospital-stay" conceptId="CIEL:976" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067">
+                        <controls>
+                            <when value="CIEL:1065" thenDisplay="#hospital-details"/>
+                        </controls>
+                    </obs>
+                </p>
+
+                <div id="hospital-details" class="two-columns">
                     <div>
                         <p class="side-by-side">
                             <label>
-                                <uimessage code="Hospitalization since last visit"/>
+                                <uimessage code="Number of hospitalizations since last visit"/>
                             </label>
-                            <obs id="hospital-stay" conceptId="CIEL:976" style="radio"
-                                 answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067">
-                                <controls>
-                                    <when value="CIEL:1065" thenDisplay="#num-hospital"/>
-                                </controls>
-                            </obs>
+                            <obs conceptId="CIEL:1773" />
                             <br/>
 
-                            <div id="num-hospital">
-                                <label>
-                                    <uimessage code="mirebalais.dischargeNote.dischargeDate.label"/>
-                                </label>
-                                <obs conceptId="CIEL:1641" allowTime="false" />
-                                <br/>
+                            <label>
+                                <uimessage code="Number of days"/>
+                            </label>
+                            <obs conceptId="PIH:2872" showUnits="coreapps.days" unitsCssClass="append-to-value" />
+                            <br/><br/>
 
-                                <label>
-                                    <uimessage code="Number of hospitalizations since last visit"/>
-                                </label>
-                                <obs conceptId="CIEL:1773" />
-                                <br/>
-
-                                <label>
-                                    <uimessage code="Number of days"/>
-                                </label>
-                                <obs conceptId="PIH:2872" showUnits="coreapps.days" unitsCssClass="append-to-value" />
-
-
-                            </div>
-                        </p>
-
-                    </div>
-
-                    <div>
-                        <br/>
-                        <p class="side-by-side">
                             <label>
                                 <uimessage code="Hospitalized for heart failure" />
                             </label>
@@ -539,6 +526,18 @@
                                      answerConceptId="CIEL:159567"
                                      answerCode="Echocardiogram performed"/>
                             </obsgroup>
+                        </p>
+
+                    </div>
+
+                    <div>
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="mirebalais.dischargeNote.dischargeDate.label"/>
+                            </label>
+                            <obs conceptId="CIEL:1641" allowTime="false" />
+                            <br/>
+
                         </p>
 
                         <p>
