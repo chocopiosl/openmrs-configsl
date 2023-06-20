@@ -30,10 +30,6 @@
             font-size: 1em;
             font-weight: normal;
         }
-        .multilines-display {
-            width: 100px;
-            height: 100%;
-        }
     </style>
 
     <ifMode mode="VIEW" include="false">
@@ -162,6 +158,11 @@
 
             .section-container label { /*new definition to override labels inside section-containers*/
                 margin: 0px;
+            }
+
+            .multilines-display {
+                width: 100px;
+                height: 100%;
             }
         </style>
 
@@ -475,6 +476,23 @@
             </script>
         </ifMode>
     </includeIf>
+
+    <ifMode mode="VIEW" >
+        <script type="text/javascript">
+            jq(function () {
+                // looking for empty vitals obs
+                jq('htmlform').each(function (index, form) {
+                    let emptyObs = jq(form).find('section#vitals .emptyValue');
+                    if (emptyObs != null &amp;&amp; emptyObs.length > 0) {
+                        for (let z = 0; z &lt; emptyObs.length; z++) {
+                            // hide vitals fields whose value is empty (SL-337)
+                            jq(emptyObs[z]).closest('fieldset').hide();
+                        }
+                    }
+                });
+            });
+        </script>
+    </ifMode>
 
     <span id="most-recent-encounter-title" style="display:none"><!--The Most Recent Encounter app in Core Apps replaces this with the "most recent" label--></span>
 
