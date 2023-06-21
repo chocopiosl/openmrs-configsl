@@ -321,25 +321,35 @@
 
         <section id="ncd_info" sectionTag="fieldset" headerTag="legend" headerStyle="title"
                  headerCode="Followup indicators">
-            <div class="section-container">
-                <repeat>
-                    <template>
-                        <p>
-                            <p class="list-inline-wide">
-                                <label>
-                                    <uimessage code="{xId}"/>
-                                </label>
-                                <obs conceptId="{message}" style="radio"
-                                     answerConceptIds="PIH:YES,PIH:NO" />
+            <div class="section-container two-columns">
+                <div>
+                    <repeat>
+                        <template>
+                            <p>
+                                <p class="list-inline-wide">
+                                    <label>
+                                        <uimessage code="{xId}"/>
+                                    </label>
+                                    <obs conceptId="{message}" style="radio"
+                                         answerConceptIds="PIH:YES,PIH:NO" />
+                                </p>
                             </p>
-                        </p>
-                    </template>
-                    <render message="CIEL:1898"   xId="Patient condition improved"/>
-                    <render message="CIEL:164075" xId="Overall treatment adherence"/>
-                    <render message="CIEL:167819" xId="Missed doses in past week"/>
-                    <render message="CIEL:167021" xId="Aware and understands the disease"/>
-                    <render message="PIH:14465"   xId="Understands treatment"/>
-                </repeat>
+                        </template>
+                        <render message="CIEL:1898"   xId="Patient condition improved" tog=""/>
+                        <render message="CIEL:164075" xId="Overall treatment adherence" tog=""/>
+                        <render message="CIEL:167819" xId="Missed doses in past week" tog=""/>
+                        <render message="CIEL:167021" xId="Aware and understands the disease" tog=""/>
+                        <render message="PIH:14465"   xId="Understands treatment" tog=""/>
+                    </repeat>
+                </div>
+                <div>
+                    <br/><br/>
+                    <label>
+                        <uimessage code="# of missed doses in past week"/>
+                    </label>
+                    <obs conceptId="CIEL:167918"  />
+
+                </div>
             </div>
         </section>
 
@@ -688,40 +698,104 @@
 
             <br/>
 
+            <!-- followup only -->
+            <includeIf velocityTest="$encounter.encounterType.uuid == '5cbfd6a2-92d9-4ad0-b526-9d29bfe1d10c'">
+                <div class="two-columns">
+                    <div>
+                        <strong>
+                            <uimessage code="Diagnosis on discharge"/>
+                        </strong>
+                        <br/>
+                        <repeat>
+                            <template>
+                                <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                    <obs conceptId="PIH:DIAGNOSIS" answerConceptId="{diagId}" style="checkbox"/>
+                                </obsgroup>
+                            </template>
+                            <render diagId="CIEL:142460" diagName="Diabetes with hyperosmolar coma" />
+                            <render diagId="CIEL:142452" diagName="Diabetic foot" />
+                            <render diagId="CIEL:142454" diagName="DKA with coma" />
+                            <render diagId="CIEL:122714" diagName="DKA without coma" />
+                            <render diagId="CIEL:138291" diagName="Hyperglycemia" />
+                        </repeat>
+                    </div>
+
+                    <div>
+                        <strong>
+                            <uimessage code="DM Treatment on discharge" />
+                        </strong>
+                        <br/>
+                        <obs conceptId="PIH:14468" style="checkbox"
+                             answerConceptId="CIEL:78056"
+                             answerCode="Insulin" />
+                        <obs conceptId="PIH:14468" style="checkbox"
+                             answerConceptId="CIEL:167915"
+                             answerCode="Oral anti-diabetic" />
+                    </div>
+                </div>
+                <br/>
+            </includeIf>
+
+            <strong>
+                <uimessage code="Diabetes followup indicators"/>
+            </strong>
+
+            <ifMode mode="VIEW" include="false">
+                <table align="left" style="font-size:small">
+                    <tr>
+                        <td>
+                            Controlled definition: HBA1c &lt; 7% (53 mmol/m)<br/>
+                            (if available the best)
+                        </td>
+                        <td>
+                            Preprandial glucose: 80 - 130 mg/dL (4.4 - 7.2 mmol/L)<br/>
+                            Postprandial glucose:  &lt; 180 mg/dL (10 mmol/L)
+                        </td>
+                    </tr>
+                </table>
+            </ifMode>
+
             <div class="two-columns">
                 <div>
-                    <strong>
-                        <uimessage code="Diagnosis on discharge"/>
-                    </strong>
-                    <br/>
                     <repeat>
                         <template>
-                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                                <obs conceptId="PIH:DIAGNOSIS" answerConceptId="{diagId}" style="checkbox"/>
-                            </obsgroup>
+                            <p class="list-inline-wide">
+                                <label>
+                                    <uimessage code="{questionName}"/>
+                                </label>
+                                <obs conceptId="{qId}" style="radio"
+                                     answerConceptIds="PIH:YES,PIH:NO"
+                                     answerCodes="yes,no" />
+                            </p>
                         </template>
-                        <render diagId="CIEL:142460" diagName="Diabetes with hyperosmolar coma" />
-                        <render diagId="CIEL:142452" diagName="Diabetic foot" />
-                        <render diagId="CIEL:142454" diagName="DKA with coma" />
-                        <render diagId="CIEL:122714" diagName="DKA without coma" />
-                        <render diagId="CIEL:138291" diagName="Hyperglycemia" />
+                        <render qId="PIH:6756"    questionName="On insulin" />
+                        <render qId="CIEL:167998" questionName="On ACE inhibitors" />
+                        <render qId="CIEL:167957" questionName="Severe hypoglycemia in last month" />
+                        <render qId="CIEL:167956" questionName="Glycometer (home)" />
+                        <render qId="CIEL:167919" questionName="Ability to read and manage glycometer" />
+                        <render qId="PIH:14709"   questionName="Patient adjusted insulin based on glucometer" />
                     </repeat>
-                </div>
 
+                    <p class="list-inline-wide">
+                        <label>
+                            <uimessage code="Indications on ACE inhibitors"/><br/>
+                            <uimessage code="(proteinuria present; BP &gt;= 135/75)"/>
+                        </label>
+                        <obs conceptId="CIEL:168000" style="radio"
+                             answerConceptIds="PIH:YES,PIH:NO"
+                             answerCodes="yes,no" />
+                    </p>
+                </div>
                 <div>
-                    <strong>
-                        <uimessage code="DM Treatment on discharge" />
-                    </strong>
-                    <br/>
-                    <obs conceptId="PIH:14468" style="checkbox"
-                         answerConceptId="CIEL:78056"
-                         answerCode="Insulin" />
-                    <obs conceptId="PIH:14468" style="checkbox"
-                         answerConceptId="CIEL:167915"
-                         answerCode="Oral anti-diabetic" />
+                    <br/><br/><br/>
+                    <label>
+                        <uimessage code="Number of hypoglycemic episodes (past 30 days)"/>
+                    </label>
+                    <p class="narrow">
+                        <obs conceptId="PIH:14708"/>
+                    </p>
                 </div>
             </div>
-            <br/>
 
             <strong>
                 <uimessage code="Fundoscopy"/>
@@ -767,50 +841,84 @@
             </p>
 
             <strong>
-                <uimessage code="Diabetes followup indicators"/>
+                <uimessage code="Diabetic foot"/>
             </strong>
+            <p class="list-inline">
+                <label>
+                    <uimessage code="Foot examination performed"/>
+                </label>
+                <obs id="foot-exam" conceptId="PIH:14779" style="radio"
+                     answerConceptIds="CIEL:1267,PIH:NOT DONE">
+                    <controls>
+                        <when value="CIEL:1267" thenDisplay="#foot-results"/>
+                    </controls>
+                </obs>
 
-            <div class="two-columns">
-                <div>
-                    <repeat>
-                        <template>
-                            <p class="list-inline-wide">
-                                <label>
-                                    <uimessage code="{questionName}"/>
-                                </label>
-                                <obs conceptId="{qId}" style="radio"
-                                     answerConceptIds="PIH:YES,PIH:NO"
-                                     answerCodes="yes,no" />
-                            </p>
-                        </template>
-                        <render qId="PIH:6756"    questionName="On insulin" />
-                        <render qId="CIEL:167998" questionName="On ACE inhibitors" />
-                        <render qId="CIEL:167957" questionName="Severe hypoglycemia in last month" />
-                        <render qId="CIEL:167956" questionName="Glycometer (home)" />
-                        <render qId="CIEL:167919" questionName="Ability to read and manage glycometer" />
-                        <render qId="PIH:14709"   questionName="Patient adjusted insulin based on glucometer" />
-                    </repeat>
+                <div id="foot-results" class="two-columns">
+                    <div>
+                        <p class="list-inline">
+                            <label>
+                                <uimessage code="Foot exam findings"/>
+                            </label>
+                            <obs id="foot-abnorm" conceptId="CIEL:165471" style="radio"
+                                 answerConceptIds="CIEL:1115,CIEL:1116">
+                                <controls>
+                                    <when value="CIEL:1116" thenDisplay="#foot-findings"/>
+                                </controls>
+                            </obs>
+                        </p>
 
-                    <p class="list-inline-wide">
-                        <label>
-                            <uimessage code="Indications on ACE inhibitors"/><br/>
-                            <uimessage code="(proteinuria present; BP &gt;= 135/75)"/>
-                        </label>
-                        <obs conceptId="CIEL:168000" style="radio"
-                             answerConceptIds="PIH:YES,PIH:NO"
-                             answerCodes="yes,no" />
-                    </p>
+                        <p class="list-inline">
+                            <label>
+                                <uimessage code="Referred to surgery"/>
+                            </label>
+                            <obs conceptId="PIH:14781" style="radio"
+                                 answerConceptIds="CIEL:1065,CIEL:1066"
+                                 answerCodes="yes,no"/>
+                        </p>
+
+                    </div>
+                    <div>
+                        <p id="foot-findings">
+                            <label>
+                                <uimessage code="Foot exam findings"/>
+                            </label>
+                            <obs conceptId="PIH:14778" />
+                        </p>
+                    </div>
                 </div>
-                <div>
-                    <br/><br/><br/>
+
+
+
+                <p id="foot-sense" class="list-inline">
                     <label>
-                        <uimessage code="Number of hypoglycemic episodes (past 30 days)"/>
+                        <uimessage code="Loss of sensation"/>
                     </label>
-                    <p class="narrow">
-                        <obs conceptId="PIH:14708"/>
-                    </p>
-                </div>
-            </div>
+                    <obs id="foot-numb" conceptId="CIEL:132653" style="radio"
+                         answerConceptIds="CIEL:1066,CIEL:1065"
+                         answerCodes="no, yes">
+                        <controls>
+                            <when value="CIEL:1065" thenDisplay="#foot-numb-message"/>
+                        </controls>
+                    </obs>
+
+                    <label id="foot-numb-message">
+                        <b>
+                            <uimessage code="  Ulcer prevention recommended"/>
+                        </b>
+                    </label>
+                </p>
+
+                <p class="list-inline">
+                    <label>
+                        <uimessage code="Improvement since last visit"/>
+                    </label>
+                    <obs conceptId="PIH:14782" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"
+                         answerCodes="yes,no" />
+                </p>
+
+            </p>
 
             <!-- ToDo:  From Haiti but not on SL paper.  Remove? -->
             <br/>
@@ -967,7 +1075,7 @@
                 </div>
             </div>
 
-            <!-- hypertension followup only -->
+            <!-- followup only -->
             <includeIf velocityTest="$encounter.encounterType.uuid == '5cbfd6a2-92d9-4ad0-b526-9d29bfe1d10c'">
                 <strong>
                     <uimessage code="Hypertension followup indicators" />

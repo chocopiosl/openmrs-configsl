@@ -482,12 +482,13 @@
                             <obs conceptId="PIH:2872" showUnits="coreapps.days" unitsCssClass="append-to-value" />
                             <br/><br/>
 
+                            <!-- ToDo: This is replaced by the next section unless they want y/n
                             <label>
                                 <uimessage code="Hospitalized for heart failure" />
                             </label>
                             <br/>
                             <obs conceptId="PIH:3133" style="radio"
-                                 answerConceptIds="CIEL:1065,CIEL:1066" />
+                                 answerConceptIds="CIEL:1065,CIEL:1066" /> -->
                         </p>
 
                         <p>
@@ -499,8 +500,10 @@
                                     <obs conceptId="PIH:12476" style="checkbox"
                                          answerConceptId="{answId}" answerCode="{name}" />
                                 </template>
+                                <render answId="CIEL:119481" name="Diabetes mellitus (DM)"/>
                                 <render answId="CIEL:139069" name="Heart failure"/>
                                 <render answId="CIEL:120576" name="Chronic renal failure"/>
+                                <render answId="CIEL:117703" name="Sickle cell disease" />
                             </repeat>
                         </p>
 
@@ -565,6 +568,24 @@
                             </repeat>
 
                             <obs conceptId="PIH:14715" labelCode="Other treatment at discharge" />
+                        </p>
+
+                        <p>
+                            <label>
+                                <uimessage code="DM diagnosis on discharge"/>
+                            </label>
+                            <repeat>
+                                <template>
+                                    <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                        <obs conceptId="PIH:DIAGNOSIS" answerConceptId="{diagId}" style="checkbox"/>
+                                    </obsgroup>
+                                </template>
+                                <render diagId="CIEL:142460" diagName="Diabetes with hyperosmolar coma" />
+                                <render diagId="CIEL:142452" diagName="Diabetic foot" />
+                                <render diagId="CIEL:142454" diagName="DKA with coma" />
+                                <render diagId="CIEL:122714" diagName="DKA without coma" />
+                                <render diagId="CIEL:138291" diagName="Hyperglycemia" />
+                            </repeat>
                         </p>
 
                     </div>

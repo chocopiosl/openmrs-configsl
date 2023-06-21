@@ -121,6 +121,7 @@
                     <div style="padding:0px;font-weight:bold;">
                         <orderProperty name="concept" label="" style="radio">
                             <option value="3cd3bd5a-26fe-102b-80cb-0017a47871b2" label="Total protein" />
+                            <option value="1875AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="Urine protein" />
                             <option value="3cd4e194-26fe-102b-80cb-0017a47871b2" label="Glucose" />
                             <option value="3cd4374e-26fe-102b-80cb-0017a47871b2" label="Creatinine" />
                             <option value="3cd4aa12-26fe-102b-80cb-0017a47871b2" label="Urea" />
@@ -131,6 +132,14 @@
                             <option value="3ccc7158-26fe-102b-80cb-0017a47871b2" label="Hb" />
                             <option value="3cd2a906-26fe-102b-80cb-0017a47871b2" label="Leukocytes" />
                             <option value="3cd3d038-26fe-102b-80cb-0017a47871b2" label="Platelets" />
+                            <option value="161442AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="Ketones" />
+                            <option value="159644AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="HbA1c" />
+                            <option value="160225AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="Sickling test" />
+                            <option value="e286d1c8-e3df-45d6-a6cf-7cee0bdf370b" label="Sickle RT SCAN" />
+                            <option value="165544AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="Hb electrophoresis" />
+
+                            <!--
+                            <option value="" label="C-peptide" /> -->
                         </orderProperty>
 
                         <div style="display:none;">
