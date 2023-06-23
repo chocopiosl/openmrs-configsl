@@ -146,6 +146,9 @@
                             <orderProperty name="urgency" value="ROUTINE"/>
                             <orderProperty name="previousOrder"/>
                             <orderProperty name="careSetting" value="OUTPATIENT"/>
+                            <!-- ToDo: SL-366 Fix autoExpireDate -->
+                            <!-- <orderProperty name="autoExpireDate" value="x" /> -->
+
                         </div>
                     </div>
                 </orderTemplate>
