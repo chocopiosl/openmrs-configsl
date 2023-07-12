@@ -1388,61 +1388,6 @@
                 </label>
                 <obs conceptId="PIH:11973"/>
             </div>
-
-            <br/>
-            <table>
-                <tr>
-                    <th colspan="2">
-                        <label>
-                            <uimessage code="pihcore.echocardiogram.title"/>
-                        </label>
-                    </th>
-                </tr>
-                <repeat with="['ltVentSystolic','PIH:Left ventricle systolic function','PIH:NORMAL','PIH:Very weak'],
-                              ['rtVentDim','PIH:Right ventricle dimension','PIH:NORMAL','PIH:SEVERELY DILATED'],
-                              ['mitralValve','PIH:MITRAL VALVE FINDINGS','PIH:NO MITRAL STENOSIS','CIEL:134082'],
-                              ['pericardium','PIH:PERICARDIUM FINDINGS','PIH:No pericardial effusion','PIH:Severe pericardial effusion'],
-                              ['venaCava','PIH:Inferior vena cava findings','PIH:NORMAL','PIH:DILATED']">
-                    <tr>
-                        <td>
-                            <label>
-                                <uimessage code="pihcore.echo.{0}"/>
-                            </label>
-                        </td>
-                        <td>
-                            <p class="side-by-side">
-                                <obs conceptId="{1}" answerConceptIds="{2},{3}"
-                                     style="radio" />
-                            </p>
-                        </td>
-                    </tr>
-                </repeat>
-
-                <tr>
-                    <td>
-                        <label>
-                            <uimessage code="pihcore.echo.quality"/>
-                        </label>
-                    </td>
-                    <td>
-                        <p class="side-by-side">
-                            <obs conceptId="CIEL:165253" style="radio"
-                                 answerConceptIds="PIH:SATISFACTORY,PIH:UNSATISFACTORY SAMPLE"
-                                 answerCodes="pihcore.adequate,pihcore.inadequate" />
-                        </p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>
-                            <uimessage code="pihcore.additionalComments"/>:
-                        </label>
-                    </td>
-                    <td>
-                        <obs conceptId="CIEL:159573"/>
-                    </td>
-                </tr>
-            </table>
         </div>
     </section>
 
