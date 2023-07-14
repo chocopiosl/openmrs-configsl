@@ -482,13 +482,6 @@
                             <obs conceptId="PIH:2872" showUnits="coreapps.days" unitsCssClass="append-to-value" />
                             <br/><br/>
 
-                            <!-- ToDo: This is replaced by the next section unless they want y/n
-                            <label>
-                                <uimessage code="Hospitalized for heart failure" />
-                            </label>
-                            <br/>
-                            <obs conceptId="PIH:3133" style="radio"
-                                 answerConceptIds="CIEL:1065,CIEL:1066" /> -->
                         </p>
 
                         <p>
@@ -501,26 +494,22 @@
                                          answerConceptId="{answId}" answerCode="{name}" />
                                 </template>
                                 <render answId="CIEL:119481" name="Diabetes mellitus (DM)"/>
+                                <render answId="PIH:HYPERTENSION" nickname="htn" name="Hypertension"/>
                                 <render answId="CIEL:139069" name="Heart failure"/>
-                                <render answId="CIEL:120576" name="Chronic renal failure"/>
+                                <render answId="PIH:Chronic respiratory disease program" nickname="respire" name="Chronic lung disease" />
+                                <render answId="CIEL:145438" nickname="kidney_failure" name="Chronic kidney disease"/>
+                                <render answId="PIH:3714" nickname="cirrhosis" name="Liver cirrhosis" />
                                 <render answId="CIEL:117703" name="Sickle cell disease" />
+                                <render answId="CIEL:160849" nickname="palliative" name="Palliative care"/>
+
                             </repeat>
                         </p>
 
                         <p>
                             <label>
-                                <uimessage code="Diagnosis during hospitalization"/>
+                                <uimessage code="Other diagnoses during hospitalization"/>
                             </label>
                             <obs conceptId="PIH:6899" style="textarea" rows="3"/>
-                        </p>
-
-                        <p class="side-by-side">
-                            <label>
-                                <uimessage code="Chronic lung disease screening tool during hospitalization" />
-                            </label>
-                            <br/>
-                            <obs conceptId="PIH:14602" style="radio"
-                                 answerConceptIds="CIEL:703,CIEL:664,CIEL:1118" />
                         </p>
 
                         <p>

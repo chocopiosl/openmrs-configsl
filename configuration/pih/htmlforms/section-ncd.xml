@@ -177,17 +177,9 @@
         <div class="section-container">
             <div class="two-columns">
 
-                <!-- Program enrollment and set workflow state-->
+                <!-- Program enrollment -->
                 <div>
                     <enrollInProgram programId="NCD" locationTag="Program Location" />
-
-                    <!-- ToDo: HTML-689 Use message properties for state labels for translations -->
-                    <!-- ToDo: If we want to use radio buttons, we need to change the styling/css or stateSeparator tag -->
-                    <workflowState workflowId="51579bce-bf3a-11e7-abc4-cec278b6b50a"
-                                   stateIds="51579e44-bf3a-11e7-abc4-cec278b6b50a, 51579fde-bf3a-11e7-abc4-cec278b6b50a, 5157a15a-bf3a-11e7-abc4-cec278b6b50a"
-                                   labelCode="51579bce-bf3a-11e7-abc4-cec278b6b50a.custom.title"
-                                   stateLabels="Controlled,Uncontrolled,Complicated"
-                                   type="dropdown" />
                 </div>
             </div>
 
@@ -580,10 +572,18 @@
 
                     </div>
                 </div>
+
             </div>
         </section>
 
     </includeIf>
+
+    <section sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.visitNote.clinicalNotes">
+        <div class="section-container">
+            <obs conceptId="CIEL:161011" style="textarea" />
+        </div>
+    </section>
 
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.ncd.diabetes">
@@ -1393,6 +1393,15 @@
 
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Chronic lung disease">
         <div id="respire" class="section-container">
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Chronic lung disease screening tool during hospitalization" />
+                </label>
+                <br/>
+                <obs conceptId="PIH:14602" style="radio"
+                     answerConceptIds="CIEL:703,CIEL:664,CIEL:1118" />
+            </p>
+
             <table>
                 <tr>
                     <th colspan="3">

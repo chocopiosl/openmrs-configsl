@@ -399,7 +399,7 @@
     </section>
 
     <section id="clinical-impress" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="pihcore.consult.clinicalImpressions">
+             headerCode="New clinical impressions">
         <div class="section-container">
             <obs conceptId="CIEL:162749" style="textarea" rows="8"/>
         </div>
@@ -421,6 +421,15 @@
     <section id="disposition-section" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="coreapps.consult.disposition">
         <div class="section-container">
+            <!-- Set workflow state-->
+            <!-- ToDo: HTML-689 Use message properties for state labels for translations -->
+            <!-- ToDo: If we want to use radio buttons, we need to change the styling/css or stateSeparator tag -->
+            <workflowState workflowId="51579bce-bf3a-11e7-abc4-cec278b6b50a"
+                           stateIds="51579e44-bf3a-11e7-abc4-cec278b6b50a, 51579fde-bf3a-11e7-abc4-cec278b6b50a, 5157a15a-bf3a-11e7-abc4-cec278b6b50a"
+                           labelCode="51579bce-bf3a-11e7-abc4-cec278b6b50a.custom.title"
+                           stateLabels="Controlled,Uncontrolled,Complicated"
+                           type="dropdown" />
+
             <div class="two-columns">
                 <div>
                     <label>
