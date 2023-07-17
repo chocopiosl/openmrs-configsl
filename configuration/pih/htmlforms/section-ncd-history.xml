@@ -490,18 +490,24 @@
                             </label>
                             <repeat>
                                 <template>
-                                    <obs conceptId="PIH:12476" style="checkbox"
-                                         answerConceptId="{answId}" answerCode="{name}" />
+                                    <obs id="{nickname}-q" conceptId="PIH:12476" style="checkbox"
+                                         answerConceptId="{answId}" answerCode="{name}" >
+                                        <controls>
+                                            <when value="CIEL:119481" thenDisplay="#{nickname}-plus" />
+                                            <when value="CIEL:139069" thenDisplay="#{nickname}-plus" />
+                                            <when value="CIEL:155569" thenDisplay="#{nickname}-plus" />
+                                            <when value="CIEL:145438" thenDisplay="#{nickname}-plus" />
+                                        </controls>
+                                    </obs>
                                 </template>
-                                <render answId="CIEL:119481" name="Diabetes mellitus (DM)"/>
-                                <render answId="PIH:HYPERTENSION" nickname="htn" name="Hypertension"/>
-                                <render answId="CIEL:139069" name="Heart failure"/>
-                                <render answId="PIH:Chronic respiratory disease program" nickname="respire" name="Chronic lung disease" />
-                                <render answId="CIEL:145438" nickname="kidney_failure" name="Chronic kidney disease"/>
+                                <render answId="CIEL:119481" nickname="dm" name="Diabetes mellitus (DM)"/>
+                                <render answId="CIEL:117399" nickname="htn" name="Hypertension"/>
+                                <render answId="CIEL:139069" nickname="hf" name="Heart failure"/>
+                                <render answId="CIEL:155569" nickname="respire" name="Chronic lung disease" />
+                                <render answId="CIEL:145438" nickname="ckd" name="Chronic kidney disease"/>
                                 <render answId="PIH:3714" nickname="cirrhosis" name="Liver cirrhosis" />
-                                <render answId="CIEL:117703" name="Sickle cell disease" />
+                                <render answId="CIEL:117703" nickname="sickle" name="Sickle cell disease" />
                                 <render answId="CIEL:160849" nickname="palliative" name="Palliative care"/>
-
                             </repeat>
                         </p>
 
@@ -512,13 +518,15 @@
                             <obs conceptId="PIH:6899" style="textarea" rows="3"/>
                         </p>
 
-                        <p>
-                            <obsgroup groupingConceptId="CIEL:160714" showIfEmpty="false">
-                                <obs conceptId="CIEL:1651" style="checkbox"
-                                     answerConceptId="CIEL:159567"
-                                     answerCode="Echocardiogram performed"/>
-                            </obsgroup>
-                        </p>
+                        <div id="hf-plus">
+                            <p>
+                                <obsgroup groupingConceptId="CIEL:160714" showIfEmpty="false">
+                                    <obs conceptId="CIEL:1651" style="checkbox"
+                                         answerConceptId="CIEL:159567"
+                                         answerCode="Echocardiogram performed"/>
+                                </obsgroup>
+                            </p>
+                        </div>
 
                     </div>
 
@@ -530,13 +538,6 @@
                             <obs conceptId="CIEL:1641" allowTime="false" />
                             <br/>
 
-                        </p>
-
-                        <p>
-                            <label>
-                                <uimessage code="Creatinine (at discharge)" />
-                            </label>
-                            <obs conceptId="CIEL:790" showUnits="true" />
                         </p>
 
                         <p>
@@ -559,24 +560,45 @@
                             <obs conceptId="PIH:14715" labelCode="Other treatment at discharge" />
                         </p>
 
-                        <p>
-                            <label>
-                                <uimessage code="DM diagnosis on discharge"/>
-                            </label>
-                            <repeat>
-                                <template>
-                                    <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                                        <obs conceptId="PIH:DIAGNOSIS" answerConceptId="{diagId}" style="checkbox"/>
-                                    </obsgroup>
-                                </template>
-                                <render diagId="CIEL:142460" diagName="Diabetes with hyperosmolar coma" />
-                                <render diagId="CIEL:142452" diagName="Diabetic foot" />
-                                <render diagId="CIEL:142454" diagName="DKA with coma" />
-                                <render diagId="CIEL:122714" diagName="DKA without coma" />
-                                <render diagId="CIEL:138291" diagName="Hyperglycemia" />
-                            </repeat>
-                        </p>
+                        <div id="dm-plus">
+                            <p>
+                                <label>
+                                    <uimessage code="DM diagnosis on discharge"/>
+                                </label>
+                                <repeat>
+                                    <template>
+                                        <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                            <obs conceptId="PIH:DIAGNOSIS" answerConceptId="{diagId}" style="checkbox"/>
+                                        </obsgroup>
+                                    </template>
+                                    <render diagId="CIEL:142460" diagName="Diabetes with hyperosmolar coma" />
+                                    <render diagId="CIEL:142452" diagName="Diabetic foot" />
+                                    <render diagId="CIEL:142454" diagName="DKA with coma" />
+                                    <render diagId="CIEL:122714" diagName="DKA without coma" />
+                                    <render diagId="CIEL:138291" diagName="Hyperglycemia" />
+                                </repeat>
+                            </p>
+                        </div>
 
+                        <div id="respire-plus">
+                            <p class="side-by-side">
+                                <label>
+                                    <uimessage code="Chronic lung disease screening tool during hospitalization" />
+                                </label>
+                                <br/>
+                                <obs conceptId="PIH:14602" style="radio"
+                                     answerConceptIds="CIEL:703,CIEL:664,CIEL:1118" />
+                            </p>
+                        </div>
+
+                        <div id="ckd-plus">
+                            <p>
+                                <label>
+                                    <uimessage code="Creatinine at discharge" />
+                                </label>
+                                <obs conceptId="CIEL:790" showUnits="true" />
+                            </p>
+                        </div>
                     </div>
                 </div>
             </obsgroup>

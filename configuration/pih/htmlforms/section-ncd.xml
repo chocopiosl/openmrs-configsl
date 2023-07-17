@@ -311,41 +311,7 @@
             });
         </script>
 
-        <section id="ncd_info" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-                 headerCode="Followup indicators">
-            <div class="section-container two-columns">
-                <div>
-                    <repeat>
-                        <template>
-                            <p>
-                                <p class="list-inline-wide">
-                                    <label>
-                                        <uimessage code="{xId}"/>
-                                    </label>
-                                    <obs conceptId="{message}" style="radio"
-                                         answerConceptIds="PIH:YES,PIH:NO" />
-                                </p>
-                            </p>
-                        </template>
-                        <render message="CIEL:1898"   xId="Patient condition improved" tog=""/>
-                        <render message="CIEL:164075" xId="Overall treatment adherence" tog=""/>
-                        <render message="CIEL:167819" xId="Missed doses in past week" tog=""/>
-                        <render message="CIEL:167021" xId="Aware and understands the disease" tog=""/>
-                        <render message="PIH:14465"   xId="Understands treatment" tog=""/>
-                    </repeat>
-                </div>
-                <div>
-                    <br/><br/>
-                    <label>
-                        <uimessage code="# of missed doses in past week"/>
-                    </label>
-                    <obs conceptId="CIEL:167918"  />
-
-                </div>
-            </div>
-        </section>
-
-        <section id="vitals" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+         <section id="vitals" sectionTag="fieldset" headerTag="legend" headerStyle="title"
                  headerCode="pihcore.vitalSigns">
             <div class="section-container">
 
@@ -740,6 +706,38 @@
                 <uimessage code="Diabetes followup indicators"/>
             </strong>
 
+            <obsgroup groupingConceptId="PIH:14469" showIfEmpty="false">
+                <div class="two-columns">
+                    <div>
+                        <repeat>
+                            <template>
+                                <p>
+                                    <p class="list-inline-wide">
+                                        <label>
+                                            <uimessage code="{xId}"/>
+                                        </label>
+                                        <obs conceptId="{message}" style="radio"
+                                             answerConceptIds="PIH:YES,PIH:NO" />
+                                    </p>
+                                </p>
+                            </template>
+                            <render message="CIEL:1898"   xId="Patient condition improved" tog=""/>
+                            <render message="CIEL:164075" xId="Overall treatment adherence" tog=""/>
+                            <render message="CIEL:167819" xId="Missed doses in past week" tog=""/>
+                            <render message="CIEL:167021" xId="Aware and understands the disease" tog=""/>
+                            <render message="CIEL:167914" xId="Understands treatment" tog=""/>
+                        </repeat>
+                    </div>
+                    <div>
+                        <br/><br/>
+                        <label>
+                            <uimessage code="# of missed doses in past week"/>
+                        </label>
+                        <obs conceptId="CIEL:167918"  />
+
+                    </div>
+                </div>
+
             <ifMode mode="VIEW" include="false">
                 <table align="left" style="font-size:small">
                     <tr>
@@ -796,6 +794,8 @@
                     </p>
                 </div>
             </div>
+
+            </obsgroup>
 
             <strong>
                 <uimessage code="Fundoscopy"/>
@@ -1080,19 +1080,40 @@
                 <strong>
                     <uimessage code="Hypertension followup indicators" />
                 </strong>
-                <repeat>
-                    <template>
-                        <p class="side-by-side">
+
+                <obsgroup groupingConceptId="PIH:14462" showIfEmpty="false">
+                    <div class="two-columns">
+                        <div>
+                            <repeat>
+                                <template>
+                                    <p>
+                                        <p class="list-inline-wide">
+                                            <label>
+                                                <uimessage code="{xId}"/>
+                                            </label>
+                                            <obs conceptId="{message}" style="radio"
+                                                 answerConceptIds="PIH:YES,PIH:NO" />
+                                        </p>
+                                    </p>
+                                </template>
+                                <render message="CIEL:1898"   xId="Patient condition improved" tog=""/>
+                                <render message="CIEL:164075" xId="Overall treatment adherence" tog=""/>
+                                <render message="CIEL:167819" xId="Missed doses in past week" tog=""/>
+                                <render message="CIEL:167021" xId="Aware and understands the disease" tog=""/>
+                                <render message="CIEL:167914" xId="Understands treatment" tog=""/>
+                                <render cid="PIH:14464" messg="Disease controlled (BP less than equal 150/80)" />
+                            </repeat>
+                        </div>
+                        <div>
+                            <br/><br/>
                             <label>
-                                <uimessage code="{messg}" />
+                                <uimessage code="# of missed doses in past week"/>
                             </label>
-                            <obs conceptId="{cid}" style="radio"
-                                 answerConceptIds="CIEL:1065,CIEL:1066" />
-                        </p>
-                    </template>
-                    <render cid="CIEL:1898" messg="Better controlled" />
-                    <render cid="PIH:14464" messg="Disease controlled (BP less than equal 150/80)" />
-                </repeat>
+                            <obs conceptId="CIEL:167918"  />
+
+                        </div>
+                    </div>
+                </obsgroup>
             </includeIf>
 
         </div>
@@ -1304,6 +1325,12 @@
                                          answerCodes="yes,no,unknown" />
                                 </p>
                             </template>
+                            <render qId="CIEL:1898"   questionName="Patient condition improved" tog=""/>
+                            <render qId="CIEL:164075" questionName="Overall treatment adherence" tog=""/>
+                            <render qId="CIEL:167819" questionName="Missed doses in past week" tog=""/>
+                            <render qId="CIEL:167021" questionName="Aware and understands the disease" tog=""/>
+                            <render qId="CIEL:167914" questionName="Understands treatment" tog=""/>
+
                             <render qId="CIEL:168115" questionName="Low salt adherence diet" />
                             <render qId="CIEL:1788"   questionName="Refer for admission" />
                             <render qId="PIH:14738"   questionName="Refer for surgery evaluation" />
@@ -1311,6 +1338,8 @@
                             <render qId="PIH:14740"   questionName="Echocardiogram improvement" />
                             <render qId="PIH:14741"   questionName="Ability to titrate diuretic" />
                         </repeat>
+
+                        <!-- ToDo:  Add missed dose number? -->
 
                     </div>
 
@@ -1393,14 +1422,6 @@
 
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Chronic lung disease">
         <div id="respire" class="section-container">
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="Chronic lung disease screening tool during hospitalization" />
-                </label>
-                <br/>
-                <obs conceptId="PIH:14602" style="radio"
-                     answerConceptIds="CIEL:703,CIEL:664,CIEL:1118" />
-            </p>
 
             <table>
                 <tr>
@@ -1792,6 +1813,12 @@
                                      answerCodes="yes,no" />
                             </p>
                         </template>
+                        <render qId="CIEL:1898"   questionName="Patient condition improved" tog=""/>
+                        <render qId="CIEL:164075" questionName="Overall treatment adherence" tog=""/>
+                        <render qId="CIEL:167819" questionName="Missed doses in past week" tog=""/>
+                        <render qId="CIEL:167021" questionName="Aware and understands the disease" tog=""/>
+                        <render qId="CIEL:167914" questionName="Understands treatment" tog=""/>
+
                         <render qId="PIH:14716"   questionName="HTN controlled" />
                         <render qId="PIH:14718"   questionName="Stable creatinine level" />
                         <render qId="PIH:14719"   questionName="Dialysis referral" />
@@ -1799,10 +1826,8 @@
                         <render qId="CIEL:128340" questionName="Proteinuria" />
                         <render qId="PIH:14721"   questionName="CKD relapse" />
                     </repeat>
-
                 </div>
             </obsgroup>
-
         </div>
     </section>
 
