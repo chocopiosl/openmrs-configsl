@@ -551,6 +551,164 @@
         </div>
     </section>
 
+    <section id="hospital" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Hospitalization">
+        <div class="section-container">
+            <!-- ToDo: Check with Marta about controls and reorganize with obsgroup -->
+
+            <obsgroup groupingConceptId="PIH:HOSPITALIZATION CONSTRUCT" showIfEmpty="false">
+
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="Hospitalization since last visit"/>
+                    </label>
+                    <obs id="hospital-stay" conceptId="CIEL:976" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067">
+                        <controls>
+                            <when value="CIEL:1065" thenDisplay="#hospital-details"/>
+                        </controls>
+                    </obs>
+                </p>
+
+                <div id="hospital-details" class="two-columns">
+                    <div>
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Number of hospitalizations since last visit"/>
+                            </label>
+                            <obs conceptId="CIEL:1773" />
+                            <br/>
+
+                            <label>
+                                <uimessage code="Number of days"/>
+                            </label>
+                            <obs conceptId="PIH:2872" showUnits="coreapps.days" unitsCssClass="append-to-value" />
+                            <br/><br/>
+
+                        </p>
+
+                        <p>
+                            <label>
+                                <uimessage code="NCD diagnosis which caused hospitalization" />
+                            </label>
+                            <repeat>
+                                <template>
+                                    <obs id="{nickname}-q" conceptId="PIH:12476" style="checkbox"
+                                         answerConceptId="{answId}" answerCode="{name}" >
+                                        <controls>
+                                            <when value="CIEL:119481" thenDisplay="#{nickname}-plus" />
+                                            <when value="CIEL:139069" thenDisplay="#{nickname}-plus" />
+                                            <when value="CIEL:155569" thenDisplay="#{nickname}-plus" />
+                                            <when value="CIEL:145438" thenDisplay="#{nickname}-plus" />
+                                        </controls>
+                                    </obs>
+                                </template>
+                                <render answId="CIEL:119481" nickname="dm" name="Diabetes mellitus (DM)"/>
+                                <render answId="CIEL:117399" nickname="htn" name="Hypertension"/>
+                                <render answId="CIEL:139069" nickname="hf" name="Heart failure"/>
+                                <render answId="CIEL:155569" nickname="respire" name="Chronic lung disease" />
+                                <render answId="CIEL:145438" nickname="ckd" name="Chronic kidney disease"/>
+                                <render answId="PIH:3714" nickname="cirrhosis" name="Liver cirrhosis" />
+                                <render answId="CIEL:117703" nickname="sickle" name="Sickle cell disease" />
+                                <render answId="CIEL:160849" nickname="palliative" name="Palliative care"/>
+                            </repeat>
+                        </p>
+
+                        <p>
+                            <label>
+                                <uimessage code="Other diagnoses during hospitalization"/>
+                            </label>
+                            <obs conceptId="PIH:6899" style="textarea" rows="3"/>
+                        </p>
+
+                        <div id="hf-plus">
+                            <p>
+                                <obsgroup groupingConceptId="CIEL:160714" showIfEmpty="false">
+                                    <obs conceptId="CIEL:1651" style="checkbox"
+                                         answerConceptId="CIEL:159567"
+                                         answerCode="Echocardiogram performed"/>
+                                </obsgroup>
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="mirebalais.dischargeNote.dischargeDate.label"/>
+                            </label>
+                            <obs conceptId="CIEL:1641" allowTime="false" />
+                            <br/>
+
+                        </p>
+
+                        <p>
+                            <label>
+                                <uimessage code="Treatment at discharge" />
+                            </label>
+
+                            <repeat>
+                                <template>
+                                    <obs conceptId="PIH:14468" style="checkbox"
+                                         answerConceptId="{answId}" answerCode="{name}" />
+                                </template>
+                                <render answId="CIEL:78056" name="Insulin"/>
+                                <render answId="CIEL:167915" name="Oral anti-diabetic"/>
+
+                                <render answId="PIH:14775" name="Short acting morphine"/>
+                                <render answId="PIH:14776" name="Long acting morphine"/>
+                            </repeat>
+
+                            <obs conceptId="PIH:14715" labelCode="Other treatment at discharge" />
+                        </p>
+
+                        <div id="dm-plus">
+                            <p>
+                                <label>
+                                    <uimessage code="DM diagnosis on discharge"/>
+                                </label>
+                                <repeat>
+                                    <template>
+                                        <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                            <obs conceptId="PIH:DIAGNOSIS" answerConceptId="{diagId}" style="checkbox"/>
+                                        </obsgroup>
+                                    </template>
+                                    <render diagId="CIEL:142460" diagName="Diabetes with hyperosmolar coma" />
+                                    <render diagId="CIEL:142452" diagName="Diabetic foot" />
+                                    <render diagId="CIEL:142454" diagName="DKA with coma" />
+                                    <render diagId="CIEL:122714" diagName="DKA without coma" />
+                                    <render diagId="CIEL:138291" diagName="Hyperglycemia" />
+                                </repeat>
+                            </p>
+                        </div>
+
+                        <div id="respire-plus">
+                            <p class="side-by-side">
+                                <label>
+                                    <uimessage code="Chronic lung disease screening tool during hospitalization" />
+                                </label>
+                                <br/>
+                                <obs conceptId="PIH:14602" style="radio"
+                                     answerConceptIds="CIEL:703,CIEL:664,CIEL:1118" />
+                            </p>
+                        </div>
+
+                        <div id="ckd-plus">
+                            <p>
+                                <label>
+                                    <uimessage code="Creatinine at discharge" />
+                                </label>
+                                <obs conceptId="CIEL:790" showUnits="true" />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </obsgroup>
+
+        </div>
+    </section>
+
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.ncd.diabetes">
         <div id="diabetes" class="section-container">
@@ -664,44 +822,6 @@
 
             <br/>
 
-            <!-- followup only -->
-            <includeIf velocityTest="$encounter.encounterType.uuid == '5cbfd6a2-92d9-4ad0-b526-9d29bfe1d10c'">
-                <div class="two-columns">
-                    <div>
-                        <strong>
-                            <uimessage code="Diagnosis on discharge"/>
-                        </strong>
-                        <br/>
-                        <repeat>
-                            <template>
-                                <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                                    <obs conceptId="PIH:DIAGNOSIS" answerConceptId="{diagId}" style="checkbox"/>
-                                </obsgroup>
-                            </template>
-                            <render diagId="CIEL:142460" diagName="Diabetes with hyperosmolar coma" />
-                            <render diagId="CIEL:142452" diagName="Diabetic foot" />
-                            <render diagId="CIEL:142454" diagName="DKA with coma" />
-                            <render diagId="CIEL:122714" diagName="DKA without coma" />
-                            <render diagId="CIEL:138291" diagName="Hyperglycemia" />
-                        </repeat>
-                    </div>
-
-                    <div>
-                        <strong>
-                            <uimessage code="DM Treatment on discharge" />
-                        </strong>
-                        <br/>
-                        <obs conceptId="PIH:14468" style="checkbox"
-                             answerConceptId="CIEL:78056"
-                             answerCode="Insulin" />
-                        <obs conceptId="PIH:14468" style="checkbox"
-                             answerConceptId="CIEL:167915"
-                             answerCode="Oral anti-diabetic" />
-                    </div>
-                </div>
-                <br/>
-            </includeIf>
-
             <strong>
                 <uimessage code="Diabetes followup indicators"/>
             </strong>
@@ -726,6 +846,7 @@
                             <render message="CIEL:167819" xId="Missed doses in past week" tog=""/>
                             <render message="CIEL:167021" xId="Aware and understands the disease" tog=""/>
                             <render message="CIEL:167914" xId="Understands treatment" tog=""/>
+                            <render message="PIH:14741"   xId="Ability to titrate diuretic" />
                         </repeat>
                     </div>
                     <div>
@@ -761,28 +882,34 @@
                                 <label>
                                     <uimessage code="{questionName}"/>
                                 </label>
-                                <obs conceptId="{qId}" style="radio"
+                                <obs id="dm-{q}-top" conceptId="{qId}" style="radio"
                                      answerConceptIds="PIH:YES,PIH:NO"
-                                     answerCodes="yes,no" />
+                                     answerCodes="yes,no" >
+                                    <controls>
+                                        <when value="PIH:YES" thenDisplay="#dm-{q}-details" />
+                                    </controls>
+                                </obs>
                             </p>
                         </template>
-                        <render qId="PIH:6756"    questionName="On insulin" />
-                        <render qId="CIEL:167998" questionName="On ACE inhibitors" />
-                        <render qId="CIEL:167957" questionName="Severe hypoglycemia in last month" />
-                        <render qId="CIEL:167956" questionName="Glycometer (home)" />
-                        <render qId="CIEL:167919" questionName="Ability to read and manage glycometer" />
-                        <render qId="PIH:14709"   questionName="Patient adjusted insulin based on glucometer" />
+                        <render qId="PIH:6756"    questionName="On insulin" q="insulin"/>
+                        <render qId="CIEL:167957" questionName="Severe hypoglycemia in last month" q="severe"/>
+                        <render qId="CIEL:167956" questionName="Glycometer (home)" q="home"/>
+                        <render qId="CIEL:167919" questionName="Ability to read and manage glycometer" q="abiity" />
+                        <render qId="PIH:14709"   questionName="Patient adjusted insulin based on glucometer" q="adjust"/>
+                        <render qId="CIEL:167998" questionName="On ACE inhibitors" q="ace"/>
                     </repeat>
 
-                    <p class="list-inline-wide">
-                        <label>
-                            <uimessage code="Indications on ACE inhibitors"/><br/>
-                            <uimessage code="(proteinuria present; BP &gt;= 135/75)"/>
-                        </label>
-                        <obs conceptId="CIEL:168000" style="radio"
-                             answerConceptIds="PIH:YES,PIH:NO"
-                             answerCodes="yes,no" />
-                    </p>
+                    <div id="dm-ace-details">
+                        <p class="list-inline-wide">
+                            <label>
+                                <uimessage code="Indications on ACE inhibitors"/><br/>
+                                <uimessage code="(proteinuria present; BP &gt;= 135/75)"/>
+                            </label>
+                            <obs conceptId="CIEL:168000" style="radio"
+                                 answerConceptIds="PIH:YES,PIH:NO"
+                                 answerCodes="yes,no" />
+                        </p>
+                    </div>
                 </div>
                 <div>
                     <br/><br/><br/>
@@ -811,33 +938,37 @@
                     </controls>
                 </obs>
 
-                <p id="fundy-results" class="side-by-side">
-                    <label>
-                        <uimessage code="Fundoscopy results" />
-                    </label>
-                    <obs id="fun-abnorm" conceptId="CIEL:167917" style="radio"
-                         answerConceptIds="CIEL:1115,CIEL:1116">
-                        <controls>
-                            <when value="CIEL:1116" thenDisplay="#fun-findings" />
-                        </controls>
-                    </obs>
+                <div id="fundy-results" class="two-columns">
+                    <div>
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Fundoscopy results"/>
+                            </label>
+                            <obs id="fun-abnorm" conceptId="CIEL:167917" style="radio"
+                                 answerConceptIds="CIEL:1115,CIEL:1116">
+                                <controls>
+                                    <when value="CIEL:1116" thenDisplay="#fun-findings"/>
+                                </controls>
+                            </obs>
+                        </p>
+                    </div>
 
                     <div id="fun-findings">
                         <repeat>
                             <template>
                                 <obs conceptId="CIEL:167917" style="checkbox"
-                                     answerConceptId="CIEL:{funId}" />
+                                     answerConceptId="CIEL:{funId}"/>
                             </template>
-                            <render funId="142429" message="Diabetic retinopathy" />
-                            <render funId="113271" message="Retinal detachment" />
-                            <render funId="124755" message="Thrombosis of retinal vein" />
-                            <render funId="142820" message="Deep retinal hemorrhage" />
-                            <render funId="143265" message="Cotton wool spots" />
-                            <render funId="119109" message="Optic nerve disease" />
+                            <render funId="142429" message="Diabetic retinopathy"/>
+                            <render funId="113271" message="Retinal detachment"/>
+                            <render funId="124755" message="Thrombosis of retinal vein"/>
+                            <render funId="142820" message="Deep retinal hemorrhage"/>
+                            <render funId="143265" message="Cotton wool spots"/>
+                            <render funId="119109" message="Optic nerve disease"/>
                         </repeat>
                     </div>
+                </div>
 
-                </p>
             </p>
 
             <strong>
@@ -1075,7 +1206,7 @@
                 </div>
             </div>
 
-            <!-- followup only -->
+            <!-- Fix this!!!   followup only -->
             <includeIf velocityTest="$encounter.encounterType.uuid == '5cbfd6a2-92d9-4ad0-b526-9d29bfe1d10c'">
                 <strong>
                     <uimessage code="Hypertension followup indicators" />
@@ -1101,7 +1232,7 @@
                                 <render message="CIEL:167819" xId="Missed doses in past week" tog=""/>
                                 <render message="CIEL:167021" xId="Aware and understands the disease" tog=""/>
                                 <render message="CIEL:167914" xId="Understands treatment" tog=""/>
-                                <render cid="PIH:14464" messg="Disease controlled (BP less than equal 150/80)" />
+                                <render message="PIH:14464"   xId="Disease controlled (BP less than equal 150/80)" />
                             </repeat>
                         </div>
                         <div>
@@ -1330,13 +1461,14 @@
                             <render qId="CIEL:167819" questionName="Missed doses in past week" tog=""/>
                             <render qId="CIEL:167021" questionName="Aware and understands the disease" tog=""/>
                             <render qId="CIEL:167914" questionName="Understands treatment" tog=""/>
+                            <render qId="PIH:14741"   questionName="Ability to titrate diuretic" />
 
                             <render qId="CIEL:168115" questionName="Low salt adherence diet" />
                             <render qId="CIEL:1788"   questionName="Refer for admission" />
                             <render qId="PIH:14738"   questionName="Refer for surgery evaluation" />
                             <render qId="PIH:14739"   questionName="Endocarditis prevention therapy" />
                             <render qId="PIH:14740"   questionName="Echocardiogram improvement" />
-                            <render qId="PIH:14741"   questionName="Ability to titrate diuretic" />
+
                         </repeat>
 
                         <!-- ToDo:  Add missed dose number? -->
@@ -1780,7 +1912,7 @@
             </div>
 
             <strong>
-                <uimessage code="CKD followup indicators"/>
+                <uimessage code="CKD and Nephrotic Syndrome followup indicators"/>
             </strong>
 
             <div>
