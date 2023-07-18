@@ -175,21 +175,15 @@
     <section id="ncd_info" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.ncd.category">
         <div class="section-container">
-            <div class="two-columns">
 
-                <!-- Program enrollment -->
-                <div>
-                    <enrollInProgram programId="NCD" locationTag="Program Location" />
-                </div>
-            </div>
+            <!-- Program enrollment -->
+            <enrollInProgram programId="NCD" locationTag="Program Location" />
 
-            <br/>
             <label>
                 <uimessage code="pihcore.ncd.category.instructions"/>
             </label>
 
             <repeat>
-
                 <template>
                     <obs conceptId="PIH:NCD category" answerConceptId="{category}" answerCode="{code}"
                          toggle="{nickname}" style="checkbox"/>
@@ -826,6 +820,21 @@
                 <uimessage code="Diabetes followup indicators"/>
             </strong>
 
+            <ifMode mode="VIEW" include="false">
+                <table align="left" style="font-size:small">
+                    <tr>
+                        <td>
+                            Controlled definition: HBA1c &lt; 7% (53 mmol/m)<br/>
+                            (if available the best)
+                        </td>
+                        <td>
+                            Preprandial glucose: 80 - 130 mg/dL (4.4 - 7.2 mmol/L)<br/>
+                            Postprandial glucose:  &lt; 180 mg/dL (10 mmol/L)
+                        </td>
+                    </tr>
+                </table>
+            </ifMode>
+
             <obsgroup groupingConceptId="PIH:14469" showIfEmpty="false">
                 <div class="two-columns">
                     <div>
@@ -859,68 +868,53 @@
                     </div>
                 </div>
 
-            <ifMode mode="VIEW" include="false">
-                <table align="left" style="font-size:small">
-                    <tr>
-                        <td>
-                            Controlled definition: HBA1c &lt; 7% (53 mmol/m)<br/>
-                            (if available the best)
-                        </td>
-                        <td>
-                            Preprandial glucose: 80 - 130 mg/dL (4.4 - 7.2 mmol/L)<br/>
-                            Postprandial glucose:  &lt; 180 mg/dL (10 mmol/L)
-                        </td>
-                    </tr>
-                </table>
-            </ifMode>
+                <div class="two-columns">
+                    <div>
+                        <repeat>
+                            <template>
+                                <p class="list-inline-wide">
+                                    <label>
+                                        <uimessage code="{questionName}"/>
+                                    </label>
+                                    <obs id="dm-{q}-top" conceptId="{qId}" style="radio"
+                                         answerConceptIds="PIH:YES,PIH:NO"
+                                         answerCodes="yes,no" >
+                                        <controls>
+                                            <when value="PIH:YES" thenDisplay="#dm-{q}-details" />
+                                        </controls>
+                                    </obs>
+                                </p>
+                            </template>
+                            <render qId="PIH:6756"    questionName="On insulin" q="insulin"/>
+                            <render qId="CIEL:167957" questionName="Severe hypoglycemia in last month" q="severe"/>
+                            <render qId="CIEL:167956" questionName="Glycometer (home)" q="home"/>
+                            <render qId="CIEL:167919" questionName="Ability to read and manage glycometer" q="abiity" />
+                            <render qId="PIH:14709"   questionName="Patient adjusted insulin based on glucometer" q="adjust"/>
+                            <render qId="CIEL:167998" questionName="On ACE inhibitors" q="ace"/>
+                        </repeat>
 
-            <div class="two-columns">
-                <div>
-                    <repeat>
-                        <template>
+                        <div id="dm-ace-details">
                             <p class="list-inline-wide">
                                 <label>
-                                    <uimessage code="{questionName}"/>
+                                    <uimessage code="Indications on ACE inhibitors"/><br/>
+                                    <uimessage code="(proteinuria present; BP &gt;= 135/75)"/>
                                 </label>
-                                <obs id="dm-{q}-top" conceptId="{qId}" style="radio"
+                                <obs conceptId="CIEL:168000" style="radio"
                                      answerConceptIds="PIH:YES,PIH:NO"
-                                     answerCodes="yes,no" >
-                                    <controls>
-                                        <when value="PIH:YES" thenDisplay="#dm-{q}-details" />
-                                    </controls>
-                                </obs>
+                                     answerCodes="yes,no" />
                             </p>
-                        </template>
-                        <render qId="PIH:6756"    questionName="On insulin" q="insulin"/>
-                        <render qId="CIEL:167957" questionName="Severe hypoglycemia in last month" q="severe"/>
-                        <render qId="CIEL:167956" questionName="Glycometer (home)" q="home"/>
-                        <render qId="CIEL:167919" questionName="Ability to read and manage glycometer" q="abiity" />
-                        <render qId="PIH:14709"   questionName="Patient adjusted insulin based on glucometer" q="adjust"/>
-                        <render qId="CIEL:167998" questionName="On ACE inhibitors" q="ace"/>
-                    </repeat>
-
-                    <div id="dm-ace-details">
-                        <p class="list-inline-wide">
-                            <label>
-                                <uimessage code="Indications on ACE inhibitors"/><br/>
-                                <uimessage code="(proteinuria present; BP &gt;= 135/75)"/>
-                            </label>
-                            <obs conceptId="CIEL:168000" style="radio"
-                                 answerConceptIds="PIH:YES,PIH:NO"
-                                 answerCodes="yes,no" />
+                        </div>
+                    </div>
+                    <div>
+                        <br/><br/><br/>
+                        <label>
+                            <uimessage code="Number of hypoglycemic episodes (past 30 days)"/>
+                        </label>
+                        <p class="narrow">
+                            <obs conceptId="PIH:14708"/>
                         </p>
                     </div>
                 </div>
-                <div>
-                    <br/><br/><br/>
-                    <label>
-                        <uimessage code="Number of hypoglycemic episodes (past 30 days)"/>
-                    </label>
-                    <p class="narrow">
-                        <obs conceptId="PIH:14708"/>
-                    </p>
-                </div>
-            </div>
 
             </obsgroup>
 
@@ -991,12 +985,40 @@
                             <label>
                                 <uimessage code="Foot exam findings"/>
                             </label>
-                            <obs id="foot-abnorm" conceptId="CIEL:165471" style="radio"
-                                 answerConceptIds="CIEL:1115,CIEL:1116">
+                            <obs id="normal-foot" style="radio"
+                                 conceptId="CIEL:1127" answerConceptIds="CIEL:1115,CIEL:1116">
                                 <controls>
-                                    <when value="CIEL:1116" thenDisplay="#foot-findings"/>
+                                    <when value="CIEL:1116" thenDisplay="#abnormal-foot" />
                                 </controls>
                             </obs>
+                            <br/>
+                        </p>
+
+                    </div>
+                    <div  id="abnormal-foot">
+                        <repeat>
+                            <template>
+                                <obs id="dm-foot-{tag}-dx" conceptId="CIEL:165471" style="checkbox"
+                                     answerConceptId="CIEL:{footId}">
+                                    <controls>
+                                        <when value="CIEL:132653" thenDisplay="#foot-numb-message" />
+                                    </controls>
+                                </obs>
+                            </template>
+                            <render footId="118983" message="Neuropathy" tag="neuropathy"/>
+                            <render footId="132653" message="Loss of sensation" tag="numb"/>
+                            <render footId="163411" message="Foot ulcer" tag="ulcer" />
+
+                            <!-- ToDo:  cc mds
+                            <render footId="152805" message="Foot infection"/> -->
+
+                        </repeat>
+
+                        <p>
+                            <label>
+                                <uimessage code="Other foot exam comments"/>
+                            </label>
+                            <obs conceptId="PIH:14778" />
                         </p>
 
                         <p class="list-inline">
@@ -1008,37 +1030,16 @@
                                  answerCodes="yes,no"/>
                         </p>
 
-                    </div>
-                    <div>
-                        <p id="foot-findings">
+                        <div id="foot-numb-message">
                             <label>
-                                <uimessage code="Foot exam findings"/>
+                                <b>
+                                    <uimessage code="  Ulcer prevention recommended"/>
+                                </b>
                             </label>
-                            <obs conceptId="PIH:14778" />
-                        </p>
+                        </div>
                     </div>
+
                 </div>
-
-
-
-                <p id="foot-sense" class="list-inline">
-                    <label>
-                        <uimessage code="Loss of sensation"/>
-                    </label>
-                    <obs id="foot-numb" conceptId="CIEL:132653" style="radio"
-                         answerConceptIds="CIEL:1066,CIEL:1065"
-                         answerCodes="no, yes">
-                        <controls>
-                            <when value="CIEL:1065" thenDisplay="#foot-numb-message"/>
-                        </controls>
-                    </obs>
-
-                    <label id="foot-numb-message">
-                        <b>
-                            <uimessage code="  Ulcer prevention recommended"/>
-                        </b>
-                    </label>
-                </p>
 
                 <p class="list-inline">
                     <label>
@@ -1050,37 +1051,6 @@
                 </p>
 
             </p>
-
-            <!-- ToDo:  From Haiti but not on SL paper.  Remove? -->
-            <br/>
-            <div>
-                <strong>
-                    <uimessage code="pihcore.lab.glucose"/>
-                </strong>
-                <span class="small">
-                    <field>
-                        <obs id="glucose" conceptId="PIH:SERUM GLUCOSE" showUnits="true"/>
-                    </field>
-                </span>
-                <br/>
-                <span class="small">
-                    <field>
-                        <obs conceptId="PIH:Fasting for blood glucose test"
-                             answerConceptId="PIH:YES" answerCode="pihcore.ncd.diabetes.fasting.comment"
-                             toggle="fasting-glucose"/>
-                    </field>
-                </span>
-                <div id="fasting-glucose">
-
-                    <uimessage code="pihcore.lab.glucose-fasting"/>
-
-                    <span class="small">
-                        <field>
-                            <obs id="glucose-fasting" conceptId="CIEL:160912" showUnits="true"/>
-                        </field>
-                    </span>
-                </div>
-            </div>
 
             <p>
                 <label>
