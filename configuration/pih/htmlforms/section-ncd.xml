@@ -1241,6 +1241,7 @@
                             </template>
                             <render diagId="CIEL:5016"   tag="cardiomyopathy" answers="" />
                             <render diagId="CIEL:113227" tag="rheumaticHeart" answers="" />
+                            <render diagId="CIEL:132816" tag="degenHeart" answers="" />
                             <render diagId="CIEL:127376" tag="rtHeartFail" answers="" />
                             <render diagId="CIEL:119092" tag="pericardDisease" answers="" />
                             <render diagId="CIEL:120148" tag="arrythmia" answers="" />
@@ -1277,12 +1278,26 @@
                     <div id="rheumaticHeart">
                         <p class="side-by-side">
                             <label>
-                                <uimessage code="Rheumatic/Degenerative heart disease"/>
+                                <uimessage code="Rheumatic heart disease"/>
                             </label>
                             <br/>
                             <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
                                 <obs conceptId="PIH:DIAGNOSIS" style="radio"
-                                     answerConceptIds="CIEL:127437,CIEL:115735,CIEL:127436,CIEL:121532,CIEL:148546,CIEL:127454,PIH:14750"
+                                     answerConceptIds="CIEL:127437,CIEL:127438,CIEL:127436,CIEL:127455,CIEL:127456,CIEL:127454,PIH:14750"
+                                     answerSeparator="&lt;br /&gt;" />
+                            </obsgroup>
+                        </p>
+                    </div>
+
+                    <div id="degenHeart">
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Degenerative valve disease"/>
+                            </label>
+                            <br/>
+                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                <obs conceptId="PIH:DIAGNOSIS" style="radio"
+                                     answerConceptIds="CIEL:134082,CIEL:115735,CIEL:121532,CIEL:148546,CIEL:134088"
                                      answerSeparator="&lt;br /&gt;" />
                             </obsgroup>
                         </p>
@@ -1297,6 +1312,7 @@
                             <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
                                 <obs conceptId="PIH:DIAGNOSIS" style="radio"
                                      answerConceptIds="PIH:COR PULMONALE,CIEL:117152"
+                                     answerCodes="Cor pulmonale,Schistosomiasis"
                                      answerSeparator="&lt;br /&gt;" />
                             </obsgroup>
 
@@ -1315,6 +1331,7 @@
                             <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
                                 <obs conceptId="PIH:DIAGNOSIS" style="radio"
                                      answerConceptIds="CIEL:124033,CIEL:168127,CIEL:159343"
+                                     answerCodes="Tuberculosis of pericardium,HIV pericardial diseases,Malignant pericardial effusion"
                                      answerSeparator="&lt;br /&gt;" />
                             </obsgroup>
                         </p>
@@ -1356,7 +1373,18 @@
                     <div id="congenitalHeart">
                         <p class="side-by-side">
                             <label>
-                                <uimessage code="Congenital heart disease, specify:"/>
+                                <uimessage code="Congenital heart disease"/>
+                            </label>
+                            <br/>
+                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                <obs conceptId="PIH:DIAGNOSIS" style="radio"
+                                     answerConceptIds="CIEL:143049,CIEL:149461"
+                                     answerSeparator="&lt;br /&gt;" />
+                            </obsgroup>
+
+                            <br/>
+                            <label>
+                                <uimessage code="Additional comments:"/>
                             </label>
                             <br/>
                             <obs conceptId="PIH:14742"/>
@@ -1408,7 +1436,7 @@
                 <obsgroup groupingConceptId="PIH:14724">
                     <p class="list-inline-wide">
                         <label>
-                            <uimessage code="Volume status"/>
+                            <uimessage code="pihcore.ncd.hf.vol_status"/>
                         </label>
                         <obs conceptId="CIEL:159574" style="radio"
                              answerConceptIds="CIEL:159575,CIEL:117315,CIEL:138099" />
@@ -1482,36 +1510,31 @@
                          answerSeparator="&lt;br /&gt;"/>
                 </p>
 
-                    <strong>
-                        <uimessage code="Cardiac surgery"/>
-                    </strong>
-                    <obsgroup groupingConceptId="CIEL:160714" showIfEmpty="false">
-                        <div class="three-columns">
-                            <div>
-                                <obs conceptId="CIEL:1651" style="checkbox"
-                                     answerConceptId="PIH:7827"
-                                     answerCode="Cardiac surgery performed"/>
-                            </div>
-                            <div>
-                                <obs conceptId="CIEL:160715" allowTime="false"
-                                     labelText="Date of surgery" />
-                            </div>
-                            <div>
-                                <obs conceptId="CIEL:160716" labelText="Surgery complications" />
-                            </div>
+                <strong>
+                    <uimessage code="Cardiac surgery"/>
+                </strong>
+                <obsgroup groupingConceptId="CIEL:160714" showIfEmpty="false">
+                    <div class="two-columns">
+                        <div>
+                            <obs id="cardiac-surgery"
+                                 conceptId="CIEL:1651" style="checkbox"
+                                 answerConceptId="PIH:7827"
+                                 answerCode="Cardiac surgery performed">
+                                <controls>
+                                    <when value="PIH:7827" thenDisplay="#cardiac-surgery-details"/>
+                                </controls>
+                            </obs>
                         </div>
-                    </obsgroup>
-                <br/>
+                        <div id="cardiac-surgery-details">
+                            <obs conceptId="CIEL:160715" allowTime="false"
+                                 labelText="Date of surgery" />
 
-                <p class="side-by-side">
-                    <label>
-                        <uimessage code="pihcore.ncd.hf.vol_status"/>
-                    </label>
-                    <obs conceptId="PIH:PATIENTS FLUID MANAGEMENT" style="radio"
-                         answerConceptIds="PIH:HYPERVOLEMIC,PIH:EUVOLEMIC,PIH:HYPOVOLEMIC" />
-                </p>
-
+                            <obs conceptId="CIEL:160716" labelText="Surgery complications" />
+                        </div>
+                    </div>
+                </obsgroup>
             </div>
+            <br/>
 
             <div>
                 <label>
