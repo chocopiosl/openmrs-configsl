@@ -1411,6 +1411,23 @@
                     <uimessage code="Heart failure followup indicators"/>
                 </strong>
 
+                <obsgroup groupingConceptId="PIH:14724">
+                    <repeat>
+                        <template>
+                            <p class="list-inline">
+                                <label>
+                                    <uimessage code="{questionName}"/>
+                                </label>
+                                <obs conceptId="{qId}" style="radio"
+                                     answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                                     answerCodes="yes,no,unknown" />
+                            </p>
+                        </template>
+                        <render qId="CIEL:168115" questionName="Low salt adherence diet" />
+                    </repeat>
+
+                </obsgroup>
+
                 <div>
                     <repeat>
                         <template>
@@ -1429,12 +1446,11 @@
                         <render qId="CIEL:127640" symptName="Crackles" />
                         <render qId="CIEL:136394" symptName="Jugular distension" />
                         <render qId="PIH:14751"   symptName="Loud murmur" />
-                        <render qId="CIEL:119664" symptName="Decompensated" />
                     </repeat>
                 </div>
 
                 <obsgroup groupingConceptId="PIH:14724">
-                    <p class="list-inline-wide">
+                    <p class="list-inline">
                         <label>
                             <uimessage code="pihcore.ncd.hf.vol_status"/>
                         </label>
@@ -1442,10 +1458,61 @@
                              answerConceptIds="CIEL:159575,CIEL:117315,CIEL:138099" />
                     </p>
 
+                    <div class="two-columns">
+                        <div>
+                            <repeat>
+                                <template>
+                                    <p class="list-inline">
+                                        <label>
+                                            <uimessage code="{questionName}"/>
+                                        </label>
+                                        <obs conceptId="{qId}" style="radio"
+                                             answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                                             answerCodes="yes,no,unknown" />
+                                    </p>
+                                </template>
+                                <render qId="CIEL:1898"   questionName="Patient condition improved" tog=""/>
+                                <render qId="CIEL:164075" questionName="Overall treatment adherence" tog=""/>
+                                <render qId="CIEL:167819" questionName="Missed doses in past week" tog=""/>
+                                <render qId="CIEL:167021" questionName="Aware and understands the disease" tog=""/>
+                                <render qId="CIEL:167914" questionName="Understands treatment" tog=""/>
+                                <render qId="PIH:14741"   questionName="Ability to titrate treatment" />
+
+                                <render qId="PIH:14739"   questionName="Endocarditis prevention therapy" />
+                                <render qId="PIH:14738"   questionName="Refer for surgery evaluation" />
+                                <render qId="PIH:14740"   questionName="Echocardiogram improvement" />
+
+                            </repeat>
+                        </div>
+
+                        <div>
+                            <br/><br/>
+                            <label>
+                                <uimessage code="# of missed doses in past week"/>
+                            </label>
+                            <obs conceptId="CIEL:167918"  />
+                        </div>
+                    </div>
+
                     <div>
                         <repeat>
                             <template>
-                                <p class="list-inline-wide">
+                                <p class="list-inline">
+                                    <obsgroup groupingConceptId="PIH:14733" showIfEmpty="false">
+                                        <obs style="radio"
+                                             conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
+                                             conceptLabels="yes,no,unknown" answerConceptId="{qId}" labelText="{symptName}"/>
+                                    </obsgroup>
+                                </p>
+                            </template>
+                            <render qId="CIEL:119664" symptName="Decompensated" />
+                        </repeat>
+                    </div>
+
+                    <obsgroup groupingConceptId="PIH:14724">
+                        <repeat>
+                            <template>
+                                <p class="list-inline">
                                     <label>
                                         <uimessage code="{questionName}"/>
                                     </label>
@@ -1454,29 +1521,15 @@
                                          answerCodes="yes,no,unknown" />
                                 </p>
                             </template>
-                            <render qId="CIEL:1898"   questionName="Patient condition improved" tog=""/>
-                            <render qId="CIEL:164075" questionName="Overall treatment adherence" tog=""/>
-                            <render qId="CIEL:167819" questionName="Missed doses in past week" tog=""/>
-                            <render qId="CIEL:167021" questionName="Aware and understands the disease" tog=""/>
-                            <render qId="CIEL:167914" questionName="Understands treatment" tog=""/>
-                            <render qId="PIH:14741"   questionName="Ability to titrate diuretic" />
-
-                            <render qId="CIEL:168115" questionName="Low salt adherence diet" />
-                            <render qId="CIEL:1788"   questionName="Refer for admission" />
-                            <render qId="PIH:14738"   questionName="Refer for surgery evaluation" />
-                            <render qId="PIH:14739"   questionName="Endocarditis prevention therapy" />
-                            <render qId="PIH:14740"   questionName="Echocardiogram improvement" />
-
+                            <render qId="CIEL:1788"   questionName="Send for admission" />
                         </repeat>
 
-                        <!-- ToDo:  Add missed dose number? -->
-
-                    </div>
+                    </obsgroup>
 
                     <label>
                         <uimessage code="If systolic function is depressed, treatment class:"/>
                     </label>
-                    <div class="two-columns">
+                    <div class="three-columns">
                         <repeat>
                             <template>
                                 <div>
@@ -1484,6 +1537,7 @@
                                         <label>
                                             <uimessage code="{messg}" />
                                         </label>
+
                                         <obs conceptId="{cid}" style="radio"
                                              answerConceptIds="CIEL:1065,CIEL:1066"
                                              answerCodes="yes,no"/>
@@ -1492,7 +1546,9 @@
                             </template>
                             <render cid="PIH:14531" short="ACE" messg="On ACE inhibitors" />
                             <render cid="PIH:14723" short="BBs" messg="On beta-blockers" />
+                            <render cid="PIH:14811" short="Spirono" messg="On spironolactone" />
                         </repeat>
+
                     </div>
                 </obsgroup>
 
@@ -1673,7 +1729,7 @@
                         <p class="side-by-side">
                             <obs style="radio"
                                  conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
-                                 conceptLabels="yes,no,unsure" answerConceptId="{copdId}" labelText="{copdSym}"/>
+                                 conceptLabels="yes,no,unknown" answerConceptId="{copdId}" labelText="{copdSym}"/>
                         </p>
                     </template>
                     <render copdId="CIEL:122496" copdSym="Dyspnea" />
@@ -1692,18 +1748,46 @@
 
                             <obs conceptId="{copdId}" style="radio"
                                  answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
-                                 answerCodes="yes,no,unsure" />
+                                 answerCodes="yes,no,unknown" />
                         </p>
                     </template>
+                    <render copdId="CIEL:158939" copdSym="Smoking cessation" />
                     <render copdId="PIH:14622"   copdSym="Increased inhaler use" />
                     <render copdId="PIH:14623"   copdSym="Wheeze during exam" />
-                    <render copdId="CIEL:158939" copdSym="Smoking cessation" />
                     <render copdId="PIH:11925"   copdSym="Activity limitation" />
                     <render copdId="PIH:14626"   copdSym="Night waking due to dyspnea" />
+                </repeat>
+
+                <table>
+                    <tr><th>
+                        Exacerbation Definition (one or more):
+                    </th></tr>
+                    <tr>
+                        <td>
+                            <sl>
+                                <li>Worsening Dyspnea</li>
+                                <li>Sputum production increases and/or become thicker</li>
+                                <li>Cough increases in frequency and severity</li>
+                            </sl>
+                        </td>
+                    </tr>
+                </table>
+
+                <repeat>
+                    <template>
+                        <p class="list-inline-wide">
+                            <label>
+                                <uimessage code="{copdSym}" />
+                            </label>
+
+                            <obs conceptId="{copdId}" style="radio"
+                                 answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
+                                 answerCodes="yes,no,unknown" />
+                        </p>
+                    </template>
                     <render copdId="CIEL:166093" copdSym="COPD exacerbation" />
                     <render copdId="PIH:14626"   copdSym="If exacerbation, hospitalization needed?" />
                 </repeat>
-
             </obsgroup>
 
             <h3>Asthma</h3>
@@ -1745,6 +1829,34 @@
                              answerConceptIds="CIEL:1498,CIEL:1499,CIEL:1500"
                              answerSeparator="&lt;br /&gt;"/>
                     </p>
+                    <br/><br/>
+
+                    <strong>
+                        <uimessage code="Inhaler" />
+                    </strong>
+
+                    <div>
+                        <p class="list-inline">
+                            <label>
+                                <uimessage code="pihcore.ncd.inhalerEd"/>
+                            </label>
+                            <br/>
+                            <obs conceptId="PIH:7399" style="radio"
+                                 answerConceptIds="PIH:YES,PIH:NO,CIEL:1067"
+                                 answerCodes="yes,no,unknown"/>
+
+                        </p>
+
+                        <p class="list-inline">
+                            <label>
+                                <uimessage code="Good inhaler technique"/>
+                            </label>
+                            <br/>
+                            <obs conceptId="PIH:7397" style="radio"
+                                 answerConceptIds="PIH:YES,PIH:NO,CIEL:1067"
+                                 answerCodes="yes,no,unknown"/>
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -1756,7 +1868,41 @@
                 <div class="two-columns">
                     <div>
                         <obs conceptId="CIEL:163724" labelText="Date" allowTime="false"/>
+                        <br/>
+
+                        <table style="width: 400px">
+                            <tr>
+                                <th colspan="2">
+                                FEV1 measurement values
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>FEV1 80% or greater</td>
+                                <td>normal</td>
+                            </tr>
+                            <tr>
+                                <td>FEV1 70 - 79%</td>
+                                <td>mildly abnormal</td>
+                            </tr>
+                            <tr>
+                                <td>FEV1 50 - 70%</td>
+                                <td>moderately abnormal</td>
+                            </tr>
+                            <tr>
+                                <td>FEV1 30 - 49%</td>
+                                <td>severely abnormal</td>
+                            </tr>
+                            <tr>
+                                <td>FEV1 &lt; 30%</td>
+                                <td>very severely abnormal</td>
+                            </tr>
+                            <tr>
+                                <td>FEV1 normal and FVC decreased</td>
+                                <td>suspect interstitial lung diseases</td>
+                            </tr>
+                        </table>
                     </div>
+
                     <div>
                         <repeat>
                             <template>
@@ -1780,6 +1926,7 @@
                     </div>
                 </div>
             </obsgroup>
+            <br/>
 
             <p class="side-by-side">
                 <label>
@@ -1787,38 +1934,6 @@
                 </label>
                 <obs conceptId="PIH:14617" style="radio"
                      answerConceptIds="CIEL:162677,CIEL:162678,CIEL:162679" />
-            </p>
-
-
-            <h3>
-                <uimessage code="Inhaler" />
-            </h3>
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="pihcore.ncd.puffsPerWk"/>
-                </label>
-                <br/>
-                <obs conceptId="PIH:Puffs per week of relief inhaler (coded)" style="radio"
-                     answerConceptIds="PIH:1905,PIH:2100,PIH:11992,PIH:1602"
-                     answerSeparator="&lt;br /&gt;"/>
-            </p>
-
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="pihcore.ncd.inhalerEd"/>
-                </label>
-                <obs conceptId="PIH:7399" style="radio"
-                     answerConceptIds="PIH:YES,PIH:NO"
-                     answerCodes="yes,no"/>
-            </p>
-
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="Good inhaler technique"/>
-                </label>
-                <obs conceptId="PIH:7397" style="radio"
-                     answerConceptIds="PIH:YES,PIH:NO"
-                     answerCodes="yes,no"/>
             </p>
 
             <div>
