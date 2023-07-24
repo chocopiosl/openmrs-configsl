@@ -1676,6 +1676,64 @@
             </table>
 
             <h3>COPD</h3>
+            <table>
+                <tr><th colspan="2">Modified MRC dyspnea scale</th></tr>
+                <tr>
+                    <td>mMRC Grade 0</td>
+                    <td>I only get breathless with strenuous exercise (GOLD A)</td>
+                </tr>
+                <tr>
+                    <td>mMRC Grade 1</td>
+                    <td>I get short of breath when hurrying on the level or walking up a
+                        slight hill (GOLD A)</td>
+                </tr>
+                <tr>
+                    <td>mMRC Grade 2</td>
+                    <td>I walk slower than people of the same age on the level because
+                        of breathlessness or have to stop for breath when walking at my
+                        own pace on the level </td>
+                </tr>
+                <tr>
+                    <td>mMRC Grade 3</td>
+                    <td>I stop for breath after walking about 100 yards or after a few
+                        minutes on the level</td>
+                </tr>
+                <tr>
+                    <td>mMRC Grade 4</td>
+                    <td>I am too breathless to leave the house or I am breathless
+                        when dressing</td>
+                </tr>
+            </table>
+            <br/><br/>
+
+            <table>
+                <tr>
+                    <th rowspan="2">
+                        GOLD 'ABCD' groups<br/>
+                        Assessment of symptoms and risks of exacerbations for initiation of COPD therapy
+                    </th>
+                    <th colspan="2">Assess symptoms</th>
+                </tr>
+                <tr>
+                    <th>mMRC 0 to 1</th>
+                    <th>mMRC 2+</th>
+                </tr>
+                <tr>
+                    <td>Assess exacerbation risk Exacerbations./ Hospitalizations</td>
+                    <td>A</td>
+                    <td>B</td>
+                </tr>
+                <tr>
+                    <td>2+ exacerbations or 1+ hospitalization</td>
+                    <td>C</td>
+                    <td>D</td>
+                </tr>
+
+            </table>
+            <br/><br/>
+
+
+
             <div class="two-columns">
                 <div>
                     <strong>
@@ -1695,27 +1753,48 @@
                         <br/>
                         <obs conceptId="PIH:14603" style="radio"
                              answerConceptIds="PIH:14604,PIH:14605,PIH:14606,PIH:14607,PIH:14608,PIH:14609"
-                             answerCodes="SABA,SAMA,LABA,LAMA,Oral steroid, Steroid inhaler"
+                             answerCodes="SABA (Short-acting beta-agonist),SAMA (Short-acting muscarinic antagonist),LABA (Long-acting beta-agonist),LAMA (Long acting muscarinic antagonist),Oral steroid,Steroid inhaler"
                              answerSeparator="&lt;br /&gt;"/>
                     </p>
                 </div>
-                <div>
 
+                <div>
                     <dl>
-                        <repeat with="['A'],['B'],['C'],['D']">
-                            <dt>
-                                <uimessage code="pihcore.grade{0}"/>
-                            </dt>
-                            <dd>
-                                <uimessage code="pihcore.ncd.copdGrade{0}"/>
-                            </dd>
-                        </repeat>
+                        <dt>
+                            <uimessage code="SABA"/>
+                        </dt>
+                        <dd>
+                            <uimessage code="Salbutamol"/>
+                        </dd>
+
+                        <dt>
+                            <uimessage code="SAMA"/>
+                        </dt>
+                        <dd>
+                            <uimessage code="Ipratropium bromide"/>
+                        </dd>
+
+                        <dt>
+                            <uimessage code="LABA"/>
+                        </dt>
+                        <dd>
+                            <uimessage code="Salmeterol, Formoterol, Indacaterol"/>
+                        </dd>
+
+                        <dt>
+                            <uimessage code="LAMA"/>
+                        </dt>
+                        <dd>
+                            <uimessage code="Tiotropium"/>
+                        </dd>
+
+                        <dt>
+                            <uimessage code="Inhaled steroids"/>
+                        </dt>
+                        <dd>
+                            <uimessage code="Budesonide"/>
+                        </dd>
                     </dl>
-                    <label>
-                        <uimessage code="pihcore.ncd.laba"/>
-                        <br/>
-                        <uimessage code="pihcore.ncd.lama"/>
-                    </label>
                 </div>
             </div>
 
@@ -1860,6 +1939,42 @@
                 </div>
             </div>
 
+            <strong>
+                Chronic lung disease followup indicators
+            </strong>
+            <obsgroup groupingConceptId="PIH:14812">
+                <div class="two-columns">
+                    <div>
+                        <repeat>
+                            <template>
+                                <p class="list-inline">
+                                    <label>
+                                        <uimessage code="{questionName}"/>
+                                    </label>
+                                    <obs conceptId="{qId}" style="radio"
+                                         answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                                         answerCodes="yes,no,unknown" />
+                                </p>
+                            </template>
+                            <render qId="CIEL:1898"   questionName="Patient condition improved" tog=""/>
+                            <render qId="CIEL:164075" questionName="Overall treatment adherence" tog=""/>
+                            <render qId="CIEL:167819" questionName="Missed doses in past week" tog=""/>
+                            <render qId="CIEL:167021" questionName="Aware and understands the disease" tog=""/>
+                            <render qId="CIEL:167914" questionName="Understands treatment" tog=""/>
+                            <render qId="PIH:14741"   questionName="Ability to titrate treatment" />
+                        </repeat>
+                    </div>
+
+                    <div>
+                        <br/><br/>
+                        <label>
+                            <uimessage code="# of missed doses in past week"/>
+                        </label>
+                        <obs conceptId="CIEL:167918"  />
+                    </div>
+                </div>
+            </obsgroup>
+
             <h3>
                 <uimessage code="Spirometry" />
             </h3>
@@ -1945,7 +2060,7 @@
         </div>
     </section>
 
-    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Chronic kidney disease (CKD)/Nephrotic Syndrome">
+    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Chronic kidney disease (CKD) / Nephrotic Syndrome">
         <div id="kidney_failure" class="section-container">
 
             <p>
@@ -1973,6 +2088,24 @@
                      showCommentField="true" commentFieldCode="zl.ifOtherSpecify" />
             </p>
 
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Biopsy performed" />
+                </label>
+                <obs id="renal-biobsy" conceptId="PIH:14815" style="radio"
+                     answerConceptIds="CIEL:1065,CIEL:1066"
+                     answerCodes="yes,no">
+                    <controls>
+                        <when value="CIEL:1065" thenDisplay="#biopsy-details"/>
+                    </controls>
+                </obs>
+
+                <div id="biopsy-details">
+                    <obs conceptId="PIH:3597" labelCode="Biopsy results"/>
+                </div>
+
+            </p>
+
             <p>
                 <label>
                     <uimessage code="Nephrotic syndrome likely related with:" />
@@ -1984,7 +2117,7 @@
                              answerCode="{diagName}"/>
 
                     </template>
-                    <render answId="CIEL:115745" diagName="Minimal changes" />
+                    <render answId="CIEL:115745" diagName="Minimal change glomerulonephritis" />
                     <render answId="PIH:14767" diagName="Membraneous glomerulonephritis" />
                 </repeat>
 
@@ -2029,8 +2162,8 @@
                         <p class="side-by-side">
                             <obsgroup groupingConceptId="PIH:14732" showIfEmpty="false">
                                 <obs style="radio"
-                                     conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT"
-                                     conceptLabels="yes,no" answerConceptId="{qId}" labelText="{symptName}"/>
+                                     conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
+                                     conceptLabels="yes,no,unknown" answerConceptId="{qId}" labelText="{symptName}"/>
                             </obsgroup>
                         </p>
                     </template>
@@ -2041,33 +2174,54 @@
             </div>
 
             <obsgroup groupingConceptId="PIH:14717" showIfEmpty="false" >
-                <div>
-                    <repeat>
-                        <template>
-                            <p class="list-inline">
-                                <label>
-                                    <uimessage code="{questionName}"/>
-                                </label>
-                                <obs conceptId="{qId}" style="radio"
-                                     answerConceptIds="PIH:YES,PIH:NO"
-                                     answerCodes="yes,no" />
-                            </p>
-                        </template>
-                        <render qId="CIEL:1898"   questionName="Patient condition improved" tog=""/>
-                        <render qId="CIEL:164075" questionName="Overall treatment adherence" tog=""/>
-                        <render qId="CIEL:167819" questionName="Missed doses in past week" tog=""/>
-                        <render qId="CIEL:167021" questionName="Aware and understands the disease" tog=""/>
-                        <render qId="CIEL:167914" questionName="Understands treatment" tog=""/>
+                <div class="two-columns">
+                    <div>
+                        <repeat>
+                            <template>
+                                <p class="list-inline">
+                                    <label>
+                                        <uimessage code="{questionName}"/>
+                                    </label>
+                                    <obs conceptId="{qId}" style="radio"
+                                         answerConceptIds="PIH:YES,PIH:NO,CIEL:1067"
+                                         answerCodes="yes,no,unknown" />
+                                </p>
+                            </template>
+                            <render qId="PIH:14716"   questionName="HTN controlled" />
+                            <render qId="PIH:14718"   questionName="Stable creatinine level" />
+                            <render qId="CIEL:128340" questionName="Proteinuria" />
 
-                        <render qId="PIH:14716"   questionName="HTN controlled" />
-                        <render qId="PIH:14718"   questionName="Stable creatinine level" />
-                        <render qId="PIH:14719"   questionName="Dialysis referral" />
-                        <render qId="PIH:14720"   questionName="On dialysis" />
-                        <render qId="CIEL:128340" questionName="Proteinuria" />
-                        <render qId="PIH:14721"   questionName="CKD relapse" />
-                    </repeat>
+                            <render qId="CIEL:1898"   questionName="Patient condition improved" tog=""/>
+                            <render qId="CIEL:164075" questionName="Overall treatment adherence" tog=""/>
+                            <render qId="CIEL:167819" questionName="Missed doses in past week" tog=""/>
+                            <render qId="CIEL:167021" questionName="Aware and understands the disease" tog=""/>
+                            <render qId="CIEL:167914" questionName="Understands treatment" tog=""/>
+
+
+                            <render qId="PIH:14719"   questionName="Dialysis referral" />
+                            <render qId="PIH:14720"   questionName="On dialysis" />
+
+                            <render qId="PIH:14721"   questionName="Glomerulonephritis relapse" />
+                        </repeat>
+                    </div>
+
+                    <div>
+                        <br/><br/><br/><br/><br/><br/><br/>
+                        <label>
+                            <uimessage code="# of missed doses in past week"/>
+                        </label>
+                        <obs conceptId="CIEL:167918"  />
+
+                    </div>
                 </div>
             </obsgroup>
+
+            <p>
+                <label>
+                    <uimessage code="pihcore.remarks"/>:
+                </label>
+                <obs conceptId="PIH:14813"/>
+            </p>
         </div>
     </section>
 
