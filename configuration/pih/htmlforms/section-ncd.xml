@@ -1604,76 +1604,79 @@
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Chronic lung disease">
         <div id="respire" class="section-container">
 
-            <table>
-                <tr>
-                    <th colspan="3">
-                        <label>
-                            <uimessage code="Parenchymal lung diseases" />
-                        </label>
-                    </th>
-                </tr>
-                <tr>
-                    <td colspan="3">
-                        <repeat>
-                            <template>
-                                <obs conceptId="PIH:14599" style="checkbox"
-                                     answerConceptId="{parId}" answerCode="{message}" />
-                            </template>
-                            <render parId="CIEL:116711" message="Diffuse parenchymal and interstitial" />
-                            <render parId="PIH:14601"   message="Post infection (ie. TB)" />
-                            <render parId="CIEL:167822" message="Occupation" />
-                            <render parId="CIEL:5622"   message="Other" />
-                        </repeat>
-                    </td>
-                </tr>
+            <!-- Only include this section on the NCD intake form -->
+            <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
+                <table>
+                    <tr>
+                        <th colspan="3">
+                            <label>
+                                <uimessage code="Parenchymal lung diseases" />
+                            </label>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <repeat>
+                                <template>
+                                    <obs conceptId="PIH:14599" style="checkbox"
+                                         answerConceptId="{parId}" answerCode="{message}" />
+                                </template>
+                                <render parId="CIEL:116711" message="Diffuse parenchymal and interstitial" />
+                                <render parId="PIH:14601"   message="Post infection (ie. TB)" />
+                                <render parId="CIEL:167822" message="Occupation" />
+                                <render parId="CIEL:5622"   message="Other" />
+                            </repeat>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th width="30%">
-                        <label>
-                            <uimessage code="Obstructive lung diseases "/>
-                        </label>
-                    </th>
-                    <th>
-                        <label>
-                            <uimessage code="pihcore.symptoms"/>
-                        </label>
-                    </th>
-                    <th>
-                        <label>
-                            <uimessage code="pihcore.suggestedTreatment.label"/>
-                        </label>
-                    </th>
-                </tr>
+                    <tr>
+                        <th width="30%">
+                            <label>
+                                <uimessage code="Obstructive lung diseases "/>
+                            </label>
+                        </th>
+                        <th>
+                            <label>
+                                <uimessage code="pihcore.symptoms"/>
+                            </label>
+                        </th>
+                        <th>
+                            <label>
+                                <uimessage code="pihcore.suggestedTreatment.label"/>
+                            </label>
+                        </th>
+                    </tr>
 
-                <repeat>
-                    <template>
-                        <tr>
-                            <td>
-                                <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                                    <obs conceptId="PIH:DIAGNOSIS" answerConceptId="{ncdId}"
-                                         style="checkbox"/>
-                                </obsgroup>
-                            </td>
-                            <td>
-                                <label>
-                                    <uimessage code="{symp}"/>
-                                </label>
-                            </td>
-                            <td>
-                                <label>
-                                    <uimessage code="{sugTreat}"/>
-                                </label>
-                            </td>
-                        </tr>
-                    </template>
-                    <render ncdId="CIEL:1295" message="COPD" symp=""
-                            sugTreat="Ipratropium, Beclomethasone" />
-                    <render ncdId="CIEL:121375" message="Asthma" symp=""
-                            sugTreat="Salbutamol, Beclomethasone, or Prednisolone"/>
-                    <render ncdId="CIEL:121011" message="Bronchiectasis" symp="pihcore.symp.phlegm.label"
-                            sugTreat="pihcore.ncd.resp.bronchiectTreatment.label"/>
-                </repeat>
-            </table>
+                    <repeat>
+                        <template>
+                            <tr>
+                                <td>
+                                    <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                        <obs conceptId="PIH:DIAGNOSIS" answerConceptId="{ncdId}"
+                                             style="checkbox"/>
+                                    </obsgroup>
+                                </td>
+                                <td>
+                                    <label>
+                                        <uimessage code="{symp}"/>
+                                    </label>
+                                </td>
+                                <td>
+                                    <label>
+                                        <uimessage code="{sugTreat}"/>
+                                    </label>
+                                </td>
+                            </tr>
+                        </template>
+                        <render ncdId="CIEL:1295" message="COPD" symp=""
+                                sugTreat="Ipratropium, Beclomethasone" />
+                        <render ncdId="CIEL:121375" message="Asthma" symp=""
+                                sugTreat="Salbutamol, Beclomethasone, or Prednisolone"/>
+                        <render ncdId="CIEL:121011" message="Bronchiectasis" symp="pihcore.symp.phlegm.label"
+                                sugTreat="pihcore.ncd.resp.bronchiectTreatment.label"/>
+                    </repeat>
+                </table>
+            </includeIf>
 
             <h3>COPD</h3>
             <table>
