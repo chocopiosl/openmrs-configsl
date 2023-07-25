@@ -2249,6 +2249,41 @@
                      answerCodes="yes,no"/>
             </p>
 
+            <obsgroup groupingConceptId="PIH:14817" showIfEmpty="false">
+                <div class="two-columns">
+                    <div>
+                        <repeat>
+                            <template>
+                                <p>
+                                    <p class="list-inline-wide">
+                                        <label>
+                                            <uimessage code="{xId}"/>
+                                        </label>
+                                        <br/>
+                                        <obs conceptId="{message}" style="radio"
+                                             answerConceptIds="PIH:YES,PIH:NO,CIEL:1067" />
+                                    </p>
+                                </p>
+                            </template>
+                            <render message="CIEL:1898"   xId="Patient condition improved" tog=""/>
+                            <render message="CIEL:164075" xId="Overall treatment adherence" tog=""/>
+                            <render message="CIEL:167819" xId="Missed doses in past week" tog=""/>
+                            <render message="CIEL:167021" xId="Aware and understands the disease" tog=""/>
+                            <render message="CIEL:167914" xId="Understands treatment" tog=""/>
+                            <render message="PIH:14741"   xId="Ability to titrate diuretic" />
+                        </repeat>
+                    </div>
+                    <div>
+                        <br/><br/><br/><br/>
+                        <label>
+                            <uimessage code="# of missed doses in past week"/>
+                        </label>
+                        <obs conceptId="CIEL:167918"  />
+
+                    </div>
+                </div>
+            </obsgroup>
+
             <table>
                 <repeat>
                     <template>
@@ -2361,7 +2396,16 @@
                          answerCode="pihcore.other"
                          showCommentField="true" commentFieldCode="zl.ifOtherSpecify" />
                 </div>
+
+                <br/>
+                <label>
+                    <uimessage code="Additional comments:"/>
+                </label>
+                <br/>
+                <obs conceptId="PIH:14816"/>
             </p>
+
+
 
         </div>
     </section>
