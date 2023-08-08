@@ -373,13 +373,13 @@
         <ifMode mode="VIEW" include="false">
             #data-collection {
                 display: inline-block;
-                width: 58%;
+                width: 50%;
                 vertical-align: top;
             }
 
             #encounter-diagnoses-target {
                 display: inline-block;
-                width: 40%;
+                width: 45%;
                 vertical-align: top;
             }
 
@@ -395,6 +395,9 @@
 
             <div id="data-collection">
                 <encounterDiagnosesByObs selectedDiagnosesTarget="#encounter-diagnoses-target"/>
+            </div>
+
+            <div id="encounter-diagnoses-target">
             </div>
         </div>
     </section>
