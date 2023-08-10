@@ -1872,21 +1872,37 @@
                     </tr>
                 </table>
 
-                <repeat>
-                    <template>
-                        <p class="list-inline-wide">
-                            <label>
-                                <uimessage code="{copdSym}" />
-                            </label>
+                <p class="list-inline-wide">
+                    <label>
+                        <uimessage code="COPD exacerbation" />
+                    </label>
 
-                            <obs conceptId="{copdId}" style="radio"
-                                 answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
-                                 answerCodes="yes,no,unknown" />
-                        </p>
-                    </template>
-                    <render copdId="CIEL:166093" copdSym="COPD exacerbation" />
-                    <render copdId="PIH:14626"   copdSym="If exacerbation, hospitalization needed?" />
-                </repeat>
+                    <obs id="exar-copd" conceptId="CIEL:166093" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
+                         answerCodes="yes,no,unknown" >
+                        <controls>
+                            <when value="CIEL:1065" thenDisplay="#details-exar-copd" />
+                        </controls>
+                    </obs>
+                </p>
+
+                <div id="details-exar-copd">
+                    <label>
+                        <uimessage code="Number of COPD exacerbations since last visit" />
+                    </label>
+
+                    <obs conceptId="CIEL:167821" />
+                    <br/>
+                    <p class="list-inline-wide">
+                        <label>
+                            <uimessage code="If exacerbation, hospitalization needed?" />
+                        </label>
+
+                        <obs conceptId="PIH:14626" style="radio"
+                             answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
+                             answerCodes="yes,no,unknown" />
+                    </p>
+                </div>
             </obsgroup>
 
             <h3>Asthma</h3>
