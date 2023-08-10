@@ -1681,6 +1681,17 @@
                         <render ncdId="CIEL:121011" message="Bronchiectasis" symp="pihcore.symp.phlegm.label"
                                 sugTreat="pihcore.ncd.resp.bronchiectTreatment.label"/>
                     </repeat>
+
+                    <tr>
+                        <td>
+                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                <obs conceptId="PIH:DIAGNOSIS" style="checkbox"
+                                     answerConceptId="CIEL:143381" answerCode="Cor pulmonale"/>
+                            </obsgroup>
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                 </table>
             </includeIf>
 
