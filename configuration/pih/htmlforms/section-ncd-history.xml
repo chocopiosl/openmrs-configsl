@@ -442,10 +442,13 @@
                         <render dId="CIEL:116026" message="Breast cancer" />
                         <render dId="CIEL:133328" message="Lung cancer" />
                         <render dId="PIH:14771"   message="Hematology cancer" />
-                        <render dId="CIEL:5622" message="other" />
                     </repeat>
 
-                    <!-- ToDo:  Add other -->
+                    <!-- Other with free-text -->
+                    <obs conceptId="PIH:14773"
+                         style="checkbox"
+                         answerConceptId="CIEL:5622" answerCode="other"
+                         commentFieldCode="zl.ifOtherSpecify" />
                 </div>
             </div>
         </div>
