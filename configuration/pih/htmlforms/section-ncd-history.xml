@@ -297,6 +297,14 @@
                      answerCodes="Able to read and write,Cannot read and write"/>
             </p>
 
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Employment status" />
+                </label>
+                <obs conceptId="PIH:3395" style="radio"
+                     answerConceptIds="PIH:14833,CIEL:161382,PIH:UNEMPLOYED,CIEL:166624" />
+            </p>
+
             <div class="two-columns">
                 <div>
                     <p class="side-by-side">
