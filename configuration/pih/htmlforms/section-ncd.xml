@@ -608,23 +608,25 @@
                             </repeat>
                         </p>
 
-                        <p>
-                            <label>
-                                <uimessage code="Other diagnoses during hospitalization"/>
-                            </label>
-                            <obs conceptId="PIH:6899" style="textarea" rows="3"/>
-                        </p>
-
-                        <div id="hf-plus">
+                        <!-- this section is ONLY included for NCD intake encounter -->
+                        <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
                             <p>
-                                <obsgroup groupingConceptId="CIEL:160714" showIfEmpty="false">
-                                    <obs conceptId="CIEL:1651" style="checkbox"
-                                         answerConceptId="CIEL:159567"
-                                         answerCode="Echocardiogram performed"/>
-                                </obsgroup>
+                                <label>
+                                    <uimessage code="Other diagnoses during hospitalization"/>
+                                </label>
+                                <obs conceptId="PIH:6899" style="textarea" rows="3"/>
                             </p>
-                        </div>
 
+                            <div id="hf-plus">
+                                <p>
+                                    <obsgroup groupingConceptId="CIEL:160714" showIfEmpty="false">
+                                        <obs conceptId="CIEL:1651" style="checkbox"
+                                             answerConceptId="CIEL:159567"
+                                             answerCode="Echocardiogram performed"/>
+                                    </obsgroup>
+                                </p>
+                            </div>
+                        </includeIf>
                     </div>
 
                     <div>
@@ -637,65 +639,69 @@
 
                         </p>
 
-                        <p>
-                            <label>
-                                <uimessage code="Treatment at discharge" />
-                            </label>
-
-                            <repeat>
-                                <template>
-                                    <obs conceptId="PIH:14468" style="checkbox"
-                                         answerConceptId="{answId}" answerCode="{name}" />
-                                </template>
-                                <render answId="CIEL:78056" name="Insulin"/>
-                                <render answId="CIEL:167915" name="Oral anti-diabetic"/>
-
-                                <render answId="PIH:14775" name="Short acting morphine"/>
-                                <render answId="PIH:14776" name="Long acting morphine"/>
-                            </repeat>
-
-                            <obs conceptId="PIH:14715" labelCode="Other treatment at discharge" />
-                        </p>
-
-                        <div id="dm-plus">
+                        <!-- this section is ONLY included for NCD intake encounter -->
+                        <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
                             <p>
                                 <label>
-                                    <uimessage code="DM diagnosis on discharge"/>
+                                    <uimessage code="Treatment at discharge" />
                                 </label>
+
                                 <repeat>
                                     <template>
-                                        <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                                            <obs conceptId="PIH:DIAGNOSIS" answerConceptId="{diagId}" style="checkbox"/>
-                                        </obsgroup>
+                                        <obs conceptId="PIH:14468" style="checkbox"
+                                             answerConceptId="{answId}" answerCode="{name}" />
                                     </template>
-                                    <render diagId="CIEL:142460" diagName="Diabetes with hyperosmolar coma" />
-                                    <render diagId="CIEL:142452" diagName="Diabetic foot" />
-                                    <render diagId="CIEL:142454" diagName="DKA with coma" />
-                                    <render diagId="CIEL:122714" diagName="DKA without coma" />
-                                    <render diagId="CIEL:138291" diagName="Hyperglycemia" />
+                                    <render answId="CIEL:78056" name="Insulin"/>
+                                    <render answId="CIEL:167915" name="Oral anti-diabetic"/>
+
+                                    <render answId="PIH:14775" name="Short acting morphine"/>
+                                    <render answId="PIH:14776" name="Long acting morphine"/>
                                 </repeat>
-                            </p>
-                        </div>
 
-                        <div id="respire-plus">
-                            <p class="side-by-side">
-                                <label>
-                                    <uimessage code="Chronic lung disease screening tool during hospitalization" />
-                                </label>
-                                <br/>
-                                <obs conceptId="PIH:14602" style="radio"
-                                     answerConceptIds="CIEL:703,CIEL:664,CIEL:1118" />
+                                <obs conceptId="PIH:14715" labelCode="Other treatment at discharge" />
                             </p>
-                        </div>
 
-                        <div id="ckd-plus">
-                            <p>
-                                <label>
-                                    <uimessage code="Creatinine at discharge" />
-                                </label>
-                                <obs conceptId="CIEL:790" showUnits="true" />
-                            </p>
-                        </div>
+                            <div id="dm-plus">
+                                <p>
+                                    <label>
+                                        <uimessage code="DM diagnosis on discharge"/>
+                                    </label>
+                                    <repeat>
+                                        <template>
+                                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                                <obs conceptId="PIH:DIAGNOSIS" answerConceptId="{diagId}" style="checkbox"/>
+                                            </obsgroup>
+                                        </template>
+                                        <render diagId="CIEL:142460" diagName="Diabetes with hyperosmolar coma" />
+                                        <render diagId="CIEL:142452" diagName="Diabetic foot" />
+                                        <render diagId="CIEL:142454" diagName="DKA with coma" />
+                                        <render diagId="CIEL:122714" diagName="DKA without coma" />
+                                        <!-- ToDo: Replace this with PIH:14832 -->
+                                        <render diagId="CIEL:138291" diagName="Hyperglycemia" />
+                                    </repeat>
+                                </p>
+                            </div>
+
+                            <div id="respire-plus">
+                                <p class="side-by-side">
+                                    <label>
+                                        <uimessage code="Chronic lung disease screening tool during hospitalization" />
+                                    </label>
+                                    <br/>
+                                    <obs conceptId="PIH:14602" style="radio"
+                                         answerConceptIds="CIEL:703,CIEL:664,CIEL:1118" />
+                                </p>
+                            </div>
+
+                            <div id="ckd-plus">
+                                <p>
+                                    <label>
+                                        <uimessage code="Creatinine at discharge" />
+                                    </label>
+                                    <obs conceptId="CIEL:790" showUnits="true" />
+                                </p>
+                            </div>
+                        </includeIf>
                     </div>
                 </div>
             </obsgroup>
