@@ -676,8 +676,7 @@
                                         <render diagId="CIEL:142452" diagName="Diabetic foot" />
                                         <render diagId="CIEL:142454" diagName="DKA with coma" />
                                         <render diagId="CIEL:122714" diagName="DKA without coma" />
-                                        <!-- ToDo: Replace this with PIH:14832 -->
-                                        <render diagId="CIEL:138291" diagName="Hyperglycemia" />
+                                        <render diagId="PIH:14832" diagName="Hyperglycemia without complications" />
                                     </repeat>
                                 </p>
                             </div>
