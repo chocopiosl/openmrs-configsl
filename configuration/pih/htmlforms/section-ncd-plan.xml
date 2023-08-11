@@ -108,28 +108,27 @@
     </style>
     <br/>
 
-    <section id="test-orders" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="pihcore.lab.lab_tests.title">
-
+    <section id="test-orders" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.lab.lab_tests.title">
         <div class="section-container">
-            <order orderType="52a447d3-a64a-11e3-9aeb-50e549534c5e" format="select"
-                   selectLabel="pihcore.labOrder.addAnotherLab">
+            <order orderType="52a447d3-a64a-11e3-9aeb-50e549534c5e" onLoadFunction="renderOrderWidgetAsCheckboxes">
                 <orderTemplate>
-                    <orderProperty name="action" label="pihcore.action">
-                        <option value="NEW" label="pihcore.new"/>
-                    </orderProperty>
-
-                    <div style="padding:0px;font-weight:bold;">
-                        <orderProperty name="concept" label="" style="radio">
+                    <div style="display:none;">
+                        <orderProperty name="action">
+                            <option value="NEW"/>
+                            <option value="DISCONTINUE"/>
+                        </orderProperty>
+                        <orderProperty name="urgency" value="ROUTINE"/>
+                        <orderProperty name="previousOrder"/>
+                        <orderProperty name="careSetting" value="OUTPATIENT"/>
+                        <orderProperty name="concept" label="">
                             <option value="3cd3bd5a-26fe-102b-80cb-0017a47871b2" label="Total protein" />
                             <option value="1875AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="Urine protein" />
                             <option value="3cd4e194-26fe-102b-80cb-0017a47871b2" label="Glucose" />
                             <option value="3cd4374e-26fe-102b-80cb-0017a47871b2" label="Creatinine" />
-                            <option value="3cd4aa12-26fe-102b-80cb-0017a47871b2" label="Urea" />
+                            <option value="PIH:12653" label="Urea" />
                             <option value="161132AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="GFR" />
                             <option value="3cd76b58-26fe-102b-80cb-0017a47871b2" label="Na" />
                             <option value="3cd76ce8-26fe-102b-80cb-0017a47871b2" label="K" />
-
                             <option value="3ccc7158-26fe-102b-80cb-0017a47871b2" label="Hb" />
                             <option value="3cd2a906-26fe-102b-80cb-0017a47871b2" label="Leukocytes" />
                             <option value="3cd3d038-26fe-102b-80cb-0017a47871b2" label="Platelets" />
@@ -138,22 +137,11 @@
                             <option value="160225AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="Sickling test" />
                             <option value="e286d1c8-e3df-45d6-a6cf-7cee0bdf370b" label="Sickle RT SCAN" />
                             <option value="165544AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="Hb electrophoresis" />
-
-                            <!--
-                            <option value="" label="C-peptide" /> -->
                         </orderProperty>
-
-                        <div style="display:none;">
-                            <orderProperty name="urgency" value="ROUTINE"/>
-                            <orderProperty name="previousOrder"/>
-                            <orderProperty name="careSetting" value="OUTPATIENT"/>
-                            <!-- ToDo: SL-366 Fix autoExpireDate -->
-                            <!-- <orderProperty name="autoExpireDate" value="x" /> -->
-
-                        </div>
                     </div>
                 </orderTemplate>
             </order>
+
         </div>
     </section>
 
