@@ -121,19 +121,23 @@
                         <orderProperty name="previousOrder"/>
                         <orderProperty name="careSetting" value="OUTPATIENT"/>
                         <orderProperty name="concept" label="">
+                            <option value="PIH:12653" label="Urea (mg/dL)" />
                             <option value="3cd3bd5a-26fe-102b-80cb-0017a47871b2" label="Total protein" />
                             <option value="1875AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="Urine protein" />
-                            <option value="3cd4e194-26fe-102b-80cb-0017a47871b2" label="Glucose" />
-                            <option value="3cd4374e-26fe-102b-80cb-0017a47871b2" label="Creatinine" />
-                            <option value="PIH:12653" label="Urea" />
-                            <option value="161132AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="GFR" />
-                            <option value="3cd76b58-26fe-102b-80cb-0017a47871b2" label="Na" />
-                            <option value="3cd76ce8-26fe-102b-80cb-0017a47871b2" label="K" />
-                            <option value="3ccc7158-26fe-102b-80cb-0017a47871b2" label="Hb" />
-                            <option value="3cd2a906-26fe-102b-80cb-0017a47871b2" label="Leukocytes" />
-                            <option value="3cd3d038-26fe-102b-80cb-0017a47871b2" label="Platelets" />
-                            <option value="161442AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="Ketones" />
+                            <option value="161442AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="Ketones (urine)" />
+
+                            <option value="3cd4e194-26fe-102b-80cb-0017a47871b2" label="Blood glucose" />
+                            <option value="3cd4374e-26fe-102b-80cb-0017a47871b2" label="Serum creatinine (umol/L)" />
+                            <option value="3cd76b58-26fe-102b-80cb-0017a47871b2" label="Serum sodium (Na)" />
+                            <option value="3cd76ce8-26fe-102b-80cb-0017a47871b2" label="Serum potassium (K)" />
+
+                            <option value="3ccc7158-26fe-102b-80cb-0017a47871b2" label="Hemoglobin (Hb)" />
+                            <option value="3cd2a906-26fe-102b-80cb-0017a47871b2" label="Leukocytes (WBC) (blood)" />
+                            <option value="3cd3d038-26fe-102b-80cb-0017a47871b2" label="Platelets (blood)" />
+                            <option value="161132AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="Glomerular filtration rate (GFR)" />
+
                             <option value="159644AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="HbA1c" />
+
                             <option value="160225AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="Sickling test" />
                             <option value="e286d1c8-e3df-45d6-a6cf-7cee0bdf370b" label="Sickle RT SCAN" />
                             <option value="165544AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="Hb electrophoresis" />

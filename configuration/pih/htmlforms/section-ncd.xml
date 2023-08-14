@@ -1581,7 +1581,7 @@
                                 <obs id="cardio-ref"
                                      conceptId="PIH:Fulfillment status" style="radio"
                                      answerConceptIds="CIEL:1267,CIEL:160068"
-                                     answerCodes="completed,no" labelCode="Cardiology referral">
+                                     answerCodes="yes,no" labelCode="Cardiology referral completed">
                                     <controls>
                                         <when value="CIEL:1267" thenDisplay="#cardio-ref-details"/>
                                     </controls>
