@@ -2153,71 +2153,74 @@
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Chronic kidney disease (CKD) / Nephrotic Syndrome">
         <div id="kidney_failure" class="section-container">
 
-            <p>
-                <label>
-                    <uimessage code="Chronic renal failure secondary to:" />
-                </label>
-                <repeat>
-                    <template>
-                        <obs conceptId="PIH:14765" style="checkbox"
-                             answerConceptId="{answId}" />
+            <!-- this section is ONLY included for NCD intake encounter -->
+            <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
+                <p>
+                    <label>
+                        <uimessage code="Chronic renal failure secondary to:" />
+                    </label>
+                    <repeat>
+                        <template>
+                            <obs conceptId="PIH:14765" style="checkbox"
+                                 answerConceptId="{answId}" />
 
-                    </template>
-                    <render answId="CIEL:117399" diagName="htn" />
-                    <render answId="CIEL:119481" diagName="dm" />
-                    <render answId="CIEL:1067"   diagName="unknown" />
-                    <render answId="CIEL:155008" diagName="NSAID" />
-                    <render answId="CIEL:149486" diagName="acuteTubularNecrosis" />
-                    <render answId="CIEL:117780" diagName="Glomerulonephritis" />
-                </repeat>
+                        </template>
+                        <render answId="CIEL:117399" diagName="htn" />
+                        <render answId="CIEL:119481" diagName="dm" />
+                        <render answId="CIEL:1067"   diagName="unknown" />
+                        <render answId="CIEL:155008" diagName="NSAID" />
+                        <render answId="CIEL:149486" diagName="acuteTubularNecrosis" />
+                        <render answId="CIEL:117780" diagName="Glomerulonephritis" />
+                    </repeat>
 
-                <!-- Other free-text -->
-                <obs conceptId="PIH:14765" style="checkbox"
-                     answerConceptId="CIEL:5622"
-                     answerCode="pihcore.other"
-                     showCommentField="true" commentFieldCode="zl.ifOtherSpecify" />
-            </p>
+                    <!-- Other free-text -->
+                    <obs conceptId="PIH:14765" style="checkbox"
+                         answerConceptId="CIEL:5622"
+                         answerCode="pihcore.other"
+                         showCommentField="true" commentFieldCode="zl.ifOtherSpecify" />
+                </p>
 
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="Biopsy performed" />
-                </label>
-                <obs id="renal-biobsy" conceptId="PIH:14815" style="radio"
-                     answerConceptIds="CIEL:1065,CIEL:1066"
-                     answerCodes="yes,no">
-                    <controls>
-                        <when value="CIEL:1065" thenDisplay="#biopsy-details"/>
-                    </controls>
-                </obs>
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="Biopsy performed" />
+                    </label>
+                    <obs id="renal-biobsy" conceptId="PIH:14815" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"
+                         answerCodes="yes,no">
+                        <controls>
+                            <when value="CIEL:1065" thenDisplay="#biopsy-details"/>
+                        </controls>
+                    </obs>
 
-                <div id="biopsy-details">
-                    <obs conceptId="PIH:3597" labelCode="Biopsy results"/>
-                </div>
+                    <div id="biopsy-details">
+                        <obs conceptId="PIH:3597" labelCode="Biopsy results"/>
+                    </div>
 
-            </p>
+                </p>
 
-            <p>
-                <label>
-                    <uimessage code="Nephrotic syndrome likely related with:" />
-                </label>
-                <repeat>
-                    <template>
-                        <obs conceptId="PIH:14766" style="checkbox"
-                             answerConceptId="{answId}"
-                             answerCode="{diagName}"/>
+                <p>
+                    <label>
+                        <uimessage code="Nephrotic syndrome likely related with:" />
+                    </label>
+                    <repeat>
+                        <template>
+                            <obs conceptId="PIH:14766" style="checkbox"
+                                 answerConceptId="{answId}"
+                                 answerCode="{diagName}"/>
 
-                    </template>
-                    <render answId="CIEL:115745" diagName="Minimal change glomerulonephritis" />
-                    <render answId="PIH:14767" diagName="Membraneous glomerulonephritis" />
-                </repeat>
+                        </template>
+                        <render answId="CIEL:115745" diagName="Minimal change glomerulonephritis" />
+                        <render answId="PIH:14767" diagName="Membraneous glomerulonephritis" />
+                    </repeat>
 
-                <!-- other free-text -->
-                <obs conceptId="PIH:14766" style="checkbox"
-                     answerConceptId="CIEL:5622"
-                     answerCode="pihcore.other"
-                     showCommentField="true" commentFieldCode="zl.ifOtherSpecify" />
-            </p>
-
+                    <!-- other free-text -->
+                    <obs conceptId="PIH:14766" style="checkbox"
+                         answerConceptId="CIEL:5622"
+                         answerCode="pihcore.other"
+                         showCommentField="true" commentFieldCode="zl.ifOtherSpecify" />
+                </p>
+            </includeIf>
+            
             <div class="two-columns">
                 <div>
                     <strong>
