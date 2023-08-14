@@ -676,7 +676,7 @@
                                         <render diagId="CIEL:142452" diagName="Diabetic foot" />
                                         <render diagId="CIEL:142454" diagName="DKA with coma" />
                                         <render diagId="CIEL:122714" diagName="DKA without coma" />
-                                        <render diagId="PIH:14832" diagName="Hyperglycemia without complications" />
+                                        <render diagId="PIH:14832"   diagName="Hyperglycemia without complications" />
                                     </repeat>
                                 </p>
                             </div>
@@ -1572,8 +1572,44 @@
                 </p>
 
                 <strong>
+                    <uimessage code="Cardiology referral"/>
+                </strong>
+                <obsgroup groupingConceptId="PIH:6329" showIfEmpty="false">
+                    <div class="two-columns">
+                        <div>
+                            <p class="side-by-side">
+                                <obs id="cardio-ref"
+                                     conceptId="PIH:Fulfillment status" style="radio"
+                                     answerConceptIds="CIEL:1267,CIEL:160068"
+                                     answerCodes="completed,no" labelCode="Cardiology referral">
+                                    <controls>
+                                        <when value="CIEL:1267" thenDisplay="#cardio-ref-details"/>
+                                    </controls>
+                                </obs>
+                            </p>
+                        </div>
+                        <div id="cardio-ref-details">
+                            <obs conceptId="CIEL:163181" allowTime="false" allowFutureDates="true"
+                                 labelText="Date of cardiology referral" />
+                        </div>
+                    </div>
+                </obsgroup>
+
+                <br/>
+
+                <strong>
                     <uimessage code="Cardiac surgery"/>
                 </strong>
+                <obsgroup groupingConceptId="PIH:14725" showIfEmpty="false">
+                    <p class="side-by-side">
+                        <obs id="cardiac-surgery-sched"
+                             conceptId="PIH:Scheduled surgery" style="radio"
+                             answerConceptIds="CIEL:1065,CIEL:1066"
+                             labelCode="Cardiac surgery scheduled" />
+                    </p>
+                </obsgroup>
+
+
                 <obsgroup groupingConceptId="CIEL:160714" showIfEmpty="false">
                     <div class="two-columns">
                         <div>
