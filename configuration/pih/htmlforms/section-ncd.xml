@@ -1860,6 +1860,21 @@
             <obsgroup groupingConceptId="PIH:14620">
                 <repeat>
                     <template>
+                        <p class="list-inline-wide">
+                            <label>
+                                <uimessage code="{copdSym}" />
+                            </label>
+
+                            <obs conceptId="{copdId}" style="radio"
+                                 answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
+                                 answerCodes="yes,no,unknown" />
+                        </p>
+                    </template>
+                    <render copdId="CIEL:158939" copdSym="Smoking cessation" />
+                </repeat>
+
+                <repeat>
+                    <template>
                         <p class="side-by-side">
                             <obs style="radio"
                                  conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
@@ -1885,7 +1900,6 @@
                                  answerCodes="yes,no,unknown" />
                         </p>
                     </template>
-                    <render copdId="CIEL:158939" copdSym="Smoking cessation" />
                     <render copdId="PIH:14622"   copdSym="Increased inhaler use" />
                     <render copdId="PIH:14623"   copdSym="Wheeze during exam" />
                     <render copdId="PIH:11925"   copdSym="Activity limitation" />
