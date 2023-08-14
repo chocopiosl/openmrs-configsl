@@ -711,67 +711,70 @@
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.ncd.diabetes">
         <div id="diabetes" class="section-container">
-            <table>
-                <tr>
-                    <th>
-                        <label>
-                            <uimessage code="pihcore.ncd.diabetesType"/>
-                        </label>
-                    </th>
-                    <th>
-                        <label>
-                            <uimessage code="pihcore.suggestedTreatment.label"/>
-                        </label>
-                    </th>
-                </tr>
 
-                <!-- Diabetes diagnoses for females and males -->
-                <includeIf velocityTest="$patient.gender == 'F' ">
+            <!-- this section is ONLY included for NCD intake encounter -->
+            <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
+                <table>
                     <tr>
-                        <td>
-                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                        <th>
+                            <label>
+                                <uimessage code="pihcore.ncd.diabetesType"/>
+                            </label>
+                        </th>
+                        <th>
+                            <label>
+                                <uimessage code="pihcore.suggestedTreatment.label"/>
+                            </label>
+                        </th>
+                    </tr>
+
+                    <!-- Diabetes diagnoses for females and males -->
+                    <includeIf velocityTest="$patient.gender == 'F' ">
+                        <tr>
+                            <td>
+                                <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                    <p class="side-by-side">
+                                        <obs conceptId="PIH:DIAGNOSIS" style="radio"
+                                             answerConceptIds="CIEL:142474,CIEL:142473,PIH:Gestational diabetes,CIEL:119481"
+                                             answerCodes="Type 1 DM,Type 2 DM,Gestational DM,DM not yet specified"
+                                             answerSeparator="&lt;br /&gt;"/>
+                                    </p>
+                                </obsgroup>
+                            </td>
+                            <td align="top">
+                                <repeat with="['type1Dm','CIEL:142474','Type 1'],
+                                      ['type2Dm','CIEL:165208','Type 2'],
+                                      ['gestationalDm','PIH:Gestational diabetes','Gestational']">
+                                    <uimessage code="pihcore.ncd.diabetes.{0}Treatment.full"/>
+                                    <br/>
+                                    <br/>
+                                </repeat>
+                            </td>
+                        </tr>
+                    </includeIf>
+                    <includeIf velocityTest="$patient.gender != 'F' ">
+                        <tr>
+                            <td>
                                 <p class="side-by-side">
+                                <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
                                     <obs conceptId="PIH:DIAGNOSIS" style="radio"
-                                         answerConceptIds="CIEL:142474,CIEL:142473,PIH:Gestational diabetes,CIEL:119481"
-                                         answerCodes="Type 1 DM,Type 2 DM,Gestational DM,DM not yet specified"
+                                         answerConceptIds="CIEL:142474,CIEL:142473,CIEL:119481"
+                                         answerCodes="Type 1 DM,Type 2 DM,DM not yet specified"
                                          answerSeparator="&lt;br /&gt;"/>
+                                </obsgroup>
                                 </p>
-                            </obsgroup>
-                        </td>
-                        <td align="top">
-                            <repeat with="['type1Dm','CIEL:142474','Type 1'],
-                                  ['type2Dm','CIEL:165208','Type 2'],
-                                  ['gestationalDm','PIH:Gestational diabetes','Gestational']">
-                                <uimessage code="pihcore.ncd.diabetes.{0}Treatment.full"/>
-                                <br/>
-                                <br/>
-                            </repeat>
-                        </td>
-                    </tr>
-                </includeIf>
-                <includeIf velocityTest="$patient.gender != 'F' ">
-                    <tr>
-                        <td>
-                            <p class="side-by-side">
-                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                                <obs conceptId="PIH:DIAGNOSIS" style="radio"
-                                     answerConceptIds="CIEL:142474,CIEL:142473,CIEL:119481"
-                                     answerCodes="Type 1 DM,Type 2 DM,DM not yet specified"
-                                     answerSeparator="&lt;br /&gt;"/>
-                            </obsgroup>
-                            </p>
-                        </td>
-                        <td align="top">
-                            <repeat with="['type1Dm','CIEL:142474','Type 1'],
-                              ['type2Dm','CIEL:165208','Type 2']">
-                                <uimessage code="pihcore.ncd.diabetes.{0}Treatment.full"/>
-                                <br/>
-                            </repeat>
-                        </td>
-                    </tr>
-                </includeIf>
-
-            </table>
+                            </td>
+                            <td align="top">
+                                <repeat with="['type1Dm','CIEL:142474','Type 1'],
+                                  ['type2Dm','CIEL:165208','Type 2']">
+                                    <uimessage code="pihcore.ncd.diabetes.{0}Treatment.full"/>
+                                    <br/>
+                                </repeat>
+                            </td>
+                        </tr>
+                    </includeIf>
+                </table>
+            </includeIf>
 
             <br/>
             <strong>
