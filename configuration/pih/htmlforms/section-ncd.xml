@@ -1251,10 +1251,7 @@
                                 </template>
                                 <render diagId="CIEL:5016"   tag="cardiomyopathy" answers="" />
                                 <render diagId="CIEL:113227" tag="rheumaticHeart" answers="" />
-
-                                <!-- Change to PIH:14836-->
-                                <render diagId="CIEL:132816" tag="degenHeart" answers="" />
-
+                                <render diagId="PIH:14836"   tag="degenHeart" answers="" />
                                 <render diagId="CIEL:127376" tag="rtHeartFail" answers="" />
                                 <render diagId="CIEL:119092" tag="pericardDisease" answers="" />
                                 <render diagId="CIEL:120148" tag="arrythmia" answers="" />
