@@ -2077,33 +2077,27 @@
 
                         <table style="width: 400px">
                             <tr>
-                                <th colspan="2">
-                                FEV1 measurement values
-                                </th>
+                                <th>FEV1 value</th>
+                                <th>COPD stage</th>
                             </tr>
                             <tr>
-                                <td>FEV1 80% or greater</td>
-                                <td>normal</td>
+                                <td>FEV1 80% or above</td>
+                                <td>mild</td>
                             </tr>
                             <tr>
-                                <td>FEV1 70 - 79%</td>
-                                <td>mildly abnormal</td>
-                            </tr>
-                            <tr>
-                                <td>FEV1 50 - 70%</td>
-                                <td>moderately abnormal</td>
+                                <td>FEV1 50 - 79%</td>
+                                <td>moderate</td>
                             </tr>
                             <tr>
                                 <td>FEV1 30 - 49%</td>
-                                <td>severely abnormal</td>
+                                <td>severe</td>
                             </tr>
                             <tr>
-                                <td>FEV1 &lt; 30%</td>
-                                <td>very severely abnormal</td>
+                                <td>FEV1 29% or less</td>
+                                <td>very severe</td>
                             </tr>
                             <tr>
-                                <td>FEV1 normal and FVC decreased</td>
-                                <td>suspect interstitial lung diseases</td>
+                                <td colspan="2"><b>FEV1 normal and FVC decreased:</b><br/>suspect interstitial lung diseases</td>
                             </tr>
                         </table>
                     </div>
