@@ -1,7 +1,7 @@
-<htmlform formUuid="4CE4BA22-16B2-4C85-9B07-5E3696490BC8"
-          formEncounterType="d8a038b5-90d2-43dc-b94b-8338b76674f3"
-          formName="Outpatient Followup"
-          formVersion="2.0">
+
+<htmlform formUuid="f7f924ed-c7a2-4932-a678-553c363f720c"
+          formEncounterType="7d5853d4-67b7-4742-8492-fcf860690ed5"
+          formName="Outpatient Initial" formVersion="1.0">
 
     <style type="text/css">
         #who-when-where {
@@ -59,8 +59,8 @@
     </style>
 
     <!-- the two ifMode blocks below enable a bit of hack: when opening in ENTER mode, we just want to create the encounter,
-        we don't actually want to display the form, so we hae it hidden by default, and then automatically trigger the submit;
-        note that this will fail in the case where there isn't a default provider or date (which I don't think we have in our use cases -->
+    we don't actually want to display the form, so we hae it hidden by default, and then automatically trigger the submit;
+    note that this will fail in the case where there isn't a default provider or date (which I don't think we have in our use cases -->
 
     <ifMode mode="ENTER" include="true">
         <script type="text/javascript">
@@ -80,10 +80,10 @@
             });
         </script>
     </ifMode>
-    <div class="htmlform" style="display:none">
 
+    <div class="htmlform" style="display:none">
         <ifMode mode="VIEW" include="false">
-            <h2><uimessage code="ui.i18n.EncounterType.name.d8a038b5-90d2-43dc-b94b-8338b76674f3"/></h2>
+            <h2><uimessage code="ui.i18n.EncounterType.name.7d5853d4-67b7-4742-8492-fcf860690ed5"/></h2>
 
             <!-- users with retroConsultNote privilege can edit provider, location, and date for both retro and active visits -->
             <includeIf velocityTest="$user.hasPrivilege('Task: emr.retroConsultNote')">
@@ -163,7 +163,6 @@
                 </div>
             </includeIf>
         </ifMode>
-
 
         <ifMode mode="VIEW" include="false">
             <div id="buttons">

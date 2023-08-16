@@ -1,7 +1,7 @@
-<htmlform formUuid="4CE4BA22-16B2-4C85-9B07-5E3696490BC8"
-          formEncounterType="d8a038b5-90d2-43dc-b94b-8338b76674f3"
-          formName="Outpatient Followup"
-          formVersion="2.0">
+<htmlform formUuid="00e552d8-90ec-11e8-9eb6-529269fb1459"
+          formName="Prenatal Intake"
+          formEncounterType="00e5e810-90ec-11e8-9eb6-529269fb1459"
+          formVersion="1.1">
 
     <style type="text/css">
         #who-when-where {
@@ -16,10 +16,6 @@
 
         #where > input[type=text] {
         display: inline-block;
-        }
-
-        .narrow {
-        width: 200px;
         }
 
         .field-error {
@@ -58,6 +54,7 @@
         </ifMode>
     </style>
 
+
     <!-- the two ifMode blocks below enable a bit of hack: when opening in ENTER mode, we just want to create the encounter,
         we don't actually want to display the form, so we hae it hidden by default, and then automatically trigger the submit;
         note that this will fail in the case where there isn't a default provider or date (which I don't think we have in our use cases -->
@@ -65,7 +62,15 @@
     <ifMode mode="ENTER" include="true">
         <script type="text/javascript">
             jq(function() {
-                submitHtmlForm();
+                // if for some reason there's no encounter location selected (likely because the session location isn't
+                // a valid location for this encounter) we need to show the form, otherwise just submit
+                if (!getValue("encounterLocation.value")) {
+                    jq('#next').hide();
+                    jq('.htmlform').show();
+                }
+                else {
+                    submitHtmlForm();
+                }
             });
         </script>
     </ifMode>
@@ -83,7 +88,7 @@
     <div class="htmlform" style="display:none">
 
         <ifMode mode="VIEW" include="false">
-            <h2><uimessage code="ui.i18n.EncounterType.name.d8a038b5-90d2-43dc-b94b-8338b76674f3"/></h2>
+            <h2><uimessage code="ui.i18n.EncounterType.name.00e5e810-90ec-11e8-9eb6-529269fb1459"/></h2>
 
             <!-- users with retroConsultNote privilege can edit provider, location, and date for both retro and active visits -->
             <includeIf velocityTest="$user.hasPrivilege('Task: emr.retroConsultNote')">
@@ -94,7 +99,7 @@
                     </p>
                     <p id="where">
                         <label><uimessage code="emr.locationRequired"/></label>
-                        <span><encounterLocation default="SessionAttribute:emrContext.sessionLocationId" tags="Consult Note Location"/></span>
+                        <span><encounterLocation default="SessionAttribute:emrContext.sessionLocationId" tags="Maternal and Child Location"/></span>
                     </p>
                     <p id="when">
                         <label><uimessage code="emr.patientDashBoard.date"/></label>
@@ -115,7 +120,7 @@
                     </p>
                     <p id="where">
                         <label><uimessage code="emr.locationRequired"/></label>
-                        <span><encounterLocation default="SessionAttribute:emrContext.sessionLocationId" tags="Consult Note Location"/></span>
+                        <span><encounterLocation default="SessionAttribute:emrContext.sessionLocationId" tags="Maternal and Child Location"/></span>
                     </p>
                     <p id="when">
                         <label><uimessage code="emr.patientDashBoard.date"/></label>
@@ -124,6 +129,7 @@
                 </div>
 
             </includeIf>
+            <!-- all users that don't have either retro privilege, or those with retro-this-provider-only but with an active visit, can only edit location -->
             <!-- all users that don't have either retro privilege, or those with retro-this-provider-only but with an active visit, can only edit location -->
             <includeIf velocityTest="(!$user.hasPrivilege('Task: emr.retroConsultNoteThisProviderOnly') and !$user.hasPrivilege('Task: emr.retroConsultNote')) or ($user.hasPrivilege('Task: emr.retroConsultNoteThisProviderOnly') and !$user.hasPrivilege('Task: emr.retroConsultNote') and $visit.open)">
                 <div style="display:none">
@@ -147,7 +153,7 @@
                                     <uimessage code="emr.locationRequired"/>
                                 </label>
                                 <span>
-                                    <encounterLocation default="SessionAttribute:emrContext.sessionLocationId" tags="Consult Note Location"/>
+                                    <encounterLocation default="SessionAttribute:emrContext.sessionLocationId" tags="Maternal and Child Location"/>
                                 </span>
                             </td>
                             <td>
@@ -175,4 +181,3 @@
     </div>
 
 </htmlform>
-
