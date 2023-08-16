@@ -1,7 +1,7 @@
 
-<htmlform formUuid="C5B788D4-223D-430A-9A90-ADBE63C4A3E8"
-          formEncounterType="7d5853d4-67b7-4742-8492-fcf860690ed5"
-          formName="Outpatient Initial" formVersion="2.0">
+<htmlform formUuid="41913f5d-b287-4979-84e4-aed30e2f0a1b"
+          formEncounterType="d8a038b5-90d2-43dc-b94b-8338b76674f3"
+          formName="Outpatient Followup" formVersion="1.0">
 
     <style type="text/css">
         #who-when-where {
@@ -59,8 +59,8 @@
     </style>
 
     <!-- the two ifMode blocks below enable a bit of hack: when opening in ENTER mode, we just want to create the encounter,
-    we don't actually want to display the form, so we hae it hidden by default, and then automatically trigger the submit;
-    note that this will fail in the case where there isn't a default provider or date (which I don't think we have in our use cases -->
+        we don't actually want to display the form, so we hae it hidden by default, and then automatically trigger the submit;
+        note that this will fail in the case where there isn't a default provider or date (which I don't think we have in our use cases -->
 
     <ifMode mode="ENTER" include="true">
         <script type="text/javascript">
@@ -80,10 +80,10 @@
             });
         </script>
     </ifMode>
-
     <div class="htmlform" style="display:none">
+
         <ifMode mode="VIEW" include="false">
-            <h2><uimessage code="ui.i18n.EncounterType.name.7d5853d4-67b7-4742-8492-fcf860690ed5"/></h2>
+            <h2><uimessage code="ui.i18n.EncounterType.name.d8a038b5-90d2-43dc-b94b-8338b76674f3"/></h2>
 
             <!-- users with retroConsultNote privilege can edit provider, location, and date for both retro and active visits -->
             <includeIf velocityTest="$user.hasPrivilege('Task: emr.retroConsultNote')">
@@ -163,6 +163,7 @@
                 </div>
             </includeIf>
         </ifMode>
+
 
         <ifMode mode="VIEW" include="false">
             <div id="buttons">

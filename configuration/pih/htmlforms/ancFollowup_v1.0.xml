@@ -1,9 +1,10 @@
-
-<htmlform formUuid="C5B788D4-223D-430A-9A90-ADBE63C4A3E8"
-          formEncounterType="7d5853d4-67b7-4742-8492-fcf860690ed5"
-          formName="Outpatient Initial" formVersion="2.0">
+<htmlform formUuid="96D1B6C0-8C1C-4D5A-8628-1380B7345338"
+          formName="Prenatal Followup"
+          formEncounterType="00e5e946-90ec-11e8-9eb6-529269fb1459"
+          formVersion="2.0">
 
     <style type="text/css">
+
         #who-when-where {
         margin-bottom: 6px;
         border-bottom: 1px solid #ccc;
@@ -16,10 +17,6 @@
 
         #where > input[type=text] {
         display: inline-block;
-        }
-
-        .narrow {
-        width: 200px;
         }
 
         .field-error {
@@ -56,6 +53,7 @@
             padding-left: 15px;
             }
         </ifMode>
+
     </style>
 
     <!-- the two ifMode blocks below enable a bit of hack: when opening in ENTER mode, we just want to create the encounter,
@@ -65,7 +63,15 @@
     <ifMode mode="ENTER" include="true">
         <script type="text/javascript">
             jq(function() {
-                submitHtmlForm();
+                // if for some reason there's no encounter location selected (likely because the session location isn't
+                // a valid location for this encounter) we need to show the form, otherwise just submit
+                if (!getValue("encounterLocation.value")) {
+                    jq('#next').hide();
+                    jq('.htmlform').show();
+                }
+                else {
+                    submitHtmlForm();
+                }
             });
         </script>
     </ifMode>
@@ -82,8 +88,9 @@
     </ifMode>
 
     <div class="htmlform" style="display:none">
+
         <ifMode mode="VIEW" include="false">
-            <h2><uimessage code="ui.i18n.EncounterType.name.7d5853d4-67b7-4742-8492-fcf860690ed5"/></h2>
+            <h2><uimessage code="ui.i18n.EncounterType.name.00e5e946-90ec-11e8-9eb6-529269fb1459"/></h2>
 
             <!-- users with retroConsultNote privilege can edit provider, location, and date for both retro and active visits -->
             <includeIf velocityTest="$user.hasPrivilege('Task: emr.retroConsultNote')">
@@ -94,7 +101,7 @@
                     </p>
                     <p id="where">
                         <label><uimessage code="emr.locationRequired"/></label>
-                        <span><encounterLocation default="SessionAttribute:emrContext.sessionLocationId" tags="Consult Note Location"/></span>
+                        <span><encounterLocation default="SessionAttribute:emrContext.sessionLocationId" tags="Maternal and Child Location"/></span>
                     </p>
                     <p id="when">
                         <label><uimessage code="emr.patientDashBoard.date"/></label>
@@ -102,6 +109,7 @@
                     </p>
                 </div>
             </includeIf>
+
             <!-- users with retroConsultNoteThisProviderOnly can edit location and date (but not provider) for retro visits -->
             <includeIf velocityTest="$user.hasPrivilege('Task: emr.retroConsultNoteThisProviderOnly') and !($user.hasPrivilege('Task: emr.retroConsultNote')) and (!$visit.open)">
                 <div style="display:none">
@@ -115,7 +123,7 @@
                     </p>
                     <p id="where">
                         <label><uimessage code="emr.locationRequired"/></label>
-                        <span><encounterLocation default="SessionAttribute:emrContext.sessionLocationId" tags="Consult Note Location"/></span>
+                        <span><encounterLocation default="SessionAttribute:emrContext.sessionLocationId" tags="Maternal and Child Location"/></span>
                     </p>
                     <p id="when">
                         <label><uimessage code="emr.patientDashBoard.date"/></label>
@@ -147,7 +155,7 @@
                                     <uimessage code="emr.locationRequired"/>
                                 </label>
                                 <span>
-                                    <encounterLocation default="SessionAttribute:emrContext.sessionLocationId" tags="Consult Note Location"/>
+                                    <encounterLocation default="SessionAttribute:emrContext.sessionLocationId" tags="Maternal and Child Location"/>
                                 </span>
                             </td>
                             <td>
@@ -163,6 +171,7 @@
                 </div>
             </includeIf>
         </ifMode>
+
 
         <ifMode mode="VIEW" include="false">
             <div id="buttons">
