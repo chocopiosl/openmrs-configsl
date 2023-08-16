@@ -1161,6 +1161,41 @@
             </p>
 
             <strong>
+                Hypertension followup indicators
+            </strong>
+            <obsgroup groupingConceptId="PIH:14462">
+                <div class="two-columns">
+                    <div>
+                        <repeat>
+                            <template>
+                                <p class="list-inline">
+                                    <label>
+                                        <uimessage code="{questionName}"/>
+                                    </label>
+                                    <obs conceptId="{qId}" style="radio"
+                                         answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                                         answerCodes="yes,no,unknown" />
+                                </p>
+                            </template>
+                            <render qId="CIEL:1898"   questionName="Patient condition improved" tog=""/>
+                            <render qId="CIEL:164075" questionName="Overall treatment adherence" tog=""/>
+                            <render qId="CIEL:167819" questionName="Missed doses in past week" tog=""/>
+                            <render qId="CIEL:167021" questionName="Aware and understands the disease" tog=""/>
+                            <render qId="CIEL:167914" questionName="Understands treatment" tog=""/>
+                        </repeat>
+                    </div>
+
+                    <div>
+                        <br/><br/>
+                        <label>
+                            <uimessage code="# of missed doses in past week"/>
+                        </label>
+                        <obs conceptId="CIEL:167918"  />
+                    </div>
+                </div>
+            </obsgroup>
+
+            <strong>
                 <uimessage code="Complications related to hypertension"/>
             </strong>
             <div class="two-columns">
