@@ -594,6 +594,7 @@
                                             <when value="CIEL:139069" thenDisplay="#{nickname}-plus" />
                                             <when value="CIEL:155569" thenDisplay="#{nickname}-plus" />
                                             <when value="CIEL:145438" thenDisplay="#{nickname}-plus" />
+                                            <when value="CIEL:117703" thenDisplay="#{nickname}-plus" />
                                         </controls>
                                     </obs>
                                 </template>
@@ -602,7 +603,7 @@
                                 <render answId="CIEL:139069" nickname="hf" name="Heart failure"/>
                                 <render answId="CIEL:155569" nickname="respire" name="Chronic lung disease" />
                                 <render answId="CIEL:145438" nickname="ckd" name="Chronic kidney disease"/>
-                                <render answId="PIH:3714" nickname="cirrhosis" name="Liver cirrhosis" />
+                                <render answId="PIH:3714"    nickname="cirrhosis" name="Liver cirrhosis" />
                                 <render answId="CIEL:117703" nickname="sickle" name="Sickle cell disease" />
                                 <render answId="CIEL:160849" nickname="palliative" name="Palliative care"/>
                             </repeat>
@@ -698,6 +699,27 @@
                                         <uimessage code="Creatinine at discharge" />
                                     </label>
                                     <obs conceptId="CIEL:790" showUnits="true" />
+                                </p>
+                            </div>
+
+                            <div id="sickle-plus">
+                                <p>
+                                    <label>
+                                        <uimessage code="Main complications with sickle cell"/>
+                                    </label>
+                                    <repeat>
+                                        <template>
+                                            <obs conceptId="PIH:14839" answerConceptId="{diagId}" style="checkbox"/>
+                                        </template>
+                                        <render diagId="CIEL:121629" diagName="Anemia" />
+                                        <render diagId="CIEL:165590" diagName="PainCrisis" />
+                                        <!-- ToDo:  16August Get from new clinical mds
+                                        <render diagId="CIEL:124842" diagName="GETThoracicSyndrome" />
+                                        <render diagId="CIEL:121262" diagName="GETBacterialInfection" /> -->
+                                        <render diagId="CIEL:116128" diagName="Malaria" />
+                                        <render diagId="CIEL:111103" diagName="Stroke" />
+                                        <render diagId="CIEL:1063"   diagName="Transfusion" />
+                                    </repeat>
                                 </p>
                             </div>
                         </includeIf>
