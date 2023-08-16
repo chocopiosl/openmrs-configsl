@@ -14,11 +14,11 @@
 
 <htmlform id="mh-assessment"
           class="simple-form-ui"
-          formUuid="55399407-F739-4647-B940-A68CC45483F4"
-          htmlformUuid="3BE8C60B-EAB2-4E4D-9E0A-584ECFDBD921"
+          formUuid="a8584dd8-cc2a-11e5-9956-625662870761"
+          htmlformUuid="a8584f5e-cc2a-11e5-9956-625662870761"
           formName="Mental Health Intake"
           formEncounterType="a8584ab8-cc2a-11e5-9956-625662870761"
-          formVersion="2.0">
+          formVersion="1.0">
 
     <!-- Post submission action -->
     <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.ApplyDispositionAction"/>
@@ -41,13 +41,13 @@
     <style type="text/css">
 
         #who-when-where {
-            margin-bottom: 6px;
-            border-bottom: 1px solid #ccc;
+        margin-bottom: 6px;
+        border-bottom: 1px solid #ccc;
         }
 
         #who-when-where p {
-            display: inline-block;
-            padding-right: 20px;
+        display: inline-block;
+        padding-right: 20px;
         }
 
         #where > input[type=text] {
@@ -65,19 +65,19 @@
         }
 
         .three-columns, .two-columns {
-            display: table;
-            height: 100%;
-            width: 100%;
+        display: table;
+        height: 100%;
+        width: 100%;
         }
 
         .two-columns > div {
-            display: table-cell;
-            width: 50%;
+        display: table-cell;
+        width: 50%;
         }
 
         .three-columns > div {
-            display: table-cell;
-            width: 33%;
+        display: table-cell;
+        width: 33%;
         }
 
         .simple-form-ui input {
@@ -125,7 +125,7 @@
         margin: 0px;
         }
 
-       - .section {
+        - .section {
         width: 100%;
         }
 
@@ -134,19 +134,19 @@
         }
 
         .simple-form-ui input {
-            min-width: unset;
+        min-width: unset;
         }
         .simple-form-ui select {
-            min-width: unset;
+        min-width: unset;
         }
 
         form input[type="radio"], .form input[type="radio"] {
-            float: none;
-            display: inline-block;
+        float: none;
+        display: inline-block;
         }
 
         .side-by-side label {
-            display: inline-block;
+        display: inline-block;
         }
     </style>
 
@@ -155,49 +155,49 @@
 
             jq(function() {
 
-                const lastPeriodDateConcept = '<lookup expression="fn.getConcept('CIEL:1427').uuid"/>';
-                const dueDateConcept = '<lookup expression="fn.getConcept('CIEL:5596').uuid"/>';
+            const lastPeriodDateConcept = '<lookup expression="fn.getConcept('CIEL:1427').uuid"/>';
+            const dueDateConcept = '<lookup expression="fn.getConcept('CIEL:5596').uuid"/>';
 
-                var encounterDate = '<lookup expression="encounter.getEncounterDatetime().getTime()"/>';
+            var encounterDate = '<lookup expression="encounter.getEncounterDatetime().getTime()"/>';
 
-                setUpEdd(encounterDate, '<uimessage code="pihcore.weeks"/>');
+            setUpEdd(encounterDate, '<uimessage code="pihcore.weeks"/>');
 
-                // return appointment date can never be before encounter date
-                var setMinReturnVisitDate = function () {
+            // return appointment date can never be before encounter date
+            var setMinReturnVisitDate = function () {
 
-                    var returnVisitDate = getValue('return-visit-date.value');
+            var returnVisitDate = getValue('return-visit-date.value');
 
-                    getField('return-visit-date.value').datepicker('option', 'minDate', getField('encounterDate.value').datepicker('getDate'));
+            getField('return-visit-date.value').datepicker('option', 'minDate', getField('encounterDate.value').datepicker('getDate'));
 
-                    if (returnVisitDate  &amp;&amp; returnVisitDate != getValue('return-visit-date.value')) {
-                        setValue('return-visit-date.value','');  // reset return visit date if change to encounter date makes it invalid
-                        alert('<uimessage code="pihcore.mentalhealth.returnVisitDateResetWarning"/>');
-                    }
-                }
+            if (returnVisitDate  &amp;&amp; returnVisitDate != getValue('return-visit-date.value')) {
+            setValue('return-visit-date.value','');  // reset return visit date if change to encounter date makes it invalid
+            alert('<uimessage code="pihcore.mentalhealth.returnVisitDateResetWarning"/>');
+            }
+            }
 
-                getField('encounterDate.value').change(setMinReturnVisitDate);
+            getField('encounterDate.value').change(setMinReturnVisitDate);
 
-                setMinReturnVisitDate();
+            setMinReturnVisitDate();
 
-                jq('.medication-checkbox > input:checkbox').each(function(idx, it){
-                    if(jq(it).not(':checked')){
-                        jq(it).closest("td").siblings().find(":input").each(function(i, el){
-                            jq(el).attr("disabled", "disabled");
-                        });
-                    }
+            jq('.medication-checkbox > input:checkbox').each(function(idx, it){
+            if(jq(it).not(':checked')){
+            jq(it).closest("td").siblings().find(":input").each(function(i, el){
+            jq(el).attr("disabled", "disabled");
+            });
+            }
 
-                    jq(it).change(function(){
-                        if(jq(this).is(':checked')){
-                            jq(this).closest("td").siblings().find(":input").each(function(i, el){
-                                jq(el).removeAttr("disabled");
-                            });
-                        } else {
-                            jq(this).closest("td").siblings().find(":input").each(function(i, el){
-                                jq(el).val('').attr("disabled", "disabled");
-                            });
-                        }
-                    });
-                });
+            jq(it).change(function(){
+            if(jq(this).is(':checked')){
+            jq(this).closest("td").siblings().find(":input").each(function(i, el){
+            jq(el).removeAttr("disabled");
+            });
+            } else {
+            jq(this).closest("td").siblings().find(":input").each(function(i, el){
+            jq(el).val('').attr("disabled", "disabled");
+            });
+            }
+            });
+            });
             });
 
         </script>
@@ -346,11 +346,11 @@
                         <uimessage code="pihcore.mentalhealth.referredBy" />:
                     </label>
                     <repeat with="['PIH:Teacher'],['PIH:TRADITIONAL HEALER'],['PIH:VILLAGE HEALTH WORKER'],['PIH:11783'],['CIEL:978'],['PIH:Other medical service']">
-                            <obs conceptId="PIH:Role of referring person" answerConceptId="{0}"
-                                 style="checkbox"/>
+                        <obs conceptId="PIH:Role of referring person" answerConceptId="{0}"
+                             style="checkbox"/>
                     </repeat>
                     <obs conceptId="PIH:Role of referring person" answerConceptId="PIH:OTHER"
-                        style="checkbox" commentFieldLabel=" " />
+                         style="checkbox" commentFieldLabel=" " />
                 </div>
 
                 <div>
@@ -360,7 +360,7 @@
 
                     <repeat with="['PIH:DOCTOR'],['PIH:NURSE'],['PIH:SOCIAL WORKER SERVICE	']">
                         <obs conceptId="PIH:Type of referral role" answerConceptId="{0}"
-                                 style="checkbox"/>
+                             style="checkbox"/>
                     </repeat>
                     <obs conceptId="PIH:Type of referral role" answerConceptId="PIH:OTHER"
                          style="checkbox" commentFieldLabel=" " />
@@ -929,141 +929,121 @@
     <ifMode mode="VIEW" include="false">
         <style>
             .doseInput select, .frequency select, .duration-unit select {
-                width: 100px;
+            width: 100px;
             }
 
             .route select {
-                width: 150px;
+            width: 150px;
             }
         </style>
     </ifMode>
 
     <!--Medication-->
-    <style type="text/css">
-
-        <!-- Hide the label for the drug field in view mode -->
-        .orderwidget-history-section .order-field-label.order-drug {
-        display:none;
-        }
-        <!-- Add a colon after the Dose label in view mode -->
-        .orderwidget-history-section .order-field-label.order-dose:after {
-        content: ": ";
-        white-space: pre;
-        }
-
-        .order-field {
-        display: inline-block;
-        padding: 0px;
-        }
-        .order-field.action {
-        display: block;
-        }
-        .order-field.dateActivated {
-        padding-right: 20px;
-        }
-        .order-field-label {
-        display: inline-block;
-        padding-right: 5px;
-        vertical-align: middle;
-        }
-        .order-field-label:after {
-        content: "";
-        white-space: pre;
-        }
-        .order-field-widget {
-        display: inline-block;
-        }
-
-    </style>
-    <section id="drug-orders" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="pihcore.visitNote.orders.medications">
+    <section id="medication" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.visitNote.plan.medication">
         <div class="section-container">
-            <drugOrder format="select" selectLabel="pihcore.drugOrder.addAnotherDrug">
-                <orderTemplate>
-                    <orderProperty name="action" label="pihcore.action">
-                        <option value="NEW" label="pihcore.new"/>
-                        <option value="REVISE" label="pihcore.revise"/>
-                        <option value="RENEW" label="pihcore.renew"/>
-                        <option value="DISCONTINUE" label="pihcore.discontinue"/>
-                    </orderProperty>
 
-                    <div style="padding:0px;font-weight:bold;">
-                        <orderProperty name="drug" label="pihcore.visitNote.plan.medication" style="autocomplete">
-                            <option value="6a2a96d1-c01f-48d3-b3b9-2741bce4e064" />
-                            <option value="526d37fd-d378-441d-8af4-423a46447cbc" />
-                            <option value="671d7b24-6266-4af5-a998-4997f2cd6d48" />
-                            <option value="23f2d94b-3072-4e86-b737-d5ccded81bc0" />
-                            <option value="a8541367-1eb0-4144-9cc7-41a909902d5d" />
-                            <option value="fd58488b-b6ee-4a73-bf77-ab1eb44ec0b7" />
-                            <option value="e371d811-d32c-4f6e-8493-2fa667b7b44c" />
-                            <option value="09b9f018-6aa5-4bcf-9292-d74e07707591" />
-                            <option value="355b9a8a-6e4e-4db8-a2cd-64f61456ef53" />
-                            <option value="bb5094d6-efdd-458e-ab4e-f9916cd904ab" />
-                            <option value="7f7178bd-a1f8-44dd-85a9-02e49065e56b" />
-                            <option value="9c9f85ed-945a-4701-9c4e-1548023e68de" />
-                            <option value="6192369d-c0fe-4d11-86b9-7765940ae73d" />
-                            <option value="81694757-3336-4195-ac6b-ea574b9b8597" />
-                            <option value="b476d417-800f-4e2e-89ec-09de8fd07607" />
-                            <option value="c6a90f40-fce4-11e9-8f0b-362b9e155667" />
-                            <option value="9a499fca-699e-4809-8175-732ef43d5c14" />
-                            <option value="4eb3c71f-b716-4f01-beb7-394cebd6c191" />
-                            <option value="34dd5905-c28d-4cf8-8ebe-0b83e5093e17" />
-                            <option value="d8297181-0a3f-48fc-89c5-cc283e5a8d42" />
-                            <option value="5edb194a-70bf-4fbf-b2ca-4dce586af7f3" />
-                            <option value="39d7a7ee-b0ff-48e0-a7ca-685688147c8f" />
-                            <option value="923e3e90-8b5c-4ae6-b17f-b6d547803437" />
-                            <option value="8893bad4-a63d-4da6-9d10-96f709b20173" />
-                            <option value="cd09b1b3-ceed-436c-bb57-3e5ca1684c86" />
-                            <option value="95dbfe7e-68ac-485c-af73-9057cbe591b2" />
-                            <option value="66ca3d3e-f594-403b-823c-8b6104738b6f" />
-                        </orderProperty>
-                    </div>
+            <!-- ToDo:  Introduce the new modelling in the next release -->
+            <table>
+                <tr>
+                    <th colspan="2">
+                        <uimessage code="pihcore.visitNote.plan.dose"/>
+                    </th>
+                    <th>
+                        <uimessage code="pihcore.visitNote.plan.frequency"/>
+                    </th>
+                    <th colspan="2">
+                        <uimessage code="pihcore.visitNote.plan.duration"/>
+                    </th>
+                    <th>
+                        <uimessage code="pihcore.drug.route"/>
+                    </th>
+                </tr>
 
-                    <div style="padding:0px;font-weight:bold;">
-                        <orderProperty name="dose" label="pihcore.visitNote.plan.dose"/>
-                        <orderProperty name="doseUnits" value="1513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label=" "/>
-                        <orderProperty name="frequency" label=" "/>
-                        <orderProperty name="route" value="CIEL:160240" label=" ">
-                            <option value="CIEL:160240" /> <!-- Oral -->
-                            <option value="CIEL:162797" /> <!-- Topical -->
-                            <option value="CIEL:162392" /> <!-- Vaginally -->
-                        </orderProperty>
-                    </div>
-                    <div style="padding:0px;">
-                        <orderProperty name="dateActivated" label="pihcore.starting"/>
-                        <orderProperty name="duration" label="pihcore.visitNote.for"/>
-                        <orderProperty name="durationUnits" label=" "/>
-                    </div>
-                    <div style="padding:0px;">
-                        <orderProperty name="quantity" label="pihcore.quantity"/>
-                        <orderProperty name="quantityUnits" value="1513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label=" "/>
-                        <orderProperty name="numRefills" value="0" label="pihcore.refills"/>
-                    </div>
-                    <div style="display:none;">
-                        <orderProperty name="urgency" value="ROUTINE"/>
-                        <orderProperty name="dosingType" value="org.openmrs.SimpleDosingInstructions"/>
-                        <orderProperty name="previousOrder"/>
-                        <orderProperty name="careSetting" value="OUTPATIENT"/>
-                    </div>
-                    <orderProperty name="discontinueReason" label="pihcore.discontinueReason">
-                        <option value="CIEL:843"/>
-                        <option value="CIEL:102"/>
-                        <option value="CIEL:127750"/>
-                        <option value="CIEL:1754"/>
-                        <option value="CIEL:162853"/>
-                        <option value="CIEL:1434"/>
-                        <option value="CIEL:987"/>
-                        <option value="CIEL:1253"/>
-                        <option value="CIEL:1067"/>
-                        <option value="CIEL:5622"/>
-                    </orderProperty>
-                </orderTemplate>
-            </drugOrder>
-        </div>
-        <div class="section-container">
-            <label><b><uimessage code="pihcore.remarks"/></b></label>
+                <!-- ToDo: Improve formatting; Add placeholders/suggestions for un-entered inputs; Fix toggles -->
+                <repeat>
+                    <template>
+                        <obsgroup groupingConceptId="PIH:Prescription construct" showIfEmpty="false">
+                            <tr>
+                                <td id="{name}-rx" colspan="6">
+                                    <obs conceptId="PIH:Mental health medication"
+                                         answerDrugId="{drug}"
+                                         style="checkbox"
+                                         toggle="{id: '{name}-rx-details', style: 'hidden'}" class="medication-checkbox"/>
+                                </td>
+                            </tr>
+                            <tr id="{name}-rx-details">
+                                <td id="{name}-rx-dose" align="right">
+                                    <obs id="dose-{name}" class="doseInput" conceptId="CIEL:160856" placeholder="dose"/>
+                                </td>
+                                <td id="{name}-rx-dose-unit">
+                                    <obs id="doseUnit-{name}" class="doseInput select-arrow" placeholder="unit"
+                                         conceptId="PIH:Dosing units coded"
+                                         answerConceptIds="CIEL:161553,CIEL:161554,CIEL:1513"
+                                         answerCodes="mg,g,tablet"/>
+                                    <!-- capsule, ampule, bottle, vial, mL -->
+                                </td>
+                                <td id="{name}-rx-frequency">
+                                    <obs id="frequencyCoded-{name}" class="frequency select-arrow"
+                                         conceptId="PIH:Drug frequency for HUM"
+                                         answerConceptIds=
+                                                 "PIH:OD,PIH:BID,PIH:TID,PIH:QID,PIH:OM,PIH:ON"
+                                         answerCodes="OD,BID,TID,QID,OM,ON"/>
+                                </td>
+                                <td id="{name}-rx-duration" align="right">
+                                    <obs id="duration-{name}" class="duration doseInput" conceptId="CIEL:159368"/>
+                                </td>
+                                <td id="{name}-rx-duration-unit">
+                                    <obs id="durationUnit-{name}" class="duration-unit select-arrow"
+                                         conceptId="PIH:TIME UNITS"
+                                         answerConceptIds="PIH:Days,PIH:1073,PIH:Months"/>
+                                </td>
+                                <td id="{name}-rx-route">
+                                    <obs id="route-{name}" class="route select-arrow"
+                                         conceptId="PIH:12651"
+                                         answerConceptIds="CIEL:160240,CIEL:160242,CIEL:160243"/>
+                                </td>
+                            </tr>
+                        </obsgroup>
+                    </template>
+
+                    <render drug="6a2a96d1-c01f-48d3-b3b9-2741bce4e064" name="ChlorpromazineHCl25mgt"/>
+                    <render drug="526d37fd-d378-441d-8af4-423a46447cbc" name="ChlorpromazineHclSolution"/>
+                    <render drug="671d7b24-6266-4af5-a998-4997f2cd6d48" name="HaloperidolOily"/>
+                    <render drug="23f2d94b-3072-4e86-b737-d5ccded81bc0" name="Haloperidol5mgt"/>
+                    <render drug="a8541367-1eb0-4144-9cc7-41a909902d5d" name="Haloperidol5mgmLa"/>
+                    <render drug="fd58488b-b6ee-4a73-bf77-ab1eb44ec0b7" name="FluphenazineSol"/>
+                    <render drug="e371d811-d32c-4f6e-8493-2fa667b7b44c" name="Carbamazepine200mgt"/>
+                    <render drug="09b9f018-6aa5-4bcf-9292-d74e07707591" name="SodiumValproate200mgt"/>
+                    <render drug="355b9a8a-6e4e-4db8-a2cd-64f61456ef53" name="SodiumValproate100mgv"/>
+                    <render drug="bb5094d6-efdd-458e-ab4e-f9916cd904ab" name="Risperidone2mgt"/>
+                    <render drug="7f7178bd-a1f8-44dd-85a9-02e49065e56b" name="FluoxetineHCl20mgt"/>
+                    <render drug="9c9f85ed-945a-4701-9c4e-1548023e68de" name="Olanzapine5mg"/>
+                    <render drug="6192369d-c0fe-4d11-86b9-7765940ae73d" name="Olanzapine10mg"/>
+                    <render drug="81694757-3336-4195-ac6b-ea574b9b8597" name="DiphenhydramineHCl25mgt"/>
+                    <render drug="b476d417-800f-4e2e-89ec-09de8fd07607" name="DiphenhydramineHCl50mga"/>
+                    <render drug="c6a90f40-fce4-11e9-8f0b-362b9e155667" name="Phenobarb30mgt" />
+                    <render drug="9a499fca-699e-4809-8175-732ef43d5c14" name="Phenobarb50mgt" />
+                    <render drug="4eb3c71f-b716-4f01-beb7-394cebd6c191" name="PhenobarbAmpule"/>
+                    <render drug="34dd5905-c28d-4cf8-8ebe-0b83e5093e17" name="PhenytoinNa100t"/>
+                    <render drug="d8297181-0a3f-48fc-89c5-cc283e5a8d42" name="PhenytoinNa50a"/>
+                    <render drug="5edb194a-70bf-4fbf-b2ca-4dce586af7f3" name="AmitryptilineHCl25t"/>
+                    <render drug="39d7a7ee-b0ff-48e0-a7ca-685688147c8f" name="Diazepam5mgt"/>
+                    <render drug="923e3e90-8b5c-4ae6-b17f-b6d547803437" name="Diazepam5mga"/>
+                    <render drug="8893bad4-a63d-4da6-9d10-96f709b20173" name="Trihexyphenidyl2mgt"/>
+                    <render drug="cd09b1b3-ceed-436c-bb57-3e5ca1684c86" name="Mirtazapine15mgt" />
+                    <render drug="95dbfe7e-68ac-485c-af73-9057cbe591b2" name="Mirtazapine30mgt" />
+                    <render drug="66ca3d3e-f594-403b-823c-8b6104738b6f" name="Quetiapine100mgt" />
+                </repeat>
+            </table>
+
+
+            <br/>
             <p>
-                <obs conceptId="PIH:10637" cols="50" rows="5" />
+                <label>
+                    <uimessage code="pihcore.exam.comment"/>:
+                </label>
+                <obs conceptId="PIH:Medication comments (text)"/>
             </p>
         </div>
     </section>
@@ -1083,16 +1063,16 @@
 
                 <div id="pregnant" class="two-columns">
                     <div>
-                            <label>
-                                <uimessage code="pihcore.pregnancy.lastPeriod"/>
-                            </label>
-                            <obs id="lastPeriodDate" conceptId="CIEL:1427"/>
+                        <label>
+                            <uimessage code="pihcore.pregnancy.lastPeriod"/>
+                        </label>
+                        <obs id="lastPeriodDate" conceptId="CIEL:1427"/>
                     </div>
                     <div>
-                            <label>
-                                <uimessage code="pihcore.pregnancy.dueDate"/>
-                            </label>
-                            <obs id="edd" conceptId="CIEL:5596" allowFutureDates="true"/>
+                        <label>
+                            <uimessage code="pihcore.pregnancy.dueDate"/>
+                        </label>
+                        <obs id="edd" conceptId="CIEL:5596" allowFutureDates="true"/>
                     </div>
                 </div>
 
