@@ -709,16 +709,16 @@
                                     </label>
                                     <repeat>
                                         <template>
-                                            <obs conceptId="PIH:14839" answerConceptId="{diagId}" style="checkbox"/>
+                                            <obs conceptId="PIH:14839" style="checkbox" 
+                                                 answerConceptId="{diagId}" answerCode="{sickleComplic}"/>
                                         </template>
-                                        <render diagId="CIEL:121629" diagName="Anemia" />
-                                        <render diagId="CIEL:165590" diagName="PainCrisis" />
-                                        <!-- ToDo:  16August Get from new clinical mds
-                                        <render diagId="CIEL:124842" diagName="GETThoracicSyndrome" />
-                                        <render diagId="CIEL:121262" diagName="GETBacterialInfection" /> -->
-                                        <render diagId="CIEL:116128" diagName="Malaria" />
-                                        <render diagId="CIEL:111103" diagName="Stroke" />
-                                        <render diagId="CIEL:1063"   diagName="Transfusion" />
+                                        <render diagId="CIEL:121629" sickleComplic="Anemia" />
+                                        <render diagId="CIEL:165590" sickleComplic="Pain crisis" />
+                                        <render diagId="CIEL:124842" sickleComplic="Thoracic outlet syndrome" />
+                                        <render diagId="CIEL:121262" sickleComplic="Bacterial infection" />
+                                        <render diagId="CIEL:116128" sickleComplic="Malaria" />
+                                        <render diagId="CIEL:111103" sickleComplic="Stroke" />
+                                        <render diagId="CIEL:1063"   sickleComplic="Blood transfusion" />
                                     </repeat>
                                 </p>
                             </div>
