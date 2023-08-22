@@ -51,7 +51,8 @@ CREATE TEMPORARY TABLE temp_encounter
 SELECT patient_id,encounter_id, encounter_type ,encounter_datetime, date_created 
 FROM encounter e 
 WHERE e.encounter_type = @mch_reg_enc_type
-AND e.voided = 0;
+AND e.voided = 0
+AND DATE(e.encounter_datetime) >= @startDate AND DATE(e.encounter_datetime) <= @endDate;
 
 create index temp_encounter_ci1 on temp_encounter(encounter_id);
 
