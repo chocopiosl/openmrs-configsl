@@ -96,8 +96,8 @@
             <p class="radio">
                 <obs conceptId="PIH:11381" style="radio"
                      labelText="Counselled for HIV testing:  "
-                     answers="PIH:YES,PIH:NO,PIH:unknown"
-                     answerLabels="Yes,No,Unknown"
+                     answerConceptIds="PIH:YES,PIH:NO,PIH:unknown"
+                     answerCodes="Yes,No,Unknown"
                      answerSeparator=" " required="true"/>
             </p>
         </div>
@@ -109,8 +109,8 @@
             <p class="radio">
                 <obs conceptId="CIEL:1382" style="radio"
                      labelText="Offered and accepted family planning information:  "
-                     answers="PIH:YES,PIH:NO,PIH:unknown"
-                     answerLabels="Yes,No,Unknown"
+                     answerConceptIds="PIH:YES,PIH:NO,PIH:unknown"
+                     answerCodes="Yes,No,Unknown"
                      answerSeparator=" " required="true"/>
             </p>
         </div>
