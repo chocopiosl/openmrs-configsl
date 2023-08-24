@@ -12,7 +12,7 @@ parameters:
 datasets:
   - key: "edtriageexport"
     type: "sql"
-    config: "sql/edtriage.sql"
+    config: "sql/edTriage.sql"
 designs:
   - type: "csv"
     properties:
