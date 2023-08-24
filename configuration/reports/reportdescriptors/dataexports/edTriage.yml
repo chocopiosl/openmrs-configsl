@@ -21,6 +21,6 @@ designs:
       "dateFormat": "dd-MMM-yyyy HH:mm:ss"
 config:
   category: "dataExport"
-  order: 70
+  order: 20
   components:
     - "allDataExports"
