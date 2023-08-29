@@ -1,7 +1,7 @@
 key: "edtriageexport"
 uuid: "b2653708-c6f5-4947-8b73-8a87f20b671f"
-name: "mirebalaisreports.edtriagedataexport.name"
-description: "mirebalaisreports.edtriagedataexport.description"
+name: "Triage Notes"
+description: "Triage Notes"
 parameters:
   - key: "startDate"
     type: "java.util.Date"
@@ -12,7 +12,7 @@ parameters:
 datasets:
   - key: "edtriageexport"
     type: "sql"
-    config: "sql/edTriage.sql"
+    config: "sql/Triage.sql"
 designs:
   - type: "csv"
     properties:
