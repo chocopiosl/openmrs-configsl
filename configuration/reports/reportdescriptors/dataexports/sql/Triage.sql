@@ -1,4 +1,5 @@
 CALL initialize_global_metadata();
+set @partition = '${partitionNum}';
 
 SELECT encounter_type_id into @EDTriageEnc from encounter_type where uuid = '74cef0a6-2801-11e6-b67b-9e71128cae77';
 
@@ -296,8 +297,8 @@ set t.Glucose_Value = o.value_numeric;
 Select
 wellbody_emr_id,
 kgh_emr_id,
-encounter_id,
-visit_id,
+concat(@partition,"-",encounter_id) encounter_id,
+concat(@partition,"-",visit_id) visit_id,
 loc_registered,
 unknown_patient,
 ED_Visit_Start_Datetime,
