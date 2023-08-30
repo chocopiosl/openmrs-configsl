@@ -49,7 +49,8 @@ Pain                     text,
 Other_Symptom            text,         
 Clinical_Impression      text,         
 Pregnancy_Test           text,         
-Glucose_Value            double
+Glucose_Value            double,
+Referral_Destination     varchar(255)
 );
 
 insert into temp_ED_Triage (patient_id, encounter_id, visit_id, encounter_datetime, date_entered, created_by)
@@ -293,6 +294,12 @@ inner join obs o on o.encounter_id = t.encounter_id and o.voided =0
 and o.concept_id = @gv
 set t.Glucose_Value = o.value_numeric;
 
+set @destination = concept_from_mapping('PIH','14818');
+update temp_ED_Triage t
+inner join obs o on o.encounter_id = t.encounter_id and o.voided =0
+and o.concept_id =@destination
+set t.Referral_Destination = concept_name(o.value_coded,@locale);
+
 -- final output of data
 Select
 wellbody_emr_id,
@@ -335,5 +342,6 @@ Pain,
 Other_Symptom,
 Clinical_Impression,
 Pregnancy_Test,
-Glucose_Value
+Glucose_Value,
+Referral_Destination
 from temp_ED_Triage;
