@@ -850,34 +850,18 @@
                 <uimessage code="Diabetes followup indicators"/>
             </strong>
 
-            <ifMode mode="VIEW" include="false">
-                <table align="left" style="font-size:small">
-                    <tr>
-                        <td>
-                            Controlled definition: HBA1c &lt; 7% (53 mmol/m)<br/>
-                            (if available the best)
-                        </td>
-                        <td>
-                            Preprandial glucose: 80 - 130 mg/dL (4.4 - 7.2 mmol/L)<br/>
-                            Postprandial glucose:  &lt; 180 mg/dL (10 mmol/L)
-                        </td>
-                    </tr>
-                </table>
-            </ifMode>
-
             <obsgroup groupingConceptId="PIH:14469" showIfEmpty="false">
                 <div class="two-columns">
                     <div>
                         <repeat>
                             <template>
-                                <p>
-                                    <p class="list-inline-wide">
-                                        <label>
-                                            <uimessage code="{xId}"/>
-                                        </label>
-                                        <obs conceptId="{message}" style="radio"
-                                             answerConceptIds="PIH:YES,PIH:NO" />
-                                    </p>
+                                <p class="list-inline">
+                                    <label>
+                                        <uimessage code="{xId}"/>
+                                    </label>
+                                    <obs conceptId="{message}" style="radio"
+                                         answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                                         answerCodes="yes,no,unknown" />
                                 </p>
                             </template>
                             <render message="CIEL:1898"   xId="Patient condition improved" tog=""/>
@@ -897,6 +881,31 @@
 
                     </div>
                 </div>
+
+                <ifMode mode="VIEW" include="false">
+                    <table align="left" style="font-size:small">
+                        <tr>
+                            <th colspan="2">
+                                Definition of disease control
+                            </th>
+                            <td>
+                                HBA1c &lt; 7% (53 mmol/m)
+                                <i>(if available, the best measurement)</i><br/>
+                                Preprandial glucose: 80 - 130 mg/dL (4.4 - 7.2 mmol/L)<br/>
+                                Postprandial glucose:  &lt; 180 mg/dL (10 mmol/L)
+                            </td>
+                        </tr>
+                    </table>
+                </ifMode>
+
+                <p class="list-inline-wide">
+                    <label>
+                        <uimessage code="Disease control"/>
+                    </label>
+                    <obs conceptId="PIH:11506" style="radio"
+                         answerConceptIds="PIH:11507,PIH:11508,PIH:11509"
+                         answerCodes="controlled,not controlled,complications" />
+                </p>
 
                 <div class="two-columns">
                     <div>
@@ -936,9 +945,9 @@
                         </div>
                     </div>
                     <div>
-                        <br/><br/><br/>
+                        <br/>
                         <label>
-                            <uimessage code="Number of hypoglycemic episodes (past 30 days)"/>
+                            <uimessage code="# of hypoglycemic episodes in past 30 days"/>
                         </label>
                         <p class="narrow">
                             <obs conceptId="PIH:14708"/>
@@ -1183,41 +1192,6 @@
             </p>
 
             <strong>
-                Hypertension followup indicators
-            </strong>
-            <obsgroup groupingConceptId="PIH:14462">
-                <div class="two-columns">
-                    <div>
-                        <repeat>
-                            <template>
-                                <p class="list-inline">
-                                    <label>
-                                        <uimessage code="{questionName}"/>
-                                    </label>
-                                    <obs conceptId="{qId}" style="radio"
-                                         answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
-                                         answerCodes="yes,no,unknown" />
-                                </p>
-                            </template>
-                            <render qId="CIEL:1898"   questionName="Patient condition improved" tog=""/>
-                            <render qId="CIEL:164075" questionName="Overall treatment adherence" tog=""/>
-                            <render qId="CIEL:167819" questionName="Missed doses in past week" tog=""/>
-                            <render qId="CIEL:167021" questionName="Aware and understands the disease" tog=""/>
-                            <render qId="CIEL:167914" questionName="Understands treatment" tog=""/>
-                        </repeat>
-                    </div>
-
-                    <div>
-                        <br/><br/>
-                        <label>
-                            <uimessage code="# of missed doses in past week"/>
-                        </label>
-                        <obs conceptId="CIEL:167918"  />
-                    </div>
-                </div>
-            </obsgroup>
-
-            <strong>
                 <uimessage code="Complications related to hypertension"/>
             </strong>
             <div class="two-columns">
@@ -1241,47 +1215,63 @@
                 </div>
             </div>
 
-            <!-- Fix this!!!   followup only -->
-            <includeIf velocityTest="$encounter.encounterType.uuid == '5cbfd6a2-92d9-4ad0-b526-9d29bfe1d10c'">
-                <strong>
-                    <uimessage code="Hypertension followup indicators" />
-                </strong>
+            <br/>
+            <strong>
+                <uimessage code="Hypertension followup indicators" />
+            </strong>
 
-                <obsgroup groupingConceptId="PIH:14462" showIfEmpty="false">
-                    <div class="two-columns">
-                        <div>
-                            <repeat>
-                                <template>
-                                    <p>
-                                        <p class="list-inline-wide">
-                                            <label>
-                                                <uimessage code="{xId}"/>
-                                            </label>
-                                            <obs conceptId="{message}" style="radio"
-                                                 answerConceptIds="PIH:YES,PIH:NO" />
-                                        </p>
-                                    </p>
-                                </template>
-                                <render message="CIEL:1898"   xId="Patient condition improved" tog=""/>
-                                <render message="CIEL:164075" xId="Overall treatment adherence" tog=""/>
-                                <render message="CIEL:167819" xId="Missed doses in past week" tog=""/>
-                                <render message="CIEL:167021" xId="Aware and understands the disease" tog=""/>
-                                <render message="CIEL:167914" xId="Understands treatment" tog=""/>
-                                <render message="PIH:14464"   xId="Disease controlled (BP less than equal 150/80)" />
-                            </repeat>
-                        </div>
-                        <div>
-                            <br/><br/>
-                            <label>
-                                <uimessage code="# of missed doses in past week"/>
-                            </label>
-                            <obs conceptId="CIEL:167918"  />
-
-                        </div>
+            <obsgroup groupingConceptId="PIH:14462" showIfEmpty="false">
+                <div class="two-columns">
+                    <div>
+                        <repeat>
+                            <template>
+                                <p class="list-inline">
+                                    <label>
+                                        <uimessage code="{xId}"/>
+                                    </label>
+                                    <obs conceptId="{message}" style="radio"
+                                         answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                                         answerCodes="yes,no,unknown"/>
+                                </p>
+                            </template>
+                            <render message="CIEL:1898"   xId="Patient condition improved" tog=""/>
+                            <render message="CIEL:164075" xId="Overall treatment adherence" tog=""/>
+                            <render message="CIEL:167819" xId="Missed doses in past week" tog=""/>
+                            <render message="CIEL:167021" xId="Aware and understands the disease" tog=""/>
+                            <render message="CIEL:167914" xId="Understands treatment" tog=""/>
+                        </repeat>
                     </div>
-                </obsgroup>
-            </includeIf>
+                    <div>
+                        <br/><br/>
+                        <label>
+                            <uimessage code="# of missed doses in past week"/>
+                        </label>
+                        <obs conceptId="CIEL:167918"  />
 
+                    </div>
+                </div>
+
+                <ifMode mode="VIEW" include="false">
+                    <table align="left" style="font-size:small">
+                        <tr>
+                            <th colspan="2">
+                                Definition of disease control
+                            </th>
+                            <td>
+                                Blood pressure less than or equal to 150/80
+                            </td>
+                        </tr>
+                    </table>
+                </ifMode>
+
+                <p class="list-inline-extra-wide">
+                    <label>
+                        <uimessage code="Disease control"/>
+                    </label>
+                    <obs conceptId="PIH:11506" style="radio"
+                         answerConceptIds="PIH:11507,PIH:11508,PIH:11509" />
+                </p>
+            </obsgroup>
         </div>
     </section>
 
@@ -2318,6 +2308,14 @@
             </div>
 
             <obsgroup groupingConceptId="PIH:14717" showIfEmpty="false" >
+                <p class="list-inline-wide">
+                    <label>
+                        <uimessage code="CKD/nephrotic syndrome control"/>
+                    </label>
+                    <obs conceptId="PIH:11506" style="radio"
+                         answerConceptIds="PIH:11507,PIH:11508,PIH:11509"
+                         answerCodes="controlled,not controlled,complications" />
+                </p>
                 <div class="two-columns">
                     <div>
                         <repeat>
@@ -2340,7 +2338,6 @@
                             <render qId="CIEL:167819" questionName="Missed doses in past week" tog=""/>
                             <render qId="CIEL:167021" questionName="Aware and understands the disease" tog=""/>
                             <render qId="CIEL:167914" questionName="Understands treatment" tog=""/>
-
 
                             <render qId="PIH:14719"   questionName="Dialysis referral" />
                             <render qId="PIH:14720"   questionName="On dialysis" />
@@ -2371,6 +2368,17 @@
 
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Liver cirrhosis">
         <div id="cirrhosis" class="section-container">
+
+            <obsgroup groupingConceptId="PIH:14827" showIfEmpty="false">
+                <p class="list-inline-wide">
+                    <label>
+                        <uimessage code="Disease control"/>
+                    </label>
+                    <obs conceptId="PIH:11506" style="radio"
+                         answerConceptIds="PIH:11507,PIH:11508,PIH:11509"
+                         answerCodes="controlled,not controlled,complications" />
+                </p>
+            </obsgroup>
         </div>
     </section>
 
