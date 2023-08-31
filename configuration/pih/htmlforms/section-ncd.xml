@@ -1269,7 +1269,8 @@
                         <uimessage code="Disease control"/>
                     </label>
                     <obs conceptId="PIH:11506" style="radio"
-                         answerConceptIds="PIH:11507,PIH:11508,PIH:11509" />
+                         answerConceptIds="PIH:11507,PIH:11508,PIH:11509"
+                         answerCodes="controlled,uncontrolled,complications"/>
                 </p>
             </obsgroup>
         </div>
@@ -1838,8 +1839,6 @@
 
             </table>
             <br/><br/>
-
-
 
             <div class="two-columns">
                 <div>
