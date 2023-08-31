@@ -2435,7 +2435,8 @@
             <table>
                 <repeat>
                     <template>
-                        <obsgroup groupingConceptId="CIEL:1727" showIfEmpty="false">
+                        <!-- ToDo: Create custom construct for palliative care -->
+                        <obsgroup groupingConceptId="PIH:14859" showIfEmpty="false">
                             <tr>
                                 <td id="{symptName}-symp" colspan="3">
                                     <obs conceptId="CIEL:1728" style="checkbox"
@@ -2561,6 +2562,79 @@
 
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Sickle cell">
         <div id="sickle" class="section-container">
+            <strong>
+                <uimessage code="On treatment"/>
+            </strong>
+            <br/>
+            <repeat>
+                <template>
+                    <obs conceptId="PIH:14857" style="checkbox"
+                         answerConceptId="{qId}"/>
+                </template>
+                <render qId="CIEL:76613" medName="Folic acid" />
+                <render qId="CIEL:81724" medName="Penicillin" />
+                <render qId="CIEL:77795" medName="Hydroxyurea" />
+            </repeat>
+            <br/>
+
+            <strong>
+                <uimessage code="Sickle cell followup indicators"/>
+            </strong>
+            <obsgroup groupingConceptId="PIH:14826">
+                <!-- ToDo: Add bunch of questions -->
+
+                <!-- ToDo: Add signs and symptoms -->
+                <div>
+                    <repeat>
+                        <template>
+                            <p class="side-by-side">
+                                <obsgroup groupingConceptId="PIH:14858" showIfEmpty="false">
+                                    <obs style="radio"
+                                         conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
+                                         conceptLabels="yes,no,unknown" answerConceptId="{qId}" labelText="{symptName}"/>
+                                </obsgroup>
+                            </p>
+                        </template>
+                        <render qId="CIEL:114403" symptName="Pain" />
+                        <render qId="CIEL:140238" symptName="Fever" />
+                        <render qId="CIEL:136443" symptName="Jaundice" />
+                        <render qId="CIEL:121629" symptName="Anemia" />
+                        <render qId="PIH:ASCITES" symptName="Ascites" /> <!-- ToDo: change to CIEL:148346 -->
+                    </repeat>
+                </div>
+
+                <div class="two-columns">
+                    <div>
+                        <repeat>
+                            <template>
+                                <p class="list-inline">
+                                    <label>
+                                        <uimessage code="{questionName}"/>
+                                    </label>
+                                    <obs conceptId="{qId}" style="radio"
+                                         answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                                         answerCodes="yes,no,unknown" />
+                                </p>
+                            </template>
+                            <render qId="CIEL:1898"   questionName="Patient condition improved" tog=""/>
+                            <render qId="CIEL:164075" questionName="Overall treatment adherence" tog=""/>
+                            <render qId="CIEL:167819" questionName="Missed doses in past week" tog=""/>
+                            <render qId="CIEL:167021" questionName="Aware and understands the disease" tog=""/>
+                            <render qId="CIEL:167914" questionName="Understands treatment" tog=""/>
+                            <render qId="PIH:14741"   questionName="Ability to titrate treatment" />
+                        </repeat>
+                    </div>
+
+                    <div>
+                        <br/><br/>
+                        <label>
+                            <uimessage code="# of missed doses in past week"/>
+                        </label>
+                        <obs conceptId="CIEL:167918"  />
+                    </div>
+                </div>
+            </obsgroup>
+
         </div>
     </section>
 
