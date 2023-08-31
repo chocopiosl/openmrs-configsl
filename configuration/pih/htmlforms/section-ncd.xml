@@ -904,7 +904,7 @@
                     </label>
                     <obs conceptId="PIH:11506" style="radio"
                          answerConceptIds="PIH:11507,PIH:11508,PIH:11509"
-                         answerCodes="controlled,not controlled,complications" />
+                         answerCodes="controlled,uncontrolled,complications" />
                 </p>
 
                 <div class="two-columns">
@@ -2314,7 +2314,7 @@
                     </label>
                     <obs conceptId="PIH:11506" style="radio"
                          answerConceptIds="PIH:11507,PIH:11508,PIH:11509"
-                         answerCodes="controlled,not controlled,complications" />
+                         answerCodes="controlled,uncontrolled,complications" />
                 </p>
                 <div class="two-columns">
                     <div>
@@ -2376,7 +2376,7 @@
                     </label>
                     <obs conceptId="PIH:11506" style="radio"
                          answerConceptIds="PIH:11507,PIH:11508,PIH:11509"
-                         answerCodes="controlled,not controlled,complications" />
+                         answerCodes="controlled,uncontrolled,complications" />
                 </p>
             </obsgroup>
         </div>
