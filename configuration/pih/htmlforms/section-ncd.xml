@@ -2449,13 +2449,14 @@
                                     <p class="list-inline">
                                         <obs conceptId="CIEL:162676" style="radio"
                                              answerConceptIds="CIEL:1107,CIEL:162677,CIEL:162678,CIEL:162679"
-                                             answerCodes="No,Better,Worse,Same" />
+                                             answerCodes="no,better,worse,same" />
                                     </p>
                                 </td>
                                 <td>
                                     <p class="list-inline">
                                         <obs conceptId="PIH:14768" style="radio"
-                                             answerConceptIds="PIH:11507,PIH:11508" />
+                                             answerConceptIds="PIH:11507,PIH:11508"
+                                             answerCodes="controlled,uncontrolled"/>
                                     </p>
                                 </td>
                             </tr>
