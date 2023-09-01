@@ -2569,7 +2569,7 @@
             <repeat>
                 <template>
                     <obs conceptId="PIH:14857" style="checkbox"
-                         answerConceptId="{qId}"/>
+                         answerConceptId="{qId}" answerCode="{medName}"/>
                 </template>
                 <render qId="CIEL:76613" medName="Folic acid" />
                 <render qId="CIEL:81724" medName="Penicillin" />
@@ -2599,7 +2599,11 @@
                         <render qId="CIEL:140238" symptName="Fever" />
                         <render qId="CIEL:136443" symptName="Jaundice" />
                         <render qId="CIEL:121629" symptName="Anemia" />
-                        <render qId="PIH:ASCITES" symptName="Ascites" /> <!-- ToDo: change to CIEL:148346 -->
+                        <render qId="CIEL:148346" symptName="Ascites" />
+                        <render qId="CIEL:112804" symptName="Spleen palpable" />
+                        <!-- <render qId="CIEL:x" symptName="Liver palpable" /> -->
+                        <render qId="CIEL:142373" symptName="Difficulty breathing" />
+                        <render qId="CIEL:120749" symptName="Chest pain" />
                     </repeat>
                 </div>
 
