@@ -1,8 +1,8 @@
 <htmlform
         id="primary-care-plan-medication-form"
-        formUuid="11D1D273-78F9-4303-BEE4-11CC995DD433"
+        formUuid="00b30a40-bcf8-11e5-a837-0899200c9a66"
         formName="Plan Medication"
-        formVersion="1.0">
+        formVersion="1.1">
 
     <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.ApplyDispositionAction"/>
 

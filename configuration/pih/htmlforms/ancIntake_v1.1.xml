@@ -1,10 +1,9 @@
-<htmlform formUuid="9F8EC44D-CC7D-4ADD-8A6A-6FAF736255A0"
-          formName="MCH Delivery"
-          formEncounterType="00e5ebb2-90ec-11e8-9eb6-529269fb1459"
-          formVersion="1.0">
+<htmlform formUuid="00e552d8-90ec-11e8-9eb6-529269fb1459"
+          formName="Prenatal Intake"
+          formEncounterType="00e5e810-90ec-11e8-9eb6-529269fb1459"
+          formVersion="1.1">
 
     <style type="text/css">
-
         #who-when-where {
         margin-bottom: 6px;
         border-bottom: 1px solid #ccc;
@@ -53,12 +52,12 @@
             padding-left: 15px;
             }
         </ifMode>
-
     </style>
 
+
     <!-- the two ifMode blocks below enable a bit of hack: when opening in ENTER mode, we just want to create the encounter,
-     we don't actually want to display the form, so we hae it hidden by default, and then automatically trigger the submit;
-     note that this will fail in the case where there isn't a default provider or date (which I don't think we have in our use cases -->
+        we don't actually want to display the form, so we hae it hidden by default, and then automatically trigger the submit;
+        note that this will fail in the case where there isn't a default provider or date (which I don't think we have in our use cases -->
 
     <ifMode mode="ENTER" include="true">
         <script type="text/javascript">
@@ -89,7 +88,7 @@
     <div class="htmlform" style="display:none">
 
         <ifMode mode="VIEW" include="false">
-            <h2><uimessage code="ui.i18n.EncounterType.name.00e5ebb2-90ec-11e8-9eb6-529269fb1459"/></h2>
+            <h2><uimessage code="ui.i18n.EncounterType.name.00e5e810-90ec-11e8-9eb6-529269fb1459"/></h2>
 
             <!-- users with retroConsultNote privilege can edit provider, location, and date for both retro and active visits -->
             <includeIf velocityTest="$user.hasPrivilege('Task: emr.retroConsultNote')">
@@ -130,6 +129,7 @@
                 </div>
 
             </includeIf>
+            <!-- all users that don't have either retro privilege, or those with retro-this-provider-only but with an active visit, can only edit location -->
             <!-- all users that don't have either retro privilege, or those with retro-this-provider-only but with an active visit, can only edit location -->
             <includeIf velocityTest="(!$user.hasPrivilege('Task: emr.retroConsultNoteThisProviderOnly') and !$user.hasPrivilege('Task: emr.retroConsultNote')) or ($user.hasPrivilege('Task: emr.retroConsultNoteThisProviderOnly') and !$user.hasPrivilege('Task: emr.retroConsultNote') and $visit.open)">
                 <div style="display:none">
