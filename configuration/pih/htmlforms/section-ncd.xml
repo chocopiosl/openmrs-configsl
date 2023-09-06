@@ -2573,9 +2573,71 @@
                 </template>
                 <render qId="CIEL:76613" medName="Folic acid"/>
                 <render qId="CIEL:81724" medName="Penicillin"/>
+
+                <!-- ToDo: Is hydroxyurea needed since it's asked later? -->
                 <render qId="CIEL:77795" medName="Hydroxyurea"/>
             </repeat>
             <br/>
+
+            <obsgroup groupingConceptId="PIH:14872">
+                <div class="two-columns">
+                    <div>
+                        <p class="list-inline">
+                            <label>
+                                <uimessage code="Complications since last visit"/>
+                            </label>
+                            <obs id="scd-comp-q" conceptId="PIH:14867" style="radio"
+                                 answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                                 answerCodes="yes,no,unknown">
+                                <controls>
+                                    <when value="PIH:YES" thenDisplay="#scd-comp-text"/>
+                                </controls>
+                            </obs>
+                        </p>
+                    </div>
+
+                    <div id="scd-comp-text">
+                        <label>
+                            <uimessage code="Complication summary" />
+                        </label>
+                        <obs conceptId="PIH:14679" />
+                    </div>
+                </div>
+
+                <div class="two-columns">
+                    <div>
+                        <p class="list-inline">
+                            <label>
+                                <uimessage code="Hydroxyurea indicated"/>
+                            </label>
+                            <obs id="scd-hydroxy-q" conceptId="PIH:14869" style="radio"
+                                 answerConceptIds="PIH:YES,PIH:NO"
+                                 answerCodes="yes,no">
+                                <controls>
+                                    <when value="PIH:YES" thenDisplay="#scd-hydroxy-details"/>
+                                </controls>
+                            </obs>
+                        </p>
+                    </div>
+
+                    <div id="scd-hydroxy-details">
+                        <p class="list-inline">
+                            <label>
+                                <uimessage code="Treatment with hydroxyurea" />
+                            </label>
+                            <obs conceptId="PIH:14870" style="radio"
+                                 answerConceptIds="PIH:YES,PIH:NO" answerCodes="yes,no" />
+                            <br/>
+
+                            <label>
+                                <uimessage code="Complications with hydroxyurea" />
+                            </label>
+                            <obs conceptId="PIH:14871" style="radio"
+                                 answerConceptIds="PIH:YES,PIH:NO" answerCodes="yes,no" />
+                        </p>
+                    </div>
+                </div>
+            </obsgroup>
 
             <strong>
                 <uimessage code="Sickle cell followup indicators"/>
@@ -2599,13 +2661,14 @@
                     <render qId="CIEL:121629" symptName="Anemia"/>
                     <render qId="CIEL:148346" symptName="Ascites"/>
                     <render qId="CIEL:112804" symptName="Spleen palpable"/>
-                    <!-- <render qId="CIEL:x" symptName="Liver palpable" /> -->
+
+                    <!-- ToDo:  Uncomment with clinical mds
+                    <render qId="PIH:14868" symptName="Liver palpable" /> -->
                     <render qId="CIEL:142373" symptName="Difficulty breathing"/>
                     <render qId="CIEL:120749" symptName="Chest pain"/>
                 </repeat>
             </div>
 
-            <!-- ToDo: Add bunch of questions -->
             <obsgroup groupingConceptId="PIH:14826">
                 <div>
                     <repeat>
@@ -2634,21 +2697,25 @@
                                     <label>
                                         <uimessage code="{questionName}"/>
                                     </label>
-                                    <obs conceptId="{qId}" style="radio"
+                                    <obs id="{tog}" conceptId="{qId}" style="radio"
                                          answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
-                                         answerCodes="yes,no,unknown"/>
+                                         answerCodes="yes,no,unknown">
+                                        <controls>
+                                            <when value="PIH:YES" thenDisplay="#{tog}-details"/>
+                                        </controls>
+                                    </obs>
                                 </p>
                             </template>
-                            <render qId="CIEL:1898"   questionName="Patient condition improved" tog=""/>
-                            <render qId="CIEL:164075" questionName="Overall treatment adherence" tog=""/>
-                            <render qId="CIEL:167819" questionName="Missed doses in past week" tog=""/>
-                            <render qId="CIEL:167021" questionName="Aware and understands the disease" tog=""/>
-                            <render qId="CIEL:167914" questionName="Understands treatment" tog=""/>
-                            <render qId="PIH:14741"   questionName="Ability to titrate treatment"/>
+                            <render qId="CIEL:1898"   questionName="Patient condition improved" tog="scd-fui-improved"/>
+                            <render qId="CIEL:164075" questionName="Overall treatment adherence" tog="scd-fui-adher"/>
+                            <render qId="CIEL:167819" questionName="Missed doses in past week" tog="scd-fui-miss"/>
+                            <render qId="CIEL:167021" questionName="Aware and understands the disease" tog="scd-fui-aware"/>
+                            <render qId="CIEL:167914" questionName="Understands treatment" tog="scd-fui-under"/>
+                            <render qId="PIH:14741"   questionName="Ability to titrate treatment" tog="scd-fui-tite"/>
                         </repeat>
                     </div>
 
-                    <div>
+                    <div id="scd-fui-miss-details">
                         <br/>
                         <br/>
                         <label>
