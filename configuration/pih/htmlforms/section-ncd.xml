@@ -194,7 +194,7 @@
                 <render category="PIH:HEART FAILURE" nickname="heart_failure" code="Heart failure"/>
                 <render category="PIH:Chronic respiratory disease program" nickname="respire" code="Chronic lung disease" />
                 <render category="CIEL:145438" nickname="kidney_failure" code="Chronic kidney disease"/>
-                <render category="PIH:3714" nickname="cirrhosis" code="Liver cirrhosis" />
+                <render category="PIH:3714" nickname="cirrhosis" code="Liver cirrhosis / Hepatitis B" />
                 <render category="CIEL:160849" nickname="palliative" code="Palliative care"/>
                 <render category="PIH:Sickle-Cell Anemia" nickname="sickle" code="Sickle cell"/>
             </repeat>
@@ -2368,8 +2368,28 @@
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Liver cirrhosis">
         <div id="cirrhosis" class="section-container">
 
+
+            <ifMode mode="VIEW" include="false">
+                <table align="left" style="font-size:small">
+                    <tr>
+                        <th colspan="2">
+                            Indications for treatment
+                        </th>
+                        <td>
+                            APRI > 1.5 or USS Cirrhosis<br/>
+                            VL from 2000 and ALT > 1.5 times 40 (at least 2 times in 4 months)<br/>
+                            Coinfection VHC-VIH<br/>
+                            VL from 2000 in pregnant women
+                        </td>
+                    </tr>
+                </table>
+            </ifMode>
+
+            <strong>
+                <uimessage code="Liver followup indicators"/>
+            </strong>
             <obsgroup groupingConceptId="PIH:14827" showIfEmpty="false">
-                <p class="list-inline-wide">
+                <p class="list-inline">
                     <label>
                         <uimessage code="Disease control"/>
                     </label>
@@ -2377,6 +2397,44 @@
                          answerConceptIds="PIH:11507,PIH:11508,PIH:11509"
                          answerCodes="controlled,uncontrolled,complications" />
                 </p>
+
+                <div class="two-columns">
+                    <div>
+                        <repeat>
+                            <template>
+                                <p class="list-inline">
+                                    <label>
+                                        <uimessage code="{questionName}"/>
+                                    </label>
+                                    <obs id="liver-{tog}" conceptId="{qId}" style="radio"
+                                         answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                                         answerCodes="yes,no,unknown">
+                                        <controls>
+                                            <when value="PIH:YES" thenDisplay="#liver-{tog}-details"/>
+                                        </controls>
+                                    </obs>
+                                </p>
+                            </template>
+                            <render qId="CIEL:1898"   questionName="Patient condition improved" tog="fui-improved"/>
+                            <render qId="CIEL:164075" questionName="Overall treatment adherence" tog="fui-adher"/>
+                            <render qId="CIEL:167819" questionName="Missed doses in past week" tog="fui-miss"/>
+                            <render qId="CIEL:167021" questionName="Aware and understands the disease" tog="fui-aware"/>
+                            <render qId="CIEL:167914" questionName="Understands treatment" tog="fui-under"/>
+                            <render qId="PIH:14741"   questionName="Ability to titrate treatment" tog="fui-tite"/>
+                        </repeat>
+                    </div>
+
+                    <div id="liver-fui-miss-details">
+                        <br/>
+                        <br/>
+                        <label>
+                            <uimessage code="# of missed doses in past week"/>
+                        </label>
+                        <obs conceptId="CIEL:167918"/>
+                    </div>
+                </div>
+
+
             </obsgroup>
         </div>
     </section>
@@ -2661,9 +2719,7 @@
                     <render qId="CIEL:121629" symptName="Anemia"/>
                     <render qId="CIEL:148346" symptName="Ascites"/>
                     <render qId="CIEL:112804" symptName="Spleen palpable"/>
-
-                    <!-- ToDo:  Uncomment with clinical mds
-                    <render qId="PIH:14868" symptName="Liver palpable" /> -->
+                    <render qId="PIH:14868" symptName="Liver palpable" />
                     <render qId="CIEL:142373" symptName="Difficulty breathing"/>
                     <render qId="CIEL:120749" symptName="Chest pain"/>
                 </repeat>
