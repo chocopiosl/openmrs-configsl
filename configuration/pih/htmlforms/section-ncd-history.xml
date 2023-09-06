@@ -464,7 +464,7 @@
 
     <section id="risk-factors" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Risk Factors">
-        <div class="section-container-color two-columns">
+        <div class="section-container two-columns">
             <div>
                 <repeat>
                     <template>
@@ -503,11 +503,57 @@
 
             </div>
 
-            <div>
+            <div class="section-container">
                 <label>
-                    <uimessage code="Other risk factors"/>
+                    <uimessage code="Risk factors for liver cirrhosis"/>
                 </label>
-                <obs conceptId="PIH:12999" rows="4"/>
+                <repeat>
+                    <template>
+                        <obs conceptId="PIH:14873"
+                             style="checkbox"
+                             answerConceptId="{dId}"
+                             answerCode="{message}" />
+                    </template>
+                    <render dId="CIEL:159449" message="Alcohol use" />
+                    <render dId="CIEL:5841"   message="Herbal traditional medicines" />
+                    <render dId="CIEL:115115" message="Obesity" />
+                    <render dId="CIEL:160666" message="Other drugs/medicine" />
+                </repeat>
+                <obs conceptId="PIH:14873"
+                     style="checkbox"
+                     answerConceptId="CIEL:5622"
+                     answerCode="Others"
+                     commentFieldCode="specify:"/>
+                <br/>
+                <p>
+                    <label>
+                        <uimessage code="Risk factors for Hepatitis B"/>
+                    </label>
+                    <repeat>
+                        <template>
+                            <obs conceptId="PIH:14874"
+                                 style="checkbox"
+                                 answerConceptId="{dId}"
+                                 answerCode="{message}" />
+                        </template>
+                        <!-- ToDo: Create new concepts -->
+                        <!-- <render dId="CIEL:x"   message="Vertical transmission" /> -->
+                        <!-- <render dId="CIEL:x"   message="Siblings infected" /> -->
+                        <!-- <render dId="CIEL:x"   message="Partner infected" /> -->
+                        <render dId="CIEL:1063"   message="Blood transfusion" />
+                        <!-- <render dId="CIEL:x"   message="Tribal ceremony" /> -->
+                        <render dId="CIEL:1067"   message="Unknown" />
+                        <render dId="CIEL:1107"   message="None" />
+                    </repeat>
+                </p>
+
+                <p>
+                    <label>
+                        <uimessage code="Other risk factors"/>
+                    </label>
+                    <obs conceptId="PIH:12999" rows="4"/>
+                </p>
+
             </div>
         </div>
     </section>

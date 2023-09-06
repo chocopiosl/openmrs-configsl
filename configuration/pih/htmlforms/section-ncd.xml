@@ -2388,6 +2388,28 @@
             <strong>
                 <uimessage code="Liver followup indicators"/>
             </strong>
+
+            <div>
+                <repeat>
+                    <template>
+                        <p class="list-inline">
+                            <obsgroup groupingConceptId="PIH:14875" showIfEmpty="false">
+                                <obs style="radio"
+                                     conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
+                                     conceptLabels="yes,no,unknown"
+                                     answerConceptId="{qId}" labelText="{symptName}"/>
+                            </obsgroup>
+                        </p>
+                    </template>
+                    <!-- <render qId="CIEL:x" symptName="Asymptomatic" /> -->
+                    <render qId="CIEL:139582" symptName="Gastrointestinal bleeding" />
+                    <render qId="CIEL:120345" symptName="Confusion" />
+                    <render qId="CIEL:879"    symptName="Pruritus" />
+                    <render qId="CIEL:159449" symptName="Alcohol use" />
+                </repeat>
+            </div>
+
+
             <obsgroup groupingConceptId="PIH:14827" showIfEmpty="false">
                 <p class="list-inline">
                     <label>
