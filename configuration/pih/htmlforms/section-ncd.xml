@@ -2571,39 +2571,58 @@
                     <obs conceptId="PIH:14857" style="checkbox"
                          answerConceptId="{qId}" answerCode="{medName}"/>
                 </template>
-                <render qId="CIEL:76613" medName="Folic acid" />
-                <render qId="CIEL:81724" medName="Penicillin" />
-                <render qId="CIEL:77795" medName="Hydroxyurea" />
+                <render qId="CIEL:76613" medName="Folic acid"/>
+                <render qId="CIEL:81724" medName="Penicillin"/>
+                <render qId="CIEL:77795" medName="Hydroxyurea"/>
             </repeat>
             <br/>
 
             <strong>
                 <uimessage code="Sickle cell followup indicators"/>
             </strong>
-            <obsgroup groupingConceptId="PIH:14826">
-                <!-- ToDo: Add bunch of questions -->
 
-                <!-- ToDo: Add signs and symptoms -->
+            <!-- Sickle cell signs and symptoms -->
+            <div>
+                <repeat>
+                    <template>
+                        <p class="side-by-side">
+                            <obsgroup groupingConceptId="PIH:14858" showIfEmpty="false">
+                                <obs style="radio"
+                                     conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
+                                     conceptLabels="yes,no,unknown" answerConceptId="{qId}" labelText="{symptName}"/>
+                            </obsgroup>
+                        </p>
+                    </template>
+                    <render qId="CIEL:114403" symptName="Pain"/>
+                    <render qId="CIEL:140238" symptName="Fever"/>
+                    <render qId="CIEL:136443" symptName="Jaundice"/>
+                    <render qId="CIEL:121629" symptName="Anemia"/>
+                    <render qId="CIEL:148346" symptName="Ascites"/>
+                    <render qId="CIEL:112804" symptName="Spleen palpable"/>
+                    <!-- <render qId="CIEL:x" symptName="Liver palpable" /> -->
+                    <render qId="CIEL:142373" symptName="Difficulty breathing"/>
+                    <render qId="CIEL:120749" symptName="Chest pain"/>
+                </repeat>
+            </div>
+
+            <!-- ToDo: Add bunch of questions -->
+            <obsgroup groupingConceptId="PIH:14826">
                 <div>
                     <repeat>
                         <template>
-                            <p class="side-by-side">
-                                <obsgroup groupingConceptId="PIH:14858" showIfEmpty="false">
-                                    <obs style="radio"
-                                         conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
-                                         conceptLabels="yes,no,unknown" answerConceptId="{qId}" labelText="{symptName}"/>
-                                </obsgroup>
+                            <p class="list-inline">
+                                <label>
+                                    <uimessage code="{questionName}"/>
+                                </label>
+                                <obs conceptId="{qId}" style="radio"
+                                     answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                                     answerCodes="yes,no,unknown"/>
                             </p>
                         </template>
-                        <render qId="CIEL:114403" symptName="Pain" />
-                        <render qId="CIEL:140238" symptName="Fever" />
-                        <render qId="CIEL:136443" symptName="Jaundice" />
-                        <render qId="CIEL:121629" symptName="Anemia" />
-                        <render qId="CIEL:148346" symptName="Ascites" />
-                        <render qId="CIEL:112804" symptName="Spleen palpable" />
-                        <!-- <render qId="CIEL:x" symptName="Liver palpable" /> -->
-                        <render qId="CIEL:142373" symptName="Difficulty breathing" />
-                        <render qId="CIEL:120749" symptName="Chest pain" />
+                        <render qId="CIEL:159610" questionName="Malaria prophylaxis" tog=""/>
+                        <render qId="PIH:14866"   questionName="Transfusion needed" tog=""/>
+                        <render qId="CIEL:1788"   questionName="Hospitalization needed" tog=""/>
+                        <render qId="CIEL:167022" questionName="Family awareness of disease" tog=""/>
                     </repeat>
                 </div>
 
@@ -2617,7 +2636,7 @@
                                     </label>
                                     <obs conceptId="{qId}" style="radio"
                                          answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
-                                         answerCodes="yes,no,unknown" />
+                                         answerCodes="yes,no,unknown"/>
                                 </p>
                             </template>
                             <render qId="CIEL:1898"   questionName="Patient condition improved" tog=""/>
@@ -2625,19 +2644,20 @@
                             <render qId="CIEL:167819" questionName="Missed doses in past week" tog=""/>
                             <render qId="CIEL:167021" questionName="Aware and understands the disease" tog=""/>
                             <render qId="CIEL:167914" questionName="Understands treatment" tog=""/>
-                            <render qId="PIH:14741"   questionName="Ability to titrate treatment" />
+                            <render qId="PIH:14741"   questionName="Ability to titrate treatment"/>
                         </repeat>
                     </div>
 
                     <div>
-                        <br/><br/>
+                        <br/>
+                        <br/>
                         <label>
                             <uimessage code="# of missed doses in past week"/>
                         </label>
-                        <obs conceptId="CIEL:167918"  />
+                        <obs conceptId="CIEL:167918"/>
                     </div>
                 </div>
-            </obsgroup>
+           </obsgroup>
 
         </div>
     </section>
