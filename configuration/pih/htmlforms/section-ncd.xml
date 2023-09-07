@@ -595,6 +595,7 @@
                                             <when value="CIEL:155569" thenDisplay="#{nickname}-plus" />
                                             <when value="CIEL:145438" thenDisplay="#{nickname}-plus" />
                                             <when value="CIEL:117703" thenDisplay="#{nickname}-plus" />
+                                            <when value="PIH:3714"    thenDisplay="#{nickname}-plus" />
                                         </controls>
                                     </obs>
                                 </template>
@@ -603,7 +604,7 @@
                                 <render answId="CIEL:139069" nickname="hf" name="Heart failure"/>
                                 <render answId="CIEL:155569" nickname="respire" name="Chronic lung disease" />
                                 <render answId="CIEL:145438" nickname="ckd" name="Chronic kidney disease"/>
-                                <render answId="PIH:3714"    nickname="cirrhosis" name="Liver cirrhosis" />
+                                <render answId="PIH:3714"    nickname="liver" name="Liver cirrhosis" />
                                 <render answId="CIEL:117703" nickname="sickle" name="Sickle cell disease" />
                                 <render answId="CIEL:160849" nickname="palliative" name="Palliative care"/>
                             </repeat>
@@ -618,15 +619,6 @@
                                 <obs conceptId="PIH:6899" style="textarea" rows="3"/>
                             </p>
 
-                            <div id="hf-plus">
-                                <p>
-                                    <obsgroup groupingConceptId="CIEL:160714" showIfEmpty="false">
-                                        <obs conceptId="CIEL:1651" style="checkbox"
-                                             answerConceptId="CIEL:159567"
-                                             answerCode="Echocardiogram performed"/>
-                                    </obsgroup>
-                                </p>
-                            </div>
                         </includeIf>
                     </div>
 
@@ -682,6 +674,16 @@
                                 </p>
                             </div>
 
+                            <div id="hf-plus">
+                                <p>
+                                    <obsgroup groupingConceptId="CIEL:160714" showIfEmpty="false">
+                                        <obs conceptId="CIEL:1651" style="checkbox"
+                                             answerConceptId="CIEL:159567"
+                                             answerCode="Echocardiogram performed"/>
+                                    </obsgroup>
+                                </p>
+                            </div>
+
                             <div id="respire-plus">
                                 <p class="side-by-side">
                                     <label>
@@ -699,6 +701,26 @@
                                         <uimessage code="Creatinine at discharge" />
                                     </label>
                                     <obs conceptId="CIEL:790" showUnits="true" />
+                                </p>
+                            </div>
+
+                            <div id="liver-plus">
+                                <p>
+                                    <label>
+                                        <uimessage code="Liver diagnosis on discharge"/>
+                                    </label>
+                                    <repeat>
+                                        <template>
+                                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                                <obs conceptId="PIH:DIAGNOSIS" answerConceptId="{diagId}" style="checkbox"/>
+                                            </obsgroup>
+                                        </template>
+                                        <render diagId="CIEL:113808" diagName="Spontaneous bacterial peritonitis" />
+                                        <render diagId="CIEL:148346" diagName="Ascites" />
+                                        <render diagId="CIEL:138834" diagName="Liver encephalopathy" />
+                                        <render diagId="CIEL:136443" diagName="Jaundice" />
+                                        <render diagId="CIEL:139582"   diagName="Gastrointestinal bleeding" />
+                                    </repeat>
                                 </p>
                             </div>
 
@@ -2365,9 +2387,9 @@
         </div>
     </section>
 
-    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Liver cirrhosis">
+    <section sectionTag="fieldset"
+             headerTag="legend" headerStyle="title" headerCode="Liver cirrhosis / Hepatitis B">
         <div id="cirrhosis" class="section-container">
-
 
             <ifMode mode="VIEW" include="false">
                 <table align="left" style="font-size:small">
@@ -2401,6 +2423,7 @@
                             </obsgroup>
                         </p>
                     </template>
+                    <!-- ToDo: Create new concepts -->
                     <!-- <render qId="CIEL:x" symptName="Asymptomatic" /> -->
                     <render qId="CIEL:139582" symptName="Gastrointestinal bleeding" />
                     <render qId="CIEL:120345" symptName="Confusion" />

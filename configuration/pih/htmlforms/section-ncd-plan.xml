@@ -138,6 +138,14 @@
 
                             <option value="159644AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="HbA1c" />
 
+                            <option value="3cd6c946-26fe-102b-80cb-0017a47871b2" label="HIV rapid" />
+
+                            <option value="161471AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="HVC" />
+                            <option value="ae5f7e1a-c200-4afd-a40f-279bcbcf8ce0" label="Hbe Ag" />
+                            <option value="3cd27760-26fe-102b-80cb-0017a47871b2" label="ALT" />
+                            <option value="3cd275d0-26fe-102b-80cb-0017a47871b2" label="AST" />
+                            <option value="e6901490-7735-4a80-a5b9-4de40219125d" label="APRI" />
+
                             <option value="160225AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="Sickling test" />
                             <option value="e286d1c8-e3df-45d6-a6cf-7cee0bdf370b" label="Sickle RT SCAN" />
                             <option value="165544AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="Hb electrophoresis" />
