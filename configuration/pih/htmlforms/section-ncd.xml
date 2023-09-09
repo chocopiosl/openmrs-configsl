@@ -1069,9 +1069,7 @@
                             <render footId="118983" message="Neuropathy" tag="neuropathy"/>
                             <render footId="132653" message="Loss of sensation" tag="numb"/>
                             <render footId="163411" message="Foot ulcer" tag="ulcer" />
-
-                            <!-- ToDo:  cc mds
-                            <render footId="152805" message="Foot infection"/> -->
+                            <render footId="152805" message="Foot infection"/>
 
                         </repeat>
 
@@ -2391,6 +2389,50 @@
              headerTag="legend" headerStyle="title" headerCode="Liver cirrhosis / Hepatitis B">
         <div id="cirrhosis" class="section-container">
 
+            <!-- this section is ONLY included for NCD intake encounter -->
+            <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
+                <strong>
+                    <uimessage code="Diagnosis"/>
+                </strong>
+                <div class="two-columns">
+                    <div>
+                        <p class="side-by-side">
+                            <repeat>
+                                <template>
+                                    <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                        <obs conceptId="PIH:DIAGNOSIS" style="checkbox"
+                                             answerConceptId="{diagId}" answerCode="{name}"/>
+                                    </obsgroup>
+                                    <br/>
+                                </template>
+                                <render diagId="CIEL:120557" name="Chronic Hepatitis B" />
+                                <render diagId="CIEL:145347" name="Chronic Hepatitis C" />
+                                <render diagId="CIEL:168297" name="Hepatocarcinoma due to Hepatitis B" />
+                                <render diagId="CIEL:168298" name="Hepatocarcinoma due to Hepatitis C" />
+                                <render diagId="CIEL:143118" name="Cryptogenic cirrhosis" />
+                            </repeat>
+
+                        </p>
+                    </div>
+                    <div>
+                        <label>
+                            <uimessage code="Hepatocarcinoma secondary to"/>
+                        </label>
+
+
+                        <label>
+                            <uimessage code="Liver cirrhosis secondary to"/>
+                        </label>
+
+                    </div>
+                </div>
+            </includeIf>
+
+            <br/>
+            <strong>
+                <uimessage code="Liver followup indicators"/>
+            </strong>
+
             <ifMode mode="VIEW" include="false">
                 <table align="left" style="font-size:small">
                     <tr>
@@ -2407,10 +2449,6 @@
                 </table>
             </ifMode>
 
-            <strong>
-                <uimessage code="Liver followup indicators"/>
-            </strong>
-
             <div>
                 <repeat>
                     <template>
@@ -2423,15 +2461,14 @@
                             </obsgroup>
                         </p>
                     </template>
-                    <!-- ToDo: Create new concepts -->
-                    <!-- <render qId="CIEL:x" symptName="Asymptomatic" /> -->
+                    <render qId="CIEL:168289" symptName="Asymptomatic" />
+                    <render qId="CIEL:168295" symptName="Ascitic paracentesis" />
                     <render qId="CIEL:139582" symptName="Gastrointestinal bleeding" />
                     <render qId="CIEL:120345" symptName="Confusion" />
                     <render qId="CIEL:879"    symptName="Pruritus" />
                     <render qId="CIEL:159449" symptName="Alcohol use" />
                 </repeat>
             </div>
-
 
             <obsgroup groupingConceptId="PIH:14827" showIfEmpty="false">
                 <p class="list-inline">
@@ -2477,6 +2514,70 @@
                         </label>
                         <obs conceptId="CIEL:167918"/>
                     </div>
+                </div>
+
+            </obsgroup>
+
+            <obsgroup groupingConceptId="PIH:14890" showIfEmpty="false">
+                <br/>
+                <strong>
+                    <uimessage code="Hepatitis B treatment"/>
+                </strong>
+                <p class="side-by-side">
+                    <obs id="hepB-q" conceptId="PIH:14889" style="radio"
+                         labelCode="On treatment"
+                         answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1175"
+                         answerCodes="yes,no,not applicable">
+                        <controls>
+                            <when value="CIEL:1065" thenDisplay="#hepB-details" />
+                        </controls>
+                    </obs>
+                </p>
+
+                <div id="hepB-details">
+                    <p class="side-by-side">
+                        <repeat>
+                            <template>
+                                <obs conceptId="PIH:14888" style="checkbox"
+                                         answerConceptId="{medId}" answerCode="{name}"/>
+                                <br/>
+                            </template>
+                            <render medId="CIEL:84795" name="Tenofovir" />
+                            <render medId="CIEL:75694" name="Entecav" />
+                        </repeat>
+                    </p>
+
+                    <p class="list-inline-wide">
+                        <label>
+                            <uimessage code="Secondary effects"/>
+                        </label>
+                        <obs style="radio"
+                             conceptId="CIEL:162871"
+                             answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1175"
+                             answerCodes="yes,no,not applicable" />
+                    </p>
+                    <p class="list-inline-wide">
+                        <label>
+                            <uimessage code="Missed doses in the last week"/>
+                        </label>
+                        <obs style="radio"
+                             conceptId="CIEL:167819"
+                             answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1175"
+                             answerCodes="yes,no,not applicable" />
+
+                    </p>
+                    <p class="list-inline-wide">
+                        <label>
+                            <uimessage code="Response to treatment (after 1 year)"/>
+                        </label>
+                        <br/>
+                        <!-- ToDo:  Add partial response -->
+                        <obs style="radio"
+                             conceptId="CIEL:167819"
+                             answerConceptIds="CIEL:1775,PIH:2416"
+                             answerCodes="complete response (undetectable VL),no response" />
+                    </p>
+
                 </div>
 
 
@@ -2764,7 +2865,7 @@
                     <render qId="CIEL:121629" symptName="Anemia"/>
                     <render qId="CIEL:148346" symptName="Ascites"/>
                     <render qId="CIEL:112804" symptName="Spleen palpable"/>
-                    <render qId="PIH:14868" symptName="Liver palpable" />
+                    <render qId="CIEL:168290" symptName="Liver palpable" />
                     <render qId="CIEL:142373" symptName="Difficulty breathing"/>
                     <render qId="CIEL:120749" symptName="Chest pain"/>
                 </repeat>
