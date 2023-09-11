@@ -15,6 +15,8 @@ wellbody_emr_id          varchar(50),
 kgh_emr_id               varchar(50), 
 loc_registered           varchar(255),   
 unknown_patient          varchar(255),   
+gender                   varchar(255),	
+age_at_encounter         int(3), 
 ED_Visit_Start_Datetime  datetime,     
 encounter_datetime       datetime,       
 encounter_location       text,       
@@ -48,7 +50,6 @@ Respiratory              text,
 Pain                     text,         
 Other_Symptom            text,         
 Clinical_Impression      text,         
-Pregnancy_Test           text,         
 Glucose_Value            double,
 Referral_Destination     varchar(255)
 );
@@ -69,7 +70,8 @@ patient_id      int(11),
 wellbody_emr_id varchar(50),
 kgh_emr_id      varchar(50),  
 loc_registered  varchar(255),  
-unknown_patient varchar(255)
+unknown_patient varchar(255),
+gender          varchar(255)
 );
    
 insert into temp_ed_patient(patient_id)
@@ -84,12 +86,19 @@ UPDATE temp_ed_patient SET kgh_emr_id = patient_identifier(patient_id,'c09a1d24-
 -- unknown patient
 UPDATE temp_ed_patient SET unknown_patient = unknown_patient(patient_id);
 
+-- gender
+UPDATE temp_ed_patient SET gender = gender(patient_id);
+
 update temp_ED_Triage t
 inner join temp_ed_patient p on p.patient_id = t.patient_id
 set	t.wellbody_emr_id = p.wellbody_emr_id,
     t.kgh_emr_id = p.kgh_emr_id,
-	t.unknown_patient = p.unknown_patient;
+	t.unknown_patient = p.unknown_patient,
+	t.gender = p.gender;
 
+
+-- age
+UPDATE temp_ED_Triage SET age_at_encounter = age_at_enc(patient_id, encounter_id);
 
 -- Provider
 UPDATE temp_ED_Triage SET provider = PROVIDER(encounter_id);
@@ -282,12 +291,6 @@ inner join obs o on o.encounter_id = t.encounter_id and o.voided =0
 and o.concept_id =@ci
 set t.Clinical_Impression = o.value_text;
 
-set @pregancy_test = concept_from_mapping('PIH','B-HCG');
-update temp_ED_Triage t
-inner join obs o on o.encounter_id = t.encounter_id and o.voided =0
-and o.concept_id =@pregancy_test
-set t.Pregnancy_Test = concept_name(o.value_coded,@locale);
-
 set @gv = concept_from_mapping('PIH','SERUM GLUCOSE');
 update temp_ED_Triage t
 inner join obs o on o.encounter_id = t.encounter_id and o.voided =0
@@ -304,10 +307,12 @@ set t.Referral_Destination = concept_name(o.value_coded,@locale);
 Select
 wellbody_emr_id,
 kgh_emr_id,
-concat(@partition,"-",encounter_id) encounter_id,
-concat(@partition,"-",visit_id) visit_id,
+if(@partition REGEXP '^[0-9]+$' = 1,concat(@partition,'-',encounter_id),encounter_id) "encounter_id",
+if(@partition REGEXP '^[0-9]+$' = 1,concat(@partition,'-',visit_id),visit_id) "visit_id",
 loc_registered,
 unknown_patient,
+gender,
+age_at_encounter,
 ED_Visit_Start_Datetime,
 encounter_datetime,
 encounter_location,
@@ -341,7 +346,6 @@ Respiratory,
 Pain,
 Other_Symptom,
 Clinical_Impression,
-Pregnancy_Test,
 Glucose_Value,
 Referral_Destination
 from temp_ED_Triage;
