@@ -2426,9 +2426,7 @@
                                 </template>
                                 <render diagId="CIEL:168297" name="Hepatocarcinoma due to Hepatitis B" />
                                 <render diagId="CIEL:168298" name="Hepatocarcinoma due to Hepatitis C" />
-                                <!--
                                 <render diagId="PIH:14911"   name="Hepatocarcinoma due to unknown cause" />
-                                -->
                             </repeat>
                         </p>
                     </div>
@@ -2447,11 +2445,10 @@
                                 </template>
                                 <render diagId="CIEL:168300" name="Cirrhosis due to Hepatitis B" />
                                 <render diagId="CIEL:168301" name="Cirrhosis due to Hepatitis C" />
-                                <!--
                                 <render diagId="CIEL:149157" name="Alcoholic cirrhosis" />
                                 <render diagId="CIEL:168302" name="Cirrhosis schistosomiasis" />
                                 <render diagId="PIH:14910"   name="Cirrhosis secondary to fatty liver disease" />
-                                <render diagId="CIEL:146184" name="Cardiac cirrhosis" /> -->
+                                <render diagId="CIEL:146184" name="Cardiac cirrhosis" />
                                 <render diagId="CIEL:143118" name="Cryptogenic cirrhosis" />
                             </repeat>
                         </p>
@@ -2535,6 +2532,7 @@
                             <render qId="CIEL:167021" questionName="Aware and understands the disease" tog="fui-aware"/>
                             <render qId="CIEL:167914" questionName="Understands treatment" tog="fui-under"/>
                             <render qId="PIH:14741"   questionName="Ability to titrate treatment" tog="fui-tite"/>
+                            <render qId="CIEL:1788"   questionName="Need hospitalization today" tog="fui-hosp" />
                         </repeat>
 
                         <p class="side-by-side">
@@ -2560,7 +2558,7 @@
                                         <render qId="PIH:14912"   answId="Cirrhosis USS" />
                                         <render qId="CIEL:168288" answId="Cirrhosis APRI" />
                                         <render qId="CIEL:654"    answId="ALT / SGPT" />
-                                        <!-- <render qId="x" answId="VL" /> -->
+                                        <!-- ToDo:  <render qId="x" answId="VL" /> -->
                                         <render qId="CIEL:1169"   answId="Co-infected with HIV" />
                                         <render qId="CIEL:156590" answId="Co-infected with Hepatitis C" />
                                         <render qId="CIEL:111491" answId="Pregnancy and VL &gt; 20,000" />
@@ -2640,10 +2638,7 @@
                              answerConceptIds="CIEL:1775,CIEL:162677,PIH:2416"
                              answerCodes="complete (undetectable VL),partial (decrease but persistent),no response" />
                     </p>
-
                 </div>
-
-
             </obsgroup>
         </div>
     </section>

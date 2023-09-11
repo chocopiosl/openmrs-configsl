@@ -186,7 +186,8 @@
                     <label>if other, specify:</label>
                     <obs conceptId="CIEL:1392" style="text"/>
 
-                    <!-- Liver ultrasound CIEL:852 with HCC CIEL:135721-->
+                    <!-- Liver ultrasound CIEL:852 with HCC CIEL:135721
+                    ['CIEL:135721','Hepatocarcinoma'], -->
                     <br/>
                     <strong>
                         <uimessage code="Liver ultrasound findings"/>
@@ -194,9 +195,9 @@
                     <br/>
 
                     <!-- todo: Add additional uss results -->
-                    <!--                                   ['CIEL:135721','Hepatocarcinoma'], -->
                     <repeat with="['CIEL:1118',  'Not done'],
                                   ['CIEL:1115',  'Normal'],
+
                                   ['CIEL:5622',  'Other']">
 
                         <obs conceptId="CIEL:852"
