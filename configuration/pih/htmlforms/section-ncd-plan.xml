@@ -140,6 +140,8 @@
 
                             <option value="3cd6c946-26fe-102b-80cb-0017a47871b2" label="HIV rapid" />
 
+                            <option value="3ce44134-26fe-102b-80cb-0017a47871b2" label="B-hCG (pregnancy)" />
+
                             <option value="161471AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="HVC" />
                             <option value="ae5f7e1a-c200-4afd-a40f-279bcbcf8ce0" label="Hbe Ag" />
                             <option value="3cd27760-26fe-102b-80cb-0017a47871b2" label="ALT" />
@@ -162,7 +164,7 @@
         <div class="section-container">
             <div class="two-columns">
                 <div>
-                    <strong>X-ray</strong>
+                    <strong>Chest X-ray</strong>
                     <br/>
 
                     <repeat with="['CIEL:1118',  'Not done'],
@@ -183,6 +185,25 @@
 
                     <label>if other, specify:</label>
                     <obs conceptId="CIEL:1392" style="text"/>
+
+                    <!-- Liver ultrasound CIEL:852 with HCC CIEL:135721-->
+                    <br/>
+                    <strong>
+                        <uimessage code="Liver ultrasound findings"/>
+                    </strong>
+                    <br/>
+
+                    <!-- todo: Add additional uss results -->
+                    <!--                                   ['CIEL:135721','Hepatocarcinoma'], -->
+                    <repeat with="['CIEL:1118',  'Not done'],
+                                  ['CIEL:1115',  'Normal'],
+                                  ['CIEL:5622',  'Other']">
+
+                        <obs conceptId="CIEL:852"
+                             answerConceptId="{0}"
+                             answerLabel="{1}"
+                             style="checkbox"/>
+                    </repeat>
                 </div>
 
                 <div>

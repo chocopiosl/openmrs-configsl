@@ -596,6 +596,7 @@
                                             <when value="CIEL:145438" thenDisplay="#{nickname}-plus" />
                                             <when value="CIEL:117703" thenDisplay="#{nickname}-plus" />
                                             <when value="PIH:3714"    thenDisplay="#{nickname}-plus" />
+                                            <when value="CIEL:117598" thenDisplay="#{nickname}-plus" />
                                         </controls>
                                     </obs>
                                 </template>
@@ -604,7 +605,8 @@
                                 <render answId="CIEL:139069" nickname="hf" name="Heart failure"/>
                                 <render answId="CIEL:155569" nickname="respire" name="Chronic lung disease" />
                                 <render answId="CIEL:145438" nickname="ckd" name="Chronic kidney disease"/>
-                                <render answId="PIH:3714"    nickname="liver" name="Liver cirrhosis" />
+                                <!-- <render answId="PIH:3714" nickname="liver" name="Liver cirrhosis" /> -->
+                                <render answId="CIEL:117598" nickname="liver" name="Liver decompensation" />
                                 <render answId="CIEL:117703" nickname="sickle" name="Sickle cell disease" />
                                 <render answId="CIEL:160849" nickname="palliative" name="Palliative care"/>
                             </repeat>
@@ -2407,22 +2409,52 @@
                                 </template>
                                 <render diagId="CIEL:120557" name="Chronic Hepatitis B" />
                                 <render diagId="CIEL:145347" name="Chronic Hepatitis C" />
+                            </repeat>
+                        </p>
+
+                        <label>
+                            <uimessage code="Hepatocarcinoma secondary"/>
+                        </label>
+                        <p class="side-by-side">
+                            <repeat>
+                                <template>
+                                    <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                        <obs conceptId="PIH:DIAGNOSIS" style="checkbox"
+                                             answerConceptId="{diagId}" answerCode="{name}"/>
+                                    </obsgroup>
+                                    <br/>
+                                </template>
                                 <render diagId="CIEL:168297" name="Hepatocarcinoma due to Hepatitis B" />
                                 <render diagId="CIEL:168298" name="Hepatocarcinoma due to Hepatitis C" />
-                                <render diagId="CIEL:143118" name="Cryptogenic cirrhosis" />
+                                <!--
+                                <render diagId="PIH:14911"   name="Hepatocarcinoma due to unknown cause" />
+                                -->
                             </repeat>
-
                         </p>
                     </div>
                     <div>
                         <label>
-                            <uimessage code="Hepatocarcinoma secondary to"/>
+                            <uimessage code="Liver cirrhosis secondary"/>
                         </label>
-
-
-                        <label>
-                            <uimessage code="Liver cirrhosis secondary to"/>
-                        </label>
+                        <p class="side-by-side">
+                            <repeat>
+                                <template>
+                                    <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                        <obs conceptId="PIH:DIAGNOSIS" style="checkbox"
+                                             answerConceptId="{diagId}" answerCode="{name}"/>
+                                    </obsgroup>
+                                    <br/>
+                                </template>
+                                <render diagId="CIEL:168300" name="Cirrhosis due to Hepatitis B" />
+                                <render diagId="CIEL:168301" name="Cirrhosis due to Hepatitis C" />
+                                <!--
+                                <render diagId="CIEL:149157" name="Alcoholic cirrhosis" />
+                                <render diagId="CIEL:168302" name="Cirrhosis schistosomiasis" />
+                                <render diagId="PIH:14910"   name="Cirrhosis secondary to fatty liver disease" />
+                                <render diagId="CIEL:146184" name="Cardiac cirrhosis" /> -->
+                                <render diagId="CIEL:143118" name="Cryptogenic cirrhosis" />
+                            </repeat>
+                        </p>
 
                     </div>
                 </div>
@@ -2504,6 +2536,38 @@
                             <render qId="CIEL:167914" questionName="Understands treatment" tog="fui-under"/>
                             <render qId="PIH:14741"   questionName="Ability to titrate treatment" tog="fui-tite"/>
                         </repeat>
+
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="New indication for Hepatitis B treatment"/>
+                            </label>
+                            <obs id="new-hepb-tto" conceptId="PIH:14889" style="radio"
+                                 answerConceptIds="PIH:YES,PIH:NO"
+                                 answerCodes="yes,no">
+                                <controls>
+                                    <when value="PIH:YES" thenDisplay="#new-hepb-reason"/>
+                                </controls>
+                            </obs>
+
+                            <div id="new-hepb-reason">
+                                <p>
+                                    <repeat>
+                                        <template>
+                                                <obs conceptId="PIH:14914" style="checkbox"
+                                                     answerConceptId="{qId}"
+                                                     answerCode="{answId}" />
+                                        </template>
+                                        <render qId="PIH:14912"   answId="Cirrhosis USS" />
+                                        <render qId="CIEL:168288" answId="Cirrhosis APRI" />
+                                        <render qId="CIEL:654"    answId="ALT / SGPT" />
+                                        <!-- <render qId="x" answId="VL" /> -->
+                                        <render qId="CIEL:1169"   answId="Co-infected with HIV" />
+                                        <render qId="CIEL:156590" answId="Co-infected with Hepatitis C" />
+                                        <render qId="CIEL:111491" answId="Pregnancy and VL &gt; 20,000" />
+                                    </repeat>
+                                </p>
+                            </div>
+                        </p>
                     </div>
 
                     <div id="liver-fui-miss-details">
@@ -2571,11 +2635,10 @@
                             <uimessage code="Response to treatment (after 1 year)"/>
                         </label>
                         <br/>
-                        <!-- ToDo:  Add partial response -->
                         <obs style="radio"
-                             conceptId="CIEL:167819"
-                             answerConceptIds="CIEL:1775,PIH:2416"
-                             answerCodes="complete response (undetectable VL),no response" />
+                             conceptId="PIH:14892"
+                             answerConceptIds="CIEL:1775,CIEL:162677,PIH:2416"
+                             answerCodes="complete (undetectable VL),partial (decrease but persistent),no response" />
                     </p>
 
                 </div>
