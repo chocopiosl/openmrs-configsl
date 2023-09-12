@@ -548,8 +548,6 @@
     <section id="hospital" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Hospitalization">
         <div class="section-container">
-            <!-- ToDo: Check with Marta about controls and reorganize with obsgroup -->
-
             <obsgroup groupingConceptId="PIH:HOSPITALIZATION CONSTRUCT" showIfEmpty="false">
 
                 <p class="side-by-side">
@@ -663,9 +661,7 @@
                                     </label>
                                     <repeat>
                                         <template>
-                                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                                                <obs conceptId="PIH:DIAGNOSIS" answerConceptId="{diagId}" style="checkbox"/>
-                                            </obsgroup>
+                                            <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
                                         </template>
                                         <render diagId="CIEL:142460" diagName="Diabetes with hyperosmolar coma" />
                                         <render diagId="CIEL:142452" diagName="Diabetic foot" />
@@ -678,11 +674,9 @@
 
                             <div id="hf-plus">
                                 <p>
-                                    <obsgroup groupingConceptId="CIEL:160714" showIfEmpty="false">
-                                        <obs conceptId="CIEL:1651" style="checkbox"
-                                             answerConceptId="CIEL:159567"
-                                             answerCode="Echocardiogram performed"/>
-                                    </obsgroup>
+                                    <obs conceptId="CIEL:1651" style="checkbox"
+                                         answerConceptId="CIEL:159567"
+                                         answerCode="Echocardiogram performed"/>
                                 </p>
                             </div>
 
@@ -713,15 +707,13 @@
                                     </label>
                                     <repeat>
                                         <template>
-                                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                                                <obs conceptId="PIH:DIAGNOSIS" answerConceptId="{diagId}" style="checkbox"/>
-                                            </obsgroup>
+                                            <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
                                         </template>
                                         <render diagId="CIEL:113808" diagName="Spontaneous bacterial peritonitis" />
                                         <render diagId="CIEL:148346" diagName="Ascites" />
                                         <render diagId="CIEL:138834" diagName="Liver encephalopathy" />
                                         <render diagId="CIEL:136443" diagName="Jaundice" />
-                                        <render diagId="CIEL:139582"   diagName="Gastrointestinal bleeding" />
+                                        <render diagId="CIEL:139582" diagName="Gastrointestinal bleeding" />
                                     </repeat>
                                 </p>
                             </div>
@@ -746,6 +738,14 @@
                                     </repeat>
                                 </p>
                             </div>
+
+                            <p>
+                                <label>
+                                    <uimessage code="Other diagnoses at discharge"/>
+                                </label>
+                                <obs conceptId="PIH:14922" />
+                            </p>
+
                         </includeIf>
                     </div>
                 </div>
@@ -2447,7 +2447,7 @@
                                 <render diagId="CIEL:168301" name="Cirrhosis due to Hepatitis C" />
                                 <render diagId="CIEL:149157" name="Alcoholic cirrhosis" />
                                 <render diagId="CIEL:168302" name="Cirrhosis schistosomiasis" />
-                                <render diagId="PIH:14910"   name="Cirrhosis secondary to fatty liver disease" />
+                                <render diagId="PIH:14910"   name="Non-alcoholic steatohepatitis" />
                                 <render diagId="CIEL:146184" name="Cardiac cirrhosis" />
                                 <render diagId="CIEL:143118" name="Cryptogenic cirrhosis" />
                             </repeat>
@@ -2558,7 +2558,7 @@
                                         <render qId="PIH:14912"   answId="Cirrhosis USS" />
                                         <render qId="CIEL:168288" answId="Cirrhosis APRI" />
                                         <render qId="CIEL:654"    answId="ALT / SGPT" />
-                                        <!-- ToDo:  <render qId="x" answId="VL" /> -->
+                                        <!-- ToDo:  <render qId="CIEL:168323" answId="Hep B DNA (VL)" /> -->
                                         <render qId="CIEL:1169"   answId="Co-infected with HIV" />
                                         <render qId="CIEL:156590" answId="Co-infected with Hepatitis C" />
                                         <render qId="CIEL:111491" answId="Pregnancy and VL &gt; 20,000" />
@@ -2697,7 +2697,6 @@
             <table>
                 <repeat>
                     <template>
-                        <!-- ToDo: Create custom construct for palliative care -->
                         <obsgroup groupingConceptId="PIH:14859" showIfEmpty="false">
                             <tr>
                                 <td id="{symptName}-symp" colspan="3">

@@ -536,11 +536,11 @@
                                  answerConceptId="{dId}"
                                  answerCode="{message}" />
                         </template>
-                        <render dId="CIEL:168292" message="Vertical transmission/Maternal infection" />
+                        <render dId="CIEL:168292" message="Vertical transmission (Maternal infection)" />
                         <render dId="CIEL:168293" message="Sibling infected" />
                         <render dId="CIEL:168294" message="Partner infected" />
                         <render dId="CIEL:1063"   message="Blood transfusion" />
-                        <!-- <render dId="CIEL:x"   message="Tribal ceremony" /> -->
+                        <render dId="PIH:14920"   message="Traditional ceremony" />
                         <render dId="CIEL:1067"   message="Unknown" />
                         <render dId="CIEL:1107"   message="None" />
                     </repeat>
