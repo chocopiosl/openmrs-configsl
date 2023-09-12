@@ -197,10 +197,8 @@
                 <render category="PIH:3714" nickname="cirrhosis" code="Liver cirrhosis / Hepatitis B" />
                 <render category="CIEL:160849" nickname="palliative" code="Palliative care"/>
                 <render category="PIH:Sickle-Cell Anemia" nickname="sickle" code="Sickle cell"/>
+                <render category="CIEL:5622" nickname="other-ncd" code="Other"/>
             </repeat>
-            <obs conceptId="PIH:NCD category" answerConceptId="PIH:OTHER"
-                 style="checkbox" toggle="other"
-                 showCommentField="true" commentFieldLabel=" "/>
         </div>
     </section>
 
@@ -883,20 +881,24 @@
                                     <label>
                                         <uimessage code="{xId}"/>
                                     </label>
-                                    <obs conceptId="{message}" style="radio"
+                                    <obs id="dm-fui-{tog}" conceptId="{message}" style="radio"
                                          answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
-                                         answerCodes="yes,no,unknown" />
+                                         answerCodes="yes,no,unknown" >
+                                        <controls>
+                                            <when value="PIH:YES" thenDisplay="#dm-fui-{tog}-details"/>
+                                        </controls>
+                                    </obs>
                                 </p>
                             </template>
-                            <render message="CIEL:1898"   xId="Patient condition improved" tog=""/>
-                            <render message="CIEL:164075" xId="Overall treatment adherence" tog=""/>
-                            <render message="CIEL:167819" xId="Missed doses in past week" tog=""/>
-                            <render message="CIEL:167021" xId="Aware and understands the disease" tog=""/>
-                            <render message="CIEL:167914" xId="Understands treatment" tog=""/>
-                            <render message="PIH:14741"   xId="Ability to titrate diuretic" />
+                            <render message="CIEL:1898"   xId="Patient condition improved" tog="improved"/>
+                            <render message="CIEL:164075" xId="Overall treatment adherence" tog="adher"/>
+                            <render message="CIEL:167819" xId="Missed doses in past week" tog="missed"/>
+                            <render message="CIEL:167021" xId="Aware and understands the disease" tog="aware"/>
+                            <render message="CIEL:167914" xId="Understands treatment" tog="understands"/>
+                            <render message="PIH:14741"   xId="Ability to titrate diuretic" tog="titrate"/>
                         </repeat>
                     </div>
-                    <div>
+                    <div id="dm-fui-missed-details">
                         <br/><br/>
                         <label>
                             <uimessage code="# of missed doses in past week"/>
@@ -1251,19 +1253,23 @@
                                     <label>
                                         <uimessage code="{xId}"/>
                                     </label>
-                                    <obs conceptId="{message}" style="radio"
+                                    <obs id="htn-fui-{tog}" conceptId="{message}" style="radio"
                                          answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
-                                         answerCodes="yes,no,unknown"/>
+                                         answerCodes="yes,no,unknown">
+                                        <controls>
+                                            <when value="PIH:YES" thenDisplay="#htn-fui-{tog}-details"/>
+                                        </controls>
+                                    </obs>
                                 </p>
                             </template>
-                            <render message="CIEL:1898"   xId="Patient condition improved" tog=""/>
-                            <render message="CIEL:164075" xId="Overall treatment adherence" tog=""/>
-                            <render message="CIEL:167819" xId="Missed doses in past week" tog=""/>
-                            <render message="CIEL:167021" xId="Aware and understands the disease" tog=""/>
-                            <render message="CIEL:167914" xId="Understands treatment" tog=""/>
+                            <render message="CIEL:1898"   xId="Patient condition improved" tog="improved"/>
+                            <render message="CIEL:164075" xId="Overall treatment adherence" tog="adher"/>
+                            <render message="CIEL:167819" xId="Missed doses in past week" tog="missed"/>
+                            <render message="CIEL:167021" xId="Aware and understands the disease" tog="aware"/>
+                            <render message="CIEL:167914" xId="Understands treatment" tog="understand"/>
                         </repeat>
                     </div>
-                    <div>
+                    <div id="htn-fui-missed-details">
                         <br/><br/>
                         <label>
                             <uimessage code="# of missed doses in past week"/>
@@ -1498,12 +1504,12 @@
                                 <label>
                                     <uimessage code="{questionName}"/>
                                 </label>
-                                <obs conceptId="{qId}" style="radio"
+                                <obs id="hf-fui-{tog}" conceptId="{qId}" style="radio"
                                      answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
                                      answerCodes="yes,no,unknown" />
                             </p>
                         </template>
-                        <render qId="CIEL:168115" questionName="Low salt adherence diet" />
+                        <render qId="CIEL:168115" questionName="Low salt adherence diet" tog="salt" />
                     </repeat>
 
                 </obsgroup>
@@ -1546,26 +1552,29 @@
                                         <label>
                                             <uimessage code="{questionName}"/>
                                         </label>
-                                        <obs conceptId="{qId}" style="radio"
+                                        <obs id="hf-fui-{tog}" conceptId="{qId}" style="radio"
                                              answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
-                                             answerCodes="yes,no,unknown" />
+                                             answerCodes="yes,no,unknown" >
+                                            <controls>
+                                                <when value="PIH:YES" thenDisplay="#hf-fui-{tog}-details"/>
+                                            </controls>
+                                        </obs>
                                     </p>
                                 </template>
-                                <render qId="CIEL:1898"   questionName="Patient condition improved" tog=""/>
-                                <render qId="CIEL:164075" questionName="Overall treatment adherence" tog=""/>
-                                <render qId="CIEL:167819" questionName="Missed doses in past week" tog=""/>
-                                <render qId="CIEL:167021" questionName="Aware and understands the disease" tog=""/>
-                                <render qId="CIEL:167914" questionName="Understands treatment" tog=""/>
-                                <render qId="PIH:14741"   questionName="Ability to titrate treatment" />
+                                <render qId="CIEL:1898"   questionName="Patient condition improved" tog="improved"/>
+                                <render qId="CIEL:164075" questionName="Overall treatment adherence" tog="adher"/>
+                                <render qId="CIEL:167819" questionName="Missed doses in past week" tog="missed"/>
+                                <render qId="CIEL:167021" questionName="Aware and understands the disease" tog="aware"/>
+                                <render qId="CIEL:167914" questionName="Understands treatment" tog="understand"/>
+                                <render qId="PIH:14741"   questionName="Ability to titrate treatment" tog="titrate"/>
 
-                                <render qId="PIH:14739"   questionName="Endocarditis prevention therapy" />
-                                <render qId="PIH:14738"   questionName="Refer for surgery evaluation" />
-                                <render qId="PIH:14740"   questionName="Echocardiogram improvement" />
-
+                                <render qId="PIH:14739"   questionName="Endocarditis prevention therapy" tog="endocard"/>
+                                <render qId="PIH:14738"   questionName="Refer for surgery evaluation" tog="referSurg"/>
+                                <render qId="PIH:14740"   questionName="Echocardiogram improvement" tog="echoImprov" />
                             </repeat>
                         </div>
 
-                        <div>
+                        <div id="hf-fui-missed-details">
                             <br/><br/>
                             <label>
                                 <uimessage code="# of missed doses in past week"/>
@@ -2109,21 +2118,25 @@
                                     <label>
                                         <uimessage code="{questionName}"/>
                                     </label>
-                                    <obs conceptId="{qId}" style="radio"
+                                    <obs id="lung-fui-{tog}" conceptId="{qId}" style="radio"
                                          answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
-                                         answerCodes="yes,no,unknown" />
+                                         answerCodes="yes,no,unknown" >
+                                        <controls>
+                                            <when value="PIH:YES" thenDisplay="#lung-fui-{tog}-details"/>
+                                        </controls>
+                                    </obs>
                                 </p>
                             </template>
-                            <render qId="CIEL:1898"   questionName="Patient condition improved" tog=""/>
-                            <render qId="CIEL:164075" questionName="Overall treatment adherence" tog=""/>
-                            <render qId="CIEL:167819" questionName="Missed doses in past week" tog=""/>
-                            <render qId="CIEL:167021" questionName="Aware and understands the disease" tog=""/>
-                            <render qId="CIEL:167914" questionName="Understands treatment" tog=""/>
-                            <render qId="PIH:14741"   questionName="Ability to titrate treatment" />
+                            <render qId="CIEL:1898"   questionName="Patient condition improved" tog="improved"/>
+                            <render qId="CIEL:164075" questionName="Overall treatment adherence" tog="adher"/>
+                            <render qId="CIEL:167819" questionName="Missed doses in past week" tog="missed"/>
+                            <render qId="CIEL:167021" questionName="Aware and understands the disease" tog="aware"/>
+                            <render qId="CIEL:167914" questionName="Understands treatment" tog="understands"/>
+                            <render qId="PIH:14741"   questionName="Ability to titrate treatment" tog="titrate" />
                         </repeat>
                     </div>
 
-                    <div>
+                    <div id="lung-fui-missed-details">
                         <br/><br/>
                         <label>
                             <uimessage code="# of missed doses in past week"/>
@@ -2345,29 +2358,33 @@
                                     <label>
                                         <uimessage code="{questionName}"/>
                                     </label>
-                                    <obs conceptId="{qId}" style="radio"
+                                    <obs id="ckd-fui-{tog}" conceptId="{qId}" style="radio"
                                          answerConceptIds="PIH:YES,PIH:NO,CIEL:1067"
-                                         answerCodes="yes,no,unknown" />
+                                         answerCodes="yes,no,unknown" >
+                                        <controls>
+                                            <when value="PIH:YES" thenDisplay="#ckd-fui-{tog}-details"/>
+                                        </controls>
+                                    </obs>
                                 </p>
                             </template>
-                            <render qId="PIH:14716"   questionName="HTN controlled" />
-                            <render qId="PIH:14718"   questionName="Stable creatinine level" />
-                            <render qId="CIEL:128340" questionName="Proteinuria" />
+                            <render qId="PIH:14716"   questionName="HTN controlled" tog="control"/>
+                            <render qId="PIH:14718"   questionName="Stable creatinine level" tog="creatinine" />
+                            <render qId="CIEL:128340" questionName="Proteinuria" tog="pu"/>
 
-                            <render qId="CIEL:1898"   questionName="Patient condition improved" tog=""/>
-                            <render qId="CIEL:164075" questionName="Overall treatment adherence" tog=""/>
-                            <render qId="CIEL:167819" questionName="Missed doses in past week" tog=""/>
-                            <render qId="CIEL:167021" questionName="Aware and understands the disease" tog=""/>
-                            <render qId="CIEL:167914" questionName="Understands treatment" tog=""/>
+                            <render qId="CIEL:1898"   questionName="Patient condition improved" tog="improved"/>
+                            <render qId="CIEL:164075" questionName="Overall treatment adherence" tog="adher"/>
+                            <render qId="CIEL:167819" questionName="Missed doses in past week" tog="missed"/>
+                            <render qId="CIEL:167021" questionName="Aware and understands the disease" tog="aware"/>
+                            <render qId="CIEL:167914" questionName="Understands treatment" tog="understands"/>
 
-                            <render qId="PIH:14719"   questionName="Dialysis referral" />
-                            <render qId="PIH:14720"   questionName="On dialysis" />
+                            <render qId="PIH:14719"   questionName="Dialysis referral" tog="dialysis"/>
+                            <render qId="PIH:14720"   questionName="On dialysis" tog="onDial"/>
 
-                            <render qId="PIH:14721"   questionName="Glomerulonephritis relapse" />
+                            <render qId="PIH:14721"   questionName="Glomerulonephritis relapse" tog="glomer" />
                         </repeat>
                     </div>
 
-                    <div>
+                    <div id="ckd-fui-missed-details">
                         <br/><br/><br/><br/><br/><br/><br/>
                         <label>
                             <uimessage code="# of missed doses in past week"/>
@@ -2715,26 +2732,30 @@
                         <repeat>
                             <template>
                                 <p>
-                                    <p class="list-inline-wide">
+                                    <p class="list-inline">
                                         <label>
                                             <uimessage code="{xId}"/>
                                         </label>
-                                        <br/>
-                                        <obs conceptId="{message}" style="radio"
-                                             answerConceptIds="PIH:YES,PIH:NO,CIEL:1067" />
+                                        <obs id="pall-fui-{tog}" conceptId="{message}" style="radio"
+                                             answerConceptIds="PIH:YES,PIH:NO,CIEL:1067"
+                                             answerCodes="yes,no,unknown">
+                                            <controls>
+                                                <when value="PIH:YES" thenDisplay="#pall-fui-{tog}-details"/>
+                                            </controls>
+                                        </obs>
                                     </p>
                                 </p>
                             </template>
-                            <render message="CIEL:1898"   xId="Patient condition improved" tog=""/>
-                            <render message="CIEL:164075" xId="Overall treatment adherence" tog=""/>
-                            <render message="CIEL:167819" xId="Missed doses in past week" tog=""/>
-                            <render message="CIEL:167021" xId="Aware and understands the disease" tog=""/>
-                            <render message="CIEL:167914" xId="Understands treatment" tog=""/>
-                            <render message="PIH:14741"   xId="Ability to titrate diuretic" />
+                            <render message="CIEL:1898"   xId="Patient condition improved" tog="improved"/>
+                            <render message="CIEL:164075" xId="Overall treatment adherence" tog="adher"/>
+                            <render message="CIEL:167819" xId="Missed doses in past week" tog="missed"/>
+                            <render message="CIEL:167021" xId="Aware and understands the disease" tog="aware"/>
+                            <render message="CIEL:167914" xId="Understands treatment" tog="understand"/>
+                            <render message="PIH:14741"   xId="Ability to titrate diuretic" tog="titrate"/>
                         </repeat>
                     </div>
-                    <div>
-                        <br/><br/><br/><br/>
+                    <div id="pall-fui-missed-details">
+                        <br/><br/>
                         <label>
                             <uimessage code="# of missed doses in past week"/>
                         </label>
@@ -3039,7 +3060,7 @@
     </section>
 
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.other">
-        <div id="other" class="section-container">
+        <div id="other-ncd" class="section-container">
             <p>
                 <repeat with="['CIEL:119624','Deep vein thrombosis'],
                               ['CIEL:113504','Pulmonary embolism'],
@@ -3054,7 +3075,9 @@
                 </repeat>
 
                 <!-- Other diagnosis and comment -->
-                <obs conceptId="PIH:DIAGNOSIS" answerConceptId="CIEL:5622"/>
+                <label>
+                    <uimessage code="Other NCD diagnosis" />
+                </label>
                 <obs conceptId="PIH:7416"/>
             </p>
         </div>
