@@ -229,7 +229,8 @@
     "logo": {
       "src": "site/logo.png",
       "alt": "Partners In Health - Sierra Leone",
-      "name": "Partners In Health - Sierra Leone"
+      "name": "Partners In Health - Sierra Leone",
+      "link": "${openmrsBase}/pihcore/home.page"
     }
   },
    "@openmrs/esm-patient-search-app": {
