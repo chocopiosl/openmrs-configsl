@@ -105,11 +105,17 @@
         #test-orders .orderwidget-section-header {
             padding-bottom: 25px;
         }
+
+        .two-column-old {
+            column-count: 2;
+            -webkit-column-count: 2;
+            -moz-column-count: 2;
+        }
     </style>
     <br/>
 
     <section id="test-orders" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.lab.lab_tests.title">
-        <div class="section-container">
+        <div class="section-container two-column-old">
             <order orderType="52a447d3-a64a-11e3-9aeb-50e549534c5e" onLoadFunction="renderOrderWidgetAsCheckboxes">
                 <orderTemplate>
                     <div style="display:none;">
@@ -188,23 +194,20 @@
                     <label>if other, specify:</label>
                     <obs conceptId="CIEL:1392" style="text"/>
 
-                    <!-- Liver ultrasound CIEL:852 with HCC CIEL:135721
-                    ['PIH:14915','Heterogeneous without signs of cirrhosis'],
-                    ['CIEL:135721','Hepatocarcinoma (HCC)'],
-                    ['PIH:14916','Cirrhosis with portal hypertension'],
-                    ['PIH:14917','Cirrhosis without portal hypertension'],
-                    ['PIH:14918','Periportal fibrosis'],-->
                     <br/>
                     <strong>
                         <uimessage code="Liver ultrasound findings"/>
                     </strong>
                     <br/>
 
-                    <!-- todo: Add additional uss results -->
                     <repeat with="['CIEL:1118',  'Not done'],
-                                  ['CIEL:1115',  'Normal'],
-
-                                  ['CIEL:5622',  'Other']">
+                                ['CIEL:1115',  'Normal'],
+                                ['PIH:14915','Heterogeneous without signs of cirrhosis'],
+                                ['CIEL:135721','Hepatocarcinoma (HCC)'],
+                                ['PIH:14916','Cirrhosis with portal hypertension'],
+                                ['PIH:14917','Cirrhosis without portal hypertension'],
+                                ['PIH:14918','Periportal fibrosis'],
+                                ['CIEL:5622',  'Other']">
 
                         <obs conceptId="CIEL:852"
                              answerConceptId="{0}"

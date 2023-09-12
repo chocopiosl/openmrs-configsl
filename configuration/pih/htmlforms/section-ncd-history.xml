@@ -318,7 +318,7 @@
                             </controls>
                         </obs>
 
-                        <div id="specify-support">
+                        <div id="specify-support" style="margin-left: 30px">
                             <label>if yes, specify support:</label>
                             <obs conceptId="PIH:2156" answerConceptId="PIH:990"   answerCode="Transport" />
                             <obs conceptId="PIH:2156" answerConceptId="PIH:1400"  answerCode="Food" />
@@ -339,7 +339,7 @@
                             </controls>
                         </obs>
 
-                        <div id="days-missed">
+                        <div id="days-missed" style="margin-left: 30px">
                             <label>
                                 <uimessage code="Days of lost schooling (related diseases)" />
                             </label>
@@ -406,58 +406,6 @@
             </div>
 
             <div id="encounter-diagnoses-target">
-            </div>
-        </div>
-    </section>
-
-    <section id="for-palliative" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="Palliative only">
-        <div class="section-container">
-            <div class="two-columns">
-                <div>
-                    <label>
-                        <uimessage code="Non-tumoral diseases" />
-                    </label>
-
-                    <repeat>
-                        <template>
-                            <obs conceptId="PIH:14773"
-                                 style="checkbox"
-                                 answerConceptId="{dId}" />
-                            <!-- answerCode="{message}" -->
-                        </template>
-                        <render dId="PIH:14772"   message="Refractory heart disease" />
-                        <render dId="CIEL:155569" message="CLD" />
-                        <render dId="CIEL:145438" message="CKD" />
-                    </repeat>
-
-                    <!-- ToDo:  Add other -->
-                </div>
-                <div>
-                    <label>
-                        <uimessage code="Tumoral diseases" />
-                    </label>
-
-                    <repeat>
-                        <template>
-                            <obs conceptId="PIH:14773"
-                                 style="checkbox"
-                                 answerConceptId="{dId}"
-                                 answerCode="{message}" />
-                        </template>
-                        <render dId="CIEL:116066" message="Hepatocarcinoma" />
-                        <render dId="CIEL:134788" message="Prostate cancer" />
-                        <render dId="CIEL:116026" message="Breast cancer" />
-                        <render dId="CIEL:133328" message="Lung cancer" />
-                        <render dId="PIH:14771"   message="Hematology cancer" />
-                    </repeat>
-
-                    <!-- Other with free-text -->
-                    <obs conceptId="PIH:14773"
-                         style="checkbox"
-                         answerConceptId="CIEL:5622" answerCode="other"
-                         commentFieldCode="zl.ifOtherSpecify" />
-                </div>
             </div>
         </div>
     </section>

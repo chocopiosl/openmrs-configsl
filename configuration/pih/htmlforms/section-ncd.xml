@@ -956,7 +956,7 @@
                             <render qId="CIEL:167998" questionName="On ACE inhibitors" q="ace"/>
                         </repeat>
 
-                        <div id="dm-ace-details">
+                        <div id="dm-ace-details" style="margin-left: 20px">
                             <p class="list-inline-wide">
                                 <label>
                                     <uimessage code="Indications on ACE inhibitors"/><br/>
@@ -997,7 +997,7 @@
 
                 <div id="fundy-results" class="two-columns">
                     <div>
-                        <p class="side-by-side">
+                        <p class="side-by-side" style="margin-left: 30px">
                             <label>
                                 <uimessage code="Fundoscopy results"/>
                             </label>
@@ -1044,7 +1044,7 @@
 
                 <div id="foot-results" class="two-columns">
                     <div>
-                        <p class="list-inline">
+                        <p class="list-inline" style="margin-left: 30px">
                             <label>
                                 <uimessage code="Foot exam findings"/>
                             </label>
@@ -2008,7 +2008,7 @@
                     </obs>
                 </p>
 
-                <div id="details-exar-copd">
+                <div id="details-exar-copd" style="margin-left: 30px">
                     <label>
                         <uimessage code="Number of COPD exacerbations since last visit" />
                     </label>
@@ -2254,7 +2254,7 @@
                         </controls>
                     </obs>
 
-                    <div id="biopsy-details">
+                    <div id="biopsy-details" style="margin-left: 30px">
                         <obs conceptId="PIH:3597" labelCode="Biopsy results"/>
                     </div>
 
@@ -2547,7 +2547,7 @@
                                 </controls>
                             </obs>
 
-                            <div id="new-hepb-reason">
+                            <div id="new-hepb-reason" style="margin-left: 30px">
                                 <p>
                                     <repeat>
                                         <template>
@@ -2558,7 +2558,7 @@
                                         <render qId="PIH:14912"   answId="Cirrhosis USS" />
                                         <render qId="CIEL:168288" answId="Cirrhosis APRI" />
                                         <render qId="CIEL:654"    answId="ALT / SGPT" />
-                                        <!-- ToDo:  <render qId="CIEL:168323" answId="Hep B DNA (VL)" /> -->
+                                        <render qId="CIEL:168323" answId="Hep B DNA (VL)" />
                                         <render qId="CIEL:1169"   answId="Co-infected with HIV" />
                                         <render qId="CIEL:156590" answId="Co-infected with Hepatitis C" />
                                         <render qId="CIEL:111491" answId="Pregnancy and VL &gt; 20,000" />
@@ -2596,7 +2596,7 @@
                     </obs>
                 </p>
 
-                <div id="hepB-details">
+                <div id="hepB-details" style="margin-left: 30px">
                     <p class="side-by-side">
                         <repeat>
                             <template>
@@ -2645,6 +2645,56 @@
 
     <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Palliative care">
         <div id="palliative" class="section-container">
+
+            <!-- Only show on intake -->
+            <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
+                <div class="two-columns">
+                    <div>
+                        <label>
+                            <uimessage code="Non-tumoral diseases" />
+                        </label>
+
+                        <repeat>
+                            <template>
+                                <obs conceptId="PIH:14773"
+                                     style="checkbox"
+                                     answerConceptId="{dId}" />
+                                <!-- answerCode="{message}" -->
+                            </template>
+                            <render dId="PIH:14772"   message="Refractory heart disease" />
+                            <render dId="CIEL:155569" message="CLD" />
+                            <render dId="CIEL:145438" message="CKD" />
+                        </repeat>
+
+                        <!-- ToDo:  Add other -->
+                    </div>
+                    <div>
+                        <label>
+                            <uimessage code="Tumoral diseases" />
+                        </label>
+
+                        <repeat>
+                            <template>
+                                <obs conceptId="PIH:14773"
+                                     style="checkbox"
+                                     answerConceptId="{dId}"
+                                     answerCode="{message}" />
+                            </template>
+                            <render dId="CIEL:116066" message="Hepatocarcinoma" />
+                            <render dId="CIEL:134788" message="Prostate cancer" />
+                            <render dId="CIEL:116026" message="Breast cancer" />
+                            <render dId="CIEL:133328" message="Lung cancer" />
+                            <render dId="PIH:14771"   message="Hematology cancer" />
+                        </repeat>
+
+                        <!-- Other with free-text -->
+                        <obs conceptId="PIH:14773"
+                             style="checkbox"
+                             answerConceptId="CIEL:5622" answerCode="other"
+                             commentFieldCode="zl.ifOtherSpecify" />
+                    </div>
+                </div>
+            </includeIf>
 
             <strong>
                 <uimessage code="Palliative followup indicators"/>
@@ -2789,7 +2839,7 @@
                     </controls>
                 </obs>
 
-                <div id="hosp-pall-reason">
+                <div id="hosp-pall-reason" style="margin-left: 30px">
                     <label>Reasons for hospitalization</label>
 
                     <repeat>
