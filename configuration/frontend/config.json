@@ -1,33 +1,39 @@
- {
-   "openmrs/esm-login-app": {
-     "chooseLocation": {
-       "enabled" : true,
-       "useLoginLocationTag": true,
-       "numberToShow": 5
-     },
-     "logo": {
-       "src": "site/logo.png",
-       "alt": "Partners In Health - Sierra Leone"
-     }
-
-   },
+{
+  "openmrs/esm-login-app": {
+    "chooseLocation": {
+      "enabled": true,
+      "useLoginLocationTag": true,
+      "numberToShow": 5
+    },
+    "logo": {
+      "src": "site/logo.png",
+      "alt": "Partners In Health - Sierra Leone"
+    }
+  },
   "@openmrs/esm-patient-registration-app": {
     "sections": [
-      "demographics", "contact", "social", "identifiers"
+      "demographics",
+      "contact",
+      "social",
+      "identifiers"
     ],
     "sectionDefinitions": [
       {
         "id": "demographics",
         "name": "Demographics",
         "fields": [
-          "name", "gender", "dob", "mothers_name"
+          "name",
+          "gender",
+          "dob",
+          "mothers_name"
         ]
       },
       {
         "id": "contact",
         "name": "Contact Info",
         "fields": [
-          "address", "phone"
+          "address",
+          "phone"
         ]
       },
       {
@@ -75,7 +81,7 @@
           {
             "uuid": "${concept.singleOrChild.uuid}",
             "label": "Single"
-          } ,
+          },
           {
             "uuid": "${concept.married.uuid}",
             "label": "Married"
@@ -107,7 +113,7 @@
           {
             "uuid": "${concept.civilServant.uuid}",
             "label": "Civil servant"
-          } ,
+          },
           {
             "uuid": "${concept.commerce.uuid}",
             "label": "Commerce"
@@ -117,87 +123,87 @@
             "label": "Commercial bike rider"
           },
           {
-            "uuid":"${concept.cowherd.uuid}",
+            "uuid": "${concept.cowherd.uuid}",
             "label": "Cowherd"
           },
           {
-            "uuid":"${concept.driver.uuid}",
+            "uuid": "${concept.driver.uuid}",
             "label": "Driver"
           },
           {
-            "uuid":"${concept.factoryWorker.uuid}",
+            "uuid": "${concept.factoryWorker.uuid}",
             "label": "Factory worker"
           },
           {
-            "uuid":"${concept.farmer.uuid}",
+            "uuid": "${concept.farmer.uuid}",
             "label": "Farmer"
           },
           {
-            "uuid":"${concept.fisherman.uuid}",
+            "uuid": "${concept.fisherman.uuid}",
             "label": "Fisherman"
           },
           {
-            "uuid":"${concept.fruitOrVegetableVendor.uuid}",
+            "uuid": "${concept.fruitOrVegetableVendor.uuid}",
             "label": "Fruit or vegetable vendor"
           },
           {
-            "uuid":"${concept.healthCareWorker.uuid}",
+            "uuid": "${concept.healthCareWorker.uuid}",
             "label": "Health care worker"
           },
           {
-            "uuid":"${concept.housework.uuid}",
+            "uuid": "${concept.housework.uuid}",
             "label": "Housework"
           },
           {
-            "uuid":"${concept.houseworkFieldwork.uuid}",
+            "uuid": "${concept.houseworkFieldwork.uuid}",
             "label": "Housework/Fieldwork"
           },
           {
-            "uuid":"${concept.manualLaborer.uuid}",
+            "uuid": "${concept.manualLaborer.uuid}",
             "label": "Manual Laborer"
           },
           {
-            "uuid":"${concept.marketVendor.uuid}",
+            "uuid": "${concept.marketVendor.uuid}",
             "label": "Market Vendor"
           },
           {
-            "uuid":"${concept.military.uuid}",
+            "uuid": "${concept.military.uuid}",
             "label": "Military"
           },
           {
-            "uuid":"${concept.miner.uuid}",
+            "uuid": "${concept.miner.uuid}",
             "label": "Miner"
           },
           {
-            "uuid":"${concept.police.uuid}",
+            "uuid": "${concept.police.uuid}",
             "label": "Police"
           },
           {
-            "uuid":"${concept.professional.uuid}",
+            "uuid": "${concept.professional.uuid}",
             "label": "Professional"
           },
           {
-            "uuid":"${concept.retired.uuid}",
+            "uuid": "${concept.retired.uuid}",
             "label": "Retired"
           },
           {
-            "uuid":"${concept.shopOwner.uuid}",
+            "uuid": "${concept.shopOwner.uuid}",
             "label": "Shop owner"
           },
           {
-            "uuid":"${concept.student.uuid}",
+            "uuid": "${concept.student.uuid}",
             "label": "Student"
           },
           {
-            "uuid":"${concept.teacher.uuid}",
+            "uuid": "${concept.teacher.uuid}",
             "label": "Teacher"
           },
           {
-            "uuid":"${concept.unemployed.uuid}",
+            "uuid": "${concept.unemployed.uuid}",
             "label": "Unemployed"
           },
           {
-            "uuid":"${concept.otherNonCoded.uuid}",
+            "uuid": "${concept.otherNonCoded.uuid}",
             "label": "Other"
           }
         ]
@@ -225,19 +231,20 @@
       "encounterProviderRoleUuid": "${encounterRole.administrativeClerk.uuid}"
     }
   },
+  "@openmrs/esm-patient-search-app": {
+    "defaultIdentifierTypes": [
+      "${patientIdentifierType.wellbodyEmrId.uuid}",
+      "${patientIdentifierType.kghEmrId.uuid}",
+      "${patientIdentifierType.ncdId.uuid}"
+    ]
+  },
   "@openmrs/esm-primary-navigation-app": {
     "logo": {
       "src": "site/logo.png",
       "alt": "Partners In Health - Sierra Leone",
-      "name": "Partners In Health - Sierra Leone"
+      "name": "Partners In Health - Sierra Leone",
+      "link": "${openmrsBase}/home.page"
     }
-  },
-   "@openmrs/esm-patient-search-app": {
-     "defaultIdentifierTypes": [
-       "${patientIdentifierType.wellbodyEmrId.uuid}",
-       "${patientIdentifierType.kghEmrId.uuid}",
-       "${patientIdentifierType.ncdId.uuid}"
-     ]
-   }
+  }
 }
 
