@@ -2466,7 +2466,7 @@
                                 <render diagId="CIEL:168302" name="Cirrhosis schistosomiasis" />
                                 <render diagId="PIH:14910"   name="Non-alcoholic steatohepatitis" />
                                 <render diagId="CIEL:146184" name="Cardiac cirrhosis" />
-                                <render diagId="CIEL:143118" name="Cryptogenic cirrhosis" />
+                                <render diagId="CIEL:143118" name="Unknown" fullName="Cryptogenic cirrhosis" />
                             </repeat>
                         </p>
 
