@@ -2997,21 +2997,26 @@
             </div>
 
             <obsgroup groupingConceptId="PIH:14826">
-                <div>
-                    <repeat>
-                        <template>
-                            <p class="list-inline">
-                                <label>
-                                    <uimessage code="{questionName}"/>
-                                </label>
-                                <obs conceptId="{qId}" style="radio"
-                                     answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
-                                     answerCodes="yes,no,unknown"/>
-                            </p>
-                        </template>
-                        <render qId="CIEL:159610" questionName="Malaria prophylaxis" tog=""/>
-                        <render qId="CIEL:167022" questionName="Family awareness of disease" tog=""/>
-                    </repeat>
+                <div class="two-columns">
+                    <div>
+                        <repeat>
+                            <template>
+                                <p class="list-inline">
+                                    <label>
+                                        <uimessage code="{questionName}"/>
+                                    </label>
+                                    <obs conceptId="{qId}" style="radio"
+                                         answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                                         answerCodes="yes,no,unknown"/>
+                                </p>
+                            </template>
+                            <render qId="CIEL:159610" questionName="Malaria prophylaxis" tog=""/>
+                            <render qId="CIEL:167022" questionName="Family awareness of disease" tog=""/>
+                        </repeat>
+                    </div>
+                    <div>
+                        <obs conceptId="PIH:13748" labelCode="# of transfusions since last visit" />
+                    </div>
                 </div>
 
                 <div class="two-columns">
@@ -3041,13 +3046,13 @@
                     </div>
 
                     <div id="scd-fui-miss-details">
-                        <br/>
-                        <br/>
+                        <br/><br/>
                         <label>
                             <uimessage code="# of missed doses in past week"/>
                         </label>
                         <obs conceptId="CIEL:167918"/>
                     </div>
+
                 </div>
            </obsgroup>
 
