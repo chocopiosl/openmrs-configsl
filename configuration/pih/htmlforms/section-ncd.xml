@@ -2886,9 +2886,6 @@
                 <br/>
                 <obs conceptId="PIH:14816"/>
             </p>
-
-
-
         </div>
     </section>
 
@@ -3013,8 +3010,6 @@
                             </p>
                         </template>
                         <render qId="CIEL:159610" questionName="Malaria prophylaxis" tog=""/>
-                        <render qId="PIH:14866"   questionName="Transfusion needed" tog=""/>
-                        <render qId="CIEL:1788"   questionName="Hospitalization needed" tog=""/>
                         <render qId="CIEL:167022" questionName="Family awareness of disease" tog=""/>
                     </repeat>
                 </div>
