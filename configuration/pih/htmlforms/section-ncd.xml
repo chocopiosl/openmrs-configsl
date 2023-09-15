@@ -172,36 +172,6 @@
         </script>
     </ifMode>
 
-    <section id="ncd_info" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="pihcore.ncd.category">
-        <div class="section-container">
-
-            <!-- Program enrollment -->
-            <enrollInProgram programId="NCD" locationTag="Program Location" />
-
-            <label>
-                <uimessage code="pihcore.ncd.category.instructions"/>
-            </label>
-
-            <repeat>
-                <template>
-                    <obs conceptId="PIH:NCD category" answerConceptId="{category}" answerCode="{code}"
-                         toggle="{nickname}" style="checkbox"/>
-                </template>
-
-                <render category="PIH:DIABETES" nickname="diabetes" code="Diabetes"/>
-                <render category="PIH:HYPERTENSION" nickname="htn" code="Hypertension"/>
-                <render category="PIH:HEART FAILURE" nickname="heart_failure" code="Heart failure"/>
-                <render category="PIH:Chronic respiratory disease program" nickname="respire" code="Chronic lung disease" />
-                <render category="CIEL:145438" nickname="kidney_failure" code="Chronic kidney disease"/>
-                <render category="PIH:3714" nickname="cirrhosis" code="Liver cirrhosis / Hepatitis B" />
-                <render category="CIEL:160849" nickname="palliative" code="Palliative care"/>
-                <render category="PIH:Sickle-Cell Anemia" nickname="sickle" code="Sickle cell"/>
-                <render category="CIEL:5622" nickname="other-ncd" code="Other"/>
-            </repeat>
-        </div>
-    </section>
-
     <!-- Only show vitals for intake; For followup, vitals are shown in the visit information (section-ncd-followup.xml) -->
     <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
 
@@ -609,6 +579,7 @@
                         </p>
 
                         <!-- this section is ONLY included for NCD intake encounter -->
+                        <!-- ToDo:  Is this only for intake???  Ask Marta -->
                         <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
                             <p>
                                 <label>
@@ -752,7 +723,63 @@
         </div>
     </section>
 
-    <section sectionTag="fieldset" headerTag="legend" headerStyle="title"
+    <section id="ncd_info" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="NCD categories and shortcuts">
+        <div class="section-container">
+
+            <!-- Program enrollment -->
+            <enrollInProgram programId="NCD" locationTag="Program Location" />
+
+            <ifMode mode="VIEW" include="false">
+                <p>
+                    <div class="shortcuts">
+                        |
+                        <repeat>
+                            <template>
+                                <a href="#{nickname}-section">
+                                    <uimessage code="{ncdName}"/>
+                                </a>
+                                |
+                            </template>
+                            <render category="PIH:DIABETES" nickname="diabetes" ncdName="Diabetes"/>
+                            <render category="PIH:HYPERTENSION" nickname="htn" ncdName="Hypertension"/>
+                            <render category="PIH:HEART FAILURE" nickname="heart_failure" ncdName="Heart failure"/>
+                            <render category="PIH:Chronic respiratory disease program" nickname="respire" ncdName="Chronic lung disease" />
+                            <render category="CIEL:145438" nickname="kidney_failure" ncdName="Chronic kidney disease"/>
+                            <render category="PIH:3714" nickname="cirrhosis" ncdName="Liver cirrhosis / Hepatitis B" />
+                            <render category="CIEL:160849" nickname="palliative" ncdName="Palliative care"/>
+                            <render category="PIH:Sickle-Cell Anemia" nickname="sickle" ncdName="Sickle cell"/>
+                            <render category="CIEL:5622" nickname="other-ncd" ncdName="Other"/>
+                            <render nickname="buttons" ncdName="go to the bottom" />
+                        </repeat>
+                    </div>
+                </p>
+            </ifMode>
+
+            <label>
+                <uimessage code="pihcore.ncd.category.instructions"/>
+            </label>
+
+            <repeat>
+                <template>
+                    <obs conceptId="PIH:NCD category" answerConceptId="{category}" answerCode="{code}"
+                         style="checkbox"/>
+                </template>
+
+                <render category="PIH:DIABETES" nickname="diabetes" code="Diabetes"/>
+                <render category="PIH:HYPERTENSION" nickname="htn" code="Hypertension"/>
+                <render category="PIH:HEART FAILURE" nickname="heart_failure" code="Heart failure"/>
+                <render category="PIH:Chronic respiratory disease program" nickname="respire" code="Chronic lung disease" />
+                <render category="CIEL:145438" nickname="kidney_failure" code="Chronic kidney disease"/>
+                <render category="PIH:3714" nickname="cirrhosis" code="Liver cirrhosis / Hepatitis B" />
+                <render category="CIEL:160849" nickname="palliative" code="Palliative care"/>
+                <render category="PIH:Sickle-Cell Anemia" nickname="sickle" code="Sickle cell"/>
+                <render category="CIEL:5622" nickname="other-ncd" code="Other"/>
+            </repeat>
+        </div>
+    </section>
+
+    <section id="diabetes-section" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.ncd.diabetes">
         <div id="diabetes" class="section-container">
 
@@ -1125,7 +1152,7 @@
         </div>
     </section>
 
-    <section sectionTag="fieldset" headerTag="legend" headerStyle="title"
+    <section id="htn-section" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.ncd.htn">
         <div id="htn" class="section-container">
 
@@ -1304,7 +1331,7 @@
         </div>
     </section>
 
-    <section sectionTag="fieldset" headerTag="legend" headerStyle="title"
+    <section id="heart_failure-section" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="pihcore.ncd.heart_failure">
         <div id="heart_failure" class="section-container">
             <!-- this section is ONLY included for NCD intake encounter -->
@@ -1726,7 +1753,7 @@
         </div>
     </section>
 
-    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Chronic lung disease">
+    <section id="respire-section" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Chronic lung disease">
         <div id="respire" class="section-container">
 
             <!-- Only include this section on the NCD intake form -->
@@ -2225,7 +2252,8 @@
         </div>
     </section>
 
-    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Chronic kidney disease (CKD) / Nephrotic Syndrome">
+    <section id="kidney_failure-section" sectionTag="fieldset"
+             headerTag="legend" headerStyle="title" headerCode="Chronic kidney disease (CKD) / Nephrotic Syndrome">
         <div id="kidney_failure" class="section-container">
 
             <!-- this section is ONLY included for NCD intake encounter -->
@@ -2404,7 +2432,7 @@
         </div>
     </section>
 
-    <section sectionTag="fieldset"
+    <section id="cirrhosis-section" sectionTag="fieldset"
              headerTag="legend" headerStyle="title" headerCode="Liver cirrhosis / Hepatitis B">
         <div id="cirrhosis" class="section-container">
 
@@ -2660,7 +2688,7 @@
         </div>
     </section>
 
-    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Palliative care">
+    <section id="palliative-section" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Palliative care">
         <div id="palliative" class="section-container">
 
             <!-- Only show on intake -->
@@ -2889,8 +2917,32 @@
         </div>
     </section>
 
-    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Sickle cell">
+    <section id="sickle-section" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Sickle cell">
         <div id="sickle" class="section-container">
+            <!-- this section is ONLY included for NCD intake encounter -->
+            <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
+                <table>
+                    <tr>
+                        <td>
+                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                <p class="side-by-side">
+                                    <obs conceptId="PIH:DIAGNOSIS" style="radio"
+                                         answerConceptIds="CIEL:117703,CIEL:126513,CIEL:126512,CIEL:168107,CIEL:117635"
+                                         answerCodes="Sickle-cell anemia (SS),Sickle-cell trait (AS),Sickle-cell beta thalassemia (SB),Sickle-cell hemoglobin C disease (SC),Other hemoglobinopathy"
+                                         answerSeparator="&lt;br /&gt;"/>
+                                </p>
+                            </obsgroup>
+
+                            <label>
+                                <uimessage code="If other sickle-cell disease, please specify" />
+                            </label>
+                            <obs conceptId="PIH:14924" />
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+            </includeIf>
+
             <strong>
                 <uimessage code="On treatment"/>
             </strong>
@@ -3059,7 +3111,8 @@
         </div>
     </section>
 
-    <section sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="pihcore.other">
+    <section id="other-ncd-section" sectionTag="fieldset"
+             headerTag="legend" headerStyle="title" headerCode="pihcore.other">
         <div id="other-ncd" class="section-container">
             <p>
                 <repeat with="['CIEL:119624','Deep vein thrombosis'],
@@ -3083,6 +3136,7 @@
         </div>
     </section>
 
+    <div id="buttons-section"></div>
     <ifMode mode="VIEW" include="false">
         <div id="buttons">
             <button id="next" type="button" class="submitButton confirm right">
