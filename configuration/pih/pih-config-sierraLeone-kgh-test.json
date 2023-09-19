@@ -6,6 +6,7 @@
 
   "components": [
     "activeVisits",
+    "adt",
     "allergies",
     "checkIn",
     "clinicianDashboard",
@@ -20,6 +21,7 @@
     "markPatientDead",
     "mchGAINMaternal",
     "mchGAINNewborn",
+    "medicationDispensing",
     "mentalHealth",
     "myAccount",
     "ncd",
