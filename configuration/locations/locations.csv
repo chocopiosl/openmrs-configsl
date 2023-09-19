@@ -1,12 +1,12 @@
-UUID,Void/Retire,Name,Description,Parent,Tag|Archives Location,Tag|Check-In Location,Tag|Consult Note Location,Tag|Dispensing Location,Tag|ED Triage Location,Tag|Labs Component Location,Tag|Lab Results Location,Tag|Maternal and Child Location,Tag|Medical Record Location,Tag|Mental Health Location,Tag|NCD Consult Location,Tag|Registration Location,Tag|Visit Location,Tag|Vitals Location,Tag|Order Pathology Location
-0561303b-9868-4a1d-933d-fe52ce1b8c9f,,Wellbody,Wellbody,,,,,,,,,,,,,,TRUE,,
-b6733150-7426-11e5-a837-0800200c9a66,,Wellbody Clinic,Wellbody Clinic,Wellbody,TRUE,TRUE,TRUE,TRUE,,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,,TRUE,
-dac348b7-2ece-47ad-b80a-140fc6788706,,Wellbody MCH,Wellbody MCH,Wellbody,TRUE,TRUE,TRUE,TRUE,,TRUE,TRUE,TRUE,TRUE,,,TRUE,,TRUE,
-93b8750b-b986-4023-a533-6116477f7936,TRUE,Wellbody GAIN,Wellbody GAIN (nursing),Wellbody,,,,,,,,,,,,,,,
-7a17bfc6-4032-4784-98cd-59d819c03b43,,Wellbody NCD,Wellbody Non-communicate disease clinic,Wellbody,TRUE,TRUE,TRUE,,,TRUE,,,TRUE,,TRUE,TRUE,,TRUE,
-7b959d2f-11f3-4611-b2e4-7002006c5aa6,,Wellbody Mental Health,Wellbody Mental Health clinic,Wellbody,TRUE,TRUE,,,,TRUE,TRUE,,TRUE,TRUE,,TRUE,,TRUE,
-074b2ab0-716a-11eb-8aa6-0242ac110002,,KGH,KGH,,,,,,,,,,,,,,TRUE,,TRUE
-2bcb9215-8cd6-11eb-b7be-0242ac110002,,KGH Triage,KGH Triage,KGH,TRUE,TRUE,TRUE,TRUE,TRUE,,,,TRUE,,,TRUE,,TRUE,TRUE
-5981f962-6eec-453d-89ce-2f9ac48d096f,,KGH MCH,KGH Maternal Child Health,KGH,TRUE,TRUE,,TRUE,,,,TRUE,TRUE,,,TRUE,,,TRUE
-7b959d2f-11f3-4611-b2e4-700200625d61,,KGH NCD,KGH non-communicate disease clinic,KGH,TRUE,TRUE,TRUE,TRUE,,TRUE,,,TRUE,,TRUE,TRUE,,TRUE,TRUE
-7b959d2f-11f3-4611-b2e4-700200629a66,,KGH Mental Health,KGH Mental Health clinic,KGH,TRUE,TRUE,,TRUE,,,,,TRUE,TRUE,,TRUE,,TRUE,TRUE
+UUID,Void/Retire,Name,Description,Parent,Tag|Archives Location,Tag|Check-In Location,Tag|Consult Note Location,Tag|Dispensing Location,Tag|ED Triage Location,Tag|Labs Component Location,Tag|Lab Results Location,Tag|Maternal and Child Location,Tag|Medical Record Location,Tag|Mental Health Location,Tag|NCD Consult Location,Tag|Registration Location,Tag|Visit Location,Tag|Vitals Location,Tag|Order Pathology Location,Tag|Order Radiology Study Location
+0561303b-9868-4a1d-933d-fe52ce1b8c9f,,Wellbody,Wellbody,,,,,,,,,,,,,,TRUE,,,
+b6733150-7426-11e5-a837-0800200c9a66,,Wellbody Clinic,Wellbody Clinic,Wellbody,TRUE,TRUE,TRUE,TRUE,,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,,TRUE,,
+dac348b7-2ece-47ad-b80a-140fc6788706,,Wellbody MCH,Wellbody MCH,Wellbody,TRUE,TRUE,TRUE,TRUE,,TRUE,TRUE,TRUE,TRUE,,,TRUE,,TRUE,,
+93b8750b-b986-4023-a533-6116477f7936,TRUE,Wellbody GAIN,Wellbody GAIN (nursing),Wellbody,,,,,,,,,,,,,,,,
+7a17bfc6-4032-4784-98cd-59d819c03b43,,Wellbody NCD,Wellbody Non-communicate disease clinic,Wellbody,TRUE,TRUE,TRUE,,,TRUE,,,TRUE,,TRUE,TRUE,,TRUE,,
+7b959d2f-11f3-4611-b2e4-7002006c5aa6,,Wellbody Mental Health,Wellbody Mental Health clinic,Wellbody,TRUE,TRUE,,,,TRUE,TRUE,,TRUE,TRUE,,TRUE,,TRUE,,
+074b2ab0-716a-11eb-8aa6-0242ac110002,,KGH,KGH,,,,,,,,,,,,,,TRUE,,,
+2bcb9215-8cd6-11eb-b7be-0242ac110002,,KGH Triage,KGH Triage,KGH,TRUE,TRUE,TRUE,TRUE,TRUE,,,,TRUE,,,TRUE,,TRUE,TRUE,TRUE
+5981f962-6eec-453d-89ce-2f9ac48d096f,,KGH MCH,KGH Maternal Child Health,KGH,TRUE,TRUE,,TRUE,,,,TRUE,TRUE,,,TRUE,,,TRUE,TRUE
+7b959d2f-11f3-4611-b2e4-700200625d61,,KGH NCD,KGH non-communicate disease clinic,KGH,TRUE,TRUE,TRUE,TRUE,,TRUE,,,TRUE,,TRUE,TRUE,,TRUE,TRUE,TRUE
+7b959d2f-11f3-4611-b2e4-700200629a66,,KGH Mental Health,KGH Mental Health clinic,KGH,TRUE,TRUE,,TRUE,,,,,TRUE,TRUE,,TRUE,,TRUE,TRUE,TRUE
