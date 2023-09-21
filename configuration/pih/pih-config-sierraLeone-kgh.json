@@ -41,6 +41,10 @@
   ],
   "idCardLabel": "KGH",
 
+  "registrationConfig": {
+    "allowUnknownPatients": true
+  },
+
   "extraIdentifierTypes": [
     "${patientIdentifierType.wellbodyEmrId.uuid}",
     "${patientIdentifierType.ncdId.uuid}"
