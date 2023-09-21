@@ -580,18 +580,6 @@
                                     <render answId="CIEL:145438" nickname="ckd" name="Chronic kidney diseases"/>
                                 </repeat>
                             </p>
-
-                            <!-- this section is ONLY included for NCD intake encounter -->
-                            <!-- ToDo:  Is this only for intake???  Ask Marta -->
-                            <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
-                                <p>
-                                    <label>
-                                        <uimessage code="Other diagnoses during hospitalization"/>
-                                    </label>
-                                    <obs conceptId="PIH:6899" style="textarea" rows="3"/>
-                                </p>
-
-                            </includeIf>
                         </div>
 
                         <div>
@@ -605,26 +593,20 @@
                             </p>
 
                             <!-- this section is ONLY included for NCD intake encounter -->
+                            <!-- ToDo:  Is this only for intake???  Ask Marta -->
                             <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
-                                <div id="hf-plus">
-                                     <p>
-                                        <obs conceptId="CIEL:1651" style="checkbox"
-                                             answerConceptId="CIEL:159567"
-                                             answerCode="Echocardiogram performed"/>
-                                    </p>
-                                </div>
+                                <br/><br/><br/><br/><br/>
+                                <p>
+                                    <label>
+                                        <uimessage code="Other diagnoses during hospitalization"/>
+                                    </label>
+                                    <obs conceptId="PIH:6899" style="textarea" rows="3"/>
+                                </p>
 
-                                <div id="respire-plus">
-                                    <p class="side-by-side">
-                                        <label>
-                                            <uimessage code="Chronic lung disease screening tool during hospitalization" />
-                                        </label>
-                                        <br/>
-                                        <obs conceptId="PIH:14602" style="radio"
-                                             answerConceptIds="CIEL:703,CIEL:664,CIEL:1118" />
-                                    </p>
-                                </div>
+                            </includeIf>
 
+                            <!-- this section is ONLY included for NCD intake encounter -->
+                            <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
                                 <div id="sickle-plus">
                                     <p>
                                         <label>
@@ -701,7 +683,16 @@
                         </tr>
 
                         <tr id="hf-plus-t">
-                            <th>Heart failure</th>
+                            <td>
+                                <p>
+                                    <strong>Heart failure</strong>
+                                </p>
+                                <p>
+                                    <obs conceptId="CIEL:1651" style="checkbox"
+                                         answerConceptId="CIEL:159567"
+                                         answerCode="Echocardiogram performed"/>
+                                </p>
+                            </td>
                             <td>
                                 <label>
                                     <uimessage code="Heart failure diagnosis on discharge"/>
@@ -718,11 +709,27 @@
                         </tr>
 
                         <tr id="respire-plus-t">
-                            <th>Chronic lung disease</th>
+                            <td>
+                                <p>
+                                    <strong>Chronic lung disease</strong>
+                                </p>
+
+                                <p class="side-by-side">
+                                    <label>
+                                        <uimessage code="Screening tool during hospitalization" />
+                                    </label>
+                                    <br/>
+                                    <obs conceptId="PIH:14602" style="radio"
+                                         answerConceptIds="CIEL:703,CIEL:664,CIEL:1118"
+                                         answerCodes="+,-,not done"/>
+                                </p>
+                            </td>
                             <td>
                                 <label>
                                     <uimessage code="Chronic lung disease diagnosis on discharge"/>
                                 </label>
+
+
                                 <repeat>
                                     <template>
                                         <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
