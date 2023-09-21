@@ -530,293 +530,326 @@
                     </obs>
                 </p>
 
-                <div id="hospital-details" class="two-columns">
-                    <div>
-                        <p class="side-by-side">
-                            <label>
-                                <uimessage code="Number of hospitalizations since last visit"/>
-                            </label>
-                            <obs conceptId="CIEL:1773" />
-                            <br/>
-
-                            <label>
-                                <uimessage code="Number of days"/>
-                            </label>
-                            <obs conceptId="PIH:2872" showUnits="coreapps.days" unitsCssClass="append-to-value" />
-                            <br/><br/>
-
-                        </p>
-
-                        <p>
-                            <label>
-                                <uimessage code="NCD diagnosis which caused hospitalization" />
-                            </label>
-                            <repeat>
-                                <template>
-                                    <obs id="{nickname}-q" conceptId="PIH:12476" style="checkbox"
-                                         answerConceptId="{answId}" answerCode="{name}" >
-                                        <controls>
-                                            <when value="CIEL:119481" thenDisplay="#{nickname}-plus" />
-                                            <when value="CIEL:117399" thenDisplay="#{nickname}-plus" />
-                                            <when value="CIEL:139069" thenDisplay="#{nickname}-plus" />
-                                            <when value="CIEL:155569" thenDisplay="#{nickname}-plus" />
-
-
-                                            <when value="PIH:3714"    thenDisplay="#{nickname}-plus" />
-                                            <when value="CIEL:117703" thenDisplay="#{nickname}-plus" />
-                                            <when value="CIEL:160849" thenDisplay="#{nickname}-plus" />
-                                            <when value="CIEL:145438" thenDisplay="#{nickname}-plus" />
-                                        </controls>
-                                    </obs>
-                                </template>
-                                <render answId="CIEL:119481" nickname="dm" name="Diabetes mellitus (DM)"/>
-                                <render answId="CIEL:117399" nickname="htn" name="Hypertension"/>
-                                <render answId="CIEL:139069" nickname="hf" name="Heart failure"/>
-                                <render answId="CIEL:155569" nickname="respire" name="Chronic lung diseases (CLD)" />
-                                <render answId="PIH:3714"    nickname="liver" name="Liver cirrhosis" />
-                                <render answId="CIEL:117703" nickname="sickle" name="Sickle cell diseases" />
-                                <render answId="CIEL:160849" nickname="palliative" name="Palliative care"/>
-                                <render answId="CIEL:145438" nickname="ckd" name="Chronic kidney diseases"/>
-                            </repeat>
-                        </p>
-
-                        <!-- this section is ONLY included for NCD intake encounter -->
-                        <!-- ToDo:  Is this only for intake???  Ask Marta -->
-                        <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
-                            <p>
+                <div id="hospital-details">
+                    <div class="two-columns">
+                        <div>
+                            <p class="side-by-side">
                                 <label>
-                                    <uimessage code="Other diagnoses during hospitalization"/>
+                                    <uimessage code="Number of hospitalizations since last visit"/>
                                 </label>
-                                <obs conceptId="PIH:6899" style="textarea" rows="3"/>
+                                <obs conceptId="CIEL:1773" />
+                                <br/>
+
+                                <label>
+                                    <uimessage code="Number of days"/>
+                                </label>
+                                <obs conceptId="PIH:2872" showUnits="coreapps.days" unitsCssClass="append-to-value" />
+                                <br/><br/>
+
                             </p>
 
-                        </includeIf>
-                    </div>
-
-                    <div>
-                        <p class="side-by-side">
-                            <label>
-                                <uimessage code="mirebalais.dischargeNote.dischargeDate.label"/>
-                            </label>
-                            <obs conceptId="CIEL:1641" allowTime="false" />
-                            <br/>
-
-                        </p>
-
-                        <!-- this section is ONLY included for NCD intake encounter -->
-                        <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
                             <p>
                                 <label>
-                                    <uimessage code="Treatment at discharge" />
+                                    <uimessage code="NCD diagnosis which caused hospitalization" />
                                 </label>
-
                                 <repeat>
                                     <template>
-                                        <obs conceptId="PIH:14468" style="checkbox"
-                                             answerConceptId="{answId}" answerCode="{name}" />
+                                        <obs id="{nickname}-q" conceptId="PIH:12476" style="checkbox"
+                                             answerConceptId="{answId}" answerCode="{name}" >
+                                            <controls>
+                                                <when value="CIEL:119481" thenDisplay="#{nickname}-plus" />
+                                                <when value="CIEL:117399" thenDisplay="#{nickname}-plus" />
+                                                <when value="CIEL:139069" thenDisplay="#{nickname}-plus" />
+                                                <when value="CIEL:155569" thenDisplay="#{nickname}-plus" />
+
+
+                                                <when value="PIH:3714"    thenDisplay="#{nickname}-plus" />
+                                                <when value="CIEL:117703" thenDisplay="#{nickname}-plus" />
+                                                <when value="CIEL:160849" thenDisplay="#{nickname}-plus" />
+                                                <when value="CIEL:145438" thenDisplay="#{nickname}-plus" />
+                                            </controls>
+                                        </obs>
                                     </template>
-                                    <render answId="CIEL:78056" name="Insulin"/>
-                                    <render answId="CIEL:167915" name="Oral anti-diabetic"/>
-
-                                    <render answId="PIH:14775" name="Short acting morphine"/>
-                                    <render answId="PIH:14776" name="Long acting morphine"/>
+                                    <render answId="CIEL:119481" nickname="dm" name="Diabetes mellitus (DM)"/>
+                                    <render answId="CIEL:117399" nickname="htn" name="Hypertension"/>
+                                    <render answId="CIEL:139069" nickname="hf" name="Heart failure"/>
+                                    <render answId="CIEL:155569" nickname="respire" name="Chronic lung diseases (CLD)" />
+                                    <render answId="PIH:3714"    nickname="liver" name="Liver cirrhosis" />
+                                    <render answId="CIEL:117703" nickname="sickle" name="Sickle cell diseases" />
+                                    <render answId="CIEL:160849" nickname="palliative" name="Palliative care"/>
+                                    <render answId="CIEL:145438" nickname="ckd" name="Chronic kidney diseases"/>
                                 </repeat>
-
-                                <obs conceptId="PIH:14715" labelCode="Other treatment at discharge" />
                             </p>
 
-                            <div id="dm-plus">
+                            <!-- this section is ONLY included for NCD intake encounter -->
+                            <!-- ToDo:  Is this only for intake???  Ask Marta -->
+                            <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
                                 <p>
                                     <label>
-                                        <uimessage code="DM diagnosis on discharge"/>
+                                        <uimessage code="Other diagnoses during hospitalization"/>
                                     </label>
-                                    <repeat>
-                                        <template>
-                                            <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
-                                        </template>
-                                        <render diagId="PIH:14953"   diagName="Hyperosmolar hyperglycemic syndrome (HHS)" />
-                                        <render diagId="CIEL:142454" diagName="DKA with coma" />
-                                        <render diagId="CIEL:122714" diagName="DKA without coma" />
-                                        <render diagId="PIH:14832"   diagName="Non complicated hyperglycemia" />
-                                        <render diagId="PIH:14954" diagName="Complicated diabetic foot" />
-                                        <render diagId="PIH:14955" diagName="Amputation for diabetic foot" />
-                                    </repeat>
+                                    <obs conceptId="PIH:6899" style="textarea" rows="3"/>
                                 </p>
-                            </div>
 
-                            <div id="htn-plus">
-                                <p>
-                                    <label>
-                                        <uimessage code="Hypertension diagnosis on discharge"/>
-                                    </label>
-                                    <repeat>
-                                        <template>
-                                            <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
-                                        </template>
-                                        <render diagId="CIEL:161644" diagName="Hypertensive urgency/emergency" />
-                                        <render diagId="CIEL:121856" diagName="Acute pulmonary edema" />
-                                        <render diagId="CIEL:111103" diagName="Stroke" />
-                                        <render diagId="CIEL:116608" diagName="Ischemic heart disease" />
-                                        <render diagId="CIEL:116116" diagName="Malignant hypertension" />
-                                    </repeat>
-                                </p>
-                            </div>
+                            </includeIf>
+                        </div>
 
-                            <div id="hf-plus">
-                                <p>
-                                    <label>
-                                        <uimessage code="Heart failure diagnosis on discharge"/>
-                                    </label>
-                                    <repeat>
-                                        <template>
-                                            <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
-                                        </template>
-                                        <render diagId="CIEL:149751" diagName="Decompensated acute heart failure" />
-                                    </repeat>
-                                </p>
-                                <p>
-                                    <obs conceptId="CIEL:1651" style="checkbox"
-                                         answerConceptId="CIEL:159567"
-                                         answerCode="Echocardiogram performed"/>
-                                </p>
-                            </div>
+                        <div>
+                            <p class="side-by-side">
+                                <label>
+                                    <uimessage code="mirebalais.dischargeNote.dischargeDate.label"/>
+                                </label>
+                                <obs conceptId="CIEL:1641" allowTime="false" />
+                                <br/>
 
-                            <div id="respire-plus">
-                                <p class="side-by-side">
-                                    <label>
-                                        <uimessage code="Chronic lung disease screening tool during hospitalization" />
-                                    </label>
-                                    <br/>
-                                    <obs conceptId="PIH:14602" style="radio"
-                                         answerConceptIds="CIEL:703,CIEL:664,CIEL:1118" />
-                                </p>
-                                <p>
-                                    <label>
-                                        <uimessage code="Chronic lung disease diagnosis on discharge"/>
-                                    </label>
-                                    <repeat>
-                                        <template>
-                                            <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
-                                        </template>
-                                        <render diagId="CIEL:166093" diagName="Acute exacerbation of COPD" />
-                                        <render diagId="CIEL:4"      diagName="Asthma exacerbation" />
-                                        <render diagId="CIEL:113311" diagName="Respiratory insufficiency related to other condition" />
-                                    </repeat>
-                                </p>
-                            </div>
+                            </p>
 
-                            <div id="ckd-plus">
-                                <p>
-                                    <label>
-                                        <uimessage code="CKD diagnosis on discharge"/>
-                                    </label>
-                                    <repeat>
-                                        <template>
-                                            <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
-                                        </template>
-                                        <render diagId="PIH:14958"   diagName="Nephrotic syndrome decompensation" />
-                                        <render diagId="CIEL:121849" diagName="Acute renal failure" />
-                                        <render diagId="CIEL:154967" diagName="Acute renal failure over chronic renal failure" />
-                                        <render diagId="CIEL:123549" diagName="Uremic encephalopathy" />
-                                        <render diagId="CIEL:162044" diagName="Severe anemia" />
-                                    </repeat>
-                                </p>
+                            <!-- this section is ONLY included for NCD intake encounter -->
+                            <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
+                                <div id="hf-plus">
+                                     <p>
+                                        <obs conceptId="CIEL:1651" style="checkbox"
+                                             answerConceptId="CIEL:159567"
+                                             answerCode="Echocardiogram performed"/>
+                                    </p>
+                                </div>
+
+                                <div id="respire-plus">
+                                    <p class="side-by-side">
+                                        <label>
+                                            <uimessage code="Chronic lung disease screening tool during hospitalization" />
+                                        </label>
+                                        <br/>
+                                        <obs conceptId="PIH:14602" style="radio"
+                                             answerConceptIds="CIEL:703,CIEL:664,CIEL:1118" />
+                                    </p>
+                                </div>
+
+                                <div id="sickle-plus">
+                                    <p>
+                                        <label>
+                                            <uimessage code="Main complications with sickle cell"/>
+                                        </label>
+                                        <repeat>
+                                            <template>
+                                                <obs conceptId="PIH:14839" style="checkbox"
+                                                     answerConceptId="{diagId}" answerCode="{sickleComplic}"/>
+                                            </template>
+                                            <render diagId="CIEL:121629" sickleComplic="Anemia" />
+                                            <render diagId="CIEL:165590" sickleComplic="Pain crisis" />
+                                            <render diagId="CIEL:124842" sickleComplic="Thoracic outlet syndrome" />
+                                            <render diagId="CIEL:121262" sickleComplic="Bacterial infection" />
+                                            <render diagId="CIEL:116128" sickleComplic="Malaria" />
+                                            <render diagId="CIEL:111103" sickleComplic="Stroke" />
+                                            <render diagId="CIEL:1063"   sickleComplic="Blood transfusion" />
+                                        </repeat>
+                                    </p>
+                                </div>
+                            </includeIf>
+                        </div>
+
+                    </div>
+
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th>Diagnosis at discharge</th>
+                            <th>Treatment at discharge</th>
+                        </tr>
+
+                        <tr id="dm-plus-t">
+                            <th>Diabetes</th>
+                            <td>
+                                <label>
+                                    <uimessage code="DM diagnosis on discharge"/>
+                                </label>
+                                <repeat>
+                                    <template>
+                                        <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
+                                    </template>
+                                    <render diagId="PIH:14953"   diagName="Hyperosmolar hyperglycemic syndrome (HHS)" />
+                                    <render diagId="CIEL:142454" diagName="DKA with coma" />
+                                    <render diagId="CIEL:122714" diagName="DKA without coma" />
+                                    <render diagId="PIH:14832"   diagName="Non complicated hyperglycemia" />
+                                    <render diagId="PIH:14954"   diagName="Complicated diabetic foot" />
+                                    <render diagId="PIH:14955"   diagName="Amputation for diabetic foot" />
+                                </repeat>
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+
+                        <tr id="htn-plus-t">
+                            <th>Hypertension</th>
+                            <td>
+                                <label>
+                                    <uimessage code="Hypertension diagnosis on discharge"/>
+                                </label>
+                                <repeat>
+                                    <template>
+                                        <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
+                                    </template>
+                                    <render diagId="CIEL:161644" diagName="Hypertensive urgency/emergency" />
+                                    <render diagId="CIEL:121856" diagName="Acute pulmonary edema" />
+                                    <render diagId="CIEL:111103" diagName="Stroke" />
+                                    <render diagId="CIEL:116608" diagName="Ischemic heart disease" />
+                                    <render diagId="CIEL:116116" diagName="Malignant hypertension" />
+                                </repeat>
+                            </td>
+                            <td></td>
+                        </tr>
+
+                        <tr id="hf-plus-t">
+                            <th>Heart failure</th>
+                            <td>
+                                <label>
+                                    <uimessage code="Heart failure diagnosis on discharge"/>
+                                </label>
+                                <repeat>
+                                    <template>
+                                        <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
+                                    </template>
+                                    <render diagId="CIEL:149751" diagName="Decompensated acute heart failure" />
+                                </repeat>
+
+                            </td>
+                            <td></td>
+                        </tr>
+
+                        <tr id="respire-plus-t">
+                            <th>Chronic lung disease</th>
+                            <td>
+                                <label>
+                                    <uimessage code="Chronic lung disease diagnosis on discharge"/>
+                                </label>
+                                <repeat>
+                                    <template>
+                                        <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
+                                    </template>
+                                    <render diagId="CIEL:166093" diagName="Acute exacerbation of COPD" />
+                                    <render diagId="CIEL:4"      diagName="Asthma exacerbation" />
+                                    <render diagId="CIEL:113311" diagName="Respiratory insufficiency related to other condition" />
+                                </repeat>
+                            </td>
+                            <td></td>
+                        </tr>
+
+                        <tr id="ckd-plus-t">
+                            <th>Chronic kidney disease</th>
+                            <td>
+                                <label>
+                                    <uimessage code="CKD diagnosis on discharge"/>
+                                </label>
+                                <repeat>
+                                    <template>
+                                        <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
+                                    </template>
+                                    <render diagId="PIH:14958"   diagName="Nephrotic syndrome decompensation" />
+                                    <render diagId="CIEL:121849" diagName="Acute renal failure" />
+                                    <render diagId="CIEL:154967" diagName="Acute renal failure over chronic renal failure" />
+                                    <render diagId="CIEL:123549" diagName="Uremic encephalopathy" />
+                                    <render diagId="CIEL:162044" diagName="Severe anemia" />
+                                </repeat>
+                            </td>
+                            <td>
                                 <p>
                                     <label>
                                         <uimessage code="Creatinine at discharge" />
                                     </label>
                                     <obs conceptId="CIEL:790" showUnits="true" />
                                 </p>
-                            </div>
+                            </td>
+                        </tr>
 
-                            <div id="liver-plus">
-                                <p>
-                                    <label>
-                                        <uimessage code="Liver diagnosis on discharge"/>
-                                    </label>
-                                    <repeat>
-                                        <template>
-                                            <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
-                                        </template>
-                                        <render diagId="CIEL:113808" diagName="Spontaneous bacterial peritonitis" />
-                                        <render diagId="CIEL:138834" diagName="Liver encephalopathy" />
-                                        <render diagId="PIH:14956"   diagName="Decompensated cirrhosis with ascites" />
-                                        <render diagId="CIEL:117598" diagName="Liver failure" />
+                        <tr id="liver-plus-t">
+                            <th>Chronic liver cirrhosis / Hepatitis</th>
+                            <td>
+                                <label>
+                                    <uimessage code="Liver diagnosis on discharge"/>
+                                </label>
+                                <repeat>
+                                    <template>
+                                        <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
+                                    </template>
+                                    <render diagId="CIEL:113808" diagName="Spontaneous bacterial peritonitis" />
+                                    <render diagId="CIEL:138834" diagName="Liver encephalopathy" />
+                                    <render diagId="PIH:14956"   diagName="Decompensated cirrhosis with ascites" />
+                                    <render diagId="CIEL:117598" diagName="Liver failure" />
 
-                                        <!-- ToDo: On paper form.  Discuss with Marta -->
-                                        <render diagId="CIEL:148346" diagName="Ascites" />
-                                        <render diagId="CIEL:136443" diagName="Jaundice" />
-                                        <render diagId="CIEL:139582" diagName="Gastrointestinal bleeding" />
-                                    </repeat>
-                                </p>
-                            </div>
+                                    <!-- ToDo: On paper form.  Discuss with Marta -->
+                                    <render diagId="CIEL:148346" diagName="Ascites" />
+                                    <render diagId="CIEL:136443" diagName="Jaundice" />
+                                    <render diagId="CIEL:139582" diagName="Gastrointestinal bleeding" />
+                                </repeat>
+                            </td>
+                            <td></td>
+                        </tr>
 
-                            <div id="sickle-plus">
-                                <p>
-                                    <label>
-                                        <uimessage code="Sickle cell diagnosis on discharge"/>
-                                    </label>
-                                    <repeat>
-                                        <template>
-                                            <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
-                                        </template>
-                                        <render diagId="CIEL:116128" sickleText="Malaria" />
-                                        <render diagId="CIEL:126721" sickleText="Sepsis" />
-                                        <render diagId="CIEL:121629" sickleText="Anemia" />
-                                        <render diagId="PIH:14957"   sickleText="Vaso-occlusive crisis" />
-                                        <render diagId="CIEL:147059" sickleText="Bone pain" />
-                                        <render diagId="CIEL:111103" sickleText="Stroke" />
-                                        <render diagId="CIEL:149871" sickleText="Acute chest syndrome" />
-                                    </repeat>
-                                </p>
+                        <tr>
+                            <th>Sickle-cell disease</th>
+                            <td>
+                                <label>
+                                    <uimessage code="Sickle cell diagnosis on discharge"/>
+                                </label>
+                                <repeat>
+                                    <template>
+                                        <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
+                                    </template>
+                                    <render diagId="CIEL:116128" sickleText="Malaria" />
+                                    <render diagId="CIEL:126721" sickleText="Sepsis" />
+                                    <render diagId="CIEL:121629" sickleText="Anemia" />
+                                    <render diagId="PIH:14957"   sickleText="Vaso-occlusive crisis" />
+                                    <render diagId="CIEL:147059" sickleText="Bone pain" />
+                                    <render diagId="CIEL:111103" sickleText="Stroke" />
+                                    <render diagId="CIEL:149871" sickleText="Acute chest syndrome" />
+                                </repeat>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
 
-                                <p>
-                                    <label>
-                                        <uimessage code="Main complications with sickle cell"/>
-                                    </label>
-                                    <repeat>
-                                        <template>
-                                            <obs conceptId="PIH:14839" style="checkbox" 
-                                                 answerConceptId="{diagId}" answerCode="{sickleComplic}"/>
-                                        </template>
-                                        <render diagId="CIEL:121629" sickleComplic="Anemia" />
-                                        <render diagId="CIEL:165590" sickleComplic="Pain crisis" />
-                                        <render diagId="CIEL:124842" sickleComplic="Thoracic outlet syndrome" />
-                                        <render diagId="CIEL:121262" sickleComplic="Bacterial infection" />
-                                        <render diagId="CIEL:116128" sickleComplic="Malaria" />
-                                        <render diagId="CIEL:111103" sickleComplic="Stroke" />
-                                        <render diagId="CIEL:1063"   sickleComplic="Blood transfusion" />
-                                    </repeat>
-                                </p>
-                            </div>
+                        <tr id="palliative-plus-t">
+                            <th>Palliative care</th>
+                            <td>
+                                <repeat>
+                                    <template>
+                                        <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
+                                    </template>
+                                    <render diagId="PIH:14959"   diagName="Uncontrolled pain secondary to tumor" />
+                                    <render diagId="CIEL:122983" diagName="Vomiting" />
+                                    <render diagId="CIEL:996"    diagName="Constipation" />
+                                    <render diagId="CIEL:131781" diagName="Narcotic intoxication" />
+                                </repeat>
+                            </td>
+                            <td>
+                                <repeat>
+                                    <template>
+                                        <obs conceptId="PIH:14774" answerConceptId="{treatId}" style="checkbox"/>
+                                    </template>
+                                    <render treatId="CIEL:80106" treatName="Morphine" />
+                                    <render treatId="CIEL:85276" treatName="Tramadol" />
+                                    <render treatId="CIEL:78632" treatName="Lactulose" />
+                                    <render treatId="CIEL:79757" treatName="Metoclopramide" />
+                                </repeat>
+                            </td>
+                        </tr>
 
-                            <div id="palliative-plus">
-                                <p>
-                                    <label>
-                                        <uimessage code="Palliative care diagnosis on discharge"/>
-                                    </label>
-                                    <repeat>
-                                        <template>
-                                            <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
-                                        </template>
-                                        <render diagId="PIH:14959"   diagName="Uncontrolled pain secondary to tumor" />
-                                        <render diagId="CIEL:122983" diagName="Vomiting" />
-                                        <render diagId="CIEL:996"    diagName="Constipation" />
-                                        <render diagId="CIEL:131781" diagName="Narcotic intoxication" />
-                                    </repeat>
-                                </p>
-                            </div>
-
-                            <p>
+                        <tr id="other-htn-t">
+                            <th>Other</th>
+                            <td>
                                 <label>
                                     <uimessage code="Other diagnoses at discharge"/>
                                 </label>
                                 <obs conceptId="PIH:14922" />
-                            </p>
-
-                        </includeIf>
-                    </div>
+                            </td>
+                            <td>
+                                <obs conceptId="PIH:14715" labelCode="Other treatment at discharge" />
+                            </td>
+                        </tr>
+                    </table>
                 </div>
+
             </obsgroup>
 
         </div>
