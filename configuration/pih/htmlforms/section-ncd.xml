@@ -634,7 +634,7 @@
 
                     <table>
                         <tr>
-                            <th></th>
+                            <th width="25%"></th>
                             <th>Diagnosis at discharge</th>
                             <th>Treatment at discharge</th>
                         </tr>
@@ -642,9 +642,10 @@
                         <tr id="dm-plus-t">
                             <th>Diabetes</th>
                             <td>
+                                <!--
                                 <label>
                                     <uimessage code="DM diagnosis on discharge"/>
-                                </label>
+                                </label> -->
                                 <repeat>
                                     <template>
                                         <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
@@ -652,22 +653,33 @@
                                     <render diagId="PIH:14953"   diagName="Hyperosmolar hyperglycemic syndrome (HHS)" />
                                     <render diagId="CIEL:142454" diagName="DKA with coma" />
                                     <render diagId="CIEL:122714" diagName="DKA without coma" />
-                                    <render diagId="PIH:14832"   diagName="Non complicated hyperglycemia" />
+                                    <render diagId="CIEL:138291" diagName="Hyperglycemia" />
                                     <render diagId="PIH:14954"   diagName="Complicated diabetic foot" />
                                     <render diagId="PIH:14955"   diagName="Amputation for diabetic foot" />
                                 </repeat>
                             </td>
                             <td>
-
+                                <repeat>
+                                    <template>
+                                        <obs conceptId="PIH:6694" style="checkbox"
+                                             answerConceptId="{treatId}" answerCode="{treatName}"/>
+                                    </template>
+                                    <render treatId="CIEL:78064" treatName="Insulin glargine (Lantus)" />
+                                    <render treatId="CIEL:78065" treatName="Insulin glulisine (Apidra)" />
+                                    <render treatId="CIEL:78082" treatName="Human insulin (Actrapid)" />
+                                    <render treatId="CIEL:79652" treatName="Metformin hydrochloride" />
+                                    <render treatId="CIEL:77071" treatName="Glibenclamide (Daonil)" />
+                                </repeat>
                             </td>
                         </tr>
 
                         <tr id="htn-plus-t">
                             <th>Hypertension</th>
                             <td>
-                                <label>
+
+                                <!-- <label>
                                     <uimessage code="Hypertension diagnosis on discharge"/>
-                                </label>
+                                </label> -->
                                 <repeat>
                                     <template>
                                         <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
@@ -679,7 +691,21 @@
                                     <render diagId="CIEL:116116" diagName="Malignant hypertension" />
                                 </repeat>
                             </td>
-                            <td></td>
+                            <td>
+                                <repeat>
+                                    <template>
+                                        <obs conceptId="PIH:6770" style="checkbox"
+                                             answerConceptId="{treatId}" answerCode="{treatName}"/>
+                                    </template>
+                                    <render treatId="CIEL:71138" treatName="Amlodipine besylate" />
+                                    <render treatId="CIEL:77696" treatName="Hydrochlorothiazide (HCTZ)" />
+                                    <render treatId="CIEL:72248" treatName="Bisoprolol fumarate" />
+                                    <render treatId="CIEL:71652" treatName="Atenolol" />
+                                    <render treatId="CIEL:162298" treatName="ACE inhibitors" />
+                                    <render treatId="CIEL:76734" treatName="Furosemide" />
+                                    <render treatId="CIEL:71617" treatName="Aspirin" />
+                                </repeat>
+                            </td>
                         </tr>
 
                         <tr id="hf-plus-t">
@@ -690,13 +716,13 @@
                                 <p>
                                     <obs conceptId="CIEL:1651" style="checkbox"
                                          answerConceptId="CIEL:159567"
-                                         answerCode="Echocardiogram performed"/>
+                                         answerCode="Echo performed"/>
                                 </p>
                             </td>
                             <td>
-                                <label>
+                                <!-- <label>
                                     <uimessage code="Heart failure diagnosis on discharge"/>
-                                </label>
+                                </label> -->
                                 <repeat>
                                     <template>
                                         <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
@@ -705,7 +731,24 @@
                                 </repeat>
 
                             </td>
-                            <td></td>
+                            <td>
+                                <repeat>
+                                    <template>
+                                        <obs conceptId="PIH:3429" answerConceptId="{treatId}" style="checkbox"/>
+                                    </template>
+                                    <render treatId="CIEL:72248" treatName="Bisoprolol fumarate" />
+                                    <render treatId="CIEL:71652" treatName="Atenolol" />
+                                    <render treatId="CIEL:162298" treatName="ACE inhibitors" />
+                                    <render treatId="PIH:14965"   treatName="Spironolactone 25mg" />
+                                    <render treatId="PIH:14966"   treatName="Spironolactone 100mg" />
+                                    <render treatId="CIEL:76734"  treatName="Furosemide" />
+                                    <render treatId="CIEL:77696"  treatName="Hydrochlorothiazide (HCTZ)" />
+                                    <render treatId="CIEL:151331" treatName="Prophylactic antibiotics" />
+                                    <render treatId="CIEL:75687"  treatName="Enoxaparin" />
+                                    <render treatId="CIEL:86417"  treatName="Warfarin sodium" />
+                                </repeat>
+
+                            </td>
                         </tr>
 
                         <tr id="respire-plus-t">
@@ -725,10 +768,9 @@
                                 </p>
                             </td>
                             <td>
-                                <label>
+                                <!-- <label>
                                     <uimessage code="Chronic lung disease diagnosis on discharge"/>
-                                </label>
-
+                                </label> -->
 
                                 <repeat>
                                     <template>
@@ -739,19 +781,30 @@
                                     <render diagId="CIEL:113311" diagName="Respiratory insufficiency related to other condition" />
                                 </repeat>
                             </td>
-                            <td></td>
+                            <td>
+                                <repeat>
+                                    <template>
+                                        <obs conceptId="PIH:6745" answerConceptId="{treatId}" style="checkbox"/>
+                                    </template>
+                                    <render treatId="CIEL:78200" treatName="Ipratropium bromide" />
+                                    <render treatId="CIEL:798"   treatName="Salbutamol" />
+                                    <render treatId="CIEL:82446" treatName="Prednisolone" />
+                                    <render treatId="CIEL:1195"  treatName="Antibiotics" />
+                                </repeat>
+                            </td>
                         </tr>
 
                         <tr id="ckd-plus-t">
                             <th>Chronic kidney disease</th>
                             <td>
-                                <label>
+                                <!-- <label>
                                     <uimessage code="CKD diagnosis on discharge"/>
-                                </label>
+                                </label> -->
                                 <repeat>
                                     <template>
                                         <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
                                     </template>
+                                    <!-- <render diagId="CIEL:115303" diagName="Nephrotic syndrome" /> -->
                                     <render diagId="PIH:14958"   diagName="Nephrotic syndrome decompensation" />
                                     <render diagId="CIEL:121849" diagName="Acute renal failure" />
                                     <render diagId="CIEL:154967" diagName="Acute renal failure over chronic renal failure" />
@@ -760,6 +813,22 @@
                                 </repeat>
                             </td>
                             <td>
+                                <repeat>
+                                    <template>
+                                        <obs conceptId="PIH:14967" style="checkbox"
+                                             answerConceptId="{treatId}" answerCode="{treatName}"/>
+                                    </template>
+                                    <render treatId="CIEL:76342" treatName="Ferrous sulfate (Ferro)" />
+                                    <render treatId="CIEL:82446" treatName="Prednisolone" />
+                                    <render treatId="CIEL:72660" treatName="Calcium carbonate" />
+                                    <render treatId="CIEL:76734" treatName="Furosemide" />
+                                    <render treatId="CIEL:84239" treatName="Spironolactone" />
+                                    <render treatId="CIEL:71138" treatName="Amlodipine besylate" />
+                                    <render treatId="CIEL:77696" treatName="Hydrochlorothiazide (HCTZ)" />
+                                    <render treatId="CIEL:162298" treatName="ACE inhibitors" />
+                                </repeat>
+                                <br/>
+
                                 <p>
                                     <label>
                                         <uimessage code="Creatinine at discharge" />
@@ -770,11 +839,11 @@
                         </tr>
 
                         <tr id="liver-plus-t">
-                            <th>Chronic liver cirrhosis / Hepatitis</th>
+                            <th>Chronic liver cirrhosis /<br/> Hepatitis</th>
                             <td>
-                                <label>
+                                <!-- <label>
                                     <uimessage code="Liver diagnosis on discharge"/>
-                                </label>
+                                </label> -->
                                 <repeat>
                                     <template>
                                         <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
@@ -790,15 +859,27 @@
                                     <render diagId="CIEL:139582" diagName="Gastrointestinal bleeding" />
                                 </repeat>
                             </td>
-                            <td></td>
+                            <td>
+                                <repeat>
+                                    <template>
+                                        <obs conceptId="PIH:14963" style="checkbox"
+                                             answerConceptId="{treatId}" answerCode="{treatName}"/>
+                                    </template>
+                                    <render treatId="CIEL:84795" treatName="Tenofovir (TDF)" />
+                                    <render treatId="CIEL:76734" treatName="Furosemide" />
+                                    <render treatId="CIEL:84239" treatName="Spironolactone" />
+                                    <render treatId="CIEL:82734" treatName="Propranolol hydrochloride" />
+                                    <render treatId="CIEL:78632" treatName="Lactulose" />
+                                </repeat>
+                            </td>
                         </tr>
 
                         <tr>
                             <th>Sickle-cell disease</th>
                             <td>
-                                <label>
+                                <!-- <label>
                                     <uimessage code="Sickle cell diagnosis on discharge"/>
-                                </label>
+                                </label> -->
                                 <repeat>
                                     <template>
                                         <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
@@ -813,6 +894,19 @@
                                 </repeat>
                             </td>
                             <td>
+                                <repeat>
+                                    <template>
+                                        <obs conceptId="PIH:14963" answerConceptId="{treatId}" style="checkbox"/>
+                                    </template>
+                                    <render treatId="CIEL:77795" treatName="Hydroxyurea" />
+                                    <render treatId="CIEL:76613" treatName="Folic acid (Acfol)" />
+                                    <render treatId="CIEL:151331" treatName="Prophylactic antibiotics" />
+                                    <render treatId="CIEL:159610" treatName="Malaria prophylactic treatment" />
+                                    <render treatId="CIEL:70116" treatName="Paracetamol" />
+                                    <render treatId="CIEL:77897" treatName="Ibuprofen" />
+                                    <render treatId="CIEL:85276" treatName="Tramadol hydrochloride" />
+                                    <render treatId="CIEL:80106" treatName="Morphine" />
+                                </repeat>
                             </td>
                         </tr>
 
