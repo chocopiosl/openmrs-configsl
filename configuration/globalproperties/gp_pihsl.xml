@@ -40,12 +40,6 @@
         <value>449d5a8e-5da0-4e84-8eb7-819aaf67d824</value>
     </globalProperty>
 
-    <!-- Paper Record Global Properties -->
-    <globalProperty>
-        <property>emr.paperRecordIdentifierType</property>
-        <!-- Patient Identifier: KGH patientIdentifierType.kghEmrId.uuid -->
-        <value>c09a1d24-7162-11eb-8aa6-0242ac110002</value>
-    </globalProperty>
     <!-- Check In -->
     <globalProperty>
         <property>mirebalais.checkIn.paymentAmounts</property>
