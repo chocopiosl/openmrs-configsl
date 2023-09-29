@@ -1,0 +1,16 @@
+<config>
+    <globalProperties>
+        <globalProperty>
+            <property>queue.serviceConceptSetName</property>
+            <value>KGH Queue Services Set</value>
+        </globalProperty>
+        <globalProperty>
+            <property>queue.priorityConceptSetName</property>
+            <value>Queue Default Priority Set</value>
+        </globalProperty>
+        <globalProperty>
+            <property>queue.statusConceptSetName</property>
+            <value>Queue Default Status Set</value>
+        </globalProperty>
+    </globalProperties>
+</config>

@@ -1,0 +1,2 @@
+UUID,Entity name,Name,Description,Datatype classname,Datatype config,Min occurs,Max occurs,Preferred handler classname
+9ef6003f-5ef2-11ee-b459-0242ac120002,Visit,Queue Number,Queue number associated with the visit,org.openmrs.customdatatype.datatype.FreeTextDatatype,,0,1,
