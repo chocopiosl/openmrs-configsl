@@ -246,7 +246,7 @@
       "link": "${openmrsBase}/index.htm"
     }
   },
-  "@openmrs/esm-outpatient-app": {
+  "@openmrs/esm-service-queues-app": {
     "concepts": {
       "serviceConceptSetUuid": "3a160167-5ee4-11ee-b459-0242ac120002",
       "priorityConceptSetUuid": "fd51cbdc-5ee5-11ee-b459-0242ac120002",
@@ -254,10 +254,10 @@
       "emergencyPriorityConceptUuid": "762ecf40-3065-47aa-93c3-15372d98d393",
       "statusConceptSetUuid": "3afe2abe-5ee6-11ee-b459-0242ac120002",
       "defaultStatusConceptUuid": "3d8f2db3-5ee6-11ee-b459-0242ac120002",
-      "defaultTransitionStatus": "40d2a81a-5ee6-11ee-b459-0242ac120002",
-      "visitQueueNumberAttributeUuid": "9ef6003f-5ef2-11ee-b459-0242ac120002",
-      "defaultFacilityUrl": ""
-    }
+      "defaultTransitionStatus": "40d2a81a-5ee6-11ee-b459-0242ac120002"
+    },
+    "visitQueueNumberAttributeUuid": "9ef6003f-5ef2-11ee-b459-0242ac120002",
+    "defaultFacilityUrl": ""
   }
 }
 
