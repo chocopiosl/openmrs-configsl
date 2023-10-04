@@ -19,3 +19,5 @@ encounterType:
     uuid: "3790ecc6-bc63-48f8-9104-f81dc90ee21c"
   mentalHealthFollowup:
     uuid: "9d701a81-bb83-40ea-9efc-af50f05575f2"
+  PATIENT_REGISTRATION:
+    name: "Patient Registration"
