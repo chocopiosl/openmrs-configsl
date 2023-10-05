@@ -21,3 +21,9 @@ encounterType:
     uuid: "9d701a81-bb83-40ea-9efc-af50f05575f2"
   PATIENT_REGISTRATION:
     name: "Patient Registration"
+  CHECK_IN:
+    name: "Check-In"
+  MEDICATION_DISPENSED:
+    name: "Medication Dispensed"
+  VITALS:
+    name: "Vital Signs"
