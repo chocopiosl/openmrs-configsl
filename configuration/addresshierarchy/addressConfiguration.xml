@@ -45,6 +45,7 @@
         <string>address1</string>
         <string>stateProvince</string>
         <string>countyDistrict</string>
+        <string>country</string>
     </lineByLineFormat>
     <addressHierarchyFile>
         <filename>sierra_leone_address_hierarchy_entries.csv</filename>
