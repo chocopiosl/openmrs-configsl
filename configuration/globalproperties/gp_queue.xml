@@ -1,0 +1,16 @@
+<config>
+    <globalProperties>
+        <globalProperty>
+            <property>queue.serviceConceptSetName</property>
+            <value>KGH Clinical Services Set</value>
+        </globalProperty>
+        <globalProperty>
+            <property>queue.priorityConceptSetName</property>
+            <value>PIH Queue Priority Set</value>
+        </globalProperty>
+        <globalProperty>
+            <property>queue.statusConceptSetName</property>
+            <value>PIH Queue Status Set</value>
+        </globalProperty>
+    </globalProperties>
+</config>

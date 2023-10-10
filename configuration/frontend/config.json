@@ -245,6 +245,19 @@
       "name": "Partners In Health - Sierra Leone",
       "link": "${openmrsBase}/index.htm"
     }
+  },
+  "@openmrs/esm-service-queues-app": {
+    "concepts": {
+      "serviceConceptSetUuid": "239c7e26-139f-4833-80e8-f0de2f4c8104",
+      "priorityConceptSetUuid": "6a28c6ca-f52e-4a8e-8da7-ee7fe4953b3d",
+      "defaultPriorityConceptUuid": "161236AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "emergencyPriorityConceptUuid": "1882AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "statusConceptSetUuid": "98759313-3812-4c88-88c6-7686dc7c6443",
+      "defaultStatusConceptUuid": "167407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "defaultTransitionStatus": "167408AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "visitQueueNumberAttributeUuid": "",
+    "defaultFacilityUrl": ""
   }
 }
 
