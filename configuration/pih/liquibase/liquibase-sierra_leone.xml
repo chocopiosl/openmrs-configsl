@@ -31,5 +31,15 @@
          </comment>
          <sqlFile endDelimiter=";" path="sql/fix_encounters_without_visits.sql" relativeToChangelogFile="true" stripComments="true"/>
     </changeSet>
-
+    <changeSet id="20231006-fix-data-from-wrong-htmlform-tags" author="ddesimone">
+         <preConditions onFail="MARK_RAN">
+           <sqlCheck expectedResult="0">
+              select count(*) from obs where void_reason = 'SL-409 fix data from wrong htmlform tags';
+           </sqlCheck>
+        </preConditions>
+         <comment>
+            SL-409 Wrong htmlform tags (answers)
+         </comment>
+         <sqlFile endDelimiter=";" path="sql/fix_data_from_wrong_htmlform_tags.sql" relativeToChangelogFile="true" stripComments="true" />
+    </changeSet>
 </databaseChangeLog>
