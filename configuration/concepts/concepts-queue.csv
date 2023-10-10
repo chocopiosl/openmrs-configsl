@@ -1,9 +1,0 @@
-uuid,Fully specified name:en,Data class,Data type
-3a160167-5ee4-11ee-b459-0242ac120002,KGH Queue Services Set,ConvSet,N/A
-fd51cbdc-5ee5-11ee-b459-0242ac120002,Queue Default Priority Set,ConvSet,N/A
-3afe2abe-5ee6-11ee-b459-0242ac120002,Queue Default Status Set,ConvSet,N/A
-9c1961b8-5ee4-11ee-b459-0242ac120002,MCOE Check-In,Misc,N/A
-c366448e-5ee4-11ee-b459-0242ac120002,MCOE Triage,Misc,N/A
-3d8f2db3-5ee6-11ee-b459-0242ac120002,Waiting for Service,Misc,N/A
-40d2a81a-5ee6-11ee-b459-0242ac120002,In Service,Misc,N/A
-463574a6-5ee6-11ee-b459-0242ac120002,Waiting for Transfer Out,Misc,N/A
