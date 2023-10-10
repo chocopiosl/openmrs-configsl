@@ -256,7 +256,7 @@
       "defaultStatusConceptUuid": "167407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "defaultTransitionStatus": "167408AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
     },
-    "visitQueueNumberAttributeUuid": "9ef6003f-5ef2-11ee-b459-0242ac120002",
+    "visitQueueNumberAttributeUuid": "",
     "defaultFacilityUrl": ""
   }
 }
