@@ -44,7 +44,8 @@
       "mothersName": {
         "required": false
       }
-    }
+    },
+    "showCountryInAddressHierarchy" : true
   },
 
   "idCardLocale": "en"
