@@ -1,0 +1,7 @@
+UUID,Void/Retire,Name,Description,Parent,Tag|Archives Location,Tag|Check-In Location,Tag|Consult Note Location,Tag|Dispensing Location,Tag|ED Triage Location,Tag|Labs Component Location,Tag|Lab Results Location,Tag|Maternal and Child Location,Tag|Medical Record Location,Tag|Mental Health Location,Tag|NCD Consult Location,Tag|Registration Location,Tag|Visit Location,Tag|Vitals Location
+067c83ad-6850-11ee-ab8d-0242ac120002,,MCOE,Maternal Center of Excellence,KGH,,,,,,,,,,,,,,
+11377a5b-6850-11ee-ab8d-0242ac120002,,Labour and Delivery,Labour and Delivery,MCOE,,,,,,,,,,,,,,
+4d7e927d-6850-11ee-ab8d-0242ac120002,,MCCU,MCCU,MCOE,,,,,,,,,,,,,,
+0ce2f6fb-6850-11ee-ab8d-0242ac120002,,NICU,Newborn Intensive Care Unit,MCOE,,,,,,,,,,,,,,
+17596678-6850-11ee-ab8d-0242ac120002,,Obstetric Post-Op,Obstetric Post-Op,MCOE,,,,,,,,,,,,,,
+142de844-6850-11ee-ab8d-0242ac120002,,Obstetric Surgery,Obstetric Surgery,MCOE,,,,,,,,,,,,,,
