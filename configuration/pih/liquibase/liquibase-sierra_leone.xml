@@ -5,6 +5,67 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
+    <changeSet id="20231010-clean-address-hierarchy-city_village" author="cioan">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sqlCheck expectedResult="0">
+                    select count(*) from person_address where city_village = '-';
+                </sqlCheck>
+            </not>
+        </preConditions>
+        <comment>
+            HUM-7477, clean address hierarchy levels which were stored as hyphens
+        </comment>
+        <sql>
+            update person_address set city_village =null where city_village = '-';
+        </sql>
+    </changeSet>
+    <changeSet id="20231010-clean-address-hierarchy-address1" author="cioan">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sqlCheck expectedResult="0">
+                    select count(*) from person_address where address1 = '-';
+                </sqlCheck>
+            </not>
+        </preConditions>
+        <comment>
+            HUM-7477, clean address hierarchy levels which were stored as hyphens
+        </comment>
+        <sql>
+            update person_address set address1 =null where address1 = '-';
+        </sql>
+    </changeSet>
+    <changeSet id="20231010-clean-address-hierarchy-state_province" author="cioan">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sqlCheck expectedResult="0">
+                    select count(*) from person_address where state_province = '-';
+                </sqlCheck>
+            </not>
+        </preConditions>
+        <comment>
+            HUM-7477, clean address hierarchy levels which were stored as hyphens
+        </comment>
+        <sql>
+            update person_address set state_province =null where state_province = '-';
+        </sql>
+    </changeSet>
+    <changeSet id="20231010-clean-address-hierarchy-county_district" author="cioan">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sqlCheck expectedResult="0">
+                    select count(*) from person_address where county_district = '-';
+                </sqlCheck>
+            </not>
+        </preConditions>
+        <comment>
+            HUM-7477, clean address hierarchy levels which were stored as hyphens
+        </comment>
+        <sql>
+            update person_address set county_district =null where county_district = '-';
+        </sql>
+    </changeSet>
+
     <changeSet id="20230411-fix-encounters-not-slotted-in-visits" author="ddesimone">
          <preConditions onFail="MARK_RAN">
              <not>
