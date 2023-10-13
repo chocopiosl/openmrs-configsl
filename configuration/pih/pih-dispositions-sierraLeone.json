@@ -15,6 +15,12 @@
     "additionalObs": []
   },
   {
+    "uuid": "active",
+    "name": "pihcore.active",
+    "conceptCode": "CIEL:161636",
+    "additionalObs": []
+  },
+  {
     "uuid": "transferWithinHospital",
     "name": "disposition.emrapi.transferInHospital",
     "conceptCode": "PIH:Transfer within hospital",

@@ -23,6 +23,20 @@
     "additionalObs": []
   },
   {
+    "uuid": "transferWithinHospital",
+    "name": "disposition.emrapi.transferInHospital",
+    "conceptCode": "PIH:Transfer within hospital",
+    "additionalObs": [
+      {
+        "label": "pihcore.internalTransferLocation",
+        "conceptCode": "PIH: 14973",
+        "params": {
+          "id": "transferInternalLocation"
+        }
+      }
+    ]
+  },
+  {
     "uuid": "transferOutOfHospital",
     "name": "disposition.emrapi.transferOutOfHospital",
     "conceptCode": "PIH:Transfer out of hospital",
