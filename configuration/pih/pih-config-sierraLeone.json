@@ -45,6 +45,16 @@
         "required": false
       }
     },
+    "relationships" : [
+      {
+        "type": "mother",
+        "label": "registration.patient.mother.label",
+        "relationshipType": "8d91a210-c2cc-11de-8d13-0010c6dffd0f",
+        "gender": "F",
+        "multipleValues": false,
+        "required": false
+      }
+    ],
     "showCountryInAddressHierarchy" : true
   },
 
