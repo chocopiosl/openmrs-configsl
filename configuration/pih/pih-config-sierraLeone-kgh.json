@@ -23,6 +23,7 @@
     "labs",
     "managePrinters",
     "markPatientDead",
+    "medicationDispensing",
     "mchGAINMaternal",
     "mchGAINNewborn",
     "mentalHealth",
