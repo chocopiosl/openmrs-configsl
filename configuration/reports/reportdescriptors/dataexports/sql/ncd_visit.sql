@@ -454,4 +454,4 @@ disposition,
 transfer_site,
 index_asc,
 index_desc
-from temp_ncd order by date_created desc;
+from temp_ncd order by patient_id, encounter_datetime;
