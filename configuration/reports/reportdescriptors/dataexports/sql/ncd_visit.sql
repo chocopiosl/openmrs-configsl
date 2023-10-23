@@ -346,6 +346,60 @@ set transfer_site = obs_value_datetime_from_temp(encounter_id, 'PIH','14424');
 update temp_ncd t
 set transfer_site = obs_value_coded_list_from_temp(encounter_id, 'PIH','14424',@locale);
 
+
+
+-- The ascending/descending indexes are calculated ordering on the encounter date
+-- new temp tables are used to build them and then joined into the main temp table.
+### index ascending
+drop temporary table if exists temp_visit_index_asc;
+CREATE TEMPORARY TABLE temp_visit_index_asc
+(
+    SELECT
+            patient_id,
+            encounter_datetime,
+            encounter_id,
+            index_asc
+FROM (SELECT
+            @r:= IF(@u = patient_id, @r + 1,1) index_asc,
+            encounter_datetime,
+            encounter_id,
+            patient_id,
+            @u:= patient_id
+      FROM temp_ncd,
+                    (SELECT @r:= 1) AS r,
+                    (SELECT @u:= 0) AS u
+            ORDER BY patient_id, encounter_datetime ASC, encounter_id ASC
+        ) index_ascending );
+CREATE INDEX tvia_e ON temp_visit_index_asc(encounter_id);
+update temp_ncd t
+inner join temp_visit_index_asc tvia on tvia.encounter_id = t.encounter_id
+set t.index_asc = tvia.index_asc;
+
+drop temporary table if exists temp_visit_index_desc;
+CREATE TEMPORARY TABLE temp_visit_index_desc
+(
+    SELECT
+            patient_id,
+            encounter_datetime,
+            encounter_id,
+            index_desc
+FROM (SELECT
+            @r:= IF(@u = patient_id, @r + 1,1) index_desc,
+            encounter_datetime,
+            encounter_id,
+            patient_id,
+            @u:= patient_id
+      FROM temp_ncd,
+                    (SELECT @r:= 1) AS r,
+                    (SELECT @u:= 0) AS u
+            ORDER BY patient_id, encounter_datetime DESC, encounter_id DESC
+        ) index_descending );
+       
+ CREATE INDEX tvid_e ON temp_visit_index_desc(encounter_id);      
+update temp_ncd t
+inner join temp_visit_index_desc tvid on tvid.encounter_id = t.encounter_id
+set t.index_desc = tvid.index_desc;
+
 select
 if(@partition REGEXP '^[0-9]+$' = 1,concat(@partition,'-',patient_id),patient_id) "patient_id",
 emr_id,
@@ -400,4 +454,4 @@ disposition,
 transfer_site,
 index_asc,
 index_desc
-from temp_ncd order by date_created desc;
+from temp_ncd order by patient_id, encounter_datetime;
