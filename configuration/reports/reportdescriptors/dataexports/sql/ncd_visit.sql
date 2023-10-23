@@ -347,12 +347,12 @@ update temp_ncd t
 set transfer_site = obs_value_coded_list_from_temp(encounter_id, 'PIH','14424',@locale);
 
 select
-concat(@partition,"-",patient_id) patient_id,
+if(@partition REGEXP '^[0-9]+$' = 1,concat(@partition,'-',patient_id),patient_id) "patient_id",
 emr_id,
-concat(@partition,"-",encounter_id) encounter_id,
+if(@partition REGEXP '^[0-9]+$' = 1,concat(@partition,'-',encounter_id),encounter_id) "encounter_id",
 encounter_datetime,
 date_created,
-concat(@partition,"-",visit_id) visit_id,
+if(@partition REGEXP '^[0-9]+$' = 1,concat(@partition,'-',visit_id),visit_id) "visit_id",
 provider,
 creator,
 encounter_location,
