@@ -408,7 +408,7 @@ encounter_datetime,
 date_created,
 if(@partition REGEXP '^[0-9]+$' = 1,concat(@partition,'-',visit_id),visit_id) "visit_id",
 provider,
-creator,a
+creator,
 encounter_location,
 encounter_type,
 social_support,
