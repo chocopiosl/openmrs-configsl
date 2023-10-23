@@ -220,8 +220,17 @@
                         <orderProperty name="frequency" label=" "/>
                         <orderProperty name="route" value="CIEL:160240" label=" ">
                             <option value="CIEL:160240" /> <!-- Oral -->
+                            <option value="CIEL:160242" label="IV" /> <!-- IV  -->
+                            <option value="CIEL:160243" label="IM" /> <!-- IM -->
+                            <option value="CIEL:160245" /> <!-- Subcutaneous -->
                             <option value="CIEL:162797" /> <!-- Topical -->
-                            <option value="CIEL:162392" /> <!-- Vaginally -->
+                            <option value="CIEL:165519" /> <!-- Sublingual -->
+                            <option value="CIEL:162390" label="Optical" /> <!-- Optical -->
+                            <option value="CIEL:162387" label="Ear(s)" /> <!-- Ear(s)   -->
+                            <option value="CIEL:160241" /> <!-- Inhalation -->
+                            <option value="CIEL:165520" /> <!-- Intra-articular -->
+                            <option value="CIEL:162393" label="Intra-rectal" /> <!-- Rectal -->
+                            <option value="CIEL:162392" label="Intra-vaginal" /> <!-- Vaginal -->
                         </orderProperty>
                     </div>
                     <div style="padding:0px;">
