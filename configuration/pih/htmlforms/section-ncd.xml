@@ -3381,6 +3381,12 @@
                 </label>
                 <obs conceptId="PIH:7416"/>
             </p>
+
+            <p style="text-align:right;">
+                <a href="#ncd_info">
+                    <uimessage code="Return to NCD categories"/>&#8679;
+                </a>
+            </p>
         </div>
     </section>
 
