@@ -49,7 +49,7 @@
       {
         "id": "mother",
         "label": "registration.patient.mother.label",
-        "relationshipType": "c2cbcf50-fb86-497c-9b07-c905c467bf26",
+        "relationshipType": "9a4b3b84-8a9f-11e8-9a94-a6cf71072f73",
         "relationshipDirection": "A",
         "gender": "F",
         "multipleValues": false,
@@ -58,7 +58,7 @@
       {
         "id": "child",
         "label": "registration.patient.children.label",
-        "relationshipType": "c2cbcf50-fb86-497c-9b07-c905c467bf26",
+        "relationshipType": "9a4b3b84-8a9f-11e8-9a94-a6cf71072f73",
         "relationshipDirection": "B",
         "multipleValues": true,
         "required": false
