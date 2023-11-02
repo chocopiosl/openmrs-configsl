@@ -53,7 +53,8 @@ CREATE TEMPORARY TABLE temp_encounter
 SELECT patient_id,encounter_id, encounter_type ,encounter_datetime, date_created 
 FROM encounter e 
 WHERE e.encounter_type IN (@ncd_init)
--- AND e.patient_id=112048
+and (DATE(encounter_datetime) >=  date(@startDate) or @startDate is null)
+and (DATE(encounter_datetime) <=  date(@endDate) or @endDate is null)
 AND e.voided = 0;
 
 
