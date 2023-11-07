@@ -30,7 +30,6 @@ left outer join program p on pp.program_id =p.program_id
 left outer join users u on pp.creator =u.user_id
 left outer join concept_name cn on pp.outcome_concept_id = cn.concept_id and cn.voided=0 and cn.locale='en'
 where pp.voided=0 
-AND pp.patient_id = 112048
 AND pp.program_id = @ncd_program;
 
 UPDATE ncd_program tgt
