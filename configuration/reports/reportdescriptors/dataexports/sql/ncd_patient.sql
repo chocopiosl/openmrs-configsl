@@ -30,12 +30,8 @@ ckd_stage varchar(100),
 sickle_cell_type varchar(100),
 recent_program_id int,
 next_appointment_date date,
-enroll_location varchar(30),
-date_of_enrollment date,
-currently_enrolled boolean,
 dead boolean, 
 date_of_death date,
-unenrollment_date date,
 name varchar(50), 
 family_name varchar(50),
 dob date,
@@ -44,6 +40,7 @@ current_age int,
 gender varchar(10),
 other_ncd_type varchar(500),
 most_recent_visit_date date,
+first_ncd_visit_date date,
 disposition varchar(50)
 );
 
@@ -53,14 +50,18 @@ CREATE TEMPORARY TABLE temp_encounter
 SELECT patient_id,encounter_id, encounter_type ,encounter_datetime, date_created 
 FROM encounter e 
 WHERE e.encounter_type IN (@ncd_init)
-and (DATE(encounter_datetime) >=  date(@startDate) or @startDate is null)
-and (DATE(encounter_datetime) <=  date(@endDate) or @endDate is null)
 AND e.voided = 0;
 
 
 DROP TABLE IF EXISTS recent_encounter;
 CREATE TABLE recent_encounter
 SELECT max(encounter_datetime) encounter_datetime, patient_id
+FROM temp_encounter
+GROUP BY patient_id;
+
+DROP TABLE IF EXISTS first_encounter;
+CREATE TABLE first_encounter
+SELECT min(encounter_datetime) encounter_datetime, patient_id
 FROM temp_encounter
 GROUP BY patient_id;
 
@@ -77,7 +78,7 @@ current_age, gender, dead, date_of_death, dob)
 SELECT patient_id,
 patient_identifier(patient_id, metadata_uuid('org.openmrs.module.emrapi', 'emr.primaryIdentifierType')) AS emr_id,
 encounter_id,
-person_name(patient_id),
+person_given_name(patient_id),
 person_family_name(patient_id),
 current_age_in_years(patient_id),
 gender(patient_id), 
@@ -154,21 +155,10 @@ CASE WHEN answerEverExists_from_temp(patient_id,'PIH','3064', 'PIH', '7908', nul
      END;
 
 UPDATE ncd_patient
-SET next_appointment_date = obs_value_datetime_from_temp(encounter_id, 'PIH','5096'); 
-
-UPDATE ncd_patient
-SET enroll_location = currentProgramLocation(patient_id,@ncd_program);
+SET next_appointment_date = CAST(obs_value_datetime_from_temp(encounter_id, 'PIH','5096') AS date); 
 
 UPDATE ncd_patient
 SET recent_program_id = mostRecentPatientProgramId(patient_id, @ncd_program);
-
-UPDATE ncd_patient tgt
-INNER JOIN patient_program pp ON tgt.recent_program_id=pp.patient_program_id
-SET date_of_enrollment=pp.date_enrolled;
-
-UPDATE ncd_patient tgt
-SET currently_enrolled=CASE WHEN tgt.date_of_enrollment IS NOT NULL AND tgt.dead IS NOT NULL THEN TRUE ELSE FALSE END ;
-
 
 set @disp = concept_from_mapping('PIH','8620');
 UPDATE ncd_patient tgt 
@@ -188,6 +178,10 @@ SET other_ncd_type = obs_value_text_from_temp(encounter_id, 'PIH', '7416');
 UPDATE ncd_patient tgt 
 INNER JOIN recent_encounter re ON tgt.patient_id = re.patient_id 
 SET most_recent_visit_date = re.encounter_datetime ;
+
+UPDATE ncd_patient tgt 
+INNER JOIN first_encounter re ON tgt.patient_id = re.patient_id 
+SET first_ncd_visit_date = re.encounter_datetime ;
 
 SELECT 
 emr_id,
@@ -211,12 +205,8 @@ lung_disease_type,
 ckd_stage,
 sickle_cell_type,
 next_appointment_date,
-enroll_location,
-date_of_enrollment,
-currently_enrolled,
 dead,
 date_of_death,
-unenrollment_date,
 name,
 family_name,
 dob,
@@ -225,5 +215,6 @@ current_age,
 gender,
 other_ncd_type,
 most_recent_visit_date,
+first_ncd_visit_date,
 disposition
 FROM ncd_patient;
