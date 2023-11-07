@@ -1,7 +1,7 @@
 key: NCDProgramData
 uuid: 1977e89f-2ae1-4d32-b4dc-b0a517a0b30a
-name: NCD Program Data
-description: NCD Program Data
+name: NCD Program Data (SL)
+description: NCD Program Data (SL)
 parameters:
   - key: startDate
     type: java.util.Date
