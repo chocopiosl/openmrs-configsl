@@ -125,6 +125,7 @@ SET hypertension_type = obs_value_coded_list_from_temp(encounter_id, 'PIH', '119
 UPDATE ncd_patient
 SET diabetes_type = CASE WHEN answerEverExists_from_temp(patient_id,'PIH','3064', 'PIH', '6692', null) THEN 'Type 2 DM'
 WHEN answerEverExists_from_temp(patient_id,'PIH','3064', 'PIH', '6691', null) THEN 'Type 1 DM'
+WHEN answerEverExists_from_temp(patient_id,'PIH','3064', 'PIH', '6693', null) THEN 'Gestational DM'
 WHEN answerEverExists_from_temp(patient_id,'PIH','3064', 'PIH', '3720', null) THEN 'DM not yet specified' 
 ELSE NULL
 END;
