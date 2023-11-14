@@ -29,6 +29,24 @@
         </script>
     </ifMode>
 
+    <ifMode mode="VIEW" >
+        <script type="text/javascript">
+            jq(function () {
+                // looking for empty local address obs
+                jq('htmlform').each(function (index, form) {
+                    let emptyObs = jq(form).find('section#localContactInfo .emptyValue');
+                    if (emptyObs != null &amp;&amp; emptyObs.length > 0) {
+                        for (let z = 0; z &lt; emptyObs.length; z++) {
+                            // hide local address fields whose value is empty
+                            jq(emptyObs[z]).parent().next('br').remove();
+                            jq(emptyObs[z]).parent('span').remove();
+                        }
+                    }
+                });
+            });
+        </script>
+    </ifMode>
+
 
     <ifMode mode="VIEW" include="false">
         <h2><uimessage code="registration.patient.localContact.label"/></h2>
