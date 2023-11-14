@@ -29,6 +29,24 @@
         </script>
     </ifMode>
 
+    <ifMode mode="VIEW" >
+        <script type="text/javascript">
+            jq(function () {
+                // looking for empty local address obs
+                jq('htmlform').each(function (index, form) {
+                    let emptyObs = jq(form).find('section#localContactInfo .emptyValue');
+                    if (emptyObs != null &amp;&amp; emptyObs.length > 0) {
+                        for (let z = 0; z &lt; emptyObs.length; z++) {
+                            // hide local address fields whose value is empty
+                            jq(emptyObs[z]).parent().next('br').remove();
+                            jq(emptyObs[z]).parent('span').remove();
+                        }
+                    }
+                });
+            });
+        </script>
+    </ifMode>
+
 
     <ifMode mode="VIEW" include="false">
         <h2><uimessage code="registration.patient.localContact.label"/></h2>
@@ -42,33 +60,20 @@
 
             <obsgroup groupingConceptId="PIH:14704">
                 <div>
-                    <!-- edit mode of name/phone -->
-                    <ifMode mode="VIEW" include="false">
-                        <div class="left">
-                            <h3><uimessage code="sl.registration.patient.localContactPerson.contactName.question"/></h3>
-                            <p class="left">
-                                <obs conceptId="PIH:NAMES AND FIRSTNAMES OF CONTACT" id="contactName" showUnits="false" unitsCssClass="append-to-value" size="20" required="true"/>
-                            </p>
-                        </div>
 
-                    </ifMode>
-
-                    <!-- view mode of name/relationship -->
-                    <ifMode mode="VIEW" include="true">
-                        <div>
-                            <h3><uimessage code="sl.registration.patient.localContactPerson.contactName.question"/></h3>
-                            <p class="left">
-                                <obs conceptId="PIH:NAMES AND FIRSTNAMES OF CONTACT" id="contactFirstName" showUnits="false" unitsCssClass="append-to-value" size="20" required="true"/>
-                            </p>
-                        </div>
-                        <div>
-                            <h3><uimessage code="registrationapp.patient.phone.label"/></h3>
-                            <p class="left">
-                                <obs conceptId="PIH:TELEPHONE NUMBER OF CONTACT" id="contactPhoneNumber" showUnits="false" unitsCssClass="append-to-value" size="20" required="false" class="phoneRegex"/>
-                            </p>
-                        </div>
-                    </ifMode>
-
+                    <div>
+                        <h3><uimessage code="sl.registration.patient.localContactPerson.name.label"/></h3>
+                        <p class="left">
+                            <obs conceptId="PIH:NAMES AND FIRSTNAMES OF CONTACT" id="contactFirstName" showUnits="false" unitsCssClass="append-to-value" size="20" required="true"/>
+                        </p>
+                    </div>
+                    <div>
+                        <h3><uimessage code="registrationapp.patient.phone.label"/></h3>
+                        <p class="left">
+                            <obs conceptId="PIH:TELEPHONE NUMBER OF CONTACT" id="contactPhoneNumber" showUnits="false" unitsCssClass="append-to-value" size="20" required="false" class="phoneRegex"/>
+                        </p>
+                    </div>
+                    
                     <!-- edit mode of address -->
                     <ifMode mode="VIEW" include="false">
                         <div id="contactAddress-container">
@@ -83,7 +88,7 @@
                             </div>
                             <div>
                                 <h3><uimessage code="sl.registration.patient.localAddress.district"/></h3>
-                                <obs class="level" conceptId="PIH:14784" id="contactAddress-district" showUnits="false" unitsCssClass="append-to-value" size="20" required="true"/>
+                                <obs class="level" conceptId="PIH:14784" id="contactAddress-countyDistrict" showUnits="false" unitsCssClass="append-to-value" size="20" required="true"/>
                             </div>
                             <div>
                                 <h3><uimessage code="sl.registration.patient.localAddress.stateProvince"/></h3>
@@ -113,7 +118,7 @@
                                 <obs class="level" conceptId="PIH:City Village" id="contactAddress-cityVillage" showUnits="false" unitsCssClass="append-to-value" size="20"/><br/>
                                 <obs class="level" conceptId="PIH:Address1" id="contactAddress-address1" showUnits="false" unitsCssClass="append-to-value" size="20"/><br/>
                                 <obs class="level" conceptId="PIH:State Province" id="contactAddress-stateProvince" showUnits="false" unitsCssClass="append-to-value" size="20"/>
-                                <obs class="level" conceptId="PIH:14784" id="contactAddress-district" showUnits="false" unitsCssClass="append-to-value" size="20"/>
+                                <obs class="level" conceptId="PIH:14784" id="contactAddress-countyDistrict" showUnits="false" unitsCssClass="append-to-value" size="20"/>
                                 <obs class="level" conceptId="PIH:Country" id="contactAddress-country" showUnits="false" unitsCssClass="append-to-value" size="20"/>
                             </p>
                         </div>
