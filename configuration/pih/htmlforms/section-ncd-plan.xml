@@ -175,45 +175,51 @@
                     <strong>Chest X-ray</strong>
                     <br/>
 
-                    <repeat with="['CIEL:1118',  'Not done'],
-                                  ['CIEL:1115',  'Normal'],
-                                  ['CIEL:5158',  'Cardiomegaly'],
-                                  ['CIEL:139069','Heart failure'],
-                                  ['CIEL:141342','Emphysema'],
-                                  ['PIH:14586',  'Interstitial lung patterns'],
-                                  ['PIH:14582',  'Post TB changes'],
-                                  ['CIEL:138099','Volume overload'],
-                                  ['CIEL:5622',  'Other']">
+                    <obsgroup groupingConceptId="PIH:Radiology report construct">
+                        <obs conceptId="PIH:12847" labelCode="Date"/>
+                        <repeat with="['CIEL:1118',  'Not done'],
+                                      ['CIEL:1115',  'Normal'],
+                                      ['CIEL:5158',  'Cardiomegaly'],
+                                      ['CIEL:139069','Heart failure'],
+                                      ['CIEL:141342','Emphysema'],
+                                      ['PIH:14586',  'Interstitial lung patterns'],
+                                      ['PIH:14582',  'Post TB changes'],
+                                      ['CIEL:138099','Volume overload'],
+                                      ['CIEL:5622',  'Other']">
 
-                        <obs conceptId="CIEL:12"
-                             answerConceptId="{0}"
-                             answerLabel="{1}"
-                             style="checkbox"/>
-                    </repeat>
+                                <obs conceptId="CIEL:12"
+                                     answerConceptId="{0}"
+                                     answerLabel="{1}"
+                                     style="checkbox"/>
+                        </repeat>
+                    </obsgroup>
 
                     <label>if other, specify:</label>
                     <obs conceptId="CIEL:1392" style="text"/>
 
                     <br/>
                     <strong>
-                        <uimessage code="Liver ultrasound findings"/>
+                        <uimessage code="Abdominal ultrasound findings"/>
                     </strong>
                     <br/>
 
-                    <repeat with="['CIEL:1118',  'Not done'],
-                                ['CIEL:1115',  'Normal'],
-                                ['PIH:14915','Heterogeneous without signs of cirrhosis'],
-                                ['CIEL:135721','Hepatocarcinoma (HCC)'],
-                                ['PIH:14916','Cirrhosis with portal hypertension'],
-                                ['PIH:14917','Cirrhosis without portal hypertension'],
-                                ['PIH:14918','Periportal fibrosis'],
-                                ['CIEL:5622',  'Other']">
+                    <obsgroup groupingConceptId="PIH:Radiology report construct">
+                        <obs conceptId="PIH:12847" labelCode="Date"/>
+                            <repeat with="['CIEL:1118','Not done'],
+                                        ['CIEL:1115',  'Normal'],
+                                        ['PIH:14915',  'Heterogeneous without signs of cirrhosis'],
+                                        ['CIEL:135721','Hepatocarcinoma (HCC)'],
+                                        ['PIH:14916','Cirrhosis with portal hypertension'],
+                                        ['PIH:14917','Cirrhosis without portal hypertension'],
+                                        ['PIH:14918','Periportal fibrosis'],
+                                        ['CIEL:5622','Other']">
 
-                        <obs conceptId="CIEL:852"
-                             answerConceptId="{0}"
-                             answerLabel="{1}"
-                             style="checkbox"/>
-                    </repeat>
+                                <obs conceptId="CIEL:845"
+                                     answerConceptId="{0}"
+                                     answerLabel="{1}"
+                                     style="checkbox"/>
+                            </repeat>
+                    </obsgroup>
                 </div>
 
                 <div>
@@ -222,24 +228,25 @@
                     </strong>
                     <br/>
 
-                    <repeat with="['CIEL:1118','Not done'],
-                                  ['CIEL:1115','Normal'],
-                                  ['CIEL:135971','Left ventricular hypertrophy'],
-                                  ['CIEL:148203','Atrial Fibrillation'],
-                                  ['CIEL:135972','Dilated left ventricle'],
-                                  ['CIEL:168041','Depressed left ventricle'],
-                                  ['CIEL:5622','Other']">
+                    <obsgroup groupingConceptId="PIH:3403">
+                        <obs conceptId="PIH:12847" labelCode="Date"/>
+                        <repeat with="['CIEL:1118','Not done'],
+                                      ['CIEL:1115','Normal'],
+                                      ['CIEL:135971','Left ventricular hypertrophy'],
+                                      ['CIEL:148203','Atrial Fibrillation'],
+                                      ['CIEL:135972','Dilated left ventricle'],
+                                      ['CIEL:168041','Depressed left ventricle'],
+                                      ['CIEL:5622','Other']">
 
-                        <obsgroup groupingConceptId="PIH:3403">
-                            <obs conceptId="CIEL:159565"
-                                 answerConceptId="{0}"
-                                 answerLabel="{1}"
-                                 style="checkbox"/>
-                        </obsgroup>
-                    </repeat>
+                                <obs conceptId="CIEL:159565"
+                                     answerConceptId="{0}"
+                                     answerLabel="{1}"
+                                     style="checkbox"/>
+                        </repeat>
 
-                    <label>if other, specify:</label>
-                    <obs conceptId="CIEL:160845" style="text"/>
+                        <label>if other, specify:</label>
+                        <obs conceptId="CIEL:160845" style="text"/>
+                    </obsgroup>
 
                     <!-- Echocardiogram -->
                     <br/>
@@ -248,23 +255,25 @@
                     </strong>
                     <br/>
 
-                    <repeat with="['CIEL:1118','Not done'],
-                              ['CIEL:1115','Normal'],
-                              ['PIH:COR PULMONALE','Cor pulmonale'],
-                              ['CIEL:135971','Left ventricular hypertrophy'],
-                              ['CIEL:135972','Dilated left ventricle'],
-                              ['CIEL:168041','Depressed left ventricle'],
-                              ['CIEL:5622','Other']">
+                    <obsgroup groupingConceptId="PIH:Radiology report construct">
+                        <obs conceptId="PIH:12847" labelCode="Date"/>
+                        <repeat with="['CIEL:1118','Not done'],
+                                  ['CIEL:1115','Normal'],
+                                  ['PIH:COR PULMONALE','Cor pulmonale'],
+                                  ['CIEL:135971','Left ventricular hypertrophy'],
+                                  ['CIEL:135972','Dilated left ventricle'],
+                                  ['CIEL:168041','Depressed left ventricle'],
+                                  ['CIEL:5622','Other']">
 
-                        <obs conceptId="CIEL:159567"
-                             answerConceptId="{0}"
-                             answerLabel="{1}"
-                             style="checkbox"/>
-                    </repeat>
+                            <obs conceptId="CIEL:159567"
+                                 answerConceptId="{0}"
+                                 answerLabel="{1}"
+                                 style="checkbox"/>
+                        </repeat>
 
-                    <label>if other, specify:</label>
-                    <obs conceptId="CIEL:159573" style="text"/>
-
+                        <label>if other, specify:</label>
+                        <obs conceptId="CIEL:159573" style="text"/>
+                    </obsgroup>
                 </div>
             </div>
         </div>
