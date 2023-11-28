@@ -42,7 +42,16 @@ create temporary table temp_ncd
  liver_cirrhosis_hepb              bit,          
  palliative_care                   bit,          
  sickle_cell                       bit,          
- other_ncd                         bit,          
+ other_ncd                         bit,     
+ diabetes_onset_date			        date,
+ hypertension_onset_date		     date,
+ heart_failure_onset_date          date,
+ chronic_lung_disease_onset_date   date,
+ chronic_kidney_disease_onset_date date,
+ liver_cirrhosis_hepb_onset_date  date,
+ palliative_care_onset_date       date,
+ sickle_cell_onset_date           date,
+ other_ncd_onset_date             date,
  diabetes_type                     varchar(255), 
  diabetes_indicators_obs_group     int(11),      
  diabetes_control                  varchar(255), 
@@ -203,40 +212,69 @@ set diabetes =
 	if(obs_single_value_coded_from_temp(encounter_id, 'PIH','10529','PIH','3720')=@yes, 1,null);
 
 update temp_ncd t
+set diabetes_onset_date =  obs_from_group_id_value_datetime(obs_group_id_of_value_coded(encounter_id, 'PIH','10529','PIH','3720'), 'PIH','7538');
+ 
+
+update temp_ncd t
 set hypertension = 
 	if(obs_single_value_coded_from_temp(encounter_id, 'PIH','10529','PIH','903')=@yes, 1,null);
+
+update temp_ncd t
+set hypertension_onset_date =  obs_from_group_id_value_datetime(obs_group_id_of_value_coded(encounter_id, 'PIH','10529','PIH','903'), 'PIH','7538');
+ 
 
 update temp_ncd t
 set heart_failure = 
 	if(obs_single_value_coded_from_temp(encounter_id, 'PIH','10529','PIH','3468')=@yes, 1,null);
 
 update temp_ncd t
+set heart_failure_onset_date =  obs_from_group_id_value_datetime(obs_group_id_of_value_coded(encounter_id, 'PIH','10529','PIH','3468'), 'PIH','7538');
+ 
+
+update temp_ncd t
 set chronic_lung_disease = 
 	if(obs_single_value_coded_from_temp(encounter_id, 'PIH','10529','PIH','6768')=@yes, 1,null);
+
+update temp_ncd t
+set chronic_lung_disease_onset_date =  obs_from_group_id_value_datetime(obs_group_id_of_value_coded(encounter_id, 'PIH','10529','PIH','6768'), 'PIH','7538');
 
 update temp_ncd t
 set chronic_kidney_disease = 
 	if(obs_single_value_coded_from_temp(encounter_id, 'PIH','10529','PIH','3699')=@yes, 1,null);
 
 update temp_ncd t
+set chronic_kidney_disease_onset_date =  obs_from_group_id_value_datetime(obs_group_id_of_value_coded(encounter_id, 'PIH','10529','PIH','3699'), 'PIH','7538');
+
+
+update temp_ncd t
 set liver_cirrhosis_hepb = 
 	if(obs_single_value_coded_from_temp(encounter_id, 'PIH','10529','PIH','3714')=@yes, 1,null);
+
+update temp_ncd t
+set liver_cirrhosis_hepb_onset_date =  obs_from_group_id_value_datetime(obs_group_id_of_value_coded(encounter_id, 'PIH','10529','PIH','3714'), 'PIH','7538');
+
 
 update temp_ncd t
 set palliative_care = 
 	if(obs_single_value_coded_from_temp(encounter_id, 'PIH','10529','PIH','10359')=@yes, 1,null);
 
 update temp_ncd t
-set sickle_cell = 
-	if(obs_single_value_coded_from_temp(encounter_id, 'PIH','10529','PIH','7908')=@yes, 1,null);
+set palliative_care_onset_date =  obs_from_group_id_value_datetime(obs_group_id_of_value_coded(encounter_id, 'PIH','10529','PIH','10359'), 'PIH','7538');
+
 
 update temp_ncd t
 set sickle_cell = 
 	if(obs_single_value_coded_from_temp(encounter_id, 'PIH','10529','PIH','7908')=@yes, 1,null);
+
+update temp_ncd t
+set sickle_cell_onset_date =  obs_from_group_id_value_datetime(obs_group_id_of_value_coded(encounter_id, 'PIH','10529','PIH','7908'), 'PIH','7538');
 
 update temp_ncd t
 set other_ncd = 
 	if(obs_single_value_coded_from_temp(encounter_id, 'PIH','10529','PIH','5622')=@yes, 1,null);
+
+update temp_ncd t
+set other_ncd_onset_date =  obs_from_group_id_value_datetime(obs_group_id_of_value_coded(encounter_id, 'PIH','10529','PIH','5622'), 'PIH','7538');
 
 update temp_ncd t
 set diabetes_type = obs_value_coded_list_from_temp(encounter_id, 'PIH','1715',@locale);
@@ -435,6 +473,15 @@ liver_cirrhosis_hepb,
 palliative_care,
 sickle_cell,
 other_ncd,
+diabetes_onset_date,
+hypertension_onset_date,
+heart_failure_onset_date,
+chronic_lung_disease_onset_date,
+chronic_kidney_disease_onset_date,
+liver_cirrhosis_hepb_onset_date,
+palliative_care_onset_date,
+sickle_cell_onset_date,
+other_ncd_onset_date,
 diabetes_type,
 diabetes_control,
 diabetes_on_insulin,
