@@ -24,6 +24,7 @@
     "managePrinters",
     "markPatientDead",
     "medicationDispensing",
+    "mchForms",
     "mchGAINMaternal",
     "mchGAINNewborn",
     "mentalHealth",
