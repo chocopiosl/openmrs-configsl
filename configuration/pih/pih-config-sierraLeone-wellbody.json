@@ -42,6 +42,7 @@
   "idCardLabel": "Wellbody Clinic Dorma",
 
   "extraIdentifierTypes": [
+    "${patientIdentifierType.nationalId.uuid}",
     "${patientIdentifierType.kghEmrId.uuid}",
     "${patientIdentifierType.ncdId.uuid}"
   ],

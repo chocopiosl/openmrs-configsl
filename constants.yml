@@ -6,7 +6,8 @@ patientIdentifierType:
     uuid: "c09a1d24-7162-11eb-8aa6-0242ac110002"
   ncdId:
     uuid: "badec513-cfbb-11ed-8b1c-0242ac120002"
-
+  nationalId:
+    uuid: "eb201574-8abe-4393-9a8a-8d30a48a08ad"
 # Encounter Types
 encounterType:
   sierraLeoneOutpatientInitial:
