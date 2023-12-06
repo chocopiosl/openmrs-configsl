@@ -48,6 +48,7 @@
   },
 
   "extraIdentifierTypes": [
+    "${patientIdentifierType.nationalId.uuid}",
     "${patientIdentifierType.wellbodyEmrId.uuid}",
     "${patientIdentifierType.ncdId.uuid}"
   ],
