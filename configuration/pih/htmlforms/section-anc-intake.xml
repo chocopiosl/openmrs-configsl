@@ -164,7 +164,13 @@
                          answerCodes="pihcore.mch.firstTri,pihcore.mch.secondTri,pihcore.mch.thirdTri"
                     -->
                 </p>
-
+                <!-- Number of ANC visits -->
+                <p>
+                    <label>
+                        <uimessage code="sl.anc.number.of.visits"/>
+                    </label>
+                    <obs conceptId="CIEL:1590" />
+                </p>
                 <!-- HIV test -->
                 <p>
                     <label>
