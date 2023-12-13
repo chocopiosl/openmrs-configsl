@@ -55,7 +55,8 @@
     "visitNote",
     "vitals",
     "checkInHomepageApp",
-    "vitalsHomepageApp"
+    "vitalsHomepageApp",
+    "wristbands"
   ],
 
   "dispositionConfig": "file:configuration/pih/pih-dispositions-sierraLeone-mcoe.json"
