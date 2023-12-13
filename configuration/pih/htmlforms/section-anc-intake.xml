@@ -65,6 +65,22 @@
     -webkit-column-count: 4;
     -moz-column-count: 4;
     }
+
+    .gestationalAge {
+        white-space: nowrap;
+        display:    inline-flex;
+     }
+
+    .gestationalAge span{
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+    .gestationalAge input[type="text"]{
+        min-width: 2%;
+        width: 80px;
+        white-space: nowrap;
+    }
 </style>
 
     <style type="text/css">
@@ -348,7 +364,19 @@
                 </p>
 
             </div>
-
+            <div>
+                <p>
+                    <span id="gestational-age-wrapper">
+                        <label>
+                            <uimessage code="pihcore.gestational.age" />
+                        </label>
+                        <span>
+                            <obs conceptId="CIEL:1438" class="value gestationalAge" showUnits="true" unitsCssClass="append-to-value" size="80"/>
+                            <label>(<uimessage code="pihcore.gestational.age.instructions" />)</label>
+                        </span>
+                    </span>
+                </p>
+            </div>
             <p>
                 <label>
                     <uimessage code="pihcore.consult.returnVisitDate" />
