@@ -1,7 +1,7 @@
 <htmlform id="section-delivery"
-          formUuid="14ebad5e-d7dc-11e8-9f8b-f2801f1b9fd1"
+          formUuid="e1d2303e-7a49-43c7-8fd5-ca062fef6616"
           formName="MCH Delivery section"
-          formVersion="1.0">
+          formVersion="3.0">
 
     <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.CleanDiagnosisConstructAction"/>
 
@@ -47,10 +47,13 @@
         width: 100%;
         }
 
-        .two-columns {
-            column-count: 2;
-            -webkit-column-count: 2;
-            -moz-column-count: 2;
+        .side-by-side label {
+            display: inline-block;
+        }
+
+        form input[type="radio"], .form input[type="radio"] {
+            float: none;
+            display: inline-block;
         }
 
     </style>
@@ -59,39 +62,39 @@
         <ifMode mode="VIEW" include="true">
 
             #section-delivery legend {
-            display: none;
+                display: none;
             }
 
             #section-delivery fieldset {
-            margin: 0px;
-            border: 0px;
-            padding: 0px;
+                margin: 0px;
+                border: 0px;
+                padding: 0px;
             }
 
             #section-delivery fieldset h3 {
-            font-size: 1em;
-            width: 200px;
-            display: inline-block;
-            margin: 0px;
-            margin-right: 10px;
-            color: #3E3E3E;
-            vertical-align: top;
+                font-size: 1em;
+                width: 200px;
+                display: inline-block;
+                margin: 0px;
+                margin-right: 10px;
+                color: #3E3E3E;
+                vertical-align: top;
             }
 
             #section-delivery fieldset p {
-            vertical-align: top;
-            display: inline-block;
-            float: none;
+                vertical-align: top;
+                display: inline-block;
+                float: none;
             }
 
             #section-delivery fieldset .left {
-            vertical-align: top;
-            display: inline-block;
-            float: none;
+                vertical-align: top;
+                display: inline-block;
+                float: none;
             }
 
             #section-delivery .title {
-            display: none;
+                display: none;
             }
 
             form input[type="radio"], .form input[type="radio"] {
@@ -104,28 +107,75 @@
             }
 
             #section-delivery .encounter-date {
-            display: none;
+                display: none;
             }
 
             #section-delivery .encounter-provider {
-            display: none;
+                display: none;
             }
 
             #section-delivery .encounter-location {
-            display: none;
+                display: none;
             }
 
             #section-delivery .comment-label {
-            display: none;
+                display: none;
             }
 
             #section-delivery .comment-field {
-            display: block;
-            margin-left: 215px;
+                display: block;
+                margin-left: 215px;
             }
 
             #section-delivery br {
-            display: none;
+                display: none;
+            }
+        </ifMode>
+
+        <ifMode mode="VIEW" include="false">
+            .date-one-line {
+                display: flex;
+            }
+
+            .date-one-line label {
+                align-self: center;
+                margin-right: 1em;
+            }
+
+            .date-one-line span {
+                display: flex;
+            }
+
+            .hasDatepicker {
+                min-width: 120px;
+                margin-top: 0px;
+            }
+
+            .hfe-hours, .hfe-minutes, .hfe-seconds {
+                width: 70px;
+                min-width: 70px;
+                margin: 0px 10px 0px 10px;
+            }
+
+            .four-columns, .three-columns, .two-columns {
+                display: table;
+                height: 100%;
+                width: 100%;
+            }
+
+            .two-columns > div {
+                display: table-cell;
+                width: 50%;
+            }
+
+            .three-columns > div {
+                display: table-cell;
+                width: 33%;
+            }
+
+            .four-columns > div {
+                display: table-cell;
+                width: 25%;
             }
         </ifMode>
     </style>
@@ -154,223 +204,395 @@
         </script>
     </ifMode>
 
-    <section id="labor-delivery" sectionTag="fieldset" headerTag="legend"
-             headerStyle="title" headerCode="pihcore.delivery.title">
-
+    <section id="delivery-intake" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Intake">
         <div class="section-container">
-            <div class="two-columns">
-                <p>
-                    <label>
-                        <uimessage code="pihcore.mch.deliveryDate"/>
-                    </label>
-                    <span class="small">
-                        <obs conceptId="CIEL:5599" allowTime="false"/>
-                    </span>
-                </p>
+            <p class="date-one-line">
+                <label>
+                    <uimessage code="Admission date/time"/>
+                </label>
+                <obs conceptId="CIEL:1640"/>
+            </p>
 
-                <div id="calculated-edd-and-gestational" class="hidden">
-                    <p>
-                        <span id="calculated-edd-wrapper">
-                            <span id="calculated-edd-label">
-                                <uimessage code="pihcore.calculatedEstimatedDeliveryDate"/>:&#160;
-                            </span>
-                            <span id='calculated-edd' class="value">
-                                <lookup expression="fn.latestObs('CIEL:1427').valueDatetime"/>
-                            </span>
-                            <span class="small hidden">
-                                <obs id="lastPeriodDate" conceptId="CIEL:1427" allowFutureDates="false"/>
-                            </span>
-                        </span>
-                    </p>
-                    <p>
-                        <span id="calculated-gestational-age-wrapper">
-                            <span id="calculated-gestational-age-label">
-                                <uimessage code="pihcore.calculatedGestationalAge"/>:&#160;
-                            </span>
-                            <span id='calculated-gestational-age-value' class="value"></span>
-                        </span>
+            <div class="three-columns">
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="pihcore.mch.grava"/>
+                        </label>
+                        <obs conceptId="CIEL:5624" />
                     </p>
                 </div>
-                <!-- Mental Health -->
-                <!--                    <p>
-                                        <label>
-                                            <uimessage code="pihcore.mentalhealth.title"/>
-                                        </label>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="pihcore.mch.para"/>
+                        </label>
+                        <obs conceptId="CIEL:1053"/>
+                    </p>
+                </div>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="Gestational age"/>
+                        </label>
+                        <obs conceptId="CIEL:165425"/>
 
-                                        <obs conceptId="PIH:Mental health diagnosis" answerConceptId="PIH:DEPRESSION"
-                                             style="checkbox"/>
-                                        <obs conceptId="PIH:Mental health diagnosis" answerConceptId="PIH:Post traumatic stress disorder"
-                                             style="checkbox"/>
-                                        <obs conceptId="PIH:Mental health diagnosis" answerConceptId="PIH:SCHIZOPHRENIA"
-                                             style="checkbox"/>
-                                    </p>
-                -->
-                <p>
-                    <label>
-                        <uimessage code="pihcore.birthweight"/>
-                    </label>
-                    <obs conceptId="CIEL:5916" required="true"/>
-                </p>
-                <p>
-                    <label>
-                        <h7>Estimated blood loss</h7>
-                    </label>
-                    <obs conceptId="PIH:Estimated blood loss" showUnits="liters" unitsCssClass="append-to-value"/>
-                </p>
+                        <label>
+                            <uimessage code="Decimal represents number of days"/>
+                            <br/>
+                            <i>
+                                <uimessage code="For example, 37.4 = 37 weeks + 4 days"/>
+                            </i>
+                        </label>
+                    </p>
+                </div>
+            </div>
 
-                <!-- Delivery type -->
-                <label>Delivery Type</label>
-                <obs conceptId="PIH:11663" answerConceptId="CIEL:162595" style="checkbox"/>
-                <!-- Breech delivery -->
-                <obs conceptId="PIH:Outpatient procedure" answerConceptId="PIH:1172" style="checkbox"/>
+            <label>
+                <uimessage code="PAC (PostAbortion Care) type"/>
+            </label>
+            <obs conceptId="PIH:14376" style="checkbox" answerConceptId="CIEL:79984"/>
+            <obs conceptId="PIH:14376" style="checkbox" answerConceptId="CIEL:162484"/>
+            <obs conceptId="PIH:14376" style="checkbox" answerConceptId="CIEL:159728"/>
+            <obs conceptId="PIH:14376" style="checkbox" answerConceptId="CIEL:1637"/>
 
+        </div>
+    </section>
 
-                <fieldset>
-                    <label>Perineal Tear</label>
-                    <obs conceptId="CIEL:165247" id="perineal tear" answerSeparator="&lt;br&gt;"
-                         answerConceptIds="CIEL:165521,CIEL:165522,CIEL:165523,CIEL:165524"
-                         answerLabels="First degree,Second degree,Third degree,Fourth degree"/>
-                </fieldset>
-
-
-                <!-- APGAR -->
-                <p class="apgar">
-                    <label>
-                        <uimessage code="pihcore.mch.apgarScore1"/>
-                    </label>
-
-                    <!-- APGAR at 1 minutes (CIEL:159603) -->
-                    <obs conceptId="CIEL:159603" answerConceptIds="PIH:11933,PIH:11934,PIH:11935"
-                         answerCodes="pihcore.mch.lessThan4,pihcore.mch.between4and8,pihcore.mch.greaterThan8"
-                         style="radio" answerSeparator=""/>
-                </p>
-                <p class="apgar">
-                    <label>
-                        <uimessage code="pihcore.mch.apgarScore"/>
-                    </label>
-
-                    <!-- APGAR at 5 minutes (CIEL:159604) -->
-                    <obs conceptId="CIEL:159604" answerConceptIds="PIH:11933,PIH:11934,PIH:11935"
-                         answerCodes="pihcore.mch.lessThan4,pihcore.mch.between4and8,pihcore.mch.greaterThan8"
-                         style="radio" answerSeparator=""/>
-                </p>
-                <p class="apgar">
-                    <label>
-                        <uimessage code="pihcore.mch.apgarScore10"/>
-                    </label>
-
-                    <!-- APGAR at 10 minutes (CIEL:159605) -->
-                    <obs conceptId="CIEL:159605" answerConceptIds="PIH:11933,PIH:11934,PIH:11935"
-                         answerCodes="pihcore.mch.lessThan4,pihcore.mch.between4and8,pihcore.mch.greaterThan8"
-                         style="radio" answerSeparator=""/>
-                </p>
+    <section id="labor" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Labor">
+        <div class="section-container">
+            <p class="date-one-line">
+                <label>
+                    <uimessage code="Time of start of labour"/>
+                </label>
+                <obs conceptId="CIEL:163444"/>
+            </p>
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Presentation and position:"/>
+                </label>
+                <br/>
+                <obs id="presentation"
+                     conceptId="CIEL:160090" style="radio"
+                     answerSeparator="&lt;br /&gt;">
+                    <controls>
+                        <when value="CIEL:5622" thenDisplay="#other-presentation"/>
+                    </controls>
+                </obs>
+            </p>
+            <div id="other-presentation">
+                <label>
+                    <uimessage code="zl.ifOtherSpecify"/>
+                </label>
+                <obs conceptId="PIH:14414"/>
             </div>
         </div>
+    </section>
 
-        <br/>
+    <section id="delivery-section" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Delivery">
+        <div class="section-container">
+            <p class="date-one-line">
+                <label>
+                    <uimessage code="Delivery date/time"/>
+                </label>
+                <obs conceptId="CIEL:5599" required="true"/>
+            </p>
+
+            <div id="calculated-edd-and-gestational" class="hidden">
+                <p>
+                    <span id="calculated-edd-wrapper">
+                        <span id="calculated-edd-label">
+                            <uimessage code="pihcore.calculatedEstimatedDeliveryDate"/>:&#160;
+                        </span>
+                        <span id='calculated-edd' class="value">
+                            <lookup expression="fn.latestObs('CIEL:1427').valueDatetime"/>
+                        </span>
+                        <span class="small hidden">
+                            <obs id="lastPeriodDate" conceptId="CIEL:1427" allowFutureDates="false"/>
+                        </span>
+                    </span>
+                </p>
+                <p>
+                    <span id="calculated-gestational-age-wrapper">
+                        <span id="calculated-gestational-age-label">
+                            <uimessage code="pihcore.calculatedGestationalAge"/>:&#160;
+                        </span>
+                        <span id='calculated-gestational-age-value' class="value"></span>
+                    </span>
+                </p>
+            </div>
+
+            <p class="side-by-side">
+
+                <label>
+                    <uimessage code="Type"/>
+                </label>
+                <obs conceptId="PIH:11663" style="radio"
+                     answerConceptIds="CIEL:1170,PIH:1172,CIEL:155884" />
+
+                <br/>
+                <label>
+                    <uimessage code="Outcome"/>
+                </label>
+                <obs conceptId="CIEL:159917" style="radio"
+                     answerConceptIds="CIEL:151849,CIEL:159916,CIEL:135436"
+                     answerCodes="Alive,FSB,MSB"/>
+
+                <br/>
+                <label>
+                    <uimessage code="Was the partograph used?"/>
+                </label>
+                <obs conceptId="PIH:13964" style="radio" answerConceptIds="CIEL:1065,CIEL:1066"/>
+
+                <br/>
+                <label>
+                    <uimessage code="Uterotonic given immediately after birth? (Oxytocin/ Misoprostol)"/>
+                </label>
+                <obs conceptId="PIH:14373" style="radio" answerConceptIds="CIEL:1065,CIEL:1066"/>
+
+                <br/>
+                <label>Perineal Tear</label>
+                <obs conceptId="CIEL:165247" id="perineal tear" style="radio"
+                     answerConceptIds="CIEL:165521,CIEL:165522,CIEL:165523,CIEL:165524"
+                     answerLabels="1st degree,2nd degree,3rd degree,4th degree"/>
+            </p>
+        </div>
+    </section>
+
+    <section id="delivery-findings" sectionTag="fieldset" headerTag="legend"
+             headerStyle="title" headerCode="pihcore.findings.label">
 
         <!-- Findings during delivery -->
         <div class="section-container">
-            <h3>
-                <label>
-                    <uimessage code="pihcore.findings.label"/>
-                </label>
-            </h3>
+
             <div class="two-columns">
+                <div>
 
+                    <h6>
+                        Mother
+                    </h6>
+                    <p>
+                        <repeat>
+                            <template>
+                                <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                    <obs conceptId="PIH:DIAGNOSIS" answerConceptId="{concept}" style="checkbox"/>
+                                </obsgroup>
+                            </template>
 
-                <h6>
-                    Mother
-                </h6>
-                <p>
-                    <repeat>
-                        <template>
-                            <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                                <obs conceptId="PIH:DIAGNOSIS" answerConceptId="{concept}" style="checkbox"/>
-                            </obsgroup>
-                        </template>
+                            <!--Mother-->
+                            <render concept="CIEL:165088" name="gbv"/>
+                            <render concept="CIEL:145548" name="Chorioamnionitis"/>
+                            <render concept="CIEL:113006" name="severe pre-eclampsia"/>
+                            <render concept="PIH:Eclampsia" name="eclampsia"/>
+                            <render concept="CIEL:113602" name="Prolonged labour"/>
+                            <render concept="CIEL:121856" name="Acute pulmonary edema"/>
+                            <render concept="CIEL:130" name="Puerperal sepsis"/>
+                            <render concept="CIEL:138706" name="herpes"/>
+                            <render concept="CIEL:112493" name="syphilis"/>
+                        </repeat>
 
-                        <!--Mother-->
-                        <render concept="CIEL:165088" name="gbv"/>
-                        <render concept="CIEL:145548" name="Chorioamnionitis"/>
-                        <render concept="CIEL:113006" name="severe pre-eclampsia"/>
-                        <render concept="PIH:Eclampsia" name="eclampsia"/>
-                        <render concept="CIEL:113602" name="Prolonged labour"/>
-                        <render concept="CIEL:121856" name="Acute pulmonary edema"/>
-                        <render concept="CIEL:130" name="Puerperal sepsis"/>
-                        <render concept="CIEL:138706" name="herpes"/>
-                        <render concept="CIEL:112493" name="syphilis"/>
-                    </repeat>
+                        <obs conceptId="PIH:6644" answerConceptId="PIH:174"
+                             answerCode="pihcore.mch.otherSTI" style="checkbox"/>
 
-                    <obs conceptId="PIH:6644" answerConceptId="PIH:174"
-                         answerCode="pihcore.mch.otherSTI" style="checkbox"/>
+                        <obs conceptId="PIH:6644" answerConceptId="PIH:OTHER"
+                             showCommentField="true" commentFieldLabel="" style="checkbox"/>
 
-                    <obs conceptId="PIH:6644" answerConceptId="PIH:OTHER"
-                         showCommentField="true" commentFieldLabel="" style="checkbox"/>
+                    </p>
 
-                </p>
+                    <!-- <render concept="PIH:POSTPARTUM HEMORRHAGE" name="postpartum hemorrhage"/> -->
+                    <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                        <obs conceptId="PIH:DIAGNOSIS" answerConceptId="PIH:POSTPARTUM HEMORRHAGE" style="checkbox"/>
+                    </obsgroup>
+                    <span style="padding-left:30px;"></span>
 
-                <!-- <render concept="PIH:POSTPARTUM HEMORRHAGE" name="postpartum hemorrhage"/> -->
-                <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                    <obs conceptId="PIH:DIAGNOSIS" answerConceptId="PIH:POSTPARTUM HEMORRHAGE" style="checkbox"/>
-                </obsgroup>
-                <span style="padding-left:30px;"></span>
-                <label>
-                    Blood loss (mL)
-                </label>
-                <obs conceptId="PIH:12555" />
+                    <p>
+                        <label>
+                            <h7>Estimated blood loss</h7>
+                        </label>
+                        <obs conceptId="PIH:Estimated blood loss" showUnits="liters" unitsCssClass="append-to-value"/>
+                    </p>
 
-                <br/>
-                <br/>
-                <br/>
+                </div>
 
-                <h6>
-                    Baby
-                </h6>
-                <p>
+                <div>
 
-                    <repeat>
-                        <template>
-                            <!-- problem for newborn -->
-                            <obs conceptId="PIH:12564" answerConceptId="{concept}"
-                                 showIfEmpty="false" style="checkbox"/>
-                        </template>
+                    <h6>
+                        Baby
+                    </h6>
+                    <p>
 
-                        <!--Baby -->
-                        <render concept="CIEL:130109" name="abnormal placenta"/>
-                        <render concept="CIEL:115939" name="abnormal presentation"/>
-                        <render concept="CIEL:145935" name="cephalopelvic distortion"/>
-                        <render concept="CIEL:162217" name="low birth weight"/>
-                        <render concept="CIEL:162218" name="low birth weight"/>
-                        <render concept="CIEL:162219" name="low birth weight"/>
-                        <render concept="CIEL:162237" name="low birth weight"/>
-                        <render concept="CIEL:162239" name="low birth weight"/>
-                        <render concept="CIEL:111523" name="Premature less than 28 weeks"/>
-                        <render concept="PIH:11789" name="Premature (28-32)"/>
-                        <render concept="PIH:11790" name="Premature (32-36)"/>
-                        <render concept="CIEL:127639" name="Respiratory distress"/>
-                        <render concept="PIH:Birth Asphyxia" name="birth asphyxia"/>
-                        <render concept="PIH:Fetal distress" name="Fetal distress"/>
-                        <render concept="CIEL:116642" name="Fetal demise"/>
-                        <render concept="CIEL:118245" name="fetal retardation"/>
-                        <render concept="CIEL:143849" name="Congenital malformation"/>
-                        <render concept="CIEL:129211" name="rupture membrane"/>
-                        <render concept="CIEL:115866" name="aspiration meconium"/>
-                    </repeat>
-                </p>
+                        <repeat>
+                            <template>
+                                <!-- problem for newborn -->
+                                <obs conceptId="PIH:12564" answerConceptId="{concept}"
+                                     showIfEmpty="false" style="checkbox"/>
+                            </template>
+
+                            <!--Baby -->
+                            <render concept="CIEL:130109" name="abnormal placenta"/>
+                            <render concept="CIEL:115939" name="abnormal presentation"/>
+                            <render concept="CIEL:145935" name="cephalopelvic distortion"/>
+                            <render concept="CIEL:162217" name="low birth weight"/>
+                            <render concept="CIEL:162218" name="low birth weight"/>
+                            <render concept="CIEL:162219" name="low birth weight"/>
+                            <render concept="CIEL:162237" name="low birth weight"/>
+                            <render concept="CIEL:162239" name="low birth weight"/>
+                            <render concept="CIEL:111523" name="Premature less than 28 weeks"/>
+                            <render concept="PIH:11789" name="Premature (28-32)"/>
+                            <render concept="PIH:11790" name="Premature (32-36)"/>
+                            <render concept="CIEL:127639" name="Respiratory distress"/>
+                            <render concept="PIH:Birth Asphyxia" name="birth asphyxia"/>
+                            <render concept="PIH:Fetal distress" name="Fetal distress"/>
+                            <render concept="CIEL:116642" name="Fetal demise"/>
+                            <render concept="CIEL:118245" name="fetal retardation"/>
+                            <render concept="CIEL:143849" name="Congenital malformation"/>
+                            <render concept="CIEL:129211" name="rupture membrane"/>
+                            <render concept="CIEL:115866" name="aspiration meconium"/>
+                        </repeat>
+                    </p>
+                </div>
             </div>
 
         </div>
+    </section>
 
-        <br/>
-
+    <section id="newborn" sectionTag="fieldset"
+             headerTag="legend" headerStyle="title" headerCode="Newborn condition">
         <div class="section-container">
-            <label>
-                <uimessage code="pihcore.dischargeDate"/>
-            </label>
-            <span class="small">
-                <obs conceptId="PIH:3800" allowTime="false"/>
-            </span>
+            <div class="three-columns">
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="Alive"/>
+                        </label>
+                        <obs conceptId="CIEL:1571" style="radio"
+                             answerConceptIds="CIEL:1065,CIEL:1066"/>
+                    </p>
+                </div>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="Sex"/>
+                        </label>
+                        <obs conceptId="CIEL:1587" style="radio"
+                             answerConceptIds="CIEL:1534,CIEL:1535"
+                             answerCodes="M,F"/>
+                    </p>
+                </div>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="(Birth) Weight (kg)"/>
+                        </label>
+                        <!-- ToDo:  Is weight recorded if baby died? -->
+                        <obs conceptId="CIEL:5916" required="true"/>
+                    </p>
+
+                </div>
+            </div>
+
+        <div class="three-columns">
+            <!-- APGAR -->
+            <div class="apgar">
+                <label>
+                    <uimessage code="pihcore.mch.apgarScore1"/>
+                </label>
+
+                <!-- APGAR at 1 minutes -->
+                <obs conceptId="PIH:14419"/>
+            </div>
+            <div class="apgar">
+                <label>
+                    <uimessage code="pihcore.mch.apgarScore"/>
+                </label>
+
+                <!-- APGAR at 5 minutes -->
+                <obs conceptId="CIEL:159604"/>
+            </div>
+            <div class="apgar">
+                <label>
+                    <uimessage code="pihcore.mch.apgarScore10"/>
+                </label>
+
+                <!-- APGAR at 10 minutes -->
+                <obs conceptId="PIH:14785"/>
+            </div>
+        </div>
+            <br/>
+
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Breastfeeding initiated within 1 hour after birth"/>
+                </label>
+                <obs conceptId="CIEL:161543" style="radio" answerConceptIds="CIEL:1065,CIEL:1066"/>
+            </p>
+        </div>
+    </section>
+
+    <section id="hcw" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Delivery conducted by">
+        <div class="section-container">
+            <obsgroup groupingConceptId="CIEL:163391">
+                <label>
+                    <uimessage code="HCW Name"/>
+                </label>
+                <!-- ToDo: Should this be free-text? -->
+                <obs conceptId="PIH:6592"/>
+
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="HCW Cadre:"/>
+                    </label>
+                    <br/>
+                    <obs id="hcw-cadre" style="radio"
+                         conceptId="CIEL:1573" answerSeparator="&lt;br /&gt;">
+                        <controls>
+                            <when value="CIEL:5622" thenDisplay="#other-role"/>
+                        </controls>
+                    </obs>
+                    <div id="other-role">
+                        <label>
+                            <uimessage code="zl.ifOtherSpecify"/>
+                        </label>
+                        <obs conceptId="PIH:14415"/>
+                    </div>
+                </p>
+            </obsgroup>
+        </div>
+    </section>
+
+    <section id="postpartum-fp" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Post-partum family planning">
+        <div class="section-container">
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Counselled on family planning before discharge"/>
+                </label>
+                <obs conceptId="CIEL:1382" style="radio" answerConceptIds="CIEL:1065,CIEL:1066"/>
+
+                <br/>
+                <label>
+                    <uimessage code="Accepted and received a family planning before discharge"/>
+                </label>
+                <obs conceptId="CIEL:166421" style="radio" answerConceptIds="CIEL:1065,CIEL:1066"/>
+            </p>
+        </div>
+    </section>
+
+    <section id="adt" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Maternal outcome">
+        <div class="section-container">
+
+            <p>
+                <label>
+                    <uimessage code="pihcore.dischargeDate"/>
+                </label>
+                <span class="small">
+                    <obs conceptId="PIH:3800" allowTime="false"/>
+                </span>
+            </p>
+
+            <div id="disposition">
+                <encounterDisposition />
+            </div>
         </div>
     </section>
 
