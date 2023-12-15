@@ -218,7 +218,7 @@
         <uimessage code="LABOR &amp; DELIVERY"/>
     </h2>
 
-    <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Intake">
+    <section id="intake" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Intake">
         <div class="section-container">
             <p class="date-one-line">
                 <label>
@@ -250,8 +250,11 @@
                             <uimessage code="Gestational age"/>
                         </label>
                         <obs conceptId="CIEL:165425"/>
+                        <br/>
                         <label>
-                            <uimessage code="Decimal represents number of days.  For example, 37.4 = 37 weeks + 4 days."/>
+                            <i>
+                                <uimessage code="Decimal represents number of days.  For example, 37.4 = 37 weeks + 4 days."/>
+                            </i>
                         </label>
                     </p>
                 </div>
@@ -268,7 +271,7 @@
         </div>
     </section>
 
-    <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Labor">
+    <section id="labor" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Labor">
         <div class="section-container">
             <p class="date-one-line">
                 <label>
@@ -292,7 +295,7 @@
         </div>
     </section>
 
-    <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Delivery">
+    <section id="delivery-section" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Delivery">
         <div class="section-container">
             <p class="date-one-line">
                 <label>
@@ -332,7 +335,8 @@
         </div>
     </section>
 
-    <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Newborn condition">
+    <section id="newborn" sectionTag="fieldset"
+             headerTag="legend" headerStyle="title" headerCode="Newborn condition">
         <div class="section-container">
             <div class="four-columns">
                 <div>
@@ -424,7 +428,7 @@
         </div>
     </section>
 
-    <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+    <section id="postpartum-fp" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Post-partum family planning">
         <div class="section-container">
             <p class="side-by-side">
@@ -442,7 +446,7 @@
         </div>
     </section>
 
-    <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Maternal outcome">
+    <section id="adt" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Maternal outcome">
         <div class="section-container">
             <p id="when" class="side-by-side">
                 <label>
@@ -459,7 +463,7 @@
         </div>
     </section>
 
-    <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Delivery conducted by">
+    <section id="hcw" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Delivery conducted by">
         <div class="section-container">
             <obsgroup groupingConceptId="CIEL:163391">
                 <label>
