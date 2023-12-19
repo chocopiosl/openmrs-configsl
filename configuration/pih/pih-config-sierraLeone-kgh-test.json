@@ -2,7 +2,7 @@
   "site": "KGH-TEST",
 
   "locationTags": {
-    "Login Location": ["KGH Triage", "KGH MCH", "KGH NCD", "KGH Mental Health", "Labour and Delivery", "MCCU", "NICU", "Obstetric Post-Op", "Obstetric Surgery", "KGH Laboratory", "KGH Pharmacy" ],
+    "Login Location": ["KGH Triage", "KGH MCH", "KGH NCD", "KGH Mental Health", "KGH Laboratory", "KGH Pharmacy", "Antenatal Ward", "Labour and Delivery", "MCCU", "MCOE Triage", "NICU", "Obstetric Post-Op", "Obstetric Surgery", "Postnatal Ward", "Loss Ward"],
     "Program Location": [ "KGH MCH", "KGH NCD", "KGH Mental Health" ],
     "Order Pathology Location": ["Labour and Delivery", "MCCU", "NICU", "Obstetric Post-Op", "Obstetric Surgery"],
     "Inpatients App Location": ["Labour and Delivery", "MCCU", "NICU", "Obstetric Post-Op", "Obstetric Surgery"],
