@@ -10,7 +10,7 @@
     "Appointment Location": ["KGH Triage", "Labour and Delivery", "MCCU", "NICU", "Obstetric Post-Op", "Obstetric Surgery"],
     "Admission Location": ["KGH Triage", "Labour and Delivery", "MCCU", "NICU", "Obstetric Post-Op", "Obstetric Surgery"],
     "Transfer Location": ["Labour and Delivery", "MCCU", "NICU", "Obstetric Post-Op", "Obstetric Surgery"],
-    "Queue Location": ["KGH Triage", "KGH MCH", "Labour and Delivery", "MCCU", "NICU", "Obstetric Post-Op", "Obstetric Surgery"]
+    "Queue Location": ["MCOE Triage", "Labour and Delivery", "MCCU", "NICU", "Obstetric Post-Op", "Obstetric Surgery","Antenatal Ward", "Postnatal Ward", "Loss Ward"]
   },
 
   "components": [
