@@ -2023,7 +2023,7 @@
                                 </template>
                                 <render parId="CIEL:116711" message="Diffuse parenchymal and interstitial" />
                                 <render parId="PIH:14601"   message="Post infection (ie. TB)" />
-                                <render parId="CIEL:167822" message="Occupation" />
+                                <render parId="CIEL:132486" message="Occupational" />
                                 <render parId="CIEL:5622"   message="Other" />
                             </repeat>
                         </td>
@@ -2700,6 +2700,7 @@
                                     </obsgroup>
                                     <br/>
                                 </template>
+                                <render diagId="CIEL:121812" name="Acute Hepatitis B" />
                                 <render diagId="CIEL:120557" name="Chronic Hepatitis B" />
                                 <render diagId="CIEL:145347" name="Chronic Hepatitis C" />
                             </repeat>
