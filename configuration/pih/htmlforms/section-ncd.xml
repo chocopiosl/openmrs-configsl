@@ -610,7 +610,7 @@
                                 <div id="sickle-plus">
                                     <p>
                                         <label>
-                                            <uimessage code="Main complications with sickle cell"/>
+                                            <uimessage code="Main complications with sickle cell disease"/>
                                         </label>
                                         <repeat>
                                             <template>
@@ -618,12 +618,21 @@
                                                      answerConceptId="{diagId}" answerCode="{sickleComplic}"/>
                                             </template>
                                             <render diagId="CIEL:121629" sickleComplic="Anemia" />
+                                            <render diagId="CIEL:162044" sickleComplic="Severe anemia" />
+                                            <render diagId="CIEL:136586" sickleComplic="Intravascular hemolysis" />
                                             <render diagId="CIEL:165590" sickleComplic="Pain crisis" />
+                                            <render diagId="CIEL:117643" sickleComplic="Sickle-cell vaso-occlusive crisis" />
                                             <render diagId="CIEL:124842" sickleComplic="Thoracic outlet syndrome" />
+                                            <render diagId="CIEL:149871" sickleComplic="Acute chest syndrome" />
+                                            <render diagId="CIEL:148074" sickleComplic="Avascular bone necrosis" />
+
+                                            <render diagId="CIEL:111103" sickleComplic="Stroke" />
+                                            <render diagId="CIEL:112483" sickleComplic="Systemic infection" />
                                             <render diagId="CIEL:121262" sickleComplic="Bacterial infection" />
                                             <render diagId="CIEL:116128" sickleComplic="Malaria" />
-                                            <render diagId="CIEL:111103" sickleComplic="Stroke" />
+
                                             <render diagId="CIEL:1063"   sickleComplic="Blood transfusion" />
+                                            <render diagId="CIEL:5622" sickleComplic="Other" />
                                         </repeat>
                                     </p>
                                 </div>
