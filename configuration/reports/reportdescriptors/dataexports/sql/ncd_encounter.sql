@@ -163,6 +163,12 @@ inner join temp_ncd t on t.encounter_id = o.encounter_id
 where o.voided = 0 
 ;
 
+DROP TEMPORARY TABLE IF EXISTS limitation_obs_id;
+CREATE TEMPORARY TABLE limitation_obs_id
+SELECT encounter_id, obs_id AS obs_group_id
+FROM temp_obs
+WHERE concept_id=concept_from_mapping('PIH','14587');
+
 update temp_ncd t
 set next_appointment_date = DATE(obs_value_datetime_from_temp(encounter_id, 'PIH','5096'));
 
@@ -464,8 +470,11 @@ set inhaler_for_symptoms_2x_week_asthma = obs_value_coded_list_from_temp(encount
 UPDATE temp_ncd t
 SET inhaler_count = if(inhaler_for_symptoms_2x_week_asthma=@yes, 1, 0);
 
-update temp_ncd t
-set activity_limitation_asthma = obs_value_coded_list_from_temp(encounter_id,'PIH', '11925','en');
+-- update temp_ncd t
+-- set activity_limitation_asthma = obs_value_coded_list_from_temp(encounter_id,'PIH', '11925','en');
+UPDATE temp_ncd t
+INNER JOIN limitation_obs_id l ON t.encounter_id=l.encounter_id
+SET activity_limitation_asthma=obs_from_group_id_value_coded_list_from_temp(l.obs_group_id, 'PIH', '11925','en');
 UPDATE temp_ncd t
 SET activity_count = if(activity_limitation_asthma=@yes, 1, 0);
 
