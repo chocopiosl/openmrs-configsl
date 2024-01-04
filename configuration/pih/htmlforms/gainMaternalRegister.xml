@@ -301,7 +301,7 @@
                 <label>
                     <uimessage code="Delivery date/time"/>
                 </label>
-                <obs conceptId="CIEL:5599"/>
+                <obs conceptId="CIEL:5599" allowFutureDates="false" allowFutureTimes="true" />
             </p>
             <p class="side-by-side">
 
