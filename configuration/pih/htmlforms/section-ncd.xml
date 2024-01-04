@@ -2012,31 +2012,25 @@
 
             <!-- Only include this section on the NCD intake form -->
             <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
-                <table>
-                    <tr>
-                        <th colspan="3">
-                            <label>
-                                <uimessage code="Parenchymal lung diseases" />
-                            </label>
-                        </th>
-                    </tr>
-                    <tr>
-                        <td colspan="3">
-                            <repeat>
-                                <template>
-                                    <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                                        <obs conceptId="PIH:DIAGNOSIS" answerConceptId="{parId}"
-                                             style="checkbox"/>
-                                    </obsgroup>
-                                </template>
-                                <render parId="CIEL:116711" message="Diffuse parenchymal and interstitial" />
-                                <render parId="PIH:14601"   message="Post infection (ie. TB)" />
-                                <render parId="PIH:15069" message="Occupational" />
-                                <render parId="PIH:15070" message="Other" />
-                            </repeat>
-                        </td>
-                    </tr>
+                <h3>
+                    <uimessage code="Restrictive lung diseases" />
+                </h3>
 
+                <repeat>
+                    <template>
+                        <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                            <obs conceptId="PIH:DIAGNOSIS" answerConceptId="{parId}" answerCode="{message}"
+                                 style="checkbox"/>
+                        </obsgroup>
+                    </template>
+                    <render parId="CIEL:116711" message="Interstitial lung disease" />
+                    <render parId="PIH:14601"   message="Post infection (Tuberculosis)" />
+                    <render parId="CIEL:132486" message="Occupational lung disease" />
+                    <render parId="CIEL:127611" message="Other restrictive lung disease" />
+                </repeat>
+                <br/>
+
+                <table>
                     <tr>
                         <th width="30%">
                             <label>
@@ -2095,6 +2089,7 @@
                         <td></td>
                     </tr>
                 </table>
+                <br/>
             </includeIf>
 
             <h3>COPD</h3>
