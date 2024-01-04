@@ -295,7 +295,7 @@
                 <label>
                     <uimessage code="Delivery date/time"/>
                 </label>
-                <obs conceptId="CIEL:5599" required="true"/>
+                <obs conceptId="CIEL:5599" required="true" defaultDatetime="today" allowFutureDates="false" allowFutureTimes="true" />
             </p>
 
             <div id="calculated-edd-and-gestational" class="hidden">
