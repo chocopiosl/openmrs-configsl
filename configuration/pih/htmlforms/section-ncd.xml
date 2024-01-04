@@ -620,18 +620,13 @@
                                             <render diagId="CIEL:121629" sickleComplic="Anemia" />
                                             <render diagId="CIEL:162044" sickleComplic="Severe anemia" />
                                             <render diagId="CIEL:136586" sickleComplic="Intravascular hemolysis" />
-                                            <render diagId="CIEL:165590" sickleComplic="Pain crisis" />
-                                            <render diagId="CIEL:117643" sickleComplic="Sickle-cell vaso-occlusive crisis" />
-                                            <render diagId="CIEL:124842" sickleComplic="Thoracic outlet syndrome" />
+                                            <render diagId="CIEL:117643" sickleComplic="Sickle-cell vaso-occlusive pain crisis" />
                                             <render diagId="CIEL:149871" sickleComplic="Acute chest syndrome" />
                                             <render diagId="CIEL:148074" sickleComplic="Avascular bone necrosis" />
-
                                             <render diagId="CIEL:111103" sickleComplic="Stroke" />
-                                            <render diagId="CIEL:112483" sickleComplic="Systemic infection" />
                                             <render diagId="CIEL:121262" sickleComplic="Bacterial infection" />
                                             <render diagId="CIEL:116128" sickleComplic="Malaria" />
 
-                                            <render diagId="CIEL:1063"   sickleComplic="Blood transfusion" />
                                             <render diagId="CIEL:5622" sickleComplic="Other" />
                                         </repeat>
                                     </p>
@@ -891,15 +886,17 @@
                                 </label> -->
                                 <repeat>
                                     <template>
-                                        <obs conceptId="PIH:14921" answerConceptId="{diagId}" style="checkbox"/>
+                                        <obs conceptId="PIH:14921"
+                                             answerConceptId="{diagId}" answerCode="{sickleText}"
+                                             style="checkbox"/>
                                     </template>
-                                    <render diagId="CIEL:116128" sickleText="Malaria" />
-                                    <render diagId="CIEL:126721" sickleText="Sepsis" />
                                     <render diagId="CIEL:121629" sickleText="Anemia" />
-                                    <render diagId="PIH:14957"   sickleText="Vaso-occlusive crisis" />
+                                    <render diagId="CIEL:117643" sickleText="Sickle-cell vaso-occlusive pain crisis" />
                                     <render diagId="CIEL:147059" sickleText="Bone pain" />
-                                    <render diagId="CIEL:111103" sickleText="Stroke" />
                                     <render diagId="CIEL:149871" sickleText="Acute chest syndrome" />
+                                    <render diagId="CIEL:111103" sickleText="Stroke" />
+                                    <render diagId="CIEL:126721" sickleText="Bacterial infection" />
+                                    <render diagId="CIEL:116128" sickleText="Malaria" />
                                 </repeat>
                             </td>
                             <td>
@@ -2027,13 +2024,15 @@
                         <td colspan="3">
                             <repeat>
                                 <template>
-                                    <obs conceptId="PIH:14599" style="checkbox"
-                                         answerConceptId="{parId}" answerCode="{message}" />
+                                    <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                        <obs conceptId="PIH:DIAGNOSIS" answerConceptId="{parId}"
+                                             style="checkbox"/>
+                                    </obsgroup>
                                 </template>
                                 <render parId="CIEL:116711" message="Diffuse parenchymal and interstitial" />
                                 <render parId="PIH:14601"   message="Post infection (ie. TB)" />
-                                <render parId="CIEL:132486" message="Occupational" />
-                                <render parId="CIEL:5622"   message="Other" />
+                                <render parId="PIH:15069" message="Occupational" />
+                                <render parId="PIH:15070" message="Other" />
                             </repeat>
                         </td>
                     </tr>
