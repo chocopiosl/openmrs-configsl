@@ -1,13 +1,20 @@
 SELECT encounter_type_id  INTO @ncd_init FROM encounter_type et WHERE uuid='ae06d311-1866-455b-8a64-126a9bd74171';
 SELECT encounter_type_id  INTO @ncd_followup FROM encounter_type et WHERE uuid='5cbfd6a2-92d9-4ad0-b526-9d29bfe1d10c';
 SELECT program_id  INTO @ncd_program FROM program p WHERE uuid='515796ec-bf3a-11e7-abc4-cec278b6b50a';
-SET @partition = '${partitionNum}';
+SELECT encounter_type_id INTO @labResultEnc FROM encounter_type WHERE uuid= '4d77916a-0620-11e5-a6c0-1697f925ec7b';
+SELECT concept_id INTO @order_number FROM concept WHERE UUID = '393dec41-2fb5-428f-acfa-36ea85da6666'; 
+SELECT concept_id INTO @result_date FROM concept WHERE UUID = '68d6bd27-37ff-4d7a-87a0-f5e0f9c8dcc0'; 
+SELECT concept_id INTO @test_location FROM concept WHERE UUID = GLOBAL_PROPERTY_VALUE('labworkflowowa.locationOfLaboratory', 'Unknown Location'); -- test location may differ by implementation
+SELECT concept_id INTO @test_status FROM concept WHERE UUID = '7e0cf626-dbe8-42aa-9b25-483b51350bf8'; 
+SELECT concept_id INTO @collection_date_estimated FROM concept WHERE UUID = '87f506e3-4433-40ec-b16c-b3c65e402989'; 
 
+SET @partition = '${partitionNum}';
 
 DROP TABLE IF EXISTS ncd_patient;
 CREATE TABLE ncd_patient (
 patient_id int, 
 encounter_id int, 
+encounter_datetime datetime,
 emr_id varchar(50),
 hiv varchar(30),
 comorbidities varchar(30),
@@ -41,7 +48,11 @@ gender varchar(10),
 other_ncd_type varchar(500),
 most_recent_visit_date date,
 first_ncd_visit_date date,
-disposition varchar(50)
+disposition varchar(50),
+missed_school boolean,
+cardiomyopathy boolean,
+most_recent_hba1c_value int,
+most_recent_hba1c_date date
 );
 
 
@@ -70,14 +81,23 @@ create index temp_encounter_ci1 on temp_encounter(encounter_id);
 DROP TEMPORARY TABLE if exists temp_obs;
 CREATE TEMPORARY TABLE temp_obs
 select o.obs_id, o.voided, o.obs_group_id, o.encounter_id, o.person_id, o.concept_id, o.value_coded, o.value_numeric, o.value_text, o.value_datetime, o.value_drug, o.comments, o.date_created, o.obs_datetime
+,CASE WHEN concept_id=concept_from_mapping('PIH','5629') THEN TRUE ELSE NULL END AS missed_school,
+CASE WHEN concept_id=concept_from_mapping('PIH','3064') AND value_coded=concept_from_mapping('PIH','5016') THEN TRUE ELSE NULL END AS cardiomyopathy
 from obs o inner join temp_encounter t on o.encounter_id = t.encounter_id
 where o.voided = 0;
 
-INSERT INTO ncd_patient(patient_id, emr_id, encounter_id,  name, family_name, 
+DROP TEMPORARY TABLE if exists temp_mschool_card;
+CREATE TEMPORARY TABLE temp_mschool_card
+SELECT person_id,max(missed_school) AS missed_school, max(cardiomyopathy) AS cardiomyopathy
+FROM temp_obs
+GROUP BY person_id;
+
+INSERT INTO ncd_patient(patient_id, emr_id, encounter_id,encounter_datetime, name, family_name, 
 current_age, gender, dead, date_of_death, dob)
 SELECT patient_id,
 patient_identifier(patient_id, metadata_uuid('org.openmrs.module.emrapi', 'emr.primaryIdentifierType')) AS emr_id,
 encounter_id,
+encounter_datetime,
 person_given_name(patient_id),
 person_family_name(patient_id),
 current_age_in_years(patient_id),
@@ -184,6 +204,34 @@ UPDATE ncd_patient tgt
 INNER JOIN first_encounter re ON tgt.patient_id = re.patient_id 
 SET first_ncd_visit_date = re.encounter_datetime ;
 
+UPDATE ncd_patient tgt 
+INNER JOIN temp_mschool_card tm ON tgt.patient_id =tm.person_id 
+SET tgt.missed_school=tm.missed_school, tgt.cardiomyopathy=tm.cardiomyopathy;
+
+DROP TABLE IF EXISTS hb1ac_results;
+CREATE TABLE hb1ac_results AS
+SELECT e.encounter_id, cast(e.encounter_datetime AS date) AS encounter_date, CAST(o.obs_datetime AS date) AS obs_date,
+o.person_id, o.value_numeric 
+FROM encounter e 
+INNER JOIN obs o ON e.encounter_id = o.encounter_id 
+WHERE e.encounter_type =@labResultEnc
+AND o.concept_id NOT IN (@order_number,@result_date,@test_location,@test_status,@collection_date_estimated)
+AND o.concept_id = concept_from_mapping('PIH','7460');
+
+
+UPDATE ncd_patient t
+INNER JOIN hb1ac_results o ON t.patient_id=o.person_id
+SET t.most_recent_hba1c_value= o.value_numeric;
+
+UPDATE ncd_patient t
+INNER JOIN (SELECT max(encounter_date) AS encounter_date, person_id 
+FROM hb1ac_results
+GROUP BY person_id
+) o
+ON t.patient_id=o.person_id
+SET t.most_recent_hba1c_date= o.encounter_date;
+
+
 SELECT 
 emr_id,
 hiv,
@@ -217,5 +265,9 @@ gender,
 other_ncd_type,
 cast(most_recent_visit_date as date) as most_recent_visit_date,
 cast(first_ncd_visit_date as date) as first_ncd_visit_date,
-disposition
+disposition,
+missed_school,
+cardiomyopathy,
+most_recent_hba1c_value,
+most_recent_hba1c_date
 FROM ncd_patient;
