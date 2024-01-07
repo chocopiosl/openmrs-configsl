@@ -76,26 +76,33 @@ create temporary table temp_ncd
  disposition                       varchar(255), 
  transfer_site                     varchar(255),
  echooptions						varchar(255), 
- echocomment 						varchar(500),
+ echocomment 						varchar(500), 
  echocardiogram_findings			varchar(500), 
+ on_on_ace_inhibitor_group_id 		int, 
  on_ace_inhibitor                   varchar(3), 
- on_beta_blocker                    varchar(3),
- cardiac_surgery_scheduled          varchar(3),
- cardiac_surgery_performed_date		date,
+ on_beta_blocker                    varchar(3), 
+ cardiac_surgery_scheduled          varchar(3), 
+ cardiac_surgery_performed_date		date, 
  cardiac_surgery_performed          boolean, 
- scd_penicillin_treatment           boolean,
+ scd_penicillin_treatment           boolean, 
  scd_folic_acid_treatment			boolean, 
  transfusions_since_last_visit     int, 
- asthma_severity                   varchar(20),  
- nighttime_waking_asthma           varchar(3),
- nighttime_count 					int,  
+ asthma_severity                   varchar(20), 
+ nighttime_waking_asthma           varchar(3), 
+ nighttime_count 					int, 
  symptoms_2x_week_asthma            varchar(3), 
  symptoms_2x_count 					int, 
- inhaler_for_symptoms_2x_week_asthma varchar(3),  
+ inhaler_for_symptoms_2x_week_asthma varchar(3), 
  inhaler_count						int, 
- activity_limitation_asthma			varchar(60),
+ limitation_obs_group_id			int, 
+ activity_limitation_asthma			varchar(60), 
  activity_count						int, 
  asthma_control_GINA               varchar(20),
+ echocardiogram_obs_group_id 		int, 
+ echocardiogram_date				date, 
+ diabitec_comma					    boolean, 
+ diabitec_without_comma				boolean, 
+ hospitalization_DKA				boolean,
  index_asc                         int, 
  index_desc                        int
 );
@@ -158,6 +165,7 @@ set t.emr_id = p.emr_id;
 DROP TEMPORARY TABLE IF EXISTS temp_obs;
 create temporary table temp_obs 
 select o.obs_id, o.voided ,o.obs_group_id , o.encounter_id, o.person_id, o.concept_id, o.value_coded, o.value_numeric, o.value_text,o.value_datetime, o.comments, o.date_created  
+,o.obs_datetime
 from obs o
 inner join temp_ncd t on t.encounter_id = o.encounter_id
 where o.voided = 0 
@@ -168,6 +176,12 @@ CREATE TEMPORARY TABLE limitation_obs_id
 SELECT encounter_id, obs_id AS obs_group_id
 FROM temp_obs
 WHERE concept_id=concept_from_mapping('PIH','14587');
+
+update temp_ncd t
+set echocardiogram_obs_group_id = obs_group_id_of_value_coded_from_temp(encounter_id,'PIH','8614' ,'PIH','3763' );
+
+UPDATE temp_ncd t
+SET echocardiogram_date=obs_from_group_id_value_datetime_from_temp(t.echocardiogram_obs_group_id, 'PIH', '12847');
 
 update temp_ncd t
 set next_appointment_date = DATE(obs_value_datetime_from_temp(encounter_id, 'PIH','5096'));
@@ -353,8 +367,6 @@ set hypertension_stage =
 		ELSE obs_value_coded_list_from_temp(encounter_id, 'PIH','12699',@locale)
 	END;
 
--- select obs_value_coded_list_from_temp(646965, 'PIH','12699',@locale);
-
 update temp_ncd t
 set rheumatic_heart_disease = 
 	if(obs_single_value_coded_from_temp(encounter_id, 'PIH','3064','PIH','221')=@yes, 1,null);
@@ -384,13 +396,13 @@ update temp_ncd t
 set ckd_stage = obs_value_coded_list_from_temp(encounter_id, 'PIH','12501',@locale);
 
 UPDATE temp_ncd t
-SET echooptions = obs_value_coded_list_from_temp(encounter_id,'PIH','3763','en');
+SET echooptions = obs_from_group_id_value_coded_list(echocardiogram_obs_group_id,'PIH','3763','en');
 
 UPDATE temp_ncd t
-SET echocomment = obs_value_text_from_temp(647132,'PIH','3407');
+SET echocomment = obs_from_group_id_value_text(echocardiogram_obs_group_id, 'PIH', '8596');
 
 UPDATE temp_ncd t
-SET echocardiogram_findings =  concat(concat(echooptions,'|'),echocomment );
+SET echocardiogram_findings =  concat(concat(echooptions,'| '),echocomment );
 
 update temp_ncd t
 set ckd_indicators_obs_group = obs_id_from_temp(encounter_id,'PIH','14717',0);
@@ -424,8 +436,12 @@ set transfer_site = obs_value_datetime_from_temp(encounter_id, 'PIH','14424');
 update temp_ncd t
 set transfer_site = obs_value_coded_list_from_temp(encounter_id, 'PIH','14424',@locale);
 
+UPDATE temp_ncd t
+SET on_on_ace_inhibitor_group_id = obs_id_from_temp(encounter_id, 'PIH','14724', 0);
+
+
 update temp_ncd t
-set on_ace_inhibitor = obs_value_coded_list_from_temp(encounter_id,'PIH', '14531','en');
+set on_ace_inhibitor = obs_from_group_id_value_coded_list_from_temp(on_on_ace_inhibitor_group_id,'PIH','14531','en' );
 
 update temp_ncd t
 set on_beta_blocker = obs_value_coded_list_from_temp(encounter_id,'PIH', '14723','en');
@@ -470,11 +486,10 @@ set inhaler_for_symptoms_2x_week_asthma = obs_value_coded_list_from_temp(encount
 UPDATE temp_ncd t
 SET inhaler_count = if(inhaler_for_symptoms_2x_week_asthma=@yes, 1, 0);
 
--- update temp_ncd t
--- set activity_limitation_asthma = obs_value_coded_list_from_temp(encounter_id,'PIH', '11925','en');
 UPDATE temp_ncd t
 INNER JOIN limitation_obs_id l ON t.encounter_id=l.encounter_id
 SET activity_limitation_asthma=obs_from_group_id_value_coded_list_from_temp(l.obs_group_id, 'PIH', '11925','en');
+
 UPDATE temp_ncd t
 SET activity_count = if(activity_limitation_asthma=@yes, 1, 0);
 
@@ -494,6 +509,16 @@ FROM temp_ncd t LEFT OUTER JOIN orders o ON t.encounter_id=o.encounter_id AND o.
 UPDATE temp_ncd t
 INNER JOIN order_hb1ac o ON t.encounter_id=o.encounter_id
 SET t.lab_order_hba1c= o.lab_order_hba1c;
+
+
+UPDATE temp_ncd t
+SET diabitec_comma = answerEverExists_from_temp(t.patient_id, 'PIH', '14921', 'PIH','14482',null);
+
+UPDATE temp_ncd t
+SET diabitec_without_comma = answerEverExists_from_temp(t.patient_id, 'PIH', '14921', 'PIH','14483',null);
+
+UPDATE temp_ncd t
+SET hospitalization_DKA = diabitec_comma OR diabitec_without_comma;
 
 -- The ascending/descending indexes are calculated ordering on the encounter date
 -- new temp tables are used to build them and then joined into the main temp table.
@@ -614,8 +639,8 @@ echocardiogram_findings,
 on_ace_inhibitor,
 on_beta_blocker,
 cardiac_surgery_scheduled,
-cardiac_surgery_performed_date,
 cardiac_surgery_performed,
+cardiac_surgery_performed_date,
 scd_penicillin_treatment,
 scd_folic_acid_treatment,
 transfusions_since_last_visit,
@@ -625,7 +650,9 @@ symptoms_2x_week_asthma,
 inhaler_for_symptoms_2x_week_asthma,
 activity_limitation_asthma,
 asthma_control_GINA,
+echocardiogram_date,
+hospitalization_DKA,
 index_asc,
 index_desc
-from temp_ncd
+from temp_ncd 
 order by patient_id, encounter_datetime;
