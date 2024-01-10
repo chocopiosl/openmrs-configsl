@@ -49,18 +49,28 @@ other_ncd_type varchar(500),
 most_recent_visit_date date,
 first_ncd_visit_date date,
 disposition varchar(50),
-missed_school boolean,
+ever_missed_school boolean,
 cardiomyopathy boolean,
 most_recent_hba1c_value int,
-most_recent_hba1c_date date
+most_recent_hba1c_date date,
+most_recent_echocardiogram_date date
 );
 
-
 DROP TABLE IF EXISTS temp_encounter;
-CREATE TEMPORARY TABLE temp_encounter
-SELECT patient_id,encounter_id, encounter_type ,encounter_datetime, date_created 
+CREATE TABLE temp_encounter (
+patient_id int,
+encounter_id int, 
+encounter_type varchar(100) ,
+encounter_datetime datetime, 
+date_created date,
+echocardiogram_obs_group_id int, 
+echocardiogram_date	date
+);
+INSERT INTO temp_encounter
+SELECT patient_id,encounter_id, encounter_type ,encounter_datetime, date_created, NULL AS echocardiogram_obs_group_id,
+NULL AS echocardiogram_date
 FROM encounter e 
-WHERE e.encounter_type IN (@ncd_init)
+WHERE e.encounter_type IN (@ncd_init, @ncd_followup)
 AND e.voided = 0;
 
 
@@ -81,14 +91,27 @@ create index temp_encounter_ci1 on temp_encounter(encounter_id);
 DROP TEMPORARY TABLE if exists temp_obs;
 CREATE TEMPORARY TABLE temp_obs
 select o.obs_id, o.voided, o.obs_group_id, o.encounter_id, o.person_id, o.concept_id, o.value_coded, o.value_numeric, o.value_text, o.value_datetime, o.value_drug, o.comments, o.date_created, o.obs_datetime
-,CASE WHEN concept_id=concept_from_mapping('PIH','5629') THEN TRUE ELSE NULL END AS missed_school,
+,CASE WHEN concept_id=concept_from_mapping('PIH','5629') THEN TRUE ELSE NULL END AS ever_missed_school,
 CASE WHEN concept_id=concept_from_mapping('PIH','3064') AND value_coded=concept_from_mapping('PIH','5016') THEN TRUE ELSE NULL END AS cardiomyopathy
 from obs o inner join temp_encounter t on o.encounter_id = t.encounter_id
 where o.voided = 0;
 
+UPDATE temp_encounter t
+set echocardiogram_obs_group_id = obs_group_id_of_value_coded_from_temp(encounter_id,'PIH','8614','PIH','3763');
+
+UPDATE temp_encounter t
+SET echocardiogram_date= obs_from_group_id_value_datetime_from_temp(t.echocardiogram_obs_group_id,'PIH','12847');
+
+DROP TABLE IF EXISTS last_echocardiogram;
+CREATE TEMPORARY TABLE last_echocardiogram
+SELECT patient_id, max(echocardiogram_date) AS echocardiogram_date
+FROM temp_encounter te
+GROUP BY patient_id;
+
+
 DROP TEMPORARY TABLE if exists temp_mschool_card;
 CREATE TEMPORARY TABLE temp_mschool_card
-SELECT person_id,max(missed_school) AS missed_school, max(cardiomyopathy) AS cardiomyopathy
+SELECT person_id,max(ever_missed_school) AS ever_missed_school, max(cardiomyopathy) AS cardiomyopathy
 FROM temp_obs
 GROUP BY person_id;
 
@@ -106,6 +129,11 @@ dead(patient_id),
 death_date(patient_id),
 birthdate(patient_id)
 FROM temp_encounter;
+
+
+UPDATE ncd_patient tgt 
+INNER JOIN last_echocardiogram lc ON tgt.patient_id = lc.patient_id
+SET tgt.most_recent_echocardiogram_date= lc.echocardiogram_date;
 
 UPDATE ncd_patient tgt 
 INNER JOIN person p ON tgt.patient_id = p.person_id
@@ -206,7 +234,7 @@ SET first_ncd_visit_date = re.encounter_datetime ;
 
 UPDATE ncd_patient tgt 
 INNER JOIN temp_mschool_card tm ON tgt.patient_id =tm.person_id 
-SET tgt.missed_school=tm.missed_school, tgt.cardiomyopathy=tm.cardiomyopathy;
+SET tgt.ever_missed_school=tm.ever_missed_school, tgt.cardiomyopathy=tm.cardiomyopathy;
 
 DROP TABLE IF EXISTS hb1ac_results;
 CREATE TABLE hb1ac_results AS
@@ -266,8 +294,9 @@ other_ncd_type,
 cast(most_recent_visit_date as date) as most_recent_visit_date,
 cast(first_ncd_visit_date as date) as first_ncd_visit_date,
 disposition,
-missed_school,
+ever_missed_school,
 cardiomyopathy,
 most_recent_hba1c_value,
-most_recent_hba1c_date
+most_recent_hba1c_date,
+most_recent_echocardiogram_date
 FROM ncd_patient;
