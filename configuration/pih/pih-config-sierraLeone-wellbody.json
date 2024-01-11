@@ -6,8 +6,8 @@
   "site": "WELLBODY",
 
   "locationTags": {
-    "Login Location": ["Wellbody Clinic", "Wellbody MCH", "Wellbody Mental Health", "Wellbody Laboratory", "Wellbody Pharmacy"],
-    "Program Location": [ "Wellbody MCH", "Wellbody Mental Health"]
+    "Login Location": ["Wellbody Clinic", "Wellbody MCH", "Wellbody NCD", "Wellbody Mental Health", "Wellbody Laboratory", "Wellbody Pharmacy"],
+    "Program Location": ["Wellbody MCH", "Wellbody NCD", "Wellbody Mental Health"]
   },
 
   "components": [
@@ -21,11 +21,12 @@
     "labs",
     "managePrinters",
     "markPatientDead",
-    "medicationDispensing",
     "mchForms",
     "mchGAINMaternal",
+    "medicationDispensing",
     "mentalHealth",
     "myAccount",
+    "ncd",
     "overviewReports",
     "patientDocuments",
     "patientRegistration",
