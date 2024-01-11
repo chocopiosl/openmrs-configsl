@@ -248,14 +248,29 @@
                 </div>
             </div>
 
-            <label>
-                <uimessage code="PAC (PostAbortion Care) type"/>
-            </label>
-            <obs conceptId="PIH:14376" style="checkbox" answerConceptId="CIEL:79984"/>
-            <obs conceptId="PIH:14376" style="checkbox" answerConceptId="CIEL:162484"/>
-            <obs conceptId="PIH:14376" style="checkbox" answerConceptId="CIEL:159728"/>
-            <obs conceptId="PIH:14376" style="checkbox" answerConceptId="CIEL:1637"/>
-
+            <div id="calculated-edd-and-gestational" class="hidden">
+                <p>
+                    <span id="calculated-edd-wrapper">
+                        <span id="calculated-edd-label">
+                            <uimessage code="pihcore.calculatedEstimatedDeliveryDate"/>:&#160;
+                        </span>
+                        <span id='calculated-edd' class="value">
+                            <lookup expression="fn.latestObs('CIEL:1427').valueDatetime"/>
+                        </span>
+                        <span class="small hidden">
+                            <obs id="lastPeriodDate" conceptId="CIEL:1427" allowFutureDates="false"/>
+                        </span>
+                    </span>
+                </p>
+                <p>
+                    <span id="calculated-gestational-age-wrapper">
+                        <span id="calculated-gestational-age-label">
+                            <uimessage code="pihcore.calculatedGestationalAge"/>:&#160;
+                        </span>
+                        <span id='calculated-gestational-age-value' class="value"></span>
+                    </span>
+                </p>
+            </div>
         </div>
     </section>
 
@@ -295,35 +310,10 @@
                 <label>
                     <uimessage code="Delivery date/time"/>
                 </label>
-                <obs conceptId="CIEL:5599" required="true"/>
+                <obs conceptId="CIEL:5599" required="true" defaultDatetime="today" allowFutureDates="false" allowFutureTimes="true" />
             </p>
 
-            <div id="calculated-edd-and-gestational" class="hidden">
-                <p>
-                    <span id="calculated-edd-wrapper">
-                        <span id="calculated-edd-label">
-                            <uimessage code="pihcore.calculatedEstimatedDeliveryDate"/>:&#160;
-                        </span>
-                        <span id='calculated-edd' class="value">
-                            <lookup expression="fn.latestObs('CIEL:1427').valueDatetime"/>
-                        </span>
-                        <span class="small hidden">
-                            <obs id="lastPeriodDate" conceptId="CIEL:1427" allowFutureDates="false"/>
-                        </span>
-                    </span>
-                </p>
-                <p>
-                    <span id="calculated-gestational-age-wrapper">
-                        <span id="calculated-gestational-age-label">
-                            <uimessage code="pihcore.calculatedGestationalAge"/>:&#160;
-                        </span>
-                        <span id='calculated-gestational-age-value' class="value"></span>
-                    </span>
-                </p>
-            </div>
-
             <p class="side-by-side">
-
                 <label>
                     <uimessage code="Type"/>
                 </label>
@@ -346,7 +336,7 @@
 
                 <br/>
                 <label>
-                    <uimessage code="Uterotonic given immediately after birth? (Oxytocin/ Misoprostol)"/>
+                    <uimessage code="Uterotonic given immediately after birth? (Oxytocin/ HSC)"/>
                 </label>
                 <obs conceptId="PIH:14373" style="radio" answerConceptIds="CIEL:1065,CIEL:1066"/>
 
@@ -355,6 +345,67 @@
                 <obs conceptId="CIEL:165247" id="perineal tear" style="radio"
                      answerConceptIds="CIEL:165521,CIEL:165522,CIEL:165523,CIEL:165524"
                      answerLabels="1st degree,2nd degree,3rd degree,4th degree"/>
+            </p>
+
+            <h6>Newborn condition</h6>
+
+            <div class="three-columns">
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="Sex"/>
+                        </label>
+                        <obs conceptId="CIEL:1587" style="radio"
+                             answerConceptIds="CIEL:1534,CIEL:1535"
+                             answerCodes="M,F"/>
+                    </p>
+                </div>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="(Birth) Weight (kg)"/>
+                        </label>
+                        <obs conceptId="CIEL:5916" required="true"/>
+                    </p>
+
+                </div>
+                <div></div>
+            </div>
+
+            <div class="three-columns">
+                <!-- APGAR -->
+                <div class="apgar">
+                    <label>
+                        <uimessage code="pihcore.mch.apgarScore1"/>
+                    </label>
+
+                    <!-- APGAR at 1 minutes -->
+                    <obs conceptId="PIH:14419"/>
+                </div>
+                <div class="apgar">
+                    <label>
+                        <uimessage code="pihcore.mch.apgarScore"/>
+                    </label>
+
+                    <!-- APGAR at 5 minutes -->
+                    <obs conceptId="CIEL:159604"/>
+                </div>
+                <div class="apgar">
+                    <label>
+                        <uimessage code="pihcore.mch.apgarScore10"/>
+                    </label>
+
+                    <!-- APGAR at 10 minutes -->
+                    <obs conceptId="PIH:14785"/>
+                </div>
+            </div>
+            <br/>
+
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Breastfeeding initiated within 1 hour after birth"/>
+                </label>
+                <obs conceptId="CIEL:161543" style="radio" answerConceptIds="CIEL:1065,CIEL:1066"/>
             </p>
         </div>
     </section>
@@ -456,79 +507,6 @@
         </div>
     </section>
 
-    <section id="newborn" sectionTag="fieldset"
-             headerTag="legend" headerStyle="title" headerCode="Newborn condition">
-        <div class="section-container">
-            <div class="three-columns">
-                <div>
-                    <p class="side-by-side">
-                        <label>
-                            <uimessage code="Alive"/>
-                        </label>
-                        <obs conceptId="CIEL:1571" style="radio"
-                             answerConceptIds="CIEL:1065,CIEL:1066"/>
-                    </p>
-                </div>
-                <div>
-                    <p class="side-by-side">
-                        <label>
-                            <uimessage code="Sex"/>
-                        </label>
-                        <obs conceptId="CIEL:1587" style="radio"
-                             answerConceptIds="CIEL:1534,CIEL:1535"
-                             answerCodes="M,F"/>
-                    </p>
-                </div>
-                <div>
-                    <p class="side-by-side">
-                        <label>
-                            <uimessage code="(Birth) Weight (kg)"/>
-                        </label>
-                        <!-- ToDo:  Is weight recorded if baby died? -->
-                        <obs conceptId="CIEL:5916" required="true"/>
-                    </p>
-
-                </div>
-            </div>
-
-        <div class="three-columns">
-            <!-- APGAR -->
-            <div class="apgar">
-                <label>
-                    <uimessage code="pihcore.mch.apgarScore1"/>
-                </label>
-
-                <!-- APGAR at 1 minutes -->
-                <obs conceptId="PIH:14419"/>
-            </div>
-            <div class="apgar">
-                <label>
-                    <uimessage code="pihcore.mch.apgarScore"/>
-                </label>
-
-                <!-- APGAR at 5 minutes -->
-                <obs conceptId="CIEL:159604"/>
-            </div>
-            <div class="apgar">
-                <label>
-                    <uimessage code="pihcore.mch.apgarScore10"/>
-                </label>
-
-                <!-- APGAR at 10 minutes -->
-                <obs conceptId="PIH:14785"/>
-            </div>
-        </div>
-            <br/>
-
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="Breastfeeding initiated within 1 hour after birth"/>
-                </label>
-                <obs conceptId="CIEL:161543" style="radio" answerConceptIds="CIEL:1065,CIEL:1066"/>
-            </p>
-        </div>
-    </section>
-
     <section id="hcw" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Delivery conducted by">
         <div class="section-container">
             <obsgroup groupingConceptId="CIEL:163391">
@@ -574,6 +552,16 @@
                     <uimessage code="Accepted and received a family planning before discharge"/>
                 </label>
                 <obs conceptId="CIEL:166421" style="radio" answerConceptIds="CIEL:1065,CIEL:1066"/>
+            </p>
+
+            <p>
+                <label>
+                    <uimessage code="PAC (PostAbortion Care) type"/>
+                </label>
+                <obs conceptId="PIH:14376" style="checkbox" answerConceptId="CIEL:79984"/>
+                <obs conceptId="PIH:14376" style="checkbox" answerConceptId="CIEL:162484"/>
+                <obs conceptId="PIH:14376" style="checkbox" answerConceptId="CIEL:159728"/>
+                <obs conceptId="PIH:14376" style="checkbox" answerConceptId="CIEL:1637"/>
             </p>
         </div>
     </section>

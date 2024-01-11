@@ -175,8 +175,10 @@
                     <strong>Chest X-ray</strong>
                     <br/>
 
-                    <obsgroup groupingConceptId="PIH:Radiology report construct">
+                    <obsgroup groupingConceptId="PIH:Radiology report construct"
+                              hiddenConceptId="PIH:Radiology procedure performed" hiddenAnswerConceptId="CIEL:12">
                         <obs conceptId="PIH:12847" labelCode="Date"/>
+
                         <repeat with="['CIEL:1118',  'Not done'],
                                       ['CIEL:1115',  'Normal'],
                                       ['CIEL:5158',  'Cardiomegaly'],
@@ -192,10 +194,10 @@
                                      answerLabel="{1}"
                                      style="checkbox"/>
                         </repeat>
-                    </obsgroup>
 
-                    <label>if other, specify:</label>
-                    <obs conceptId="CIEL:1392" style="text"/>
+                        <label>if other, specify:</label>
+                        <obs conceptId="PIH:8596" style="text"/>
+                    </obsgroup>
 
                     <br/>
                     <strong>
@@ -203,22 +205,27 @@
                     </strong>
                     <br/>
 
-                    <obsgroup groupingConceptId="PIH:Radiology report construct">
+                    <obsgroup groupingConceptId="PIH:Radiology report construct"
+                              hiddenConceptId="PIH:Radiology procedure performed" hiddenAnswerConceptId="CIEL:845">
                         <obs conceptId="PIH:12847" labelCode="Date"/>
-                            <repeat with="['CIEL:1118','Not done'],
-                                        ['CIEL:1115',  'Normal'],
-                                        ['PIH:14915',  'Heterogeneous without signs of cirrhosis'],
-                                        ['CIEL:135721','Hepatocarcinoma (HCC)'],
-                                        ['PIH:14916','Cirrhosis with portal hypertension'],
-                                        ['PIH:14917','Cirrhosis without portal hypertension'],
-                                        ['PIH:14918','Periportal fibrosis'],
-                                        ['CIEL:5622','Other']">
 
-                                <obs conceptId="CIEL:845"
-                                     answerConceptId="{0}"
-                                     answerLabel="{1}"
-                                     style="checkbox"/>
-                            </repeat>
+                        <repeat with="['CIEL:1118','Not done'],
+                                    ['CIEL:1115',  'Normal'],
+                                    ['PIH:14915',  'Heterogeneous without signs of cirrhosis'],
+                                    ['CIEL:135721','Hepatocarcinoma (HCC)'],
+                                    ['PIH:14916','Cirrhosis with portal hypertension'],
+                                    ['PIH:14917','Cirrhosis without portal hypertension'],
+                                    ['PIH:14918','Periportal fibrosis'],
+                                    ['CIEL:5622','Other']">
+
+                            <obs conceptId="CIEL:845"
+                                 answerConceptId="{0}"
+                                 answerLabel="{1}"
+                                 style="checkbox"/>
+                        </repeat>
+
+                        <label>if other, specify:</label>
+                        <obs conceptId="PIH:8596" style="text"/>
                     </obsgroup>
                 </div>
 
@@ -228,8 +235,10 @@
                     </strong>
                     <br/>
 
-                    <obsgroup groupingConceptId="PIH:3403">
+                    <obsgroup groupingConceptId="PIH:Radiology report construct"
+                              hiddenConceptId="PIH:Radiology procedure performed" hiddenAnswerConceptId="CIEL:159565">
                         <obs conceptId="PIH:12847" labelCode="Date"/>
+
                         <repeat with="['CIEL:1118','Not done'],
                                       ['CIEL:1115','Normal'],
                                       ['CIEL:135971','Left ventricular hypertrophy'],
@@ -245,7 +254,7 @@
                         </repeat>
 
                         <label>if other, specify:</label>
-                        <obs conceptId="CIEL:160845" style="text"/>
+                        <obs conceptId="PIH:8596" style="text"/>
                     </obsgroup>
 
                     <!-- Echocardiogram -->
@@ -255,8 +264,10 @@
                     </strong>
                     <br/>
 
-                    <obsgroup groupingConceptId="PIH:Radiology report construct">
+                    <obsgroup groupingConceptId="PIH:Radiology report construct"
+                              hiddenConceptId="PIH:Radiology procedure performed" hiddenAnswerConceptId="CIEL:159567">
                         <obs conceptId="PIH:12847" labelCode="Date"/>
+
                         <repeat with="['CIEL:1118','Not done'],
                                   ['CIEL:1115','Normal'],
                                   ['PIH:COR PULMONALE','Cor pulmonale'],
@@ -272,7 +283,7 @@
                         </repeat>
 
                         <label>if other, specify:</label>
-                        <obs conceptId="CIEL:159573" style="text"/>
+                        <obs conceptId="PIH:8596" style="text"/>
                     </obsgroup>
                 </div>
             </div>

@@ -43,10 +43,10 @@ create temporary table temp_ncd
  palliative_care                   bit,          
  sickle_cell                       bit,          
  other_ncd                         bit,     
- diabetes_onset_date			        date,
- hypertension_onset_date		     date,
- heart_failure_onset_date          date,
- chronic_lung_disease_onset_date   date,
+ diabetes_onset_date			  date,
+ hypertension_onset_date		  date,
+ heart_failure_onset_date         date,
+ chronic_lung_disease_onset_date  date,
  chronic_kidney_disease_onset_date date,
  liver_cirrhosis_hepb_onset_date  date,
  palliative_care_onset_date       date,
@@ -55,7 +55,9 @@ create temporary table temp_ncd
  diabetes_type                     varchar(255), 
  diabetes_indicators_obs_group     int(11),      
  diabetes_control                  varchar(255), 
- diabetes_on_insulin               bit,          
+ diabetes_on_insulin               bit,  
+ diabetes_home_glucometer		   bit, 
+ lab_order_hba1c                   boolean, 
  hypertension_type                 varchar(255), 
  hypertension_stage                varchar(255), 
  hypertension_indicators_obs_group int(11),      
@@ -73,10 +75,38 @@ create temporary table temp_ncd
  next_appointment_date             date,     
  disposition                       varchar(255), 
  transfer_site                     varchar(255),
+ echooptions						varchar(255), 
+ echocomment 						varchar(500), 
+ echocardiogram_findings			varchar(500), 
+ on_on_ace_inhibitor_group_id 		int, 
+ on_ace_inhibitor                   varchar(3), 
+ on_beta_blocker                    varchar(3), 
+ cardiac_surgery_scheduled          varchar(3), 
+ cardiac_surgery_performed_date		date, 
+ cardiac_surgery_performed          boolean, 
+ scd_penicillin_treatment           boolean, 
+ scd_folic_acid_treatment			boolean, 
+ transfusions_since_last_visit     int, 
+ asthma_severity                   varchar(20), 
+ nighttime_waking_asthma           varchar(3), 
+ nighttime_count 					int, 
+ symptoms_2x_week_asthma            varchar(3), 
+ symptoms_2x_count 					int, 
+ inhaler_for_symptoms_2x_week_asthma varchar(3), 
+ inhaler_count						int, 
+ limitation_obs_group_id			int, 
+ activity_limitation_asthma			varchar(60), 
+ activity_count						int, 
+ asthma_control_GINA               varchar(20),
+ echocardiogram_obs_group_id 		int, 
+ echocardiogram_date				date, 
+ diabitec_comma					    boolean, 
+ diabitec_without_comma				boolean, 
+ hospitalization_DKA				boolean,
  index_asc                         int, 
  index_desc                        int
 );
-	
+
 insert into temp_ncd
 	(patient_id,
 	encounter_id,
@@ -135,10 +165,23 @@ set t.emr_id = p.emr_id;
 DROP TEMPORARY TABLE IF EXISTS temp_obs;
 create temporary table temp_obs 
 select o.obs_id, o.voided ,o.obs_group_id , o.encounter_id, o.person_id, o.concept_id, o.value_coded, o.value_numeric, o.value_text,o.value_datetime, o.comments, o.date_created  
+,o.obs_datetime
 from obs o
 inner join temp_ncd t on t.encounter_id = o.encounter_id
 where o.voided = 0 
 ;
+
+DROP TEMPORARY TABLE IF EXISTS limitation_obs_id;
+CREATE TEMPORARY TABLE limitation_obs_id
+SELECT encounter_id, obs_id AS obs_group_id
+FROM temp_obs
+WHERE concept_id=concept_from_mapping('PIH','14587');
+
+update temp_ncd t
+set echocardiogram_obs_group_id = obs_group_id_of_value_coded_from_temp(encounter_id,'PIH','8614' ,'PIH','3763' );
+
+UPDATE temp_ncd t
+SET echocardiogram_date=obs_from_group_id_value_datetime_from_temp(t.echocardiogram_obs_group_id, 'PIH', '12847');
 
 update temp_ncd t
 set next_appointment_date = DATE(obs_value_datetime_from_temp(encounter_id, 'PIH','5096'));
@@ -286,6 +329,9 @@ update temp_ncd t
 set  diabetes_control = obs_from_group_id_value_coded_list_from_temp(diabetes_indicators_obs_group, 'PIH','11506',@locale);
 
 update temp_ncd t
+set diabetes_home_glucometer = value_coded_as_boolean(obs_id_from_temp(encounter_id, 'PIH','14503',0));
+
+update temp_ncd t
 set diabetes_on_insulin = value_coded_as_boolean(obs_id_from_temp(encounter_id, 'PIH','6756',0));
 
 set @dx = concept_from_mapping('PIH','3064');
@@ -321,9 +367,6 @@ set hypertension_stage =
 		ELSE obs_value_coded_list_from_temp(encounter_id, 'PIH','12699',@locale)
 	END;
 
--- select obs_value_coded_list_from_temp(646965, 'PIH','12699',@locale);
-
-
 update temp_ncd t
 set rheumatic_heart_disease = 
 	if(obs_single_value_coded_from_temp(encounter_id, 'PIH','3064','PIH','221')=@yes, 1,null);
@@ -351,6 +394,15 @@ and o.concept_id = @dx
 
 update temp_ncd t
 set ckd_stage = obs_value_coded_list_from_temp(encounter_id, 'PIH','12501',@locale);
+
+UPDATE temp_ncd t
+SET echooptions = obs_from_group_id_value_coded_list(echocardiogram_obs_group_id,'PIH','3763','en');
+
+UPDATE temp_ncd t
+SET echocomment = obs_from_group_id_value_text(echocardiogram_obs_group_id, 'PIH', '8596');
+
+UPDATE temp_ncd t
+SET echocardiogram_findings =  concat(concat(echooptions,'| '),echocomment );
 
 update temp_ncd t
 set ckd_indicators_obs_group = obs_id_from_temp(encounter_id,'PIH','14717',0);
@@ -384,7 +436,89 @@ set transfer_site = obs_value_datetime_from_temp(encounter_id, 'PIH','14424');
 update temp_ncd t
 set transfer_site = obs_value_coded_list_from_temp(encounter_id, 'PIH','14424',@locale);
 
+UPDATE temp_ncd t
+SET on_on_ace_inhibitor_group_id = obs_id_from_temp(encounter_id, 'PIH','14724', 0);
 
+
+update temp_ncd t
+set on_ace_inhibitor = obs_from_group_id_value_coded_list_from_temp(on_on_ace_inhibitor_group_id,'PIH','14531','en' );
+
+update temp_ncd t
+set on_beta_blocker = obs_value_coded_list_from_temp(encounter_id,'PIH', '14723','en');
+
+update temp_ncd t
+set cardiac_surgery_scheduled = obs_value_coded_list_from_temp(encounter_id,'PIH', '7814','en');
+
+
+update temp_ncd t
+set cardiac_surgery_performed = 
+	if(obs_single_value_coded_from_temp(encounter_id, 'PIH','10484','PIH','7827')=@yes, 1,null);
+
+update temp_ncd t
+set cardiac_surgery_performed_date = obs_value_datetime_from_temp(encounter_id, 'PIH','10485');
+
+update temp_ncd t
+set scd_penicillin_treatment = 
+	if(obs_single_value_coded_from_temp(encounter_id, 'PIH','14857','PIH','784')=@yes, 1,null);
+
+update temp_ncd t
+set scd_folic_acid_treatment = 
+	if(obs_single_value_coded_from_temp(encounter_id, 'PIH','14857','PIH','257')=@yes, 1,null);
+
+update temp_ncd t
+set transfusions_since_last_visit = obs_value_numeric_from_temp(encounter_id, 'PIH','13748');
+
+update temp_ncd t
+set asthma_severity = obs_value_coded_list_from_temp(encounter_id,'PIH', '7405','en');
+
+update temp_ncd t
+set nighttime_waking_asthma = obs_value_coded_list_from_temp(encounter_id,'PIH', '11731','en');
+UPDATE temp_ncd t
+SET nighttime_count = if(nighttime_waking_asthma=@yes, 1, 0);
+	
+update temp_ncd t
+set symptoms_2x_week_asthma = obs_value_coded_list_from_temp(encounter_id,'PIH', '11803','en');
+UPDATE temp_ncd t
+SET symptoms_2x_count = if(symptoms_2x_week_asthma=@yes, 1, 0);
+
+update temp_ncd t
+set inhaler_for_symptoms_2x_week_asthma = obs_value_coded_list_from_temp(encounter_id,'PIH', '11991','en');
+UPDATE temp_ncd t
+SET inhaler_count = if(inhaler_for_symptoms_2x_week_asthma=@yes, 1, 0);
+
+UPDATE temp_ncd t
+INNER JOIN limitation_obs_id l ON t.encounter_id=l.encounter_id
+SET activity_limitation_asthma=obs_from_group_id_value_coded_list_from_temp(l.obs_group_id, 'PIH', '11925','en');
+
+UPDATE temp_ncd t
+SET activity_count = if(activity_limitation_asthma=@yes, 1, 0);
+
+UPDATE temp_ncd t
+SET asthma_control_GINA = 
+CASE WHEN (nighttime_waking_asthma IS NULL OR symptoms_2x_week_asthma IS NULL OR inhaler_for_symptoms_2x_week_asthma IS NULL OR activity_limitation_asthma IS NULL) THEN NULL 
+WHEN ((nighttime_count+symptoms_2x_count+inhaler_count+activity_count) BETWEEN 3 AND 4) THEN 'Uncontrolled'
+WHEN ((nighttime_count+symptoms_2x_count+inhaler_count+activity_count) BETWEEN 1 AND 2) THEN 'Partly controlled'
+WHEN ((nighttime_count+symptoms_2x_count+inhaler_count+activity_count)  = 0 ) THEN 'Well controlled'
+END;
+
+DROP TABLE IF EXISTS order_hb1ac;
+CREATE TABLE order_hb1ac AS
+SELECT t.encounter_id,CASE WHEN o.concept_id = concept_from_mapping('PIH','7460') THEN TRUE ELSE FALSE END AS "lab_order_hba1c"
+FROM temp_ncd t LEFT OUTER JOIN orders o ON t.encounter_id=o.encounter_id AND o.voided=0;
+
+UPDATE temp_ncd t
+INNER JOIN order_hb1ac o ON t.encounter_id=o.encounter_id
+SET t.lab_order_hba1c= o.lab_order_hba1c;
+
+
+UPDATE temp_ncd t
+SET diabitec_comma = answerEverExists_from_temp(t.patient_id, 'PIH', '14921', 'PIH','14482',null);
+
+UPDATE temp_ncd t
+SET diabitec_without_comma = answerEverExists_from_temp(t.patient_id, 'PIH', '14921', 'PIH','14483',null);
+
+UPDATE temp_ncd t
+SET hospitalization_DKA = diabitec_comma OR diabitec_without_comma;
 
 -- The ascending/descending indexes are calculated ordering on the encounter date
 -- new temp tables are used to build them and then joined into the main temp table.
@@ -485,6 +619,8 @@ other_ncd_onset_date,
 diabetes_type,
 diabetes_control,
 diabetes_on_insulin,
+diabetes_home_glucometer,
+lab_order_hba1c,
 hypertension_type,
 hypertension_stage,
 hypertension_controlled,
@@ -499,6 +635,24 @@ sickle_cell_type,
 next_appointment_date,
 disposition,
 transfer_site,
+echocardiogram_findings,
+on_ace_inhibitor,
+on_beta_blocker,
+cardiac_surgery_scheduled,
+cardiac_surgery_performed,
+cardiac_surgery_performed_date,
+scd_penicillin_treatment,
+scd_folic_acid_treatment,
+transfusions_since_last_visit,
+asthma_severity,
+nighttime_waking_asthma,
+symptoms_2x_week_asthma,
+inhaler_for_symptoms_2x_week_asthma,
+activity_limitation_asthma,
+asthma_control_GINA,
+echocardiogram_date,
+hospitalization_DKA,
 index_asc,
 index_desc
-from temp_ncd order by patient_id, encounter_datetime;
+from temp_ncd 
+order by patient_id, encounter_datetime;
