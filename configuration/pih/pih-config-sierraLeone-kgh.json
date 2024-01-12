@@ -5,8 +5,8 @@
   "site": "KGH",
 
   "locationTags": {
-    "Login Location": ["KGH Triage", "KGH MCH", "KGH Mental Health", "KGH Laboratory", "KGH Pharmacy"],
-    "Program Location":  [ "KGH MCH", "KGH Mental Health"]
+    "Login Location": ["KGH Triage", "KGH MCH", "KGH NCD", "KGH Mental Health", "KGH Laboratory", "KGH Pharmacy"],
+    "Program Location":  [ "KGH MCH", "KGH NCD","KGH Mental Health"]
   },
 
   "components": [
@@ -28,6 +28,7 @@
     "mchGAINNewborn",
     "mentalHealth",
     "myAccount",
+    "ncd",
     "overviewReports",
     "patientDocuments",
     "patientRegistration",
