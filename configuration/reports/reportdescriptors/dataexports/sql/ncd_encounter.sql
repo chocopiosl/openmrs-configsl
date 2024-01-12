@@ -512,10 +512,10 @@ SET t.lab_order_hba1c= o.lab_order_hba1c;
 
 
 UPDATE temp_ncd t
-SET diabitec_comma = answerEverExists_from_temp(t.patient_id, 'PIH', '14921', 'PIH','14482',null);
+SET diabitec_comma = answer_exists_in_encounter(t.patient_id, 'PIH', '14921', 'PIH','14482');
 
 UPDATE temp_ncd t
-SET diabitec_without_comma = answerEverExists_from_temp(t.patient_id, 'PIH', '14921', 'PIH','14483',null);
+SET diabitec_without_comma = answer_exists_in_encounter(t.patient_id, 'PIH', '14921', 'PIH','14483');
 
 UPDATE temp_ncd t
 SET hospitalization_DKA = diabitec_comma OR diabitec_without_comma;
