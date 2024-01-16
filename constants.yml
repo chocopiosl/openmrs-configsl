@@ -18,6 +18,16 @@ encounterType:
     uuid: "9cc89b83-e32f-410a-947d-aeb3bda37571"
   sierraLeoneMchNewbornRegister:
     uuid: "3790ecc6-bc63-48f8-9104-f81dc90ee21c"
+  sierraLeoneNewbornAssessment:
+    uuid: "6444b8d4-407d-444d-aa15-d6dff204ed83"
+  sierraLeoneNewbornObs:
+    uuid: "78d02c05-5b41-4cb6-8c7c-f2e64773489f"
+  sierraLeoneNewbornReferral:
+    uuid: "928d21b1-9514-44a0-960f-bdad3551e0eb"
+  sierraLeoneLaborProgress:
+    uuid: "ac5ec970-31b7-4659-9141-284bfbc13c69"
+  sierraLeoneLaborDeliverySummary:
+    uuid: "fec2cc56-e35f-42e1-8ae3-017142c1ca59"
   mentalHealthFollowup:
     uuid: "9d701a81-bb83-40ea-9efc-af50f05575f2"
   PATIENT_REGISTRATION:

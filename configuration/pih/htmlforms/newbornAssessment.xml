@@ -1,0 +1,554 @@
+<!--
+  ~ The contents of this file are subject to the OpenMRS Public License
+  ~ Version 1.0 (the "License"); you may not use this file except in
+  ~ compliance with the License. You may obtain a copy of the License at
+  ~ http//license.openmrs.org
+  ~
+  ~ Software distributed under the License is distributed on an "AS IS"
+  ~ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+  ~ License for the specific language governing rights and limitations
+  ~ under the License.
+  ~
+  ~ Copyright (C) OpenMRS, LLC.  All Rights Reserved.
+  -->
+
+<htmlform id="newborn-assessment"
+          formUuid="17e93a76-32d1-4435-a5e3-3068e305c2d7"
+          htmlformUuid="f6eb28e3-66d1-4f99-b46f-0ff6e05c672c"
+          formName="Newborn Assessment"
+          formEncounterType="6444b8d4-407d-444d-aa15-d6dff204ed83" formVersion="1.0">
+
+    <style type="text/css">
+
+        #who-when-where {
+            margin-bottom: 6px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        #who-when-where p {
+            display: inline-block;
+            padding-right: 20px;
+        }
+
+        #where > input[type=text] {
+            display: inline-block;
+        }
+
+        .field-error {
+            color: #ff6666;
+            font-size: 1.1em;
+            display: block;
+        }
+
+        form fieldset {
+            min-width: 90%
+        }
+
+        #encounterDate input {
+            min-width: 15%
+        }
+
+        textarea {
+            overflow-y: hidden; /* fixes scrollbar flash - kudos to @brettjonesdev */
+            padding-top: 1.1em; /* fixes text jump on Enter keypress */
+        }
+
+        @media print {
+            .print-form-datestamps { display: block !important }
+            button.cancel, button.submit { display: none }
+            label { font-weight: bold }
+            label[for] { font-weight: normal } /* refers to the radio set label */
+        }
+
+        .section-container {
+            background: #F2F2F2;
+            box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
+            padding: 10px 5px 10px 15px;
+            line-height: 1.5em; /*add this for vertical spacing between elements*/
+        }
+
+        .section-container input[type="checkbox"] {
+            margin: 0px 5px; /*changed values to vertical, horizontal*/
+            top:5px; /*added to offset the checkbox position to line up*/
+        }
+
+        .section-container label { /*new definition to override labels inside section-containers*/
+            margin: 0px;
+        }
+
+        - .section {
+            width: 100%;
+        }
+
+        .side-by-side label {
+            display: inline-block;
+        }
+
+        form input[type="radio"], .form input[type="radio"] {
+            float: none;
+            display: inline-block;
+        }
+
+        .four-columns, .three-columns, .two-columns {
+            display: table;
+            height: 100%;
+            width: 100%;
+        }
+
+        .two-columns > div {
+            display: table-cell;
+            width: 50%;
+        }
+
+        .three-columns > div {
+            display: table-cell;
+            width: 33%;
+        }
+
+        .four-columns > div {
+            display: table-cell;
+            width: 25%;
+        }
+
+        <ifMode mode="VIEW" include="false">
+            .date-one-line {
+                display: flex;
+            }
+
+            .date-one-line label {
+                align-self: center;
+                margin-right: 1em;
+            }
+
+            .date-one-line span {
+                display: flex;
+            }
+
+            .hasDatepicker {
+                min-width: 120px;
+                margin-top: 0px;
+            }
+
+            .hfe-hours, .hfe-minutes, .hfe-seconds {
+                width: 70px;
+                min-width: 70px;
+                margin: 0px 10px 0px 10px;
+            }
+        </ifMode>
+    </style>
+
+    <div class="print-form-datestamps" style="display:none">
+        <p><uimessage code="pihcore.form.created_on"/>:
+            <lookup complexExpression="$form.dateCreated"/>
+        </p>
+        <p><uimessage code="pihcore.form.last_updated_on"/>:
+            <lookup complexExpression="$form.dateChanged"/>
+        </p>
+        <p><uimessage code="pihcore.form.printed_on"/>:
+            <lookup complexExpression="$formGeneratedDatetime"/>
+        </p>
+    </div>
+
+    <ifMode mode="VIEW" include="false">
+        <h2>
+            <label>
+                <uimessage code="pih.task.newbornAssessment"/>
+            </label>
+        </h2>
+
+        <!-- users with retroConsultNote privilege can edit provider, location, and date for both retro and active visits -->
+        <includeIf velocityTest="$user.hasPrivilege('Task: emr.retroConsultNote')">
+            <div id="who-when-where">
+                <p id="who">
+                    <label>
+                        <uimessage code="emr.patientDashBoard.providerRequired"/>
+                    </label>
+                    <span>
+                        <encounterProviderAndRole default="currentUser"
+                                                  encounterRole="4f10ad1a-ec49-48df-98c7-1391c6ac7f05" required="true"/>
+                    </span>
+                </p>
+                <p id="where">
+                    <label>
+                        <uimessage code="emr.locationRequired"/>
+                    </label>
+                    <span>
+                        <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"
+                                           tags="Maternal and Child Location"/>
+                    </span>
+                </p>
+            </div>
+        </includeIf>
+
+        <!-- users with retroConsultNoteThisProviderOnly can edit location and date (but not provider) for retro visits -->
+        <includeIf
+                velocityTest="$user.hasPrivilege('Task: emr.retroConsultNoteThisProviderOnly') and !($user.hasPrivilege('Task: emr.retroConsultNote')) and (!$visit.open)">
+            <div style="display:none">
+                <encounterProviderAndRole default="currentUser" encounterRole="4f10ad1a-ec49-48df-98c7-1391c6ac7f05"
+                                          required="true"/>
+            </div>
+
+            <div id="who-when-where">
+                <p id="who">
+                    <label>
+                        <uimessage code="emr.patientDashBoard.provider"/>
+                    </label>
+                    <span>
+                        <lookup expression="user.person.personName"/>
+                    </span>
+                </p>
+                <p id="where">
+                    <label>
+                        <uimessage code="emr.locationRequired"/>
+                    </label>
+                    <span>
+                        <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"
+                                           tags="Maternal and Child Location"/>
+                    </span>
+                </p>
+            </div>
+
+        </includeIf>
+
+        <!-- all users that don't have either retro privilege, or those with retro-this-provider-only but with an active visit, can only edit location -->
+        <includeIf velocityTest="(!$user.hasPrivilege('Task: emr.retroConsultNoteThisProviderOnly') and !$user.hasPrivilege('Task: emr.retroConsultNote')) or ($user.hasPrivilege('Task: emr.retroConsultNoteThisProviderOnly') and !$user.hasPrivilege('Task: emr.retroConsultNote') and $visit.open)">
+            <div style="display:none">
+                <encounterProviderAndRole default="currentUser" encounterRole="4f10ad1a-ec49-48df-98c7-1391c6ac7f05"
+                                          required="true"/>
+                <encounterDate id="encounterDate" default="now"/>
+            </div>
+            <div id="who-when-where">
+                <table id="who-where-when-view">
+                    <tr>
+                        <td>
+                            <label>
+                                <uimessage code="emr.patientDashBoard.provider"/>
+                            </label>
+                            <span>
+                                <lookup complexExpression="#if($encounter) $ui.format($encounter.provider) #else $ui.format($user.person) #end"/>
+                            </span>
+                        </td>
+                        <td>
+                            <label>
+                                <uimessage code="emr.locationRequired"/>
+                            </label>
+                            <span>
+                                <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"
+                                                   tags="Maternal and Child Location"/>
+                            </span>
+                        </td>
+                        <td>
+                            <label>
+                                <uimessage code="emr.patientDashBoard.date"/>
+                            </label>
+                            <span>
+                                <lookup complexExpression="#if($encounter) $ui.format($fn.startOfDay($encounter.encounterDatetime)) #else $ui.format($fn.startOfDay($formGeneratedDatetime)) #end"/>
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </includeIf>
+    </ifMode>
+
+    <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Registration of Newborn">
+        <div class="section-container">
+            <p>
+                <label>
+                    <uimessage code="Name of baby"/>
+                </label>
+                <obs conceptId="CIEL:1586"/>
+                <label>
+                    <uimessage code="Chart #/ Patient #"/>
+                </label>
+                <obs conceptId="CIEL:164803"/>
+            </p>
+
+            <p class="side-by-side">
+
+                <div class="two-columns">
+                    <div>
+                        <label>
+                            <uimessage code="Mother:"/>
+                        </label>
+                        <lookup expression="patient.personName"/>
+                        <br/>
+                        Telephone:  <lookup expression="personAttributes.get('Telephone Number')"/>
+                    </div>
+
+                    <div>
+                        <label>
+                            <uimessage code="or Caregiver:"/>
+
+                        </label>
+                        <obsgroup groupingConceptId="PIH:13182">
+                            Name: <obs conceptId="PIH:2724" />
+                            Telephone: <obs conceptId="PIH:6194"/>
+                        </obsgroup>
+
+                    </div>
+                </div>
+            </p>
+
+            <p id="when" class="date-one-line">
+                <label>
+                    <uimessage code="Date &amp; time of birth"/>
+                </label>
+                <span>
+                    <obs conceptId="CIEL:5599" showTime="true"/>
+                </span>
+            </p>
+        </div>
+    </section>
+
+    <section id="treatment" sectionTag="fieldset"
+             headerTag="legend" headerStyle="title" headerCode="Admission">
+        <div class="section-container">
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Sex"/>
+                </label>
+                <obs conceptId="CIEL:1587" style="radio"
+                     answerConceptIds="CIEL:1534,CIEL:1535"
+                     answerCodes="M,F"/>
+            </p>
+
+            <label>
+                <uimessage code="Birth weight (kg)"/>
+            </label>
+            <obs conceptId="CIEL:5916"/>
+        </div>
+    </section>
+
+    <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="History">
+        <div class="section-container">
+            <p class="side-by-side">
+
+                <label>
+                    <uimessage code="Mode of delivery"/>
+                </label>
+                <obs conceptId="PIH:11663" style="radio"
+                     answerConceptIds="CIEL:1170,CIEL:166425,CIEL:155884"
+                     answerCodes="Normal,Assisted (vacuum or instrument),C-section"/>
+            </p>
+
+            <p>
+                <label>
+                    <uimessage code="Diagnosis at birth"/>
+                </label>
+                <repeat>
+                    <template>
+                        <obsgroup groupingConceptId="PIH:Visit Diagnoses">
+                            <obs conceptId="PIH:DIAGNOSIS" style="checkbox" answerConceptId="{prior-dx}"/>
+                        </obsgroup>
+                    </template>
+
+                    <render prior-dx="CIEL:159908"/>
+                    <render prior-dx="CIEL:116222"/>
+                    <render prior-dx="PIH:7557"/>
+                    <render prior-dx="CIEL:140476"/>
+                    <render prior-dx="CIEL:115368"/>
+                    <render prior-dx="CIEL:147125"/>
+                    <render prior-dx="CIEL:137998"/>
+                    <render prior-dx="CIEL:145047"/>
+                </repeat>
+                <obsgroup groupingConceptId="PIH:14391">
+                    <obs conceptId="PIH:DIAGNOSIS" style="checkbox"
+                         answerConceptId="CIEL:5622"/>
+                    <label>
+                        <uimessage code="if other, specify:"/>
+                    </label>
+                    <obs conceptId="CIEL:161602"/>
+                </obsgroup>
+            </p>
+
+            <p>
+                <label>
+                    <uimessage code="Treatment provided at delivery unit prior to admission at SCBU"/>
+                </label>
+                <repeat>
+                    <template>
+                        <obs conceptId="PIH:3513" style="checkbox" answerConceptId="{prior-tx}"/>
+                    </template>
+
+                    <render prior-tx="CIEL:164174"/>
+                    <render prior-tx="CIEL:167724"/>
+                    <render prior-tx="CIEL:164173"/>
+                    <render prior-tx="CIEL:167422"/>
+                    <render prior-tx="CIEL:71101"/>
+                    <render prior-tx="PIH:4037"/>
+                    <render prior-tx="CIEL:162738"/>
+                </repeat>
+                <obs conceptId="PIH:3513" style="checkbox"
+                     answerConceptId="CIEL:5622" commentFieldCode="if other, specify:"/>
+            </p>
+
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="APGAR score at time at 1 minutes after birth (0-10, unknown)"/>
+                </label>
+                <obs conceptId="PIH:14419"/>
+                <obs conceptId="PIH:12377" style="checkbox"
+                     answerConceptId="CIEL:1067" answerCode="unknown"/>
+                <br/>
+                <br/>
+
+                <label>
+                    <uimessage code="APGAR score at time at 5 minutes after birth (0-10, unknown)"/>
+                </label>
+                <obs conceptId="CIEL: 159604"/>
+                <obs conceptId="PIH:11932" style="checkbox"
+                     answerConceptId="CIEL:1067" answerCode="unknown"/>
+            </p>
+
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Assisted ventilation at birth"/>
+                </label>
+                <obs conceptId="CIEL:162131" style="radio"
+                     answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"/>
+            </p>
+
+            <p>
+                <label>
+                    <uimessage code="Birth weight (kg)"/>
+                </label>
+                <obs conceptId="CIEL:5916"/>
+            </p>
+
+            <p>
+                <label>
+                    <uimessage code="Gestation age"/>
+                </label>
+                <obs conceptId="CIEL:165425"/>
+                <label>
+                    <i>
+                        <uimessage code="Decimal represents number of days.  For example, 37.4 = 37 weeks + 4 days."/>
+                    </i>
+                </label>
+            </p>
+
+            <p>
+                <label>
+                    <uimessage code="Diagnosis at admission"/>
+                </label>
+                <repeat>
+                    <template>
+                        <obs conceptId="PIH:12564" style="checkbox" answerConceptId="{admission-dx}"/>
+                    </template>
+
+                    <render admission-dx="CIEL:127638"/>
+                    <render admission-dx="PIH:7557"/>
+                    <render admission-dx="CIEL:226"/>
+                    <render admission-dx="CIEL:114100"/>
+                    <render admission-dx="CIEL:115835"/>
+                    <render admission-dx="CIEL:113841"/>
+                    <render admission-dx="CIEL:143849"/>
+                    <render admission-dx="CIEL:115368"/>
+                    <render admission-dx="CIEL:822"/>
+                    <render admission-dx="CIEL:124954"/>
+                </repeat>
+                <obs conceptId="PIH:12564" style="checkbox"
+                     answerConceptId="CIEL:5622" commentFieldCode="if other, specify:"/>
+            </p>
+
+            <p>
+                <label>
+                    <uimessage code="Management"/>
+                </label>
+                <repeat>
+                    <template>
+                        <obs conceptId="CIEL:165995" style="checkbox" answerConceptId="{management}"/>
+                    </template>
+
+                    <render management="CIEL:167422"/>
+                    <render management="CIEL:164174"/>
+                    <render management="CIEL:162738"/>
+                    <render management="CIEL:165944"/>
+                    <render management="CIEL:161911"/>
+                    <render management="CIEL:1063"/>
+                    <render management="CIEL:161651"/>
+                    <render management="CIEL:1187"/>
+                </repeat>
+                <obs conceptId="CIEL:165995" style="checkbox"
+                     answerConceptId="CIEL:5622" commentFieldCode="if other, specify:"/>
+            </p>
+
+        </div>
+    </section>
+
+    <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Discharge form/Outcome">
+        <div class="section-container">
+
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Outcome of admission at SCBU:"/>
+                </label>
+                <obs id="outcome-admission" conceptId="PIH:8620" style="radio"
+                     answerConceptIds="CIEL:1692,PIH:11521,CIEL:1694,CIEL:159">
+                    <controls>
+                        <when value="CIEL:159" thenDisplay="#scbu-death"/>
+                    </controls>
+                </obs>
+
+                <div id="scbu-death">
+                    <strong>
+                        <uimessage code="Death Outcome"/>
+                    </strong>
+                    <obsgroup groupingConceptId="CIEL:163528">
+                        <p class="date-one-line">
+                            <label>
+                                <uimessage code="Date and time of death"/>
+                            </label>
+                            <obs conceptId="PIH:14399" allowFutureDates="true"/>
+                        </p>
+
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Cause of death/ mortality"/>
+                            </label>
+                            <br/>
+                            <obs conceptId="CIEL:159482" style="radio"
+                                 answerConceptIds="CIEL:127638,PIH:7557,CIEL:226,CIEL:114100,CIEL:114100,CIEL:113841,CIEL:1067"/>
+                        </p>
+
+                        <label>
+                            <uimessage code="if other cause of death, specify:"/>
+                        </label>
+                        <obs conceptId="CIEL:160218"/>
+
+                        <label>
+                            <uimessage code="Age at death (days)"/>
+                        </label>
+                        <obs conceptId="PIH:14393"/>
+
+                        <label>
+                            <uimessage code="Weight at time of death (kg)"/>
+                        </label>
+                        <obs conceptId="CIEL:5089"/>
+                    </obsgroup>
+                </div>
+            </p>
+
+            <p class="date-one-line">
+                <label>
+                    <uimessage code="If alive, date of discharge, or LAMA, or referral"/>
+                </label>
+                <obs conceptId="CIEL:1641" allowFutureDates="true" />
+            </p>
+
+        </div>
+    </section>
+
+    <ifMode mode="VIEW" include="false">
+        <div id="buttons">
+            <submit submitClass="confirm right" submitCode="mirebalais.save"/>
+            <button type="button" class="cancel">
+                <uimessage code="emr.cancel"/>
+            </button>
+        </div>
+    </ifMode>
+
+</htmlform>
