@@ -315,11 +315,11 @@
         <div class="section-container">
             <p id="when" class="date-one-line">
                 <label>
-                    <uimessage code="Date &amp; time of birth"/>
+                    <uimessage code="Date &amp; time of delivery"/>
                 </label>
                 <span>
-                    <!-- ToDo: Date is collected at registration time, but not time -->
-                    <obs conceptId="PIH:15080" showTime="true"/>
+                    <!-- NOTE: Birthdate is collected at registration time -->
+                    <obs conceptId="CIEL:5599" showTime="true"/>
                 </span>
             </p>
 
@@ -378,7 +378,7 @@
                     <div>
                         <p class="side-by-side">
                             <label>
-                                <uimessage code="Head circumference (cm)"/>
+                                <uimessage code="Head circumference"/>
                             </label>
                             <obs conceptId="CIEL:163555" showUnits="true"/>
                         </p>
@@ -483,6 +483,7 @@
                         <td colspan="5">* A total score of 7–10 at 5 minutes is considered normal; 4–6, intermediate; and 0–3, low.</td>
                     </tr>
                 </table>
+                <br/>
 
                 <p class="side-by-side">
                     <label>
@@ -612,18 +613,10 @@
                             </template>
                             <render management="CIEL:162738"/>
                         </repeat>
+                        <i>others?</i>
                     </p>
                 </div>
         </div>
-
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="Fetal moulding score"/>
-                </label>
-                <obs conceptId="CIEL:166527" style="radio"
-                    answerConceptIds="CIEL:1107,CIEL:1362,CIEL:1363,CIEL:1364"
-                    answerCodes="0 (no moulding),+1,+2,+3" />
-            </p>
 
             <p>
                 <label>
@@ -651,27 +644,55 @@
                 </repeat>
             </p>
 
-            <!-- ToDo: birth injury/trauma -->
+            <!-- birth injury/trauma -->
             <label>
                 <uimessage code="pihcore.birthInjury" />
             </label>
-            <!-- obs conceptId="CIEL:147277" style="radio"
-                 answerConceptIds="CIEL:1065,CIEL:1066"/ -->
+            <div class="two-columns">
+                <div>
+                    <p class="side-by-side">
+                        <obs id="birthInjury" conceptId="CIEL:147277" style="radio"
+                             answerConceptIds="CIEL:1065,CIEL:1066">
+                            <controls>
+                                <when value="CIEL:1065" thenDisplay="#birthInjury-details"/>
+                            </controls>
+                        </obs>
+                    </p>
+                </div>
+                <div id="birthInjury-details">
+                    <label>
+                        <uimessage code="Birth injury details" />
+                    </label>
+                    <obs conceptId="CIEL:160686" style="textarea" />
+                </div>
+
+            </div>
         </div>
     </section>
 
+    <!--
     <section id="exam" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Examination and First Impressions">
         <div class="section-container">
-            <obs conceptId="PIH:SUPPLEMENT RECEIVED" style="checkbox"
-                 answerConceptId="CIEL:86352" />
+            <p>
+                <i>Add cordcare and prophylactic eye drops</i><br/>
 
-            <obsgroup groupingConceptId="PIH:Visit Diagnoses">
-                <obs conceptId="PIH:DIAGNOSIS" style="checkbox" answerConceptId="CIEL:129372"
-                     answerCode="Signs of postdates"/>
-            </obsgroup>
+                <obs conceptId="PIH:SUPPLEMENT RECEIVED" style="checkbox"
+                     answerConceptId="CIEL:86352" />
+
+                <obsgroup groupingConceptId="PIH:Visit Diagnoses">
+                    <obs conceptId="PIH:DIAGNOSIS" style="checkbox" answerConceptId="CIEL:129372"
+                         answerCode="Signs of postdates"/>
+                </obsgroup>
+            </p>
+
+            <br/>
+            <p>
+                <i>Add exam information</i>
+            </p>
         </div>
     </section>
+    -->
 
     <section id="outcome" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Outcome">
@@ -684,23 +705,9 @@
                 <obs id="outcome-condition" conceptId="CIEL:160116" style="radio"
                      answerConceptIds="CIEL:160113,CIEL:160115"/>
 
-                <div id="death">
-                    <obsgroup groupingConceptId="CIEL:163528">
-                        <p class="date-one-line">
-                            <label>
-                                <uimessage code="Date and time of death"/>
-                            </label>
-                            <obs conceptId="PIH:14399" allowFutureDates="false"/>
-                        </p>
-                    </obsgroup>
+                <div id="disposition">
+                    <encounterDisposition />
                 </div>
-            </p>
-
-            <p class="date-one-line">
-                <label>
-                    <uimessage code="Date and time of transfer"/>
-                </label>
-                <obs conceptId="PIH:15081" allowFutureDates="false" />
             </p>
 
             <label>
