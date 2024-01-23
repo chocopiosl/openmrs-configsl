@@ -298,7 +298,7 @@
                 <render concept="CIEL:165088" name="Victim of GBV (gender-based violence)"/>
                 <render concept="CIEL:115491" name="Multiple gestation" />
                 <render concept="CIEL:118256" name="(signs of) Fetal distress"/>
-                <!-- ToDo:  Get concept; render concept="CIEL:150862" name="Abnormal fetal presentation"/ -->
+                <render concept="CIEL:150862" name="Abnormal fetal presentation"/>
                 <render concept="CIEL:117703" name="Sickle-cell"/>
                 <render concept="CIEL:5622" name="other"/>
             </repeat>
@@ -610,15 +610,7 @@
                             <template>
                                 <obs conceptId="CIEL:165995" style="checkbox" answerConceptId="{management}"/>
                             </template>
-
-                            <render management="CIEL:167422"/>
-                            <render management="CIEL:164174"/>
                             <render management="CIEL:162738"/>
-                            <render management="CIEL:165944"/>
-                            <render management="CIEL:161911"/>
-                            <render management="CIEL:1063"/>
-                            <render management="CIEL:161651"/>
-                            <render management="CIEL:1187"/>
                         </repeat>
                     </p>
                 </div>
@@ -630,7 +622,7 @@
                 </label>
                 <obs conceptId="CIEL:166527" style="radio"
                     answerConceptIds="CIEL:1107,CIEL:1362,CIEL:1363,CIEL:1364"
-                    answerCodes="0,1,2,3" />
+                    answerCodes="0 (no moulding),+1,+2,+3" />
             </p>
 
             <p>
@@ -659,11 +651,12 @@
                 </repeat>
             </p>
 
-            <!-- ToDo: birth injury -->
+            <!-- ToDo: birth injury/trauma -->
             <label>
                 <uimessage code="pihcore.birthInjury" />
             </label>
-            <!-- <obs conceptId="PIH:x" / -->
+            <!-- obs conceptId="CIEL:147277" style="radio"
+                 answerConceptIds="CIEL:1065,CIEL:1066"/ -->
         </div>
     </section>
 
@@ -673,11 +666,10 @@
             <obs conceptId="PIH:SUPPLEMENT RECEIVED" style="checkbox"
                  answerConceptId="CIEL:86352" />
 
-            <!-- ToDo:  Uncomment later
             <obsgroup groupingConceptId="PIH:Visit Diagnoses">
                 <obs conceptId="PIH:DIAGNOSIS" style="checkbox" answerConceptId="CIEL:129372"
                      answerCode="Signs of postdates"/>
-            </obsgroup> -->
+            </obsgroup>
         </div>
     </section>
 
