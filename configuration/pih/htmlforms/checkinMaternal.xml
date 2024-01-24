@@ -163,11 +163,12 @@
                             </template>
                             <render reason="CIEL:163511" msg="Labour"/>
                             <render reason="CIEL:139084" msg="Headache"/>
-                            <!-- render reason="" msg="Pain followup ANC"/ -->
+                            <render reason="CIEL:114403" msg="Pain"/>
+                            <render reason="CIEL:1622"   msg="Followup ANC"/>
                             <render reason="CIEL:166625" msg="Followup postnatal"/>
                             <render reason="CIEL:147241" msg="Bleeding"/>
                             <render reason="CIEL:163497" msg="Neonate visit"/>
-                            <render reason="CIEL:5622" msg="other"/>
+                            <render reason="CIEL:5622"   msg="other"/>
                         </repeat>
 
                         <label>
