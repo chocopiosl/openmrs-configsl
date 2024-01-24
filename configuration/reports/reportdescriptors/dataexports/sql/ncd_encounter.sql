@@ -56,8 +56,8 @@ create temporary table temp_ncd
  diabetes_indicators_obs_group     int(11),      
  diabetes_control                  varchar(255), 
  diabetes_on_insulin               bit,  
- diabetes_home_glucometer		   bit, 
- lab_order_hba1c                   boolean, 
+ diabetes_home_glucometer		   bit, -- 
+ lab_order_hba1c                   boolean, -- 
  hypertension_type                 varchar(255), 
  hypertension_stage                varchar(255), 
  hypertension_indicators_obs_group int(11),      
@@ -75,34 +75,34 @@ create temporary table temp_ncd
  next_appointment_date             date,     
  disposition                       varchar(255), 
  transfer_site                     varchar(255),
- echooptions						varchar(255), 
- echocomment 						varchar(500), 
- echocardiogram_findings			varchar(500), 
- on_on_ace_inhibitor_group_id 		int, 
- on_ace_inhibitor                   varchar(3), 
- on_beta_blocker                    varchar(3), 
- cardiac_surgery_scheduled          varchar(3), 
- cardiac_surgery_performed_date		date, 
- cardiac_surgery_performed          boolean, 
- scd_penicillin_treatment           boolean, 
- scd_folic_acid_treatment			boolean, 
- transfusions_since_last_visit     int, 
- asthma_severity                   varchar(20), 
- nighttime_waking_asthma           varchar(3), 
- nighttime_count 					int, 
- symptoms_2x_week_asthma            varchar(3), 
- symptoms_2x_count 					int, 
- inhaler_for_symptoms_2x_week_asthma varchar(3), 
- inhaler_count						int, 
- limitation_obs_group_id			int, 
- activity_limitation_asthma			varchar(60), 
- activity_count						int, 
+ echooptions						varchar(255), -- o
+ echocomment 						varchar(500), -- o
+ echocardiogram_findings			varchar(500), -- 
+ on_on_ace_inhibitor_group_id 		int, -- o 
+ on_ace_inhibitor                   varchar(3), -- 
+ on_beta_blocker                    varchar(3), -- 
+ cardiac_surgery_scheduled          varchar(3), -- 
+ cardiac_surgery_performed_date		date, -- 
+ cardiac_surgery_performed          boolean, -- 
+ scd_penicillin_treatment           boolean, -- 
+ scd_folic_acid_treatment			boolean, -- 
+ transfusions_since_last_visit     int, -- 
+ asthma_severity                   varchar(20), -- 
+ nighttime_waking_asthma           varchar(3), -- 
+ nighttime_count 					int, -- o 
+ symptoms_2x_week_asthma            varchar(3), -- 
+ symptoms_2x_count 					int, -- o 
+ inhaler_for_symptoms_2x_week_asthma varchar(3), -- 
+ inhaler_count						int, -- o 
+ limitation_obs_group_id			int, -- o 
+ activity_limitation_asthma			varchar(60), -- 
+ activity_count						int, -- o 
  asthma_control_GINA               varchar(20),
- echocardiogram_obs_group_id 		int, 
- echocardiogram_date				date, 
- diabitec_comma					    boolean, 
- diabitec_without_comma				boolean, 
- hospitalization_DKA				boolean,
+ echocardiogram_obs_group_id 		int, -- o
+ echocardiogram_date				date, -- 
+ diabitec_comma					    boolean, -- o
+ diabitec_without_comma				boolean, -- o
+ hospitalization_DKA				boolean, -- 
  index_asc                         int, 
  index_desc                        int
 );
@@ -145,6 +145,7 @@ set encounter_type = encounterName(encounter_type_id);
 update temp_ncd
 set provider = provider(encounter_id);
 
+
 -- patient level columns
 drop temporary table if exists temp_ncd_patients;
 create temporary table temp_ncd_patients
@@ -178,10 +179,10 @@ FROM temp_obs
 WHERE concept_id=concept_from_mapping('PIH','14587');
 
 update temp_ncd t
-set echocardiogram_obs_group_id = obs_group_id_of_value_coded_from_temp(encounter_id,'PIH','8614' ,'PIH','3763' );
+set echocardiogram_obs_group_id=obs_group_id_of_value_coded_from_temp(encounter_id,'PIH','8614','PIH','3763');
 
 UPDATE temp_ncd t
-SET echocardiogram_date=obs_from_group_id_value_datetime_from_temp(t.echocardiogram_obs_group_id, 'PIH', '12847');
+SET echocardiogram_date=obs_from_group_id_value_datetime_from_temp(t.echocardiogram_obs_group_id,'PIH','12847');
 
 update temp_ncd t
 set next_appointment_date = DATE(obs_value_datetime_from_temp(encounter_id, 'PIH','5096'));
