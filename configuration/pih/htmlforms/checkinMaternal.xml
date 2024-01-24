@@ -12,12 +12,12 @@
   ~ Copyright (C) OpenMRS, LLC.  All Rights Reserved.
   -->
 
-<htmlform formUuid="6058e2e0-7428-11e5-a837-0800200c9a66" formName="Check-In"
-          formEncounterType="55a0d3ea-a4d7-4e88-8f01-5aceb2d3c61b" formVersion="2.0">
+<htmlform formUuid="9a5a5d5b-4e99-43a0-8b66-8c9b97963354" formName="Maternal Check-In"
+          formEncounterType="251c03fa-a9dc-4157-855f-b016f4fae9ab" formVersion="1.0">
     <style>
         .encounter-summary-container {
-        font-size: 1em;
-        font-weight: normal;
+            font-size: 1em;
+            font-weight: normal;
         }
     </style>
 
@@ -31,10 +31,8 @@
         <script type="text/javascript">
 
             jq(function() {
-
-            // hack to make the datepicker show when the form is opened
-            getField('encounterDate.value').datepicker('show');
-
+                // hack to make the datepicker show when the form is opened
+                getField('encounterDate.value').datepicker('show');
             });
 
         </script>
@@ -46,7 +44,7 @@
             </fieldset>
         </div>
 
-        <section id="checkin" sectionTag="section" headerStyle="title" headerCode="mirebalais.retrospectiveCheckin.label">
+        <section id="checkin" sectionTag="section" headerStyle="title" headerCode="mirebalais.maternalCheckin.label">
 
             <fieldset class="required">
                 <legend>
@@ -129,6 +127,5 @@
 
     </ifMode>
     <!-- END VIEW VERSION OF THE FORM -->
-
 
 </htmlform>
