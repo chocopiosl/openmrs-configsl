@@ -328,11 +328,13 @@
                     <uimessage code="Gestation age"/>
                 </label>
                 <obs conceptId="CIEL:165425"/>
-                <label>
-                    <i>
-                        <uimessage code="Decimal represents number of days.  For example, 37.4 = 37 weeks + 4 days."/>
-                    </i>
-                </label>
+                <ifMode mode="VIEW" include="false">
+                    <label>
+                        <i>
+                            <uimessage code="Decimal represents number of days.  For example, 37.4 = 37 weeks + 4 days."/>
+                        </i>
+                    </label>
+                </ifMode>
             </p>
             <br/><br/>
 
@@ -423,67 +425,69 @@
                 </div>
                 <br/>
 
-                <table>
-                    <thead>
+                <ifMode mode="VIEW" include="false">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th colspan="2"></th>
+                                <th colspan="3" style="text-align:center">APGAR Score (*)</th>
+                            </tr>
+
+                            <tr>
+                                <th>Sign</th>
+                                <th>Mnemonic</th>
+                                <th>0</th>
+                                <th>1</th>
+                                <th>2</th>
+                            </tr>
+                        </thead>
+
                         <tr>
-                            <th colspan="2"></th>
-                            <th colspan="3" style="text-align:center">APGAR Score (*)</th>
+                            <td>Colour</td>
+                            <td><b>A</b>ppearance</td>
+                            <td>Blue, pale</td>
+                            <td>Body pink, Limb blue</td>
+                            <td>Pink</td>
                         </tr>
 
                         <tr>
-                            <th>Sign</th>
-                            <th>Mnemonic</th>
-                            <th>0</th>
-                            <th>1</th>
-                            <th>2</th>
+                            <td>Heart rate</td>
+                            <td><b>P</b>ulse</td>
+                            <td>Absent</td>
+                            <td>&lt; 100 bpm</td>
+                            <td>&gt; 100 bpm</td>
                         </tr>
-                    </thead>
 
-                    <tr>
-                        <td>Colour</td>
-                        <td><b>A</b>ppearance</td>
-                        <td>Blue, pale</td>
-                        <td>Body pink, Limb blue</td>
-                        <td>Pink</td>
-                    </tr>
+                        <tr>
+                            <td>Response to nasal catheter/tactile stimulation</td>
+                            <td><b>G</b>rimace</td>
+                            <td>None</td>
+                            <td>Grimace</td>
+                            <td>Sneeze, cough, (vigorous crying?)</td>
+                        </tr>
 
-                    <tr>
-                        <td>Heart rate</td>
-                        <td><b>P</b>ulse</td>
-                        <td>Absent</td>
-                        <td>&lt; 100 bpm</td>
-                        <td>&gt; 100 bpm</td>
-                    </tr>
+                        <tr>
+                            <td>Muscle tone</td>
+                            <td><b>A</b>ctivity</td>
+                            <td>Limp</td>
+                            <td>Some limb flexion</td>
+                            <td>Active</td>
+                        </tr>
 
-                    <tr>
-                        <td>Response to nasal catheter/tactile stimulation</td>
-                        <td><b>G</b>rimace</td>
-                        <td>None</td>
-                        <td>Grimace</td>
-                        <td>Sneeze, cough, (vigorous crying?)</td>
-                    </tr>
+                        <tr>
+                            <td>Respiratory effort</td>
+                            <td><b>R</b>espiration</td>
+                            <td>Absent</td>
+                            <td>Slow, irregular</td>
+                            <td>Good, crying</td>
+                        </tr>
 
-                    <tr>
-                        <td>Muscle tone</td>
-                        <td><b>A</b>ctivity</td>
-                        <td>Limp</td>
-                        <td>Some limb flexion</td>
-                        <td>Active</td>
-                    </tr>
-
-                    <tr>
-                        <td>Respiratory effort</td>
-                        <td><b>R</b>espiration</td>
-                        <td>Absent</td>
-                        <td>Slow, irregular</td>
-                        <td>Good, crying</td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="5">* A total score of 7–10 at 5 minutes is considered normal; 4–6, intermediate; and 0–3, low.</td>
-                    </tr>
-                </table>
+                        <tr>
+                            <td colspan="5">* A total score of 7–10 at 5 minutes is considered normal; 4–6, intermediate; and 0–3, low.</td>
+                        </tr>
+                    </table>
                 <br/>
+                </ifMode>
 
                 <p class="side-by-side">
                     <label>
@@ -624,7 +628,7 @@
                 </label>
                 <repeat>
                     <template>
-                        <obsgroup groupingConceptId="PIH:Visit Diagnoses">
+                        <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
                             <obs conceptId="PIH:DIAGNOSIS" style="checkbox" answerConceptId="{dx}"/>
                         </obsgroup>
                     </template>
@@ -680,7 +684,7 @@
                 <obs conceptId="PIH:SUPPLEMENT RECEIVED" style="checkbox"
                      answerConceptId="CIEL:86352" />
 
-                <obsgroup groupingConceptId="PIH:Visit Diagnoses">
+                <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
                     <obs conceptId="PIH:DIAGNOSIS" style="checkbox" answerConceptId="CIEL:129372"
                          answerCode="Signs of postdates"/>
                 </obsgroup>
