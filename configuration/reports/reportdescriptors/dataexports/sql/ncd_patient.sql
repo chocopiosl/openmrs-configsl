@@ -13,8 +13,6 @@ SET @partition = '${partitionNum}';
 DROP TABLE IF EXISTS ncd_patient;
 CREATE TABLE ncd_patient (
 patient_id int, 
-encounter_id int, 
-encounter_datetime datetime,
 emr_id varchar(50),
 hiv varchar(30),
 comorbidities varchar(30),
@@ -108,19 +106,17 @@ SELECT patient_id, max(echocardiogram_date) AS echocardiogram_date
 FROM temp_encounter te
 GROUP BY patient_id;
 
-
 DROP TEMPORARY TABLE if exists temp_mschool_card;
 CREATE TEMPORARY TABLE temp_mschool_card
-SELECT person_id,max(ever_missed_school) AS ever_missed_school, max(cardiomyopathy) AS cardiomyopathy
+SELECT person_id, max(ever_missed_school) AS ever_missed_school, max(cardiomyopathy) AS cardiomyopathy
 FROM temp_obs
 GROUP BY person_id;
 
-INSERT INTO ncd_patient(patient_id, emr_id, encounter_id,encounter_datetime, name, family_name, 
+INSERT INTO ncd_patient(patient_id, emr_id, 
+name, family_name, 
 current_age, gender, dead, date_of_death, dob)
-SELECT patient_id,
+SELECT DISTINCT patient_id,
 patient_identifier(patient_id, metadata_uuid('org.openmrs.module.emrapi', 'emr.primaryIdentifierType')) AS emr_id,
-encounter_id,
-encounter_datetime,
 person_given_name(patient_id),
 person_family_name(patient_id),
 current_age_in_years(patient_id),
@@ -141,34 +137,34 @@ AND p.voided=0
 SET tgt.dob_estimated= p.birthdate_estimated;
 
 UPDATE ncd_patient
-SET diabetes = answer_exists_in_encounter(encounter_id, 'PIH', '10529','PIH', '3720');
+SET diabetes = answerEverExists_from_temp(patient_id, 'PIH', '10529','PIH', '3720', NULL);
 
 UPDATE ncd_patient
-SET hypertension = answer_exists_in_encounter(encounter_id, 'PIH', '10529','PIH', '903');
+SET hypertension = answerEverExists_from_temp(patient_id, 'PIH', '10529','PIH', '903', NULL);
 
 UPDATE ncd_patient
-SET heart_failure = answer_exists_in_encounter(encounter_id, 'PIH', '10529','PIH', '3468');
+SET heart_failure = answerEverExists_from_temp(patient_id, 'PIH', '10529','PIH', '3468', NULL);
 
 UPDATE ncd_patient
-SET chronic_lung_disease = answer_exists_in_encounter(encounter_id, 'PIH', '10529','PIH', '6768');
+SET chronic_lung_disease = answerEverExists_from_temp(patient_id, 'PIH', '10529','PIH', '6768', NULL);
 
 UPDATE ncd_patient
-SET chronic_kidney_disease = answer_exists_in_encounter(encounter_id, 'PIH', '10529','PIH', '3699');
+SET chronic_kidney_disease = answerEverExists_from_temp(patient_id, 'PIH', '10529','PIH', '3699', NULL);
 
 UPDATE ncd_patient
-SET liver_cirrhosis_hepb = answer_exists_in_encounter(encounter_id, 'PIH', '10529','PIH', '3714');
+SET liver_cirrhosis_hepb = answerEverExists_from_temp(patient_id, 'PIH', '10529','PIH', '3714', NULL);
 
 UPDATE ncd_patient
-SET palliative_care = answer_exists_in_encounter(encounter_id, 'PIH', '10529','PIH', '10359');
+SET palliative_care = answerEverExists_from_temp(patient_id, 'PIH', '10529','PIH', '10359', NULL);
 
 UPDATE ncd_patient
-SET sickle_cell = answer_exists_in_encounter(encounter_id, 'PIH', '10529','PIH', '7908');
+SET sickle_cell = answerEverExists_from_temp(patient_id, 'PIH', '10529','PIH', '7908', NULL);
 
 UPDATE ncd_patient
-SET other_ncd = answer_exists_in_encounter(encounter_id, 'PIH', '10529','PIH', '5622');
+SET other_ncd = answerEverExists_from_temp(patient_id, 'PIH', '10529','PIH', '5622', NULL);
 
 UPDATE ncd_patient
-SET hypertension_type = obs_value_coded_list_from_temp(encounter_id, 'PIH', '11940','en');
+SET hypertension_type = last_value_coded_list_from_temp(patient_id, 'PIH', '11940','en');
 
 UPDATE ncd_patient
 SET diabetes_type = CASE WHEN answerEverExists_from_temp(patient_id,'PIH','3064', 'PIH', '6692', null) THEN 'Type 2 DM'
@@ -179,19 +175,19 @@ ELSE NULL
 END;
 
 UPDATE ncd_patient
-SET rheumatic_heart_disease = answer_exists_in_encounter(encounter_id, 'PIH', '3064','PIH', '221');
+SET rheumatic_heart_disease = answerEverExists_from_temp(patient_id, 'PIH', '3064','PIH', '221', NULL);
 
 UPDATE ncd_patient
-SET congenital_heart_disease = answer_exists_in_encounter(encounter_id, 'PIH', '3064','PIH', '3131');
+SET congenital_heart_disease = answerEverExists_from_temp(patient_id, 'PIH', '3064','PIH', '3131', NULL );
 
 UPDATE ncd_patient
-SET nyha_classification = obs_value_coded_list_from_temp(encounter_id, 'PIH', '3139','en');
+SET nyha_classification = last_value_coded_list_from_temp(patient_id, 'PIH', '3139','en');
 
 UPDATE ncd_patient
-SET lung_disease_type = obs_value_coded_list_from_temp(encounter_id, 'PIH', '14599','en');
+SET lung_disease_type = last_value_coded_list_from_temp(patient_id, 'PIH', '14599','en');
 
 UPDATE ncd_patient
-SET ckd_stage = obs_value_coded_list_from_temp(encounter_id, 'PIH', '12501','en');
+SET ckd_stage = last_value_coded_list_from_temp(patient_id, 'PIH', '12501','en');
 
 UPDATE ncd_patient
 SET sickle_cell_type = 
@@ -204,25 +200,22 @@ CASE WHEN answerEverExists_from_temp(patient_id,'PIH','3064', 'PIH', '7908', nul
      END;
 
 UPDATE ncd_patient
-SET next_appointment_date = CAST(obs_value_datetime_from_temp(encounter_id, 'PIH','5096') AS date); 
+SET next_appointment_date = CAST(last_value_datetime_from_temp(patient_id, 'PIH','5096') AS date); 
 
 UPDATE ncd_patient
 SET recent_program_id = mostRecentPatientProgramId(patient_id, @ncd_program);
 
-set @disp = concept_from_mapping('PIH','8620');
 UPDATE ncd_patient tgt 
-INNER JOIN temp_obs o ON o.encounter_id=tgt.encounter_id
-AND o.concept_id= @disp 
-SET disposition= concept_name(value_coded,@locale);
+SET disposition= last_value_coded_list_from_temp(patient_id, 'PIH', '8620',@locale);
 
 UPDATE ncd_patient
-SET hiv = obs_value_coded_list_from_temp(encounter_id, 'PIH', '1169','en');
+SET hiv = last_value_coded_list_from_temp(patient_id, 'PIH', '1169','en');
 
 UPDATE ncd_patient
-SET comorbidities = obs_value_coded_list_from_temp(encounter_id, 'PIH', '12976','en');
+SET comorbidities = last_value_coded_list_from_temp(patient_id, 'PIH', '12976','en');
 
 UPDATE ncd_patient
-SET other_ncd_type = obs_value_text_from_temp(encounter_id, 'PIH', '7416');
+SET other_ncd_type = last_value_text_from_temp(patient_id, 'PIH', '7416');
 
 UPDATE ncd_patient tgt 
 INNER JOIN recent_encounter re ON tgt.patient_id = re.patient_id 
@@ -259,8 +252,7 @@ GROUP BY person_id
 ON t.patient_id=o.person_id
 SET t.most_recent_hba1c_date= o.encounter_date;
 
-
-SELECT 
+SELECT
 emr_id,
 hiv,
 comorbidities,
