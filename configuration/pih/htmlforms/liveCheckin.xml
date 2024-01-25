@@ -69,8 +69,8 @@
 
             <p class="left">
                 <obs conceptId="PIH:REASON FOR VISIT" id="typeOfVisit"
-                     answerConceptIds="PIH:OUTPATIENT CONSULTATION,PIH:EMERGENCY VISIT,PIH:ANC VISIT,PIH:Labor and delivery visit,PIH:FAMILY PLANNING SERVICES,PIH:Immunization visit,PIH:MALNUTRITION PROGRAM,PIH:ART VISIT,PIH:TB VISIT,PIH:MENTAL HEALTH SERVICES	"
-                     answerLabels="Outpatient visit,Sick visit,ANC,Labor and Delivery,Family Planning,Immunization,Malnutrition,HIV,TB,Mental Health"
+                     answerConceptIds="PIH:OUTPATIENT CONSULTATION,PIH:EMERGENCY VISIT,PIH:ANC VISIT,PIH:Labor and delivery visit,PIH:FAMILY PLANNING SERVICES,PIH:Immunization visit,PIH:MALNUTRITION PROGRAM,PIH:ART VISIT,PIH:TB VISIT,PIH:MENTAL HEALTH SERVICES,CIEL:168363"
+                     answerLabels="Outpatient visit,Sick visit,ANC,Labor and Delivery,Family Planning,Immunization,Malnutrition,HIV,TB,Mental Health,NCD"
                      style="dropdown" size="999">
                 </obs>
             </p>

@@ -95,7 +95,7 @@
 
                 <p class="left">
                     <obs conceptId="PIH:REASON FOR VISIT" id="typeOfVisit"
-                         answerConceptIds="CIEL:1622,PIH:5483,PIH:10377,PIH:6261,PIH:1482,PIH:6262,CIEL:163497,CIEL:5489,PIH:10346,CIEL:160542,CIEL:165048,CIEL:137793"
+                         answerConceptIds="CIEL:1622,PIH:5483,PIH:10377,PIH:6261,PIH:1482,PIH:6262,CIEL:163497,CIEL:5489,PIH:10346,CIEL:160542,CIEL:165048,PIH:EMERGENCY VISIT,"
                          answerCodes="pihcore.anc,pihcore.familyPlanning.title,Labour and Delivery,pihcore.postnatal,HIV,TB,Neonate,pih.task.mentalHealth.label,Immunization,Outpatient visit,pihcore.testLocation.pedWard,Sick visit"
                          style="dropdown" size="999"/>
                 </p>
