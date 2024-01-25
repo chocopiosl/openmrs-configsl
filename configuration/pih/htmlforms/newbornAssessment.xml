@@ -642,10 +642,24 @@
                     <render dx="PIH:7557"    name="Birth asphyxia"/>
                     <render dx="CIEL:118256" name="Fetal distress"/>
                     <render dx="CIEL:116642" name="Intra-uterine fetal demise"/>
-                    <render dx="CIEL:143849" name="Congenital malformation"/>
                     <render dx="CIEL:129211" name="Premature rupture of membranes"/>
                     <render dx="CIEL:115866" name="Meconium aspiration" />
                 </repeat>
+
+                <!-- Congenital malformation -->
+                <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                    <obs id="malformation-q" conceptId="PIH:DIAGNOSIS" style="checkbox" answerConceptId="CIEL:143849">
+                        <controls>
+                            <when value="CIEL:143849" thenDisplay="#malformation-details"/>
+                        </controls>
+                    </obs>
+                </obsgroup>
+                <div id="malformation-details">
+                    <label>
+                        <uimessage code="Specify malformation(s):" />
+                    </label>
+                    <obs conceptId="PIH:15086" style="text" />
+                </div>
             </p>
 
             <!-- birth injury/trauma -->
