@@ -281,6 +281,59 @@
         </includeIf>
     </ifMode>
 
+    <section id="intake" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Intake">
+        <div class="section-container">
+            <p class="date-one-line">
+                <label>
+                    <uimessage code="Admission date/time"/>
+                </label>
+                <obs conceptId="CIEL:1640"/>
+            </p>
+
+            <div class="two-columns">
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="pihcore.mch.grava"/>
+                        </label>
+                        <obs conceptId="CIEL:5624" />
+                    </p>
+
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="pihcore.mch.para"/>
+                        </label>
+                        <obs conceptId="CIEL:1053"/>
+                    </p>
+                </div>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="Gestational age (GA)"/>
+                        </label>
+                        <obs conceptId="CIEL:165425"/>
+                        <label>
+                            <i>
+                                <uimessage code="Decimal represents number of days.  For example, 37.4 = 37 weeks + 4 days."/>
+                            </i>
+                        </label>
+                    </p>
+
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="GA based on:" />
+                        </label>
+                        <br/>
+                        <obs conceptId="CIEL:160697" style="radio"
+                             answerConceptIds="CIEL:159618,CIEL:1427,CIEL:5596"
+                             answerSeparator="&lt;br /&gt;" />
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
      <section id="preg-complications" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Pregnancy complications">
         <div class="section-container">
@@ -292,8 +345,8 @@
                 <render concept="CIEL:118256" name="(signs of) Fetal distress"/>
                 <render concept="CIEL:150862" name="Abnormal fetal presentation"/>
                 <render concept="CIEL:1449"   name="Gestational diabetes"/>
-                <!-- Get CIEL:160152
-                <render concept="CIEL:160152" name="Confirmed malaria with pregnancy"/>
+                <!-- Get
+                <render concept="CIEL:134594" name="Malaria in pregnancy"/>
                 -->
                 <render concept="PIH:3703"    name="Anemia in pregnancy" CIEL="148834"/>
                 <render concept="CIEL:118744" name="Eclampsia"/>
