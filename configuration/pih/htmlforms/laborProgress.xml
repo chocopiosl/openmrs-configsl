@@ -321,7 +321,7 @@
 
                     <p class="side-by-side">
                         <label>
-                            <uimessage code="GA based on:" />
+                            <uimessage code="Gestational age based on:" />
                         </label>
                         <br/>
                         <obs conceptId="CIEL:160697" style="radio"
@@ -345,9 +345,7 @@
                 <render concept="CIEL:118256" name="(signs of) Fetal distress"/>
                 <render concept="CIEL:150862" name="Abnormal fetal presentation"/>
                 <render concept="CIEL:1449"   name="Gestational diabetes"/>
-                <!-- Get
                 <render concept="CIEL:134594" name="Malaria in pregnancy"/>
-                -->
                 <render concept="PIH:3703"    name="Anemia in pregnancy" CIEL="148834"/>
                 <render concept="CIEL:118744" name="Eclampsia"/>
                 <render concept="CIEL:129251" name="Preeclampsia"/>

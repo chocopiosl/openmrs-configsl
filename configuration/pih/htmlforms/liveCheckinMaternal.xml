@@ -115,7 +115,7 @@
 
         <fieldset class="referral-info">
             <legend>
-                <uimessage code="pihcore.referral"/>
+                <uimessage code="Referral in"/>
             </legend>
 
             <p class="side-by-side">
@@ -124,17 +124,21 @@
                 </label>
                 <obs conceptId="CIEL:1788" id="referred"
                      answerConceptIds="CIEL:1065,CIEL:1066"
-                     style="radio"/>
+                     style="radio" >
+                    <controls>
+                        <when value="CIEL:1065" thenDisplay="#refer-details"/>
+                    </controls>
+                </obs>
             </p>
 
-            <p class="side-by-side">
+            <p id="refer-details" class="side-by-side" >
                 <label>
                     <uimessage code="Referral from:"/>
                 </label>
                 <br/>
                 <obs id="role-refer" conceptId="PIH:10647"
                      answerConceptIds="PIH:12368,CIEL:1555,CIEL:1575,CIEL:978,CIEL:5622"
-                     style="radio" answerSeparator="&lt;br /&gt;">
+                     style="radio" answerSeparator="&lt;br /&gt;" >
                     <controls>
                         <when value="CIEL:5622" thenDisplay="#other-referee"/>
                     </controls>
@@ -187,17 +191,23 @@
                         <uimessage code="If other, specify reason for referral:"/>
                     </label>
                     <obs conceptId="CIEL:164359" style="text"/>
-
                 </div>
-
             </p>
-            <br/>
+        </fieldset>
+
+        <fieldset class="queue">
+            <legend>
+                <uimessage code="MCOE Triage"/>
+            </legend>
+
+            <h3>
+                <uimessage code="MCOE Triage"/>
+            </h3>
 
             <div class="section-container" style="color:black">
                 <obs conceptId="CIEL:1272" style="checkbox"
                      answerConceptId="PIH:15073" answerCode="Refer to MCOE triage" />
             </div>
-
         </fieldset>
 
         <fieldset class="transport-info">
@@ -208,21 +218,23 @@
             <h3>
                 <uimessage code="Method of transport"/>
             </h3>
-            <p class="side-by-side">
-                <obs id="transport" conceptId="PIH:975" style="radio"
-                     answerConceptIds="CIEL:1377,PIH:BY BICYCLE,PIH:WALKING,PIH:CAR,PIH:OTHER">
-                    <controls>
-                        <when value="CIEL:5622" thenDisplay="#other-transport"/>
-                    </controls>
-                </obs>
+            <div>
+                <p class="side-by-side">
+                    <obs id="transport" conceptId="PIH:975" style="radio"
+                         answerConceptIds="CIEL:1377,PIH:BY BICYCLE,PIH:WALKING,PIH:CAR,PIH:OTHER">
+                        <controls>
+                            <when value="CIEL:5622" thenDisplay="#other-transport"/>
+                        </controls>
+                    </obs>
+                </p>
+            </div>
+            <div id="other-transport">
+                <label>
+                    <uimessage code="If other, specify transport method:"/>
+                </label>
+                <obs conceptId="PIH:1301" style="text"/>
+            </div>
 
-                <div id="other-transport">
-                    <label>
-                        <uimessage code="If other, specify transport method:"/>
-                    </label>
-                    <obs conceptId="PIH:1301" style="text"/>
-                </div>
-            </p>
         </fieldset>
 
     </section>
