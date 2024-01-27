@@ -69,33 +69,25 @@
 
     <section id="checkin" sectionTag="section" headerStyle="title" headerCode="mirebalais.maternalCheckin.label">
 
-        <fieldset class="required">
-            <legend>
-                <uimessage code="mirebalais.retrospectiveCheckin.checkinDate.label"/>
-            </legend>
-            <h3>
-                <uimessage code="mirebalais.retrospectiveCheckin.checkinDate.label"/>
-            </h3>
+        <!-- allows us to display date/provider/location when viewing a form -->
+        <ifMode mode="VIEW">
+            <fieldset>
+                <h3><uimessage code="mirebalais.retrospectiveCheckin.checkinDate.label"/></h3>
+                <encounterDate id="encounterDate" default="now" showTime="false"/>
+            </fieldset>
 
-            <p class="left">
-                <encounterDate id="encounterDate" showTime="false" default="now"/>
-            </p>
-        </fieldset>
+            <fieldset>
+                <h3><uimessage code="mirebalais.retrospectiveCheckin.provider.label"/></h3>
+                <encounterProviderAndRole default="currentUser" encounterRole="cbfe0b9d-9923-404c-941b-f048adc8cdc0" required="true"/>
 
+            </fieldset>
 
-        <fieldset class="required">
-            <legend>
-                <uimessage code="mirebalais.retrospectiveCheckin.provider.label"/>
-            </legend>
-            <h3>
-                <uimessage code="mirebalais.retrospectiveCheckin.provider.label"/>
-            </h3>
-
-            <p class="left">
-                <encounterProviderAndRole default="currentUser" encounterRole="cbfe0b9d-9923-404c-941b-f048adc8cdc0"
-                                          required="true"/>
-            </p>
-        </fieldset>
+            <fieldset>
+                <h3><uimessage code="mirebalais.retrospectiveCheckin.location.label"/></h3>
+                <!-- TODO: note that on servers with multiple Visit locations, this could result in multiple visits at the same time if patient is checked in from two different locations -->
+                <encounterLocation default="SessionAttribute:emrContext.sessionLocationId" tags="Check-In Location"/>
+            </fieldset>
+        </ifMode>
 
         <fieldset class="required type-of-visit-question">
             <legend>

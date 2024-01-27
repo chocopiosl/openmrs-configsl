@@ -502,30 +502,25 @@
                 </span>
             </p>
 
-            <div class="two-columns">
-                <div>
-                    <p class="side-by-side">
-                        <label>
-                            <uimessage code="Membranes"/>
-                        </label>
-                        <obs id="membrane-state" conceptId="CIEL:164900" style="radio"
-                             answerConceptIds="CIEL:164899,CIEL:127244" answerCodes="Intact,Ruptured">
-                            <controls>
-                                <when value="CIEL:127244" thenDisplay="#rupture-date"/>
-                            </controls>
-                        </obs>
-                    </p>
-                </div>
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Membranes"/>
+                </label>
+                <obs id="membrane-state" conceptId="CIEL:164900" style="radio"
+                     answerConceptIds="CIEL:164899,CIEL:127244" answerCodes="Intact,Ruptured">
+                    <controls>
+                        <when value="CIEL:127244" thenDisplay="#rupture-date"/>
+                    </controls>
+                </obs>
+            </p>
 
-                <div id="rupture-date" class="date-one-line">
-                    <label>
-                        <uimessage code="Rupture date/time"/>
-                    </label>
-                    <!-- ToDo: get concept CIEL:160710
-                    <obs conceptId="CIEL:160710" showTime="true"/ -->
-                </div>
-
+            <div id="rupture-date" class="date-one-line">
+                <label>
+                    <uimessage code="Rupture date/time"/>
+                </label>
+                <obs conceptId="CIEL:160710" showTime="true"/>
             </div>
+
         </div>
     </section>
 
@@ -660,7 +655,7 @@
                     <uimessage code="pihcore.showLess"/>
                 </button>
 
-            <br/>
+            <br/><br/>
             <p class="side-by-side">
                 <label>
                     <uimessage code="pihcore.uterusPalpation" />
