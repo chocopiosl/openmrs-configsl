@@ -521,6 +521,25 @@
                 <obs conceptId="CIEL:160710" showTime="true"/>
             </div>
 
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Membrane color" />
+                </label>
+                <obs conceptId="PIH:15111" style="radio"
+                     answerConceptIds="CIEL:159484,PIH:15112"/>
+            </p>
+
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Meconium classification" />
+                </label>
+                <br/>
+                <obs conceptId="PIH:15110" style="radio"
+                     answerConceptIds="CIEL:160771,CIEL:160774,CIEL:160778"
+                     answerCodes="pihcore.meconiumClass.1,pihcore.meconiumClass.2,pihcore.meconiumClass.3"
+                     answerSeparator="&lt;br /&gt;" />
+            </p>
+
         </div>
     </section>
 
@@ -588,13 +607,15 @@
                         </p>
                     </div>
                     <div>
-                        <label>
-                            <uimessage code="pihcore.fetalHeartRate"/> method
-                        </label>
-                        <span class="small">
-                            <!-- ToDo:  Add concept
-                            obs conceptId="CIEL:xx" id="fetal_hr_method" style="radio"/ -->
-                        </span>
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="pihcore.fetalHeartRate"/> method
+                            </label>
+                            <br/>
+                            <obs conceptId="CIEL:168715" id="fetal_hr_method" style="radio"
+                                 answerConceptIds="CIEL:168716,CIEL:168717,CIEL:168718,CIEL:168719,CIEL:168720,CIEL:5622"
+                                 answerCodes="Pinard,Doppler,Moyo,Janitri,CTG,other"/>
+                    </p>
                     </div>
                 </div>
 
@@ -656,6 +677,38 @@
                 </button>
 
             <br/><br/>
+
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Induced labor" />
+                </label>
+                <obs id="induced" conceptId="PIH:15113" style="radio"
+                     answerConceptIds="CIEL:1065,CIEL:1066">
+                    <controls>
+                        <when value="CIEL:1065" thenDisplay="#induced-details"/>
+                    </controls>
+                </obs>
+                <br/>
+
+                <div id="induced-details">
+                    <div id="induced-date" class="date-one-line">
+                        <label>
+                            <uimessage code="Induction date/time"/>
+                        </label>
+                        <obs conceptId="PIH:15116" showTime="true"/>
+                    </div>
+                    <br/>
+
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="Method of induction" />
+                        </label>
+                        <obs conceptId="PIH:15114" style="radio"
+                             answerConceptIds="PIH:15115,CIEL:81369,CIEL:79984" />
+                    </p>
+                </div>
+            </p>
+
             <p class="side-by-side">
                 <label>
                     <uimessage code="pihcore.uterusPalpation" />
@@ -663,6 +716,35 @@
                 <obs conceptId="CIEL:167035" style="radio"
                      answerConceptIds="CIEL:167036,CIEL:167037"
                      answerCodes="pihcore.sensitiveUterus,pihcore.nonSensitiveUterus"/>
+                <br/><br/>
+
+                <label>
+                    <uimessage code="Previous abdominal scar" />
+                </label>
+                <obs id="ab-scar" conceptId="PIH:15109" style="radio"
+                     answerConceptIds="CIEL:1065,CIEL:1066" >
+                    <controls>
+                        <when value="CIEL:1065" thenDisplay="#ab-scar-details"/>
+                    </controls>
+                </obs>
+
+                <div id="ab-scar-details" class="two-columns">
+                    <div>
+                        <label>
+                            <uimessage code="# of previous c-sections"/>
+                        </label>
+                        <obs conceptId="CIEL:160081"/>
+                    </div>
+
+                    <div>
+                        <label>
+                            <uimessage code="Description of scar"/>
+                        </label>
+                        <obs conceptId="CIEL:168244"/>
+                    </div>
+                </div>
+
+
             </p>
         </div>
     </section>

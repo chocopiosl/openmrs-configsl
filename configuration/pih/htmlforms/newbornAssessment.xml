@@ -695,6 +695,9 @@
             <p>
                 <i>Add cordcare and prophylactic eye drops</i><br/>
 
+                <obs procedure answerConceptId="CIEL:168724" answerCode="Prophylactic eye drops" />
+                <obs procedure answerConceptId="CIEL:168725" answerCode="Umbilical cord care" />
+
                 <obs conceptId="PIH:SUPPLEMENT RECEIVED" style="checkbox"
                      answerConceptId="CIEL:86352" />
 
