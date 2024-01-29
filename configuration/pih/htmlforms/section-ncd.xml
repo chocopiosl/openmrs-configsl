@@ -460,10 +460,29 @@
                                 <uimessage code="Glucose fingerstick" />
                             </label>
                             <br/>
-                            <obs conceptId="PIH:6689" style="radio"
+                            <obs id="fasting" conceptId="PIH:6689" style="radio"
                                  answerConceptIds="CIEL:1065,CIEL:1066"
-                                 answerCodes="FBG,RBG" answerSeparator="&lt;br /&gt;" />
+                                 answerCodes="FBG,RBG" answerSeparator="&lt;br /&gt;" >
+                                <controls>
+                                    <when value="CIEL:1065" thenDisplay="#fbg"/>
+                                    <when value="CIEL:1066" thenDisplay="#rbg"/>
+                                </controls>
+                            </obs>
                         </p>
+
+                        <div id="rbg">
+                            <label>
+                                <uimessage code="Fasting blood glucose (RBG)" />
+                            </label>
+                            <obs conceptId="CIEL:887" showUnits="true"/>
+                        </div>
+
+                        <div id="rbg">
+                            <label>
+                                <uimessage code="Random blood glucose (RBG)" />
+                            </label>
+                            <obs conceptId="CIEL:160912" showUnits="true"/>
+                        </div>
 
                         <!-- only show MUAC if patient is less than 13 years old (on the encounterDate)-->
                         <includeIf velocityTest="(13 > $patient.getAge($encounter.getEncounterDatetime()))">

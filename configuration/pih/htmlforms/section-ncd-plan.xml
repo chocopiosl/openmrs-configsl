@@ -159,6 +159,7 @@
                             <option value="160225AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="Sickling test" />
                             <option value="e286d1c8-e3df-45d6-a6cf-7cee0bdf370b" label="Sickle RT SCAN" />
                             <option value="165544AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="Hb electrophoresis" />
+                            <option value="161519AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label="HPLC" />
                         </orderProperty>
                     </div>
                 </orderTemplate>
