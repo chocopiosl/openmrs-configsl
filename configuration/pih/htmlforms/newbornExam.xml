@@ -13,12 +13,10 @@
   -->
 
 <htmlform id="newborn-assessment"
-          formUuid="17e93a76-32d1-4435-a5e3-3068e305c2d7"
-          htmlformUuid="f6eb28e3-66d1-4f99-b46f-0ff6e05c672c"
-          formName="Newborn Assessment"
-          formEncounterType="6444b8d4-407d-444d-aa15-d6dff204ed83" formVersion="1.0">
-
-    <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.CleanDiagnosisConstructAction"/>
+          formUuid="6575f0e6-fcae-47ef-9838-4129e60e2cbb"
+          htmlformUuid="ac4c6416-5474-4b38-a4f2-2f316f76ee73"
+          formName="Newborn Exam"
+          formEncounterType="7e42e652-89e7-4559-80fd-41f42826c98c" formVersion="1.0">
 
     <translations defaultLocale="en">
         <code name="o2Sat">
@@ -167,7 +165,7 @@
     <ifMode mode="VIEW" include="false">
         <h2>
             <label>
-                <uimessage code="pih.task.newbornAssessment"/>
+                <uimessage code="pih.task.newbornExam"/>
             </label>
         </h2>
 
@@ -281,233 +279,76 @@
         </includeIf>
     </ifMode>
 
-     <section id="preg-complications" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="Pregnancy complications">
-        <div class="section-container">
-            <repeat>
-                <template>
-                    <obs conceptId="PIH:3334" answerConceptId="{concept}" style="checkbox"/>
-                </template>
-
-                <render concept="CIEL:142474" name="Type 1 Diabetes"/>
-                <render concept="CIEL:142473" name="Type 2 Diabetes"/>
-                <render concept="CIEL:1449"   name="Gestational diabetes"/>
-                <render concept="CIEL:118744" name="Eclampsia"/>
-                <render concept="CIEL:230"    name="Postpartum hemorrhage"/>
-                <render concept="CIEL:129251" name="Preeclampsia"/>
-                <render concept="CIEL:165088" name="Victim of GBV (gender-based violence)"/>
-                <render concept="CIEL:115491" name="Multiple gestation" />
-                <render concept="CIEL:118256" name="(signs of) Fetal distress"/>
-                <render concept="CIEL:150862" name="Abnormal fetal presentation"/>
-                <render concept="CIEL:117703" name="Sickle-cell"/>
-                <render concept="CIEL:5622" name="other"/>
-            </repeat>
-
-            <label>
-                <uimessage code="zl.ifOtherSpecify" />
-            </label>
-            <obs conceptId="PIH:14679" />
-        </div>
-    </section>
-
-    <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="Newborn condition">
+    <section id="Overview" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Newborn overview">
         <div class="section-container">
             <p id="when" class="date-one-line">
                 <label>
                     <uimessage code="Date &amp; time of delivery"/>
                 </label>
-                <span>
-                    <!-- NOTE: Birthdate is collected at registration time -->
-                    <obs conceptId="CIEL:5599" showTime="true"/>
-                </span>
+                <includeIf velocityTest="($fn.latestObs('CIEL:5599')) ">
+                    <!-- ToDo:  Show date AND time -->
+                    <lookup expression="fn.latestObs('CIEL:5599').valueDatetime"/>
+                </includeIf>
             </p>
 
-            <p>
-                <label>
-                    <uimessage code="Gestation age"/>
-                </label>
-                <obs conceptId="CIEL:165425"/>
-                <ifMode mode="VIEW" include="false">
-                    <label>
-                        <i>
-                            <uimessage code="Decimal represents number of days.  For example, 37.4 = 37 weeks + 4 days."/>
-                        </i>
-                    </label>
-                </ifMode>
-            </p>
-            <br/><br/>
-
-            <div class="three-columns">
-                <div>
-                    <p class="side-by-side">
-                        <label>
-                            <uimessage code="Type of delivery"/>
-                        </label>
-                        <br/>
-                        <obs conceptId="PIH:11663" style="radio"
-                             answerConceptIds="CIEL:1170,PIH:1172,CIEL:155884"
-                             answerSeparator="&lt;br /&gt;"/>
-                    </p>
-                </div>
-                <div>
-                    <p class="side-by-side">
-                        <label>
-                            <uimessage code="Outcome"/>
-                        </label>
-                        <br/>
-                        <obs id="dead-or-alive"
-                             conceptId="CIEL:159917" style="radio"
-                             answerConceptIds="CIEL:151849,CIEL:159916,CIEL:135436"
-                             answerCodes="Alive,FSB,MSB">
-                            <controls>
-                                <when value="CIEL:151849" thenDisplay="#alive-details"/>
-                            </controls>
-                        </obs>
-                    </p>
-
-                </div>
-                <div>
-                    <p class="side-by-side">
-                        <label>
-                            <uimessage code="Sex"/>
-                        </label>
-                        <obs conceptId="CIEL:1587" style="radio"
-                             answerConceptIds="CIEL:1534,CIEL:1535"
-                             answerCodes="M,F"/>
-                    </p>
-                </div>
-            </div>
-
-            <div id="alive-details">
-                <div class="three-columns">
-                    <div>
-                        <p class="side-by-side">
-                            <label>
-                                <uimessage code="Birth length"/>
-                            </label>
-                            <obs conceptId="CIEL:163554" showUnits="true"/>
-                        </p>
-                    </div>
-                    <div>
-                        <p class="side-by-side">
-                            <label>
-                                <uimessage code="Head circumference"/>
-                            </label>
-                            <obs conceptId="CIEL:163555" showUnits="true"/>
-                        </p>
-                    </div>
-
-                    <div>
-                        <p class="side-by-side">
-                            <label>
-                                <uimessage code="Birth Weight"/>
-                            </label>
-                            <obs conceptId="CIEL:5916" showUnits="true"/>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="three-columns">
-                    <!-- APGAR -->
-                    <div class="apgar">
-                        <label>
-                            <uimessage code="pihcore.mch.apgarScore1"/>
-                        </label>
-
-                        <!-- APGAR at 1 minutes -->
-                        <obs conceptId="PIH:14419"/>
-                    </div>
-                    <div class="apgar">
-                        <label>
-                            <uimessage code="pihcore.mch.apgarScore"/>
-                        </label>
-
-                        <!-- APGAR at 5 minutes -->
-                        <obs conceptId="CIEL:159604"/>
-                    </div>
-                    <div class="apgar">
-                        <label>
-                            <uimessage code="pihcore.mch.apgarScore10"/>
-                        </label>
-
-                        <!-- APGAR at 10 minutes -->
-                        <obs conceptId="PIH:14785"/>
-                    </div>
-                </div>
-                <br/>
-
-                <ifMode mode="VIEW" include="false">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th colspan="2"></th>
-                                <th colspan="3" style="text-align:center">APGAR Score (*)</th>
-                            </tr>
-
-                            <tr>
-                                <th>Sign</th>
-                                <th>Mnemonic</th>
-                                <th>0</th>
-                                <th>1</th>
-                                <th>2</th>
-                            </tr>
-                        </thead>
-
-                        <tr>
-                            <td>Colour</td>
-                            <td><b>A</b>ppearance</td>
-                            <td>Blue, pale</td>
-                            <td>Body pink, Limb blue</td>
-                            <td>Pink</td>
-                        </tr>
-
-                        <tr>
-                            <td>Heart rate</td>
-                            <td><b>P</b>ulse</td>
-                            <td>Absent</td>
-                            <td>&lt; 100 bpm</td>
-                            <td>&gt; 100 bpm</td>
-                        </tr>
-
-                        <tr>
-                            <td>Response to nasal catheter/tactile stimulation</td>
-                            <td><b>G</b>rimace</td>
-                            <td>None</td>
-                            <td>Grimace</td>
-                            <td>Sneeze, cough, (vigorous crying?)</td>
-                        </tr>
-
-                        <tr>
-                            <td>Muscle tone</td>
-                            <td><b>A</b>ctivity</td>
-                            <td>Limp</td>
-                            <td>Some limb flexion</td>
-                            <td>Active</td>
-                        </tr>
-
-                        <tr>
-                            <td>Respiratory effort</td>
-                            <td><b>R</b>espiration</td>
-                            <td>Absent</td>
-                            <td>Slow, irregular</td>
-                            <td>Good, crying</td>
-                        </tr>
-
-                        <tr>
-                            <td colspan="5">* A total score of 7–10 at 5 minutes is considered normal; 4–6, intermediate; and 0–3, low.</td>
-                        </tr>
-                    </table>
-                <br/>
-                </ifMode>
-
+            <includeIf velocityTest="($fn.latestObs('PIH:11663')) ">
                 <p class="side-by-side">
                     <label>
-                        <uimessage code="Breastfeeding initiated within 1 hour after birth"/>
+                        <uimessage code="Type of delivery"/>:
                     </label>
-                    <obs conceptId="CIEL:161543" style="radio" answerConceptIds="CIEL:1065,CIEL:1066"/>
+                    <lookup complexExpression="$fn.latestObs('PIH:11663').valueCoded.name"/>
                 </p>
+            </includeIf>
+
+            <div id="alive-details">
+                    <!-- APGAR -->
+                    <div class="three-columns">
+                        <div class="apgar">
+                            <label>
+                                <uimessage code="pihcore.mch.apgarScore1"/>
+                            </label>
+                            <includeIf velocityTest="($fn.latestObs('PIH:14419')) ">
+                            <!-- APGAR at 1 minutes -->
+                            <lookup complexExpression="$fn.latestObs('PIH:14419').valueNumeric"/>
+                            (<lookup expression="fn.latestObs('PIH:14419').obsDatetime"/>)
+                            </includeIf>
+                        </div>
+                        <div class="apgar">
+                            <label>
+                                <uimessage code="pihcore.mch.apgarScore"/>
+                            </label>
+                            <includeIf velocityTest="($fn.latestObs('CIEL:159604')) ">
+                            <!-- APGAR at 5 minutes <obs conceptId="CIEL:159604"/> -->
+                            <lookup complexExpression="$fn.latestObs('CIEL:159604').valueNumeric"/>
+                            (<lookup expression="fn.latestObs('CIEL:159604').obsDatetime"/>)
+                            </includeIf>
+                        </div>
+
+                        <div class="apgar">
+                            <label>
+                                <uimessage code="pihcore.mch.apgarScore10"/>
+                            </label>
+                            <includeIf velocityTest="($fn.latestObs('PIH:14785')) ">
+                            <!-- APGAR at 10 minutes <obs conceptId="PIH:14785"/> -->
+                            <lookup complexExpression="$fn.latestObs('PIH:14785').valueNumeric"/>
+                            (<lookup expression="fn.latestObs('PIH:14785').obsDatetime"/>)
+                            </includeIf>
+                        </div>
+                    </div>
+                    <br/>
             </div>
+
+            <!-- Resuscitated -->
+            <includeIf velocityTest="($fn.latestObs('CIEL:162131')) ">
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="pihcore.neoResusc"/>:
+                    </label>
+                    <lookup complexExpression="$fn.latestObs('CIEL:162131').valueCoded.name"/>
+                    (<lookup expression="fn.latestObs('CIEL:162131').obsDatetime"/>)
+                </p>
+            </includeIf>
 
             <p>
                 <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
@@ -518,13 +359,173 @@
         </div>
     </section>
 
+    <section id="exam" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Physical exam">
+        <div class="section-container">
+            <p id="rbg">
+                <label>
+                    <uimessage code="Random blood glucose (RBG)" />
+                </label>
+                <obs conceptId="CIEL:887" showUnits="true"/>
+            </p>
+
+            <p>
+                <h4>
+                    <uimessage code="Umbilical cord"/>
+                </h4>
+                <div class="two-columns">
+                    <div>
+                        <p class="side-by-side">
+                            <!-- ToDo:  Add more answers PIH:3647 (dry), PIH:1670 (sticky) -->
+                            <obs conceptId="CIEL:168721" style="radio"
+                                 answerConceptIds="PIH:Clean,PIH:3647,PIH:1670"
+                                 answerSeparator="&lt;br /&gt;"/>
+                            <!-- answerCode="Clean,Dry,Sticky"/ -->
+                        </p>
+                    </div>
+                    <div>
+                        <label>Comments</label>
+                        <obs conceptId="CIEL:168722" style="text" />
+                    </div>
+                </div>
+            </p>
+
+            <p>
+                <h4>
+                    <uimessage code="Eyes"/>
+                </h4>
+                <div class="two-columns">
+                    <div>
+                        <p class="side-by-side">
+                            <!-- ToDo:  Add more answers CIEL:127777 (Red eyes) -->
+                            <obs conceptId="CIEL:163309" style="radio"
+                                 answerConceptIds="PIH:15107,PIH:1670"
+                                 answerSeparator="&lt;br /&gt;"/>
+                            <!-- answerCodes="Clear,(Red,)Sticky"/ -->
+                        </p>
+                    </div>
+                    <div>
+                        <label>Comments</label>
+                        <obs conceptId="CIEL:168722" style="text" />
+                    </div>
+                </div>
+            </p>
+
+            <p>
+                <h4>
+                    <uimessage code="Skin color"/>
+                </h4>
+                <div class="two-columns">
+                    <div>
+                        <p class="side-by-side">
+                            <obs conceptId="CIEL:1120" style="radio"
+                                 answerConceptIds="CIEL:1115,CIEL:143050,CIEL:115368"
+                                 answerSeparator="&lt;br /&gt;"
+                                 answerCodes="Normal (pink),Cyanosis (blue),Jaundice" />
+                        </p>
+                    </div>
+                    <div>
+                        <label>Comments</label>
+                        <obs conceptId="CIEL:160981" style="text" />
+                    </div>
+                </div>
+            </p>
+
+            <p>
+                <h4>
+                    <uimessage code="Urination"/>
+                </h4>
+                <div class="two-columns">
+                    <div>
+                        <p class="side-by-side">
+                            <obs conceptId="CIEL:166358" style="radio"
+                                 answerConceptIds="CIEL:1115,CIEL:148566"
+                                 answerSeparator="&lt;br /&gt;"
+                                 answerCodes="Normal (passed urine),Anuria (No urination)"/>
+                        </p>
+                    </div>
+                    <div>
+                        <label>Comments</label>
+                        <obs conceptId="CIEL:166363" style="text" />
+                    </div>
+                </div>
+            </p>
+
+            <p class="side-by-side">
+                <h4>
+                    <uimessage code="Stool"/>
+                </h4>
+                <div class="two-columns">
+                    <div>
+                        <p class="side-by-side">
+                            <obs conceptId="CIEL:163640" style="radio"
+                                 answerConceptIds="PIH:15112,CIEL:160910,CIEL:1107"
+                                 answerSeparator="&lt;br /&gt;" />
+                            <!-- answerCodes="Meconium,Brown/Green,Yellow,None"/ -->
+                        </p>
+                    </div>
+                    <div>
+                        <label>Comments</label>
+                        <obs conceptId="CIEL:160965" style="text" />
+                    </div>
+                </div>
+            </p>
+
+            <h4>
+                <uimessage code="Feeding method"/>
+            </h4>
+            <p class="side-by-side">
+                <!-- ToDo:  Add more answers (spoon,cup) -->
+                <obs conceptId="CIEL:1151" style="radio"
+                     answerConceptIds="CIEL:5632,CIEL:5254,CIEL:162380"
+                     answerCodes="Breastfed,Formula,Tube"/>
+            </p>
+        </div>
+    </section>
+
     <section id="vitals" sectionTag="fieldset" headerTag="legend"
              headerStyle="title" headerCode="pihcore.vitalSigns">
         <div class="section-container">
             <table>
                 <tr>
                     <td>
-                        <div class="five-columns">
+                        <div class="three-columns">
+                            <div>
+                                <p class="side-by-side">
+                                    <label>
+                                        <uimessage code="Weight"/>
+                                    </label>
+                                    <includeIf velocityTest="($fn.latestObs('CIEL:5089')) ">
+                                        <lookup complexExpression="$fn.latestObs('CIEL:5089').valueNumeric"/>kg
+                                        (<lookup expression="fn.latestObs('CIEL:5089').obsDatetime"/>)
+                                    </includeIf>
+                                    <br/>
+                                    <span class="small">
+                                        <obs conceptId="CIEL:5089" id="weight_kg" showUnits="emr.units.kilograms"
+                                             unitsCssClass="append-to-value"/>
+                                    </span>
+                                </p>
+
+                                <includeIf velocityTest="($fn.latestObs('CIEL:5916')) ">
+                                    <p class="side-by-side">
+                                        <label>
+                                            <uimessage code="Birth Weight:"/>
+                                        </label>
+                                        <lookup complexExpression="$fn.latestObs('CIEL:5916').valueNumeric"/>kg
+                                        (<lookup expression="fn.latestObs('CIEL:5916').obsDatetime"/>)
+                                    </p>
+                                </includeIf>
+                            </div>
+                            <div>
+                                <label>
+                                    <uimessage code="Temperature"/>
+                                </label>
+                                <span class="small">
+                                    <obs conceptId="CIEL:5088" id="temperature_c"
+                                         showUnits="emr.units.degreesCelsius" unitsCssClass="append-to-value"/>
+                                </span>
+                            </div>
+
                             <div>
                                 <label>
                                     <uimessage code="mirebalais.vitals.short.heartRate.title"/>
@@ -532,64 +533,6 @@
                                 <span class="small">
                                     <obs conceptId="CIEL:5087" id="heart_rate"
                                          showUnits="emr.units.perMinute" unitsCssClass="append-to-value"/>
-                                </span>
-                            </div>
-
-                            <div>
-                                <label>
-                                    <uimessage code="mirebalais.vitals.bloodPressure.short.title"/>
-                                </label>
-                                <span class="small">
-                                    <ifMode mode="VIEW" include="true">
-                                        <span class="append-to-value">
-                                            <obs conceptId="CIEL:5085" id="bp_systolic"/>
-                                        </span>
-                                        <span class="append-to-value">/</span>
-                                        <span class="append-to-value">
-                                            <obs conceptId="CIEL:5086" id="bp_diastolic" />
-                                        </span>
-                                        <span class="append-to-value">mm/Hg</span>
-                                    </ifMode>
-                                    <ifMode mode="VIEW" include="false">
-                                        <span class="append-to-value left">
-                                            <obs conceptId="CIEL:5085" id="bp_systolic"/>
-                                        </span>
-                                        <span class="append-to-value left">/</span>
-                                        <span class="append-to-value left">
-                                            <obs conceptId="CIEL:5086" id="bp_diastolic" />
-                                        </span>
-                                        <span class="append-to-value">mm/Hg</span>
-                                    </ifMode>
-                                </span>
-                            </div>
-
-                            <div>
-                                <label>
-                                    <uimessage code="mirebalais.vitals.respiratoryRate.short.title"/>
-                                </label>
-                                <span class="small">
-                                    <obs conceptId="CIEL:5242" id="respiratory_rate"
-                                         showUnits="emr.units.perMinute" unitsCssClass="append-to-value"/>
-                                </span>
-                            </div>
-
-                            <div>
-                                <label>
-                                    <uimessage code="o2Sat"/>
-                                </label>
-                                <span class="small">
-                                    <obs conceptId="CIEL:5092" id="o2_sat"
-                                         showUnits="emr.units.percent" unitsCssClass="append-to-value"/>
-                                </span>
-                            </div>
-
-                            <div>
-                                <label>
-                                    <uimessage code="Temp"/>
-                                </label>
-                                <span class="small">
-                                    <obs conceptId="CIEL:5088" id="temperature_c"
-                                         showUnits="emr.units.degreesCelsius" unitsCssClass="append-to-value"/>
                                 </span>
                             </div>
                         </div>
@@ -602,37 +545,7 @@
     <section id="assessment" sectionTag="fieldset"
              headerTag="legend" headerStyle="title" headerCode="Assessment">
         <div class="section-container">
-            <!-- Resuscitated -->
-            <div class="two-columns">
-                <div>
-                    <p class="side-by-side">
-                        <label>
-                            <uimessage code="pihcore.neoResusc"/>
-                        </label>
-                        <obs id="resuscitation" conceptId="CIEL:162131"
-                             answerConceptIds="CIEL:1065,CIEL:1066"
-                             style="radio" answerSeparator="">
-                            <controls>
-                                <when value="CIEL:1065" thenDisplay="#type-resuscitation"/>
-                            </controls>
-                        </obs>
-                    </p>
-                </div>
-                <div id="type-resuscitation">
-                    <label>
-                        <uimessage code="Type of resuscitation"/>
-                    </label>
-                    <p>
-                        <repeat>
-                            <template>
-                                <obs conceptId="CIEL:165995" style="checkbox" answerConceptId="{management}"/>
-                            </template>
-                            <render management="CIEL:162738"/>
-                        </repeat>
-                        <i>others?</i>
-                    </p>
-                </div>
-        </div>
+
 
             <p>
                 <label>
