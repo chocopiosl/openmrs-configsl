@@ -470,18 +470,18 @@
                             </obs>
                         </p>
 
-                        <div id="rbg">
+                        <div id="fbg">
                             <label>
-                                <uimessage code="Fasting blood glucose (RBG)" />
+                                <uimessage code="Fasting blood glucose (FBG)" />
                             </label>
-                            <obs conceptId="CIEL:887" showUnits="true"/>
+                            <obs conceptId="CIEL:160912" showUnits="true"/>
                         </div>
 
                         <div id="rbg">
                             <label>
                                 <uimessage code="Random blood glucose (RBG)" />
                             </label>
-                            <obs conceptId="CIEL:160912" showUnits="true"/>
+                            <obs conceptId="CIEL:887" showUnits="true"/>
                         </div>
 
                         <!-- only show MUAC if patient is less than 13 years old (on the encounterDate)-->

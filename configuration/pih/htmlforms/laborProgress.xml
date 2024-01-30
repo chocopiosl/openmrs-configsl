@@ -535,7 +535,7 @@
                 </label>
                 <br/>
                 <obs conceptId="PIH:15110" style="radio"
-                     answerConceptIds="CIEL:160771,CIEL:160774,CIEL:160778"
+                     answerConceptIds="CIEL:168727,CIEL:168728,CIEL:168729"
                      answerCodes="pihcore.meconiumClass.1,pihcore.meconiumClass.2,pihcore.meconiumClass.3"
                      answerSeparator="&lt;br /&gt;" />
             </p>
