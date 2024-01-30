@@ -216,8 +216,6 @@ SELECT encounter_id,value_coded_name(obs_id,'en') name FROM temp_obs
 WHERE concept_id=concept_from_mapping('PIH','14376');
 
 SELECT 
-t.encounter_id,
-patient_id,
 emrid,
 provider,
 location,
