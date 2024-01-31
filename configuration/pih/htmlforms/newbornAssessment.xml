@@ -650,6 +650,7 @@
                     <render dx="CIEL:145935" name="Cephalopelvic disproportion"/>
                     <render dx="CIEL:116222" name="Low birth weight"/>
                     <render dx="CIEL:113841" name="Premature"/>
+                    <render dx="CIEL:129372" name="Signs of postdates" />
                     <render dx="CIEL:127639" name="Respiratory distress"/>
                     <render dx="PIH:7557"    name="Birth asphyxia"/>
                     <render dx="CIEL:118256" name="Fetal distress"/>
@@ -699,33 +700,6 @@
             </div>
         </div>
     </section>
-
-    <!--
-    <section id="exam" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="Examination and First Impressions">
-        <div class="section-container">
-            <p>
-                <i>Add cordcare and prophylactic eye drops</i><br/>
-
-                <obs procedure answerConceptId="CIEL:168724" answerCode="Prophylactic eye drops" />
-                <obs procedure answerConceptId="CIEL:168725" answerCode="Umbilical cord care" />
-
-                <obs conceptId="PIH:SUPPLEMENT RECEIVED" style="checkbox"
-                     answerConceptId="CIEL:86352" />
-
-                <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                    <obs conceptId="PIH:DIAGNOSIS" style="checkbox" answerConceptId="CIEL:129372"
-                         answerCode="Signs of postdates"/>
-                </obsgroup>
-            </p>
-
-            <br/>
-            <p>
-                <i>Add exam information</i>
-            </p>
-        </div>
-    </section>
-    -->
 
     <section id="outcome" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Outcome">

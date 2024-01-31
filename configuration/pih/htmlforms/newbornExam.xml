@@ -150,6 +150,42 @@
         </ifMode>
     </style>
 
+    <ifMode mode="VIEW" include="false">
+        <script type="text/javascript">
+            jq(document).ready(function() {
+
+            jq('.normalObs').change(function(event) {
+                // get the Obs checkbox value
+                var firstCheckbox = jq(this).children(":checkbox:first").prop('checked');
+                if (firstCheckbox == true) {
+                    var parentDiv = jq(this).closest('.exam');
+                    if (parentDiv != null) {
+                        jq(parentDiv).find('.abnormalObs').each(function(index, element) {
+                            jq(this).children(":checkbox:first").prop('checked', false);
+                        });
+                    }
+                }
+            });
+
+            jq('.abnormalObs').change(function(event) {
+                var firstCheckbox = jq(this).children(":checkbox:first").prop('checked');
+                if (firstCheckbox == true) {
+                    var parentDiv = jq(this).closest('.exam');
+                    if (parentDiv != null) {
+                        jq(parentDiv).find('.normalObs').each(function(index, element) {
+                            jq(this).children(":checkbox:first").prop('checked', false);
+                        });
+                    }
+                }
+            });
+
+            // handlers for next and submit buttons, see nextAndSubmitButtons.js
+            setUpNextAndSubmitButtons();
+
+            });
+        </script>
+    </ifMode>
+
     <div class="print-form-datestamps" style="display:none">
         <p><uimessage code="pihcore.form.created_on"/>:
             <lookup complexExpression="$form.dateCreated"/>
@@ -279,85 +315,80 @@
         </includeIf>
     </ifMode>
 
-    <section id="Overview" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="Newborn overview">
-        <div class="section-container">
-            <p id="when" class="date-one-line">
-                <label>
-                    <uimessage code="Date &amp; time of delivery"/>
-                </label>
-                <includeIf velocityTest="($fn.latestObs('CIEL:5599')) ">
-                    <!-- ToDo:  Show date AND time -->
-                    <lookup expression="fn.latestObs('CIEL:5599').valueDatetime"/>
+    <ifMode mode="VIEW" include="false">
+        <section id="Overview" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+                 headerCode="Newborn overview">
+            <div class="section-container">
+                <p id="when" class="date-one-line">
+                    <label>
+                        <uimessage code="Date &amp; time of delivery"/>
+                    </label>
+                    <includeIf velocityTest="($fn.latestObs('CIEL:5599')) ">
+                        <!-- ToDo:  Show date AND time -->
+                        <lookup expression="fn.latestObs('CIEL:5599').valueDatetime"/>
+                    </includeIf>
+                </p>
+
+                <includeIf velocityTest="($fn.latestObs('PIH:11663')) ">
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="Type of delivery"/>:
+                        </label>
+                        <lookup complexExpression="$fn.latestObs('PIH:11663').valueCoded.name"/>
+                    </p>
                 </includeIf>
-            </p>
 
-            <includeIf velocityTest="($fn.latestObs('PIH:11663')) ">
-                <p class="side-by-side">
-                    <label>
-                        <uimessage code="Type of delivery"/>:
-                    </label>
-                    <lookup complexExpression="$fn.latestObs('PIH:11663').valueCoded.name"/>
-                </p>
-            </includeIf>
+                <div id="alive-details">
+                        <!-- APGAR -->
+                        <div class="three-columns">
+                            <div class="apgar">
+                                <label>
+                                    <uimessage code="pihcore.mch.apgarScore1"/>
+                                </label>
+                                <includeIf velocityTest="($fn.latestObs('PIH:14419')) ">
+                                <!-- APGAR at 1 minutes -->
+                                <lookup complexExpression="$fn.latestObs('PIH:14419').valueNumeric"/>
+                                (<lookup expression="fn.latestObs('PIH:14419').obsDatetime"/>)
+                                </includeIf>
+                            </div>
+                            <div class="apgar">
+                                <label>
+                                    <uimessage code="pihcore.mch.apgarScore"/>
+                                </label>
+                                <includeIf velocityTest="($fn.latestObs('CIEL:159604')) ">
+                                <!-- APGAR at 5 minutes <obs conceptId="CIEL:159604"/> -->
+                                <lookup complexExpression="$fn.latestObs('CIEL:159604').valueNumeric"/>
+                                (<lookup expression="fn.latestObs('CIEL:159604').obsDatetime"/>)
+                                </includeIf>
+                            </div>
 
-            <div id="alive-details">
-                    <!-- APGAR -->
-                    <div class="three-columns">
-                        <div class="apgar">
-                            <label>
-                                <uimessage code="pihcore.mch.apgarScore1"/>
-                            </label>
-                            <includeIf velocityTest="($fn.latestObs('PIH:14419')) ">
-                            <!-- APGAR at 1 minutes -->
-                            <lookup complexExpression="$fn.latestObs('PIH:14419').valueNumeric"/>
-                            (<lookup expression="fn.latestObs('PIH:14419').obsDatetime"/>)
-                            </includeIf>
+                            <div class="apgar">
+                                <label>
+                                    <uimessage code="pihcore.mch.apgarScore10"/>
+                                </label>
+                                <includeIf velocityTest="($fn.latestObs('PIH:14785')) ">
+                                <!-- APGAR at 10 minutes <obs conceptId="PIH:14785"/> -->
+                                <lookup complexExpression="$fn.latestObs('PIH:14785').valueNumeric"/>
+                                (<lookup expression="fn.latestObs('PIH:14785').obsDatetime"/>)
+                                </includeIf>
+                            </div>
                         </div>
-                        <div class="apgar">
-                            <label>
-                                <uimessage code="pihcore.mch.apgarScore"/>
-                            </label>
-                            <includeIf velocityTest="($fn.latestObs('CIEL:159604')) ">
-                            <!-- APGAR at 5 minutes <obs conceptId="CIEL:159604"/> -->
-                            <lookup complexExpression="$fn.latestObs('CIEL:159604').valueNumeric"/>
-                            (<lookup expression="fn.latestObs('CIEL:159604').obsDatetime"/>)
-                            </includeIf>
-                        </div>
+                        <br/>
+                </div>
 
-                        <div class="apgar">
-                            <label>
-                                <uimessage code="pihcore.mch.apgarScore10"/>
-                            </label>
-                            <includeIf velocityTest="($fn.latestObs('PIH:14785')) ">
-                            <!-- APGAR at 10 minutes <obs conceptId="PIH:14785"/> -->
-                            <lookup complexExpression="$fn.latestObs('PIH:14785').valueNumeric"/>
-                            (<lookup expression="fn.latestObs('PIH:14785').obsDatetime"/>)
-                            </includeIf>
-                        </div>
-                    </div>
-                    <br/>
+                <!-- Resuscitated -->
+                <includeIf velocityTest="($fn.latestObs('CIEL:162131')) ">
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="pihcore.neoResusc"/>:
+                        </label>
+                        <lookup complexExpression="$fn.latestObs('CIEL:162131').valueCoded.name"/>
+                        (<lookup expression="fn.latestObs('CIEL:162131').obsDatetime"/>)
+                    </p>
+                </includeIf>
             </div>
-
-            <!-- Resuscitated -->
-            <includeIf velocityTest="($fn.latestObs('CIEL:162131')) ">
-                <p class="side-by-side">
-                    <label>
-                        <uimessage code="pihcore.neoResusc"/>:
-                    </label>
-                    <lookup complexExpression="$fn.latestObs('CIEL:162131').valueCoded.name"/>
-                    (<lookup expression="fn.latestObs('CIEL:162131').obsDatetime"/>)
-                </p>
-            </includeIf>
-
-            <p>
-                <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                    <obs conceptId="PIH:DIAGNOSIS" style="checkbox"
-                         answerConceptId="CIEL:115491" answerCode="Twins or multiple"/>
-                </obsgroup>
-            </p>
-        </div>
-    </section>
+        </section>
+    </ifMode>
 
     <section id="exam" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Physical exam">
@@ -371,20 +402,24 @@
 
             <p>
                 <h4>
-                    <uimessage code="Umbilical cord"/>
+                    <uimessage code="Umbilical cord stump"/>
                 </h4>
-                <div class="two-columns">
+                <div class="two-columns exam">
                     <div>
-                        <p class="side-by-side">
-                            <!-- ToDo:  Add more answers for sticky -->
-                            <obs conceptId="CIEL:168721" style="radio"
-                                 answerConceptIds="PIH:Clean,PIH:3647,PIH:1670"
-                                 answerSeparator="&lt;br /&gt;"/>
-                            <!-- answerCode="Clean,Dry,Sticky"/ -->
-                        </p>
+                        <repeat>
+                            <template>
+                                <obs class="{normAb}" style="checkbox"
+                                     conceptId="CIEL:162121"
+                                     answerConceptId="{answer}" answerCode="{comment}"/>
+                            </template>
+                            <render normAb="normalObs" answer="CIEL:162122" comment="Clean" />
+                            <render normAb="normalObs" answer="CIEL:162120" comment="Dry" />
+                            <render normAb="abnormalObs" answer="CIEL:162124" comment="Moist" />
+                            <render normAb="abnormalObs" answer="PIH:1670" comment="Sticky"/>
+                        </repeat>
                     </div>
                     <div>
-                        <label>Comments</label>
+                        <label>Comments about umbilical cord</label>
                         <obs conceptId="CIEL:168722" style="text" />
                     </div>
                 </div>
@@ -394,18 +429,23 @@
                 <h4>
                     <uimessage code="Eyes"/>
                 </h4>
-                <div class="two-columns">
+                <div class="two-columns exam">
                     <div>
-                        <p class="side-by-side">
-                            <!-- ToDo:  Add more answers CIEL:127777 (Red eyes) -->
-                            <obs conceptId="CIEL:163309" style="radio"
-                                 answerConceptIds="PIH:15107,CIEL:127777,PIH:1670"
-                                 answerSeparator="&lt;br /&gt;"/>
-                            <!-- answerCodes="Clear,Red eyes,Sticky"/ -->
-                        </p>
+                        <repeat>
+                            <template>
+                                <obs class="{normAb}" style="checkbox"
+                                     conceptId="CIEL:163309"
+                                     answerConceptId="{answer}" />
+                            </template>
+                            <render normAb="normalObs" answer="PIH:15107" comment="clear" />
+                            <render normAb="abnormalObs" answer="CIEL:127777" comment="red" />
+                            <render normAb="abnormalObs" answer="PIH:7148" comment="sticky"/>
+                            <render normAb="abnormalObs" answer="PIH:2122" comment="sticky right"/>
+                            <render normAb="abnormalObs" answer="PIH:2123" comment="sticky left"/>
+                        </repeat>
                     </div>
                     <div>
-                        <label>Comments</label>
+                        <label>Comments about eyes</label>
                         <obs conceptId="CIEL:168722" style="text" />
                     </div>
                 </div>
@@ -415,17 +455,21 @@
                 <h4>
                     <uimessage code="Skin color"/>
                 </h4>
-                <div class="two-columns">
+                <div class="two-columns exam">
                     <div>
-                        <p class="side-by-side">
-                            <obs conceptId="CIEL:1120" style="radio"
-                                 answerConceptIds="CIEL:1115,CIEL:143050,CIEL:115368"
-                                 answerSeparator="&lt;br /&gt;"
-                                 answerCodes="Normal (pink),Cyanosis (blue),Jaundice" />
-                        </p>
+                        <repeat>
+                            <template>
+                                <obs class="{normAb}" style="checkbox"
+                                     conceptId="CIEL:168721"
+                                     answerConceptId="{answer}" answerCode="{comment}"/>
+                            </template>
+                            <render normAb="normalObs" answer="CIEL:1115" comment="Normal (pink)" />
+                            <render normAb="abnormalObs" answer="CIEL:143050" comment="Cyonosis (blue)" />
+                            <render normAb="abnormalObs" answer="CIEL:115368" comment="Jaundice"/>
+                        </repeat>
                     </div>
                     <div>
-                        <label>Comments</label>
+                        <label>Comments about skin</label>
                         <obs conceptId="CIEL:160981" style="text" />
                     </div>
                 </div>
@@ -445,7 +489,7 @@
                         </p>
                     </div>
                     <div>
-                        <label>Comments</label>
+                        <label>Comments about urination</label>
                         <obs conceptId="CIEL:166363" style="text" />
                     </div>
                 </div>
@@ -458,14 +502,15 @@
                 <div class="two-columns">
                     <div>
                         <p class="side-by-side">
+                            <!-- ToDo:  Add meconium -->
                             <obs conceptId="CIEL:163640" style="radio"
-                                 answerConceptIds="PIH:15112,CIEL:160910,CIEL:1107"
+                                 answerConceptIds="CIEL:162065,PIH:15112,CIEL:160910,CIEL:1107"
                                  answerSeparator="&lt;br /&gt;" />
                             <!-- answerCodes="Meconium,Brown/Green,Yellow,None"/ -->
                         </p>
                     </div>
                     <div>
-                        <label>Comments</label>
+                        <label>Comments about stool</label>
                         <obs conceptId="CIEL:160965" style="text" />
                     </div>
                 </div>
@@ -506,15 +551,17 @@
                                     </span>
                                 </p>
 
-                                <includeIf velocityTest="($fn.latestObs('CIEL:5916')) ">
-                                    <p class="side-by-side">
-                                        <label>
-                                            <uimessage code="Birth Weight:"/>
-                                        </label>
-                                        <lookup complexExpression="$fn.latestObs('CIEL:5916').valueNumeric"/>kg
-                                        (<lookup expression="fn.latestObs('CIEL:5916').obsDatetime"/>)
-                                    </p>
-                                </includeIf>
+                                <ifMode mode="VIEW" include="false">
+                                    <includeIf velocityTest="($fn.latestObs('CIEL:5916')) ">
+                                        <p class="side-by-side">
+                                            <label>
+                                                <uimessage code="Birth Weight:"/>
+                                            </label>
+                                            <lookup complexExpression="$fn.latestObs('CIEL:5916').valueNumeric"/>kg
+                                            (<lookup expression="fn.latestObs('CIEL:5916').obsDatetime"/>)
+                                        </p>
+                                    </includeIf>
+                                </ifMode>
                             </div>
                             <div>
                                 <label>
@@ -542,103 +589,39 @@
         </div>
     </section>
 
-    <section id="assessment" sectionTag="fieldset"
-             headerTag="legend" headerStyle="title" headerCode="Assessment">
+    <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Treatment">
         <div class="section-container">
+            <includeIf velocityTest="($fn.latestObs('CIEL:1651')) ">
+                <lookup complexExpression="#foreach($procedure in $fn.allObs('CIEL:1651')) $procedure.valueCoded.name,  #end"/>
+                (<lookup expression="fn.latestObs('CIEL:1651').obsDatetime"/>)
+            </includeIf>
+            <br/>
+            <includeIf velocityTest="($fn.latestObs('PIH:SUPPLEMENT RECEIVED')) ">
+                <lookup complexExpression="$fn.latestObs('PIH:SUPPLEMENT RECEIVED').valueCoded.name"/>
+                (<lookup expression="fn.latestObs('PIH:SUPPLEMENT RECEIVED').obsDatetime"/>)
+            </includeIf>
+            <br/><br/>
 
-
-            <p>
-                <label>
-                    <uimessage code="Diagnosis at birth"/>
-                </label>
-                <repeat>
-                    <template>
-                        <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                            <obs conceptId="PIH:DIAGNOSIS" style="checkbox" answerConceptId="{dx}"/>
-                        </obsgroup>
-                    </template>
-
-                    <render dx="CIEL:142015" name="Placental abnormality"/>
-                    <render dx="CIEL:115939" name="Malpresentation of fetus"/>
-                    <render dx="CIEL:145935" name="Cephalopelvic disproportion"/>
-                    <render dx="CIEL:116222" name="Low birth weight"/>
-                    <render dx="CIEL:113841" name="Premature"/>
-                    <render dx="CIEL:127639" name="Respiratory distress"/>
-                    <render dx="PIH:7557"    name="Birth asphyxia"/>
-                    <render dx="CIEL:118256" name="Fetal distress"/>
-                    <render dx="CIEL:116642" name="Intra-uterine fetal demise"/>
-                    <render dx="CIEL:129211" name="Premature rupture of membranes"/>
-                    <render dx="CIEL:115866" name="Meconium aspiration" />
-                </repeat>
-
-                <!-- Congenital malformation -->
-                <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                    <obs id="malformation-q" conceptId="PIH:DIAGNOSIS" style="checkbox" answerConceptId="CIEL:143849">
-                        <controls>
-                            <when value="CIEL:143849" thenDisplay="#malformation-details"/>
-                        </controls>
-                    </obs>
-                </obsgroup>
-                <div id="malformation-details">
-                    <label>
-                        <uimessage code="Specify malformation(s):" />
-                    </label>
-                    <obs conceptId="PIH:15086" style="text" />
-                </div>
-            </p>
-
-            <!-- birth injury/trauma -->
-            <label>
-                <uimessage code="pihcore.birthInjury" />
-            </label>
-            <div class="two-columns">
+            <div class="three-columns">
                 <div>
-                    <p class="side-by-side">
-                        <obs id="birthInjury" conceptId="CIEL:147277" style="radio"
-                             answerConceptIds="CIEL:1065,CIEL:1066">
-                            <controls>
-                                <when value="CIEL:1065" thenDisplay="#birthInjury-details"/>
-                            </controls>
-                        </obs>
-                    </p>
-                </div>
-                <div id="birthInjury-details">
-                    <label>
-                        <uimessage code="Birth injury details" />
-                    </label>
-                    <obs conceptId="CIEL:160686" style="textarea" />
+                    <obs conceptId="CIEL:1651" style="checkbox"
+                         answerConceptId="CIEL:168724" answerCode="Prophylactic eye drops" />
                 </div>
 
+                <div>
+                    <obs conceptId="CIEL:1651" style="checkbox"
+                         answerConceptId="CIEL:168725" answerCode="Umbilical cord care" />
+                </div>
+
+                <div>
+                    <!-- Vitamin K -->
+                    <obs conceptId="PIH:SUPPLEMENT RECEIVED" style="checkbox"
+                         answerConceptId="CIEL:86352" />
+                </div>
             </div>
         </div>
     </section>
-
-    <!--
-    <section id="exam" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="Examination and First Impressions">
-        <div class="section-container">
-            <p>
-                <i>Add cordcare and prophylactic eye drops</i><br/>
-
-                <obs procedure answerConceptId="CIEL:168724" answerCode="Prophylactic eye drops" />
-                <obs procedure answerConceptId="CIEL:168725" answerCode="Umbilical cord care" />
-
-                <obs conceptId="PIH:SUPPLEMENT RECEIVED" style="checkbox"
-                     answerConceptId="CIEL:86352" />
-
-                <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                    <obs conceptId="PIH:DIAGNOSIS" style="checkbox" answerConceptId="CIEL:129372"
-                         answerCode="Signs of postdates"/>
-                </obsgroup>
-            </p>
-
-            <br/>
-            <p>
-                <i>Add exam information</i>
-            </p>
-        </div>
-    </section>
-    -->
 
     <section id="outcome" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Outcome">
