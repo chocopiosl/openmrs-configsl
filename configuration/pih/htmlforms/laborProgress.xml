@@ -507,38 +507,42 @@
                     <uimessage code="Membranes"/>
                 </label>
                 <obs id="membrane-state" conceptId="CIEL:164900" style="radio"
-                     answerConceptIds="CIEL:164899,CIEL:127244" answerCodes="Intact,Ruptured">
+                     answerConceptIds="CIEL:164899,CIEL:127244,CIEL:1067" answerCodes="Intact,Ruptured,Unknown">
                     <controls>
-                        <when value="CIEL:127244" thenDisplay="#rupture-date"/>
+                        <when value="CIEL:127244" thenDisplay="#rupture-details"/>
                     </controls>
                 </obs>
             </p>
 
-            <div id="rupture-date" class="date-one-line">
-                <label>
-                    <uimessage code="Rupture date/time"/>
-                </label>
-                <obs conceptId="CIEL:160710" showTime="true"/>
+            <div id="rupture-details">
+                <p>
+                    <div id="rupture-date" class="date-one-line">
+                        <label>
+                            <uimessage code="Rupture date/time"/>
+                        </label>
+                        <obs conceptId="CIEL:160710" showTime="true"/>
+                    </div>
+                </p>
+
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="Membrane color" />
+                    </label>
+                    <obs conceptId="PIH:15111" style="radio"
+                         answerConceptIds="CIEL:159484,PIH:15112"/>
+                </p>
+
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="Meconium classification" />
+                    </label>
+                    <br/>
+                    <obs conceptId="PIH:15110" style="radio"
+                         answerConceptIds="CIEL:168727,CIEL:168728,CIEL:168729"
+                         answerCodes="pihcore.meconiumClass.1,pihcore.meconiumClass.2,pihcore.meconiumClass.3"
+                         answerSeparator="&lt;br /&gt;" />
+                </p>
             </div>
-
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="Membrane color" />
-                </label>
-                <obs conceptId="PIH:15111" style="radio"
-                     answerConceptIds="CIEL:159484,PIH:15112"/>
-            </p>
-
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="Meconium classification" />
-                </label>
-                <br/>
-                <obs conceptId="PIH:15110" style="radio"
-                     answerConceptIds="CIEL:168727,CIEL:168728,CIEL:168729"
-                     answerCodes="pihcore.meconiumClass.1,pihcore.meconiumClass.2,pihcore.meconiumClass.3"
-                     answerSeparator="&lt;br /&gt;" />
-            </p>
 
         </div>
     </section>
@@ -721,7 +725,7 @@
                 <label>
                     <uimessage code="Previous abdominal scar" />
                 </label>
-                <obs id="ab-scar" conceptId="PIH:15109" style="radio"
+                <obs id="ab-scar" conceptId="CIEL:166893" style="radio"
                      answerConceptIds="CIEL:1065,CIEL:1066" >
                     <controls>
                         <when value="CIEL:1065" thenDisplay="#ab-scar-details"/>
