@@ -1195,7 +1195,7 @@
                             <render message="CIEL:167819" xId="Missed doses in past week" tog="missed"/>
                             <render message="CIEL:167021" xId="Aware and understands the disease" tog="aware"/>
                             <render message="CIEL:167914" xId="Understands treatment" tog="understands"/>
-                            <render message="PIH:14741"   xId="Ability to titrate diuretic" tog="titrate"/>
+                            <render message="PIH:14741"   xId="Ability to titrate insulin" tog="titrate"/>
                         </repeat>
                     </div>
                     <div id="dm-fui-missed-details">
@@ -2762,7 +2762,7 @@
                                 <render diagId="CIEL:168300" name="Cirrhosis due to Hepatitis B" />
                                 <render diagId="CIEL:168301" name="Cirrhosis due to Hepatitis C" />
                                 <render diagId="CIEL:149157" name="Alcoholic cirrhosis" />
-                                <render diagId="CIEL:168302" name="Cirrhosis schistosomiasis" />
+                                <render diagId="CIEL:168302" name="Cirrhosis secondary to schistosoma" />
                                 <render diagId="PIH:14910"   name="Non-alcoholic steatohepatitis" />
                                 <render diagId="CIEL:146184" name="Cardiac cirrhosis" />
                                 <render diagId="CIEL:143118" name="Unknown" fullName="Cryptogenic cirrhosis" />
@@ -3050,7 +3050,7 @@
                             <render message="CIEL:167819" xId="Missed doses in past week" tog="missed"/>
                             <render message="CIEL:167021" xId="Aware and understands the disease" tog="aware"/>
                             <render message="CIEL:167914" xId="Understands treatment" tog="understand"/>
-                            <render message="PIH:14741"   xId="Ability to titrate diuretic" tog="titrate"/>
+                            <render message="PIH:14741"   xId="Ability to titrate opioids" tog="titrate"/>
                         </repeat>
                     </div>
                     <div id="pall-fui-missed-details">
@@ -3256,31 +3256,32 @@
                     </div>
                 </div>
 
-                <div class="two-columns">
-                    <div>
-                        <p class="list-inline">
-                            <label>
-                                <uimessage code="Hydroxyurea indicated"/>
-                            </label>
-                            <obs id="scd-hydroxy-q" conceptId="PIH:14869" style="radio"
-                                 answerConceptIds="PIH:YES,PIH:NO"
-                                 answerCodes="yes,no">
-                                <controls>
-                                    <when value="PIH:YES" thenDisplay="#scd-hydroxy-details"/>
-                                </controls>
-                            </obs>
-                        </p>
-                    </div>
+                <label>
+                    <uimessage code="Hydroxyurea indicated for all patients &gt; 9 months with confirmed Sickle cell disease (SS, S/Beta-thalassemia)"/>
+                </label>
+                <p class="list-inline">
+                    <obs id="scd-hydroxy-q" conceptId="PIH:14869" style="radio"
+                         answerConceptIds="PIH:YES,PIH:NO"
+                         answerCodes="yes,no">
+                        <controls>
+                            <when value="PIH:YES" thenDisplay="#scd-hydroxy-details"/>
+                        </controls>
+                    </obs>
+                </p>
 
-                    <div id="scd-hydroxy-details">
+                <div id="scd-hydroxy-details" class="two-columns">
+                    <div>
                         <p class="list-inline">
                             <label>
                                 <uimessage code="Treatment with hydroxyurea" />
                             </label>
                             <obs conceptId="PIH:14870" style="radio"
                                  answerConceptIds="PIH:YES,PIH:NO" answerCodes="yes,no" />
-                            <br/>
+                        </p>
+                    </div>
 
+                    <div>
+                        <p class="list-inline-wide">
                             <label>
                                 <uimessage code="Complications with hydroxyurea" />
                             </label>
