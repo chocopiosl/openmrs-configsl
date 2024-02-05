@@ -319,7 +319,7 @@
                 </label>
                 <span>
                     <!-- NOTE: Birthdate is collected at registration time -->
-                    <obs conceptId="CIEL:5599" showTime="true"/>
+                    <obs conceptId="CIEL:5599" showTime="true" allowFutureDates="false" allowFutureTimes="true" />
                 </span>
             </p>
 
