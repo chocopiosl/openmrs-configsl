@@ -475,7 +475,7 @@
                 <render concept="CIEL:150862" name="Abnormal fetal presentation"/>
                 <render concept="CIEL:1449"   name="Gestational diabetes"/>
                 <render concept="CIEL:134594" name="Malaria in pregnancy"/>
-                <render concept="PIH:3703"    name="Anemia in pregnancy" CIEL="148834"/>
+                <render concept="CIEL:148834" name="Anemia in pregnancy"/>
                 <render concept="CIEL:118744" name="Eclampsia"/>
                 <render concept="CIEL:129251" name="Preeclampsia"/>
                 <render concept="CIEL:165088" name="Victim of GBV (gender-based violence)"/>
@@ -528,8 +528,8 @@
                     <label>
                         <uimessage code="Membrane color" />
                     </label>
-                    <obs conceptId="PIH:15111" style="radio"
-                         answerConceptIds="CIEL:159484,PIH:15112"/>
+                    <obs conceptId="CIEL:168750" style="radio"
+                         answerConceptIds="CIEL:159484,CIEL:168749"/>
                 </p>
 
                 <p class="side-by-side">
@@ -537,7 +537,7 @@
                         <uimessage code="Meconium classification" />
                     </label>
                     <br/>
-                    <obs conceptId="PIH:15110" style="radio"
+                    <obs conceptId="CIEL:168726" style="radio"
                          answerConceptIds="CIEL:168727,CIEL:168728,CIEL:168729"
                          answerCodes="pihcore.meconiumClass.1,pihcore.meconiumClass.2,pihcore.meconiumClass.3"
                          answerSeparator="&lt;br /&gt;" />
@@ -686,7 +686,7 @@
                 <label>
                     <uimessage code="Induced labor" />
                 </label>
-                <obs id="induced" conceptId="PIH:15113" style="radio"
+                <obs id="induced" conceptId="CIEL:151750" style="radio"
                      answerConceptIds="CIEL:1065,CIEL:1066">
                     <controls>
                         <when value="CIEL:1065" thenDisplay="#induced-details"/>
@@ -699,7 +699,7 @@
                         <label>
                             <uimessage code="Induction date/time"/>
                         </label>
-                        <obs conceptId="PIH:15116" showTime="true"/>
+                        <obs conceptId="CIEL:168755" showTime="true"/>
                     </div>
                     <br/>
 
@@ -707,8 +707,9 @@
                         <label>
                             <uimessage code="Method of induction" />
                         </label>
-                        <obs conceptId="PIH:15114" style="radio"
-                             answerConceptIds="PIH:15115,CIEL:81369,CIEL:79984" />
+                        <obs conceptId="CIEL:168751" style="radio"
+                             answerConceptIds="CIEL:168752,CIEL:168753,CIEL:168754"
+                             answerCodes="Mechanical induction,Oxytocin,Misoprostol"/>
                     </p>
                 </div>
             </p>

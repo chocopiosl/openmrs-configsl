@@ -435,13 +435,13 @@
                             <template>
                                 <obs class="{normAb}" style="checkbox"
                                      conceptId="CIEL:163309"
-                                     answerConceptId="{answer}" />
+                                     answerConceptId="{answer}" answerCode="{comment}" />
                             </template>
-                            <render normAb="normalObs" answer="PIH:15107" comment="clear" />
-                            <render normAb="abnormalObs" answer="CIEL:127777" comment="red" />
-                            <render normAb="abnormalObs" answer="PIH:7148" comment="sticky"/>
-                            <render normAb="abnormalObs" answer="PIH:2122" comment="sticky right"/>
-                            <render normAb="abnormalObs" answer="PIH:2123" comment="sticky left"/>
+                            <render normAb="normalObs"   answer="PIH:15107"   comment="Clear" />
+                            <render normAb="abnormalObs" answer="CIEL:127777" comment="Red eyes" />
+                            <render normAb="abnormalObs" answer="CIEL:168745" comment="Sticky eyes"/>
+                            <render normAb="abnormalObs" answer="CIEL:168747" comment="Sticky right eye"/>
+                            <render normAb="abnormalObs" answer="CIEL:168746" comment="Sticky left eye"/>
                         </repeat>
                     </div>
                     <div>
@@ -502,9 +502,9 @@
                 <div class="two-columns">
                     <div>
                         <p class="side-by-side">
-                            <!-- ToDo:  Add meconium -->
+                            <!-- ToDo:  Add meconium labels? -->
                             <obs conceptId="CIEL:163640" style="radio"
-                                 answerConceptIds="CIEL:162065,PIH:15112,CIEL:160910,CIEL:1107"
+                                 answerConceptIds="CIEL:168748,CIEL:168749,CIEL:160910,CIEL:1107"
                                  answerSeparator="&lt;br /&gt;" />
                             <!-- answerCodes="Meconium,Brown/Green,Yellow,None"/ -->
                         </p>
@@ -520,10 +520,13 @@
                 <uimessage code="Feeding method"/>
             </h4>
             <p class="side-by-side">
-                <!-- ToDo:  Add more answers (spoon,cup) -->
                 <obs conceptId="CIEL:1151" style="radio"
-                     answerConceptIds="CIEL:5632,CIEL:5254,CIEL:162380"
-                     answerCodes="Breastfed,Formula,Tube"/>
+                     answerConceptIds="CIEL:5632,CIEL:5254"
+                     answerCodes="Breastfed,Formula"/>
+                <br/>
+                <obs conceptId="CIEL:168734" style="radio"
+                     answerConceptIds="CIEL:168743,CIEL:168735,CIEL:168742"
+                     answerCodes="Tube,Cup,Spoon"/>
             </p>
         </div>
     </section>
