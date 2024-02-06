@@ -212,7 +212,17 @@
             <h3>
                 <uimessage code="Method of transport"/>
             </h3>
-
+            <div>
+                <p class="side-by-side">
+                    <obs id="transport" conceptId="PIH:975" style="radio"
+                         answerConceptIds="CIEL:1377,PIH:MOTORBIKE,PIH:WALKING,PIH:CAR,PIH:OTHER"
+                         answerCodes="Ambulance,Motorbike,Walking,Car,Other">
+                        <controls>
+                            <when value="CIEL:5622" thenDisplay="#other-transport"/>
+                        </controls>
+                    </obs>
+                </p>
+            </div>
             <div id="other-transport">
                 <label>
                     <uimessage code="If other, specify transport method:"/>
