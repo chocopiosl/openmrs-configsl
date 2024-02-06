@@ -15,6 +15,7 @@
 <htmlform formUuid="8546c641-525c-474c-8696-79a60b65b6b0" formName="Maternal Check-In"
           htmlformUuid="224b6ef6-c8ce-414a-9a57-9967b32a4e64"
           formEncounterType="251c03fa-a9dc-4157-855f-b016f4fae9ab" formVersion="1.0">
+    <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.AddPatientToQueueAction"/>
     <style>
         .encounter-summary-container {
             font-size: 1em;
@@ -211,17 +212,7 @@
             <h3>
                 <uimessage code="Method of transport"/>
             </h3>
-            <div>
-                <p class="side-by-side">
-                    <obs id="transport" conceptId="PIH:975" style="radio"
-                         answerConceptIds="CIEL:1377,PIH:MOTORBIKE,PIH:WALKING,PIH:CAR,PIH:OTHER"
-                         answerCodes="Ambulance,Motorbike,Walking,Car,Other">
-                        <controls>
-                            <when value="CIEL:5622" thenDisplay="#other-transport"/>
-                        </controls>
-                    </obs>
-                </p>
-            </div>
+
             <div id="other-transport">
                 <label>
                     <uimessage code="If other, specify transport method:"/>
