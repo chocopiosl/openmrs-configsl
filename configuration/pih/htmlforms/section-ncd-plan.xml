@@ -275,6 +275,8 @@
                                   ['CIEL:135971','Left ventricular hypertrophy'],
                                   ['CIEL:135972','Dilated left ventricle'],
                                   ['CIEL:168041','Depressed left ventricle'],
+                                  ['CIEL:113237','Rheumatic valve disease'],
+                                  ['CIEL:132816','Degenerative valve disease'],
                                   ['CIEL:5622','Other']">
 
                             <obs conceptId="CIEL:159567"
