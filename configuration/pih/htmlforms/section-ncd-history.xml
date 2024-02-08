@@ -421,8 +421,8 @@
                                 <uimessage code="{questionName}"/>
                             </label>
                             <obs conceptId="{qId}" style="radio"
-                                 answerConceptIds="PIH:YES,PIH:NO"
-                                 answerCodes="yes,no" />
+                                 answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                                 answerCodes="yes,no,unknown" />
                         </p>
                     </template>
                     <render qId="CIEL:159449" questionName="Alcohol" />
@@ -437,16 +437,18 @@
                     <render qId="PIH:14712"   questionName="On NSAIDs" />
                     <render qId="PIH:14713"   questionName="On Nephrotoxic drugs" />
                     <render qId="CIEL:140231" questionName="Family history of cardiac disease" />
-
                  </repeat>
 
-                <p class="list-inline">
-                    <label>
-                        <uimessage code="Pregnancy"/>
-                    </label>
-                    <obs conceptId="CIEL:1434" style="yes_no"
-                         noLabel="no" yesLabel="yes"/>
-                </p>
+                <includeIf velocityTest="$patient.gender == 'F' ">
+                    <p class="list-inline">
+                        <label>
+                            <uimessage code="Pregnancy"/>
+                        </label>
+                        <obs conceptId="CIEL:5272" style="radio"
+                             answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                             answerCodes="yes,no,unknown" />
+                    </p>
+                </includeIf>
 
 
             </div>

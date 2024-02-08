@@ -537,26 +537,65 @@
         <div class="section-container">
             <obsgroup groupingConceptId="PIH:HOSPITALIZATION CONSTRUCT" showIfEmpty="false">
 
-                <p class="side-by-side">
-                    <label>
-                        <uimessage code="Hospitalization since last visit"/>
-                    </label>
-                    <obs id="hospital-stay" conceptId="CIEL:976" style="radio"
-                         answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067">
-                        <controls>
-                            <when value="CIEL:1065" thenDisplay="#hospital-details"/>
-                        </controls>
-                    </obs>
-                </p>
+                <!-- ONLY included for NCD intake encounter -->
+                <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="Hospitalization in previous 12 months"/>
+                        </label>
+                        <obs id="hospital-stay-12" conceptId="CIEL:5703" style="radio"
+                             answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067">
+                            <controls>
+                                <when value="CIEL:1065" thenDisplay="#hospital-details"/>
+                            </controls>
+                        </obs>
+                    </p>
+                </includeIf>
+
+                <!-- ONLY included for NCD followup encounter -->
+                <includeIf velocityTest="$encounter.encounterType.uuid == '5cbfd6a2-92d9-4ad0-b526-9d29bfe1d10c'">
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="Hospitalization since last visit"/>
+                        </label>
+                        <obs id="hospital-stay" conceptId="CIEL:976" style="radio"
+                             answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067">
+                            <controls>
+                                <when value="CIEL:1065" thenDisplay="#hospital-details"/>
+                            </controls>
+                        </obs>
+                    </p>
+                </includeIf>
 
                 <div id="hospital-details">
                     <div class="two-columns">
                         <div>
-                            <p class="side-by-side">
+                            <!-- ONLY included for NCD intake encounter -->
+                            <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
+                                <p class="side-by-side">
+                                    <label>
+                                        <uimessage code="Number of hospitalizations in previous 12 months"/>
+                                    </label>
+                                    <obs conceptId="CIEL:5704" />
+                                </p>
+                            </includeIf>
+
+                            <!-- ONLY included for NCD followup encounter -->
+                            <includeIf velocityTest="$encounter.encounterType.uuid == '5cbfd6a2-92d9-4ad0-b526-9d29bfe1d10c'">
+                                <p class="side-by-side">
+                                    <label>
+                                        <uimessage code="Number of hospitalizations since last visit"/>
+                                    </label>
+                                    <obs conceptId="CIEL:1773" />
+                                </p>
+                            </includeIf>
+
+                            <p>
+
                                 <label>
-                                    <uimessage code="Number of hospitalizations since last visit"/>
+                                    <uimessage code="Number of hospitalizations for NCDs"/>
                                 </label>
-                                <obs conceptId="CIEL:1773" />
+                                <obs conceptId="PIH:15160" />
                                 <br/>
 
                                 <label>
@@ -663,7 +702,16 @@
                         </tr>
 
                         <tr id="dm-plus-t">
-                            <th>Diabetes</th>
+                            <td>
+                                <p>
+                                    <strong>Diabetes</strong>
+                                </p>
+                                <p>
+                                    <obs conceptId="PIH:15158" style="checkbox"
+                                         answerConceptId="CIEL:1065"
+                                         answerCode="Hospitalization for DKA in past 12 months"/>
+                                </p>
+                            </td>
                             <td>
                                 <!--
                                 <label>
@@ -974,6 +1022,18 @@
                             </td>
                         </tr>
                     </table>
+
+                    <p class="side-by-side">
+                        <br/>
+                        <label>
+                            <uimessage code="Outcome of hospitalization"/>
+                        </label>
+                        <!-- ToDo: Add CIEL:142919 answer -->
+                        <obs conceptId="PIH:15159" style="radio"
+                             answerConceptIds="PIH:7384,PIH:11521" />
+                        <br/>
+                        NOTE: For death of patient during hospitalization, record death and date in the plan/disposition section.
+                    </p>
                 </div>
 
             </obsgroup>
@@ -2762,7 +2822,7 @@
                                 <render diagId="CIEL:168300" name="Cirrhosis due to Hepatitis B" />
                                 <render diagId="CIEL:168301" name="Cirrhosis due to Hepatitis C" />
                                 <render diagId="CIEL:149157" name="Alcoholic cirrhosis" />
-                                <render diagId="CIEL:168302" name="Cirrhosis secondary to schistosoma" />
+                                <render diagId="PIH:15156" name="Fibrosis secondary to Schistosoma" />
                                 <render diagId="PIH:14910"   name="Non-alcoholic steatohepatitis" />
                                 <render diagId="CIEL:146184" name="Cardiac cirrhosis" />
                                 <render diagId="CIEL:143118" name="Unknown" fullName="Cryptogenic cirrhosis" />
@@ -3199,7 +3259,7 @@
                                 <p class="side-by-side">
                                     <obs conceptId="PIH:DIAGNOSIS" style="radio"
                                          answerConceptIds="CIEL:117703,CIEL:126513,CIEL:126512,CIEL:168107,CIEL:117635"
-                                         answerCodes="Sickle-cell anemia (SS),Sickle-cell trait (AS),Sickle-cell beta thalassemia (SB),Sickle-cell hemoglobin C disease (SC),Other hemoglobinopathy"
+                                         answerCodes="Sickle-cell disease,Sickle-cell trait (AS),Sickle-cell beta thalassemia (SB),Sickle-cell hemoglobin C disease (SC),Other hemoglobinopathy"
                                          answerSeparator="&lt;br /&gt;"/>
                                 </p>
                             </obsgroup>
@@ -3249,10 +3309,30 @@
                     </div>
 
                     <div id="scd-comp-text">
-                        <label>
-                            <uimessage code="Complication summary" />
-                        </label>
-                        <obs conceptId="PIH:14679" />
+                        <p>
+                            <label>
+                                <uimessage code="Complications"/>
+                            </label>
+                            <repeat>
+                                <template>
+                                    <obs conceptId="PIH:15157" style="checkbox"
+                                         answerConceptId="{diagId}" answerCode="{sickleComplic}"/>
+                                </template>
+                                <render diagId="CIEL:121629" sickleComplic="Anemia" />
+                                <render diagId="CIEL:162044" sickleComplic="Severe anemia" />
+                                <render diagId="CIEL:136586" sickleComplic="Intravascular hemolysis" />
+                                <render diagId="CIEL:117643" sickleComplic="Sickle-cell vaso-occlusive pain crisis" />
+                                <render diagId="CIEL:149871" sickleComplic="Acute chest syndrome" />
+                                <render diagId="CIEL:148074" sickleComplic="Avascular bone necrosis" />
+                                <render diagId="CIEL:111103" sickleComplic="Stroke" />
+                                <render diagId="CIEL:121262" sickleComplic="Bacterial infection" />
+                                <render diagId="CIEL:116128" sickleComplic="Malaria" />
+                            </repeat>
+
+                            <obs conceptId="PIH:15157" style="checkbox"
+                                 answerConceptId="CIEL:5622" answerCode="other"
+                                 commentFieldCode="specify other:"/>
+                        </p>
                     </div>
                 </div>
 

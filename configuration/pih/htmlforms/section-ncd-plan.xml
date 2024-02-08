@@ -407,7 +407,42 @@
     <section id="clinical-impress" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="New clinical impressions">
         <div class="section-container">
-            <obs conceptId="CIEL:162749" style="textarea" rows="8"/>
+            <label>
+                <uimessage code="pihcore.ncd.category.instructions"/>
+            </label>
+            <repeat>
+                <template>
+                    <obsgroup groupingConceptId="PIH:15001" showIfEmpty="false" >
+                        <div class="two-columns">
+                            <div>
+                                <obs id="{nickname}-onset-q"
+                                     conceptId="PIH:NCD category" answerConceptId="{category}" answerCode="{code}"
+                                     style="checkbox" toggle="{nickname}-onset-date"/>
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                    </obsgroup>
+                </template>
+
+                <render category="PIH:DIABETES" nickname="diabetes" code="Diabetes"/>
+                <render category="PIH:HYPERTENSION" nickname="htn" code="Hypertension"/>
+                <render category="PIH:HEART FAILURE" nickname="heart_failure" code="Heart failure"/>
+                <render category="PIH:Chronic respiratory disease program" nickname="respire" code="Chronic lung disease" />
+                <render category="CIEL:145438" nickname="kidney_failure" code="Chronic kidney disease"/>
+                <render category="PIH:3714" nickname="cirrhosis" code="Liver cirrhosis / Hepatitis B" />
+                <render category="CIEL:160849" nickname="palliative" code="Palliative care"/>
+                <render category="PIH:Sickle-Cell Anemia" nickname="sickle" code="Sickle cell"/>
+                <render category="CIEL:5622" nickname="other-ncd" code="Other"/>
+            </repeat>
+
+            <p>
+                <br/>
+                <label>
+                    <uimessage code="Clinical impressions"/>
+                </label>
+                <obs conceptId="CIEL:162749" style="textarea" rows="8"/>
+            </p>
         </div>
     </section>
 
