@@ -1028,11 +1028,18 @@
                         <label>
                             <uimessage code="Outcome of hospitalization"/>
                         </label>
-                        <!-- ToDo: Add CIEL:142919 answer -->
-                        <obs conceptId="PIH:15159" style="radio"
-                             answerConceptIds="PIH:7384,PIH:11521" />
-                        <br/>
-                        NOTE: For death of patient during hospitalization, record death and date in the plan/disposition section.
+                        <obs id="hosp-outcome" conceptId="PIH:15159" style="radio"
+                             answerConceptIds="PIH:7384,PIH:11521,CIEL:142919" >
+                            <controls>
+                                <when value="CIEL:142919" thenDisplay="#death-suggest"/>
+                            </controls>
+                        </obs>
+                        <div id="death-suggest">
+                            <br/>
+                            <strong>
+                                For death during hospitalization, record death and date in the NCD plan/disposition section.
+                            </strong>
+                        </div>
                     </p>
                 </div>
 
