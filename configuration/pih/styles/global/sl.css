@@ -30,6 +30,14 @@ a {
     color: #323372;
 }
 
+a.queue-entry-link {
+    color: #0077FF;
+    text-decoration: underline;
+}
+a:hover.queue-entry-link {
+    color: #5B5C8E;
+}
+
 /* Border/shadow on search box */
 .form-control:focus {
     color: #495057;
