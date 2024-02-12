@@ -682,7 +682,7 @@
                                             <render diagId="CIEL:149871" sickleComplic="Acute chest syndrome" />
                                             <render diagId="CIEL:148074" sickleComplic="Avascular bone necrosis" />
                                             <render diagId="CIEL:111103" sickleComplic="Stroke" />
-                                            <render diagId="CIEL:121262" sickleComplic="Bacterial infection" />
+                                            <render diagId="CIEL:112483" sickleComplic="Systemic infection" />
                                             <render diagId="CIEL:116128" sickleComplic="Malaria" />
 
                                             <render diagId="CIEL:5622" sickleComplic="Other" />
@@ -962,7 +962,7 @@
                                     <render diagId="CIEL:147059" sickleText="Bone pain" />
                                     <render diagId="CIEL:149871" sickleText="Acute chest syndrome" />
                                     <render diagId="CIEL:111103" sickleText="Stroke" />
-                                    <render diagId="CIEL:126721" sickleText="Bacterial infection" />
+                                    <render diagId="CIEL:112483" sickleText="Systemic infection" />
                                     <render diagId="CIEL:116128" sickleText="Malaria" />
                                 </repeat>
                             </td>
@@ -3360,7 +3360,7 @@
                                 <render diagId="CIEL:149871" sickleComplic="Acute chest syndrome" />
                                 <render diagId="CIEL:148074" sickleComplic="Avascular bone necrosis" />
                                 <render diagId="CIEL:111103" sickleComplic="Stroke" />
-                                <render diagId="CIEL:121262" sickleComplic="Bacterial infection" />
+                                <render diagId="CIEL:112483" sickleComplic="Systemic infection" />
                                 <render diagId="CIEL:116128" sickleComplic="Malaria" />
                             </repeat>
 
