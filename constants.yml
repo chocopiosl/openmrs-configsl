@@ -20,7 +20,7 @@ encounterType:
     uuid: "3790ecc6-bc63-48f8-9104-f81dc90ee21c"
   sierraLeoneNewbornAssessment:
     uuid: "6444b8d4-407d-444d-aa15-d6dff204ed83"
-  sierraLeoneNewbornExam:
+  sierraLeoneNewbornDailyProgress:
     uuid: "7e42e652-89e7-4559-80fd-41f42826c98c"
   sierraLeoneNewbornObs:
     uuid: "78d02c05-5b41-4cb6-8c7c-f2e64773489f"

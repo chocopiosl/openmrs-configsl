@@ -6,7 +6,7 @@ ${encounterType.sierraLeoneMchDeliveryRegister.uuid},,Maternity and Delivery Reg
 ${encounterType.sierraLeoneMchNewbornRegister.uuid},,SCBU Newborn Register,The newborn (SCBU) register for Sierra Leone
 ${encounterType.mentalHealthFollowup.uuid},,Mental Health Follow-up,The followup form for mental health
 ${encounterType.sierraLeoneNewbornAssessment.uuid},,Newborn Assessment,Newborn assessment at MCOE in Sierra Leone
-${encounterType.sierraLeoneNewbornExam.uuid},,Newborn Exam,Newborn examination at MCOE in Sierra Leone
+${encounterType.sierraLeoneNewbornDailyProgress.uuid},,Newborn Daily Progress,Newborn daily progress at MCOE in Sierra Leone
 ${encounterType.sierraLeoneNewbornObs.uuid},,Newborn Observations,Newborn daily observations at MCOE in Sierra Leone
 ${encounterType.sierraLeoneNewbornReferral.uuid},,Newborn Referral,Newborn referral to NICU or SCBU at MCOE in Sierra Leone
 ${encounterType.sierraLeoneLaborProgress.uuid},,Labour Progress,Labor progression note at MCOE in Sierra Leone

@@ -12,10 +12,10 @@
   ~ Copyright (C) OpenMRS, LLC.  All Rights Reserved.
   -->
 
-<htmlform id="newborn-assessment"
+<htmlform id="newborn-daily"
           formUuid="6575f0e6-fcae-47ef-9838-4129e60e2cbb"
           htmlformUuid="ac4c6416-5474-4b38-a4f2-2f316f76ee73"
-          formName="Newborn Exam"
+          formName="Newborn Daily Progress"
           formEncounterType="7e42e652-89e7-4559-80fd-41f42826c98c" formVersion="1.0">
 
     <translations defaultLocale="en">
@@ -201,7 +201,7 @@
     <ifMode mode="VIEW" include="false">
         <h2>
             <label>
-                <uimessage code="pih.task.newbornExam"/>
+                <uimessage code="pih.task.newbornDailyProgress"/>
             </label>
         </h2>
 
