@@ -817,6 +817,7 @@
                                     <render treatId="CIEL:151331" treatName="Prophylactic antibiotics" />
                                     <render treatId="CIEL:75687"  treatName="Enoxaparin" />
                                     <render treatId="CIEL:86417"  treatName="Warfarin sodium" />
+                                    <render treatId="CIEL:83902"  treatName="Sildenafil" />
                                 </repeat>
 
                             </td>
