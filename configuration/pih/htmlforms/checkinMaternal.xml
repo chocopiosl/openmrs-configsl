@@ -76,6 +76,16 @@
             margin-left: 20px;
         }
 
+        .reason-for-referral > p > span {
+            text-wrap: nowrap;
+        }
+        .reason-for-referral > p > span > input[type="checkbox"] {
+            margin-top: 15px;
+        }
+        .reason-for-referral > p > span > label {
+            margin-left: 30px;
+        }
+
     </style>
 
         <section id="checkin" sectionTag="section" headerStyle="title" headerCode="mirebalais.maternalCheckin.label">
@@ -177,10 +187,12 @@
                                 </obs>
                             </p>
                             <div id="other-referee">
-                                <label>
-                                    <uimessage code="If other, specify role:"/>
-                                </label>
-                                <obs conceptId="PIH:6421" style="text"/>
+                                <p>
+                                    <label>
+                                        <uimessage code="If other, specify role:"/>
+                                    </label>
+                                    <obs conceptId="PIH:6421" style="text"/>
+                                </p>
                             </div>
                         </div>
 
@@ -207,29 +219,32 @@
                                 <label>
                                     <uimessage code="Reason for referral:"/>
                                 </label>
-                                <repeat>
-                                    <template>
-                                        <div class="section-container">
-                                            <obs id="refer-reasons" conceptId="CIEL:1887" style="checkbox"
-                                                 answerConceptId="{reason}" answerCode="{msg}">
-                                                <controls>
-                                                    <when value="CIEL:5622" thenDisplay="#other-reason-refer-in" />
-                                                </controls>
-                                            </obs>
-                                        </div>
-                                    </template>
-                                    <render reason="CIEL:163511" msg="Labour"/>
-                                    <render reason="CIEL:139084" msg="Headache"/>
-                                    <render reason="CIEL:114403" msg="Pain"/>
-                                    <render reason="CIEL:1622" msg="Followup ANC"/>
-                                    <render reason="CIEL:166625" msg="Followup postnatal"/>
-                                    <render reason="CIEL:147241" msg="Bleeding"/>
-                                    <render reason="CIEL:163497" msg="Neonate visit"/>
-                                    <render reason="CIEL:5622" msg="other"/>
-                                </repeat>
                             </p>
                         </div>
-                        <div>
+                    </div>
+                    <repeat with="['Labour','CIEL:163511'],
+                                  ['Headache','CIEL:139084'],
+                                  ['Pain','CIEL:114403'],
+                                  ['Followup ANC','CIEL:1622'],
+                                  ['Followup postnatal','CIEL:166625'],
+                                  ['Bleeding','CIEL:147241'],
+                                  ['Neonatal visit','CIEL:163497'],
+                                  ['other','CIEL:5622']">
+                        <div class="two-columns">
+                            <div class="reason-for-referral">
+                                <p>
+                                    <obs id="refer-reasons-{0}" conceptId="CIEL:1887" style="checkbox"
+                                         answerConceptId="{1}" answerCode="{0}">
+                                        <controls>
+                                            <when value="CIEL:5622" thenDisplay="#other-reason-refer-in"/>
+                                        </controls>
+                                    </obs>
+                                </p>
+                            </div>
+                        </div>
+                    </repeat>
+                    <div class="two-columns">
+                        <div id="other-reason-refer-in">
                             <p>
                                 <label>
                                     <uimessage code="If other, specify reason for referral:"/>
@@ -288,7 +303,7 @@
                              answerConceptIds="CIEL:1377,PIH:MOTORBIKE,PIH:WALKING,PIH:CAR,PIH:OTHER"
                              answerCodes="Ambulance,Motorbike,Walking,Car,Other">
                             <controls>
-                                <when value="CIEL:5622" thenDisplay="#other-transport"/>
+                                <when value="PIH:OTHER" thenDisplay="#other-transport"/>
                             </controls>
                         </obs>
                     </p>
