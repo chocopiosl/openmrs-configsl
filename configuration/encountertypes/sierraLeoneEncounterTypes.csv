@@ -11,3 +11,4 @@ ${encounterType.sierraLeoneNewbornObs.uuid},,Newborn Observations,Newborn daily 
 ${encounterType.sierraLeoneNewbornReferral.uuid},,Newborn Referral,Newborn referral to NICU or SCBU at MCOE in Sierra Leone
 ${encounterType.sierraLeoneLaborProgress.uuid},,Labour Progress,Labor progression note at MCOE in Sierra Leone
 ${encounterType.sierraLeoneLaborDeliverySummary.uuid},,Labor and Delivery Summary,Labor and Delivery Summary at MCOE in Sierra Leone
+${encounterType.sierraLeoneMaternalDischarge.uuid},,Maternal Discharge,Maternal Discharge in Sierra Leone
