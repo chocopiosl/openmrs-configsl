@@ -300,7 +300,7 @@
                 <div>
                     <p class="side-by-side">
                         <obs id="transport" conceptId="PIH:975" style="radio"
-                             answerConceptIds="CIEL:1377,PIH:MOTORBIKE,PIH:WALKING,PIH:CAR,PIH:OTHER"
+                             answerConceptIds="PIH:15074,PIH:MOTORBIKE,PIH:WALKING,PIH:CAR,PIH:OTHER"
                              answerCodes="Ambulance,Motorbike,Walking,Car,Other">
                             <controls>
                                 <when value="PIH:OTHER" thenDisplay="#other-transport"/>

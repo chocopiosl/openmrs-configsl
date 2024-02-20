@@ -1,0 +1,340 @@
+<!--
+  ~ The contents of this file are subject to the OpenMRS Public License
+  ~ Version 1.0 (the "License"); you may not use this file except in
+  ~ compliance with the License. You may obtain a copy of the License at
+  ~ http://license.openmrs.org
+  ~
+  ~ Software distributed under the License is distributed on an "AS IS"
+  ~ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+  ~ License for the specific language governing rights and limitations
+  ~ under the License.
+  ~
+  ~ Copyright (C) OpenMRS, LLC.  All Rights Reserved.
+  -->
+
+<htmlform id="check-in-form"
+          formUuid="6AAE4570-6756-4B40-B907-636164376986"
+          formName="Live Maternal Check-In"
+          formEncounterType="251c03fa-a9dc-4157-855f-b016f4fae9ab"
+          formVersion="1.0">
+
+    <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.AddPatientToQueueAction"/>
+
+    <macros>
+        <macro key="mcoeTriageLocation" value="f85feffc-fe54-4648-aa14-01ed6d30b943"/>
+    </macros>
+
+    <style>
+        .encounter-summary-container {
+        font-size: 1em;
+        font-weight: normal;
+        }
+
+        form input[type="radio"], .form input[type="radio"] {
+        float: none;
+        display: inline-block;
+        }
+
+        .side-by-side label {
+        display: inline-block;
+        }
+
+        .section-container input[type="checkbox"] {
+        margin: 0px 5px; /* changed values to vertical, horizontal */
+        top: 5px; /* added to offset the checkbox position to line up */
+        }
+
+        .four-columns, .three-columns, .two-columns {
+        display: table;
+        height: 100%;
+        width: 100%;
+        }
+
+        .two-columns > div {
+        display: table-cell;
+        width: 50%;
+        }
+
+        #check-in-form fieldset p {
+        vertical-align: top;
+        display: inline-block;
+        float: none;
+        }
+
+        #check-in-form fieldset .left {
+        vertical-align: top;
+        display: inline-block;
+        float: none;
+        }
+
+        #referToMCOETriage input {
+        margin-top: 15px;
+        }
+
+        #referToMCOETriage label {
+        display: inline-block;
+        margin-left: 20px;
+        }
+
+        .reason-for-referral > p > span {
+        text-wrap: nowrap;
+        }
+        .reason-for-referral > p > span > input[type="checkbox"] {
+        margin-top: 15px;
+        }
+        .reason-for-referral > p > span > label {
+        margin-left: 30px;
+        }
+
+    </style>
+    <ifMode mode="ENTER" include="true">
+        <!-- when doing "live" check in, don't allow selection of provider/date/location -->
+        <div class="hidden">
+            <div class="hidden" id="encounter-details" sectionTag="section" headerStyle="title" headerLabel="Encounter Details">
+                <fieldset>
+                    <encounterDate id="encounterDate" showTime="false" default="now"/>
+                </fieldset>
+                <fieldset>
+                    <encounterProviderAndRole default="currentUser" encounterRole="cbfe0b9d-9923-404c-941b-f048adc8cdc0"
+                                              required="true"/>
+                </fieldset>
+                <fieldset>
+                    <encounterLocation required="true" default="$mcoeTriageLocation" tags="Check-In Maternal Location"/>
+                </fieldset>
+            </div>
+        </div>
+    </ifMode>
+    <section id="checkin" sectionTag="section" headerStyle="title" headerCode="mirebalais.maternalCheckin.label">
+        <!-- START ENTER/EDIT VERSION OF THE FORM -->
+        <ifMode mode="EDIT" include="true">
+            <fieldset class="required">
+                <legend>
+                    <uimessage code="mirebalais.retrospectiveCheckin.checkinDate.label"/>
+                </legend>
+                <h3>
+                    <uimessage code="mirebalais.retrospectiveCheckin.checkinDate.label"/>
+                </h3>
+
+                <p class="left">
+                    <encounterDate id="encounterDate" showTime="false" default="now"/>
+                </p>
+            </fieldset>
+            <fieldset class="required">
+                <legend>
+                    <uimessage code="mirebalais.retrospectiveCheckin.provider.label"/>
+                </legend>
+                <h3>
+                    <uimessage code="mirebalais.retrospectiveCheckin.provider.label"/>
+                </h3>
+
+                <p class="left">
+                    <encounterProviderAndRole default="currentUser" encounterRole="cbfe0b9d-9923-404c-941b-f048adc8cdc0"
+                                              required="true"/>
+                </p>
+            </fieldset>
+
+            <fieldset class="required">
+                <legend>
+                    <uimessage code="mirebalais.retrospectiveCheckin.location.label"/>
+                </legend>
+                <h3>
+                    <uimessage code="mirebalais.retrospectiveCheckin.location.label"/>
+                </h3>
+
+                <p class="left">
+                    <encounterLocation required="true" default="$mcoeTriageLocation" tags="Check-In Maternal Location"/>
+                </p>
+            </fieldset>
+            <!-- END ENTER/EDIT VERSION OF THE FORM -->
+        </ifMode>
+
+        <ifMode mode="VIEW">
+            <span id="most-recent-encounter-title" style="display:none"><!--The Most Recent Encounter app in Core Apps replaces this with the "most recent" label--></span>
+        </ifMode>
+
+        <fieldset class="required type-of-visit-question">
+            <legend>
+                <uimessage code="mirebalais.retrospectiveCheckin.visitType.label"/>
+            </legend>
+            <h3>
+                <uimessage code="mirebalais.retrospectiveCheckin.visitType.label"/>
+            </h3>
+
+            <p class="left">
+                <obs conceptId="PIH:REASON FOR VISIT" id="typeOfVisit"
+                     answerConceptIds="CIEL:1622,PIH:5483,PIH:10377,PIH:6261,PIH:1482,PIH:6262,CIEL:163497,CIEL:5489,PIH:10346,CIEL:160542,CIEL:165048,PIH:EMERGENCY VISIT,"
+                     answerCodes="pihcore.anc,pihcore.familyPlanning.title,Labour and Delivery,pihcore.postnatal,HIV,TB,Neonate,pih.task.mentalHealth.label,Immunization,Outpatient visit,pihcore.testLocation.pedWard,Sick visit"
+                     style="dropdown" size="999"/>
+            </p>
+        </fieldset>
+
+        <fieldset class="referral-info">
+            <legend>
+                <uimessage code="Referral in"/>
+            </legend>
+
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Patient referred to MCOE?"/>
+                </label>
+                <obs conceptId="CIEL:1788" id="referred"
+                     answerConceptIds="CIEL:1065,CIEL:1066"
+                     style="radio">
+                    <controls>
+                        <when value="CIEL:1065" thenDisplay="#refer-details"/>
+                    </controls>
+                </obs>
+            </p>
+            <ifmode mode="VIEW" include="false">
+            <div id="refer-details">
+                <div class="two-columns">
+                    <div>
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Referral from:"/>
+                            </label>
+                            <br/>
+                            <obs id="role-refer" conceptId="PIH:10647"  style="radio"
+                                 answerConceptIds="PIH:12368,CIEL:1555,CIEL:1575,CIEL:978,CIEL:5622"
+                                 answerSeparator="&lt;br /&gt;">
+                                <controls>
+                                    <when value="CIEL:5622" thenDisplay="#other-referee"/>
+                                </controls>
+                            </obs>
+                        </p>
+                        <div id="other-referee">
+                            <p>
+                                <label>
+                                    <uimessage code="If other, specify role:"/>
+                                </label>
+                                <obs conceptId="PIH:6421" style="text"/>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p>
+                            <label>
+                                <uimessage code="Referral address:"/>
+                            </label>
+                            <obs conceptId="PIH:10155" style="textarea"/>
+                        </p>
+
+                        <p>
+                            <label>
+                                <uimessage code="Referral phone number:"/>
+                            </label>
+                            <obs conceptId="PIH:6194" style="text"/>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="two-columns">
+                    <div>
+                        <p>
+                            <label>
+                                <uimessage code="Reason for referral:"/>
+                            </label>
+                        </p>
+                    </div>
+                </div>
+                <repeat with="['Labour','CIEL:163511'],
+                                  ['Headache','CIEL:139084'],
+                                  ['Pain','CIEL:114403'],
+                                  ['Followup ANC','CIEL:1622'],
+                                  ['Followup postnatal','CIEL:166625'],
+                                  ['Bleeding','CIEL:147241'],
+                                  ['Neonatal visit','CIEL:163497'],
+                                  ['other','CIEL:5622']">
+                    <div class="two-columns">
+                        <div class="reason-for-referral">
+                            <p>
+                                <obs id="refer-reasons-{0}" conceptId="CIEL:1887" style="checkbox"
+                                     answerConceptId="{1}" answerCode="{0}">
+                                    <controls>
+                                        <when value="CIEL:5622" thenDisplay="#other-reason-refer-in"/>
+                                    </controls>
+                                </obs>
+                            </p>
+                        </div>
+                    </div>
+                </repeat>
+                <div class="two-columns">
+                    <div id="other-reason-refer-in">
+                        <p>
+                            <label>
+                                <uimessage code="If other, specify reason for referral:"/>
+                            </label>
+                            <obs conceptId="CIEL:164359" style="text"/>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            </ifmode>
+
+        </fieldset>
+
+        <ifMode mode="ENTER" include="true">
+            <!-- if this is an active visit (visit.open), and we are entering this form for the first time (mode=ENTER) -->
+            <fieldset class="queue">
+                <legend>
+                    <uimessage code="MCOE Triage"/>
+                </legend>
+                <h3>
+                    <uimessage code="MCOE Triage"/>
+                </h3>
+
+                <p class="left">
+                    <obs conceptId="CIEL:1272" style="checkbox" id="referToMCOETriage"
+                         answerConceptId="PIH:14976" answerCode="Refer to MCOE triage" />
+                </p>
+            </fieldset>
+        </ifMode>
+        <ifMode mode="VIEW" include="true">
+            <fieldset class="queue">
+                <legend>
+                    <uimessage code="MCOE Triage"/>
+                </legend>
+                <h3>
+                    <uimessage code="MCOE Triage"/>
+                </h3>
+
+                <p class="left">
+                    <obs conceptId="CIEL:1272" style="checkbox" id="referToMCOETriage"
+                         answerConceptId="PIH:14976" answerCode="Refer to MCOE triage" />
+                </p>
+            </fieldset>
+        </ifMode>
+        <fieldset class="transport-info">
+            <legend>
+                <uimessage code="Transport"/>
+            </legend>
+
+            <h3>
+                <uimessage code="Method of transport"/>
+            </h3>
+            <div>
+                <p class="side-by-side">
+                    <obs id="transport" conceptId="PIH:975" style="radio"
+                         answerConceptIds="CIEL:1377,PIH:MOTORBIKE,PIH:WALKING,PIH:CAR,PIH:OTHER"
+                         answerCodes="Ambulance,Motorbike,Walking,Car,Other">
+                        <controls>
+                            <when value="PIH:OTHER" thenDisplay="#other-transport"/>
+                        </controls>
+                    </obs>
+                </p>
+            </div>
+            <div id="other-transport">
+                <p>
+                    <label>
+                        <uimessage code="If other, specify transport method:"/>
+                    </label>
+                    <obs conceptId="PIH:1301" style="text"/>
+                </p>
+            </div>
+        </fieldset>
+    </section>
+
+    <submit/>
+
+</htmlform>
