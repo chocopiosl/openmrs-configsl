@@ -25,6 +25,16 @@
 
     <!-- Core Apps Global Properties -->
     <globalProperty>
+        <property>coreapps.deceasedDateUsingTime</property>
+        <value>true</value>
+    </globalProperty>
+
+    <globalProperty>
+        <property>coreapps.deceasedDateUsingTimeMinuteStep</property>
+        <value>1</value>
+    </globalProperty>
+
+    <globalProperty>
         <property>coreapps.defaultPatientIdentifierLocation</property>
         <!-- TODO: should this be fixed/upated? -->
         <!-- Location: Unknown Location -->
