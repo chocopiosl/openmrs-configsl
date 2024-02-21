@@ -411,7 +411,7 @@
     </section>
 
     <section id="risk-factors" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="Risk Factors">
+             headerCode="General risk factors for NCDs">
         <div class="section-container two-columns">
             <div>
                 <repeat>
@@ -529,35 +529,15 @@
                      labelCode="pihcore.comorbidities.label"
                      answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067">
                     <controls>
-                        <when value="CIEL:1065" thenDisplay="#comorbitities" />
+                        <when value="CIEL:1065" thenDisplay="#comorbitity-details" />
                     </controls>
                 </obs>
 
-                <div id="comorbitities">
-                    <div class="two-columns-old">
-                        <repeat with="['Diabetes','CIEL:119481'],
-                                      ['Hypertension','CIEL:117399'],
-                                      ['Epilepsy','CIEL:155'],
-                                      ['Sickle cell','CIEL:117703'],
-                                      ['Rheumatic heart disease','CIEL:113227'],
-                                      ['Chronic kidney disease','CIEL:145438'],
-                                      ['Asthma','CIEL:121375'],
-                                      ['Chronic pulmonary disease','CIEL:1295'],
-                                      ['Active TB','CIEL:164500'],
-                                      ['Cardiomyopathy','CIEL:5016'],
-                                      ['Stroke','CIEL:111103'],
-                                      ['Hepatitis B','CIEL:111759'],
-                                      ['Hepatitis C','CIEL:156590'],
-                                      ['Obesity','CIEL:115115'],
-                                      ['Malnutrition','CIEL:115122'],
-                                      ['Psychosis','CIEL:113517'],
-                                      ['Substance abuse','CIEL:112603']">
-                            <obs conceptId="CIEL:162747" style="checkbox"
-                                 answerConceptId="{1}" answerCode="{0}"/>
-                        </repeat>
-                    </div>
-                    <obs conceptId="CIEL:162747" answerConceptId="CIEL:5622"
-                         commentFieldCode="zl.ifOtherSpecify" />
+                <div id="comorbitity-details">
+                    <label>
+                        <uimessage code="Specify comorbidities" />
+                    </label>
+                    <obs conceptId="PIH:1731" style="textarea" />
                 </div>
             </p>
 

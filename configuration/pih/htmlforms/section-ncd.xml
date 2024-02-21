@@ -1236,16 +1236,81 @@
 
             <br/>
 
-            <strong>
+            <h4>
                 <uimessage code="Diabetes followup indicators"/>
-            </strong>
+            </h4>
+
+            <h5>
+                <uimessage code="Treatment indicators"/>
+            </h5>
 
             <obsgroup groupingConceptId="PIH:14469" showIfEmpty="false">
                 <div class="two-columns">
                     <div>
                         <repeat>
                             <template>
-                                <p class="list-inline">
+                                <p class="list-inline-wide">
+                                    <label>
+                                        <uimessage code="{questionName}"/>
+                                    </label>
+                                    <obs id="dm-{q}-top" conceptId="{qId}" style="radio"
+                                         answerConceptIds="PIH:YES,PIH:NO"
+                                         answerCodes="yes,no" >
+                                        <controls>
+                                            <when value="PIH:YES" thenDisplay="#dm-{q}-details" />
+                                        </controls>
+                                    </obs>
+                                </p>
+                            </template>
+                            <render qId="CIEL:1898"   questionName="Patient condition improved" q="improved"/>
+                            <render qId="PIH:6756"    questionName="On insulin" q="insulin"/>
+                            <render qId="CIEL:167957" questionName="Severe hypoglycemia in last month" q="severe"/>
+                            <render qId="CIEL:164075" questionName="Overall treatment adherence" q="adher"/>
+                            <render qId="CIEL:167819" questionName="Missed doses in past week" q="missed"/>
+                            <render qId="CIEL:167998" questionName="On ACE inhibitors" q="ace"/>
+                        </repeat>
+
+                        <div id="dm-indication-ace-details">
+                            <p class="list-inline-wide">
+                                <label>
+                                    <uimessage code="Indications for ACE inhibitors"/><br/>
+                                    <uimessage code="(proteinuria present; BP &gt;= 135/75)"/>
+                                </label>
+                                <obs conceptId="CIEL:168000" style="radio"
+                                     answerConceptIds="PIH:YES,PIH:NO"
+                                     answerCodes="yes,no" />
+                            </p>
+                        </div>
+                    </div>
+                    <div>
+                        <br/>
+                        <label>
+                            <uimessage code="# of hypoglycemic episodes in past 30 days"/>
+                        </label>
+                        <p class="narrow">
+                            <obs conceptId="PIH:14708"/>
+                        </p>
+
+                        <div id="dm-missed-details">
+                            <label>
+                                <uimessage code="# of missed doses in past week"/>
+                            </label>
+                            <obs conceptId="CIEL:167918"  />
+
+                        </div>
+                    </div>
+                </div>
+
+
+            <h5>
+                <uimessage code="Self management and awareness"/>
+            </h5>
+
+                <div class="two-columns">
+                    <div>
+                        <repeat>
+                            <template>
+                                <p class="list-inline-wide">
                                     <label>
                                         <uimessage code="{xId}"/>
                                     </label>
@@ -1258,24 +1323,36 @@
                                     </obs>
                                 </p>
                             </template>
-                            <render message="CIEL:1898"   xId="Patient condition improved" tog="improved"/>
-                            <render message="CIEL:164075" xId="Overall treatment adherence" tog="adher"/>
-                            <render message="CIEL:167819" xId="Missed doses in past week" tog="missed"/>
                             <render message="CIEL:167021" xId="Aware and understands the disease" tog="aware"/>
                             <render message="CIEL:167914" xId="Understands treatment" tog="understands"/>
                             <render message="PIH:14741"   xId="Ability to titrate insulin" tog="titrate"/>
                         </repeat>
-                    </div>
-                    <div id="dm-fui-missed-details">
-                        <br/><br/>
-                        <label>
-                            <uimessage code="# of missed doses in past week"/>
-                        </label>
-                        <obs conceptId="CIEL:167918"  />
 
+                        <repeat>
+                            <template>
+                                <p class="list-inline-wide">
+                                    <label>
+                                        <uimessage code="{questionName}"/>
+                                    </label>
+                                    <obs id="dm-{q}-top" conceptId="{qId}" style="radio"
+                                         answerConceptIds="PIH:YES,PIH:NO"
+                                         answerCodes="yes,no" >
+                                        <controls>
+                                            <when value="PIH:YES" thenDisplay="#dm-{q}-details" />
+                                        </controls>
+                                    </obs>
+                                </p>
+                            </template>
+                            <render qId="CIEL:167956" questionName="Glycometer (home)" q="home"/>
+                            <render qId="CIEL:167919" questionName="Ability to read and manage glycometer" q="abiity" />
+                            <render qId="PIH:14709"   questionName="Patient adjusted insulin based on glucometer" q="adjust"/>
+                        </repeat>
                     </div>
                 </div>
 
+                <h5>
+                    <uimessage code="Disease control"/>
+                </h5>
                 <ifMode mode="VIEW" include="false">
                     <table align="left" style="font-size:small">
                         <tr>
@@ -1300,55 +1377,6 @@
                          answerConceptIds="PIH:11507,PIH:11508,PIH:11509"
                          answerCodes="controlled,uncontrolled,complications" />
                 </p>
-
-                <div class="two-columns">
-                    <div>
-                        <repeat>
-                            <template>
-                                <p class="list-inline-wide">
-                                    <label>
-                                        <uimessage code="{questionName}"/>
-                                    </label>
-                                    <obs id="dm-{q}-top" conceptId="{qId}" style="radio"
-                                         answerConceptIds="PIH:YES,PIH:NO"
-                                         answerCodes="yes,no" >
-                                        <controls>
-                                            <when value="PIH:YES" thenDisplay="#dm-{q}-details" />
-                                        </controls>
-                                    </obs>
-                                </p>
-                            </template>
-                            <render qId="PIH:6756"    questionName="On insulin" q="insulin"/>
-                            <render qId="CIEL:167957" questionName="Severe hypoglycemia in last month" q="severe"/>
-                            <render qId="CIEL:167956" questionName="Glycometer (home)" q="home"/>
-                            <render qId="CIEL:167919" questionName="Ability to read and manage glycometer" q="abiity" />
-                            <render qId="PIH:14709"   questionName="Patient adjusted insulin based on glucometer" q="adjust"/>
-                            <render qId="CIEL:167998" questionName="On ACE inhibitors" q="ace"/>
-                        </repeat>
-
-                        <div id="dm-ace-details" style="margin-left: 20px">
-                            <p class="list-inline-wide">
-                                <label>
-                                    <uimessage code="Indications on ACE inhibitors"/><br/>
-                                    <uimessage code="(proteinuria present; BP &gt;= 135/75)"/>
-                                </label>
-                                <obs conceptId="CIEL:168000" style="radio"
-                                     answerConceptIds="PIH:YES,PIH:NO"
-                                     answerCodes="yes,no" />
-                            </p>
-                        </div>
-                    </div>
-                    <div>
-                        <br/>
-                        <label>
-                            <uimessage code="# of hypoglycemic episodes in past 30 days"/>
-                        </label>
-                        <p class="narrow">
-                            <obs conceptId="PIH:14708"/>
-                        </p>
-                    </div>
-                </div>
-
             </obsgroup>
 
             <strong>
@@ -1861,46 +1889,50 @@
             </includeIf>
 
             <div>
-                <strong>
+                <h4>
                     <uimessage code="Heart failure followup indicators"/>
-                </strong>
-
-                <obsgroup groupingConceptId="PIH:14724">
-                    <repeat>
-                        <template>
-                            <p class="list-inline">
-                                <label>
-                                    <uimessage code="{questionName}"/>
-                                </label>
-                                <obs id="hf-fui-{tog}" conceptId="{qId}" style="radio"
-                                     answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
-                                     answerCodes="yes,no,unknown" />
-                            </p>
-                        </template>
-                        <render qId="CIEL:168115" questionName="Low salt adherence diet" tog="salt" />
-                    </repeat>
-
-                </obsgroup>
-
+                </h4>
                 <div>
-                    <repeat>
-                        <template>
-                            <p class="list-inline">
-                                <obsgroup groupingConceptId="PIH:14733" showIfEmpty="false">
-                                    <obs style="radio"
-                                         conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
-                                         conceptLabels="yes,no,unknown" answerConceptId="{qId}" labelText="{symptName}"/>
-                                </obsgroup>
-                            </p>
-                        </template>
-                        <render qId="CIEL:122496" symptName="Dyspnea" />
-                        <render qId="CIEL:131689" symptName="Orthopnea" />
-                        <render qId="CIEL:130783" symptName="Paroxysmal nocturnal dyspnea" />
-                        <render qId="CIEL:130166" symptName="Pitting edema" />
-                        <render qId="CIEL:127640" symptName="Crackles" />
-                        <render qId="CIEL:136394" symptName="Jugular distension" />
-                        <render qId="PIH:14751"   symptName="Loud murmur" />
-                    </repeat>
+                    <h5>
+                        <uimessage code="Clinical indicators"/>
+                    </h5>
+                    <div class="three-columns">
+                        <repeat>
+                            <template>
+                                <div>
+                                    <p class="side-by-side">
+                                        <obsgroup groupingConceptId="PIH:14733" showIfEmpty="false">
+                                            <obs style="radio"
+                                                 conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
+                                                 conceptLabels="y,n,u" answerConceptId="{qId}" />
+                                        </obsgroup>
+                                    </p>
+                                </div>
+                            </template>
+                            <render qId="CIEL:122496" symptName="Dyspnea" />
+                            <render qId="CIEL:131689" symptName="Orthopnea" />
+                            <render qId="CIEL:130783" symptName="Paroxysmal nocturnal dyspnea" />
+                        </repeat>
+                    </div>
+
+                    <div class="three-columns">
+                        <repeat>
+                            <template>
+                                <div>
+                                    <p class="side-by-side">
+                                        <obsgroup groupingConceptId="PIH:14733" showIfEmpty="false">
+                                            <obs style="radio"
+                                                 conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
+                                                 conceptLabels="y,n,u" answerConceptId="{qId}" labelText="{symptName}"/>
+                                        </obsgroup>
+                                    </p>
+                                </div>
+                            </template>
+                            <render qId="CIEL:130166" symptName="Pitting edema" />
+                            <render qId="CIEL:127640" symptName="Crackles in lungs" />
+                            <render qId="CIEL:136394" symptName="Jugular distension" />
+                        </repeat>
+                    </div>
                 </div>
 
                 <obsgroup groupingConceptId="PIH:14724">
@@ -1911,6 +1943,10 @@
                         <obs conceptId="CIEL:159574" style="radio"
                              answerConceptIds="CIEL:159575,CIEL:117315,CIEL:138099" />
                     </p>
+
+                    <h5>
+                        <uimessage code="Awareness and treatment indicators"/>
+                    </h5>
 
                     <div class="two-columns">
                         <div>
@@ -1929,19 +1965,13 @@
                                         </obs>
                                     </p>
                                 </template>
-                                <render qId="CIEL:1898"   questionName="Patient condition improved" tog="improved"/>
-                                <render qId="CIEL:164075" questionName="Overall treatment adherence" tog="adher"/>
-                                <render qId="CIEL:167819" questionName="Missed doses in past week" tog="missed"/>
-                                <render qId="CIEL:167021" questionName="Aware and understands the disease" tog="aware"/>
                                 <render qId="CIEL:167914" questionName="Understands treatment" tog="understand"/>
+                                <render qId="CIEL:168115" questionName="Low salt adherence diet" tog="salt" />
+                                <render qId="CIEL:164075" questionName="Overall treatment adherence" tog="adher"/>
                                 <render qId="PIH:14741"   questionName="Ability to titrate treatment" tog="titrate"/>
-
-                                <render qId="PIH:14739"   questionName="Endocarditis prevention therapy" tog="endocard"/>
-                                <render qId="PIH:14738"   questionName="Refer for surgery evaluation" tog="referSurg"/>
-                                <render qId="PIH:14740"   questionName="Echocardiogram improvement" tog="echoImprov" />
+                                <render qId="CIEL:167819" questionName="Missed doses in past week" tog="missed"/>
                             </repeat>
                         </div>
-
                         <div id="hf-fui-missed-details">
                             <br/><br/>
                             <label>
@@ -1951,6 +1981,69 @@
                         </div>
                     </div>
 
+                            <label>
+                                <uimessage code="If systolic function is depressed, treatment class:"/>
+                            </label>
+                            <div class="three-columns">
+                                <repeat>
+                                    <template>
+                                        <div>
+                                            <p class="side-by-side">
+                                                <label>
+                                                    <uimessage code="{messg}" />
+                                                </label>
+
+                                                <obs conceptId="{cid}" style="radio"
+                                                     answerConceptIds="CIEL:1065,CIEL:1066"
+                                                     answerCodes="yes,no"/>
+                                            </p>
+                                        </div>
+                                    </template>
+                                    <render cid="PIH:14531" short="ACE" messg="On ACE inhibitors" />
+                                    <render cid="PIH:14723" short="BBs" messg="On beta-blockers" />
+                                    <render cid="PIH:14811" short="Spirono" messg="On spironolactone" />
+                                </repeat>
+                            </div>
+
+                            <repeat>
+                                <template>
+                                    <p class="list-inline-wide">
+                                        <label>
+                                            <uimessage code="{questionName}"/>
+                                        </label>
+                                        <obs id="hf-fui-{tog}" conceptId="{qId}" style="radio"
+                                             answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN,PIH:NOT INDICATED"
+                                             answerCodes="yes,no,unknown,not indicated" >
+                                            <controls>
+                                                <when value="PIH:YES" thenDisplay="#hf-fui-{tog}-details"/>
+                                            </controls>
+                                        </obs>
+                                    </p>
+                                </template>
+                                <render qId="PIH:14739"   questionName="Endocarditis prevention therapy" tog="endocard"/>
+                            </repeat>
+
+                            <repeat>
+                                <template>
+                                    <p class="list-inline-wide">
+                                        <label>
+                                            <uimessage code="{questionName}"/>
+                                        </label>
+                                        <obs id="hf-fui-{tog}" conceptId="{qId}" style="radio"
+                                             answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                                             answerCodes="yes,no,unknown" >
+                                            <controls>
+                                                <when value="PIH:YES" thenDisplay="#hf-fui-{tog}-details"/>
+                                            </controls>
+                                        </obs>
+                                    </p>
+                                </template>
+                                <render qId="CIEL:167021" questionName="Aware and understands the disease" tog="aware"/>
+                            </repeat>
+
+                    <h5>
+                        <uimessage code="Disease control"/>
+                    </h5>
                     <div>
                         <repeat>
                             <template>
@@ -1973,40 +2066,21 @@
                                     <label>
                                         <uimessage code="{questionName}"/>
                                     </label>
-                                    <obs conceptId="{qId}" style="radio"
+                                    <obs id="hf-fui-{tog}" conceptId="{qId}" style="radio"
                                          answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
-                                         answerCodes="yes,no,unknown" />
+                                         answerCodes="yes,no,unknown" >
+                                        <controls>
+                                            <when value="PIH:YES" thenDisplay="#hf-fui-{tog}-details"/>
+                                        </controls>
+                                    </obs>
                                 </p>
                             </template>
-                            <render qId="CIEL:1788"   questionName="Send for admission" />
+                            <render qId="CIEL:1898"   questionName="Patient condition improved" tog="improved"/>
+                            <render qId="CIEL:1788"   questionName="Send for admission"  tog="sendAdmit"/>
+                            <render qId="PIH:14738"   questionName="Refer for surgery evaluation" tog="referSurg"/>
+                            <render qId="PIH:14740"   questionName="Echocardiogram improvement" tog="echoImprov" />
                         </repeat>
-
                     </obsgroup>
-
-                    <label>
-                        <uimessage code="If systolic function is depressed, treatment class:"/>
-                    </label>
-                    <div class="three-columns">
-                        <repeat>
-                            <template>
-                                <div>
-                                    <p class="side-by-side">
-                                        <label>
-                                            <uimessage code="{messg}" />
-                                        </label>
-
-                                        <obs conceptId="{cid}" style="radio"
-                                             answerConceptIds="CIEL:1065,CIEL:1066"
-                                             answerCodes="yes,no"/>
-                                    </p>
-                                </div>
-                            </template>
-                            <render cid="PIH:14531" short="ACE" messg="On ACE inhibitors" />
-                            <render cid="PIH:14723" short="BBs" messg="On beta-blockers" />
-                            <render cid="PIH:14811" short="Spirono" messg="On spironolactone" />
-                        </repeat>
-
-                    </div>
 
                     <p class="side-by-side">
                         <label>
@@ -2195,6 +2269,60 @@
                 <br/>
             </includeIf>
 
+            <div class="two-columns">
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="On medication with" />
+                        </label>
+                        <br/>
+                        <obs conceptId="PIH:14603" style="radio"
+                             answerConceptIds="PIH:14604,PIH:14605,PIH:14606,PIH:14607,PIH:14608,PIH:14609,PIH:15163"
+                             answerCodes="SABA (Short-acting beta-agonist),SAMA (Short-acting muscarinic antagonist),LABA (Long-acting beta-agonist),LAMA (Long acting muscarinic antagonist),Oral steroid,Steroid inhaler,Oral salbutamol"
+                             answerSeparator="&lt;br /&gt;"/>
+                    </p>
+                </div>
+
+                <div>
+                    <dl>
+                        <dt>
+                            <uimessage code="SABA"/>
+                        </dt>
+                        <dd>
+                            <uimessage code="Salbutamol"/>
+                        </dd>
+
+                        <dt>
+                            <uimessage code="SAMA"/>
+                        </dt>
+                        <dd>
+                            <uimessage code="Ipratropium bromide"/>
+                        </dd>
+
+                        <dt>
+                            <uimessage code="LABA"/>
+                        </dt>
+                        <dd>
+                            <uimessage code="Salmeterol, Formoterol, Indacaterol"/>
+                        </dd>
+
+                        <dt>
+                            <uimessage code="LAMA"/>
+                        </dt>
+                        <dd>
+                            <uimessage code="Tiotropium"/>
+                        </dd>
+
+                        <dt>
+                            <uimessage code="Inhaled steroids"/>
+                        </dt>
+                        <dd>
+                            <uimessage code="Budesonide"/>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
             <h3>COPD</h3>
             <table>
                 <tr><th colspan="2">Modified MRC dyspnea scale</th></tr>
@@ -2250,75 +2378,17 @@
                 </tr>
 
             </table>
-            <br/><br/>
+            <br/>
 
-            <div class="two-columns">
-                <div>
-                    <strong>
-                        <uimessage code="pihcore.ncd.copdClass"/>
-                    </strong>
-                    <p class="side-by-side">
-                        <obs conceptId="PIH:COPD group classification" style="radio"
-                             answerConceptIds="CIEL:165441,CIEL:165442,CIEL:165443,CIEL:165444"
-                             answerCodes="pihcore.gradeA,pihcore.gradeB,pihcore.gradeC,pihcore.gradeD"
-                             answerSeparator="&lt;br /&gt;"/>
-                    </p>
-
-                    <p class="side-by-side">
-                        <label>
-                            <uimessage code="On medication with" />
-                        </label>
-                        <br/>
-                        <obs conceptId="PIH:14603" style="radio"
-                             answerConceptIds="PIH:14604,PIH:14605,PIH:14606,PIH:14607,PIH:14608,PIH:14609,PIH:15163"
-                             answerCodes="SABA (Short-acting beta-agonist),SAMA (Short-acting muscarinic antagonist),LABA (Long-acting beta-agonist),LAMA (Long acting muscarinic antagonist),Oral steroid,Steroid inhaler,Oral salbutamol"
-                             answerSeparator="&lt;br /&gt;"/>
-                    </p>
-                </div>
-
-                <div>
-                    <dl>
-                        <dt>
-                            <uimessage code="SABA"/>
-                        </dt>
-                        <dd>
-                            <uimessage code="Salbutamol"/>
-                        </dd>
-
-                        <dt>
-                            <uimessage code="SAMA"/>
-                        </dt>
-                        <dd>
-                            <uimessage code="Ipratropium bromide"/>
-                        </dd>
-
-                        <dt>
-                            <uimessage code="LABA"/>
-                        </dt>
-                        <dd>
-                            <uimessage code="Salmeterol, Formoterol, Indacaterol"/>
-                        </dd>
-
-                        <dt>
-                            <uimessage code="LAMA"/>
-                        </dt>
-                        <dd>
-                            <uimessage code="Tiotropium"/>
-                        </dd>
-
-                        <dt>
-                            <uimessage code="Inhaled steroids"/>
-                        </dt>
-                        <dd>
-                            <uimessage code="Budesonide"/>
-                        </dd>
-                    </dl>
-                </div>
-            </div>
-
-            <strong>
-                <uimessage code="COPD evaluation" />
-            </strong>
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="pihcore.ncd.copdClass"/>
+                </label>
+                <obs conceptId="PIH:COPD group classification" style="radio"
+                     answerConceptIds="CIEL:165441,CIEL:165442,CIEL:165443,CIEL:165444"
+                     answerCodes="pihcore.gradeA,pihcore.gradeB,pihcore.gradeC,pihcore.gradeD"
+                     />
+            </p>
 
             <obsgroup groupingConceptId="PIH:14620">
                 <repeat>
