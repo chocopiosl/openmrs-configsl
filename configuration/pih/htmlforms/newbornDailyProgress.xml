@@ -437,7 +437,7 @@
                                      conceptId="CIEL:163309"
                                      answerConceptId="{answer}" answerCode="{comment}" />
                             </template>
-                            <render normAb="normalObs"   answer="PIH:15107"   comment="Clear" />
+                            <render normAb="normalObs"   answer="PIH:3236"    comment="Clear" />
                             <render normAb="abnormalObs" answer="CIEL:127777" comment="Red eyes" />
                             <render normAb="abnormalObs" answer="CIEL:168745" comment="Sticky eyes"/>
                             <render normAb="abnormalObs" answer="CIEL:168747" comment="Sticky right eye"/>
