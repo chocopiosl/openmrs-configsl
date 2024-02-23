@@ -26,7 +26,7 @@ create temporary table temp_ncd
  missed_school                       bit,              
  days_lost_schooling                 double,           
  hiv                                 varchar(255),  
- risk_factors                        varchar(1000), 
+ risk_factors                        text, 
  comorbidities                       varchar(255),     
  bp_systolic                         double,           
  bp_diastolic                        double,           
@@ -81,40 +81,40 @@ create temporary table temp_ncd
  liver_indicators_obs_group          int(11),          
  liver_disease_controlled            varchar(255),     
  sickle_cell_type                    varchar(255),     
- sickle_cell_complications           varchar(1000), 
+ sickle_cell_complications           text, 
  next_appointment_date               date,             
  disposition                         varchar(255),     
  transfer_site                       varchar(255),  
- echooptions                         varchar(255),  
- echocomment                         varchar(500),  
- echocardiogram_findings             varchar(500),     
+ echooptions                         text,  
+ echocomment                         text,  
+ echocardiogram_findings             text,     
  on_on_ace_inhibitor_group_id        int,           
- on_ace_inhibitor                    varchar(3),    
- on_beta_blocker                     varchar(3),       
+ on_ace_inhibitor                    varchar(255),    
+ on_beta_blocker                     varchar(255),       
  secondary_antibiotic_prophylaxis    boolean,       
- cardiac_surgery_scheduled           varchar(3),       
+ cardiac_surgery_scheduled           varchar(255),       
  type_cardiac_surgery                varchar(255),  
  cardiac_surgery_performed_date      date,          
  cardiac_surgery_performed           boolean,          
  scd_penicillin_treatment            boolean,          
  scd_folic_acid_treatment            boolean,       
  transfusion_past_12_months          boolean,       
- asthma_severity                     varchar(20),      
- nighttime_waking_asthma             varchar(3),    
+ asthma_severity                     varchar(255),      
+ nighttime_waking_asthma             varchar(255),    
  nighttime_count                     int,              
- symptoms_2x_week_asthma             varchar(3),    
+ symptoms_2x_week_asthma             varchar(255),    
  symptoms_2x_count                   int,              
- inhaler_for_symptoms_2x_week_asthma varchar(3),    
+ inhaler_for_symptoms_2x_week_asthma varchar(255),    
  inhaler_count                       int,           
  limitation_obs_group_id             int,              
- activity_limitation_asthma          varchar(60),      
+ activity_limitation_asthma          varchar(255),      
  activity_count                      int,              
- asthma_control_GINA                 varchar(20),   
+ asthma_control_GINA                 varchar(255),   
  echocardiogram_obs_group_id         int,              
  echocardiogram_date                 date,             
- diabitec_comma                      boolean,          
- diabitec_without_comma              boolean,       
- lab_tests_ordered                   varchar(1000), 
+ diabetic_comma                      boolean,          
+ diabetic_without_comma              boolean,       
+ lab_tests_ordered                   text, 
  index_asc                           int,              
  index_desc                          int            
 );
@@ -579,16 +579,16 @@ SET t.lab_order_hba1c= o.lab_order_hba1c;
 
 
 UPDATE temp_ncd t
-SET diabitec_comma = answer_exists_in_encounter(t.encounter_id, 'PIH', '14921', 'PIH','14482');
+SET diabetic_comma = answer_exists_in_encounter(t.encounter_id, 'PIH', '14921', 'PIH','14482');
 UPDATE temp_ncd t
-SET diabitec_comma=NULL 
-WHERE diabitec_comma=FALSE;
+SET diabetic_comma=NULL 
+WHERE diabetic_comma=FALSE;
 
 UPDATE temp_ncd t
-SET diabitec_without_comma = answer_exists_in_encounter(t.encounter_id, 'PIH', '14921', 'PIH','14483');
+SET diabetic_without_comma = answer_exists_in_encounter(t.encounter_id, 'PIH', '14921', 'PIH','14483');
 UPDATE temp_ncd t
-SET diabitec_without_comma=NULL 
-WHERE diabitec_without_comma=FALSE;
+SET diabetic_without_comma=NULL 
+WHERE diabetic_without_comma=FALSE;
 
 -- lab tests
 update temp_ncd t
