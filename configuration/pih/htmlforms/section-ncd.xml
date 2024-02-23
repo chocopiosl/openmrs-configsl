@@ -2390,6 +2390,9 @@
                      />
             </p>
 
+            <strong>
+                <uimessage code="COPD evaluation" />
+            </strong>
             <obsgroup groupingConceptId="PIH:14620">
                 <repeat>
                     <template>
