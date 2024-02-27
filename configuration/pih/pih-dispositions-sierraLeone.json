@@ -76,7 +76,7 @@
     "additionalObs": [
       {
         "label": "disposition.emrapi.death.deathDate",
-        "conceptCode": "org.openmrs.module.emrapi: Date of Death",
+        "conceptCode": "PIH:14399",
         "params": {
           "id": "dateOfDeath"
         }
