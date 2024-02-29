@@ -20,14 +20,6 @@
 
     <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.CleanDiagnosisConstructAction"/>
 
-    <translations defaultLocale="en">
-        <code name="o2Sat">
-            <variant locale="en" value="O&lt;sub&gt;2&lt;/sub&gt; Sat"/>
-            <variant locale="fr" value="SpO&lt;sub&gt;2&lt;/sub&gt;"/>
-            <variant locale="es" value="SatO&lt;sub&gt;2&lt;/sub&gt;"/>
-        </code>
-    </translations>
-
     <style type="text/css">
 
         #who-when-where {
@@ -305,191 +297,6 @@
         </includeIf>
     </ifMode>
 
-    <section id="intake" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Intake">
-        <div class="section-container">
-            <p class="date-one-line">
-                <label>
-                    <uimessage code="Admission date/time"/>
-                </label>
-                <obs conceptId="CIEL:1640"/>
-            </p>
-
-            <div class="two-columns">
-                <div>
-                    <p class="side-by-side">
-                        <label>
-                            <uimessage code="pihcore.mch.grava"/>
-                        </label>
-                        <obs conceptId="CIEL:5624" />
-                    </p>
-
-                    <p class="side-by-side">
-                        <label>
-                            <uimessage code="pihcore.mch.para"/>
-                        </label>
-                        <obs conceptId="CIEL:1053"/>
-                    </p>
-                </div>
-                <div>
-                    <div id="calculated-edd-and-gestational" class="hidden">
-                        <p>
-                            <span id="calculated-edd-wrapper">
-                                <span id="calculated-edd-label">
-                                    <uimessage code="pihcore.calculatedEstimatedDeliveryDate"/>:&#160;
-                                </span>
-                                <span id='calculated-edd' class="value">
-                                    <lookup expression="fn.latestObs('CIEL:1427').valueDatetime"/>
-                                </span>
-                                <span class="small hidden">
-                                    <obs id="lastPeriodDate" conceptId="CIEL:1427" allowFutureDates="false"/>
-                                </span>
-                            </span>
-                        </p>
-                        <p>
-                            <span id="calculated-gestational-age-wrapper">
-                                <span id="calculated-gestational-age-label">
-                                    <uimessage code="pihcore.calculatedGestationalAge"/>:&#160;
-                                </span>
-                                <span id='calculated-gestational-age-value' class="value"></span>
-                            </span>
-                        </p>
-                    </div>
-
-                    <p class="side-by-side">
-                        <label>
-                            <uimessage code="Gestational age (GA)"/>
-                        </label>
-                        <obs conceptId="CIEL:165425"/>
-                        <label>
-                            <i>
-                                <uimessage code="Decimal represents number of days.  For example, 37.4 = 37 weeks + 4 days."/>
-                            </i>
-                        </label>
-                    </p>
-
-                    <p class="side-by-side">
-                        <label>
-                            <uimessage code="Gestational age based on:" />
-                        </label>
-                        <br/>
-                        <obs conceptId="CIEL:160697" style="radio"
-                             answerConceptIds="CIEL:159618,CIEL:1427,CIEL:5596,CIEL:1391"
-                             answerCodes="Ultrasound,Last menstrual date,Expected due date,Physical exam"
-                             answerSeparator="&lt;br /&gt;" />
-
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="vitals" sectionTag="fieldset" headerTag="legend"
-             headerStyle="title" headerCode="pihcore.vitalSigns">
-        <div class="section-container">
-            <table>
-                <tr>
-                    <td>
-                        <div class="five-columns">
-                            <div>
-                                <label>
-                                    <uimessage code="Temp"/>
-                                </label>
-                                <span class="small">
-                                    <obs conceptId="CIEL:5088" id="temperature_c"
-                                         showUnits="emr.units.degreesCelsius" unitsCssClass="append-to-value"/>
-                                </span>
-                            </div>
-                            <div>
-                                <label>
-                                    <uimessage code="mirebalais.vitals.short.heartRate.title"/>
-                                </label>
-                                <span class="small">
-                                    <obs conceptId="CIEL:5087" id="heart_rate"
-                                         showUnits="emr.units.perMinute" unitsCssClass="append-to-value"/>
-                                </span>
-                            </div>
-
-                            <div>
-                                <label>
-                                    <uimessage code="mirebalais.vitals.bloodPressure.short.title"/>
-                                </label>
-                                <span class="small">
-                                    <ifMode mode="VIEW" include="true">
-                                        <span class="append-to-value">
-                                            <obs conceptId="CIEL:5085" id="bp_systolic"/>
-                                        </span>
-                                        <span class="append-to-value">/</span>
-                                        <span class="append-to-value">
-                                            <obs conceptId="CIEL:5086" id="bp_diastolic" />
-                                        </span>
-                                        <span class="append-to-value">mm/Hg</span>
-                                    </ifMode>
-                                    <ifMode mode="VIEW" include="false">
-                                        <span class="append-to-value left">
-                                            <obs conceptId="CIEL:5085" id="bp_systolic"/>
-                                        </span>
-                                        <span class="append-to-value left">/</span>
-                                        <span class="append-to-value left">
-                                            <obs conceptId="CIEL:5086" id="bp_diastolic" />
-                                        </span>
-                                        <span class="append-to-value">mm/Hg</span>
-                                    </ifMode>
-                                </span>
-                            </div>
-
-                            <div>
-                                <label>
-                                    <uimessage code="mirebalais.vitals.respiratoryRate.short.title"/>
-                                </label>
-                                <span class="small">
-                                    <obs conceptId="CIEL:5242" id="respiratory_rate"
-                                         showUnits="emr.units.perMinute" unitsCssClass="append-to-value"/>
-                                </span>
-                            </div>
-
-                            <div>
-                                <label>
-                                    <uimessage code="o2Sat"/>
-                                </label>
-                                <span class="small">
-                                    <obs conceptId="CIEL:5092" id="o2_sat"
-                                         showUnits="emr.units.percent" unitsCssClass="append-to-value"/>
-                                </span>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </section>
-
-     <section id="preg-complications" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="Pregnancy complications">
-        <div class="section-container">
-            <repeat>
-                <template>
-                    <obs conceptId="PIH:3334" answerConceptId="{concept}" style="checkbox"/>
-                </template>
-                <render concept="CIEL:115491" name="Multiple gestation" />
-                <render concept="CIEL:118256" name="(signs of) Fetal distress"/>
-                <render concept="CIEL:150862" name="Abnormal fetal presentation"/>
-                <render concept="CIEL:1449"   name="Gestational diabetes"/>
-                <render concept="CIEL:134594" name="Malaria in pregnancy"/>
-                <render concept="CIEL:148834" name="Anemia in pregnancy"/>
-                <render concept="CIEL:118744" name="Eclampsia"/>
-                <render concept="CIEL:129251" name="Preeclampsia"/>
-                <render concept="CIEL:165088" name="Victim of GBV (gender-based violence)"/>
-                <render concept="CIEL:117703" name="Sickle-cell"/>
-                <render concept="CIEL:5622" name="other"/>
-            </repeat>
-
-            <label>
-                <uimessage code="zl.ifOtherSpecify" />
-            </label>
-            <obs conceptId="PIH:14679" />
-        </div>
-    </section>
-
     <section id="onset" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Labour onset">
         <div class="section-container">
@@ -501,186 +308,6 @@
                     <obs conceptId="CIEL:163444" showTime="true"/>
                 </span>
             </p>
-
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="Membranes"/>
-                </label>
-                <obs id="membrane-state" conceptId="CIEL:164900" style="radio"
-                     answerConceptIds="CIEL:164899,CIEL:127244,CIEL:1067" answerCodes="Intact,Ruptured,Unknown">
-                    <controls>
-                        <when value="CIEL:127244" thenDisplay="#rupture-details"/>
-                    </controls>
-                </obs>
-            </p>
-
-            <div id="rupture-details">
-                <p>
-                    <div id="rupture-date" class="date-one-line">
-                        <label>
-                            <uimessage code="Rupture date/time"/>
-                        </label>
-                        <obs conceptId="CIEL:160710" showTime="true"/>
-                    </div>
-                </p>
-
-                <p class="side-by-side">
-                    <label>
-                        <uimessage code="Membrane color" />
-                    </label>
-                    <obs conceptId="CIEL:168750" style="radio"
-                         answerConceptIds="CIEL:159484,CIEL:168749"/>
-                </p>
-
-                <p class="side-by-side">
-                    <label>
-                        <uimessage code="Meconium classification" />
-                    </label>
-                    <br/>
-                    <obs conceptId="CIEL:168726" style="radio"
-                         answerConceptIds="CIEL:168727,CIEL:168728,CIEL:168729"
-                         answerCodes="pihcore.meconiumClass.1,pihcore.meconiumClass.2,pihcore.meconiumClass.3"
-                         answerSeparator="&lt;br /&gt;" />
-                </p>
-            </div>
-
-        </div>
-    </section>
-
-    <ifMode mode="VIEW" include="false">
-        <script type="text/javascript">
-
-            jq(function() {
-
-                var hasValue = function(element) {
-                    return jq(element).find('.fetus-name input').val();
-                };
-
-                var hideOtherFetus = function() {
-                    jq('#fetus-2').hide();
-                    jq('#fetus-3').hide();
-                    jq('#fetus-4').hide();
-                };
-
-                if (!hasValue('#fetus-2') &amp;&amp; !hasValue('#fetus-3') &amp;&amp; !hasValue('#fetus-4')) {
-                    hideOtherFetus();
-                    jq('#show-more-fetus-button').show();
-                }
-
-                jq('#show-more-fetus-button').click(function() {
-                    jq('.fetus').show();
-                    jq('#show-more-fetus-button').hide();
-                    jq('#show-less-fetus-button').show();
-                });
-
-                jq('#show-less-fetus-button').click(function() {
-                    hideOtherFetus();
-                    jq('#show-less-fetus-button').hide();
-                    jq('#show-more-fetus-button').show();
-                });
-
-            })
-
-        </script>
-    </ifMode>
-
-    <section id="exam" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="Physical exam">
-        <div class="section-container">
-                <b>
-                    <uimessage code="pihcore.exam.obstetrical_exam.title"/>
-                </b>
-
-                <div class="three-columns in-line">
-                    <div>
-                        <label>
-                            <uimessage code="pihcore.fundalHeight"/>
-                        </label>
-                        <obs conceptId="CIEL:1439" showUnits="true"/>
-                    </div>
-                    <div>
-                        <p class="side-by-side">
-                            <label>
-                                <uimessage code="pihcore.uterineContractions"/>
-                            </label>
-                            <obs conceptId="CIEL:163750" style="radio"
-                                 answerConceptIds="CIEL:163747,CIEL:163748"
-                                 answerCodes="pihcore.absent.plural,pihcore.present.plural" />
-                            <br/>
-                            <obs conceptId="CIEL:160968" placeholder="comment"/>
-                        </p>
-                    </div>
-                    <div>
-                        <p class="side-by-side">
-                            <label>
-                                <uimessage code="pihcore.fetalHeartRate"/> method
-                            </label>
-                            <br/>
-                            <obs conceptId="CIEL:168715" id="fetal_hr_method" style="radio"
-                                 answerConceptIds="CIEL:168716,CIEL:168717,CIEL:168718,CIEL:168719,CIEL:168720,CIEL:5622"
-                                 answerCodes="Pinard,Doppler,Moyo,Janitri,CTG,other"/>
-                    </p>
-                    </div>
-                </div>
-
-                <repeat with="['1'],['2'],['3'],['4']">
-                    <span id="fetus-{0}" class="fetus">
-                        <obsgroup groupingConceptId="CIEL:165381" showIfEmpty="false">
-                            <h6>------- {0} -------</h6>
-
-                            <div class="three-columns in-line">
-                                <div>
-                                    <p class="side-by-side">
-                                        <label>
-                                            <uimessage code="pihcore.fetalPresentation"/>
-                                        </label>
-                                        <br/>
-                                        <obs id="fetus-presentation-{0}"
-                                             conceptId="CIEL:160090" style="radio"
-                                             answerSeparator="&lt;br /&gt;">
-                                            <controls>
-                                                <when value="CIEL:5622" thenDisplay="#other-presentation"/>
-                                            </controls>
-                                        </obs>
-                                    </p>
-                                    <div id="other-presentation">
-                                        <label>
-                                            <uimessage code="zl.ifOtherSpecify"/>
-                                        </label>
-                                        <obs conceptId="PIH:14414"/>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <p class="side-by-side">
-                                        <label>
-                                            <uimessage code="pihcore.fetalPosition"/>
-                                        </label>
-                                        <br/>
-                                        <obs id="fetus-position-{0}" style="radio"
-                                             conceptId="CIEL:163749" answerConceptIds="CIEL:5141,CIEL:5139" />
-                                    </p>
-                                </div>
-
-                                <div>
-                                    <label>
-                                        <uimessage code="pihcore.fetalHeartRate"/>
-                                    </label>
-                                    <obs id="fetus-hr-{0}" conceptId="CIEL:1440"
-                                         showUnits="true" />
-                                </div>
-                            </div>
-                        </obsgroup>
-                    </span>
-                </repeat>
-                <button id="show-more-fetus-button" type="button" style="display:none">
-                    <uimessage code="pihcore.showMore"/>
-                </button>
-                <button id="show-less-fetus-button" type="button" style="display:none">
-                    <uimessage code="pihcore.showLess"/>
-                </button>
-
-            <br/><br/>
 
             <p class="side-by-side">
                 <label>
@@ -714,43 +341,90 @@
                 </div>
             </p>
 
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="pihcore.uterusPalpation" />
-                </label>
-                <obs conceptId="CIEL:167035" style="radio"
-                     answerConceptIds="CIEL:167036,CIEL:167037"
-                     answerCodes="pihcore.sensitiveUterus,pihcore.nonSensitiveUterus"/>
-                <br/><br/>
+        </div>
+    </section>
 
-                <label>
-                    <uimessage code="Previous abdominal scar" />
-                </label>
-                <obs id="ab-scar" conceptId="CIEL:166893" style="radio"
-                     answerConceptIds="CIEL:1065,CIEL:1066" >
-                    <controls>
-                        <when value="CIEL:1065" thenDisplay="#ab-scar-details"/>
-                    </controls>
-                </obs>
+    <ifMode mode="VIEW" include="false">
+        <script type="text/javascript">
 
-                <div id="ab-scar-details" class="two-columns">
-                    <div>
-                        <label>
-                            <uimessage code="# of previous c-sections"/>
-                        </label>
-                        <obs conceptId="CIEL:160081"/>
-                    </div>
+            jq(function() {
 
-                    <div>
-                        <label>
-                            <uimessage code="Description of scar"/>
-                        </label>
-                        <obs conceptId="CIEL:168244"/>
-                    </div>
-                </div>
+                var hasValue = function(element) {
+                    return jq(element).find('.fetus-name input').val();
+                };
 
+                var hideOtherFetus = function() {
+                    jq('#fetus-2').hide();
+                };
 
-            </p>
+                if (!hasValue('#fetus-2')) {
+                    hideOtherFetus();
+                    jq('#show-more-fetus-button').show();
+                }
+
+                jq('#show-more-fetus-button').click(function() {
+                    jq('.fetus').show();
+                    jq('#show-more-fetus-button').hide();
+                    jq('#show-less-fetus-button').show();
+                });
+
+                jq('#show-less-fetus-button').click(function() {
+                    hideOtherFetus();
+                    jq('#show-less-fetus-button').hide();
+                    jq('#show-more-fetus-button').show();
+                });
+
+            })
+
+        </script>
+    </ifMode>
+
+    <section id="delivery" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Delivery">
+        <div class="section-container">
+                <repeat with="['1'],['2']">
+                    <span id="fetus-{0}" class="fetus">
+                        <obsgroup groupingConceptId="CIEL:165381" showIfEmpty="false">
+                            <h6>------- Infant {0} -------</h6>
+
+                            <div class="three-columns in-line">
+                                <div>
+                                    <p class="side-by-side">
+                                        <label>
+                                            <uimessage code="pihcore.fetalPresentation"/>
+                                        </label>
+                                        <br/>
+                                        <obs id="fetus-presentation-{0}"
+                                             conceptId="CIEL:160090" style="radio"
+                                             answerSeparator="&lt;br /&gt;">
+                                            <controls>
+                                                <when value="CIEL:5622" thenDisplay="#other-presentation"/>
+                                            </controls>
+                                        </obs>
+                                    </p>
+                                    <div id="other-presentation">
+                                        <label>
+                                            <uimessage code="zl.ifOtherSpecify"/>
+                                        </label>
+                                        <obs conceptId="PIH:14414"/>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <p class="side-by-side">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </obsgroup>
+                    </span>
+                </repeat>
+                <button id="show-more-fetus-button" type="button" style="display:none">
+                    <uimessage code="pihcore.showMore"/>
+                </button>
+                <button id="show-less-fetus-button" type="button" style="display:none">
+                    <uimessage code="pihcore.showLess"/>
+                </button>
         </div>
     </section>
 
