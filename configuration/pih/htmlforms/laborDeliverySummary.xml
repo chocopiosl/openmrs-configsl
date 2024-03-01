@@ -382,49 +382,184 @@
     <section id="delivery" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Delivery">
         <div class="section-container">
-                <repeat with="['1'],['2']">
-                    <span id="fetus-{0}" class="fetus">
-                        <obsgroup groupingConceptId="CIEL:165381" showIfEmpty="false">
-                            <h6>------- Infant {0} -------</h6>
 
-                            <div class="three-columns in-line">
+            <!-- ToDo: -->
+            <p>
+                <label>
+                    <uimessage code="Duration of first stage (in hours+minutes)" />
+                    <i>TBD</i>
+                </label>
+            </p>
+            <!-- ToDo: -->
+            <p>
+                <label>
+                    <uimessage code="Second stage start date/time" />
+                    <i>TBD</i>
+                </label>
+            </p>
+
+            <p>
+                <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                    <obs conceptId="PIH:DIAGNOSIS" style="checkbox"
+                         answerConceptId="CIEL:115491" answerCode="Twins or multiple"/>
+                </obsgroup>
+            </p>
+
+            <repeat with="['1'],['2']">
+                <span id="fetus-{0}" class="fetus">
+                    <obsgroup groupingConceptId="PIH:13555" showIfEmpty="false">
+                        <h6>------- Infant {0} -------</h6>
+                        <div>
+                            <p class="date-one-line">
+                                <label>
+                                    <uimessage code="Birth date/time"/>
+                                </label>
+                                <br/>
+                                <obs conceptId="PIH:15080" showTime="true"/>
+                            </p>
+                        </div>
+
+                        <div class="two-columns">
+                            <div>
+                                <p class="side-by-side">
+                                    <label>
+                                        <uimessage code="Outcome"/>
+                                    </label>
+                                    <br/>
+                                    <obs id="dead-or-alive-{0}"
+                                         conceptId="CIEL:159917" style="radio"
+                                         answerConceptIds="CIEL:151849,CIEL:159916,CIEL:135436"
+                                         answerCodes="Alive,FSB,MSB">
+                                        <controls>
+                                            <when value="CIEL:151849" thenDisplay="#alive-details-{0}"/>
+                                        </controls>
+                                    </obs>
+                                </p>
+
+                            </div>
+                            <div>
+                                <p class="side-by-side">
+                                    <label>
+                                        <uimessage code="Sex"/>
+                                    </label>
+                                    <obs conceptId="CIEL:1587" style="radio"
+                                         answerConceptIds="CIEL:1534,CIEL:1535"
+                                         answerCodes="M,F"/>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div id="alive-details-{0}">
+                            <div class="three-columns">
                                 <div>
                                     <p class="side-by-side">
                                         <label>
-                                            <uimessage code="pihcore.fetalPresentation"/>
+                                            <uimessage code="Birth Weight"/>
                                         </label>
-                                        <br/>
-                                        <obs id="fetus-presentation-{0}"
-                                             conceptId="CIEL:160090" style="radio"
-                                             answerSeparator="&lt;br /&gt;">
-                                            <controls>
-                                                <when value="CIEL:5622" thenDisplay="#other-presentation"/>
-                                            </controls>
-                                        </obs>
+                                        <obs conceptId="CIEL:5916" showUnits="true"/>
                                     </p>
-                                    <div id="other-presentation">
-                                        <label>
-                                            <uimessage code="zl.ifOtherSpecify"/>
-                                        </label>
-                                        <obs conceptId="PIH:14414"/>
-                                    </div>
                                 </div>
-
                                 <div>
                                     <p class="side-by-side">
-
+                                        <label>
+                                            <uimessage code="Birth length"/>
+                                        </label>
+                                        <obs conceptId="CIEL:163554" showUnits="true"/>
+                                    </p>
+                                </div>
+                                <div>
+                                    <p class="side-by-side">
+                                        <label>
+                                            <uimessage code="Head circumference"/>
+                                        </label>
+                                        <obs conceptId="CIEL:163555" showUnits="true"/>
                                     </p>
                                 </div>
                             </div>
-                        </obsgroup>
-                    </span>
-                </repeat>
-                <button id="show-more-fetus-button" type="button" style="display:none">
-                    <uimessage code="pihcore.showMore"/>
-                </button>
-                <button id="show-less-fetus-button" type="button" style="display:none">
-                    <uimessage code="pihcore.showLess"/>
-                </button>
+
+                            <div class="three-columns">
+                                <!-- APGAR -->
+                                <div class="apgar">
+                                    <label>
+                                        <uimessage code="pihcore.mch.apgarScore1"/>
+                                    </label>
+
+                                    <!-- APGAR at 1 minutes -->
+                                    <obs conceptId="PIH:14419"/>
+                                </div>
+                                <div class="apgar">
+                                    <label>
+                                        <uimessage code="pihcore.mch.apgarScore"/>
+                                    </label>
+
+                                    <!-- APGAR at 5 minutes -->
+                                    <obs conceptId="CIEL:159604"/>
+                                </div>
+                                <div class="apgar">
+                                    <label>
+                                        <uimessage code="pihcore.mch.apgarScore10"/>
+                                    </label>
+
+                                    <!-- APGAR at 10 minutes -->
+                                    <obs conceptId="PIH:14785"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="three-columns in-line">
+                            <div>
+                                <p class="side-by-side">
+                                    <label>
+                                        <uimessage code="pihcore.fetalPresentation"/>
+                                    </label>
+                                    <br/>
+                                    <obs id="fetus-presentation-{0}"
+                                         conceptId="CIEL:160090" style="radio"
+                                         answerSeparator="&lt;br /&gt;">
+                                        <controls>
+                                            <when value="CIEL:5622" thenDisplay="#other-presentation"/>
+                                        </controls>
+                                    </obs>
+                                </p>
+                                <div id="other-presentation">
+                                    <label>
+                                        <uimessage code="zl.ifOtherSpecify"/>
+                                    </label>
+                                    <obs conceptId="PIH:14414"/>
+                                </div>
+                            </div>
+
+                            <div>
+                                <p class="side-by-side">
+                                    <label>
+                                        <uimessage code="Method of delivery"/>
+                                    </label>
+                                    <br/>
+                                    <obs conceptId="PIH:11663" style="radio"
+                                         answerConceptIds="CIEL:1170,PIH:1172,CIEL:155884,CIEL:159902"
+                                         answerSeparator="&lt;br /&gt;"/>
+                                </p>
+                            </div>
+                        </div>
+                    </obsgroup>
+                </span>
+            </repeat>
+
+            <button id="show-more-fetus-button" type="button" style="display:none">
+                <uimessage code="pihcore.showMore"/>
+            </button>
+            <button id="show-less-fetus-button" type="button" style="display:none">
+                <uimessage code="pihcore.showLess"/>
+            </button>
+
+            <!-- ToDo: -->
+            <p>
+                <br/>
+                <label>
+                    <uimessage code="Duration of second stage (in hours+minutes)" />
+                    <i>TBD</i>
+                </label>
+            </p>
         </div>
     </section>
 
