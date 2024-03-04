@@ -36,10 +36,10 @@ create temporary table temp_ncd
  bmi                                 varchar(255),     
  obesity                             bit,              
  number_days_hospitalized            double,           
- hospitalizations_last_12_months     double,        
+-- hospitalizations_last_12_months     double,        
  last_hospitalization_discharge_date datetime,      
  last_hospitalization_outcome        varchar(255),  
- hospitalizations_ncd                double,        
+ number_hospitalizations_ncd                double,        
  hospitalization_dka_last_12_months  boolean,       
  diabetes                            bit,              
  hypertension                        bit,              
@@ -242,6 +242,7 @@ set risk_factors = (
 	select group_concat(concept_name(concept_id,@locale) SEPARATOR '|') from temp_obs o
 	where o.encounter_id = t.encounter_id
 	and value_coded = @yes_concept
+	and obs_group_id is null
 	and concept_id in (@alcohol,@smoking,@indoor_cooking,@history_pulmonary_tb,
 		@occupational_exposure,@seasonal_allergies,@excessive_salt,@maggie_seasoning,
 		@ace_inhibitors,@nsaids,@nephrotoxic_drugs,@history_cardiac_disease)
@@ -286,8 +287,8 @@ set obesity =
 update temp_ncd t
 set number_days_hospitalized = obs_value_numeric_from_temp(encounter_id, 'PIH','2872');
 
-update temp_ncd t
-set hospitalizations_last_12_months = obs_value_numeric_from_temp(encounter_id, 'PIH','5704');
+-- update temp_ncd t
+-- set hospitalizations_last_12_months = obs_value_numeric_from_temp(encounter_id, 'PIH','5704');
 
 update temp_ncd t
 set last_hospitalization_discharge_date = obs_value_datetime_from_temp(encounter_id, 'PIH','3800');
@@ -296,7 +297,7 @@ update temp_ncd t
 set last_hospitalization_outcome = obs_value_coded_list_from_temp(encounter_id, 'PIH','15159',@locale);
 
 update temp_ncd t
-set hospitalizations_ncd = obs_value_numeric_from_temp(encounter_id, 'PIH','15160');
+set number_hospitalizations_ncd = obs_value_numeric_from_temp(encounter_id, 'PIH','15160');
 
 update temp_ncd t
 set hospitalization_dka_last_12_months =  value_coded_as_boolean(obs_id_from_temp(encounter_id, 'PIH','15158',0));
@@ -515,7 +516,7 @@ update temp_ncd t
 set cardiac_surgery_scheduled = obs_value_coded_list_from_temp(encounter_id,'PIH', '15165',@locale);
 
 update temp_ncd t
-set type_cardiac_surgery = obs_value_coded_list_from_temp(encounter_id,'PIH', '10484',@locale);
+set type_cardiac_surgery = obs_value_coded_list_from_temp(encounter_id,'PIH', '7887',@locale);
 
 update temp_ncd t
 set cardiac_surgery_performed = 
@@ -591,12 +592,16 @@ SET diabetic_without_comma=NULL
 WHERE diabetic_without_comma=FALSE;
 
 -- lab tests
+select order_type_id into @testOrder from order_type ot where uuid = '52a447d3-a64a-11e3-9aeb-50e549534c5e';
 update temp_ncd t
 set lab_tests_ordered = 
 	(select GROUP_CONCAT(concept_name(o.concept_id,@locale) SEPARATOR '|')
 	from orders o
 	where o.encounter_id = t.encounter_id 
+	and voided = 0
+	and o.order_type_id = @testOrder
 	group by encounter_id);
+
 
 -- The ascending/descending indexes are calculated ordering on the encounter date
 -- new temp tables are used to build them and then joined into the main temp table.
@@ -675,10 +680,10 @@ fbg_level,
 rbg_level,
 bmi,
 obesity,
-hospitalizations_last_12_months,
+-- hospitalizations_last_12_months,
 last_hospitalization_discharge_date,
 last_hospitalization_outcome,
-hospitalizations_ncd,
+number_hospitalizations_ncd,
 hospitalization_dka_last_12_months,
 number_days_hospitalized,
 diabetes,
