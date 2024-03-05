@@ -377,39 +377,6 @@
         </div>
     </section>
 
-    <style type="text/css">
-        <ifMode mode="VIEW" include="false">
-            #data-collection {
-                display: inline-block;
-                width: 50%;
-                vertical-align: top;
-            }
-
-            #encounter-diagnoses-target {
-                display: inline-block;
-                width: 45%;
-                vertical-align: top;
-            }
-
-            #encounter-diagnoses-app {
-                margin-bottom: 20px;
-            }
-        </ifMode>
-    </style>
-
-    <section id="diagnosis" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="Diagnosis">
-        <div class="section-container-color">
-
-            <div id="data-collection">
-                <encounterDiagnosesByObs selectedDiagnosesTarget="#encounter-diagnoses-target"/>
-            </div>
-
-            <div id="encounter-diagnoses-target">
-            </div>
-        </div>
-    </section>
-
     <section id="risk-factors" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="General risk factors for NCDs">
         <div class="section-container two-columns">
