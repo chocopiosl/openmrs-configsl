@@ -70,10 +70,6 @@
             width: 95%;
         }
 
-        ul.copd {
-            list-style-position: outside;
-        }
-
         .five-columns, .four-columns, .three-columns, .two-columns {
             display: table;
             height: 100%;
@@ -143,6 +139,264 @@
             });
         </script>
     </ifMode>
+
+    <section id="cirrhosis-section" sectionTag="fieldset"
+             headerTag="legend" headerStyle="title" headerCode="Liver cirrhosis / Hepatitis B">
+        <div id="cirrhosis" class="section-container">
+
+            <!-- this section is ONLY included for NCD intake encounter -->
+            <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
+                <strong>
+                    <uimessage code="Diagnosis"/>
+                </strong>
+                <div class="two-columns">
+                    <div>
+                        <p class="side-by-side">
+                            <repeat>
+                                <template>
+                                    <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                        <obs conceptId="PIH:DIAGNOSIS" style="checkbox"
+                                             answerConceptId="{diagId}" answerCode="{name}"/>
+                                    </obsgroup>
+                                    <br/>
+                                </template>
+                                <render diagId="CIEL:121812" name="Acute Hepatitis B" />
+                                <render diagId="CIEL:120557" name="Chronic Hepatitis B" />
+                                <render diagId="CIEL:145347" name="Chronic Hepatitis C" />
+                            </repeat>
+                        </p>
+
+                        <label>
+                            <uimessage code="Hepatocarcinoma secondary"/>
+                        </label>
+                        <p class="side-by-side">
+                            <repeat>
+                                <template>
+                                    <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                        <obs conceptId="PIH:DIAGNOSIS" style="checkbox"
+                                             answerConceptId="{diagId}" answerCode="{name}"/>
+                                    </obsgroup>
+                                    <br/>
+                                </template>
+                                <render diagId="CIEL:168297" name="Hepatocarcinoma due to Hepatitis B" />
+                                <render diagId="CIEL:168298" name="Hepatocarcinoma due to Hepatitis C" />
+                                <render diagId="PIH:14911"   name="Hepatocarcinoma due to unknown cause" />
+                            </repeat>
+                        </p>
+                    </div>
+                    <div>
+                        <label>
+                            <uimessage code="Liver cirrhosis secondary"/>
+                        </label>
+                        <p class="side-by-side">
+                            <repeat>
+                                <template>
+                                    <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                        <obs conceptId="PIH:DIAGNOSIS" style="checkbox"
+                                             answerConceptId="{diagId}" answerCode="{name}"/>
+                                    </obsgroup>
+                                    <br/>
+                                </template>
+                                <render diagId="CIEL:168300" name="Cirrhosis due to Hepatitis B" />
+                                <render diagId="CIEL:168301" name="Cirrhosis due to Hepatitis C" />
+                                <render diagId="CIEL:149157" name="Alcoholic cirrhosis" />
+                                <render diagId="PIH:15156" name="Fibrosis secondary to Schistosoma" />
+                                <render diagId="PIH:14910"   name="Non-alcoholic steatohepatitis" />
+                                <render diagId="CIEL:146184" name="Cardiac cirrhosis" />
+                                <render diagId="CIEL:143118" name="Unknown" fullName="Cryptogenic cirrhosis" />
+                            </repeat>
+                        </p>
+
+                    </div>
+                </div>
+            </includeIf>
+
+            <br/>
+            <strong>
+                <uimessage code="Liver followup indicators"/>
+            </strong>
+
+            <ifMode mode="VIEW" include="false">
+                <table align="left" style="font-size:small">
+                    <tr>
+                        <th colspan="2">
+                            Indications for treatment
+                        </th>
+                        <td>
+                            APRI > 1.5 or USS Cirrhosis<br/>
+                            VL from 2000 and ALT > 1.5 times 40 (at least 2 times in 4 months)<br/>
+                            Coinfection VHC-VIH<br/>
+                            VL from 2000 in pregnant women
+                        </td>
+                    </tr>
+                </table>
+            </ifMode>
+
+            <div>
+                <repeat>
+                    <template>
+                        <p class="list-inline">
+                            <obsgroup groupingConceptId="PIH:14875" showIfEmpty="false">
+                                <obs style="radio"
+                                     conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
+                                     conceptLabels="yes,no,unknown"
+                                     answerConceptId="{qId}" labelText="{symptName}"/>
+                            </obsgroup>
+                        </p>
+                    </template>
+                    <render qId="CIEL:168289" symptName="Asymptomatic" />
+                    <render qId="CIEL:168295" symptName="Ascitic paracentesis" />
+                    <render qId="CIEL:139582" symptName="Gastrointestinal bleeding" />
+                    <render qId="CIEL:120345" symptName="Confusion" />
+                    <render qId="CIEL:879"    symptName="Pruritus" />
+                    <render qId="CIEL:159449" symptName="Alcohol use" />
+                </repeat>
+            </div>
+
+            <obsgroup groupingConceptId="PIH:14827" showIfEmpty="false">
+                <p class="list-inline">
+                    <label>
+                        <uimessage code="Disease control"/>
+                    </label>
+                    <obs conceptId="PIH:11506" style="radio"
+                         answerConceptIds="PIH:11507,PIH:11508,PIH:11509"
+                         answerCodes="controlled,uncontrolled,complications" />
+                </p>
+
+                <div class="two-columns">
+                    <div>
+                        <repeat>
+                            <template>
+                                <p class="list-inline">
+                                    <label>
+                                        <uimessage code="{questionName}"/>
+                                    </label>
+                                    <obs id="liver-{tog}" conceptId="{qId}" style="radio"
+                                         answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                                         answerCodes="yes,no,unknown">
+                                        <controls>
+                                            <when value="PIH:YES" thenDisplay="#liver-{tog}-details"/>
+                                        </controls>
+                                    </obs>
+                                </p>
+                            </template>
+                            <render qId="CIEL:1898"   questionName="Patient condition improved" tog="fui-improved"/>
+                            <render qId="CIEL:164075" questionName="Overall treatment adherence" tog="fui-adher"/>
+                            <render qId="CIEL:167819" questionName="Missed doses in past week" tog="fui-miss"/>
+                            <render qId="CIEL:167021" questionName="Aware and understands the disease" tog="fui-aware"/>
+                            <render qId="CIEL:167914" questionName="Understands treatment" tog="fui-under"/>
+                            <render qId="PIH:14741"   questionName="Ability to titrate treatment" tog="fui-tite"/>
+                            <render qId="CIEL:1788"   questionName="Need hospitalization today" tog="fui-hosp" />
+                            <render qId="PIH:15164"   questionName="On prophylaxis for esophageal varices" tog="eso-var"/>
+                        </repeat>
+
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="New indication for Hepatitis B treatment"/>
+                            </label>
+                            <obs id="new-hepb-tto" conceptId="PIH:14889" style="radio"
+                                 answerConceptIds="PIH:YES,PIH:NO"
+                                 answerCodes="yes,no">
+                                <controls>
+                                    <when value="PIH:YES" thenDisplay="#new-hepb-reason"/>
+                                </controls>
+                            </obs>
+
+                            <div id="new-hepb-reason" style="margin-left: 30px">
+                                <p>
+                                    <repeat>
+                                        <template>
+                                            <obs conceptId="PIH:14914" style="checkbox"
+                                                 answerConceptId="{qId}"
+                                                 answerCode="{answId}" />
+                                        </template>
+                                        <render qId="PIH:14912"   answId="Cirrhosis USS" />
+                                        <render qId="CIEL:168288" answId="Cirrhosis APRI" />
+                                        <render qId="CIEL:654"    answId="ALT / SGPT" />
+                                        <render qId="CIEL:168323" answId="Hep B DNA (VL)" />
+                                        <render qId="CIEL:1169"   answId="Co-infected with HIV" />
+                                        <render qId="CIEL:156590" answId="Co-infected with Hepatitis C" />
+                                        <render qId="CIEL:111491" answId="Pregnancy and VL &gt; 20,000" />
+                                    </repeat>
+                                </p>
+                            </div>
+                        </p>
+                    </div>
+
+                    <div id="liver-fui-miss-details">
+                        <br/>
+                        <br/>
+                        <label>
+                            <uimessage code="# of missed doses in past week"/>
+                        </label>
+                        <obs conceptId="CIEL:167918"/>
+                    </div>
+                </div>
+
+            </obsgroup>
+
+            <obsgroup groupingConceptId="PIH:14890" showIfEmpty="false">
+                <br/>
+                <strong>
+                    <uimessage code="Hepatitis B treatment"/>
+                </strong>
+                <p class="side-by-side">
+                    <obs id="hepB-q" conceptId="PIH:14889" style="radio"
+                         labelCode="On treatment"
+                         answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1175"
+                         answerCodes="yes,no,not applicable">
+                        <controls>
+                            <when value="CIEL:1065" thenDisplay="#hepB-details" />
+                        </controls>
+                    </obs>
+                </p>
+
+                <div id="hepB-details" style="margin-left: 30px">
+                    <p class="side-by-side">
+                        <repeat>
+                            <template>
+                                <obs conceptId="PIH:14888" style="checkbox"
+                                     answerConceptId="{medId}" answerCode="{name}"/>
+                                <br/>
+                            </template>
+                            <render medId="CIEL:84795" name="Tenofovir" />
+                            <render medId="CIEL:75694" name="Entecav" />
+                        </repeat>
+                    </p>
+
+                    <p class="list-inline-wide">
+                        <label>
+                            <uimessage code="Secondary effects"/>
+                        </label>
+                        <obs style="radio"
+                             conceptId="CIEL:162871"
+                             answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1175"
+                             answerCodes="yes,no,not applicable" />
+                    </p>
+                    <p class="list-inline-wide">
+                        <label>
+                            <uimessage code="Missed doses in the last week"/>
+                        </label>
+                        <obs style="radio"
+                             conceptId="CIEL:167819"
+                             answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1175"
+                             answerCodes="yes,no,not applicable" />
+
+                    </p>
+                    <p class="list-inline-wide">
+                        <label>
+                            <uimessage code="Response to treatment (after 1 year)"/>
+                        </label>
+                        <br/>
+                        <obs style="radio"
+                             conceptId="PIH:14892"
+                             answerConceptIds="CIEL:1775,CIEL:162677,PIH:2416"
+                             answerCodes="complete (undetectable VL),partial (decrease but persistent),no response" />
+                    </p>
+                </div>
+            </obsgroup>
+        </div>
+    </section>
 
     <div id="buttons-section"></div>
     <ifMode mode="VIEW" include="false">

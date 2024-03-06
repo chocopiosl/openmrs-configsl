@@ -70,10 +70,6 @@
             width: 95%;
         }
 
-        ul.copd {
-            list-style-position: outside;
-        }
-
         .five-columns, .four-columns, .three-columns, .two-columns {
             display: table;
             height: 100%;
@@ -143,6 +139,235 @@
             });
         </script>
     </ifMode>
+
+    <section id="palliative-section" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Palliative care">
+        <div id="palliative" class="section-container">
+
+            <!-- Only show on intake -->
+            <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
+                <div class="two-columns">
+                    <div>
+                        <label>
+                            <uimessage code="Non-tumoral diseases" />
+                        </label>
+
+                        <repeat>
+                            <template>
+                                <obs conceptId="PIH:14773"
+                                     style="checkbox"
+                                     answerConceptId="{dId}" />
+                                <!-- answerCode="{message}" -->
+                            </template>
+                            <render dId="PIH:14772"   message="Refractory heart disease" />
+                            <render dId="CIEL:155569" message="CLD" />
+                            <render dId="CIEL:145438" message="CKD" />
+                        </repeat>
+
+                        <!-- ToDo:  Add other -->
+                    </div>
+                    <div>
+                        <label>
+                            <uimessage code="Tumoral diseases" />
+                        </label>
+
+                        <repeat>
+                            <template>
+                                <obs conceptId="PIH:14773"
+                                     style="checkbox"
+                                     answerConceptId="{dId}"
+                                     answerCode="{message}" />
+                            </template>
+                            <render dId="CIEL:116066" message="Hepatocarcinoma" />
+                            <render dId="CIEL:134788" message="Prostate cancer" />
+                            <render dId="CIEL:116026" message="Breast cancer" />
+                            <render dId="CIEL:133328" message="Lung cancer" />
+                            <render dId="PIH:14771"   message="Hematology cancer" />
+                        </repeat>
+
+                        <!-- Other with free-text -->
+                        <obs conceptId="PIH:14773"
+                             style="checkbox"
+                             answerConceptId="CIEL:5622" answerCode="other"
+                             commentFieldCode="zl.ifOtherSpecify" />
+                    </div>
+                </div>
+            </includeIf>
+
+            <strong>
+                <uimessage code="Palliative followup indicators"/>
+            </strong>
+
+            <p class="list-inline-wide">
+                <label>
+                    <uimessage code="Counselling done" />
+                </label>
+                <obs conceptId="CIEL:165310" style="radio"
+                     answerConceptIds="CIEL:1267,CIEL:1118"
+                     answerCodes="yes,no"/>
+            </p>
+
+            <obsgroup groupingConceptId="PIH:14817" showIfEmpty="false">
+                <div class="two-columns">
+                    <div>
+                        <repeat>
+                            <template>
+                                <p>
+                                    <p class="list-inline">
+                                        <label>
+                                            <uimessage code="{xId}"/>
+                                        </label>
+                                        <obs id="pall-fui-{tog}" conceptId="{message}" style="radio"
+                                             answerConceptIds="PIH:YES,PIH:NO,CIEL:1067"
+                                             answerCodes="yes,no,unknown">
+                                            <controls>
+                                                <when value="PIH:YES" thenDisplay="#pall-fui-{tog}-details"/>
+                                            </controls>
+                                        </obs>
+                                    </p>
+                                </p>
+                            </template>
+                            <render message="CIEL:1898"   xId="Patient condition improved" tog="improved"/>
+                            <render message="CIEL:164075" xId="Overall treatment adherence" tog="adher"/>
+                            <render message="CIEL:167819" xId="Missed doses in past week" tog="missed"/>
+                            <render message="CIEL:167021" xId="Aware and understands the disease" tog="aware"/>
+                            <render message="CIEL:167914" xId="Understands treatment" tog="understand"/>
+                            <render message="PIH:14741"   xId="Ability to titrate opioids" tog="titrate"/>
+                        </repeat>
+                    </div>
+                    <div id="pall-fui-missed-details">
+                        <br/><br/>
+                        <label>
+                            <uimessage code="# of missed doses in past week"/>
+                        </label>
+                        <obs conceptId="CIEL:167918"  />
+
+                    </div>
+                </div>
+            </obsgroup>
+
+            <table>
+                <repeat>
+                    <template>
+                        <obsgroup groupingConceptId="PIH:14859" showIfEmpty="false">
+                            <tr>
+                                <td id="{symptName}-symp" colspan="3">
+                                    <obs conceptId="CIEL:1728" style="checkbox"
+                                         answerConceptId="{qId}"
+                                         toggle="{id: '{symptName}-details', style: 'hidden'}" class="symptom-checkbox"/>
+                                </td>
+                            </tr>
+                            <tr id="{symptName}-details" >
+                                <td></td>
+                                <td>
+                                    <p class="list-inline">
+                                        <obs conceptId="CIEL:162676" style="radio"
+                                             answerConceptIds="CIEL:1107,CIEL:162677,CIEL:162678,CIEL:162679"
+                                             answerCodes="no,better,worse,same" />
+                                    </p>
+                                </td>
+                                <td>
+                                    <p class="list-inline">
+                                        <obs conceptId="PIH:14768" style="radio"
+                                             answerConceptIds="PIH:11507,PIH:11508"
+                                             answerCodes="controlled,uncontrolled"/>
+                                    </p>
+                                </td>
+                            </tr>
+
+                        </obsgroup>
+                    </template>
+                    <render qId="CIEL:114403" symptName="Pain" />
+                    <render qId="CIEL:5978"   symptName="Nausea" />
+                    <render qId="CIEL:996"    symptName="Constipation" />
+                    <render qId="CIEL:116743" symptName="Insomnia" />
+                    <render qId="CIEL:5226"   symptName="Weakness" />
+                    <render qId="CIEL:136443" symptName="Jaundice" />
+                    <render qId="CIEL:122496" symptName="Dyspnea" />
+                </repeat>
+            </table>
+            <br/><br/>
+
+            <p class="list-inline">
+                <strong>
+                    <uimessage code="pihcore.oncologyConsult.ecog_performance_status" />
+                </strong>
+                <obs conceptId="CIEL:160379" style="radio"
+                     answers="0,1,2,3,4,5"
+                     answerLabels="0,1,2,3,4,5"/>
+
+
+                <ifMode mode="VIEW" include="false">
+
+                    <table align="left" style="font-size:small">
+                        <tr>
+                            <td>0</td>
+                            <td><uimessage code="pihcore.oncologyConsult.performance_status_0"/></td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td><uimessage code="pihcore.oncologyConsult.performance_status_1"/></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><uimessage code="pihcore.oncologyConsult.performance_status_2"/></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><uimessage code="pihcore.oncologyConsult.performance_status_3"/></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><uimessage code="pihcore.oncologyConsult.performance_status_4"/></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td><uimessage code="pihcore.oncologyConsult.performance_status_5"/></td>
+                        </tr>
+                    </table>
+
+                </ifMode>
+            </p>
+
+            <p class="list-inline">
+                <label>
+                    <br/>
+                    <uimessage code="Hospitalization required" />
+                </label>
+                <obs id="palliative-hosp" style="radio"
+                     conceptId="CIEL:1788" answerConceptIds="CIEL:1065,CIEL:1066">
+                    <controls>
+                        <when value="CIEL:1065" thenDisplay="#hosp-pall-reason" />
+                    </controls>
+                </obs>
+
+                <div id="hosp-pall-reason" style="margin-left: 30px">
+                    <label>Reasons for hospitalization</label>
+
+                    <repeat>
+                        <template>
+                            <obs conceptId="CIEL:1887" style="checkbox"
+                                 answerConceptId="{qId}"/>
+                        </template>
+                        <render qId="CIEL:142412" symptName="Diarrhea" />
+                        <render qId="CIEL:122983" symptName="Vomiting" />
+                        <render qId="PIH:7103"    symptName="Uncontrolled pain" />
+                    </repeat>
+
+                    <obs conceptId="CIEL:1887" style="checkbox"
+                         answerConceptId="CIEL:5622"
+                         answerCode="pihcore.other"
+                         showCommentField="true" commentFieldCode="zl.ifOtherSpecify" />
+                </div>
+
+                <br/>
+                <label>
+                    <uimessage code="Additional comments:"/>
+                </label>
+                <br/>
+                <obs conceptId="PIH:14816"/>
+            </p>
+        </div>
+    </section>
 
     <div id="buttons-section"></div>
     <ifMode mode="VIEW" include="false">

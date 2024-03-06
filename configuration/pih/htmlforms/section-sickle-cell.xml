@@ -70,10 +70,6 @@
             width: 95%;
         }
 
-        ul.copd {
-            list-style-position: outside;
-        }
-
         .five-columns, .four-columns, .three-columns, .two-columns {
             display: table;
             height: 100%;
@@ -143,6 +139,282 @@
             });
         </script>
     </ifMode>
+
+    <section id="sickle-section" sectionTag="fieldset" headerTag="legend" headerStyle="title" headerCode="Sickle cell">
+        <div id="sickle" class="section-container">
+            <!-- this section is ONLY included for NCD intake encounter -->
+            <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
+                <div class="two-columns">
+                    <div>
+                        <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                            <p class="side-by-side">
+                                <obs conceptId="PIH:DIAGNOSIS" style="radio"
+                                     answerConceptIds="CIEL:117703,CIEL:126513,CIEL:126512,CIEL:168107,CIEL:117635"
+                                     answerCodes="Sickle-cell disease,Sickle-cell trait (AS),Sickle-cell beta thalassemia (SB),Sickle-cell hemoglobin C disease (SC),Other hemoglobinopathy"
+                                     answerSeparator="&lt;br /&gt;"/>
+                            </p>
+                        </obsgroup>
+
+                        <label>
+                            <uimessage code="If other sickle-cell disease, please specify" />
+                        </label>
+                        <obs conceptId="PIH:14924" />
+                    </div>
+
+                    <div>
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Confirmation test method"/>
+                            </label>
+                            <br/>
+                            <obs id="scd-test-method" conceptId="CIEL:168730" style="radio"
+                                 answerConceptIds="CIEL:160225,CIEL:168733,CIEL:168732,CIEL:165544,CIEL:161519,CIEL:168731,CIEL:1067,CIEL:5622"
+                                 answerCodes="SickleScan RDT,HemoTypeSC,Gazelle,Hb Electrophoresis,HPLC,IEF,Unknown but tested at central or referral lab,other"
+                                 answerSeparator="&lt;br /&gt;" />
+                        </p>
+                    </div>
+                </div>
+                <br/>
+            </includeIf>
+
+            <strong>
+                <uimessage code="On treatment"/>
+            </strong>
+            <br/>
+            <repeat>
+                <template>
+                    <obs conceptId="PIH:14857" style="checkbox"
+                         answerConceptId="{qId}" answerCode="{medName}"/>
+                </template>
+                <render qId="CIEL:76613" medName="Folic acid"/>
+                <render qId="CIEL:81724" medName="Penicillin"/>
+
+                <!-- ToDo: Is hydroxyurea needed since it's asked later? -->
+                <render qId="CIEL:77795" medName="Hydroxyurea"/>
+            </repeat>
+            <br/>
+
+            <obsgroup groupingConceptId="PIH:14872">
+                <div class="two-columns">
+                    <div>
+                        <p class="list-inline">
+                            <label>
+                                <uimessage code="Complications since last visit"/>
+                            </label>
+                            <obs id="scd-comp-q" conceptId="PIH:14867" style="radio"
+                                 answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                                 answerCodes="yes,no,unknown">
+                                <controls>
+                                    <when value="PIH:YES" thenDisplay="#scd-comp-text"/>
+                                </controls>
+                            </obs>
+                        </p>
+                    </div>
+
+                    <div id="scd-comp-text">
+                        <p>
+                            <label>
+                                <uimessage code="Complications"/>
+                            </label>
+                            <repeat>
+                                <template>
+                                    <obs conceptId="PIH:15157" style="checkbox"
+                                         answerConceptId="{diagId}" answerCode="{sickleComplic}"/>
+                                </template>
+                                <render diagId="CIEL:121629" sickleComplic="Anemia" />
+                                <render diagId="CIEL:162044" sickleComplic="Severe anemia" />
+                                <render diagId="CIEL:136586" sickleComplic="Intravascular hemolysis" />
+                                <render diagId="CIEL:117643" sickleComplic="Sickle-cell vaso-occlusive pain crisis" />
+                                <render diagId="CIEL:149871" sickleComplic="Acute chest syndrome" />
+                                <render diagId="CIEL:148074" sickleComplic="Avascular bone necrosis" />
+                                <render diagId="CIEL:111103" sickleComplic="Stroke" />
+                                <render diagId="CIEL:112483" sickleComplic="Systemic infection" />
+                                <render diagId="CIEL:116128" sickleComplic="Malaria" />
+                            </repeat>
+
+                            <obs conceptId="PIH:15157" style="checkbox"
+                                 answerConceptId="CIEL:5622" answerCode="other"
+                                 commentFieldCode="specify other:"/>
+                        </p>
+                    </div>
+                </div>
+
+                <label>
+                    <uimessage code="Hydroxyurea indicated for all patients &gt; 9 months with confirmed Sickle cell disease (SS, S/Beta-thalassemia)"/>
+                </label>
+                <p class="list-inline">
+                    <obs id="scd-hydroxy-q" conceptId="PIH:14869" style="radio"
+                         answerConceptIds="PIH:YES,PIH:NO"
+                         answerCodes="yes,no">
+                        <controls>
+                            <when value="PIH:YES" thenDisplay="#scd-hydroxy-details"/>
+                        </controls>
+                    </obs>
+                </p>
+
+                <div id="scd-hydroxy-details" class="two-columns">
+                    <div>
+                        <p class="list-inline">
+                            <label>
+                                <uimessage code="Treatment with hydroxyurea" />
+                            </label>
+                            <obs id="hydroxy-treatment" conceptId="PIH:14870" style="radio"
+                                 answerConceptIds="PIH:YES,PIH:NO" answerCodes="yes,no" >
+                                <controls>
+                                    <when value="PIH:NO" thenDisplay="#reason-no-hydroxy"/>
+                                </controls>
+                            </obs>
+
+                            <div id="reason-no-hydroxy">
+                                <label>
+                                    <uimessage code="Reason for no hydroxyurea treatment"/>
+                                </label>
+                                <repeat>
+                                    <template>
+                                        <obs conceptId="PIH:15169" style="checkbox"
+                                             answerConceptId="{answId}" answerCode="{answerMsg}" />
+                                    </template>
+                                    <render answId="CIEL:164377" answerMsg="Side effect" />
+                                    <render answId="CIEL:1754" answerMsg="Stockout" />
+                                    <render answId="PIH:15170" answerMsg="CBC not available" />
+                                    <render answId="PIH:15171" answerMsg="No sickle-cell test confirmation (solubility test only)" />
+                                </repeat>
+                                <obs conceptId="PIH:15169" style="checkbox"
+                                     answerConceptId="CIEL:5622" answerCode="other"
+                                     commentFieldCode="Specify other reason"/>
+                            </div>
+                        </p>
+                    </div>
+
+                    <div>
+                        <p class="list-inline-wide">
+                            <label>
+                                <uimessage code="Side effect/complications with hydroxyurea" />
+                            </label>
+                            <obs id="side-effect-hydroxy" conceptId="PIH:14871" style="radio"
+                                 answerConceptIds="PIH:YES,PIH:NO" answerCodes="yes,no" >
+                                <controls>
+                                    <when value="PIH:YES" thenDisplay="#side-effect-hydroxy-text" />
+                                </controls>
+                            </obs>
+                        </p>
+                        <div id="side-effect-hydroxy-text">
+                            <obs conceptId="CIEL:164377" style="text" labelCode="Specify hydroxyurea side effect" />
+                        </div>
+                    </div>
+                </div>
+            </obsgroup>
+            <br/>
+
+            <strong>
+                <uimessage code="Sickle cell followup indicators"/>
+            </strong>
+
+            <!-- Sickle cell signs and symptoms -->
+            <div>
+                <repeat>
+                    <template>
+                        <p class="side-by-side">
+                            <obsgroup groupingConceptId="PIH:14858" showIfEmpty="false">
+                                <obs style="radio"
+                                     conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
+                                     conceptLabels="yes,no,unknown" answerConceptId="{qId}" labelText="{symptName}"/>
+                            </obsgroup>
+                        </p>
+                    </template>
+                    <render qId="CIEL:114403" symptName="Pain"/>
+                    <render qId="CIEL:140238" symptName="Fever"/>
+                    <render qId="CIEL:136443" symptName="Jaundice"/>
+                    <render qId="CIEL:121629" symptName="Anemia"/>
+                    <render qId="CIEL:148346" symptName="Ascites"/>
+                    <render qId="CIEL:112804" symptName="Spleen palpable"/>
+                    <render qId="CIEL:168290" symptName="Liver palpable" />
+                    <render qId="CIEL:142373" symptName="Difficulty breathing"/>
+                    <render qId="CIEL:120749" symptName="Chest pain"/>
+                </repeat>
+            </div>
+
+            <obsgroup groupingConceptId="PIH:14826">
+
+                <div>
+                    <repeat>
+                        <template>
+                            <p class="list-inline">
+                                <label>
+                                    <uimessage code="{questionName}"/>
+                                </label>
+                                <obs conceptId="{qId}" style="radio"
+                                     answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                                     answerCodes="yes,no,unknown"/>
+                            </p>
+                        </template>
+                        <render qId="CIEL:159610" questionName="Malaria prophylaxis" tog=""/>
+                        <render qId="CIEL:167022" questionName="Family awareness of disease" tog=""/>
+                    </repeat>
+                </div>
+
+                <div class="two-columns">
+                    <div>
+                        <repeat>
+                            <template>
+                                <p class="list-inline">
+                                    <label>
+                                        <uimessage code="{questionName}"/>
+                                    </label>
+                                    <obs id="{tog}" conceptId="{qId}" style="radio"
+                                         answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                                         answerCodes="yes,no,unknown">
+                                        <controls>
+                                            <when value="PIH:YES" thenDisplay="#{tog}-details"/>
+                                        </controls>
+                                    </obs>
+                                </p>
+                            </template>
+                            <render qId="CIEL:1898"   questionName="Patient condition improved" tog="scd-fui-improved"/>
+                            <render qId="CIEL:164075" questionName="Overall treatment adherence" tog="scd-fui-adher"/>
+                            <render qId="CIEL:167819" questionName="Missed doses in past week" tog="scd-fui-miss"/>
+                            <render qId="CIEL:167021" questionName="Aware and understands the disease" tog="scd-fui-aware"/>
+                            <render qId="CIEL:167914" questionName="Understands treatment" tog="scd-fui-under"/>
+                            <render qId="PIH:14741"   questionName="Ability to titrate treatment" tog="scd-fui-tite"/>
+                        </repeat>
+                    </div>
+
+                    <div id="scd-fui-miss-details">
+                        <br/><br/>
+                        <label>
+                            <uimessage code="# of missed doses in past week"/>
+                        </label>
+                        <obs conceptId="CIEL:167918"/>
+                    </div>
+
+                </div>
+            </obsgroup>
+
+            <obsgroup groupingConceptId="PIH:15162" showIfEmpty="false">
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="Transfusion in past 12 months"/>
+                    </label>
+                    <obs id="transfusion-status" conceptId="PIH:7868" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"
+                         answerCodes="yes,no">
+                        <controls>
+                            <when value="CIEL:1065" thenDisplay="#transfusion-details"/>
+                        </controls>
+                    </obs>
+                </p>
+
+                <div id="transfusion-details" class="two-columns">
+                    <div>
+                        <obs conceptId="PIH:13748" labelCode="# of transfusions (past 12 months)" />
+                    </div>
+                    <div>
+                        <obs conceptId="CIEL:163268" labelCode="Date of transfusion" />
+                    </div>
+                </div>
+            </obsgroup>
+        </div>
+    </section>
 
     <div id="buttons-section"></div>
     <ifMode mode="VIEW" include="false">

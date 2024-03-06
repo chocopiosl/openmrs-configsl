@@ -70,10 +70,6 @@
             width: 95%;
         }
 
-        ul.copd {
-            list-style-position: outside;
-        }
-
         .five-columns, .four-columns, .three-columns, .two-columns {
             display: table;
             height: 100%;
@@ -143,6 +139,185 @@
             });
         </script>
     </ifMode>
+
+    <section id="htn-section" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="pihcore.ncd.htn">
+        <div id="htn" class="section-container">
+
+            <!-- this section is ONLY included for NCD intake encounter -->
+            <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="Type of hypertension" />
+                    </label>
+                    <obs conceptId="PIH:11940" style="radio"
+                         answerConceptIds="CIEL:140987,CIEL:113087"
+                         answerCodes="Essential,Secondary"/>
+                </p>
+            </includeIf>
+
+            <table>
+                <tr>
+                    <th width="30%">
+                        <label>
+                            <uimessage code="pihcore.stage.label"/>
+                        </label>
+                    </th>
+                    <th>
+                        <label>
+                            <uimessage code="mirebalais.vitals.systolic.bp.title"/>
+                        </label>
+                    </th>
+                    <th>
+                        <label>
+                            <uimessage code="mirebalais.vitals.diastolic.bp.title"/>
+                        </label>
+                    </th>
+                </tr>
+
+                <tr>
+                    <td valign="top">
+                        <p class="side-by-side">
+                            <obs conceptId="CIEL:165583" style="radio"
+                                 answerConceptIds="CIEL:165206,CIEL:165203,CIEL:165204"
+                                 answerCodes="Pre-HTN,1 (Mild),2 (Moderate)"
+                                 answerSeparator="&lt;br /&gt;&lt;br /&gt;"/>
+                        </p>
+                    </td>
+                    <td>
+                        <label>
+                            <uimessage code="&gt; 130 - 139" />
+                        </label>
+                        <br/>
+                        <label>
+                            <uimessage code="&gt; 140 - 159" />
+                        </label>
+                        <br/>
+                        <label>
+                            <uimessage code="&gt; 160" />
+                        </label>
+
+                        <br/>
+                        <label>
+                            <uimessage code="&gt; 180 (Oral medication and refer to the ward for observation)" />
+                        </label>
+                    </td>
+                    <td>
+                        <label>
+                            <uimessage code="&gt; 85 - 89" />
+                        </label>
+                        <br/>
+                        <label>
+                            <uimessage code="&gt; 90 - 99" />
+                        </label>
+                        <br/>
+                        <label>
+                            <uimessage code="&gt; 100" />
+                        </label>
+                        <br/>
+                        <label>
+                            <uimessage code="&gt; 120 (Oral medication and refer to the ward for observation)" />
+                        </label>
+                    </td>
+                </tr>
+            </table>
+
+            <br/>
+            <p>
+                <label>
+                    <uimessage code="Hypertension summary"/>:
+                </label>
+                <obs conceptId="PIH:11971"/>
+            </p>
+
+            <strong>
+                <uimessage code="Complications related to hypertension"/>
+            </strong>
+            <div class="two-columns">
+                <div>
+                    <repeat>
+                        <template>
+                            <obs conceptId="PIH:14456" style="checkbox"
+                                 answerConceptId="{acid}" answerCode="{ansLabel}"/>
+                        </template>
+                        <render acid="CIEL:111103" ansLabel="Stroke"/>
+                        <render acid="CIEL:145438" ansLabel="Chronic kidney disease (CKD)"/>
+                        <render acid="CIEL:139069" ansLabel="Heart failure"/>
+                        <render acid="CIEL:5622"   ansLabel="Other"/>
+                    </repeat>
+                </div>
+                <div>
+                    <label>
+                        <uimessage code="if other, specify"/>
+                    </label>
+                    <obs conceptId="PIH:14457"/>
+                </div>
+            </div>
+
+            <br/>
+            <strong>
+                <uimessage code="Hypertension followup indicators" />
+            </strong>
+
+            <obsgroup groupingConceptId="PIH:14462" showIfEmpty="false">
+                <div class="two-columns">
+                    <div>
+                        <repeat>
+                            <template>
+                                <p class="list-inline">
+                                    <label>
+                                        <uimessage code="{xId}"/>
+                                    </label>
+                                    <obs id="htn-fui-{tog}" conceptId="{message}" style="radio"
+                                         answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                                         answerCodes="yes,no,unknown">
+                                        <controls>
+                                            <when value="PIH:YES" thenDisplay="#htn-fui-{tog}-details"/>
+                                        </controls>
+                                    </obs>
+                                </p>
+                            </template>
+                            <render message="CIEL:1898"   xId="Patient condition improved" tog="improved"/>
+                            <render message="CIEL:164075" xId="Overall treatment adherence" tog="adher"/>
+                            <render message="CIEL:167819" xId="Missed doses in past week" tog="missed"/>
+                            <render message="CIEL:167021" xId="Aware and understands the disease" tog="aware"/>
+                            <render message="CIEL:167914" xId="Understands treatment" tog="understand"/>
+                        </repeat>
+                    </div>
+                    <div id="htn-fui-missed-details">
+                        <br/><br/>
+                        <label>
+                            <uimessage code="# of missed doses in past week"/>
+                        </label>
+                        <obs conceptId="CIEL:167918"  />
+
+                    </div>
+                </div>
+
+                <ifMode mode="VIEW" include="false">
+                    <table align="left" style="font-size:small">
+                        <tr>
+                            <th colspan="2">
+                                Definition of disease control
+                            </th>
+                            <td>
+                                Blood pressure less than or equal to 150/80
+                            </td>
+                        </tr>
+                    </table>
+                </ifMode>
+
+                <p class="list-inline-extra-wide">
+                    <label>
+                        <uimessage code="Disease control"/>
+                    </label>
+                    <obs conceptId="PIH:11506" style="radio"
+                         answerConceptIds="PIH:11507,PIH:11508,PIH:11509"
+                         answerCodes="controlled,uncontrolled,complications"/>
+                </p>
+            </obsgroup>
+        </div>
+    </section>
 
     <div id="buttons-section"></div>
     <ifMode mode="VIEW" include="false">

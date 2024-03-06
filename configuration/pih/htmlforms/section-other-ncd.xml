@@ -13,7 +13,7 @@
   -->
 
 <htmlform id="section-ncd-other"
-          formName="Other NCD" formUuid="319412b8-215c-428d-a1d2-f15c1a96b4d1"
+          formName="Other NCDs" formUuid="319412b8-215c-428d-a1d2-f15c1a96b4d1"
           formVersion="1.0">
 
     <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.CleanDiagnosisConstructAction"/>
@@ -145,7 +145,7 @@
     </ifMode>
 
     <section id="other-ncd-section" sectionTag="fieldset"
-             headerTag="legend" headerStyle="title" headerCode="pihcore.other">
+             headerTag="legend" headerStyle="title" headerCode="Other NCDs">
         <div id="other-ncd" class="section-container">
             <p>
                 <repeat with="['CIEL:119624','Deep vein thrombosis'],
