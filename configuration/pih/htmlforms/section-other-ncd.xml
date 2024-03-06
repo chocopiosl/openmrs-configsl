@@ -12,8 +12,8 @@
   ~ Copyright (C) OpenMRS, LLC.  All Rights Reserved.
   -->
 
-<htmlform id=""
-          formName="" formUuid=""
+<htmlform id="section-ncd-other"
+          formName="Other NCD" formUuid="319412b8-215c-428d-a1d2-f15c1a96b4d1"
           formVersion="1.0">
 
     <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.CleanDiagnosisConstructAction"/>
@@ -143,6 +143,31 @@
             });
         </script>
     </ifMode>
+
+    <section id="other-ncd-section" sectionTag="fieldset"
+             headerTag="legend" headerStyle="title" headerCode="pihcore.other">
+        <div id="other-ncd" class="section-container">
+            <p>
+                <repeat with="['CIEL:119624','Deep vein thrombosis'],
+                              ['CIEL:113504','Pulmonary embolism'],
+                              ['CIEL:148203','Atrial fibrillation'],
+                              ['PIH:3181','Mechanical heart valve'],
+                              ['CIEL:117441','Hyperlipidemia'],
+                              ['CIEL:115115','Obesity']">
+
+                    <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                        <obs conceptId="PIH:DIAGNOSIS" answerConceptId="{0}" style="checkbox"/>
+                    </obsgroup>
+                </repeat>
+
+                <!-- Other diagnosis and comment -->
+                <label>
+                    <uimessage code="Other NCD diagnosis" />
+                </label>
+                <obs conceptId="PIH:7416"/>
+            </p>
+        </div>
+    </section>
 
     <div id="buttons-section"></div>
     <ifMode mode="VIEW" include="false">
