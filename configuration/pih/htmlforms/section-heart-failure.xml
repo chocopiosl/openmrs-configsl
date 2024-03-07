@@ -170,6 +170,7 @@
                                 <render diagId="CIEL:124800" tag="thromboemb" answers="" />
                                 <render diagId="CIEL:119956" tag="congenitalHeart" answers="" />
                                 <render diagId="PIH:12231"   tag="unknownHeart" answers="" />
+                                <!-- ToDo: OCL <render diagId="PIH:20004"   tag="hfNoEcho" answers="" /> -->
                             </repeat>
 
                         </p>
@@ -484,43 +485,50 @@
                     <h5>
                         <uimessage code="Disease control"/>
                     </h5>
-                    <div>
-                        <repeat>
-                            <template>
-                                <p class="list-inline">
-                                    <obsgroup groupingConceptId="PIH:14733" showIfEmpty="false">
-                                        <obs style="radio"
-                                             conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
-                                             conceptLabels="yes,no,unknown" answerConceptId="{qId}" labelText="{symptName}"/>
-                                    </obsgroup>
-                                </p>
-                            </template>
-                            <render qId="CIEL:119664" symptName="Decompensated" />
-                        </repeat>
-                    </div>
+                    <p class="list-inline">
+                        <label>
+                            <uimessage code="Disease control"/>
+                        </label>
+                        <obs id="hf-controlled" conceptId="PIH:11506" style="radio"
+                             answerConceptIds="PIH:11507,PIH:11508,PIH:11509"
+                             answerCodes="controlled,uncontrolled,complications" >
+                            <controls>
+                                <when value="PIH:11508" thenDisplay="#hf-uncontrolled-admit"/>
+                            </controls>
+                        </obs>
 
-                    <obsgroup groupingConceptId="PIH:14724">
-                        <repeat>
-                            <template>
-                                <p class="list-inline">
-                                    <label>
-                                        <uimessage code="{questionName}"/>
-                                    </label>
-                                    <obs id="hf-fui-{tog}" conceptId="{qId}" style="radio"
-                                         answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
-                                         answerCodes="yes,no,unknown" >
-                                        <controls>
-                                            <when value="PIH:YES" thenDisplay="#hf-fui-{tog}-details"/>
-                                        </controls>
-                                    </obs>
-                                </p>
-                            </template>
-                            <render qId="CIEL:1898"   questionName="Patient condition improved" tog="improved"/>
-                            <render qId="CIEL:1788"   questionName="Send for admission"  tog="sendAdmit"/>
-                            <render qId="PIH:14738"   questionName="Refer for surgery evaluation" tog="referSurg"/>
-                            <render qId="PIH:14740"   questionName="Echocardiogram improvement" tog="echoImprov" />
-                        </repeat>
-                    </obsgroup>
+                        <div id="hf-uncontrolled-admit">
+                            <p class="list-inline">
+                                <label>
+                                    <uimessage code="Send for admission"/>
+                                </label>
+                                <obs conceptId="CIEL:1788" style="radio"
+                                     answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                                     answerCodes="yes,no,unknown" />
+                            </p>
+                        </div>
+                    </p>
+
+                    <repeat>
+                        <template>
+                            <p class="list-inline">
+                                <label>
+                                    <uimessage code="{questionName}"/>
+                                </label>
+                                <obs id="hf-fui-{tog}" conceptId="{qId}" style="radio"
+                                     answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                                     answerCodes="yes,no,unknown" >
+                                    <controls>
+                                        <when value="PIH:YES" thenDisplay="#hf-fui-{tog}-details"/>
+                                    </controls>
+                                </obs>
+                            </p>
+                        </template>
+                        <render qId="CIEL:1898"   questionName="Patient condition improved" tog="improved"/>
+                        <!-- <render qId="CIEL:1788"   questionName="Send for admission"  tog="sendAdmit"/> -->
+                        <render qId="PIH:14738"   questionName="Refer for surgery evaluation" tog="referSurg"/>
+                        <render qId="PIH:14740"   questionName="Echocardiogram improvement" tog="echoImprov" />
+                    </repeat>
 
                     <p class="side-by-side">
                         <label>

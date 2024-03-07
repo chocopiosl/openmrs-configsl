@@ -13,7 +13,7 @@
   -->
 
 <htmlform id="liver"
-          formName="Liver Diseases" formUuid="4357b34b-ab3a-4404-ab33-a73104b26fdb"
+          formName="Liver Disease" formUuid="4357b34b-ab3a-4404-ab33-a73104b26fdb"
           formVersion="1.0">
 
     <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.CleanDiagnosisConstructAction"/>
@@ -141,7 +141,7 @@
     </ifMode>
 
     <section id="cirrhosis-section" sectionTag="fieldset"
-             headerTag="legend" headerStyle="title" headerCode="Liver cirrhosis / Hepatitis B">
+             headerTag="legend" headerStyle="title" headerCode="pihcore.ncd.liver.disease">
         <div id="cirrhosis" class="section-container">
 
             <!-- this section is ONLY included for NCD intake encounter -->
