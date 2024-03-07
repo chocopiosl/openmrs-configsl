@@ -12,5 +12,9 @@
             <property>queue.statusConceptSetName</property>
             <value>98759313-3812-4c88-88c6-7686dc7c6443</value> <!-- PIH Queue Status Set -->
         </globalProperty>
+        <globalProperty>
+            <property>queue.sortWeightGenerator</property>
+            <value>basicPrioritySortWeightGenerator</value>
+        </globalProperty>
     </globalProperties>
 </config>
