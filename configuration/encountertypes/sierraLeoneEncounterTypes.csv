@@ -1,6 +1,6 @@
 Uuid,Void/Retire,Name,Description
 ${encounterType.sierraLeoneMaternalCheckin.uuid},,Sierra Leone Maternal Check-in,The check-in form for maternal health (mcoe) in Sierra Leone
-${encounterType.sierraLeoneTriage.uuid},,Sierra Leone Maternal triage,The triage form for maternal health (mcoe) in Sierra Leone
+${encounterType.sierraLeoneMCHTriage.uuid},,Sierra Leone MCH Triage,The triage form for maternal health (mcoe) in Sierra Leone
 ${encounterType.sierraLeoneOutpatientInitial.uuid},,Sierra Leone Outpatient Initial,The outpatient intake form for Sierra Leone
 ${encounterType.sierraLeoneOutpatientFollowup.uuid},,Sierra Leone Outpatient Followup,The outpatient visit form for Sierra Leone
 ${encounterType.sierraLeoneMchDeliveryRegister.uuid},,Maternity and Delivery Register,The maternal delivery register for Sierra Leone

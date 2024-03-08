@@ -40,8 +40,8 @@ encounterType:
     name: "Check-In"
   sierraLeoneMaternalCheckin:
     uuid: "251c03fa-a9dc-4157-855f-b016f4fae9ab"
-  sierraLeoneTriage:
-    uuid: "f1652c4a-6f24-432f-9441-e58641f9c01a"
+  sierraLeoneMCHTriage:
+    uuid: "41911448-71a1-43d7-bba8-dc86339850da"
   MEDICATION_DISPENSED:
     name: "Medication Dispensing"
   VITALS:
