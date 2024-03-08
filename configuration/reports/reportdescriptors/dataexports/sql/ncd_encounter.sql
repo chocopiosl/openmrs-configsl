@@ -35,8 +35,8 @@ create temporary table temp_ncd
  rbg_level                               double,          
  bmi                                     varchar(255),    
  obesity                                 bit,             
- number_days_hospitalized_since_visit    double,          
- number_days_hospitalized_last_12_months double,          
+ number_hospitalizations_since_visit    double,          
+ number_hospitalizations_last_12_months double,          
  last_hospitalization_discharge_date     datetime,        
  last_hospitalization_outcome            varchar(255),    
  number_hospitalizations_ncd             double,          
@@ -287,10 +287,10 @@ set obesity =
 		if(obs_single_value_coded_from_temp(encounter_id, 'PIH','1734','PIH','7507')=@yes, 0,null));
 
 update temp_ncd t
-set number_days_hospitalized_since_visit = obs_value_numeric_from_temp(encounter_id, 'PIH','2872');
+set number_hospitalizations_since_visit = obs_value_numeric_from_temp(encounter_id, 'PIH','2872');
 
 update temp_ncd t
- set number_days_hospitalized_last_12_months = obs_value_numeric_from_temp(encounter_id, 'CIEL','5704');
+ set number_hospitalizations_last_12_months = obs_value_numeric_from_temp(encounter_id, 'CIEL','5704');
 
 update temp_ncd t
 set last_hospitalization_discharge_date = obs_value_datetime_from_temp(encounter_id, 'PIH','3800');
@@ -688,14 +688,14 @@ fbg_level,
 rbg_level,
 bmi,
 obesity,
-number_days_hospitalized_last_12_months,
+number_hospitalizations_last_12_months,
 last_hospitalization_discharge_date,
 last_hospitalization_outcome,
 number_hospitalizations_ncd,
 hospitalization_dka_last_12_months,
 number_days_hospitalized,
 ncd_diagnoses_caused_hospitalization,
-number_days_hospitalized_since_visit,
+number_hospitalizations_since_visit,
 diabetes,
 hypertension,
 heart_failure,
