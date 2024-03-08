@@ -1,0 +1,60 @@
+<htmlform id="triage-form"
+          formUuid="ae39663d-c248-4cee-b48e-5eb226f74e47"
+          formName="MCOE Triage"
+          formEncounterType="f1652c4a-6f24-432f-9441-e58641f9c01a"
+          formVersion="1.0">
+
+    <macros>
+        <macro key="mcoeTriageLocation" value="f85feffc-fe54-4648-aa14-01ed6d30b943"/>
+    </macros>
+
+    <section id="triage" sectionTag="section" headerStyle="title" headerCode="mirebalais.maternalCheckin.label">
+        <!-- START ENTER/EDIT VERSION OF THE FORM -->
+        <ifMode mode="VIEW" include="false">
+            <fieldset class="required">
+                <legend>
+                    <uimessage code="mirebalais.retrospectiveCheckin.checkinDate.label"/>
+                </legend>
+                <h3>
+                    <uimessage code="mirebalais.retrospectiveCheckin.checkinDate.label"/>
+                </h3>
+
+                <p class="left">
+                    <encounterDate id="encounterDate" showTime="false" default="now"/>
+                </p>
+            </fieldset>
+            <fieldset class="required">
+                <legend>
+                    <uimessage code="mirebalais.retrospectiveCheckin.provider.label"/>
+                </legend>
+                <h3>
+                    <uimessage code="mirebalais.retrospectiveCheckin.provider.label"/>
+                </h3>
+
+                <p class="left">
+                    <encounterProviderAndRole default="currentUser" encounterRole="cbfe0b9d-9923-404c-941b-f048adc8cdc0"
+                                              required="true"/>
+                </p>
+            </fieldset>
+
+            <fieldset class="required">
+                <legend>
+                    <uimessage code="mirebalais.retrospectiveCheckin.location.label"/>
+                </legend>
+                <h3>
+                    <uimessage code="mirebalais.retrospectiveCheckin.location.label"/>
+                </h3>
+
+                <p class="left">
+                    <encounterLocation required="true" default="$mcoeTriageLocation" tags="MCOE Triage Location"/>
+                </p>
+            </fieldset>
+            <!-- END ENTER/EDIT VERSION OF THE FORM -->
+        </ifMode>
+
+        <ifMode mode="VIEW">
+            <span id="most-recent-encounter-title" style="display:none"><!--The Most Recent Encounter app in Core Apps replaces this with the "most recent" label--></span>
+        </ifMode>
+    </section>
+
+</htmlform>
