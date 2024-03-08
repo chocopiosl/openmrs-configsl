@@ -203,8 +203,32 @@
                         <label>if other, specify:</label>
                         <obs conceptId="PIH:8596" style="text"/>
                     </obsgroup>
-
                     <br/>
+
+                    <strong>Bone X-ray</strong>
+                    <br/>
+
+                    <obsgroup groupingConceptId="PIH:Radiology report construct"
+                              hiddenConceptId="PIH:Radiology procedure performed" hiddenAnswerConceptId="PIH:12556">
+                        <obs conceptId="PIH:12847" labelCode="Date"/>
+
+                        <!-- Todo: swap mapping with CIEL:148071 -->
+                        <repeat with="['CIEL:1118',  'Not done'],
+                                      ['CIEL:1115',  'Normal'],
+                                      ['PIH:15059',  'Avascular necrosis of hip'],
+                                      ['CIEL:5622',  'Other']">
+
+                            <obs conceptId="CIEL:12"
+                                 answerConceptId="{0}"
+                                 answerLabel="{1}"
+                                 style="checkbox"/>
+                        </repeat>
+
+                        <label>if other, specify:</label>
+                        <obs conceptId="PIH:8596" style="text"/>
+                    </obsgroup>
+                    <br/>
+
                     <strong>
                         <uimessage code="Abdominal ultrasound findings"/>
                     </strong>
