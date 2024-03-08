@@ -307,7 +307,7 @@
                     </table>
                 </ifMode>
 
-                <p class="list-inline-extra-wide">
+                <p class="list-inline-wide">
                     <label>
                         <uimessage code="Disease control"/>
                     </label>
@@ -320,9 +320,9 @@
                     <label>
                         <uimessage code="Dangerous BP indicates hospitalization"/>
                     </label>
-                    <!-- ToDo:  get concept OCL version 1.0.3
                     <obs conceptId="PIH:20003" style="radio"
-                         answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067" /> -->
+                         answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
+                         answerCodes="yes,no,unknown" />
                 </p>
             </obsgroup>
         </div>

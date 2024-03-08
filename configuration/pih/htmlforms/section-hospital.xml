@@ -316,8 +316,7 @@
                                     <label>
                                         <uimessage code="# of hospitalizations for DKA in past 12 months"/>
                                     </label>
-                                    <!-- ToDo:  uncomment with ocl version 1.0.3
-                                    <obs conceptId="PIH:20000" /> -->
+                                    <obs conceptId="PIH:20000" />
                                 </p>
                             </td>
                             <td>

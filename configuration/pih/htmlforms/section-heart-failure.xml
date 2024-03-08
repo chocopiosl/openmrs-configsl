@@ -170,7 +170,7 @@
                                 <render diagId="CIEL:124800" tag="thromboemb" answers="" />
                                 <render diagId="CIEL:119956" tag="congenitalHeart" answers="" />
                                 <render diagId="PIH:12231"   tag="unknownHeart" answers="" />
-                                <!-- ToDo: OCL <render diagId="PIH:20004"   tag="hfNoEcho" answers="" /> -->
+                                <render diagId="PIH:20004"   tag="hfNoEcho" answers="" />
                             </repeat>
 
                         </p>

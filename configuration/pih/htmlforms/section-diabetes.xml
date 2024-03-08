@@ -279,15 +279,15 @@
                                     </label>
                                     <obs id="dm-{q}-top" conceptId="{qId}" style="radio"
                                          answerConceptIds="PIH:YES,PIH:NO"
-                                         answerCodes="yes,no" >
+                                         answerCodes="yes,no">
                                         <controls>
-                                            <when value="PIH:YES" thenDisplay="#dm-{q}-details" />
+                                            <when value="PIH:YES" thenDisplay="#dm-{q}-details"/>
                                         </controls>
                                     </obs>
                                 </p>
                             </template>
-                            <render qId="CIEL:1898"   questionName="Patient condition improved" q="improved"/>
-                            <render qId="PIH:6756"    questionName="On insulin" q="insulin"/>
+                            <render qId="CIEL:1898" questionName="Patient condition improved" q="improved"/>
+                            <render qId="PIH:6756" questionName="On insulin" q="insulin"/>
                             <render qId="CIEL:167957" questionName="Severe hypoglycemia in last month" q="severe"/>
                             <render qId="CIEL:164075" questionName="Overall treatment adherence" q="adher"/>
                             <render qId="CIEL:167819" questionName="Missed doses in past week" q="missed"/>
@@ -296,7 +296,8 @@
 
                         <p class="list-inline-wide">
                             <label>
-                                <uimessage code="Indications for ACE inhibitors"/><br/>
+                                <uimessage code="Indications for ACE inhibitors"/>
+                                <br/>
                                 <uimessage code="(proteinuria present; BP &gt;= 135/75)"/>
                             </label>
                             <obs id="dm-indications-ace"
@@ -304,7 +305,7 @@
                                  answerConceptIds="PIH:YES,PIH:NO"
                                  answerCodes="yes,no">
                                 <controls>
-                                    <when value="PIH:YES" thenDisplay="#dm-on-ace-details" />
+                                    <when value="PIH:YES" thenDisplay="#dm-on-ace-details"/>
                                 </controls>
                             </obs>
                         </p>
@@ -318,19 +319,10 @@
                                      answerConceptIds="PIH:YES,PIH:NO"
                                      answerCodes="yes,no">
                                     <controls>
-                                        <when value="PIH:NO" thenDisplay="#dm-not-ace-details" />
+                                        <when value="PIH:NO" thenDisplay="#dm-not-ace-details"/>
                                     </controls>
                                 </obs>
-
-                                <div id="dm-not-ace-details">
-                                    <label>
-                                        <uimessage code="Reason not on ACE inhibitors" />
-                                    </label>
-                                    <!-- ToDo: Add PIH:20002
-                                    <obs conceptId="PIH:20002" style="text" /> -->
-                                </div>
                             </p>
-
                         </div>
 
                     </div>
@@ -348,16 +340,25 @@
                             <label>
                                 <uimessage code="# of missed doses in past week"/>
                             </label>
-                            <obs conceptId="CIEL:167918"  />
+                            <obs conceptId="CIEL:167918"/>
 
+                        </div>
+
+                        <div id="dm-not-ace-details">
+                            <br/><br/>
+                            <br/><br/>
+                            <label>
+                                <uimessage code="Reason not on ACE inhibitors"/>
+                            </label>
+                            <!-- ToDo: Add PIH:20002 -->
+                            <obs conceptId="PIH:20002" style="text"/>
                         </div>
                     </div>
                 </div>
 
-
-            <h5>
-                <uimessage code="Self management and awareness"/>
-            </h5>
+                <h5>
+                    <uimessage code="Self management and awareness"/>
+                </h5>
 
                 <div class="two-columns">
                     <div>
@@ -435,9 +436,9 @@
                     <label>
                         <uimessage code="DKA indicates hospitalization"/>
                     </label>
-                    <!-- ToDo:  get concept OCL version 1.0.3
                     <obs conceptId="PIH:20001" style="radio"
-                         answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067" /> -->
+                         answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
+                         answerCodes="yes,no,unknown" />
                 </p>
             </obsgroup>
 
