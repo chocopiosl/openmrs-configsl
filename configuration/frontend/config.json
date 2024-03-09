@@ -247,6 +247,27 @@
     }
   },
   "@openmrs/esm-service-queues-app": {
+    "priorityConfigs": [
+      {
+        "conceptUuid": "${concept.emergency.uuid}",
+        "tagClassName": "tag",
+        "tagType": "red"
+      }
+    ],
+    "statusConfigs": [
+      {
+        "conceptUuid": "${concept.waiting.uuid}",
+        "iconComponent": "InProgress"
+      },
+      {
+        "conceptUuid": "${concept.inService.uuid}",
+        "iconComponent": "Group"
+      },
+      {
+        "conceptUuid": "${concept.waitingForTransfer.uuid}",
+        "iconComponent": "Group"
+      }
+    ],
     "concepts": {
       "serviceConceptSetUuid": "239c7e26-139f-4833-80e8-f0de2f4c8104",
       "priorityConceptSetUuid": "6a28c6ca-f52e-4a8e-8da7-ee7fe4953b3d",

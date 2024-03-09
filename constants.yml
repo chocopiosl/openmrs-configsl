@@ -46,3 +46,14 @@ encounterType:
     name: "Medication Dispensing"
   VITALS:
     name: "Vital Signs"
+concept:
+  normal:
+    uuid: "3cd750a0-26fe-102b-80cb-0017a47871b2"
+  emergency:
+    uuid: "9e4b6acc-ab97-4ecd-a48c-b3d67e5ef778"
+  waiting:
+    uuid: "167407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+  inService:
+    uuid: "167408AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+  waitingForTransfer:
+    uuid: "d639afb2-8f85-4774-a623-e6e051cda9c6"
