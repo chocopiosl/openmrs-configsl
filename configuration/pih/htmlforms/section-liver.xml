@@ -212,27 +212,52 @@
             </includeIf>
 
             <br/>
-            <strong>
+            <h3>
                 <uimessage code="Liver followup indicators"/>
-            </strong>
+            </h3>
 
-            <ifMode mode="VIEW" include="false">
-                <table align="left" style="font-size:small">
-                    <tr>
-                        <th colspan="2">
-                            Indications for treatment
-                        </th>
-                        <td>
-                            APRI > 1.5 or USS Cirrhosis<br/>
-                            VL from 2000 and ALT > 1.5 times 40 (at least 2 times in 4 months)<br/>
-                            Coinfection VHC-VIH<br/>
-                            VL from 2000 in pregnant women
-                        </td>
-                    </tr>
-                </table>
-            </ifMode>
+            <h5>
+                <uimessage code="Clinical indicators"/>
+            </h5>
 
             <div>
+                <repeat>
+                    <template>
+                        <p class="list-inline">
+                            <obsgroup groupingConceptId="PIH:14875" showIfEmpty="false">
+                                <obs id="liver-asymptomatic" style="radio"
+                                     conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
+                                     conceptLabels="yes,no,unknown"
+                                     answerConceptId="{qId}" labelText="{symptName}">
+                                    <controls>
+                                        <when value="PIH:SYMPTOM ABSENT" thenDisplay="#liver-symptoms"/>
+                                    </controls>
+                                </obs>
+                            </obsgroup>
+                        </p>
+                    </template>
+                    <render qId="CIEL:168289" symptName="Asymptomatic" />
+                </repeat>
+
+                <div id="liver-symptoms">
+                    <repeat>
+                        <template>
+                            <p class="list-inline">
+                                <obsgroup groupingConceptId="PIH:14875" showIfEmpty="false">
+                                    <obs style="radio"
+                                         conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
+                                         conceptLabels="yes,no,unknown"
+                                         answerConceptId="{qId}" labelText="{symptName}"/>
+                                </obsgroup>
+                            </p>
+                        </template>
+                        <render qId="CIEL:168295" symptName="Ascitic paracentesis" />
+                        <render qId="CIEL:139582" symptName="Gastrointestinal bleeding" />
+                        <render qId="CIEL:120345" symptName="Confusion" />
+                        <render qId="CIEL:879"    symptName="Pruritus" />
+                    </repeat>
+                </div>
+
                 <repeat>
                     <template>
                         <p class="list-inline">
@@ -244,24 +269,15 @@
                             </obsgroup>
                         </p>
                     </template>
-                    <render qId="CIEL:168289" symptName="Asymptomatic" />
-                    <render qId="CIEL:168295" symptName="Ascitic paracentesis" />
-                    <render qId="CIEL:139582" symptName="Gastrointestinal bleeding" />
-                    <render qId="CIEL:120345" symptName="Confusion" />
-                    <render qId="CIEL:879"    symptName="Pruritus" />
                     <render qId="CIEL:159449" symptName="Alcohol use" />
                 </repeat>
             </div>
 
             <obsgroup groupingConceptId="PIH:14827" showIfEmpty="false">
-                <p class="list-inline">
-                    <label>
-                        <uimessage code="Disease control"/>
-                    </label>
-                    <obs conceptId="PIH:11506" style="radio"
-                         answerConceptIds="PIH:11507,PIH:11508,PIH:11509"
-                         answerCodes="controlled,uncontrolled,complications" />
-                </p>
+
+                <h5>
+                    <uimessage code="Awareness and treatment"/>
+                </h5>
 
                 <div class="two-columns">
                     <div>
@@ -280,14 +296,11 @@
                                     </obs>
                                 </p>
                             </template>
-                            <render qId="CIEL:1898"   questionName="Patient condition improved" tog="fui-improved"/>
+                            <render qId="CIEL:167914" questionName="Understands treatment" tog="fui-under"/>
+                            <render qId="PIH:14741"   questionName="Ability to titrate treatment" tog="fui-tite"/>
                             <render qId="CIEL:164075" questionName="Overall treatment adherence" tog="fui-adher"/>
                             <render qId="CIEL:167819" questionName="Missed doses in past week" tog="fui-miss"/>
                             <render qId="CIEL:167021" questionName="Aware and understands the disease" tog="fui-aware"/>
-                            <render qId="CIEL:167914" questionName="Understands treatment" tog="fui-under"/>
-                            <render qId="PIH:14741"   questionName="Ability to titrate treatment" tog="fui-tite"/>
-                            <render qId="CIEL:1788"   questionName="Need hospitalization today" tog="fui-hosp" />
-                            <render qId="PIH:15164"   questionName="On prophylaxis for esophageal varices" tog="eso-var"/>
                         </repeat>
 
                         <p class="side-by-side">
@@ -324,8 +337,7 @@
                     </div>
 
                     <div id="liver-fui-miss-details">
-                        <br/>
-                        <br/>
+                        <br/><br/><br/><br/>
                         <label>
                             <uimessage code="# of missed doses in past week"/>
                         </label>
@@ -333,13 +345,78 @@
                     </div>
                 </div>
 
+                <h5>
+                    <uimessage code="Disease control"/>
+                </h5>
+
+                <repeat>
+                    <template>
+                        <p class="list-inline">
+                            <label>
+                                <uimessage code="{questionName}"/>
+                            </label>
+                            <obs id="liver-{tog}" conceptId="{qId}" style="radio"
+                                 answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                                 answerCodes="yes,no,unknown">
+                                <controls>
+                                    <when value="PIH:YES" thenDisplay="#liver-{tog}-details"/>
+                                </controls>
+                            </obs>
+                        </p>
+                    </template>
+                    <render qId="CIEL:1898"   questionName="Patient condition improved" tog="fui-improved"/>
+                    <render qId="PIH:15164"   questionName="On prophylaxis for esophageal varices" tog="eso-var"/>
+                </repeat>
+
+                <p class="list-inline">
+                    <label>
+                        <uimessage code="Liver disease control"/>
+                    </label>
+                    <obs id="liver-control" conceptId="PIH:11506" style="radio"
+                         answerConceptIds="PIH:11507,PIH:11508,PIH:11509"
+                         answerCodes="controlled,uncontrolled,complications" >
+                        <controls>
+                            <when value="PIH:11508" thenDisplay="#liver-fui-uncontrolled"/>
+                        </controls>
+                    </obs>
+                </p>
+
+                <div id="liver-fui-uncontrolled" >
+                    <p class="list-inline">
+                        <label>
+                            <uimessage code="Send for admission"/>
+                        </label>
+                        <obs conceptId="CIEL:1788" style="radio"
+                             answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                             answerCodes="yes,no,unknown" />
+                    </p>
+                </div>
+
             </obsgroup>
+
+            <h3>
+                <uimessage code="Hepatitis B treatment"/>
+            </h3>
 
             <obsgroup groupingConceptId="PIH:14890" showIfEmpty="false">
                 <br/>
-                <strong>
-                    <uimessage code="Hepatitis B treatment"/>
-                </strong>
+                <ifMode mode="VIEW" include="false">
+                    <table align="left" style="font-size:small">
+                        <tr>
+                            <th colspan="2">
+                                Indications for Hepatitis B treatment
+                            </th>
+                            <td>
+                                APRI > 1.5 or USS Cirrhosis<br/>
+                                VL from 2000 and ALT > 1.5 times 40 (at least 2 times in 4 months)<br/>
+                                Coinfection VHC-VIH<br/>
+                                VL from 2000 in pregnant women or HbeAg positive<br/>
+                                VL not available for pregnant women
+                            </td>
+                        </tr>
+                    </table>
+                </ifMode>
+
                 <p class="side-by-side">
                     <obs id="hepB-q" conceptId="PIH:14889" style="radio"
                          labelCode="On treatment"
