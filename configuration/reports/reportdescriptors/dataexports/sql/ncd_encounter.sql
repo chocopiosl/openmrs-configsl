@@ -287,7 +287,7 @@ set obesity =
 		if(obs_single_value_coded_from_temp(encounter_id, 'PIH','1734','PIH','7507')=@yes, 0,null));
 
 update temp_ncd t
-set number_hospitalizations_since_visit = obs_value_numeric_from_temp(encounter_id, 'PIH','2872');
+set number_hospitalizations_since_visit = obs_value_numeric_from_temp(encounter_id, 'PIH','12594');
 
 update temp_ncd t
  set number_hospitalizations_last_12_months = obs_value_numeric_from_temp(encounter_id, 'CIEL','5704');
