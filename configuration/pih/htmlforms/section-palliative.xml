@@ -193,9 +193,9 @@
                 </div>
             </includeIf>
 
-            <strong>
+            <h3>
                 <uimessage code="Palliative followup indicators"/>
-            </strong>
+            </h3>
 
             <p class="list-inline-wide">
                 <label>
@@ -206,6 +206,9 @@
                      answerCodes="yes,no"/>
             </p>
 
+            <h5>
+                <uimessage code="Awareness and treatment"/>
+            </h5>
             <obsgroup groupingConceptId="PIH:14817" showIfEmpty="false">
                 <div class="two-columns">
                     <div>
@@ -226,13 +229,12 @@
                                     </p>
                                 </p>
                             </template>
-                            <render message="CIEL:1898"   xId="Patient condition improved" tog="improved"/>
+                            <render message="CIEL:167914" xId="Understands treatment" tog="understand"/>
+                            <render message="PIH:14741"   xId="Ability to titrate opioids" tog="titrate"/>
                             <render message="CIEL:164075" xId="Overall treatment adherence" tog="adher"/>
                             <render message="CIEL:167819" xId="Missed doses in past week" tog="missed"/>
                             <render message="CIEL:167021" xId="Aware and understands the disease" tog="aware"/>
-                            <render message="CIEL:167914" xId="Understands treatment" tog="understand"/>
-                            <render message="PIH:14741"   xId="Ability to titrate opioids" tog="titrate"/>
-                        </repeat>
+                         </repeat>
                     </div>
                     <div id="pall-fui-missed-details">
                         <br/><br/>
@@ -243,6 +245,29 @@
 
                     </div>
                 </div>
+
+                <h5>
+                    <uimessage code="Disease control"/>
+                </h5>
+                <repeat>
+                    <template>
+                        <p>
+                            <p class="list-inline">
+                                <label>
+                                    <uimessage code="{xId}"/>
+                                </label>
+                                <obs id="pall-fui-{tog}" conceptId="{message}" style="radio"
+                                     answerConceptIds="PIH:YES,PIH:NO,CIEL:1067"
+                                     answerCodes="yes,no,unknown">
+                                    <controls>
+                                        <when value="PIH:YES" thenDisplay="#pall-fui-{tog}-details"/>
+                                    </controls>
+                                </obs>
+                            </p>
+                        </p>
+                    </template>
+                    <render message="CIEL:1898"   xId="Patient condition improved" tog="improved"/>
+                </repeat>
             </obsgroup>
 
             <table>
