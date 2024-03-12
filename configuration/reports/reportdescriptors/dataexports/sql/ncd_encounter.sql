@@ -40,7 +40,7 @@ create temporary table temp_ncd
  last_hospitalization_discharge_date     datetime,        
  last_hospitalization_outcome            varchar(255),    
  number_hospitalizations_ncd             double,          
- number_days_hospitalized                int,          
+ number_days_hospitalized                double,          
  ncd_diagnoses_caused_hospitalization    text,         
  hospitalization_dka_last_12_months      boolean,         
  diabetes                                bit,             
