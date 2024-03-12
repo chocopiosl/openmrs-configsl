@@ -237,7 +237,7 @@
                          </repeat>
                     </div>
                     <div id="pall-fui-missed-details">
-                        <br/><br/>
+                        <br/><br/><br/><br/>
                         <label>
                             <uimessage code="# of missed doses in past week"/>
                         </label>
