@@ -586,7 +586,7 @@
                 <div>
                     <p class="side-by-side">
                         <label>
-                            Alertness
+                            <uimessage code="pihcore.mentalhealth.alertness" />
                         </label>
                         <obs conceptId="CIEL:122943" style="radio"
                              answerConceptIds="CIEL:160282,CIEL:141762,CIEL:123818"
@@ -594,7 +594,7 @@
                     </p>
 
                     <label>
-                        Orientation status
+                        <uimessage code="pihcore.mentalhealth.orientationStatus" />
                     </label>
                     <obs conceptId="CIEL:167084" style="checkbox"
                          answerConceptId="CIEL:167081"
@@ -608,7 +608,7 @@
                     <br/>
 
                     <label>
-                        Appearance
+                        <uimessage code="pihcore.mentalhealth.appearance" />
                     </label>
 
                     <repeat>
@@ -624,7 +624,7 @@
                     <br/>
 
                     <label>
-                        Mood
+                        <uimessage code="pihcore.mentalhealth.mood.short" />
                     </label>
 
                     <repeat>
@@ -642,7 +642,7 @@
                     <br/>
 
                     <label>
-                        Affect
+                        <uimessage code="pihcore.mentalhealth.affect" />
                     </label>
 
                     <repeat>
@@ -659,25 +659,26 @@
                 </div>
                 <div>
                     <label>
-                        Thought process
+                        <uimessage code="pihcore.mentalhealth.thoughtProcess" />
                     </label>
 
                     <repeat>
                         <template>
-                            <obs conceptId="CIEL:167106	" style="checkbox"
-                                 answerConceptId="CIEL:{acID}"
+                            <obs conceptId="CIEL:167106" style="checkbox"
+                                 answerConceptId="{acID}"
                                  answerCode="{name}"/>
                         </template>
-                        <render acID="167108" name="Goal oriented"/>
-                        <render acID="167109" name="Linear"/>
-                        <render acID="167107" name="Circumferential"/>
-                        <render acID="167110" name="Tangential"/>
-                        <render acID="167111" name="Flight of ideas"/>
+                        <render acID="CIEL:167108" name="pihcore.thoughtprocess.goal"/>
+                        <render acID="CIEL:167109" name="pihcore.thoughtprocess.linearthought"/>
+                        <render acID="CIEL:167107" name="pihcore.thoughtprocess.circonf"/>
+                        <render acID="CIEL:167110" name="pihcore.thoughtprocess.tangential"/>
+                        <render acID="CIEL:167111" name="pihcore.thoughtprocess.flight"/>
+                        <render acID="PIH:14653"   name="pihcore.thoughtprocess.looseness"/>
                     </repeat>
                     <br/>
 
                     <label>
-                        Thought content
+                        <uimessage code="pihcore.mentalhealth.ThoughtContent" />
                     </label>
 
                     <repeat>
@@ -686,30 +687,30 @@
                                  answerConceptId="CIEL:{acID}"
                                  answerCode="{name}"/>
                         </template>
-                        <render acID="142600" name="Delusions"/>
-                        <render acID="167113" name="Denies suicidal ideation"/>
-                        <render acID="167114" name="Denies homicidal ideation"/>
+                        <render acID="142600" name="pihcore.thoughtcontent.delusion"/>
+                        <render acID="167113" name="pihcore.thoughtcontent.suicidal"/>
+                        <render acID="167114" name="pihcore.thoughtcontent.homicidal"/>
                         <render acID="130853" name="Paranoia"/>
-                        <render acID="133436" name="Negativistic"/>
+                        <render acID="133436" name="pihcore.thoughtcontent.negativism"/>
                     </repeat>
                     <br/>
 
                     <p class="side-by-side">
                         <label>
-                            Insight
+                            <uimessage code="pihcore.mentalhealth.insight" />
                         </label>
                         <obs conceptId="CIEL:167115" style="radio"
                              answerConceptIds="CIEL:159406,CIEL:159405,CIEL:159407"
-                             answerCodes="Fair,Good,Poor"/>
+                             answerCodes="pihcore.fair,pihcore.good,pihcore.poor"/>
                     </p>
 
                     <p class="side-by-side">
                         <label>
-                            Judgment
+                            <uimessage code="pihcore.mentalhealth.judgement" />
                         </label>
                         <obs conceptId="CIEL:167116" style="radio"
                              answerConceptIds="CIEL:159406,CIEL:159405,CIEL:159407"
-                             answerCodes="Fair,Good,Poor"/>
+                             answerCodes="pihcore.fair,pihcore.good,pihcore.poor" />
                     </p>
                     <br/>
                     <p class="comment-label">
