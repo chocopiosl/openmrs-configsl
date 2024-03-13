@@ -573,8 +573,7 @@
                             </template>
 
                             <render qId="CIEL:1898" questionName="Patient condition improved" tog="improved"/>
-                            <!-- ToDo: Add PIH:20008 Lung decompensation
-                            <render qId="PIH:20008" questionName="Lung decompensation"  tog="lungDecomp"/>  -->
+                            <render qId="PIH:20008" questionName="Lung decompensation"  tog="lungDecomp"/>
                         </repeat>
 
                         <div id="lung-dc-fui-lungDecomp-details" >

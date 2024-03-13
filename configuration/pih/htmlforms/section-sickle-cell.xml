@@ -231,7 +231,6 @@
             </h5>
             <!-- Sickle cell signs and symptoms -->
             <p class="side-by-side">
-                <!-- ToDo: Add PIH:20010 concept from OCL
                 <obsgroup groupingConceptId="PIH:14858" showIfEmpty="false">
                     <obs id="sickle-asymptom" style="radio"
                          conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
@@ -241,10 +240,9 @@
                         </controls>
                     </obs>
                 </obsgroup>
-                -->
             </p>
 
-            <div id="sc-not-symptom">
+            <div id="sc-not-asymptom">
                 <repeat>
                     <template>
                         <p class="side-by-side">
@@ -329,7 +327,7 @@
                                     <render answId="PIH:15171" answerMsg="No sickle-cell test confirmation (solubility test only)" />
                                 </repeat>
                                 <obs conceptId="PIH:15169" style="checkbox"
-                                     answerConceptId="CIEL:5622" answerCode="other"
+                                     answerConceptId="CIEL:5622" answerCode="Other"
                                      commentFieldCode="Specify other reason"/>
                             </div>
                         </p>
@@ -351,18 +349,18 @@
 
                             <repeat>
                                 <template>
-                                <!-- ToDo: get concepts from OCL
                                 <obs conceptId="PIH:20012" style="checkbox"
-                                     answerConceptId="{answId}" answerCode="{answerMsg}" /> -->
+                                     answerConceptId="{answId}" answerCode="{answerMsg}" />
                                 </template>
                                 <render answId="CIEL:114380" answerMsg="Pancytopenia" />
                                 <render answId="PIH:20013"   answerMsg="Elevated ALT/AST" />
                                 <render answId="PIH:20014"   answerMsg="Elevated creatinine" />
                                 <render answId="CIEL:111721" answerMsg="Mouth ulceration" />
                                 <render answId="CIEL:512"    answerMsg="Rash" />
+                                <render answId="CIEL:5622"    answerMsg="Other" />
                             </repeat>
 
-                            <obs conceptId="CIEL:164377" style="text" labelCode="Specify hydroxyurea side effect" />
+                            <obs conceptId="CIEL:164377" style="text" labelCode="If other, specify hydroxyurea complication:" />
                         </div>
                     </div>
                 </div>
