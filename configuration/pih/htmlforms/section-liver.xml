@@ -302,38 +302,6 @@
                             <render qId="CIEL:167819" questionName="Missed doses in past week" tog="fui-miss"/>
                             <render qId="CIEL:167021" questionName="Aware and understands the disease" tog="fui-aware"/>
                         </repeat>
-
-                        <p class="side-by-side">
-                            <label>
-                                <uimessage code="New indication for Hepatitis B treatment"/>
-                            </label>
-                            <obs id="new-hepb-tto" conceptId="PIH:14889" style="radio"
-                                 answerConceptIds="PIH:YES,PIH:NO"
-                                 answerCodes="yes,no">
-                                <controls>
-                                    <when value="PIH:YES" thenDisplay="#new-hepb-reason"/>
-                                </controls>
-                            </obs>
-
-                            <div id="new-hepb-reason" style="margin-left: 30px">
-                                <p>
-                                    <repeat>
-                                        <template>
-                                            <obs conceptId="PIH:14914" style="checkbox"
-                                                 answerConceptId="{qId}"
-                                                 answerCode="{answId}" />
-                                        </template>
-                                        <render qId="PIH:14912"   answId="Cirrhosis USS" />
-                                        <render qId="CIEL:168288" answId="Cirrhosis APRI" />
-                                        <render qId="CIEL:654"    answId="ALT / SGPT" />
-                                        <render qId="CIEL:168323" answId="Hep B DNA (VL)" />
-                                        <render qId="CIEL:1169"   answId="Co-infected with HIV" />
-                                        <render qId="CIEL:156590" answId="Co-infected with Hepatitis C" />
-                                        <render qId="CIEL:111491" answId="Pregnancy and VL &gt; 20,000" />
-                                    </repeat>
-                                </p>
-                            </div>
-                        </p>
                     </div>
 
                     <div id="liver-fui-miss-details">
@@ -392,11 +360,42 @@
                     </p>
                 </div>
 
-            </obsgroup>
+                <h3>
+                    <uimessage code="Hepatitis B treatment"/>
+                </h3>
 
-            <h3>
-                <uimessage code="Hepatitis B treatment"/>
-            </h3>
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="New indication for Hepatitis B treatment"/>
+                    </label>
+                    <obs id="new-hepb-tto" conceptId="PIH:14889" style="radio"
+                         answerConceptIds="PIH:YES,PIH:NO"
+                         answerCodes="yes,no">
+                        <controls>
+                            <when value="PIH:YES" thenDisplay="#new-hepb-reason"/>
+                        </controls>
+                    </obs>
+
+                    <div id="new-hepb-reason" style="margin-left: 30px">
+                        <p>
+                            <repeat>
+                                <template>
+                                    <obs conceptId="PIH:14914" style="checkbox"
+                                         answerConceptId="{qId}"
+                                         answerCode="{answId}" />
+                                </template>
+                                <render qId="PIH:14912"   answId="Cirrhosis USS" />
+                                <render qId="CIEL:168288" answId="Cirrhosis APRI" />
+                                <render qId="CIEL:654"    answId="ALT / SGPT" />
+                                <render qId="CIEL:168323" answId="Hep B DNA (VL)" />
+                                <render qId="CIEL:1169"   answId="Co-infected with HIV" />
+                                <render qId="CIEL:156590" answId="Co-infected with Hepatitis C" />
+                                <render qId="CIEL:111491" answId="Pregnancy and VL &gt; 20,000" />
+                            </repeat>
+                        </p>
+                    </div>
+                </p>
+            </obsgroup>
 
             <obsgroup groupingConceptId="PIH:14890" showIfEmpty="false">
                 <br/>
