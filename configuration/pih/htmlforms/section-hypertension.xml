@@ -255,10 +255,13 @@
             </div>
 
             <br/>
-            <strong>
+            <h3>
                 <uimessage code="Hypertension followup indicators" />
-            </strong>
+            </h3>
 
+            <h5>
+                <uimessage code="Self management and awareness"/>
+            </h5>
             <obsgroup groupingConceptId="PIH:14462" showIfEmpty="false">
                 <div class="two-columns">
                     <div>
@@ -277,15 +280,14 @@
                                     </obs>
                                 </p>
                             </template>
-                            <render message="CIEL:1898"   xId="Patient condition improved" tog="improved"/>
-                            <render message="CIEL:164075" xId="Overall treatment adherence" tog="adher"/>
-                            <render message="CIEL:167819" xId="Missed doses in past week" tog="missed"/>
                             <render message="CIEL:167021" xId="Aware and understands the disease" tog="aware"/>
                             <render message="CIEL:167914" xId="Understands treatment" tog="understand"/>
+                            <render message="CIEL:164075" xId="Overall treatment adherence" tog="adher"/>
+                            <render message="CIEL:167819" xId="Missed doses in past week" tog="missed"/>
                         </repeat>
                     </div>
                     <div id="htn-fui-missed-details">
-                        <br/><br/>
+                        <br/><br/><br/>
                         <label>
                             <uimessage code="# of missed doses in past week"/>
                         </label>
@@ -293,6 +295,28 @@
 
                     </div>
                 </div>
+
+                <h5>
+                    <uimessage code="Disease control"/>
+                </h5>
+
+                <repeat>
+                    <template>
+                        <p class="list-inline">
+                            <label>
+                                <uimessage code="{xId}"/>
+                            </label>
+                            <obs id="htn-fui-{tog}" conceptId="{message}" style="radio"
+                                 answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
+                                 answerCodes="yes,no,unknown">
+                                <controls>
+                                    <when value="PIH:YES" thenDisplay="#htn-fui-{tog}-details"/>
+                                </controls>
+                            </obs>
+                        </p>
+                    </template>
+                    <render message="CIEL:1898"   xId="Patient condition improved" tog="improved"/>
+                </repeat>
 
                 <ifMode mode="VIEW" include="false">
                     <table align="left" style="font-size:small">

@@ -287,13 +287,34 @@
                                 </p>
                             </template>
                             <render qId="CIEL:1898" questionName="Patient condition improved" q="improved"/>
-                            <render qId="PIH:6756" questionName="On insulin" q="insulin"/>
+                            <render qId="PIH:6756"  questionName="On insulin" q="insulin"/>
                             <render qId="CIEL:167957" questionName="Severe hypoglycemia in last month" q="severe"/>
                             <render qId="CIEL:164075" questionName="Overall treatment adherence" q="adher"/>
                             <render qId="CIEL:167819" questionName="Missed doses in past week" q="missed"/>
                         </repeat>
+                    </div>
 
+                    <div>
+                        <label>
+                            <uimessage code="# of hypoglycemic episodes in past 30 days"/>
+                        </label>
+                        <p class="narrow">
+                            <obs conceptId="PIH:14708"/>
+                        </p>
 
+                        <div id="dm-missed-details">
+                            <br/><br/>
+                            <label>
+                                <uimessage code="# of missed doses in past week"/>
+                            </label>
+                            <obs conceptId="CIEL:167918"/>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="two-columns">
+                    <div>
                         <p class="list-inline-wide">
                             <label>
                                 <uimessage code="Indications for ACE inhibitors"/>
@@ -324,33 +345,12 @@
                                 </obs>
                             </p>
                         </div>
-
                     </div>
-
                     <div>
-                        <br/>
-                        <label>
-                            <uimessage code="# of hypoglycemic episodes in past 30 days"/>
-                        </label>
-                        <p class="narrow">
-                            <obs conceptId="PIH:14708"/>
-                        </p>
-
-                        <div id="dm-missed-details">
-                            <label>
-                                <uimessage code="# of missed doses in past week"/>
-                            </label>
-                            <obs conceptId="CIEL:167918"/>
-
-                        </div>
-
                         <div id="dm-not-ace-details">
-                            <br/><br/>
-                            <br/><br/>
                             <label>
                                 <uimessage code="Reason not on ACE inhibitors"/>
                             </label>
-                            <!-- ToDo: Add PIH:20002 -->
                             <obs conceptId="PIH:20002" style="text"/>
                         </div>
                     </div>

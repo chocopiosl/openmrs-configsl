@@ -414,7 +414,7 @@
                             </repeat>
                         </div>
                         <div id="hf-fui-missed-details">
-                            <br/><br/>
+                            <br/><br/><br/><br/>
                             <label>
                                 <uimessage code="# of missed doses in past week"/>
                             </label>
@@ -587,7 +587,7 @@
                     <p class="side-by-side">
                         <obs id="cardiac-surgery-sched"
                              conceptId="PIH:Scheduled surgery" style="radio"
-                             answerConceptIds="CIEL:1065,CIEL:1066"
+                             answerConceptIds="CIEL:1065,CIEL:1066" answerCodes="yes,no"
                              labelCode="Cardiac surgery scheduled" />
                     </p>
                 </obsgroup>
