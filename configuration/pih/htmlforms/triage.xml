@@ -4,57 +4,84 @@
           formEncounterType="41911448-71a1-43d7-bba8-dc86339850da"
           formVersion="1.0">
 
+    <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.AddPatientToQueueAction"/>
     <macros>
         <macro key="mcoeTriageLocation" value="f85feffc-fe54-4648-aa14-01ed6d30b943"/>
     </macros>
 
-    <section id="triage" sectionTag="section" headerStyle="title" headerCode="mirebalais.maternalCheckin.label">
-        <!-- START ENTER/EDIT VERSION OF THE FORM -->
-        <ifMode mode="VIEW" include="false">
-            <fieldset class="required">
-                <legend>
-                    <uimessage code="mirebalais.retrospectiveCheckin.checkinDate.label"/>
-                </legend>
-                <h3>
-                    <uimessage code="mirebalais.retrospectiveCheckin.checkinDate.label"/>
-                </h3>
+    <style type="text/css">
+        #who-when-where {
+            margin-bottom: 6px;
+            border-bottom: 1px solid #ccc;
+        }
 
-                <p class="left">
-                    <encounterDate id="encounterDate" showTime="false" default="now"/>
+        #who-when-where p {
+            display: inline-block;
+            padding-right: 20px;
+        }
+
+        #where > input[type=text] {
+            display: inline-block;
+        }
+
+        .narrow {
+            width: 200px;
+        }
+
+        .field-error {
+            color: #ff6666;
+            font-size: 1.1em;
+            display: block;
+        }
+
+        #data-collection {
+            display: inline-block;
+            width: 58%;
+            vertical-align: top;
+        }
+
+    </style>
+
+    <ifMode mode="VIEW" include="false">
+        <h2><uimessage code="National Obstretic Triage and Treatment Form"/></h2>
+            <div id="who-when-where">
+                <p id="who">
+                    <label><uimessage code="emr.patientDashBoard.providerRequired"/></label>
+                    <span><encounterProviderAndRole default="currentUser" encounterRole="4f10ad1a-ec49-48df-98c7-1391c6ac7f05" required="true"/></span>
                 </p>
-            </fieldset>
-            <fieldset class="required">
-                <legend>
-                    <uimessage code="mirebalais.retrospectiveCheckin.provider.label"/>
-                </legend>
-                <h3>
-                    <uimessage code="mirebalais.retrospectiveCheckin.provider.label"/>
-                </h3>
-
-                <p class="left">
-                    <encounterProviderAndRole default="currentUser" encounterRole="cbfe0b9d-9923-404c-941b-f048adc8cdc0"
-                                              required="true"/>
+                <p id="where">
+                    <label><uimessage code="emr.locationRequired"/></label>
+                    <span><encounterLocation required="true" default="$mcoeTriageLocation" tags="MCH Triage Location"/></span>
                 </p>
-            </fieldset>
-
-            <fieldset class="required">
-                <legend>
-                    <uimessage code="mirebalais.retrospectiveCheckin.location.label"/>
-                </legend>
-                <h3>
-                    <uimessage code="mirebalais.retrospectiveCheckin.location.label"/>
-                </h3>
-
-                <p class="left">
-                    <encounterLocation required="true" default="$mcoeTriageLocation" tags="MCH Triage Location"/>
+                <p id="when">
+                    <label><uimessage code="emr.patientDashBoard.date"/></label>
+                    <span><encounterDate id="encounterDate" default="now" showTime="false"/></span>
                 </p>
-            </fieldset>
-            <!-- END ENTER/EDIT VERSION OF THE FORM -->
-        </ifMode>
+            </div>
+    </ifMode>
 
-        <ifMode mode="VIEW">
-            <span id="most-recent-encounter-title" style="display:none"><!--The Most Recent Encounter app in Core Apps replaces this with the "most recent" label--></span>
-        </ifMode>
-    </section>
+    <div class="row">
+        <div class="col-sm-6">
+            <h3 class="panel-title">Queue Service</h3>
+            <obs conceptId="CIEL:1272" style="radio" id="referToService"
+                 answerConceptIds="PIH:6259,PIH:6261,PIH:7831,PIH:10377,PIH:15035,PIH:15036,PIH:15038,PIH:15037"
+                 answerCodes="Antenatal Ward,Postnatal Ward,Pre-Op/PACU,Labour and Delivery,MCCU,NICU,Post-Op,Loss Ward"
+                 answerSeparator="&lt;br /&gt;"/>
+        </div>
+        <div class="col-sm-6">
+            <h3 class="panel-title">Priority</h3>
+            <obs conceptId="PIH:12842" style="radio" id="priority"
+                 answerConceptIds="CIEL:1115,PIH:Emergency"
+                 answerCodes="Normal,Emergency"
+                 answerSeparator="&lt;br /&gt;"/>
+        </div>
 
+    </div>
+
+    <ifMode mode="VIEW" include="false">
+        <div id="buttons">
+            <button class="submitButton confirm right" onclick="submitHtmlForm()"><uimessage code="mirebalais.save"/><i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i></button>
+            <button type="button" class="cancel"><uimessage code="emr.cancel"/></button>
+        </div>
+    </ifMode>
 </htmlform>
