@@ -234,7 +234,7 @@
                 <obsgroup groupingConceptId="PIH:14858" showIfEmpty="false">
                     <obs id="sickle-asymptom" style="radio"
                          conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
-                         conceptLabels="yes,no,unknown" answerConceptId="PIH:20010" labelText="Asymtomatic">
+                         conceptLabels="yes,no,unknown" answerConceptId="PIH:20010" labelText="Asymptomatic">
                         <controls>
                             <when value="PIH:SYMPTOM ABSENT" thenDisplay="#sc-not-asymptom"/>
                         </controls>
