@@ -132,10 +132,9 @@
     <ifMode mode="VIEW" include="false">
         <script type="text/javascript">
             jq(function() {
-
                 // handlers for next and submit buttons, see nextAndSubmitButtons.js
                 setUpNextAndSubmitButtons();
-
+                // setUpPlanButton();
             });
         </script>
     </ifMode>
@@ -337,42 +336,40 @@
                     <h5>
                         <uimessage code="Clinical indicators"/>
                     </h5>
-                    <div class="three-columns">
-                        <repeat>
-                            <template>
-                                <div>
+                    <div class="two-columns">
+                        <div>
+                            <repeat>
+                                <template>
                                     <p class="side-by-side">
                                         <obsgroup groupingConceptId="PIH:14733" showIfEmpty="false">
                                             <obs style="radio"
                                                  conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
-                                                 conceptLabels="y,n,u" answerConceptId="{qId}" />
+                                                 conceptLabels="yes,no,unknown" answerConceptId="{qId}"/>
                                         </obsgroup>
                                     </p>
-                                </div>
-                            </template>
-                            <render qId="CIEL:122496" symptName="Dyspnea" />
-                            <render qId="CIEL:131689" symptName="Orthopnea" />
-                            <render qId="CIEL:130783" symptName="Paroxysmal nocturnal dyspnea" />
-                        </repeat>
-                    </div>
+                                </template>
+                                <render qId="CIEL:122496" symptName="Dyspnea"/>
+                                <render qId="CIEL:131689" symptName="Orthopnea"/>
+                                <render qId="CIEL:127640" symptName="Crackles in lungs" />
+                            </repeat>
+                        </div>
 
-                    <div class="three-columns">
-                        <repeat>
-                            <template>
-                                <div>
+                        <div>
+                            <repeat>
+                                <template>
                                     <p class="side-by-side">
                                         <obsgroup groupingConceptId="PIH:14733" showIfEmpty="false">
                                             <obs style="radio"
                                                  conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
-                                                 conceptLabels="y,n,u" answerConceptId="{qId}" labelText="{symptName}"/>
+                                                 conceptLabels="yes,no,unknown" answerConceptId="{qId}" labelText="{symptName}"/>
                                         </obsgroup>
                                     </p>
-                                </div>
-                            </template>
-                            <render qId="CIEL:130166" symptName="Pitting edema" />
-                            <render qId="CIEL:127640" symptName="Crackles in lungs" />
-                            <render qId="CIEL:136394" symptName="Jugular distension" />
-                        </repeat>
+                                </template>
+                                <render qId="CIEL:130783" symptName="Paroxysmal nocturnal dyspnea"/>
+                                <render qId="CIEL:130166" symptName="Pitting edema" />
+                                <render qId="CIEL:136394" symptName="Jugular distension" />
+                            </repeat>
+                        </div>
                     </div>
                 </div>
 
@@ -634,6 +631,46 @@
 
     <div id="buttons-section"></div>
     <ifMode mode="VIEW" include="false">
+        <div id="buttons1">
+            <button id="plan" type="button" class="submitButton confirm right">
+                <uimessage code="pihcore.visitNote.plan"/>
+                <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
+            </button>
+            <button id="sickle" type="button" class="submitButton confirm right">
+                <uimessage code="Sickle"/>
+                <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
+            </button>
+            <button id="pallb" type="button" class="submitButton confirm right">
+                <uimessage code="Palliative"/>
+                <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
+            </button>
+            <button id="liveb" type="button" class="submitButton confirm right">
+                <uimessage code="Liver"/>
+                <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
+            </button>
+            <button id="kidb" type="button" class="submitButton confirm right">
+                <uimessage code="Kidney"/>
+                <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
+            </button>
+            <button id="lungb" type="button" class="submitButton confirm right">
+                <uimessage code="Lung"/>
+                <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
+            </button>
+            <button id="hfb" type="button" class="submitButton confirm right">
+                <uimessage code="Heart"/>
+                <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
+            </button>
+            <button id="htnb" type="button" class="submitButton confirm right">
+                <uimessage code="HTN"/>
+                <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
+            </button>
+            <button id="dmb" type="button" class="submitButton confirm right">
+                <uimessage code="DM"/>
+                <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
+            </button>
+        </div>
+        <br/><br/>
+
         <div id="buttons">
             <button id="next" type="button" class="submitButton confirm right">
                 <uimessage code="emr.next"/>
