@@ -64,8 +64,8 @@
         <div class="col-sm-6">
             <h3 class="panel-title">Queue Service</h3>
             <obs conceptId="CIEL:1272" style="radio" id="referToService"
-                 answerConceptIds="PIH:6259,PIH:6261,PIH:7831,PIH:10377,PIH:15035,PIH:15036,PIH:15038,PIH:15037"
-                 answerCodes="Antenatal Ward,Postnatal Ward,Pre-Op/PACU,Labour and Delivery,MCCU,NICU,Post-Op,Loss Ward"
+                 answerConceptIds="PIH:6259,PIH:6261,PIH:7831,PIH:10377,PIH:15035,PIH:15036,PIH:15039,PIH:15038,PIH:15037"
+                 answerCodes="Antenatal Ward,Postnatal Ward,Pre-Op/PACU,Labour and Delivery,MCCU,NICU,Pre-Op/PACU,Post-Op,Loss Ward"
                  answerSeparator="&lt;br /&gt;"/>
         </div>
         <div class="col-sm-6">
