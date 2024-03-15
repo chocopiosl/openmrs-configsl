@@ -376,46 +376,58 @@
                         </controls>
                     </obs>
 
-                    <div id="new-hepb-reason" style="margin-left: 30px">
-                        <p>
-                            <repeat>
-                                <template>
-                                    <obs conceptId="PIH:14914" style="checkbox"
-                                         answerConceptId="{qId}"
-                                         answerCode="{answId}" />
-                                </template>
-                                <render qId="PIH:14912"   answId="Cirrhosis USS" />
-                                <render qId="CIEL:168288" answId="Cirrhosis APRI" />
-                                <render qId="CIEL:654"    answId="ALT / SGPT" />
-                                <render qId="CIEL:168323" answId="Hep B DNA (VL)" />
-                                <render qId="CIEL:1169"   answId="Co-infected with HIV" />
-                                <render qId="CIEL:156590" answId="Co-infected with Hepatitis C" />
-                                <render qId="CIEL:111491" answId="Pregnancy and VL &gt; 20,000" />
-                            </repeat>
-                        </p>
+                    <div class="two-columns">
+                        <div>
+                            <ifMode mode="VIEW" include="false">
+                                <p style="font-size:small">
+                                    APRI > 1.5 or USS Cirrhosis
+                                    <br/>
+                                    VL from 2000 and ALT > 1.5 times 40 (at least 2 times in 4 months)
+                                    <br/>
+                                    Coinfection HCV-HIV
+                                    <br/>
+                                    (female only) VL from 2000 in pregnant women or HbeAg positive
+                                    <br/>
+                                    (female only) VL not available for pregnant women
+                                </p>
+                            </ifMode>
+                        </div>
+                        <div id="new-hepb-reason" style="margin-left: 30px">
+                            <p>
+                                <repeat>
+                                    <template>
+                                        <obs conceptId="PIH:14914" style="checkbox"
+                                             answerConceptId="{qId}" />
+                                    </template>
+                                    <!-- ToDo: Add new OCL
+                                    <render qId="CIEL:168583" answId="Co-infection HCV-HIV" />  -->
+                                    <render qId="PIH:14912" answId="Cirrhosis US"/>
+                                    <render qId="CIEL:168288" answId="Cirrhosis APRI"/>
+                                    <render qId="CIEL:654" answId="ALT / SGPT"/>
+                                    <render qId="CIEL:168323" answId="Hep B DNA (VL)"/>
+                                    <render qId="CIEL:1169" answId="Co-infected with HIV"/>
+                                    <render qId="CIEL:156590" answId="Co-infected with Hepatitis C"/>
+                                </repeat>
+
+                                <includeIf velocityTest="$patient.gender == 'F' ">
+                                    <repeat>
+                                        <template>
+                                            <obs conceptId="PIH:14914" style="checkbox"
+                                                 answerConceptId="{qId}" />
+                                        </template>
+                                        <render qId="CIEL:111491" answId="Pregnancy and VL &gt; 20,000"/>
+                                        <!-- ToDo: Add new OCL
+                                        <render qId="PIH:20016" answId="VL not available for pregnant women" />     -->
+                                    </repeat>
+                                </includeIf>
+                            </p>
+
+                        </div>
                     </div>
                 </p>
             </obsgroup>
 
             <obsgroup groupingConceptId="PIH:14890" showIfEmpty="false">
-                <br/>
-                <ifMode mode="VIEW" include="false">
-                    <table align="left" style="font-size:small">
-                        <tr>
-                            <th colspan="2">
-                                Indications for Hepatitis B treatment
-                            </th>
-                            <td>
-                                APRI > 1.5 or USS Cirrhosis<br/>
-                                VL from 2000 and ALT > 1.5 times 40 (at least 2 times in 4 months)<br/>
-                                Coinfection VHC-VIH<br/>
-                                VL from 2000 in pregnant women or HbeAg positive<br/>
-                                VL not available for pregnant women
-                            </td>
-                        </tr>
-                    </table>
-                </ifMode>
-
                 <p class="side-by-side">
                     <obs id="hepB-q" conceptId="PIH:14889" style="radio"
                          labelCode="On treatment"
