@@ -116,6 +116,7 @@
     "uuid": "markPatientDead",
     "name": "disposition.emrapi.death",
     "conceptCode": "PIH:DEATH",
+    "excludedEncounterTypes": ["2110a810-db62-4914-ba95-604b96010164"],
     "actions": [
       "markPatientDeadDispositionAction"
     ],
