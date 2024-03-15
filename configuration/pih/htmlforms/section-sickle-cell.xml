@@ -176,6 +176,49 @@
                 </div>
             </includeIf>
 
+            <h3>
+                <uimessage code="Sickle cell followup indicators"/>
+            </h3>
+
+            <h5>
+                <uimessage code="Clinical indicators"/>
+            </h5>
+            <!-- Sickle cell signs and symptoms -->
+            <p class="side-by-side">
+                <obsgroup groupingConceptId="PIH:14858" showIfEmpty="false">
+                    <obs id="sickle-asymptom" style="radio"
+                         conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
+                         conceptLabels="yes,no,unknown" answerConceptId="PIH:20010" labelText="Asymptomatic">
+                        <controls>
+                            <when value="PIH:SYMPTOM ABSENT" thenDisplay="#sc-not-asymptom"/>
+                        </controls>
+                    </obs>
+                </obsgroup>
+            </p>
+
+            <div id="sc-not-asymptom">
+                <repeat>
+                    <template>
+                        <p class="side-by-side">
+                            <obsgroup groupingConceptId="PIH:14858" showIfEmpty="false">
+                                <obs style="radio"
+                                     conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
+                                     conceptLabels="yes,no,unknown" answerConceptId="{qId}" labelText="{symptName}"/>
+                            </obsgroup>
+                        </p>
+                    </template>
+                    <render qId="CIEL:114403" symptName="Pain"/>
+                    <render qId="CIEL:140238" symptName="Fever"/>
+                    <render qId="CIEL:136443" symptName="Jaundice"/>
+                    <render qId="CIEL:121629" symptName="Anemia"/>
+                    <render qId="CIEL:148346" symptName="Ascites"/>
+                    <render qId="CIEL:112804" symptName="Spleen palpable"/>
+                    <render qId="CIEL:168290" symptName="Liver palpable" />
+                    <render qId="CIEL:142373" symptName="Difficulty breathing"/>
+                    <render qId="CIEL:120749" symptName="Chest pain"/>
+                </repeat>
+            </div>
+
             <obsgroup groupingConceptId="PIH:14872">
                 <div class="two-columns">
                     <div>
@@ -221,49 +264,6 @@
                     </div>
                 </div>
             </obsgroup>
-
-            <h3>
-                <uimessage code="Sickle cell followup indicators"/>
-            </h3>
-
-            <h5>
-                <uimessage code="Clinical indicators"/>
-            </h5>
-            <!-- Sickle cell signs and symptoms -->
-            <p class="side-by-side">
-                <obsgroup groupingConceptId="PIH:14858" showIfEmpty="false">
-                    <obs id="sickle-asymptom" style="radio"
-                         conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
-                         conceptLabels="yes,no,unknown" answerConceptId="PIH:20010" labelText="Asymptomatic">
-                        <controls>
-                            <when value="PIH:SYMPTOM ABSENT" thenDisplay="#sc-not-asymptom"/>
-                        </controls>
-                    </obs>
-                </obsgroup>
-            </p>
-
-            <div id="sc-not-asymptom">
-                <repeat>
-                    <template>
-                        <p class="side-by-side">
-                            <obsgroup groupingConceptId="PIH:14858" showIfEmpty="false">
-                                <obs style="radio"
-                                     conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT,PIH:SYMPTOM PRESENCE UNKNOWN"
-                                     conceptLabels="yes,no,unknown" answerConceptId="{qId}" labelText="{symptName}"/>
-                            </obsgroup>
-                        </p>
-                    </template>
-                    <render qId="CIEL:114403" symptName="Pain"/>
-                    <render qId="CIEL:140238" symptName="Fever"/>
-                    <render qId="CIEL:136443" symptName="Jaundice"/>
-                    <render qId="CIEL:121629" symptName="Anemia"/>
-                    <render qId="CIEL:148346" symptName="Ascites"/>
-                    <render qId="CIEL:112804" symptName="Spleen palpable"/>
-                    <render qId="CIEL:168290" symptName="Liver palpable" />
-                    <render qId="CIEL:142373" symptName="Difficulty breathing"/>
-                    <render qId="CIEL:120749" symptName="Chest pain"/>
-                </repeat>
-            </div>
 
             <h5>
                 <uimessage code="Awareness and treatment"/>
