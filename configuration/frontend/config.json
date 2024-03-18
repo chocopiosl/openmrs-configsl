@@ -1,7 +1,7 @@
 {
   "@openmrs/esm-appointments-app": {
     "checkInButton": {
-      "customUrl": "${openmrsBase}/htmlformentryui/htmlform/enterHtmlFormWithSimpleUi.page?patientId=${patientUuid}&definitionUiResource=file:pih/htmlforms/liveCheckin.xml&createVisit=true&returnUrl=${openmrsSpaBase}%2Fhome%2Fappointments"
+      "customUrl": "${openmrsBase}/htmlformentryui/htmlform/enterHtmlFormWithSimpleUi.page?patientId=${patientUuid}&definitionUiResource=file:pih/htmlforms/liveCheckinMaternal.xml&createVisit=true&returnUrl=${openmrsSpaBase}%2Fhome%2Fappointments"
     }
   },
   "@openmrs/esm-login-app": {
