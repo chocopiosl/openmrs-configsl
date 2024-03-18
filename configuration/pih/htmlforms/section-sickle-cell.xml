@@ -249,6 +249,7 @@
                                 <render diagId="CIEL:121629" sickleComplic="Anemia" />
                                 <render diagId="CIEL:162044" sickleComplic="Severe anemia" />
                                 <render diagId="CIEL:136586" sickleComplic="Intravascular hemolysis" />
+                                <render diagId="CIEL:117643" sickleComplic="Sickle-cell vaso-occlusive pain crisis" />
                                 <render diagId="CIEL:149871" sickleComplic="Acute chest syndrome" />
                                 <render diagId="CIEL:148074" sickleComplic="Avascular bone necrosis" />
                                 <render diagId="CIEL:111103" sickleComplic="Stroke" />
