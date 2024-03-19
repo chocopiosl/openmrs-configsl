@@ -41,10 +41,8 @@
     <lineByLineFormat>
         <string>address2</string>
         <string>cityVillage</string>
-        <string>address1</string>
-        <string>stateProvince</string>
-        <string>countyDistrict</string>
-        <string>country</string>
+        <string>address1, stateProvince</string>
+        <string>countyDistrict, country</string>
     </lineByLineFormat>
     <addressHierarchyFile>
         <filename>sierra_leone_address_hierarchy_entries.csv</filename>
