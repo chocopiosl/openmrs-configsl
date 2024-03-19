@@ -399,8 +399,7 @@
                                         <obs conceptId="PIH:14914" style="checkbox"
                                              answerConceptId="{qId}" />
                                     </template>
-                                    <!-- ToDo: Add new OCL
-                                    <render qId="CIEL:168583" answId="Co-infection HCV-HIV" />  -->
+                                    <render qId="CIEL:168583" answId="Co-infection HCV-HIV" />
                                     <render qId="PIH:14912" answId="Cirrhosis US"/>
                                     <render qId="CIEL:168288" answId="Cirrhosis APRI"/>
                                     <render qId="CIEL:654" answId="ALT / SGPT"/>
@@ -416,8 +415,7 @@
                                                  answerConceptId="{qId}" />
                                         </template>
                                         <render qId="CIEL:111491" answId="Pregnancy and VL &gt; 20,000"/>
-                                        <!-- ToDo: Add new OCL
-                                        <render qId="PIH:20016" answId="VL not available for pregnant women" />     -->
+                                        <render qId="PIH:20016" answId="VL not available for pregnant women" />
                                     </repeat>
                                 </includeIf>
                             </p>
