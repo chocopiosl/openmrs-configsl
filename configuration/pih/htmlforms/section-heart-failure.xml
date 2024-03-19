@@ -350,7 +350,7 @@
                                 </template>
                                 <render qId="CIEL:122496" symptName="Dyspnea"/>
                                 <render qId="CIEL:131689" symptName="Orthopnea"/>
-                                <render qId="CIEL:127640" symptName="Crackles in lungs" />
+                                <render qId="CIEL:130783" symptName="Paroxysmal nocturnal dyspnea"/>
                             </repeat>
                         </div>
 
@@ -365,7 +365,7 @@
                                         </obsgroup>
                                     </p>
                                 </template>
-                                <render qId="CIEL:130783" symptName="Paroxysmal nocturnal dyspnea"/>
+                                <render qId="CIEL:127640" symptName="Crackles" />
                                 <render qId="CIEL:130166" symptName="Pitting edema" />
                                 <render qId="CIEL:136394" symptName="Jugular distension" />
                             </repeat>
@@ -634,6 +634,10 @@
         <div id="buttons1">
             <button id="plan" type="button" class="submitButton confirm right">
                 <uimessage code="pihcore.visitNote.plan"/>
+                <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
+            </button>
+            <button id="dx" type="button" class="submitButton confirm right">
+                <uimessage code="pihcore.diagnosis.label"/>
                 <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
             </button>
             <button id="sickle" type="button" class="submitButton confirm right">
