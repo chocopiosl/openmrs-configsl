@@ -366,7 +366,7 @@
 
                 <p class="side-by-side">
                     <label>
-                        <uimessage code="New indication for Hepatitis B treatment"/>
+                        <uimessage code="Indication for Hepatitis B treatment"/>
                     </label>
                     <obs id="new-hepb-tto" conceptId="PIH:14889" style="radio"
                          answerConceptIds="PIH:YES,PIH:NO"
@@ -376,51 +376,29 @@
                         </controls>
                     </obs>
 
-                    <div class="two-columns">
-                        <div>
-                            <ifMode mode="VIEW" include="false">
-                                <p style="font-size:small">
-                                    APRI > 1.5 or USS Cirrhosis
-                                    <br/>
-                                    VL from 2000 and ALT > 1.5 times 40 (at least 2 times in 4 months)
-                                    <br/>
-                                    Coinfection HCV-HIV
-                                    <br/>
-                                    (female only) VL from 2000 in pregnant women or HbeAg positive
-                                    <br/>
-                                    (female only) VL not available for pregnant women
-                                </p>
-                            </ifMode>
-                        </div>
-                        <div id="new-hepb-reason" style="margin-left: 30px">
-                            <p>
+                    <div id="new-hepb-reason" style="margin-left: 30px">
+                        <p>
+                            <repeat>
+                                <template>
+                                    <obs conceptId="PIH:14914" style="checkbox"
+                                         answerConceptId="{qId}" answerCode="{answName}"/>
+                                </template>
+                                <render qId="PIH:20018"   answName="APRI score &amp;gt; 1.5 or US Cirrhosis"/>
+                                <render qId="CIEL:168583" answName="Co-infection with HCV and/or HIV" />
+                                <render qId="PIH:20019"   answName="Hep B DNA (VL) &amp;gt; 2000 and ALT &amp;gt; 1.5 x upper limit"/>
+                            </repeat>
+
+                            <includeIf velocityTest="$patient.gender == 'F' ">
                                 <repeat>
                                     <template>
                                         <obs conceptId="PIH:14914" style="checkbox"
-                                             answerConceptId="{qId}" />
+                                             answerConceptId="{qId}" answerCode="{answName}" />
                                     </template>
-                                    <render qId="CIEL:168583" answId="Co-infection HCV-HIV" />
-                                    <render qId="PIH:14912" answId="Cirrhosis US"/>
-                                    <render qId="CIEL:168288" answId="Cirrhosis APRI"/>
-                                    <render qId="CIEL:654" answId="ALT / SGPT"/>
-                                    <render qId="CIEL:168323" answId="Hep B DNA (VL)"/>
-                                    <render qId="CIEL:1169" answId="Co-infected with HIV"/>
-                                    <render qId="CIEL:156590" answId="Co-infected with Hepatitis C"/>
+                                    <render qId="PIH:20020" answName="VL &amp;gt; 2000 or HbeAg+ during pregnancy"/>
+                                    <render qId="PIH:20016" answName="VL not available during pregnancy" />
                                 </repeat>
-
-                                <includeIf velocityTest="$patient.gender == 'F' ">
-                                    <repeat>
-                                        <template>
-                                            <obs conceptId="PIH:14914" style="checkbox"
-                                                 answerConceptId="{qId}" />
-                                        </template>
-                                        <render qId="CIEL:111491" answId="Pregnancy and VL &gt; 20,000"/>
-                                        <render qId="PIH:20016" answId="VL not available for pregnant women" />
-                                    </repeat>
-                                </includeIf>
-                            </p>
-
-                        </div>
+                            </includeIf>
+                        </p>
                     </div>
                 </p>
             </obsgroup>
@@ -446,7 +424,7 @@
                                 <br/>
                             </template>
                             <render medId="CIEL:84795" name="Tenofovir" />
-                            <render medId="CIEL:75694" name="Entecav" />
+                            <render medId="CIEL:75694" name="Entecavir" />
                         </repeat>
                     </p>
 
