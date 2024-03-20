@@ -383,9 +383,9 @@
                                     <obs conceptId="PIH:14914" style="checkbox"
                                          answerConceptId="{qId}" answerCode="{answName}"/>
                                 </template>
-                                <render qId="PIH:20018"   answName="APRI score &amp;gt; 1.5 or US Cirrhosis"/>
+                                <render qId="PIH:20018"   answName="APRI score &amp;#8805; 1.5 or US Cirrhosis"/>
                                 <render qId="CIEL:168583" answName="Co-infection with HCV and/or HIV" />
-                                <render qId="PIH:20019"   answName="Hep B DNA (VL) &amp;gt; 2000 and ALT &amp;gt; 1.5 x upper limit"/>
+                                <render qId="PIH:20019"   answName="Hep B DNA (VL) &amp;#8805; 2000 and ALT &amp;#8805; 1.5 x upper limit"/>
                             </repeat>
 
                             <includeIf velocityTest="$patient.gender == 'F' ">
@@ -394,7 +394,7 @@
                                         <obs conceptId="PIH:14914" style="checkbox"
                                              answerConceptId="{qId}" answerCode="{answName}" />
                                     </template>
-                                    <render qId="PIH:20020" answName="VL &amp;gt; 2000 or HbeAg+ during pregnancy"/>
+                                    <render qId="PIH:20020" answName="VL &amp;#8805; 2000 or HbeAg+ during pregnancy"/>
                                     <render qId="PIH:20016" answName="VL not available during pregnancy" />
                                 </repeat>
                             </includeIf>
