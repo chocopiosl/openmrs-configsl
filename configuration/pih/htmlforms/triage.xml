@@ -1,4 +1,4 @@
-<htmlform id="triage-form"
+<htmlform id="mch-triage-form"
           formUuid="ae39663d-c248-4cee-b48e-5eb226f74e47"
           formName="MCOE Triage"
           formEncounterType="41911448-71a1-43d7-bba8-dc86339850da"
@@ -24,10 +24,6 @@
             display: inline-block;
         }
 
-        .narrow {
-            width: 200px;
-        }
-
         .field-error {
             color: #ff6666;
             font-size: 1.1em;
@@ -40,8 +36,38 @@
             vertical-align: top;
         }
 
+        #mch-triage-form, .exam input[type="checkbox"] {
+            margin: 0px 5px; /* changed values to vertical, horizontal */
+            top:5px;         /* added to offset the checkbox position to line up */
+        }
+
+        .exam label { /*new definition to override labels inside section-containers*/
+            margin: 0px;
+        }
+
         .row-symptom {
             margin-top: 20px;
+        }
+
+        .five-columns, .four-columns, .three-columns, .two-columns {
+            display: table;
+            height: 100%;
+            width: 100%;
+        }
+
+        .two-columns > div {
+            display: table-cell;
+            width: 50%;
+        }
+
+        .three-columns > div {
+            display: table-cell;
+            width: 33%;
+        }
+
+        .four-columns > div {
+            display: table-cell;
+            width: 25%;
         }
     </style>
 
@@ -54,6 +80,40 @@
                     console.log("beforeSubmit");
                     return true;
                 });
+
+            });
+        </script>
+
+        <script type="text/javascript">
+            jq(document).ready(function() {
+
+                jq('.normalObs').change(function(event) {
+                // get the Obs checkbox value
+                    var firstCheckbox = jq(this).children(":checkbox:first").prop('checked');
+                    if (firstCheckbox == true) {
+                        var parentDiv = jq(this).closest('.exam');
+                        if (parentDiv != null) {
+                            jq(parentDiv).find('.abnormalObs').each(function(index, element) {
+                                jq(this).children(":checkbox:first").prop('checked', false);
+                            });
+                        }
+                    }
+                });
+
+                jq('.abnormalObs').change(function(event) {
+                    var firstCheckbox = jq(this).children(":checkbox:first").prop('checked');
+                    if (firstCheckbox == true) {
+                        var parentDiv = jq(this).closest('.exam');
+                        if (parentDiv != null) {
+                            jq(parentDiv).find('.normalObs').each(function(index, element) {
+                                jq(this).children(":checkbox:first").prop('checked', false);
+                            });
+                        }
+                    }
+                });
+
+            // handlers for next and submit buttons, see nextAndSubmitButtons.js
+            // setUpNextAndSubmitButtons();
 
             });
         </script>
@@ -82,71 +142,68 @@
             <h3 class="panel-title">Evaluation</h3>
         </div>
         <div class="col-sm-3" style="background-color: #83d183;">
-            <h3 class="panel-title" style="white-space: pre-line">NON-URGENT
-                (GREEN: 4hours)</h3>
+            <h3 class="panel-title" style="white-space: pre-line">Non-urgent
+                (Green: 4 hours)</h3>
         </div>
-        <div class="col-sm-3" style="background-color: yellow;">
+        <div class="col-sm-3" style="background-color: #f8ed62;">
             <h3 class="panel-title" style="white-space: pre-line">Urgent
             (Yellow: 30 minutes)</h3>
         </div>
-        <div class="col-sm-3" style="background-color: red;">
+        <div class="col-sm-3" style="background-color: #ff5252;">
             <h3 class="panel-title" style="white-space: pre-line">Emergent
-            (RED: Immediately)</h3>
+            (Red: Immediately)</h3>
         </div>
     </div>
 
-    <div class="row row-symptom">
-        <div class="col-sm-3">
+    <div class="four-columns exam">
+        <div>
             <label>Airway</label>
         </div>
-        <div class="col-sm-3">
-            <span></span>
+        <div>
+            <obs class="normalObs" conceptId="PIH:20030" style="checkbox"
+                 answerConceptId="PIH:20032" answerCode="Patent"/>
         </div>
-        <div class="col-sm-3">
-            <span></span>
+        <div>
         </div>
-        <div class="col-sm-3 emergency">
-            <obsgroup groupingConceptId="PIH:Response triage symptom">
-                <obs conceptId="PIH:10674" answerConceptId="CIEL:164348" answerCode="Obstructed"></obs>
-            </obsgroup>
-        </div>
-    </div>
-    <div class="row">
-        <hr/>
-    </div>
-    <div class="row row-symptom">
-        <div class="col-sm-3">
-            <label>Disability</label>
-        </div>
-        <div class="col-sm-3">
-            <obsgroup groupingConceptId="PIH:Response triage symptom">
-                <obs conceptId="PIH:10674" answerConceptId="CIEL:160282" answerCode="Alert"></obs>
-            </obsgroup>
-        </div>
-        <div class="col-sm-3 emergency">
-            <obsgroup groupingConceptId="PIH:Response triage symptom">
-                <obs
-                        conceptId="PIH:10674"
-                        answerConceptIds="CIEL:139081,CIEL:118938"
-                        answerCodes="Severe headache,Blurred vision"
-                        style="radio"
-                        answerSeparator="&lt;br&gt;">
-                </obs>
-            </obsgroup>
-        </div>
-        <div class="col-sm-3 emergency">
-            <obsgroup groupingConceptId="PIH:Response triage symptom">
-                <obs
-                        conceptId="PIH:10674"
-                        answerConceptIds="CIEL:113054,CIEL:144576"
-                        answerCodes="Convulsing,Coma"
-                        style="radio"
-                        answerSeparator="&lt;br&gt;">
-                </obs>
-            </obsgroup>
+        <div>
+            <obs class="abnormalObs" conceptId="PIH:20030" style="checkbox"
+                 answerConceptId="CIEL:164348" answerCode="Obstructed"/>
         </div>
     </div>
 
+    <br/>
+
+    <div class="four-columns exam">
+        <div>
+            <label>Disability</label>
+        </div>
+        <div>
+            <obs class="normalObs" conceptId="CIEL:162558" style="checkbox"
+                 answerConceptId="CIEL:160282" answerCode="Alert"/>
+        </div>
+        <div>
+            <repeat>
+                <template>
+                    <obs class="abnormalObs" conceptId="CIEL:162558" style="checkbox"
+                         answerConceptId="{cId}" />
+                </template>
+                <render cId="CIEL:139081" labelTag="Severe headache" />
+                <render cId="CIEL:118938" labelTag="Blurred vision" />
+            </repeat>
+        </div>
+        <div>
+            <repeat>
+                <template>
+                    <obs class="abnormalObs" conceptId="CIEL:162558" style="checkbox"
+                         answerConceptId="{cId}" />
+                </template>
+                <render cId="CIEL:113054" labelTag="Convulsing" />
+                <render cId="CIEL:144576" labelTag="Coma" />
+            </repeat>
+        </div>
+    </div>
+
+    <!--
     <br/>
     <br/>
     <div class="row">
@@ -170,6 +227,8 @@
     </div>
     <br/>
     <br/>
+    -->
+
     <ifMode mode="VIEW" include="false">
         <div id="buttons">
             <button class="submitButton confirm right" onclick="submitHtmlForm()"><uimessage code="mirebalais.save"/><i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i></button>
