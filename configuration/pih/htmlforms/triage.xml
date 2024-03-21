@@ -40,7 +40,24 @@
             vertical-align: top;
         }
 
+        .row-symptom {
+            margin-top: 20px;
+        }
     </style>
+
+    <ifMode mode="VIEW" include="false">
+        <script type="text/javascript">
+            jq(function() {
+                console.log("viewMode = false");
+
+                beforeSubmit.push(function() {
+                    console.log("beforeSubmit");
+                    return true;
+                });
+
+            });
+        </script>
+    </ifMode>
 
     <ifMode mode="VIEW" include="false">
         <h2><uimessage code="National Obstretic Triage and Treatment Form"/></h2>
@@ -61,23 +78,98 @@
     </ifMode>
 
     <div class="row">
-        <div class="col-sm-6">
-            <h3 class="panel-title">Queue Service</h3>
-            <obs conceptId="CIEL:1272" style="radio" id="referToService"
-                 answerConceptIds="PIH:6259,PIH:6261,PIH:7831,PIH:10377,PIH:15035,PIH:15036,PIH:15039,PIH:15038,PIH:15037"
-                 answerCodes="Antenatal Ward,Postnatal Ward,Pre-Op/PACU,Labour and Delivery,MCCU,NICU,Pre-Op/PACU,Post-Op,Loss Ward"
-                 answerSeparator="&lt;br /&gt;"/>
+        <div class="col-sm-3">
+            <h3 class="panel-title">Evaluation</h3>
         </div>
-        <div class="col-sm-6">
-            <h3 class="panel-title">Priority</h3>
-            <obs conceptId="PIH:12842" style="radio" id="priority"
-                 answerConceptIds="CIEL:1115,PIH:Emergency"
-                 answerCodes="Normal,Emergency"
-                 answerSeparator="&lt;br /&gt;"/>
+        <div class="col-sm-3" style="background-color: #83d183;">
+            <h3 class="panel-title" style="white-space: pre-line">NON-URGENT
+                (GREEN: 4hours)</h3>
         </div>
-
+        <div class="col-sm-3" style="background-color: yellow;">
+            <h3 class="panel-title" style="white-space: pre-line">Urgent
+            (Yellow: 30 minutes)</h3>
+        </div>
+        <div class="col-sm-3" style="background-color: red;">
+            <h3 class="panel-title" style="white-space: pre-line">Emergent
+            (RED: Immediately)</h3>
+        </div>
     </div>
 
+    <div class="row row-symptom">
+        <div class="col-sm-3">
+            <label>Airway</label>
+        </div>
+        <div class="col-sm-3">
+            <span></span>
+        </div>
+        <div class="col-sm-3">
+            <span></span>
+        </div>
+        <div class="col-sm-3 emergency">
+            <obsgroup groupingConceptId="PIH:Response triage symptom">
+                <obs conceptId="PIH:10674" answerConceptId="CIEL:164348" answerCode="Obstructed"></obs>
+            </obsgroup>
+        </div>
+    </div>
+    <div class="row">
+        <hr/>
+    </div>
+    <div class="row row-symptom">
+        <div class="col-sm-3">
+            <label>Disability</label>
+        </div>
+        <div class="col-sm-3">
+            <obsgroup groupingConceptId="PIH:Response triage symptom">
+                <obs conceptId="PIH:10674" answerConceptId="CIEL:160282" answerCode="Alert"></obs>
+            </obsgroup>
+        </div>
+        <div class="col-sm-3 emergency">
+            <obsgroup groupingConceptId="PIH:Response triage symptom">
+                <obs
+                        conceptId="PIH:10674"
+                        answerConceptIds="CIEL:139081,CIEL:118938"
+                        answerCodes="Severe headache,Blurred vision"
+                        style="radio"
+                        answerSeparator="&lt;br&gt;">
+                </obs>
+            </obsgroup>
+        </div>
+        <div class="col-sm-3 emergency">
+            <obsgroup groupingConceptId="PIH:Response triage symptom">
+                <obs
+                        conceptId="PIH:10674"
+                        answerConceptIds="CIEL:113054,CIEL:144576"
+                        answerCodes="Convulsing,Coma"
+                        style="radio"
+                        answerSeparator="&lt;br&gt;">
+                </obs>
+            </obsgroup>
+        </div>
+    </div>
+
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col-sm-6">
+            <h3 class="panel-title">Referral</h3>
+            <obs conceptId="CIEL:1272" id="referToService"
+                 answerConceptIds="PIH:6259,PIH:6261,PIH:7831,PIH:10377,PIH:15035,PIH:15036,PIH:15039,PIH:15038,PIH:15037"
+                 answerCodes="Antenatal Ward,Postnatal Ward,Pre-Op/PACU,Labour and Delivery,MCCU,NICU,Pre-Op/PACU,Post-Op,Loss Ward"
+                 style="radio"
+                 answerSeparator="&lt;br /&gt;"/>
+        </div>
+        <div class="col-sm-6">
+            <label>Priority</label>
+            <obs conceptId="PIH:12842"
+                 style="radio"
+                 id="priority"
+                 answerConceptIds="CIEL:1115,PIH:Emergency"
+                 answerCodes="Normal,Emergency"
+                 answerSeparator=" "/>
+        </div>
+    </div>
+    <br/>
+    <br/>
     <ifMode mode="VIEW" include="false">
         <div id="buttons">
             <button class="submitButton confirm right" onclick="submitHtmlForm()"><uimessage code="mirebalais.save"/><i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i></button>
