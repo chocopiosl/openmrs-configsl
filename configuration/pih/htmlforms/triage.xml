@@ -65,25 +65,26 @@
             width: 33%;
         }
 
+        .four-columns {
+            margin-bottom: 20px;
+        }
         .four-columns > div {
             display: table-cell;
             width: 25%;
         }
+
+        .boundary {
+            margin-bottom: 6px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .header-col {
+            text-align: center;
+            white-space: pre-line;
+        }
     </style>
 
     <ifMode mode="VIEW" include="false">
-        <script type="text/javascript">
-            jq(function() {
-                console.log("viewMode = false");
-
-                beforeSubmit.push(function() {
-                    console.log("beforeSubmit");
-                    return true;
-                });
-
-            });
-        </script>
-
         <script type="text/javascript">
             jq(document).ready(function() {
 
@@ -112,9 +113,9 @@
                     }
                 });
 
-            // handlers for next and submit buttons, see nextAndSubmitButtons.js
-            // setUpNextAndSubmitButtons();
-
+                beforeSubmit.push(function() {
+                    return true;
+                });
             });
         </script>
     </ifMode>
@@ -137,20 +138,58 @@
             </div>
     </ifMode>
 
-    <div class="row">
-        <div class="col-sm-3">
+    <div class="section-container">
+        <div class="three-columns">
+            <div>
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="Gestational age(weeks)"/>
+                    </label>
+                    <obs conceptId="CIEL:165425"/>
+                </p>
+            </div>
+            <div>
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="pihcore.mch.grava"/>
+                    </label>
+                    <obs conceptId="CIEL:5624" />
+                </p>
+            </div>
+            <div>
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="pihcore.mch.para"/>
+                    </label>
+                    <obs conceptId="CIEL:1053"/>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div style="white-space: nowrap; display: inline-flex;">
+        <h3><uimessage code="Main complaint"/>:&amp;nbsp;&amp;nbsp;</h3>
+        <p>
+            <obs conceptId="CIEL:160531" id="chief_complaint"/>
+        </p>
+    </div>
+
+    <div class="boundary"></div>
+
+    <div class="four-columns">
+        <div>
             <h3 class="panel-title">Evaluation</h3>
         </div>
-        <div class="col-sm-3" style="background-color: #83d183;">
-            <h3 class="panel-title" style="white-space: pre-line">Non-urgent
+        <div style="background-color: #83d183;">
+            <h3 class="panel-title header-col">Non-urgent
                 (Green: 4 hours)</h3>
         </div>
-        <div class="col-sm-3" style="background-color: #f8ed62;">
-            <h3 class="panel-title" style="white-space: pre-line">Urgent
-            (Yellow: 30 minutes)</h3>
+        <div style="background-color: #f8ed62;">
+            <h3 class="panel-title header-col">Urgent
+                (Yellow: 30 minutes)</h3>
         </div>
-        <div class="col-sm-3" style="background-color: #ff5252;">
-            <h3 class="panel-title" style="white-space: pre-line">Emergent
+        <div style="background-color: #ff5252;">
+            <h3 class="panel-title header-col">Emergent
             (Red: Immediately)</h3>
         </div>
     </div>
@@ -170,8 +209,6 @@
                  answerConceptId="CIEL:164348" answerCode="Obstructed"/>
         </div>
     </div>
-
-    <br/>
 
     <div class="four-columns exam">
         <div>
