@@ -655,8 +655,8 @@
                         <br/>
                         <!-- ToDo:  Add CIEL:123814 Underweight (BMI under 18.5) -->
                         <obs id="bmi-results" conceptId="CIEL:167092" style="radio"
-                             answerConceptIds="CIEL:167090,CIEL:114413,CIEL:115115,CIEL:133952"
-                             answerCodes="Normal (BMI 18.5 - 24.9),Overweight (BMI 25.0 - 29.9),Moderate obese (BMI 30.0 - 34.9),Severe obese (BMI 35.0 - 39.9)"
+                             answerConceptIds="CIEL:123814,CIEL:167090,CIEL:114413,CIEL:115115,CIEL:133952"
+                             answerCodes="Underweight (BMI under 18.5),Normal (BMI 18.5 - 24.9),Overweight (BMI 25.0 - 29.9),Moderate obese (BMI 30.0 - 34.9),Severe obese (BMI 35.0 - 39.9)"
                              answerSeparator="&lt;br /&gt;"/>
 
                         <br/><br/>
