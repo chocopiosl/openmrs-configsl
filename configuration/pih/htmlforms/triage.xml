@@ -119,7 +119,6 @@
                 function setPriority(priority) {
                     jq("#priority").children("input").each(function() {
                         let attrVal = jq(this).attr("value");
-                        console.log("attr.value = " + attrVal);
                         if ( attrVal == priority ) {
                             jq(this).prop("checked", true);
                         }
@@ -290,6 +289,23 @@
                 <render cId="CIEL:165217" labelTag="Labor with imminent delivery" />
                 <render cId="CIEL:165271" labelTag="Severe abd pain" />
             </repeat>
+        </div>
+    </div>
+    <div class="four-columns exam">
+        <div>
+            <label>Fetus</label>
+        </div>
+        <div>
+            <obs class="normalObs" conceptId="PIH:20033" style="checkbox"
+                 answerConceptId="CIEL:162108" answerCode="Moving(>24wks)"/>
+        </div>
+        <div>
+            <obs class="abnormalObs" conceptId="PIH:20033" style="checkbox"
+                 answerConceptId="CIEL:113377" answerCode="Decreased FM"/>
+        </div>
+        <div>
+            <obs class="abnormalObs" conceptId="PIH:20033" style="checkbox"
+            answerConceptId="CIEL:1452" answerCode="Absent FM"/>
         </div>
     </div>
 
