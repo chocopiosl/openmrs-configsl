@@ -88,6 +88,9 @@
         <script type="text/javascript">
             jq(document).ready(function() {
 
+                const normalPriority = '<lookup expression="fn.getConcept('CIEL:1115').id"/>';
+                const emergencyPriority = '<lookup expression="fn.getConcept('PIH:Emergency').id"/>';
+
                 jq('.normalObs').change(function(event) {
                 // get the Obs checkbox value
                     var firstCheckbox = jq(this).children(":checkbox:first").prop('checked');
@@ -113,7 +116,25 @@
                     }
                 });
 
+                function setPriority(priority) {
+                    jq("#priority").children("input").each(function() {
+                        let attrVal = jq(this).attr("value");
+                        console.log("attr.value = " + attrVal);
+                        if ( attrVal == priority ) {
+                            jq(this).prop("checked", true);
+                        }
+                    });
+                }
+
                 beforeSubmit.push(function() {
+                    setPriority(normalPriority);
+                    jq(".abnormalObs input[type='checkbox']").each(function() {
+                        if ( this.checked ) {
+                            setPriority(emergencyPriority);
+                            //this is equivalent to break the for loop, no need to check for multiple emergency priorities
+                            return false;
+                        }
+                    });
                     return true;
                 });
             });
@@ -240,31 +261,65 @@
         </div>
     </div>
 
-    <!--
-    <br/>
-    <br/>
-    <div class="row">
-        <div class="col-sm-6">
+    <div class="four-columns exam">
+        <div>
+            <label>Events</label>
+        </div>
+        <div>
+            <obs class="normalObs" conceptId="CIEL:165372" style="checkbox"
+                 answerConceptId="CIEL:1115" answerCode="Uneventful"/>
+        </div>
+        <div>
+            <repeat>
+                <template>
+                    <obs class="abnormalObs" conceptId="CIEL:165372" style="checkbox"
+                         answerConceptId="{cId}" />
+                </template>
+                <render cId="CIEL:110548" labelTag="Spotting" />
+                <render cId="CIEL:162193" labelTag="Labor" />
+                <render cId="CIEL:151" labelTag="Abd pain" />
+            </repeat>
+        </div>
+        <div>
+            <repeat>
+                <template>
+                    <obs class="abnormalObs" conceptId="CIEL:165372" style="checkbox"
+                         answerConceptId="{cId}" />
+                </template>
+                <render cId="CIEL:147232" labelTag="Vaginal bleeding" />
+                <render cId="CIEL:165217" labelTag="Labor with imminent delivery" />
+                <render cId="CIEL:165271" labelTag="Severe abd pain" />
+            </repeat>
+        </div>
+    </div>
+
+    <div class="boundary"></div>
+
+    <div class="two-columns">
+        <div>
             <h3 class="panel-title">Referral</h3>
-            <obs conceptId="CIEL:1272" id="referToService"
-                 answerConceptIds="PIH:6259,PIH:6261,PIH:7831,PIH:10377,PIH:15035,PIH:15036,PIH:15039,PIH:15038,PIH:15037"
-                 answerCodes="Antenatal Ward,Postnatal Ward,Pre-Op/PACU,Labour and Delivery,MCCU,NICU,Pre-Op/PACU,Post-Op,Loss Ward"
-                 style="radio"
-                 answerSeparator="&lt;br /&gt;"/>
+                <obs conceptId="CIEL:1272" id="referToService"
+                     style="radio"
+                     answerConceptIds="PIH:6259,PIH:15039,PIH:10377,PIH:15035"
+                     answerCodes="Antenatal Ward,Pre-Op/PACU,Labour and Delivery,MCCU"
+                     answerSeparator="&lt;br /&gt;"/>
         </div>
-        <div class="col-sm-6">
-            <label>Priority</label>
-            <obs conceptId="PIH:12842"
-                 style="radio"
-                 id="priority"
-                 answerConceptIds="CIEL:1115,PIH:Emergency"
-                 answerCodes="Normal,Emergency"
-                 answerSeparator=" "/>
+        <div>
         </div>
+    </div>
+    <div class="hidden">
+        <label>Priority</label>
+        <obs conceptId="PIH:12842"
+             style="radio"
+             id="priority"
+             answerConceptIds="CIEL:1115,PIH:Emergency"
+             answerCodes="Normal,Emergency"
+             answerSeparator=" "/>
     </div>
     <br/>
     <br/>
-    -->
+
+    <div class="boundary"></div>
 
     <ifMode mode="VIEW" include="false">
         <div id="buttons">
