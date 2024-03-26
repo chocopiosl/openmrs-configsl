@@ -218,33 +218,6 @@
         </h1>
     </ifMode>
 
-    <!-- ToDo: Removed this section
-    <section id="ncd-ids" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="Identifiers">
-        <div class="section-container">
-            <div class="three-columns">
-                <div>
-                    <label>
-                        <uimessage code="NCD ID" />
-                    </label>
-                </div>
-
-                <div>
-                    <label>
-                        <uimessage code="Transfer ID" />
-                    </label>
-                </div>
-
-                <div>
-                    <label>
-                        <uimessage code="Facility ID#" />
-                    </label>
-                </div>
-            </div>
-        </div>
-    </section>
-    -->
-
     <section id="details" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Patient Details">
         <div class="section-container">
@@ -414,7 +387,7 @@
                 <render category="PIH:HEART FAILURE" nickname="heart_failure" code="Heart failure"/>
                 <render category="PIH:Chronic respiratory disease program" nickname="respire" code="Chronic lung disease" />
                 <render category="CIEL:145438" nickname="kidney_failure" code="Chronic kidney disease"/>
-                <render category="PIH:3714" nickname="cirrhosis" code="Liver cirrhosis / Hepatitis B" />
+                <render category="PIH:3714" nickname="cirrhosis" code="Liver disease" />
                 <render category="CIEL:160849" nickname="palliative" code="Palliative care"/>
                 <render category="PIH:Sickle-Cell Anemia" nickname="sickle" code="Sickle cell"/>
                 <render category="CIEL:5622" nickname="other-ncd" code="Other"/>
@@ -653,7 +626,6 @@
                             <uimessage code="BMI results"/>
                         </label>
                         <br/>
-                        <!-- ToDo:  Add CIEL:123814 Underweight (BMI under 18.5) -->
                         <obs id="bmi-results" conceptId="CIEL:167092" style="radio"
                              answerConceptIds="CIEL:123814,CIEL:167090,CIEL:114413,CIEL:115115,CIEL:133952"
                              answerCodes="Underweight (BMI under 18.5),Normal (BMI 18.5 - 24.9),Overweight (BMI 25.0 - 29.9),Moderate obese (BMI 30.0 - 34.9),Severe obese (BMI 35.0 - 39.9)"

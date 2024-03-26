@@ -268,33 +268,6 @@
                                 </p>
 
                             </includeIf>
-
-                            <!-- this section is ONLY included for NCD intake encounter -->
-                            <includeIf velocityTest="$encounter.encounterType.uuid == 'ae06d311-1866-455b-8a64-126a9bd74171'">
-                                <div id="sickle-plus">
-                                    <p>
-                                        <label>
-                                            <uimessage code="Main complications with sickle cell disease"/>
-                                        </label>
-                                        <repeat>
-                                            <template>
-                                                <obs conceptId="PIH:14839" style="checkbox"
-                                                     answerConceptId="{diagId}" answerCode="{sickleComplic}"/>
-                                            </template>
-                                            <render diagId="CIEL:121629" sickleComplic="Anemia" />
-                                            <render diagId="CIEL:162044" sickleComplic="Severe anemia" />
-                                            <render diagId="CIEL:136586" sickleComplic="Intravascular hemolysis" />
-                                            <render diagId="CIEL:149871" sickleComplic="Acute chest syndrome" />
-                                            <render diagId="CIEL:148074" sickleComplic="Avascular bone necrosis" />
-                                            <render diagId="CIEL:111103" sickleComplic="Stroke" />
-                                            <render diagId="CIEL:112483" sickleComplic="Systemic infection" />
-                                            <render diagId="CIEL:116128" sickleComplic="Malaria" />
-
-                                            <render diagId="CIEL:5622" sickleComplic="Other" />
-                                        </repeat>
-                                    </p>
-                                </div>
-                            </includeIf>
                         </div>
 
                     </div>
@@ -576,12 +549,13 @@
                             <td>
                                 <repeat>
                                     <template>
-                                        <obs conceptId="PIH:14963" answerConceptId="{treatId}" style="checkbox"/>
+                                        <obs conceptId="PIH:14963" style="checkbox"
+                                             answerConceptId="{treatId}" answerCode="{treatName}" />
                                     </template>
-                                    <render treatId="CIEL:77795" treatName="Hydroxyurea" />
+                                    <render treatId="CIEL:77795"  treatName="Hydroxycarbamide/Hydroxyurea" />
                                     <render treatId="CIEL:76613" treatName="Folic acid (Acfol)" />
                                     <render treatId="CIEL:151331" treatName="Prophylactic antibiotics" />
-                                    <render treatId="CIEL:159610" treatName="Malaria prophylactic treatment" />
+                                    <render treatId="CIEL:159610" treatName="Malaria prophylaxis" />
                                     <render treatId="CIEL:70116" treatName="Paracetamol" />
                                     <render treatId="CIEL:77897" treatName="Ibuprofen" />
                                     <render treatId="CIEL:85276" treatName="Tramadol hydrochloride" />

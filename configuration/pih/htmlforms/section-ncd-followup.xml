@@ -304,7 +304,7 @@
                 <render category="PIH:HEART FAILURE" nickname="heart_failure" code="Heart failure"/>
                 <render category="PIH:Chronic respiratory disease program" nickname="respire" code="Chronic lung disease" />
                 <render category="CIEL:145438" nickname="kidney_failure" code="Chronic kidney disease"/>
-                <render category="PIH:3714" nickname="cirrhosis" code="Liver cirrhosis / Hepatitis B" />
+                <render category="PIH:3714" nickname="cirrhosis" code="Liver disease" />
                 <render category="CIEL:160849" nickname="palliative" code="Palliative care"/>
                 <render category="PIH:Sickle-Cell Anemia" nickname="sickle" code="Sickle cell"/>
                 <render category="CIEL:5622" nickname="other-ncd" code="Other"/>

@@ -326,7 +326,7 @@
 
                 <repeat>
                     <template>
-                        <p class="list-inline-wide">
+                        <p class="list-inline-extra-wide">
                             <label>
                                 <uimessage code="{questionName}"/>
                             </label>
@@ -342,9 +342,6 @@
                     <render qId="PIH:14718"   questionName="Stable creatinine level" tog="creatinine" />
                     <render qId="CIEL:128340" questionName="Proteinuria" tog="pu"/>
                     <render qId="CIEL:1898"   questionName="Patient condition improved" tog="improved"/>
-                    <render qId="PIH:14721"   questionName="Glomerulonephritis relapse" tog="glomer" />
-                    <render qId="PIH:14719"   questionName="Dialysis referral" tog="dialysis"/>
-                    <render qId="PIH:14720"   questionName="On dialysis" tog="onDial"/>
                 </repeat>
 
                 <p class="list-inline-wide">
@@ -360,6 +357,7 @@
                     </obs>
                 </p>
 
+
                 <div id="ckd-fui-uncontrolled" >
                     <p class="list-inline-wide">
                         <label>
@@ -370,6 +368,26 @@
                              answerCodes="yes,no,unknown" />
                     </p>
                 </div>
+
+                <repeat>
+                    <template>
+                        <p class="list-inline-extra-wide">
+                            <label>
+                                <uimessage code="{questionName}"/>
+                            </label>
+                            <obs id="ckd-fui-{tog}" conceptId="{qId}" style="radio"
+                                 answerConceptIds="PIH:YES,PIH:NO,CIEL:1067"
+                                 answerCodes="yes,no,unknown" >
+                                <controls>
+                                    <when value="PIH:YES" thenDisplay="#ckd-fui-{tog}-details"/>
+                                </controls>
+                            </obs>
+                        </p>
+                    </template>
+                    <render qId="PIH:14721"   questionName="Glomerulonephritis/nephrotic syndrome relapse" tog="glomer" />
+                    <render qId="PIH:14719"   questionName="Dialysis referral" tog="dialysis"/>
+                    <render qId="PIH:14720"   questionName="On dialysis" tog="onDial"/>
+                </repeat>
             </obsgroup>
 
             <p>

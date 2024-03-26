@@ -285,87 +285,6 @@
             </repeat>
             <br/>
 
-            <label>
-                <uimessage code="Hydroxyurea indicated for all patients &gt; 9 months with confirmed Sickle cell disease (SS, S/Beta-thalassemia)"/>
-            </label>
-            <obsgroup groupingConceptId="PIH:14872">
-                <p class="list-inline">
-                    <obs id="scd-hydroxy-q" conceptId="PIH:14869" style="radio"
-                         answerConceptIds="PIH:YES,PIH:NO"
-                         answerCodes="yes,no">
-                        <controls>
-                            <when value="PIH:YES" thenDisplay="#scd-hydroxy-details"/>
-                        </controls>
-                    </obs>
-                </p>
-
-                <div id="scd-hydroxy-details" class="two-columns">
-                    <div>
-                        <p class="list-inline">
-                            <label>
-                                <uimessage code="Treatment with hydroxyurea" />
-                            </label>
-                            <obs id="hydroxy-treatment" conceptId="PIH:14870" style="radio"
-                                 answerConceptIds="PIH:YES,PIH:NO" answerCodes="yes,no" >
-                                <controls>
-                                    <when value="PIH:NO" thenDisplay="#reason-no-hydroxy"/>
-                                </controls>
-                            </obs>
-
-                            <div id="reason-no-hydroxy">
-                                <label>
-                                    <uimessage code="Reason for no hydroxyurea treatment"/>
-                                </label>
-                                <repeat>
-                                    <template>
-                                        <obs conceptId="PIH:15169" style="checkbox"
-                                             answerConceptId="{answId}" answerCode="{answerMsg}" />
-                                    </template>
-                                    <render answId="CIEL:164377" answerMsg="Side effect" />
-                                    <render answId="CIEL:1754" answerMsg="Stockout" />
-                                    <render answId="PIH:15170" answerMsg="CBC not available" />
-                                    <render answId="PIH:15171" answerMsg="No sickle-cell test confirmation (solubility test only)" />
-                                </repeat>
-                                <obs conceptId="PIH:15169" style="checkbox"
-                                     answerConceptId="CIEL:5622" answerCode="Other"
-                                     commentFieldCode="Specify other reason"/>
-                            </div>
-                        </p>
-                    </div>
-
-                    <div>
-                        <p class="list-inline-wide">
-                            <label>
-                                <uimessage code="Complications with hydroxyurea" />
-                            </label>
-                            <obs id="side-effect-hydroxy" conceptId="PIH:14871" style="radio"
-                                 answerConceptIds="PIH:YES,PIH:NO" answerCodes="yes,no" >
-                                <controls>
-                                    <when value="PIH:YES" thenDisplay="#side-effect-hydroxy-compl-details" />
-                                </controls>
-                            </obs>
-                        </p>
-                        <div id="side-effect-hydroxy-compl-details">
-
-                            <repeat>
-                                <template>
-                                <obs conceptId="PIH:20012" style="checkbox"
-                                     answerConceptId="{answId}" answerCode="{answerMsg}" />
-                                </template>
-                                <render answId="CIEL:114380" answerMsg="Pancytopenia" />
-                                <render answId="PIH:20013"   answerMsg="Elevated ALT/AST" />
-                                <render answId="PIH:20014"   answerMsg="Elevated creatinine" />
-                                <render answId="CIEL:111721" answerMsg="Mouth ulceration" />
-                                <render answId="CIEL:512"    answerMsg="Rash" />
-                                <render answId="CIEL:5622"    answerMsg="Other" />
-                            </repeat>
-
-                            <obs conceptId="CIEL:164377" style="text" labelCode="If other, specify hydroxyurea complication:" />
-                        </div>
-                    </div>
-                </div>
-            </obsgroup>
-
             <obsgroup groupingConceptId="PIH:14826">
                 <div class="two-columns">
                     <div>
@@ -471,6 +390,90 @@
                     </div>
                     <div>
                         <obs conceptId="CIEL:163268" labelCode="Date of transfusion" />
+                    </div>
+                </div>
+            </obsgroup>
+            <br/>
+
+            <label>
+                <uimessage code="Indications for Hydroxyurea"/>
+                <br/>
+                <uimessage code="( &gt; 9 months with confirmed Sickle cell disease -- SS, S/Beta-thalassemia)"/>
+            </label>
+            <obsgroup groupingConceptId="PIH:14872">
+                <p class="list-inline">
+                    <obs id="scd-hydroxy-q" conceptId="PIH:14869" style="radio"
+                         answerConceptIds="PIH:YES,PIH:NO"
+                         answerCodes="yes,no">
+                        <controls>
+                            <when value="PIH:YES" thenDisplay="#scd-hydroxy-details"/>
+                        </controls>
+                    </obs>
+                </p>
+
+                <div id="scd-hydroxy-details" class="two-columns">
+                    <div>
+                        <p class="list-inline">
+                            <label>
+                                <uimessage code="On hydroxyurea" />
+                            </label>
+                            <obs id="hydroxy-treatment" conceptId="PIH:14870" style="radio"
+                                 answerConceptIds="PIH:YES,PIH:NO" answerCodes="yes,no" >
+                                <controls>
+                                    <when value="PIH:NO" thenDisplay="#reason-no-hydroxy"/>
+                                </controls>
+                            </obs>
+
+                            <div id="reason-no-hydroxy">
+                                <label>
+                                    <uimessage code="Reason not on hydroxyurea"/>
+                                </label>
+                                <repeat>
+                                    <template>
+                                        <obs conceptId="PIH:15169" style="checkbox"
+                                             answerConceptId="{answId}" answerCode="{answerMsg}" />
+                                    </template>
+                                    <render answId="CIEL:164377" answerMsg="Side effect" />
+                                    <render answId="CIEL:1754" answerMsg="Stockout" />
+                                    <render answId="PIH:15170" answerMsg="CBC not available" />
+                                    <render answId="PIH:15171" answerMsg="No sickle-cell test confirmation (solubility test only)" />
+                                </repeat>
+                                <obs conceptId="PIH:15169" style="checkbox"
+                                     answerConceptId="CIEL:5622" answerCode="Other"
+                                     commentFieldCode="Specify other reason"/>
+                            </div>
+                        </p>
+                    </div>
+
+                    <div>
+                        <p class="list-inline-wide">
+                            <label>
+                                <uimessage code="Complications with hydroxyurea" />
+                            </label>
+                            <obs id="side-effect-hydroxy" conceptId="PIH:14871" style="radio"
+                                 answerConceptIds="PIH:YES,PIH:NO" answerCodes="yes,no" >
+                                <controls>
+                                    <when value="PIH:YES" thenDisplay="#side-effect-hydroxy-compl-details" />
+                                </controls>
+                            </obs>
+                        </p>
+                        <div id="side-effect-hydroxy-compl-details">
+
+                            <repeat>
+                                <template>
+                                    <obs conceptId="PIH:20012" style="checkbox"
+                                         answerConceptId="{answId}" answerCode="{answerMsg}" />
+                                </template>
+                                <render answId="CIEL:114380" answerMsg="Pancytopenia" />
+                                <render answId="PIH:20013"   answerMsg="Elevated ALT/AST" />
+                                <render answId="PIH:20014"   answerMsg="Elevated creatinine" />
+                                <render answId="CIEL:111721" answerMsg="Mouth ulceration" />
+                                <render answId="CIEL:512"    answerMsg="Rash" />
+                                <render answId="CIEL:5622"    answerMsg="Other" />
+                            </repeat>
+
+                            <obs conceptId="CIEL:164377" style="text" labelCode="If other, specify hydroxyurea complication:" />
+                        </div>
                     </div>
                 </div>
             </obsgroup>
