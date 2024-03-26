@@ -94,6 +94,11 @@
             float: none !important;
             min-width: initial;
         }
+        .side-by-side input[type="checkbox"] {
+            float: none;
+            display: inline-block;
+        }
+        
     </style>
 
     <ifMode mode="VIEW" include="false">
@@ -351,6 +356,25 @@
              answerConceptIds="CIEL:133632,CIEL:133473,PIH:1701"
              answerCodes="Back/Musculo-skeletal pain,Nausea/Vomiting,Other"/>
     </p>
+    <div class="ebolaDiv">
+        <p class="side-by-side">
+            <label>
+                <uimessage code="Ebola Screen:" />
+            </label>
+            <repeat>
+                <template>
+                    <obs conceptId="PIH:12245" style="checkbox"
+                         answerConceptId="{cId}" />
+                </template>
+                <render cId="CIEL:140238" labelTag="Fever" />
+                <render cId="CIEL:127777" labelTag="Red eyes" />
+                <render cId="CIEL:158843" labelTag="Sore throat" />
+                <render cId="CIEL:512" labelTag="Rash" />
+                <render cId="CIEL:147241" labelTag="Unexplained bleeding" />
+                <render cId="CIEL:142412" labelTag="Diarrhea" />
+            </repeat>
+        </p>
+    </div>
     <div class="referralService">
         <p class="side-by-side">
             <label>
