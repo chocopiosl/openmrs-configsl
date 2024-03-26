@@ -183,7 +183,7 @@
                                 <br/>
                                 <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
                                     <obs conceptId="PIH:DIAGNOSIS" style="radio"
-                                         answerConceptIds="CIEL:139529,CIEL:142317,CIEL:113918,CIEL:163712,CIEL:168116,CIEL:168128,PIH:14748"
+                                         answerConceptIds="CIEL:139529,CIEL:142317,CIEL:168116,CIEL:113918,CIEL:163712,CIEL:168116,CIEL:168128,PIH:14748"
                                          answerSeparator="&lt;br /&gt;" />
                                 </obsgroup>
                                 <br/>
