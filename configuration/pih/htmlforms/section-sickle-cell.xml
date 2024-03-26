@@ -265,6 +265,30 @@
                 </div>
             </obsgroup>
 
+            <obsgroup groupingConceptId="PIH:15162" showIfEmpty="false">
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="Transfusion in past 12 months"/>
+                    </label>
+                    <obs id="transfusion-status" conceptId="PIH:7868" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"
+                         answerCodes="yes,no">
+                        <controls>
+                            <when value="CIEL:1065" thenDisplay="#transfusion-details"/>
+                        </controls>
+                    </obs>
+                </p>
+
+                <div id="transfusion-details" class="two-columns">
+                    <div>
+                        <obs conceptId="PIH:13748" labelCode="# of transfusions (past 12 months)" />
+                    </div>
+                    <div>
+                        <obs conceptId="CIEL:163268" labelCode="Date of transfusion" />
+                    </div>
+                </div>
+            </obsgroup>
+
             <h5>
                 <uimessage code="Awareness and treatment"/>
             </h5>
@@ -279,9 +303,6 @@
                 </template>
                 <render qId="CIEL:76613" medName="Folic acid"/>
                 <render qId="CIEL:81724" medName="Penicillin"/>
-
-                <!-- ToDo: Is hydroxyurea needed since it's asked later? -->
-                <render qId="CIEL:77795" medName="Hydroxyurea"/>
             </repeat>
             <br/>
 
@@ -367,33 +388,7 @@
                              answerCodes="yes,no,unknown" />
                     </p>
                 </div>
-
             </obsgroup>
-
-            <obsgroup groupingConceptId="PIH:15162" showIfEmpty="false">
-                <p class="side-by-side">
-                    <label>
-                        <uimessage code="Transfusion in past 12 months"/>
-                    </label>
-                    <obs id="transfusion-status" conceptId="PIH:7868" style="radio"
-                         answerConceptIds="CIEL:1065,CIEL:1066"
-                         answerCodes="yes,no">
-                        <controls>
-                            <when value="CIEL:1065" thenDisplay="#transfusion-details"/>
-                        </controls>
-                    </obs>
-                </p>
-
-                <div id="transfusion-details" class="two-columns">
-                    <div>
-                        <obs conceptId="PIH:13748" labelCode="# of transfusions (past 12 months)" />
-                    </div>
-                    <div>
-                        <obs conceptId="CIEL:163268" labelCode="Date of transfusion" />
-                    </div>
-                </div>
-            </obsgroup>
-            <br/>
 
             <label>
                 <uimessage code="Indications for Hydroxyurea"/>
