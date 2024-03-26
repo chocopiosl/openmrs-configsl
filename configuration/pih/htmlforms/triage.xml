@@ -82,6 +82,18 @@
             text-align: center;
             white-space: pre-line;
         }
+        .side-by-side label {
+            display: inline-block;
+        }
+        form input[type="radio"], .form input[type="radio"] {
+            float: none;
+            display: inline-block;
+        }
+        p.radio > * {
+            display: inline;
+            float: none !important;
+            min-width: initial;
+        }
     </style>
 
     <ifMode mode="VIEW" include="false">
@@ -92,7 +104,6 @@
                 const emergencyPriority = '<lookup expression="fn.getConcept('PIH:Emergency').id"/>';
 
                 jq('.normalObs').change(function(event) {
-                // get the Obs checkbox value
                     var firstCheckbox = jq(this).children(":checkbox:first").prop('checked');
                     if (firstCheckbox == true) {
                         var parentDiv = jq(this).closest('.exam');
@@ -112,6 +123,25 @@
                             jq(parentDiv).find('.normalObs').each(function(index, element) {
                                 jq(this).children(":checkbox:first").prop('checked', false);
                             });
+                        }
+                    }
+                });
+
+                jq('.normalQueue').change(function(event) {
+                    let normalQueue = jq(this).children("input[type='radio']:checked").val();
+                    if (normalQueue) {
+                        let parentDiv = jq(this).closest(".referralService");
+                        if (parentDiv) {
+                            jq(parentDiv).find(".emergencyQueue").children("input[type='radio']").prop('checked', false);
+                        }
+                    }
+                });
+                jq('.emergencyQueue').change(function(event) {
+                    let emergencyQueue = jq(this).children("input[type='radio']:checked").val();
+                    if (emergencyQueue) {
+                        let parentDiv = jq(this).closest(".referralService");
+                        if (parentDiv) {
+                            jq(parentDiv).find(".normalQueue").children("input[type='radio']").prop('checked', false);
                         }
                     }
                 });
@@ -311,17 +341,38 @@
 
     <div class="boundary"></div>
 
-    <div class="two-columns">
-        <div>
-            <h3 class="panel-title">Referral</h3>
-                <obs conceptId="CIEL:1272" id="referToService"
-                     style="radio"
-                     answerConceptIds="PIH:6259,PIH:15039,PIH:10377,PIH:15035"
-                     answerCodes="Antenatal Ward,Pre-Op/PACU,Labour and Delivery,MCCU"
-                     answerSeparator="&lt;br /&gt;"/>
-        </div>
-        <div>
-        </div>
+
+    <p class="side-by-side">
+        <label>
+            <uimessage code="Other complaints:" />
+        </label>
+        <obs conceptId="CIEL:1119"
+             style="radio"
+             answerConceptIds="CIEL:133632,CIEL:133473,PIH:1701"
+             answerCodes="Back/Musculo-skeletal pain,Nausea/Vomiting,Other"/>
+    </p>
+    <div class="referralService">
+        <p class="side-by-side">
+            <label>
+                <uimessage code="Any Red/Yellow Emergency:" />
+            </label>
+            <obs conceptId="CIEL:1272"
+                 style="radio"
+                 class="emergencyQueue"
+                 answerConceptIds="PIH:15039,PIH:10377,PIH:15035"
+                 answerCodes="Pre-Op/PACU,Labour and Delivery,MCCU"/>
+        </p>
+
+        <p class="side-by-side">
+            <label>
+                <uimessage code="Green/No Emergency:" />
+            </label>
+            <obs conceptId="CIEL:1272"
+                 style="radio"
+                 class="normalQueue"
+                 answerConceptIds="PIH:6259,PIH:6261"
+                 answerCodes="ANC, Postnatal"/>
+        </p>
     </div>
     <div class="hidden">
         <label>Priority</label>
