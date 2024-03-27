@@ -419,16 +419,21 @@
     </div>
 
     <div class="boundary"></div>
-
-
+    
     <p class="side-by-side">
         <label>
             <uimessage code="Other complaints:" />
         </label>
         <obs conceptId="CIEL:1119"
+             id="complaints"
              style="radio"
-             answerConceptIds="CIEL:133632,CIEL:133473,PIH:1701"
-             answerCodes="Back/Musculo-skeletal pain,Nausea/Vomiting,Other"/>
+             answerConceptIds="CIEL:133632,CIEL:133473,PIH:OTHER"
+             answerCodes="Back/Musculo-skeletal pain,Nausea/Vomiting,Other">
+            <controls>
+                <when value="PIH:OTHER" thenDisplay="#other-complain"/>
+            </controls>
+        </obs>
+        <obs conceptId="PIH:14679" id="other-complain" style="text"/>
     </p>
     <div class="ebolaDiv">
         <p class="side-by-side">
