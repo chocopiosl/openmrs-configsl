@@ -49,7 +49,7 @@
             margin-top: 20px;
         }
 
-        .five-columns, .four-columns, .three-columns, .two-columns {
+        .five-columns, .four-columns, .three-plus-one, .three-columns, .two-columns {
             display: table;
             height: 100%;
             width: 100%;
@@ -65,7 +65,19 @@
             width: 33%;
         }
 
-        .four-columns {
+        .three-plus-one > div {
+            display: table-cell;
+        }
+
+        .three-plus-one > div {
+            width: 29%;
+            margin-top: 20px;
+        }
+        .three-plus-one > div:first-child {
+            width: 13%;
+        }
+
+        .three-plus-one {
             margin-bottom: 20px;
         }
         .four-columns > div {
@@ -98,7 +110,21 @@
             float: none;
             display: inline-block;
         }
-        
+        .vitals span, .complaint span {
+            float: none;
+            display: inline-block;
+        }
+        .vitals input[type="text"] {
+            max-width: 60px;
+        }
+        #chief_complaint {
+            min-width: 80%;
+        }
+        .headerLabel {
+            font-size: 1.2em;
+            color: #3E3E3E;
+        }
+
     </style>
 
     <ifMode mode="VIEW" include="false">
@@ -193,45 +219,83 @@
             </div>
     </ifMode>
 
-    <div class="section-container">
-        <div class="three-columns">
-            <div>
-                <p class="side-by-side">
-                    <label>
-                        <uimessage code="Gestational age(weeks)"/>
-                    </label>
-                    <obs conceptId="CIEL:165425"/>
-                </p>
-            </div>
-            <div>
-                <p class="side-by-side">
-                    <label>
-                        <uimessage code="pihcore.mch.grava"/>
-                    </label>
-                    <obs conceptId="CIEL:5624" />
-                </p>
-            </div>
-            <div>
-                <p class="side-by-side">
-                    <label>
-                        <uimessage code="pihcore.mch.para"/>
-                    </label>
-                    <obs conceptId="CIEL:1053"/>
-                </p>
-            </div>
-        </div>
+    <div class="vitals">
+        <p class="side-by-side">
+            <label>
+                <uimessage code="Gestational age(weeks)"/>:&amp;nbsp;&amp;nbsp;
+            </label>
+            <obs conceptId="CIEL:165425" id="gestationalAge"/>
+            <label>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                <uimessage code="pihcore.mch.grava"/>:&amp;nbsp;&amp;nbsp;
+            </label>
+            <obs conceptId="CIEL:5624" id="gravida"/>
+            <label>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                <uimessage code="pihcore.mch.para"/>:&amp;nbsp;&amp;nbsp;
+            </label>
+            <obs conceptId="CIEL:1053" id="para"/>
+        </p>
     </div>
 
-    <div style="white-space: nowrap; display: inline-flex;">
-        <h3><uimessage code="Main complaint"/>:&amp;nbsp;&amp;nbsp;</h3>
-        <p>
+    <div class="complaint">
+        <p class="side-by-side">
+            <label class="headerLabel"><uimessage code="Main complaint"/>:&amp;nbsp;&amp;nbsp;</label>
             <obs conceptId="CIEL:160531" id="chief_complaint"/>
+        </p>
+    </div>
+
+    <div class="vitals">
+        <p class="side-by-side">
+            <label class="headerLabel">
+                <uimessage code="Vitals:&amp;nbsp;&amp;nbsp;" />
+            </label>
+            <label>
+                <uimessage code="BP:" />
+            </label>
+            <obs conceptId="PIH:SYSTOLIC BLOOD PRESSURE" id="bp_systolic"/>
+                /
+            <obs conceptId="PIH:DIASTOLIC BLOOD PRESSURE" id="bp_diastolic"/>
+            <label>
+                <uimessage code="&amp;nbsp;&amp;nbsp;&amp;nbsp;HR: " />
+            </label>
+            <obs conceptId="PIH:PULSE" id="heart_rate"/>
+            <label>
+                <uimessage code="emr.units.perMinute" />
+            </label>
+            <label>
+                <uimessage code="&amp;nbsp;&amp;nbsp;&amp;nbsp;RR: " />
+            </label>
+            <obs conceptId="PIH:RESPIRATORY RATE" id="respiratory_rate"/>
+            <label>
+                <uimessage code="emr.units.perMinute" />
+            </label>
+            <label>
+                <uimessage code="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;T: " />
+            </label>
+            <obs conceptId="PIH:TEMPERATURE (C)" id="temperature_c"/>
+            <label>
+                <uimessage code="emr.units.degreesCelsius" />
+            </label>
+            <label>&amp;nbsp;&amp;nbsp;&amp;nbsp;</label>
+            <label>
+                <uimessage code="mirebalais.vitals.o2sat.title" />:
+            </label>
+            <obs conceptId="PIH:BLOOD OXYGEN SATURATION" id="o2_sat"/>
+            <label>
+                <uimessage code="emr.units.percent" />
+            </label>
+            <label>
+                <uimessage code="&amp;nbsp;&amp;nbsp;FHR: " />
+            </label>
+            <obs conceptId="CIEL:1440" id="fhr"/>
+            <label>
+                <uimessage code="emr.units.perMinute" />
+            </label>
         </p>
     </div>
 
     <div class="boundary"></div>
 
-    <div class="four-columns">
+    <div class="three-plus-one">
         <div>
             <h3 class="panel-title">Evaluation</h3>
         </div>
@@ -249,7 +313,7 @@
         </div>
     </div>
 
-    <div class="four-columns exam">
+    <div class="three-plus-one exam">
         <div>
             <label>Airway</label>
         </div>
@@ -265,7 +329,7 @@
         </div>
     </div>
 
-    <div class="four-columns exam">
+    <div class="three-plus-one exam">
         <div>
             <label>Disability</label>
         </div>
@@ -295,7 +359,7 @@
         </div>
     </div>
 
-    <div class="four-columns exam">
+    <div class="three-plus-one exam">
         <div>
             <label>Events</label>
         </div>
@@ -326,7 +390,7 @@
             </repeat>
         </div>
     </div>
-    <div class="four-columns exam">
+    <div class="three-plus-one exam">
         <div>
             <label>Fetus</label>
         </div>
