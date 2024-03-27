@@ -97,6 +97,9 @@
         .side-by-side label {
             display: inline-block;
         }
+        .side-by-side span {
+            display: inline-block;
+        }
         form input[type="radio"], .form input[type="radio"] {
             float: none;
             display: inline-block;
@@ -203,19 +206,25 @@
 
     <ifMode mode="VIEW" include="false">
         <h2><uimessage code="National Obstretic Triage and Treatment Form"/></h2>
-            <div id="who-when-where">
-                <p id="who">
-                    <label><uimessage code="emr.patientDashBoard.providerRequired"/></label>
-                    <span><encounterProviderAndRole default="currentUser" encounterRole="4f10ad1a-ec49-48df-98c7-1391c6ac7f05" required="true"/></span>
-                </p>
-                <p id="where">
-                    <label><uimessage code="emr.locationRequired"/></label>
-                    <span><encounterLocation required="true" default="$mcoeTriageLocation" tags="MCH Triage Location"/></span>
-                </p>
-                <p id="when">
-                    <label><uimessage code="emr.patientDashBoard.date"/></label>
-                    <span><encounterDate id="encounterDate" default="now" showTime="false"/></span>
-                </p>
+            <div id="who-when-where" class="three-columns">
+                <div style="width: 34%">
+                    <p id="who" class="side-by-side">
+                        <label><uimessage code="emr.patientDashBoard.providerRequired"/></label>
+                        <span><encounterProviderAndRole default="currentUser" encounterRole="4f10ad1a-ec49-48df-98c7-1391c6ac7f05" required="true"/></span>
+                    </p>
+                </div>
+                <div style="width: 30%">
+                    <p id="where" class="side-by-side">
+                        <label><uimessage code="emr.locationRequired"/></label>
+                        <encounterLocation required="true" default="$mcoeTriageLocation" tags="MCH Triage Location"/>
+                    </p>
+                </div>
+                <div style="width: 15%">
+                    <p id="when" class="side-by-side">
+                        <label><uimessage code="emr.patientDashBoard.date"/></label>
+                        <encounterDate id="encounterDate" default="now" showTime="false"/>
+                    </p>
+                </div>
             </div>
     </ifMode>
 
