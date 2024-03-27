@@ -439,6 +439,23 @@
             </repeat>
         </p>
     </div>
+    <div class="tbScreen">
+        <label class="headerLabel">
+            <uimessage code="pihcore.tbscreen.title"/> <ifMode mode="VIEW" include="false"><font style="color:red">(required)</font> If at least two questions answers yes</ifMode>
+        </label>
+        <repeat with="['Cough > 2 weeks','11567'], ['Fever','5945'], ['Night Sweat','6029'],['Weight Loss','6477']">
+            <p class="side-by-side">
+                <!-- TB symptom -->
+                <label><uimessage code="{0}"/>:&amp;nbsp;&amp;nbsp;</label>
+                <obs conceptIds="PIH:11563,PIH:11564"
+                     style="radio"
+                     answerConceptId="PIH:{1}"
+                     conceptLabels="Yes, No"
+                     labelText=""/>
+            </p>
+        </repeat>
+    </div>
+    <div class="boundary"></div>
     <div class="referralService">
         <p class="side-by-side">
             <label>
@@ -471,9 +488,7 @@
              answerCodes="Normal,Emergency"
              answerSeparator=" "/>
     </div>
-    <br/>
-    <br/>
-
+    
     <div class="boundary"></div>
 
     <ifMode mode="VIEW" include="false">
