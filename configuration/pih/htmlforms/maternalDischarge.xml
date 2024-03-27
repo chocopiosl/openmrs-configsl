@@ -273,7 +273,7 @@
     </ifMode>
 
     <ifMode mode="VIEW" include="false">
-        <includeIf velocityTest="($fn.latestObs('CIEL:1640')) ">
+        <includeIf velocityTest="($fn.latestObsBeforeCurrentEncounter('CIEL:1640', true)) ">
             <section id="Overview" sectionTag="fieldset" headerTag="legend" headerStyle="title"
                      headerCode="Overview">
                 <div class="section-container">
@@ -282,7 +282,7 @@
                                 <uimessage code="Date &amp; time of admission"/>
                             </label>
                             <!-- ToDo:  Show date AND time -->
-                            <lookup expression="fn.latestObs('CIEL:1640').valueDatetime"/>
+                            <lookup expression="fn.latestObsBeforeCurrentEncounter('CIEL:1640', true).valueDatetime" format="dd MMM yyyy h:mm aa"/>
                     </p>
                 </div>
             </section>
