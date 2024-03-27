@@ -350,7 +350,7 @@
             <repeat>
                 <template>
                     <obs class="abnormalObs" conceptId="CIEL:162558" style="checkbox"
-                         answerConceptId="{cId}" />
+                         answerConceptId="{cId}" answerCode="{labelTag}"/>
                 </template>
                 <render cId="CIEL:139081" labelTag="Severe headache" />
                 <render cId="CIEL:118938" labelTag="Blurred vision" />
@@ -360,7 +360,7 @@
             <repeat>
                 <template>
                     <obs class="abnormalObs" conceptId="CIEL:162558" style="checkbox"
-                         answerConceptId="{cId}" />
+                         answerConceptId="{cId}" answerCode="{labelTag}"/>
                 </template>
                 <render cId="CIEL:113054" labelTag="Convulsing" />
                 <render cId="CIEL:144576" labelTag="Coma" />
@@ -380,10 +380,11 @@
             <repeat>
                 <template>
                     <obs class="abnormalObs" conceptId="CIEL:165372" style="checkbox"
-                         answerConceptId="{cId}" />
+                         answerConceptId="{cId}" answerCode="{labelTag}"/>
                 </template>
                 <render cId="CIEL:110548" labelTag="Spotting" />
                 <render cId="CIEL:162193" labelTag="Labor" />
+                <render cId="PIH:20051" labelTag="SROM &gt;24h" />
                 <render cId="CIEL:151" labelTag="Abd pain" />
             </repeat>
         </div>
@@ -391,7 +392,7 @@
             <repeat>
                 <template>
                     <obs class="abnormalObs" conceptId="CIEL:165372" style="checkbox"
-                         answerConceptId="{cId}" />
+                         answerConceptId="{cId}" answerCode="{labelTag}"/>
                 </template>
                 <render cId="CIEL:147232" labelTag="Vaginal bleeding" />
                 <render cId="CIEL:165217" labelTag="Labor with imminent delivery" />
