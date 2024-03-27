@@ -122,6 +122,11 @@
             display: table-cell;
             width: 20%;
         }
+        
+        .prior-obs-value {
+            color: blue;
+            font-size: smaller;
+        }
 
         <ifMode mode="VIEW" include="false">
             .date-one-line {
@@ -323,18 +328,17 @@
                     <label>
                         <uimessage code="Date &amp; time of delivery"/>
                     </label>
-                    <includeIf velocityTest="($fn.latestObs('CIEL:5599')) ">
-                        <!-- ToDo:  Show date AND time -->
-                        <lookup expression="fn.latestObs('CIEL:5599').valueDatetime"/>
+                    <includeIf velocityTest="($fn.latestObsBeforeCurrentEncounter('CIEL:5599', true)) ">
+                        <lookup expression="fn.latestObsBeforeCurrentEncounter('CIEL:5599', true).valueDatetime"  format="dd MMM yyyy h:mm aa"/>
                     </includeIf>
                 </p>
 
-                <includeIf velocityTest="($fn.latestObs('PIH:11663')) ">
+                <includeIf velocityTest="($fn.latestObsBeforeCurrentEncounter('PIH:11663', true)) ">
                     <p class="side-by-side">
                         <label>
                             <uimessage code="Type of delivery"/>:
                         </label>
-                        <lookup complexExpression="$fn.latestObs('PIH:11663').valueCoded.name"/>
+                        <lookup complexExpression="$fn.latestObsBeforeCurrentEncounter('PIH:11663', true).valueCoded.name"/>
                     </p>
                 </includeIf>
 
@@ -345,20 +349,20 @@
                                 <label>
                                     <uimessage code="pihcore.mch.apgarScore1"/>
                                 </label>
-                                <includeIf velocityTest="($fn.latestObs('PIH:14419')) ">
-                                <!-- APGAR at 1 minutes -->
-                                <lookup complexExpression="$fn.latestObs('PIH:14419').valueNumeric"/>
-                                (<lookup expression="fn.latestObs('PIH:14419').obsDatetime"/>)
+                                <includeIf velocityTest="($fn.latestObsBeforeCurrentEncounter('PIH:14419', true)) ">
+                                    <!-- APGAR at 1 minutes -->
+                                    <lookup complexExpression="$fn.latestObsBeforeCurrentEncounter('PIH:14419', true).valueNumeric"/>
+                                    (<lookup expression="fn.latestObsBeforeCurrentEncounter('PIH:14419', true).obsDatetime"/>)
                                 </includeIf>
                             </div>
                             <div class="apgar">
                                 <label>
                                     <uimessage code="pihcore.mch.apgarScore"/>
                                 </label>
-                                <includeIf velocityTest="($fn.latestObs('CIEL:159604')) ">
-                                <!-- APGAR at 5 minutes <obs conceptId="CIEL:159604"/> -->
-                                <lookup complexExpression="$fn.latestObs('CIEL:159604').valueNumeric"/>
-                                (<lookup expression="fn.latestObs('CIEL:159604').obsDatetime"/>)
+                                <includeIf velocityTest="($fn.latestObsBeforeCurrentEncounter('CIEL:159604', true)) ">
+                                    <!-- APGAR at 5 minutes <obs conceptId="CIEL:159604"/> -->
+                                    <lookup complexExpression="$fn.latestObsBeforeCurrentEncounter('CIEL:159604', true).valueNumeric"/>
+                                    (<lookup expression="fn.latestObsBeforeCurrentEncounter('CIEL:159604', true).obsDatetime"/>)
                                 </includeIf>
                             </div>
 
@@ -366,10 +370,10 @@
                                 <label>
                                     <uimessage code="pihcore.mch.apgarScore10"/>
                                 </label>
-                                <includeIf velocityTest="($fn.latestObs('PIH:14785')) ">
-                                <!-- APGAR at 10 minutes <obs conceptId="PIH:14785"/> -->
-                                <lookup complexExpression="$fn.latestObs('PIH:14785').valueNumeric"/>
-                                (<lookup expression="fn.latestObs('PIH:14785').obsDatetime"/>)
+                                <includeIf velocityTest="($fn.latestObsBeforeCurrentEncounter('PIH:14785', true)) ">
+                                    <!-- APGAR at 10 minutes <obs conceptId="PIH:14785"/> -->
+                                    <lookup complexExpression="$fn.latestObsBeforeCurrentEncounter('PIH:14785', true).valueNumeric"/>
+                                    (<lookup expression="fn.latestObsBeforeCurrentEncounter('PIH:14785', true).obsDatetime"/>)
                                 </includeIf>
                             </div>
                         </div>
@@ -377,13 +381,13 @@
                 </div>
 
                 <!-- Resuscitated -->
-                <includeIf velocityTest="($fn.latestObs('CIEL:162131')) ">
+                <includeIf velocityTest="($fn.latestObsBeforeCurrentEncounter('CIEL:162131', true)) ">
                     <p class="side-by-side">
                         <label>
                             <uimessage code="pihcore.neoResusc"/>:
                         </label>
-                        <lookup complexExpression="$fn.latestObs('CIEL:162131').valueCoded.name"/>
-                        (<lookup expression="fn.latestObs('CIEL:162131').obsDatetime"/>)
+                        <lookup complexExpression="$fn.latestObsBeforeCurrentEncounter('CIEL:162131', true).valueCoded.name"/>
+                        (<lookup expression="fn.latestObsBeforeCurrentEncounter('CIEL:162131', true).obsDatetime"/>)
                     </p>
                 </includeIf>
             </div>
@@ -543,9 +547,11 @@
                                     <label>
                                         <uimessage code="Weight"/>
                                     </label>
-                                    <includeIf velocityTest="($fn.latestObs('CIEL:5089')) ">
-                                        <lookup complexExpression="$fn.latestObs('CIEL:5089').valueNumeric"/>kg
-                                        (<lookup expression="fn.latestObs('CIEL:5089').obsDatetime"/>)
+                                    <includeIf velocityTest="($fn.latestObsBeforeCurrentEncounter('CIEL:5089', true)) ">
+                                        <span class="prior-obs-value">
+                                            <lookup complexExpression="$fn.latestObsBeforeCurrentEncounter('CIEL:5089', true).valueNumeric"/>kg
+                                            (<lookup expression="fn.latestObsBeforeCurrentEncounter('CIEL:5089', true).obsDatetime"/>)
+                                        </span>
                                     </includeIf>
                                     <br/>
                                     <span class="small">
@@ -555,13 +561,15 @@
                                 </p>
 
                                 <ifMode mode="VIEW" include="false">
-                                    <includeIf velocityTest="($fn.latestObs('CIEL:5916')) ">
+                                    <includeIf velocityTest="($fn.latestObsBeforeCurrentEncounter('CIEL:5916', true)) ">
                                         <p class="side-by-side">
-                                            <label>
-                                                <uimessage code="Birth Weight:"/>
-                                            </label>
-                                            <lookup complexExpression="$fn.latestObs('CIEL:5916').valueNumeric"/>kg
-                                            (<lookup expression="fn.latestObs('CIEL:5916').obsDatetime"/>)
+                                            <span class="prior-obs-value">
+                                                <label>
+                                                    <uimessage code="Birth Weight:"/>
+                                                </label>
+                                                <lookup complexExpression="$fn.latestObsBeforeCurrentEncounter('CIEL:5916', true).valueNumeric"/>kg
+                                                (<lookup expression="fn.latestObsBeforeCurrentEncounter('CIEL:5916', true).obsDatetime"/>)
+                                            </span>
                                         </p>
                                     </includeIf>
                                 </ifMode>
@@ -595,30 +603,35 @@
     <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Treatment">
         <div class="section-container">
-            <includeIf velocityTest="($fn.latestObs('CIEL:1651')) ">
-                <lookup complexExpression="#foreach($procedure in $fn.allObs('CIEL:1651')) $procedure.valueCoded.name,  #end"/>
-                (<lookup expression="fn.latestObs('CIEL:1651').obsDatetime"/>)
-            </includeIf>
-            <br/>
-            <includeIf velocityTest="($fn.latestObs('PIH:SUPPLEMENT RECEIVED')) ">
-                <lookup complexExpression="$fn.latestObs('PIH:SUPPLEMENT RECEIVED').valueCoded.name"/>
-                (<lookup expression="fn.latestObs('PIH:SUPPLEMENT RECEIVED').obsDatetime"/>)
-            </includeIf>
-            <br/><br/>
 
             <div class="three-columns">
                 <div>
+                    <lookup complexExpression="#set( $priorEyeDrops = $fn.latestObsInVisitPriorToEncounter('CIEL:1651', 'CIEL:168724') )"/>
+                    <includeIf velocityTest="( $priorEyeDrops )">
+                        <span class="prior-obs-value">[ x ] <lookup complexExpression="$priorEyeDrops.obsDatetime"/></span>
+                    </includeIf>
+                    <br/>
                     <obs conceptId="CIEL:1651" style="checkbox"
                          answerConceptId="CIEL:168724" answerCode="Prophylactic eye drops" />
                 </div>
 
                 <div>
+                    <lookup complexExpression="#set( $priorCordCare = $fn.latestObsInVisitPriorToEncounter('CIEL:1651', 'CIEL:168725') )"/>
+                    <includeIf velocityTest="( $priorCordCare )">
+                        <span class="prior-obs-value">[ x ] <lookup complexExpression="$priorCordCare.obsDatetime"/></span>
+                    </includeIf>
+                    <br/>
                     <obs conceptId="CIEL:1651" style="checkbox"
                          answerConceptId="CIEL:168725" answerCode="Umbilical cord care" />
                 </div>
 
                 <div>
                     <!-- Vitamin K -->
+                    <lookup complexExpression="#set( $priorSupplement = $fn.latestObsInVisitPriorToEncounter('PIH:SUPPLEMENT RECEIVED', 'CIEL:86352') )"/>
+                    <includeIf velocityTest="( $priorSupplement )">
+                        <span class="prior-obs-value">[ x ] <lookup complexExpression="$priorSupplement.obsDatetime"/></span>
+                    </includeIf>
+                    <br/>
                     <obs conceptId="PIH:SUPPLEMENT RECEIVED" style="checkbox"
                          answerConceptId="CIEL:86352" />
                 </div>
