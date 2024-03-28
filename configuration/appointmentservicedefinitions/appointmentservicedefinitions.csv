@@ -1,3 +1,5 @@
 Uuid,Void/Retire,Name,Description,Duration,Start Time,End Time,Max Load,Speciality,Location,Label Colour,_order:1000
 1e94831a-a24b-4f93-b413-9ff9a0b0bc09,,Family Planning,Appointment for Family Planning,30,8:00,17:00,15,,,,
 b485f97d-3836-4aed-8c90-81b536cc6e3a,,ANC Follow-Up,Appointment for ANC Follow-Up,30,8:00,17:00,15,,,,
+76504fad-ecf5-11ee-bd0d-0242ac120002,,Postnatal,Postnatal Appointment,30,8:00,17:00,15,,,,
+aedd73a1-ecf5-11ee-bd0d-0242ac120002,,Elective Caesarian Section,Elective Caesarian Section Appointment,30,8:00,17:00,15,,,,
