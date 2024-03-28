@@ -334,7 +334,7 @@
         </div>
         <div>
             <obs class="abnormalObs" conceptId="PIH:20030" style="checkbox"
-                 answerConceptId="CIEL:164348" answerCode="Obstructed"/>
+                 answerConceptId="CIEL:164348" answerCode="Obstructed Labor"/>
         </div>
     </div>
 
@@ -352,7 +352,6 @@
                     <obs class="abnormalObs" conceptId="CIEL:162558" style="checkbox"
                          answerConceptId="{cId}" answerCode="{labelTag}"/>
                 </template>
-                <render cId="CIEL:139081" labelTag="Severe headache" />
                 <render cId="CIEL:118938" labelTag="Blurred vision" />
             </repeat>
         </div>
@@ -362,6 +361,7 @@
                     <obs class="abnormalObs" conceptId="CIEL:162558" style="checkbox"
                          answerConceptId="{cId}" answerCode="{labelTag}"/>
                 </template>
+                <render cId="CIEL:139081" labelTag="Severe headache" />
                 <render cId="CIEL:113054" labelTag="Convulsing" />
                 <render cId="CIEL:144576" labelTag="Coma" />
             </repeat>
@@ -455,7 +455,7 @@
         </p>
     </div>
     <div class="tbScreen">
-        <label class="headerLabel">
+        <label>
             <uimessage code="pihcore.tbscreen.title"/> <ifMode mode="VIEW" include="false"><font style="color:red">(required)</font> If at least two questions answers yes</ifMode>
         </label>
         <repeat with="['Cough > 2 weeks','11567'], ['Fever','5945'], ['Night Sweat','6029'],['Weight Loss','6477']">
