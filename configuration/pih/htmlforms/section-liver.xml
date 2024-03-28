@@ -251,7 +251,7 @@
                                 </obsgroup>
                             </p>
                         </template>
-                        <render qId="CIEL:168295" symptName="Ascitic paracentesis" />
+                        <render qId="CIEL:460"    symptName="Ascites/Edema/Anasarca" />
                         <render qId="CIEL:139582" symptName="Gastrointestinal bleeding" />
                         <render qId="CIEL:120345" symptName="Confusion" />
                         <render qId="CIEL:879"    symptName="Pruritus" />
