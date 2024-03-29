@@ -108,7 +108,7 @@
 
         jq(document).ready(function() {
 
-            const vitalsSignsEncounterType = '4fb47712-34a6-40d2-8ed3-e153abbd25b7';
+            const vitalsSignsEncounterType = '2fd151a2-fbef-43e3-b82d-c3f70f1d7333';
             const weightConceptUuid = '3ce93b62-26fe-102b-80cb-0017a47871b2';
             const heightConceptUuid = '3ce93cf2-26fe-102b-80cb-0017a47871b2';
             const systolicBPConceptUuid = '3ce934fa-26fe-102b-80cb-0017a47871b2';
@@ -316,7 +316,7 @@
              headerCode="pihcore.vitalSigns">
         <div class="section-container">
 
-            <!-- Previous vitals from the same encounter -->
+            <!-- Previous vitals from the same visit -->
             <div id="lastVitals" class="hidden section-container">
                 <table style="color:grey">
                     <tr>
@@ -494,35 +494,6 @@
                     </span>
                 </div>
                 <div>
-                    <p class="side-by-side">
-                        <label>
-                            <uimessage code="Glucose fingerstick" />
-                        </label>
-                        <br/>
-                        <obs id="fasting" conceptId="PIH:6689" style="radio"
-                             answerConceptIds="CIEL:1065,CIEL:1066"
-                             answerCodes="FBG,RBG" answerSeparator="&lt;br /&gt;" >
-                            <controls>
-                                <when value="CIEL:1065" thenDisplay="#fbg"/>
-                                <when value="CIEL:1066" thenDisplay="#rbg"/>
-                            </controls>
-                        </obs>
-                    </p>
-
-                    <div id="fbg">
-                        <label>
-                            <uimessage code="Fasting blood glucose (FBG)" />
-                        </label>
-                        <obs conceptId="CIEL:160912" showUnits="true"/>
-                    </div>
-
-                    <div id="rbg">
-                        <label>
-                            <uimessage code="Random blood glucose (RBG)" />
-                        </label>
-                        <obs conceptId="CIEL:887" showUnits="true"/>
-                    </div>
-
                     <!-- only show MUAC if patient is less than 13 years old (on the encounterDate)-->
                     <includeIf velocityTest="(13 > $patient.getAge($encounter.getEncounterDatetime()))">
                         <p class="side-by-side">
