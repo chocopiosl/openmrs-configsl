@@ -46,6 +46,8 @@ encounterType:
     name: "Medication Dispensing"
   VITALS:
     name: "Vital Signs"
+  sierraLeoneVitalsNCD:
+    uuid: "2fd151a2-fbef-43e3-b82d-c3f70f1d7333"
 concept:
   normal:
     uuid: "3cd750a0-26fe-102b-80cb-0017a47871b2"
