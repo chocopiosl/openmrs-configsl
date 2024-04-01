@@ -52,12 +52,6 @@
             width: 120px;
         }
 
-        .two-columns {
-            column-count: 2;
-            -webkit-column-count: 2;
-            -moz-column-count: 2;
-        }
-
        - .section {
             width: 100%;
             }
@@ -115,14 +109,8 @@
                 display: none;
             }
 
-            #vitals-with-glucoes .encounter-location {
+            #vitals-with-glucose .encounter-location {
                 display: none;
-            }
-
-            .two-columns {
-                column-count: 2;
-                -webkit-column-count: 2;
-                -moz-column-count: 2;
             }
 
             .section-container {
@@ -194,9 +182,7 @@
                 return (weightLbs / 2.2).toFixed(1);
             }
 
-
             // inches to cm converter
-
             var inchesExitHandler = {
                 handleExit: function (fieldValue) {
                     if (fieldValue &amp;&amp; fieldValue.value()) {
@@ -320,7 +306,6 @@
             <script type="text/javascript">
 
                 // cm to mm ExitHandler when in edit mode
-
                 var cmExitHandler = {
                     handleExit: function (fieldValue) {
                         if (fieldValue &amp;&amp; fieldValue.value()) {
@@ -465,7 +450,7 @@
             jq(function () {
                 // looking for empty vitals obs
                 jq('htmlform').each(function (index, form) {
-                    let emptyObs = jq(form).find('section#vitals .emptyValue');
+                    let emptyObs = jq(form).find('section#vitals-with-glucose .emptyValue');
                     if (emptyObs != null &amp;&amp; emptyObs.length > 0) {
                         for (let z = 0; z &lt; emptyObs.length; z++) {
                             // hide vitals fields whose value is empty (SL-337)
@@ -490,16 +475,22 @@
         </div>
     </includeIf>
 
-    <section id="vitals" sectionTag="section" headerStyle="title" headerCode="mirebalais.vitals.title">
+    <section id="vitals-with-glucose" sectionTag="section"
+             headerStyle="title" headerCode="mirebalais.vitals.title">
 
         <ifMode mode="VIEW" include="false">
 
             <!-- allow editing provider, location, or date if NOT an active visit and user has retro privileges -->
-            <includeIf velocityTest="!$visit.open and ($user.hasPrivilege('Task: emr.retroConsultNote') or $user.hasPrivilege('Task: emr.retroConsultNoteThisProviderOnly'))">
+            <includeIf
+                    velocityTest="!$visit.open and ($user.hasPrivilege('Task: emr.retroConsultNote') or $user.hasPrivilege('Task: emr.retroConsultNoteThisProviderOnly'))">
                 <fieldset field-separator=", ">
 
-                    <legend><uimessage code="pihcore.details"/></legend>
-                    <h3><uimessage code="pihcore.details"/></h3>
+                    <legend>
+                        <uimessage code="pihcore.details"/>
+                    </legend>
+                    <h3>
+                        <uimessage code="pihcore.details"/>
+                    </h3>
 
                     <!-- don't allow editing provider if user only has "retroConsultNoteThisProviderOnly" privilege -->
                     <includeIf velocityTest="$user.hasPrivilege('Task: emr.retroConsultNote')">
@@ -509,13 +500,15 @@
                         <span>
                             <field>
                                 <encounterProviderAndRole default="currentUser"
-                                                      encounterRole="98bf2792-3f0a-4388-81bb-c78b29c0df92" required="true"/>
+                                                          encounterRole="98bf2792-3f0a-4388-81bb-c78b29c0df92"
+                                                          required="true"/>
                             </field>
                         </span>
                     </includeIf>
                     <includeIf velocityTest="!$user.hasPrivilege('Task: emr.retroConsultNote')">
                         <div style="display:none">
-                            <encounterProviderAndRole default="currentUser" encounterRole="98bf2792-3f0a-4388-81bb-c78b29c0df92"
+                            <encounterProviderAndRole default="currentUser"
+                                                      encounterRole="98bf2792-3f0a-4388-81bb-c78b29c0df92"
                                                       required="true"/>
                         </div>
                     </includeIf>
@@ -546,7 +539,9 @@
         </ifMode>
 
         <fieldset>
-            <legend><uimessage code="mirebalais.vitals.complaint.title"/></legend>
+            <legend>
+                <uimessage code="mirebalais.vitals.complaint.title"/>
+            </legend>
             <h3>
                 <uimessage code="mirebalais.vitals.complaint.title"/>
             </h3>
@@ -556,24 +551,32 @@
             </p>
         </fieldset>
 
-        <fieldset >
-            <legend><uimessage code="mirebalais.vitals.height.title"/></legend>
-            <h3><uimessage code="mirebalais.vitals.height.title"/></h3>
+        <fieldset>
+            <legend>
+                <uimessage code="mirebalais.vitals.height.title"/>
+            </legend>
+            <h3>
+                <uimessage code="mirebalais.vitals.height.title"/>
+            </h3>
 
             <p class="left">
                 <obs conceptId="PIH:HEIGHT (CM)" id="height_cm"
-                     showUnits="emr.units.centimeters" unitsCssClass="append-to-value" />
+                     showUnits="emr.units.centimeters" unitsCssClass="append-to-value"/>
             </p>
 
         </fieldset>
 
-        <fieldset >
-            <legend><uimessage code="mirebalais.vitals.weight.title"/></legend>
-            <h3><uimessage code="mirebalais.vitals.weight.title"/></h3>
+        <fieldset>
+            <legend>
+                <uimessage code="mirebalais.vitals.weight.title"/>
+            </legend>
+            <h3>
+                <uimessage code="mirebalais.vitals.weight.title"/>
+            </h3>
 
             <p class="left" style="margin-right: 5px; margin-left: 5px;">
                 <obs conceptId="PIH:WEIGHT (KG)" id="weight_kg"
-                     showUnits="emr.units.kilograms" unitsCssClass="append-to-value" />
+                     showUnits="emr.units.kilograms" unitsCssClass="append-to-value"/>
             </p>
 
         </fieldset>
@@ -582,8 +585,12 @@
         <includeIf velocityTest="$patient.getAge($encounter.getEncounterDatetime()) > 5">
 
             <fieldset>
-                <legend><uimessage code="mirebalais.vitals.bmi.title"/></legend>
-                <h3><uimessage code="mirebalais.vitals.bmi.title"/></h3>
+                <legend>
+                    <uimessage code="mirebalais.vitals.bmi.title"/>
+                </legend>
+                <h3>
+                    <uimessage code="mirebalais.vitals.bmi.title"/>
+                </h3>
 
                 <span id="no-calculated-bmi">
                     <uimessage code="mirebalais.vitals.bmi.instructions"/>
@@ -596,39 +603,51 @@
                 </span>
 
                 <p id="calculated-bmi-continue">
-                    <input type="hidden" name="focus-in-bmi-question" id="hidden-calculated-bmi" />
+                    <input type="hidden" name="focus-in-bmi-question" id="hidden-calculated-bmi"/>
                     <uimessage code="mirebalais.vitals.calculatedField.continue"/>
                 </p>
             </fieldset>
 
-        </includeIf >
+        </includeIf>
 
-        <fieldset field-separator=" " >
-            <legend><uimessage code="mirebalais.vitals.temperature.title"/></legend>
+        <fieldset field-separator=" ">
+            <legend>
+                <uimessage code="mirebalais.vitals.temperature.title"/>
+            </legend>
             <h3>
                 <uimessage code="mirebalais.vitals.temperature.title"/>
             </h3>
 
             <p class="left">
-                <obs conceptId="PIH:TEMPERATURE (C)" id="temperature_c" showUnits="emr.units.degreesCelsius" unitsCssClass="append-to-value"/>
+                <obs conceptId="PIH:TEMPERATURE (C)" id="temperature_c" showUnits="emr.units.degreesCelsius"
+                     unitsCssClass="append-to-value"/>
             </p>
 
         </fieldset>
 
         <fieldset>
-            <legend><uimessage code="mirebalais.vitals.heartRate.title"/></legend>
+            <legend>
+                <uimessage code="mirebalais.vitals.heartRate.title"/>
+            </legend>
             <h3>
                 <uimessage code="mirebalais.vitals.heartRate.title"/>
             </h3>
 
             <p>
-                <obs conceptId="PIH:PULSE" id="heart_rate" showUnits="emr.units.perMinute" unitsCssClass="append-to-value"/>
+                <obs conceptId="PIH:PULSE" id="heart_rate" showUnits="emr.units.perMinute"
+                     unitsCssClass="append-to-value"/>
             </p>
         </fieldset>
 
         <fieldset field-separator=" / ">
-            <legend><uimessage code="mirebalais.vitals.bloodPressure.title"/> #1</legend>
-            <h3><uimessage code="mirebalais.vitals.bloodPressure.title"/> #1</h3>
+            <legend>
+                <uimessage code="mirebalais.vitals.bloodPressure.title"/>
+                #1
+            </legend>
+            <h3>
+                <uimessage code="mirebalais.vitals.bloodPressure.title"/>
+                #1
+            </h3>
 
             <p class="left">
                 <obs conceptId="PIH:SYSTOLIC BLOOD PRESSURE" id="bp_systolic"/>
@@ -642,8 +661,14 @@
         </fieldset>
 
         <fieldset field-separator=" / ">
-            <legend><uimessage code="mirebalais.vitals.bloodPressure.title"/> #2</legend>
-            <h3><uimessage code="mirebalais.vitals.bloodPressure.title"/> #2</h3>
+            <legend>
+                <uimessage code="mirebalais.vitals.bloodPressure.title"/>
+                #2
+            </legend>
+            <h3>
+                <uimessage code="mirebalais.vitals.bloodPressure.title"/>
+                #2
+            </h3>
 
             <p class="left">
                 <obs conceptId="PIH:20067" id="bp_systolic2"/>
@@ -657,50 +682,63 @@
         </fieldset>
 
         <fieldset>
-            <legend><uimessage code="mirebalais.vitals.respiratoryRate.title"/></legend>
+            <legend>
+                <uimessage code="mirebalais.vitals.respiratoryRate.title"/>
+            </legend>
             <h3>
                 <uimessage code="mirebalais.vitals.respiratoryRate.title"/>
             </h3>
 
             <p>
-                <obs conceptId="PIH:RESPIRATORY RATE" id="respiratory_rate" showUnits="emr.units.perMinute" unitsCssClass="append-to-value"/>
+                <obs conceptId="PIH:RESPIRATORY RATE" id="respiratory_rate" showUnits="emr.units.perMinute"
+                     unitsCssClass="append-to-value"/>
             </p>
         </fieldset>
 
-
         <fieldset>
-            <legend><uimessage code="mirebalais.vitals.o2sat.title"/></legend>
+            <legend>
+                <uimessage code="mirebalais.vitals.o2sat.title"/>
+            </legend>
             <h3>
                 <uimessage code="mirebalais.vitals.o2sat.title"/>
             </h3>
 
             <p>
-                <obs conceptId="PIH:BLOOD OXYGEN SATURATION" id="o2_sat" showUnits="emr.units.percent" unitsCssClass="append-to-value"/>
+                <obs conceptId="PIH:BLOOD OXYGEN SATURATION" id="o2_sat" showUnits="emr.units.percent"
+                     unitsCssClass="append-to-value"/>
             </p>
         </fieldset>
 
         <!-- only show MUAC if patient is less than 13 years old (on the encounterDate)-->
         <includeIf velocityTest="(13 > $patient.getAge($encounter.getEncounterDatetime()))">
             <fieldset field-separator=" or ">
-                <legend><uimessage code="mirebalais.vitals.muac.navigation.title"/></legend>
-                <h3><uimessage code="mirebalais.vitals.muac.navigation.title"/></h3>
+                <legend>
+                    <uimessage code="mirebalais.vitals.muac.navigation.title"/>
+                </legend>
+                <h3>
+                    <uimessage code="mirebalais.vitals.muac.navigation.title"/>
+                </h3>
 
                 <!-- add cm for view if in view mode -->
                 <ifMode mode="VIEW">
                     <p>
                         <span class='obs-field'>
                             <span id="muac_cm_display" class="value"/>
-                            <span class="append-to-value"><uimessage code="emr.units.centimeters"/></span>
+                            <span class="append-to-value">
+                                <uimessage code="emr.units.centimeters"/>
+                            </span>
                         </span>
                     </p>
-		   </ifMode>
+                </ifMode>
 
                 <!-- add cm field for conversion if in edit mode -->
                 <ifMode mode="VIEW" include="false">
-                     <p class='left'>
+                    <p class='left'>
                         <span class='obs-field'>
                             <input type="text" id="muac_cm" size="5" min="5" max="30" class="number numeric-range cm"/>
-                            <span class="append-to-value"><uimessage code="emr.units.centimeters"/></span>
+                            <span class="append-to-value">
+                                <uimessage code="emr.units.centimeters"/>
+                            </span>
                             <span class="error field-error" style="display: none"></span>
                         </span>
                     </p>
@@ -721,12 +759,16 @@
 
         <!-- only show z score if patient is less than 5 years old (on the encounterDate) -->
         <includeIf velocityTest="(5 > $patient.getAge($encounter.getEncounterDatetime()))">
-            <fieldset >
-                <legend><uimessage code="mirebalais.vitals.zscore.title"/></legend>
-                <h3><uimessage code="mirebalais.vitals.zscore.title"/></h3>
+            <fieldset>
+                <legend>
+                    <uimessage code="mirebalais.vitals.zscore.title"/>
+                </legend>
+                <h3>
+                    <uimessage code="mirebalais.vitals.zscore.title"/>
+                </h3>
 
                 <p>
-                    <obs conceptId="CIEL:162584" id="z_score" />
+                    <obs conceptId="CIEL:162584" id="z_score"/>
                 </p>
             </fieldset>
         </includeIf>
@@ -734,8 +776,12 @@
         <!-- only show Head circumference if patient is less than 3 years old (on the encounterDate) -->
         <includeIf velocityTest="3 > $patient.getAge($encounter.getEncounterDatetime())">
             <fieldset>
-                <legend><uimessage code="mirebalais.vitals.head.navigation.title"/></legend>
-                <h3><uimessage code="mirebalais.vitals.head.title"/></h3>
+                <legend>
+                    <uimessage code="mirebalais.vitals.head.navigation.title"/>
+                </legend>
+                <h3>
+                    <uimessage code="mirebalais.vitals.head.title"/>
+                </h3>
 
                 <p>
                     <obs conceptId="PIH:HEAD CIRCUMFERENCE" id="head_cm"
@@ -744,8 +790,12 @@
             </fieldset>
 
             <fieldset>
-                <legend><uimessage code="mirebalais.vitals.ratioMuacHC.title"/></legend>
-                <h3><uimessage code="mirebalais.vitals.ratioMuacHC.title"/></h3>
+                <legend>
+                    <uimessage code="mirebalais.vitals.ratioMuacHC.title"/>
+                </legend>
+                <h3>
+                    <uimessage code="mirebalais.vitals.ratioMuacHC.title"/>
+                </h3>
 
                 <span id="no-calculated-ratio">
                     <uimessage code="mirebalais.vitals.ratioMuacHC.instructions"/>
@@ -758,7 +808,7 @@
                 </span>
 
                 <p id="calculated-ratio-continue">
-                    <input type="hidden" name="focus-in-ratio-question" id="hidden-calculated-ratio" />
+                    <input type="hidden" name="focus-in-ratio-question" id="hidden-calculated-ratio"/>
                     <uimessage code="mirebalais.vitals.calculatedField.continue"/>
                 </p>
             </fieldset>
@@ -766,15 +816,17 @@
         </includeIf>
 
         <fieldset>
-            <legend><uimessage code="pihcore.lab.glucose"/></legend>
+            <legend>
+                <uimessage code="pihcore.lab.glucose"/>
+            </legend>
             <h3>
-                <uimessage code="Glucose fingerstick" />
+                <uimessage code="Glucose fingerstick"/>
             </h3>
 
             <p class="side-by-side">
                 <obs id="fasting" conceptId="PIH:6689" style="radio"
                      answerConceptIds="CIEL:1065,CIEL:1066"
-                     answerCodes="FBG,RBG" >
+                     answerCodes="FBG,RBG">
                     <controls>
                         <when value="CIEL:1065" thenDisplay="#fbg"/>
                         <when value="CIEL:1066" thenDisplay="#rbg"/>
@@ -784,14 +836,14 @@
 
             <div id="fbg">
                 <label>
-                    <uimessage code="Fasting blood glucose (FBG)" />
+                    <uimessage code="Fasting blood glucose (FBG)"/>
                 </label>
                 <obs conceptId="CIEL:160912" showUnits="true"/>
             </div>
 
             <div id="rbg">
                 <label>
-                    <uimessage code="Random blood glucose (RBG)" />
+                    <uimessage code="Random blood glucose (RBG)"/>
                 </label>
                 <obs conceptId="CIEL:887" showUnits="true"/>
             </div>
