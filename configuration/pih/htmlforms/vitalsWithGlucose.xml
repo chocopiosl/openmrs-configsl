@@ -627,41 +627,33 @@
         </fieldset>
 
         <fieldset field-separator=" / ">
-            <legend><uimessage code="mirebalais.vitals.bloodPressure.title"/></legend>
-            <h3><uimessage code="mirebalais.vitals.bloodPressure.title"/></h3>
+            <legend><uimessage code="mirebalais.vitals.bloodPressure.title"/> #1</legend>
+            <h3><uimessage code="mirebalais.vitals.bloodPressure.title"/> #1</h3>
 
+            <p class="left">
+                <obs conceptId="PIH:SYSTOLIC BLOOD PRESSURE" id="bp_systolic"/>
+            </p>
+            <p class="left">
+                /
+            </p>
+            <p class="left">
+                <obs conceptId="PIH:DIASTOLIC BLOOD PRESSURE" id="bp_diastolic"/>
+            </p>
+        </fieldset>
 
-            <h5>
-                <uimessage code="mirebalais.vitals.bloodPressure.title"/> #1
-            </h5>
-            <field>
-                <p class="left">
-                    <obs conceptId="PIH:SYSTOLIC BLOOD PRESSURE" id="bp_systolic"/>
-                </p>
-                <p class="left">
-                    /
-                </p>
-                <p class="left">
-                    <obs conceptId="PIH:DIASTOLIC BLOOD PRESSURE" id="bp_diastolic"/>
-                </p>
-            </field>
+        <fieldset field-separator=" / ">
+            <legend><uimessage code="mirebalais.vitals.bloodPressure.title"/> #2</legend>
+            <h3><uimessage code="mirebalais.vitals.bloodPressure.title"/> #2</h3>
 
-            <br/><br/><br/>
-            <h5>
-                <uimessage code="mirebalais.vitals.bloodPressure.title"/> #2
-            </h5>
-
-            <field>
-                <p class="left">
-                    <obs conceptId="PIH:20067" id="bp_systolic2"/>
-                </p>
-                <p class="left">
-                    /
-                </p>
-                <p class="left">
-                    <obs conceptId="PIH:20066" id="bp_diastolic2"/>
-                </p>
-            </field>
+            <p class="left">
+                <obs conceptId="PIH:20067" id="bp_systolic2"/>
+            </p>
+            <p class="left">
+                /
+            </p>
+            <p class="left">
+                <obs conceptId="PIH:20066" id="bp_diastolic2"/>
+            </p>
         </fieldset>
 
         <fieldset>
