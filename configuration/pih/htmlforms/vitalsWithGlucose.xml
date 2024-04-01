@@ -520,7 +520,7 @@
                     <span>
                         <field>
                             <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"
-                                               tags="Vitals Location"/>
+                                               tags="NCD Consult Location"/>
                         </field>
                     </span>
                     <br/>
