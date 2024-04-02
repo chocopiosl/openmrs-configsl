@@ -105,6 +105,24 @@
             display: inline-block;
         }
 
+        .list-inline label, .list-inline input[type="radio"], .list-inline span,
+        .list-inline-wide label, .list-inline-wide input[type="radio"], .list-inline-wide span,
+        .list-inline-extra-wide label, .list-inline-extra-wide input[type="radio"], .list-inline-extra-wide span {
+            display: inline-block;
+            float: none;
+        }
+
+        .list-inline label:first-child {
+            width: 220px;
+        }
+
+        .list-inline-wide label:first-child {
+            width: 320px;
+        }
+
+        .list-inline-extra-wide label:first-child {
+            width: 420px;
+        }
 
         #vitals fieldset p {
             vertical-align: top;
@@ -343,17 +361,9 @@
                         </label>
                         <obs conceptId="CIEL:1590" />
                     </p>
-                    <!-- HIV test -->
-                    <p>
-                        <label>
-                            <uimessage code="pihcore.hiv.counselledTested"/>
-                        </label>
-                        <obs conceptId="CIEL:164401" answerConceptId="CIEL:1065"
-                             style="checkbox"/>
-                    </p>
                 </div>
-
             </div>
+            <br/>
 
             <div class="two-columns">
                 <div>
@@ -370,6 +380,22 @@
                             <uimessage code="pihcore.mch.numberPriorStillbirth"/>
                         </label>
                         <obs conceptId="CIEL:160077" required="true"/>
+                    </p>
+
+                    <p>
+                        <label>
+                            <uimessage code="Weight of other babies" />
+                        </label>
+                        <repeat>
+                            <template>
+                                <obs conceptId="PIH:20072" style="checkbox"
+                                     answerConceptId="CIEL:{answerId}"
+                                     answerCode="{words}" />
+                            </template>
+                            <render answerId="1407" words="birth weight &amp;#x2264; 2.5kg" />
+                            <render answerId="1115" words="normal" />
+                            <render answerId="1408" words="birth weight &amp;#x2265; 4kg" />
+                        </repeat>
                     </p>
 
                     <p>
@@ -508,43 +534,6 @@
                     <obs conceptId="PIH:RETURN VISIT DATE" allowFutureDates="true" allowPastDates="false" id="apptDate" required="true" />
                 </span>
             </p>
-        </div>
-    </section>
-
-    <section id="misc" sectionTag="fieldset" headerTag="legend"
-             headerStyle="title" headerCode="Additions">
-        <div class="section-container side-button">
-
-
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="pihcore.lab.blood_type"/>
-                </label>
-                <obs id="blood-type" style="radio"
-                     conceptId="PIH:BLOOD TYPING"/>
-            </p>
-
-            <!-- ToDo: If the other format of Blood type is preferred (blood type cell group and Rh
-            <span class="side-by-side">
-                <label for="blood-type-group">
-                    <uimessage code="pihcore.lab.bloodTypeGroup" />:
-                </label>
-                <obs id="blood-type-group" style="radio"
-                     conceptId="CIEL:163126"
-                     answerConceptIds="CIEL:163115,CIEL:163116,CIEL:163117,CIEL:163118"
-                     answerCodes="A,B,AB,O"/>
-            </span>
-            <br/>
-
-            <span class="side-by-side">
-                <label for="blood-rh">
-                    <uimessage code="pihcore.lab.bloodRh" />:
-                </label>
-                <obs id="blood-rh" style="radio"
-                     conceptId="CIEL:160232"
-                     answerConceptIds="CIEL:703,CIEL:664" />
-            </span>
-            -->
         </div>
     </section>
 
@@ -713,13 +702,116 @@
                     </td>
                 </tr>
             </table>
+        </div>
+    </section>
+
+    <section id="lab-treatment" sectionTag="fieldset" headerTag="legend"
+             headerStyle="title" headerCode="Lab and Treatment">
+        <div class="section-container side-button">
+
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="pihcore.lab.blood_type"/>
+                </label>
+                <obs id="blood-type" style="radio"
+                     conceptId="PIH:BLOOD TYPING"/>
+            </p>
+
+            <!-- ToDo: If the other format of Blood type is preferred (blood type cell group and Rh
+            <span class="side-by-side">
+                <label for="blood-type-group">
+                    <uimessage code="pihcore.lab.bloodTypeGroup" />:
+                </label>
+                <obs id="blood-type-group" style="radio"
+                     conceptId="CIEL:163126"
+                     answerConceptIds="CIEL:163115,CIEL:163116,CIEL:163117,CIEL:163118"
+                     answerCodes="A,B,AB,O"/>
+            </span>
             <br/>
+
+            <span class="side-by-side">
+                <label for="blood-rh">
+                    <uimessage code="pihcore.lab.bloodRh" />:
+                </label>
+                <obs id="blood-rh" style="radio"
+                     conceptId="CIEL:160232"
+                     answerConceptIds="CIEL:703,CIEL:664" />
+            </span>
+            -->
+
+            <!-- Urine dipstick -->
+            <repeat>
+                <template>
+                    <p class="side-by-side">
+                        <label for="urine-{message}">
+                            <uimessage code="Urine {message}"/>
+                        </label>
+                        <obs id="urine-{message}" style="radio"
+                             conceptId="CIEL:{concept}"
+                             answerConceptIds="{answers}"/>
+                    </p>
+                </template>
+                <render concept="159734" message="glucose" answers="CIEL:1365,CIEL:1364,CIEL:1363,CIEL:1362,CIEL:664" />
+                <render concept="1875"   message="protein" answers="CIEL:1365,CIEL:1364,CIEL:1363,CIEL:1362,CIEL:159416,CIEL:664" />
+            </repeat>
+
+            <p class="list-inline-wide">
+                <label for="fefol">
+                    <uimessage code="FeFol (Ferrous sulfate + Folic acid)"/>
+                </label>
+                <obs id="fefol" style="radio"
+                     conceptId="CIEL:164166"
+                     answerConceptIds="CIEL:1065,CIEL:1066"
+                     answerCodes="yes,no"/>
+            </p>
+
+            <p class="list-inline-wide">
+                <label for="ipt-sp">
+                    <uimessage code="IPTp-SP (for malaria)"/>
+                </label>
+                <obs id="ipt-sp" style="radio"
+                     conceptId="CIEL:1591"
+                     answerConceptIds="CIEL:1065,CIEL:1066"
+                     answerCodes="yes,no"/>
+            </p>
+
+            <includeIf velocityTest="$encounter.encounterType.uuid == '00e5e810-90ec-11e8-9eb6-529269fb1459' || $encounter.encounterType.uuid == '00e5e946-90ec-11e8-9eb6-529269fb1459'" >
+                <p class="list-inline-wide">
+                    <label>
+                        <uimessage code="Nutrition counselling"/>
+                    </label>
+                    <obs conceptId="CIEL:1380" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"
+                         answerCodes="yes,no" />
+                </p>
+            </includeIf>
 
             <p>
                 <obs conceptId="PIH:6760" style="textarea" labelText="Other complaints" />
             </p>
+
+            <!-- HIV test -->
+            <p class="list-inline-wide">
+                <label>
+                    <uimessage code="pihcore.hiv.counselledTested"/>
+                </label>
+                <obs conceptId="CIEL:164401" style="radio"
+                     answerConceptIds="CIEL:1065,CIEL:1066"
+                     answerCodes="yes,no"/>
+            </p>
+            
+            <p class="list-inline-wide">
+                <label for="bednet">
+                    <uimessage code="ITN (insecticide-treated bed net)"/>
+                </label>
+                <obs id="bednet" style="radio"
+                     conceptId="CIEL:159855"
+                     answerConceptIds="CIEL:1065,CIEL:1066"
+                     answerCodes="yes,no"/>
+            </p>
         </div>
     </section>
+
 
     <section id="unhealthy_habits" sectionTag="fieldset" headerTag="legend"
              headerStyle="title" headerCode="pihcore.habits">
