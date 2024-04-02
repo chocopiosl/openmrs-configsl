@@ -632,17 +632,21 @@
     <div id="buttons-section"></div>
     <ifMode mode="VIEW" include="false">
         <style type="text/css">
-            <!-- #3AB4B1 -->
-        .ncdButton2.confirm, ncdButton2.confirm {
-            background: #3f746d; ;
-            border-color: #3f746d;;
+            .ncdButton2.confirm, ncdButton2.confirm {
+                background: #3f746d;
+                border-color: #3f746d;
+            }
 
-        }
+            .ncdButton1.confirm, ncdButton1.confirm {
+                background: #6f9792;
+                border-color: #6f9792;
+             }
 
-        .ncdButton1.confirm, ncdButton1.confirm {
-            background: #6f9792;
-            border-color: #6f9792;
-         }
+            .ncdButtonSelf.confirm, ncdButtonSelf.confirm {
+                background: #6f9792;
+                border-color: #6f9792;
+                color: black;
+            }
         </style>
 
         <div id="buttons1">
@@ -674,7 +678,7 @@
                 <uimessage code="Lung"/>
                 <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
             </button>
-            <button id="pihcore-heartFailure" type="button" class="nextSection ncdButton1 submitButton confirm right">
+            <button id="pihcore-heartFailure" type="button" class="nextSection ncdButtonSelf submitButton confirm right">
                 <uimessage code="Heart"/>
                 <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
             </button>
