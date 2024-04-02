@@ -814,6 +814,42 @@
         </div>
     </section>
 
+    <style>
+        #data-collection {
+            display: inline-block;
+            width: 58%;
+            vertical-align: top;
+        }
+
+        #encounter-diagnoses-target {
+            display: inline-block;
+            width: 40%;
+            vertical-align: top;
+        }
+
+        #encounter-diagnoses-app {
+            margin-bottom: 20px;
+        }
+    </style>
+
+    <section id="diagnosis" sectionTag="fieldset" headerTag="legend"
+             headerStyle="title" headerCode="Diagnoses">
+        <div class="section-container">
+            <div id="data-collection">
+                <encounterDiagnosesByObs
+                         selectedDiagnosesTarget="#encounter-diagnoses-target"/>
+                <p>
+                    <label>
+                        <uimessage code="emr.consult.freeTextComments"/>
+                    </label>
+                    <obs conceptId="PIH:CLINICAL IMPRESSION COMMENTS" style="textarea" rows="5"/>
+                </p>
+            </div>
+
+            <div id="encounter-diagnoses-target">
+            </div>
+        </div>
+    </section>
 
     <section id="unhealthy_habits" sectionTag="fieldset" headerTag="legend"
              headerStyle="title" headerCode="pihcore.habits">
@@ -823,47 +859,48 @@
                 <label position="left">
                     <uimessage code="pihcore.habits.smoking"/>
                 </label>
+                <br/>
                 <obs conceptId="PIH:HISTORY OF TOBACCO USE"
                      answerConceptIds="PIH:IN THE PAST,PIH:CURRENTLY,PIH:NEVER,PIH:unknown"
-                     style="radio" answerSeparator=""/>
+                     style="radio" answerSeparator="&lt;br /&gt;"/>
             </p>
 
             <div class="two-columns">
                 <div>
-                <p class="list-inline">
-                    <label position="left">
-                        <uimessage code="pihcore.habits.alcohol"/>
-                        <i>Consider palm wine and homolais</i>
-                    </label>
-                    <obs conceptId="PIH:HISTORY OF ALCOHOL USE"
-                         answerConceptIds="PIH:IN THE PAST,PIH:CURRENTLY,PIH:NEVER,PIH:unknown"
-                         style="radio" answerSeparator=""/>
-                </p>
+                    <p class="radio">
+                        <label position="left">
+                            <uimessage code="pihcore.habits.alcohol"/>
+                            <i>(consider palm wine and homolais)</i>
+                        </label>
+                        <obs conceptId="PIH:HISTORY OF ALCOHOL USE"
+                             answerConceptIds="PIH:IN THE PAST,PIH:CURRENTLY,PIH:NEVER,PIH:unknown"
+                             style="radio" answerSeparator=""/>
+                    </p>
 
-                <p class="radio">
-                    <label>
-                        <uimessage code="pihcore.habits.drinksPerDay"/>
-                    </label>
-                    <obs conceptId="PIH:ALCOHOLIC DRINKS PER DAY"/>
-                </p>
+                    <p class="radio">
+                        <label>
+                            <uimessage code="pihcore.habits.drinksPerDay"/>
+                        </label>
+                        <obs conceptId="PIH:ALCOHOLIC DRINKS PER DAY"/>
+                    </p>
                 </div>
 
                 <div>
-                <p class="radio">
-                    <label>
-                        <uimessage code="pihcore.habits.drugs"/>
-                        <i>Consider tramadol and codeine</i>
-                    </label>
-                    <obs conceptId="CIEL:162556"
-                         answerConceptIds="PIH:IN THE PAST,PIH:CURRENTLY,PIH:NEVER,PIH:unknown"
-                         style="radio" answerSeparator=" "/>
-                </p>
-                <p>
-                    <label>
-                        <uimessage code="pihcore.habits.drugName"/>
-                    </label>
-                    <obs conceptId="PIH:6489"/>
-                </p>
+                    <p class="radio">
+                        <label>
+                            <uimessage code="pihcore.habits.drugs"/>
+                            <i>(ie. tramadol, codeine, kush)</i>
+                        </label>
+                        <obs conceptId="CIEL:162556"
+                             answerConceptIds="PIH:IN THE PAST,PIH:CURRENTLY,PIH:NEVER,PIH:unknown"
+                             style="radio" answerSeparator=""/>
+                    </p>
+                    <p>
+                        <label>
+                            <uimessage code="pihcore.habits.drugName"/>
+                        </label>
+                        <obs conceptId="PIH:6489"/>
+                    </p>
                 </div>
             </div>
         </div>
