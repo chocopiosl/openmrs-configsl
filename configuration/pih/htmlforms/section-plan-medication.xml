@@ -65,10 +65,20 @@
             <p class="radio">
                 <obs conceptId="PIH:11381" style="radio"
                      labelText="Counselled for HIV testing:  "
-                     answerConceptIds="PIH:YES,PIH:NO,PIH:unknown"
-                     answerCodes="Yes,No,Unknown"
+                     answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
+                     answerCodes="yes,no,unknown"
                      answerSeparator=" " />
             </p>
+
+            <includeIf velocityTest="$encounter.encounterType.uuid == '00e5e810-90ec-11e8-9eb6-529269fb1459' || $encounter.encounterType.uuid == '00e5e946-90ec-11e8-9eb6-529269fb1459'" >
+                <p class="radio">
+                    <obs conceptId="CIEL:1380" style="radio"
+                         labelText="Nutrition counselling:  "
+                         answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
+                         answerCodes="yes,no,unknown"
+                         answerSeparator=" " />
+                </p>
+            </includeIf>
         </div>
     </section>
 
