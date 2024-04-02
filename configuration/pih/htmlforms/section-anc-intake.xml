@@ -709,35 +709,37 @@
              headerStyle="title" headerCode="Lab and Treatment">
         <div class="section-container side-button">
 
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="pihcore.lab.blood_type"/>
-                </label>
-                <obs id="blood-type" style="radio"
-                     conceptId="PIH:BLOOD TYPING"/>
-            </p>
+            <includeIf velocityTest="$encounter.encounterType.uuid == '00e5e810-90ec-11e8-9eb6-529269fb1459'" >
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="pihcore.lab.blood_type"/>
+                    </label>
+                    <obs id="blood-type" style="radio"
+                         conceptId="PIH:BLOOD TYPING"/>
+                </p>
 
-            <!-- ToDo: If the other format of Blood type is preferred (blood type cell group and Rh
-            <span class="side-by-side">
-                <label for="blood-type-group">
-                    <uimessage code="pihcore.lab.bloodTypeGroup" />:
-                </label>
-                <obs id="blood-type-group" style="radio"
-                     conceptId="CIEL:163126"
-                     answerConceptIds="CIEL:163115,CIEL:163116,CIEL:163117,CIEL:163118"
-                     answerCodes="A,B,AB,O"/>
-            </span>
-            <br/>
+                <!-- ToDo: If the other format of Blood type is preferred (blood type cell group and Rh
+                <span class="side-by-side">
+                    <label for="blood-type-group">
+                        <uimessage code="pihcore.lab.bloodTypeGroup" />:
+                    </label>
+                    <obs id="blood-type-group" style="radio"
+                         conceptId="CIEL:163126"
+                         answerConceptIds="CIEL:163115,CIEL:163116,CIEL:163117,CIEL:163118"
+                         answerCodes="A,B,AB,O"/>
+                </span>
+                <br/>
 
-            <span class="side-by-side">
-                <label for="blood-rh">
-                    <uimessage code="pihcore.lab.bloodRh" />:
-                </label>
-                <obs id="blood-rh" style="radio"
-                     conceptId="CIEL:160232"
-                     answerConceptIds="CIEL:703,CIEL:664" />
-            </span>
-            -->
+                <span class="side-by-side">
+                    <label for="blood-rh">
+                        <uimessage code="pihcore.lab.bloodRh" />:
+                    </label>
+                    <obs id="blood-rh" style="radio"
+                         conceptId="CIEL:160232"
+                         answerConceptIds="CIEL:703,CIEL:664" />
+                </span>
+                -->
+            </includeIf>
 
             <!-- Urine dipstick -->
             <repeat>
@@ -799,7 +801,7 @@
                      answerConceptIds="CIEL:1065,CIEL:1066"
                      answerCodes="yes,no"/>
             </p>
-            
+
             <p class="list-inline-wide">
                 <label for="bednet">
                     <uimessage code="ITN (insecticide-treated bed net)"/>

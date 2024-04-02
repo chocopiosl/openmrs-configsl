@@ -44,15 +44,65 @@
         }
 
        - .section {
-        width: 100%;
+            width: 100%;
         }
 
-        .two-columns {
-        column-count: 2;
-        -webkit-column-count: 2;
-        -moz-column-count: 2;
+        .list-inline label, .list-inline input[type="radio"], .list-inline span,
+        .list-inline-wide label, .list-inline-wide input[type="radio"], .list-inline-wide span,
+        .list-inline-extra-wide label, .list-inline-extra-wide input[type="radio"], .list-inline-extra-wide span {
+            display: inline-block;
+            float: none;
         }
 
+        .list-inline label:first-child {
+            width: 220px;
+        }
+
+        .list-inline-wide label:first-child {
+            width: 320px;
+        }
+
+        .list-inline-extra-wide label:first-child {
+            width: 420px;
+        }
+
+        #vitals fieldset p {
+            vertical-align: top;
+            display: inline-block;
+            float: none;
+        }
+
+        #vitals fieldset .left {
+            vertical-align: top;
+            display: inline-block;
+            float: none;
+        }
+
+        .five-columns, .four-columns, .three-columns, .two-columns {
+            display: table;
+            height: 100%;
+            width: 100%;
+        }
+
+        .two-columns > div {
+            display: table-cell;
+            width: 50%;
+        }
+
+        .three-columns > div {
+            display: table-cell;
+            width: 33%;
+        }
+
+        .four-columns > div {
+            display: table-cell;
+            width: 25%;
+        }
+
+        .five-columns > div {
+            display: table-cell;
+            width: 20%;
+        }
     </style>
 
     <style type="text/css">
@@ -153,7 +203,7 @@
              headerStyle="title" headerCode="pihcore.ancFollowup.title">
         <div class="section-container">
             <div class="two-columns">
-                <p>
+                <div>
                     <label>
                         <uimessage code="pihcore.mch.dangerSigns"/>
                     </label>
@@ -180,7 +230,7 @@
                         <render concept="CIEL:148968" name="amniotic fluid leaking"/>
                         <render concept="CIEL:113377" name="decreased fetal movement"/>
                     </repeat>
-                </p>
+                </div>
 
                 <!-- Mental Health -->
 <!--                <p>
@@ -200,7 +250,7 @@
                 <!--   <render concept="CIEL:228" name="antenatal hemorrhage"/> -->
 <br/><br/><br/>
                 <!-- Risk factors for mother -->
-                <p>
+                <div>
                     <label>
                         <uimessage code="pihcore.mch.riskFactors"/>
                     </label>
@@ -245,74 +295,303 @@
                     <obs conceptId="CIEL:160079" answerConceptSetIds="1da49fd7-b1fe-4053-8309-061c37ea56be"
                          style="autocomplete" />
                          -->
-                </p>
+                </div>
 
-                <br/><br/>
             </div>
-            <!-- HIV test -->
-                <p>
-                    <label>
-                        <uimessage code="pihcore.hiv.counselledTested"/>
-                    </label>
 
-                    <obs conceptId="CIEL:164401" answerConceptId="CIEL:1065"
-                         style="checkbox" />
-                </p>
 
             <div id="calculated-edd-and-gestational" class="two-columns hidden">
-                <p>
+                <div>
                     <span id="calculated-edd-wrapper">
                         <span id="calculated-edd-label">
                             <uimessage code="pihcore.calculatedEstimatedDeliveryDate"/>:&#160;
                         </span>
                         <span id='calculated-edd' class="value"></span>
                     </span>
-                </p>
+                </div>
 
-                <p>
+                <div>
                     <span id="calculated-gestational-age-wrapper">
                         <span id="calculated-gestational-age-label">
                             <uimessage code="pihcore.calculatedGestationalAge"/>:&#160;
                         </span>
                         <span id='calculated-gestational-age-value' class="value"></span>
                     </span>
-                </p>
+                </div>
+            </div>
+            <br/>
 
-            </div>
             <div class="two-columns">
-              <p>
-                  <label>
-                      <uimessage code="pihcore.fundalHeight"/>
-                  </label>
-                  <obs conceptId="CIEL:1439" required="true"/>
-              </p>
-              <p>
-                  <label>
-                      <uimessage code="pihcore.fetalHeartRate"/>
-                  </label>
-                  <obs conceptId="CIEL:1440" required="true"/>
-              </p>
-            </div>
-            <div class="two-columns">
-              <p>
+              <div>
                   <label>
                       <uimessage code="pihcore.pregnancy.dueDate"/>
                   </label>
+              </div>
+                <div>
                   <span class="small">
                       <obs id="edd" conceptId="CIEL:5596" allowFutureDates="true"/>
                   </span>
-              </p>
+              </div>
             </div>
-            <div class="two-columns">
-              <p>
-                  <label>
-                      <uimessage code="pihcore.consult.returnVisitDate"/>
-                  </label>
-                  <span class="small">
-                      <obs conceptId="PIH:RETURN VISIT DATE" allowFutureDates="true" allowPastDates="false" id="apptDate"/>
-                  </span>
-              </p>
-            </div>
+        </div>
+    </section>
+
+    <section id="vitals" sectionTag="fieldset" headerTag="legend"
+             headerStyle="title" headerCode="pihcore.vitalSigns">
+
+        <!-- Previous vitals from the same encounter -->
+        <div id="lastVitals" class="hidden section-container">
+            <table style="color:grey">
+                <tr>
+                    <td>
+                        <label>
+                            <uimessage code="mirebalais.mostRecentVitals.label"/>
+                            <span class="date-span ng-binding">
+                                <i class="icon-calendar"></i><span id="lastVitalsEncounterDate"></span>
+                            </span>
+                            <span class="time-span ng-binding">
+                                <i class="icon-time"></i><span id="lastVitalsEncounterTime"></span>
+                            </span>
+                        </label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="five-columns">
+                            <div>
+                                <label>
+                                    <uimessage code="Height (cm)"/>
+                                </label>
+                                <span class="small">
+                                    <span id="last_ht" class="obs-field">
+                                        <span class="emptyValue">____</span>
+                                    </span>
+                                    <span class="append-to-value">cm</span>
+                                </span>
+                            </div>
+
+                            <div>
+                                <label>
+                                    <uimessage code="Weight (kg)"/>
+                                </label>
+                                <span class="small">
+                                    <span id="last_wt" class="obs-field">
+                                        <span class="emptyValue">____</span>
+                                    </span>
+                                    <span class="append-to-value">kg</span>
+                                </span>
+                            </div>
+                            <div>
+                                <label>
+                                    <uimessage code="mirebalais.vitals.bloodPressure.short.title"/>&amp;nbsp;
+                                </label>
+                                <span class="small">
+                                    <span id="last_bp_systolic" class="obs-field">
+                                        <span class="emptyValue">____</span>
+                                    </span>
+                                    <span class="append-to-value">/</span>
+                                    <span id="last_bp_diastolic" class="obs-field">
+                                        <span class="emptyValue">____</span>
+                                    </span>
+                                    <span class="append-to-value">mm/Hg</span>
+                                </span>
+                            </div>
+                            <div>
+                                <label>
+                                    <uimessage code="mirebalais.vitals.short.heartRate.title"/>
+                                </label>
+                                <span class="small">
+                                    <span id="last_heart_rate" class="obs-field">
+                                        <span class="emptyValue">____</span>
+                                    </span>
+                                    <span class="append-to-value">/min</span>
+                                </span>
+                            </div>
+
+                            <div>
+                                <label>
+                                    <uimessage code="Temp"/>
+                                </label>
+                                <span class="small">
+                                    <span id="last_temperature_c" class="obs-field">
+                                        <span class="emptyValue">____</span>
+                                    </span>
+                                    <span class="append-to-value">°C</span>
+                                </span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section-container">
+            <table>
+                <tr>
+                    <td>
+                        <div class="five-columns">
+                            <div>
+                                <label>
+                                    <uimessage code="Height"/>
+                                </label>
+                                <span class="small">
+                                    <obs conceptId="CIEL:5090" id="height"
+                                         showUnits="cm" unitsCssClass="append-to-value"/>
+                                </span>
+                            </div>
+
+                            <div>
+                                <label>
+                                    <uimessage code="Weight"/>
+                                </label>
+                                <span class="small">
+                                    <obs conceptId="CIEL:5089" id="weight"
+                                         showUnits="kg" unitsCssClass="append-to-value"/>
+                                </span>
+                            </div>
+                            <div>
+                                <label>
+                                    <uimessage code="mirebalais.vitals.bloodPressure.short.title"/>
+                                </label>
+                                <span class="small">
+                                    <ifMode mode="VIEW" include="true">
+                                        <span class="append-to-value">
+                                            <obs conceptId="CIEL:5085" id="bp_systolic"/>
+                                        </span>
+                                        <span class="append-to-value">/</span>
+                                        <span class="append-to-value">
+                                            <obs conceptId="CIEL:5086" id="bp_diastolic" />
+                                        </span>
+                                        <span class="append-to-value">mm/Hg</span>
+                                    </ifMode>
+                                    <ifMode mode="VIEW" include="false">
+                                        <span class="append-to-value left">
+                                            <obs conceptId="CIEL:5085" id="bp_systolic"/>
+                                        </span>
+                                        <span class="append-to-value left">/</span>
+                                        <span class="append-to-value left">
+                                            <obs conceptId="CIEL:5086" id="bp_diastolic" />
+                                        </span>
+                                        <span class="append-to-value">mm/Hg</span>
+                                    </ifMode>
+                                </span>
+                            </div>
+
+                            <div>
+                                <label>
+                                    <uimessage code="pihcore.fundalHeight"/>
+                                </label>
+                                <span class="small">
+                                    <obs conceptId="CIEL:1439" id="fundal-ht" required="true"
+                                         showUnits="cm" unitsCssClass="append-to-value"/>
+                                </span>
+                            </div>
+
+                            <div>
+                                <label>
+                                    <uimessage code="pihcore.fetalHeartRate"/>
+                                </label>
+                                <span class="small">
+                                    <obs conceptId="CIEL:1440" id="fetal-hr" required="true"
+                                         showUnits="beats/min" unitsCssClass="append-to-value"/>
+                                </span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <section id="lab-treatment" sectionTag="fieldset" headerTag="legend"
+             headerStyle="title" headerCode="Lab and Treatment">
+        <div class="section-container side-button">
+
+            <!-- Urine dipstick -->
+            <repeat>
+                <template>
+                    <p class="list-inline">
+                        <label for="urine-{message}">
+                            <uimessage code="Urine {message}"/>
+                        </label>
+                        <obs id="urine-{message}" style="radio"
+                             conceptId="CIEL:{concept}"
+                             answerConceptIds="{answers}"/>
+                    </p>
+                </template>
+                <render concept="159734" message="glucose" answers="CIEL:1365,CIEL:1364,CIEL:1363,CIEL:1362,CIEL:664" />
+                <render concept="1875"   message="protein" answers="CIEL:1365,CIEL:1364,CIEL:1363,CIEL:1362,CIEL:159416,CIEL:664" />
+            </repeat>
+
+            <p class="list-inline-wide">
+                <label for="fefol">
+                    <uimessage code="FeFol (Ferrous sulfate + Folic acid)"/>
+                </label>
+                <obs id="fefol" style="radio"
+                     conceptId="CIEL:164166"
+                     answerConceptIds="CIEL:1065,CIEL:1066"
+                     answerCodes="yes,no"/>
+            </p>
+
+            <p class="list-inline-wide">
+                <label for="ipt-sp">
+                    <uimessage code="IPTp-SP (for malaria)"/>
+                </label>
+                <obs id="ipt-sp" style="radio"
+                     conceptId="CIEL:1591"
+                     answerConceptIds="CIEL:1065,CIEL:1066"
+                     answerCodes="yes,no"/>
+            </p>
+
+            <includeIf velocityTest="$encounter.encounterType.uuid == '00e5e810-90ec-11e8-9eb6-529269fb1459' || $encounter.encounterType.uuid == '00e5e946-90ec-11e8-9eb6-529269fb1459'" >
+                <p class="list-inline-wide">
+                    <label>
+                        <uimessage code="Nutrition counselling"/>
+                    </label>
+                    <obs conceptId="CIEL:1380" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"
+                         answerCodes="yes,no" />
+                </p>
+            </includeIf>
+
+            <p>
+                <obs conceptId="PIH:6760" style="textarea" labelText="Other complaints" />
+            </p>
+
+            <!-- HIV test -->
+            <p class="list-inline-wide">
+                <label>
+                    <uimessage code="pihcore.hiv.counselledTested"/>
+                </label>
+                <obs conceptId="CIEL:164401" style="radio"
+                     answerConceptIds="CIEL:1065,CIEL:1066"
+                     answerCodes="yes,no"/>
+            </p>
+
+            <p class="list-inline-wide">
+                <label for="bednet">
+                    <uimessage code="ITN (insecticide-treated bed net)"/>
+                </label>
+                <obs id="bednet" style="radio"
+                     conceptId="CIEL:159855"
+                     answerConceptIds="CIEL:1065,CIEL:1066"
+                     answerCodes="yes,no"/>
+            </p>
+        </div>
+    </section>
+
+    <section id="return" sectionTag="fieldset" headerTag="legend"
+             headerStyle="title" headerCode="Return visit">
+        <div class="section-container">
+            <p>
+                <label>
+                    <uimessage code="pihcore.consult.returnVisitDate"/>
+                </label>
+                <span class="small">
+                    <obs conceptId="PIH:RETURN VISIT DATE" allowFutureDates="true" allowPastDates="false" id="apptDate"/>
+                </span>
+            </p>
         </div>
     </section>
 
