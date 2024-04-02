@@ -197,6 +197,123 @@
                 setUpNextAndSubmitButtons();
             });
         </script>
+
+        <script type="text/javascript">
+
+            jq(document).ready(function() {
+
+                const vitalsSignsEncounterType = '4fb47712-34a6-40d2-8ed3-e153abbd25b7';
+                const weightConceptUuid = '3ce93b62-26fe-102b-80cb-0017a47871b2';
+                const heightConceptUuid = '3ce93cf2-26fe-102b-80cb-0017a47871b2'
+                const systolicBPConceptUuid = '3ce934fa-26fe-102b-80cb-0017a47871b2';
+                const diastolicBPConceptUuid = '3ce93694-26fe-102b-80cb-0017a47871b2';
+                const hrConceptUuid = '3ce93824-26fe-102b-80cb-0017a47871b2';
+                const temperatureConceptUuid = '3ce939d2-26fe-102b-80cb-0017a47871b2';
+                const respiratoryRateConceptUuid = '3ceb11f8-26fe-102b-80cb-0017a47871b2';
+                const o2SatConceptUuid = '3ce9401c-26fe-102b-80cb-0017a47871b2';
+                const pregnancyHistoryConstruct = '163588AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
+                const obGynEncounterType= 'd83e98fd-dc7b-420f-aa3f-36f648b4483d';
+                const typeOfVisit = '164181AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
+                const intakeVisit = '164180AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
+                const whProcedurePerformed="1651AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+                const whProcedures="57755670-c183-494b-bd5e-723e0978c3e3";
+                const whSterilizationProcedures = "46cbbdd9-9cc2-42c6-8ecb-4dbe6ea01354";
+
+                const lastPeriodDateConcept = '<lookup expression="fn.getConcept('CIEL:1427').uuid"/>';
+                const dueDateConcept = '<lookup expression="fn.getConcept('CIEL:5596').uuid"/>';
+                const trimAtEnrollConcept = '<lookup expression="fn.getConcept('PIH:11661').uuid"/>';
+                const firstTrimConcept = '<lookup expression="fn.getConcept('CIEL:1721').uuid"/>';
+                const secondTrimConcept = '<lookup expression="fn.getConcept('CIEL:1722').uuid"/>';
+                const thirdTrimConcept = '<lookup expression="fn.getConcept('CIEL:1723').uuid"/>';
+                const gravidaConcept = '<lookup expression="fn.getConcept('CIEL:5624').uuid"/>';
+                const paraConcept = '<lookup expression="fn.getConcept('CIEL:1053').uuid"/>';
+                const abortusConcept = '<lookup expression="fn.getConcept('CIEL:1823').uuid"/>';
+                const livingConcept = '<lookup expression="fn.getConcept('CIEL:1825').uuid"/>';
+                const menstruationConcept = '<lookup expression="fn.getConcept('CIEL:160600').uuid"/>';
+                const regularMenstrConcept = '<lookup expression="fn.getConcept('CIEL:1065').uuid"/>';
+                const irregularMenstrConcept = '<lookup expression="fn.getConcept('CIEL:1066').uuid"/>';
+                const regularTxt = '<uimessage code="pihcore.regular"/>';
+                const irregularTxt = '<uimessage code="pihcore.irregular"/>';
+                const visitDiagConcept = '<lookup expression="fn.getConcept('PIH:Visit Diagnoses').uuid"/>';
+                const diagConcept = '<lookup expression="fn.getConcept('PIH:DIAGNOSIS').uuid"/>';
+                const dysmenorConcept = '<lookup expression="fn.getConcept('CIEL:127').uuid"/>';
+                const durationMenstCycleConcept = '<lookup expression="fn.getConcept('CIEL:160597').uuid"/>';
+                const durationMensesConcept = '<lookup expression="fn.getConcept('CIEL:163732').uuid"/>';
+                const ageMenarcheConcept = '<lookup expression="fn.getConcept('CIEL:160598').uuid"/>';
+                const age1stSexualInterConcept = '<lookup expression="fn.getConcept('CIEL:163587').uuid"/>';
+                const numSexPartnersConcept = '<lookup expression="fn.getConcept('CIEL:5570').uuid"/>';
+                const pregOrderConcept = '<lookup expression="fn.getConcept('CIEL:163460').uuid"/>';
+                const deliveryTypeConcept = '<lookup expression="fn.getConcept('PIH:11663').uuid"/>';
+                const pregOutcomeConcept = '<lookup expression="fn.getConcept('CIEL:161033').uuid"/>';
+
+                const contextPath = window.location.href.split('/')[3];
+                const apiBaseUrl =  "/" + contextPath + "/ws/rest/v1";
+                const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+                const monthOption = { month: 'short'};
+
+                const patientUuid = '<lookup expression="patient.uuid"/>';
+                let currentEncounterDate = new Date();
+                let lookupEncDate = '<lookup expression="encounter.getEncounterDatetime().getTime()"/>';
+                if ( lookupEncDate ) {
+                    currentEncounterDate = new Date(+lookupEncDate);
+                }
+
+                let serverEncounterDate = '<lookup complexExpression="#if ($encounter) #set ($encounterDate = $encounter.encounterDatetime) #else #set ($encounterDate = $visit.startDatetime) #end"/>';
+
+                const visitUuid = '<lookup expression="encounter.getVisit().getUuid()"/>';
+
+                jq.getJSON(apiBaseUrl + "/visit/" + visitUuid, {
+                    v: 'custom:(uuid,id,startDatetime,encounters:(uuid,display,encounterDatetime,encounterType:(uuid,name),obs:(uuid,display,concept:(uuid,display),obsDatetime,value)))'
+                },
+                function( data ){
+                    if (data.encounters &amp;&amp; data.encounters.length &gt; 0) {
+                        for (let index=0; index &lt; data.encounters.length; ++index) {
+                            let encounter = data.encounters[index];
+                            if (encounter.encounterType.uuid === vitalsSignsEncounterType) {
+                                // we found a VitalsSigns encounter on this visit
+                                let encounterDate = new Date(encounter.encounterDatetime);
+                                let month = new Intl.DateTimeFormat(undefined, monthOption).format(encounterDate);
+                                jq("#lastVitalsEncounterDate").text(encounterDate.getDate() + "-" + month + "-" + encounterDate.getFullYear());
+                                jq("#lastVitalsEncounterTime").text(encounterDate.toLocaleTimeString());
+
+                                if (encounter.obs &amp;&amp; encounter.obs.length &gt; 0) {
+                                    jq('#lastVitals').show();
+                                    for (let j=0; j &lt; encounter.obs.length; ++j) {
+                                        let obs = encounter.obs[j];
+                                        if (obs.concept.uuid === systolicBPConceptUuid) {
+                                            jq("#last_bp_systolic").text(obs.value);
+                                            jq("#last_bp_systolic").removeClass("emptyValue").addClass("value");
+                                        } else if (obs.concept.uuid === diastolicBPConceptUuid) {
+                                            jq("#last_bp_diastolic").text(obs.value);
+                                            jq("#last_bp_diastolic").removeClass("emptyValue").addClass("value");
+                                        } else if (obs.concept.uuid === hrConceptUuid) {
+                                            jq("#last_heart_rate").text(obs.value);
+                                            jq("#last_heart_rate").removeClass("emptyValue").addClass("value");
+                                        } else if (obs.concept.uuid === temperatureConceptUuid) {
+                                            jq("#last_temperature_c").text(obs.value);
+                                            jq("#last_temperature_c").removeClass("emptyValue").addClass("value");
+                                        } else if (obs.concept.uuid === respiratoryRateConceptUuid) {
+                                            jq("#last_respiratory_rate").text(obs.value);
+                                            jq("#last_respiratory_rate").removeClass("emptyValue").addClass("value");
+                                        } else if (obs.concept.uuid === o2SatConceptUuid) {
+                                            jq("#last_o2_sat").text(obs.value);
+                                            jq("#last_o2_sat").removeClass("emptyValue").addClass("value");
+                                        } else if (obs.concept.uuid === heightConceptUuid) {
+                                            jq("#last_ht").text(obs.value);
+                                            jq("#last_ht").removeClass("emptyValue").addClass("value");
+                                        } else if (obs.concept.uuid === weightConceptUuid) {
+                                            jq("#last_wt").text(obs.value);
+                                            jq("#last_wt").removeClass("emptyValue").addClass("value");
+                                        }
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
     </ifMode>
 
     <section id="anc-followup" sectionTag="fieldset" headerTag="legend"
