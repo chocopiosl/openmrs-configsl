@@ -227,6 +227,21 @@
                     return retValue;
                 }
 
+                function evaluateHeartRate(value) {
+                    let retValue = priorities.GREEN;
+                    if (value != null &amp;&amp; !(Number.isNaN(value)) ) {
+                        let numericValue = Number(value);
+                        if (numericValue &lt; 110) {
+                            return priorities.GREEN;
+                        } else if ((numericValue &gt; 109) &amp;&amp; (numericValue &lt; 120)) {
+                            return priorities.YELLOW;
+                        } else if (numericValue &gt; 119) {
+                            return priorities.RED;
+                        }
+                    }
+                    return retValue;
+                }
+
                 let vitalsInfo = {
                     bp_systolic: {
                         evaluate: evaluateBpSystolic,
@@ -234,6 +249,10 @@
                     },
                     bp_diastolic: {
                         evaluate: evaluateBpDiastolic,
+                        value: null
+                    },
+                    heart_rate: {
+                        evaluate: evaluateHeartRate,
                         value: null
                     }
                 };
@@ -295,10 +314,6 @@
                     }
                     calculatePriority()
                 });
-
-                // jq('.symptom').change(function(event) {
-                //     calculatePriority();
-                // });
 
                 jq('.normalObs').change(function(event) {
                     var firstCheckbox = jq(this).children(":checkbox:first").prop('checked');
@@ -514,13 +529,13 @@
             <label>Airway</label>
         </div>
         <div>
-            <obs class="normalObs greenObs symptom" conceptId="PIH:20030" style="checkbox"
+            <obs class="normalObs greenObs" conceptId="PIH:20030" style="checkbox"
                  answerConceptId="PIH:20032" answerCode="Patent"/>
         </div>
         <div>
         </div>
         <div>
-            <obs class="abnormalObs redObs symptom" conceptId="PIH:20030" style="checkbox"
+            <obs class="abnormalObs redObs" conceptId="PIH:20030" style="checkbox"
                  answerConceptId="CIEL:164348" answerCode="Obstructed Labor"/>
         </div>
     </div>
@@ -530,13 +545,13 @@
             <label>Disability</label>
         </div>
         <div>
-            <obs class="normalObs greenObs symptom" conceptId="CIEL:162558" style="checkbox"
+            <obs class="normalObs greenObs" conceptId="CIEL:162558" style="checkbox"
                  answerConceptId="CIEL:160282" answerCode="Alert"/>
         </div>
         <div>
             <repeat>
                 <template>
-                    <obs class="abnormalObs yellowObs symptom" conceptId="CIEL:162558" style="checkbox"
+                    <obs class="abnormalObs yellowObs" conceptId="CIEL:162558" style="checkbox"
                          answerConceptId="{cId}" answerCode="{labelTag}"/>
                 </template>
                 <render cId="CIEL:118938" labelTag="Blurred vision" />
@@ -545,7 +560,7 @@
         <div>
             <repeat>
                 <template>
-                    <obs class="abnormalObs redObs symptom" conceptId="CIEL:162558" style="checkbox"
+                    <obs class="abnormalObs redObs" conceptId="CIEL:162558" style="checkbox"
                          answerConceptId="{cId}" answerCode="{labelTag}"/>
                 </template>
                 <render cId="CIEL:139081" labelTag="Severe headache" />
@@ -560,13 +575,13 @@
             <label>Events</label>
         </div>
         <div>
-            <obs class="normalObs greenObs symptom" conceptId="CIEL:165372" style="checkbox"
+            <obs class="normalObs greenObs" conceptId="CIEL:165372" style="checkbox"
                  answerConceptId="CIEL:1115" answerCode="Uneventful"/>
         </div>
         <div>
             <repeat>
                 <template>
-                    <obs class="abnormalObs yellowObs symptom" conceptId="CIEL:165372" style="checkbox"
+                    <obs class="abnormalObs yellowObs" conceptId="CIEL:165372" style="checkbox"
                          answerConceptId="{cId}" answerCode="{labelTag}"/>
                 </template>
                 <render cId="CIEL:110548" labelTag="Spotting" />
@@ -578,7 +593,7 @@
         <div>
             <repeat>
                 <template>
-                    <obs class="abnormalObs redObs symptom" conceptId="CIEL:165372" style="checkbox"
+                    <obs class="abnormalObs redObs" conceptId="CIEL:165372" style="checkbox"
                          answerConceptId="{cId}" answerCode="{labelTag}"/>
                 </template>
                 <render cId="CIEL:147232" labelTag="Vaginal bleeding" />
@@ -592,15 +607,15 @@
             <label>Fetus</label>
         </div>
         <div>
-            <obs class="normalObs greenObs symptom" conceptId="PIH:20033" style="checkbox"
+            <obs class="normalObs greenObs" conceptId="PIH:20033" style="checkbox"
                  answerConceptId="CIEL:162108" answerCode="Moving(>24wks)"/>
         </div>
         <div>
-            <obs class="abnormalObs yellowObs symptom" conceptId="PIH:20033" style="checkbox"
+            <obs class="abnormalObs yellowObs" conceptId="PIH:20033" style="checkbox"
                  answerConceptId="CIEL:113377" answerCode="Decreased FM"/>
         </div>
         <div>
-            <obs class="abnormalObs redObs symptom" conceptId="PIH:20033" style="checkbox"
+            <obs class="abnormalObs redObs" conceptId="PIH:20033" style="checkbox"
             answerConceptId="CIEL:1452" answerCode="Absent FM"/>
         </div>
     </div>
