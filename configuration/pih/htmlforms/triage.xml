@@ -127,6 +127,29 @@
             font-size: 1.2em;
             color: #3E3E3E;
         }
+        .triage-label-green {
+            background-color: #5cb85c;
+        }
+        .triage-label-yellow {
+            background-color: #e8e457;
+        }
+        .triage-label-red {
+            background-color: #d9534f;
+        }
+
+        #sticky {
+            padding: 0.5ex;
+            height: 50px;
+            width: 940px;
+            transition: box-shadow 400ms;
+        }
+
+        #sticky.stick {
+            position: fixed;
+            top: 0;
+            z-index: 2;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        }
 
     </style>
 
@@ -136,6 +159,146 @@
 
                 const normalPriority = '<lookup expression="fn.getConcept('CIEL:1115').id"/>';
                 const emergencyPriority = '<lookup expression="fn.getConcept('PIH:Emergency').id"/>';
+
+                const priorities = {
+                    GREEN: {
+                        value: 0,
+                        message: "Non-urgent",
+                        className: "triage-label-green"
+                    },
+                    YELLOW: {
+                        value: 1,
+                        message: "Urgent",
+                        className: "triage-label-yellow"
+                    },
+                    RED: {
+                        value: 2,
+                        message: "Emergent",
+                        className: "triage-label-red"
+                    }
+                };
+                function getPrioritiesClasses() {
+                    let classNames = [];
+                    for (const priority in priorities) {
+                        classNames.push(priorities[priority].className);
+                    }
+                    return classNames.join(" ");
+                }
+                const classNames = getPrioritiesClasses();
+
+                function sticky_relocate() {
+                    var window_top = jq(window).scrollTop();
+                    var div_top = jq('#sticky-anchor').offset().top;
+                    if (window_top &gt; (div_top + 30 ) ) {
+                        jq('#sticky').addClass('stick');
+                        jq('#sticky-anchor').height(jq('#sticky').outerHeight());
+                    } else if (window_top &lt; (div_top - 70 )) {
+                        jq('#sticky').removeClass('stick');
+                        jq('#sticky-anchor').height(0);
+                    }
+                }
+                function evaluateBpSystolic(value) {
+                    let retValue = priorities.GREEN;
+                    if (value != null &amp;&amp; !(Number.isNaN(value)) ) {
+                        let numericValue = Number(value);
+                        if (numericValue &lt; 80) {
+                            return priorities.RED;
+                        } else if ((numericValue &gt; 139) &amp;&amp; (numericValue &lt; 160)) {
+                            return priorities.YELLOW;
+                        } else if (numericValue &gt; 159) {
+                            return priorities.RED;
+                        }
+                    }
+                    return retValue;
+                }
+
+                function evaluateBpDiastolic(value) {
+                    let retValue = priorities.GREEN;
+                    if (value != null &amp;&amp; !(Number.isNaN(value)) ) {
+                        let numericValue = Number(value);
+                        if (numericValue &lt; 51) {
+                            return priorities.RED;
+                        } else if ((numericValue &gt; 89) &amp;&amp; (numericValue &lt; 110)) {
+                            return priorities.YELLOW;
+                        } else if (numericValue &gt; 109) {
+                            return priorities.RED;
+                        }
+                    }
+                    return retValue;
+                }
+
+                let vitalsInfo = {
+                    bp_systolic: {
+                        evaluate: evaluateBpSystolic,
+                        value: null
+                    },
+                    bp_diastolic: {
+                        evaluate: evaluateBpDiastolic,
+                        value: null
+                    }
+                };
+
+                function evaluateVitals() {
+                    let priority = priorities.GREEN;
+                    for (const obj in vitalsInfo) {
+                        let vitalValue = vitalsInfo[obj].value;
+                        let evalPriority = vitalsInfo[obj].evaluate(vitalValue);
+                        if (evalPriority.value &gt; priority.value ) {
+                            priority = evalPriority;
+                        }
+                    }
+                    return priority;
+                }
+
+                function evaluateSymptoms() {
+                    let priority = priorities.GREEN;
+                    jq('.redObs').each(function(index, element) {
+                        let firstCheckbox = jq(this).children(":checkbox:first").prop('checked');
+                        if (firstCheckbox == true) {
+                            priority = priorities.RED;
+                        }
+                    });
+                    if (priority.value &gt; priorities.GREEN.value) {
+                        return priority;
+                    }
+                    jq('.yellowObs').each(function(index, element) {
+                        let firstCheckbox = jq(this).children(":checkbox:first").prop('checked');
+                        if (firstCheckbox == true) {
+                            priority = priorities.YELLOW;
+                        }
+                    });
+                    return priority;
+                }
+
+                function calculatePriority() {
+                    let globalPriority = null;
+                    let vitalsPriority =  evaluateVitals();
+                    let symptomsPriority = evaluateSymptoms();
+                    if ( vitalsPriority.value &gt; symptomsPriority.value ) {
+                        globalPriority = vitalsPriority;
+                    } else {
+                        globalPriority = symptomsPriority;
+                    }
+                    jq('#sticky').removeClass(classNames).addClass(globalPriority.className);
+                    jq('#statusMessage').text(globalPriority.message);
+                }
+
+                jq('.vitals-values').change(function(event) {
+                    const vitalsId = jq(this).attr('id');
+                    const vitalValue = jq(this).find('input').val();
+                    if (vitalsId) {
+                        if (vitalValue) {
+                            vitalsInfo[vitalsId].value = vitalValue;
+                        } else {
+                            vitalsInfo[vitalsId].value = null;
+                        }
+                    }
+                    calculatePriority()
+                });
+
+                // jq('.symptom').change(function(event) {
+                //     calculatePriority();
+                // });
 
                 jq('.normalObs').change(function(event) {
                     var firstCheckbox = jq(this).children(":checkbox:first").prop('checked');
@@ -147,6 +310,7 @@
                             });
                         }
                     }
+                    calculatePriority();
                 });
 
                 jq('.abnormalObs').change(function(event) {
@@ -159,6 +323,7 @@
                             });
                         }
                     }
+                    calculatePriority();
                 });
 
                 jq('.normalQueue').change(function(event) {
@@ -200,11 +365,33 @@
                     });
                     return true;
                 });
+
+                jq(window).scroll(sticky_relocate);
+                sticky_relocate();
+                calculatePriority();
             });
         </script>
     </ifMode>
 
     <ifMode mode="VIEW" include="false">
+        <div id="sticky-anchor"></div>
+        <div class="panel progress-bar triage-label-green" role="progressbar" aria-valuenow="100"
+             aria-valuemin="0" aria-valuemax="100" id="sticky">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <div class="row">
+                        <div class="col-sm-2"><uimessage code="Status"/></div>
+                        <div class="col-sm-7 center-content">
+                            <span id="statusMessage"></span>
+                        </div>
+                        <div class="col-sm-3 right">
+                            <span></span>
+                        </div>
+                    </div>
+                </h3>
+            </div>
+        </div>
+
         <h2><uimessage code="National Obstretic Triage and Treatment Form"/></h2>
             <div id="who-when-where" class="three-columns">
                 <div style="width: 34%">
@@ -260,13 +447,13 @@
             <label>
                 <uimessage code="BP:" />
             </label>
-            <obs conceptId="PIH:SYSTOLIC BLOOD PRESSURE" id="bp_systolic"/>
+            <obs conceptId="PIH:SYSTOLIC BLOOD PRESSURE" id="bp_systolic" class="vitals-values"/>
                 /
-            <obs conceptId="PIH:DIASTOLIC BLOOD PRESSURE" id="bp_diastolic"/>
+            <obs conceptId="PIH:DIASTOLIC BLOOD PRESSURE" id="bp_diastolic" class="vitals-values"/>
             <label>
                 <uimessage code="&amp;nbsp;&amp;nbsp;&amp;nbsp;HR: " />
             </label>
-            <obs conceptId="PIH:PULSE" id="heart_rate"/>
+            <obs conceptId="PIH:PULSE" id="heart_rate" class="vitals-values"/>
             <label>
                 <uimessage code="emr.units.perMinute" />
             </label>
@@ -308,15 +495,15 @@
         <div>
             <h3 class="panel-title">Evaluation</h3>
         </div>
-        <div style="background-color: #83d183;">
+        <div>
             <h3 class="panel-title header-col">Non-urgent
                 (Green: 4 hours)</h3>
         </div>
-        <div style="background-color: #f8ed62;">
+        <div>
             <h3 class="panel-title header-col">Urgent
                 (Yellow: 30 minutes)</h3>
         </div>
-        <div style="background-color: #ff5252;">
+        <div>
             <h3 class="panel-title header-col">Emergent
             (Red: Immediately)</h3>
         </div>
@@ -327,13 +514,13 @@
             <label>Airway</label>
         </div>
         <div>
-            <obs class="normalObs" conceptId="PIH:20030" style="checkbox"
+            <obs class="normalObs greenObs symptom" conceptId="PIH:20030" style="checkbox"
                  answerConceptId="PIH:20032" answerCode="Patent"/>
         </div>
         <div>
         </div>
         <div>
-            <obs class="abnormalObs" conceptId="PIH:20030" style="checkbox"
+            <obs class="abnormalObs redObs symptom" conceptId="PIH:20030" style="checkbox"
                  answerConceptId="CIEL:164348" answerCode="Obstructed Labor"/>
         </div>
     </div>
@@ -343,13 +530,13 @@
             <label>Disability</label>
         </div>
         <div>
-            <obs class="normalObs" conceptId="CIEL:162558" style="checkbox"
+            <obs class="normalObs greenObs symptom" conceptId="CIEL:162558" style="checkbox"
                  answerConceptId="CIEL:160282" answerCode="Alert"/>
         </div>
         <div>
             <repeat>
                 <template>
-                    <obs class="abnormalObs" conceptId="CIEL:162558" style="checkbox"
+                    <obs class="abnormalObs yellowObs symptom" conceptId="CIEL:162558" style="checkbox"
                          answerConceptId="{cId}" answerCode="{labelTag}"/>
                 </template>
                 <render cId="CIEL:118938" labelTag="Blurred vision" />
@@ -358,7 +545,7 @@
         <div>
             <repeat>
                 <template>
-                    <obs class="abnormalObs" conceptId="CIEL:162558" style="checkbox"
+                    <obs class="abnormalObs redObs symptom" conceptId="CIEL:162558" style="checkbox"
                          answerConceptId="{cId}" answerCode="{labelTag}"/>
                 </template>
                 <render cId="CIEL:139081" labelTag="Severe headache" />
@@ -373,13 +560,13 @@
             <label>Events</label>
         </div>
         <div>
-            <obs class="normalObs" conceptId="CIEL:165372" style="checkbox"
+            <obs class="normalObs greenObs symptom" conceptId="CIEL:165372" style="checkbox"
                  answerConceptId="CIEL:1115" answerCode="Uneventful"/>
         </div>
         <div>
             <repeat>
                 <template>
-                    <obs class="abnormalObs" conceptId="CIEL:165372" style="checkbox"
+                    <obs class="abnormalObs yellowObs symptom" conceptId="CIEL:165372" style="checkbox"
                          answerConceptId="{cId}" answerCode="{labelTag}"/>
                 </template>
                 <render cId="CIEL:110548" labelTag="Spotting" />
@@ -391,7 +578,7 @@
         <div>
             <repeat>
                 <template>
-                    <obs class="abnormalObs" conceptId="CIEL:165372" style="checkbox"
+                    <obs class="abnormalObs redObs symptom" conceptId="CIEL:165372" style="checkbox"
                          answerConceptId="{cId}" answerCode="{labelTag}"/>
                 </template>
                 <render cId="CIEL:147232" labelTag="Vaginal bleeding" />
@@ -405,15 +592,15 @@
             <label>Fetus</label>
         </div>
         <div>
-            <obs class="normalObs" conceptId="PIH:20033" style="checkbox"
+            <obs class="normalObs greenObs symptom" conceptId="PIH:20033" style="checkbox"
                  answerConceptId="CIEL:162108" answerCode="Moving(>24wks)"/>
         </div>
         <div>
-            <obs class="abnormalObs" conceptId="PIH:20033" style="checkbox"
+            <obs class="abnormalObs yellowObs symptom" conceptId="PIH:20033" style="checkbox"
                  answerConceptId="CIEL:113377" answerCode="Decreased FM"/>
         </div>
         <div>
-            <obs class="abnormalObs" conceptId="PIH:20033" style="checkbox"
+            <obs class="abnormalObs redObs symptom" conceptId="PIH:20033" style="checkbox"
             answerConceptId="CIEL:1452" answerCode="Absent FM"/>
         </div>
     </div>
