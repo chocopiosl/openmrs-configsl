@@ -430,6 +430,7 @@
                             <render answerId="CIEL:138405" hint="HIV" answerCode="pihcore.lab.hiv.title" />
                             <render answerId="PIH:HEART DISEASE" hint="Heart disease"/>
                             <render answerId="PIH:DIABETES" hint="Diabetes"/>
+                            <render answerId="PIH:HYPERTENSION" hint="Hypertension" />
                             <render answerId="CIEL:115491" hint="Multiple gestation"/>
                             <render answerId="CIEL:130108" hint="Placental abruption"/>
                             <render answerId="CIEL:114127" hint="Placenta praevia"/>
