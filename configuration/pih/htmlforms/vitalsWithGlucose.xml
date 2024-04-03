@@ -448,13 +448,16 @@
     <ifMode mode="VIEW" >
         <script type="text/javascript">
             jq(function () {
-                // looking for empty vitals obs
+                // hide vitals fields whose value is empty (SL-337)
                 jq('htmlform').each(function (index, form) {
                     let emptyObs = jq(form).find('section#vitals-with-glucose .emptyValue');
                     if (emptyObs != null &amp;&amp; emptyObs.length > 0) {
                         for (let z = 0; z &lt; emptyObs.length; z++) {
-                            // hide vitals fields whose value is empty (SL-337)
-                            jq(emptyObs[z]).closest('fieldset').hide();
+                            let parentFieldSet = jq(emptyObs[z]).closest('fieldset');
+                            let nonEmptyObs = jq(parentFieldSet).find('.value');
+                            if (!nonEmptyObs || nonEmptyObs.length === 0) {
+                                jq(parentFieldSet).hide();
+                            }
                         }
                     }
                 });
