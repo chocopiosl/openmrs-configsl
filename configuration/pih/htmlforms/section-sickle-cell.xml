@@ -503,8 +503,8 @@
                         <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
                     </button>
                 </template>
-                <render idName="ncdPlan"       buttonStyle="Dark" label="pihcore.visitNote.plan" />
-                <render idName="primaryCareDx" buttonStyle="Dark" label="pihcore.diagnosis.label" />
+                <render idName="ncd-plan"      buttonStyle="Dark" label="pihcore.visitNote.plan" />
+                <render idName="diagnosis"     buttonStyle="Dark" label="pihcore.diagnosis.label" />
                 <render idName="sickle-cell"   buttonStyle="Self" label="Sickle" />
                 <render idName="palliative"    buttonStyle="Light" label="Palliative" />
                 <render idName="liver"         buttonStyle="Light" label="Liver" />
