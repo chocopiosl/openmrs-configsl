@@ -630,64 +630,42 @@
     <div id="buttons-section"></div>
     <ifMode mode="VIEW" include="false">
         <style type="text/css">
-            .ncdButton2.confirm, ncdButton2.confirm {
-            background: #3f746d;
-            border-color: #3f746d;
+            .ncdButtonDark.confirm, ncdButtonDark.confirm {
+                background: #3f746d;
+                border-color: #3f746d;
             }
 
-            .ncdButton1.confirm, ncdButton1.confirm {
-            background: #6f9792;
-            border-color: #6f9792;
+            .ncdButtonLight.confirm, ncdButtonLight.confirm {
+                background: #6f9792;
+                border-color: #6f9792;
             }
 
             .ncdButtonSelf.confirm, ncdButtonSelf.confirm {
-            background: #6f9792;
-            border-color: #6f9792;
-            color: black;
+                background: #6f9792;
+                border-color: #6f9792;
+                color: black;
             }
         </style>
 
-        <div id="buttons1">
-            <button id="pihcore-ncdPlan" type="button" class="nextSection ncdButton2 submitButton confirm right" >
-                <uimessage code="pihcore.visitNote.plan"/>
-                <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
-            </button>
-            <button id="pihcore-primaryCareDx" type="button" class="nextSection ncdButton2 submitButton confirm right" >
-                <uimessage code="pihcore.diagnosis.label"/>
-                <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
-            </button>
-            <button id="pihcore-sickleCell" type="button" class="nextSection ncdButton1 submitButton confirm right">
-                <uimessage code="Sickle"/>
-                <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
-            </button>
-            <button id="pihcore-palliative" type="button" class="nextSection ncdButton1 submitButton confirm right">
-                <uimessage code="Palliative"/>
-                <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
-            </button>
-            <button id="pihcore-liver" type="button" class="nextSection ncdButton1 submitButton confirm right">
-                <uimessage code="Liver"/>
-                <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
-            </button>
-            <button id="pihcore-kidney" type="button" class="nextSection ncdButton1 submitButton confirm right">
-                <uimessage code="Kidney"/>
-                <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
-            </button>
-            <button id="pihcore-lung" type="button" class="nextSection ncdButton1 submitButton confirm right">
-                <uimessage code="Lung"/>
-                <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
-            </button>
-            <button id="pihcore-heart-failure" type="button" class="nextSection ncdButton1 submitButton confirm right">
-                <uimessage code="Heart"/>
-                <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
-            </button>
-            <button id="pihcore-hypertension" type="button" class="nextSection ncdButton1 submitButton confirm right">
-                <uimessage code="HTN"/>
-                <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
-            </button>
-            <button id="pihcore-diabetes" type="button" class="nextSection ncdButton1 submitButton confirm right">
-                <uimessage code="DM"/>
-                <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
-            </button>
+        <div id="buttonsTopRow">
+            <repeat>
+                <template>
+                    <button id="pihcore-{idName}" type="button" class="nextSection ncdButton{buttonStyle} submitButton confirm right" >
+                        <uimessage code="{label}"/>
+                        <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
+                    </button>
+                </template>
+                <render idName="plan-medication" buttonStyle="Dark" label="pihcore.visitNote.plan" />
+                <render idName="diagnosis"     buttonStyle="Dark" label="pihcore.diagnosis.label" />
+                <render idName="sickle-cell"   buttonStyle="Light" label="Sickle" />
+                <render idName="palliative"    buttonStyle="Light" label="Palliative" />
+                <render idName="liver"         buttonStyle="Light" label="Liver" />
+                <render idName="kidney"        buttonStyle="Light" label="Kidney" />
+                <render idName="lung"          buttonStyle="Light" label="Lung" />
+                <render idName="heart-failure" buttonStyle="Light" label="Heart" />
+                <render idName="hypertension"  buttonStyle="Light" label="HTN" />
+                <render idName="diabetes"      buttonStyle="Light" label="DM" />
+            </repeat>
         </div>
         <br/><br/>
 
