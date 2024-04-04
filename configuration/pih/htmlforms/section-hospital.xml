@@ -676,7 +676,7 @@
                 <uimessage code="Lung"/>
                 <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
             </button>
-            <button id="pihcore-heartFailure" type="button" class="nextSection ncdButton1 submitButton confirm right">
+            <button id="pihcore-heart-failure" type="button" class="nextSection ncdButton1 submitButton confirm right">
                 <uimessage code="Heart"/>
                 <i class="icon-spinner icon-spin icon-2x" style="display: none; margin-left: 10px;"></i>
             </button>
