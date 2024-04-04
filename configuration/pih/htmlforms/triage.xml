@@ -242,6 +242,60 @@
                     return retValue;
                 }
 
+                function evaluateRespiratoryRate(value) {
+                    let retValue = priorities.GREEN;
+                    if (value != null &amp;&amp; !(Number.isNaN(value)) ) {
+                        let numericValue = Number(value);
+                        if (numericValue &lt; 20) {
+                            return priorities.GREEN;
+                        } else if ((numericValue &gt; 19) &amp;&amp; (numericValue &lt; 30)) {
+                            return priorities.YELLOW;
+                        } else if (numericValue &gt; 29) {
+                            return priorities.RED;
+                        }
+                    }
+                    return retValue;
+                }
+
+                function evaluateTemperature(value) {
+                    let retValue = priorities.GREEN;
+                    if (value != null &amp;&amp; !(Number.isNaN(value)) ) {
+                        let numericValue = Number(value);
+                        if ( (numericValue &lt; 35) || (numericValue &gt;= 38) ) {
+                            return priorities.RED;
+                        } else if ((numericValue &gt; 37.6) &amp;&amp; (numericValue &lt; 38)) {
+                            return priorities.YELLOW;
+                        }
+                    }
+                    return retValue;
+                }
+
+                function evaluateFhr(value) {
+                    let retValue = priorities.GREEN;
+                    if (value != null &amp;&amp; !(Number.isNaN(value)) ) {
+                        let numericValue = Number(value);
+                        if ( (numericValue &lt; 80) || (numericValue &gt;= 200) ) {
+                            return priorities.RED;
+                        } else if ( (numericValue &lt; 101) || (numericValue &gt; 159) ) {
+                            return priorities.YELLOW;
+                        }
+                    }
+                    return retValue;
+                }
+
+                function evaluateOxigenSaturation(value) {
+                    let retValue = priorities.GREEN;
+                    if (value != null &amp;&amp; !(Number.isNaN(value)) ) {
+                        let numericValue = Number(value);
+                        if ( numericValue &lt;= 92 ) {
+                            return priorities.RED;
+                        } else if ( (numericValue &gt; 92) &amp;&amp; (numericValue &lt; 95) ) {
+                            return priorities.YELLOW;
+                        }
+                    }
+                    return retValue;
+                }
+
                 let vitalsInfo = {
                     bp_systolic: {
                         evaluate: evaluateBpSystolic,
@@ -253,6 +307,22 @@
                     },
                     heart_rate: {
                         evaluate: evaluateHeartRate,
+                        value: null
+                    },
+                    respiratory_rate: {
+                        evaluate: evaluateRespiratoryRate,
+                        value: null
+                    },
+                    temperature_c: {
+                        evaluate: evaluateTemperature,
+                        value: null
+                    },
+                    o2_sat: {
+                        evaluate: evaluateOxigenSaturation,
+                        value: null
+                    },
+                    fhr: {
+                        evaluate: evaluateFhr,
                         value: null
                     }
                 };
@@ -475,14 +545,14 @@
             <label>
                 <uimessage code="&amp;nbsp;&amp;nbsp;&amp;nbsp;RR: " />
             </label>
-            <obs conceptId="PIH:RESPIRATORY RATE" id="respiratory_rate"/>
+            <obs conceptId="PIH:RESPIRATORY RATE" id="respiratory_rate" class="vitals-values"/>
             <label>
                 <uimessage code="emr.units.perMinute" />
             </label>
             <label>
                 <uimessage code="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;T: " />
             </label>
-            <obs conceptId="PIH:TEMPERATURE (C)" id="temperature_c"/>
+            <obs conceptId="PIH:TEMPERATURE (C)" id="temperature_c" class="vitals-values"/>
             <label>
                 <uimessage code="emr.units.degreesCelsius" />
             </label>
@@ -490,14 +560,14 @@
             <label>
                 <uimessage code="mirebalais.vitals.o2sat.title" />:
             </label>
-            <obs conceptId="PIH:BLOOD OXYGEN SATURATION" id="o2_sat"/>
+            <obs conceptId="PIH:BLOOD OXYGEN SATURATION" id="o2_sat" class="vitals-values"/>
             <label>
                 <uimessage code="emr.units.percent" />
             </label>
             <label>
                 <uimessage code="&amp;nbsp;&amp;nbsp;FHR: " />
             </label>
-            <obs conceptId="CIEL:1440" id="fhr"/>
+            <obs conceptId="CIEL:1440" id="fhr" class="vitals-values"/>
             <label>
                 <uimessage code="emr.units.perMinute" />
             </label>
