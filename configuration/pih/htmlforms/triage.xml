@@ -36,7 +36,7 @@
 
         #mch-triage-form, .exam input[type="checkbox"] {
             margin: 0px 5px; /* changed values to vertical, horizontal */
-            top:5px;         /* added to offset the checkbox position to line up */
+            top: 5px; /* added to offset the checkbox position to line up */
         }
 
         .exam label { /*new definition to override labels inside section-containers*/
@@ -71,6 +71,7 @@
             width: 29%;
             margin-top: 20px;
         }
+
         .three-plus-one > div:first-child {
             width: 13%;
         }
@@ -78,6 +79,7 @@
         .three-plus-one {
             margin-bottom: 20px;
         }
+
         .four-columns > div {
             display: table-cell;
             width: 25%;
@@ -92,47 +94,59 @@
             text-align: center;
             white-space: pre-line;
         }
+
         .side-by-side label {
             display: inline-block;
         }
+
         .side-by-side span {
             display: inline-block;
         }
+
         form input[type="radio"], .form input[type="radio"] {
             float: none;
             display: inline-block;
         }
+
         p.radio > * {
             display: inline;
             float: none !important;
             min-width: initial;
         }
+
         .side-by-side input[type="checkbox"] {
             float: none;
             display: inline-block;
         }
+
         .vitals span, .complaint span {
             float: none;
             display: inline-block;
         }
+
         .vitals input[type="text"] {
             max-width: 60px;
         }
+
         #chief_complaint {
             min-width: 80%;
         }
+
         .headerLabel {
             font-size: 1.2em;
             color: #3E3E3E;
         }
+
         .triage-label-green {
-            background-color: #5cb85c;
+            background-color: #96b85c;
         }
+
         .triage-label-yellow {
             background-color: #e8e457;
         }
+
         .triage-label-red {
-            background-color: #d9534f;
+            background-color: #ee6f6b;
         }
 
         #sticky {
@@ -162,17 +176,20 @@
                     GREEN: {
                         value: 0,
                         message: "Non-urgent",
-                        className: "triage-label-green"
+                        className: "triage-label-green",
+                        queuePriority: normalPriority
                     },
                     YELLOW: {
                         value: 1,
                         message: "Urgent",
-                        className: "triage-label-yellow"
+                        className: "triage-label-yellow",
+                        queuePriority: emergencyPriority
                     },
                     RED: {
                         value: 2,
                         message: "Emergent",
-                        className: "triage-label-red"
+                        className: "triage-label-red",
+                        queuePriority: emergencyPriority
                     }
                 };
                 function getPrioritiesClasses() {
@@ -368,19 +385,32 @@
                     }
                     jq('#sticky').removeClass(classNames).addClass(globalPriority.className);
                     jq('#statusMessage').text(globalPriority.message);
+                    return globalPriority;
                 }
 
-                jq('.vitals-values').change(function(event) {
-                    const vitalsId = jq(this).attr('id');
-                    const vitalValue = jq(this).find('input').val();
+                jq(".vitals-values").find('input').on("blur", function() {
+                    const vitalsId = jq(this).closest("span").attr('id');
+                    const vitalValue = jq(this).val();
+                    let inputElement = jq(this);
+                    jq(inputElement).removeClass('legalValue');
+                    jq(inputElement).removeClass(classNames);
                     if (vitalsId) {
                         if (vitalValue) {
                             vitalsInfo[vitalsId].value = vitalValue;
+                            let vitalsPriority = vitalsInfo[vitalsId].evaluate(vitalsInfo[vitalsId].value);
+                            if ( vitalsPriority ) {
+                                setTimeout( () => {
+                                    jq(inputElement).removeClass('legalValue').addClass(vitalsPriority.className);
+                                } , 100);
+                            }
                         } else {
                             vitalsInfo[vitalsId].value = null;
+                            setTimeout( () => {
+                                jq(inputElement).addClass('legalValue');
+                            }, 100);
                         }
                     }
-                    calculatePriority()
+                    calculatePriority();
                 });
 
                 jq('.normalObs').change(function(event) {
@@ -439,18 +469,14 @@
 
                 beforeSubmit.push(function() {
                     setPriority(normalPriority);
-                    jq(".abnormalObs input[type='checkbox']").each(function() {
-                        if ( this.checked ) {
-                            setPriority(emergencyPriority);
-                            //this is equivalent to break the for loop, no need to check for multiple emergency priorities
-                            return false;
-                        }
-                    });
+                    let globalPriority = calculatePriority();
+                    setPriority(globalPriority.queuePriority);
                     return true;
                 });
 
                 jq(window).scroll(sticky_relocate);
                 sticky_relocate();
+                jq(".vitals-values").find('input').trigger("blur");
                 calculatePriority();
             });
         </script>
