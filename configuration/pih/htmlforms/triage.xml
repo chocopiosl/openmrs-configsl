@@ -24,16 +24,14 @@
             display: inline-block;
         }
 
+        input.legalValue {
+            background-color: white;
+        }
+
         .field-error {
             color: #ff6666;
             font-size: 1.1em;
             display: block;
-        }
-
-        #data-collection {
-            display: inline-block;
-            width: 58%;
-            vertical-align: top;
         }
 
         #mch-triage-form, .exam input[type="checkbox"] {
