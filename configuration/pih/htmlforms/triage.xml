@@ -171,6 +171,13 @@
             text-align: center;
         }
 
+        #isolationMsg {
+            font-size: larger;
+            color: #d9534f;
+            font-weight: bold;
+            display:none;
+        }
+
     </style>
 
     <ifMode mode="VIEW" include="false">
@@ -421,6 +428,41 @@
                     calculatePriority();
                 });
 
+
+                function evaluateTBScreening() {
+                    let isSymptomPresent = true;
+                    jq(".tbScreen").find("input[type='radio'][value='3410']").each( function(index) {
+                        isSymptomPresent = isSymptomPresent &amp;&amp; this.checked;
+                    });
+                    return isSymptomPresent;
+                }
+
+                function evaluateEbolaScreening() {
+                    let isSymptomPresent = true;
+                    jq(".isolation").find("input[type='checkbox']").each( function(index) {
+                        isSymptomPresent = isSymptomPresent &amp;&amp; this.checked;
+                    });
+                    return isSymptomPresent;
+                }
+
+                function evaluateIsolationStatus() {
+                    let status = evaluateEbolaScreening() || evaluateTBScreening();
+                    if ( status ) {
+                        jq("#isolationMsg").show();
+                    } else {
+                        jq("#isolationMsg").hide();
+                    }
+                    return status;
+                }
+
+                jq(".isolation").find("input[type='checkbox']").change( function(event) {
+                    evaluateIsolationStatus();
+                });
+
+                jq(".tbScreen").find("input[type='radio']").change( function(event) {
+                    evaluateIsolationStatus();
+                });
+
                 jq('.normalObs').change(function(event) {
                     var firstCheckbox = jq(this).children(":checkbox:first").prop('checked');
                     if (firstCheckbox == true) {
@@ -487,6 +529,7 @@
                 jq(".vitals-values").find('input').attr('autocomplete', 'off');
                 jq(".vitals-values").find('input').trigger("blur");
                 calculatePriority();
+                evaluateIsolationStatus();
             });
         </script>
     </ifMode>
@@ -748,14 +791,14 @@
             <repeat>
                 <template>
                     <obs conceptId="PIH:12245" style="checkbox"
-                         answerConceptId="{cId}" />
+                         answerConceptId="{cId}" class="{isolationClass}"/>
                 </template>
-                <render cId="CIEL:140238" labelTag="Fever" />
-                <render cId="CIEL:127777" labelTag="Red eyes" />
-                <render cId="CIEL:158843" labelTag="Sore throat" />
-                <render cId="CIEL:512" labelTag="Rash" />
-                <render cId="CIEL:147241" labelTag="Unexplained bleeding" />
-                <render cId="CIEL:142412" labelTag="Diarrhea" />
+                <render cId="CIEL:140238" labelTag="Fever" isolationClass="isolation"/>
+                <render cId="CIEL:127777" labelTag="Red eyes" isolationClass="non-isolation"/>
+                <render cId="CIEL:158843" labelTag="Sore throat" isolationClass="non-isolation"/>
+                <render cId="CIEL:512" labelTag="Rash" isolationClass="isolation"/>
+                <render cId="CIEL:147241" labelTag="Unexplained bleeding" isolationClass="isolation"/>
+                <render cId="CIEL:142412" labelTag="Diarrhea" isolationClass="isolation"/>
             </repeat>
         </p>
     </div>
@@ -774,6 +817,9 @@
                      labelText=""/>
             </p>
         </repeat>
+    </div>
+    <div>
+        <span id="isolationMsg" >Patient needs isolation and urgent review by infectious disease team.</span>
     </div>
     <div class="boundary"></div>
     <div class="referralService">
