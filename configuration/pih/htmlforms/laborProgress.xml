@@ -311,7 +311,7 @@
                 <label>
                     <uimessage code="Admission date/time"/>
                 </label>
-                <obs conceptId="CIEL:1640"/>
+                <obs conceptId="CIEL:1640" allowFutureDates="false" allowFutureTimes="true"/>
             </p>
 
             <div class="two-columns">
