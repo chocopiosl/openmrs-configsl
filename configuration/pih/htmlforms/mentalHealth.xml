@@ -477,39 +477,6 @@
             </div>
 
             <div class="two-columns">
-                <!-- Drug use -->
-                <div>
-                    <p class="list-inline">
-                        <label>
-                            <uimessage code="Other drugs"/>:
-                        </label>
-                        <obs conceptId="CIEL:162556" answerConceptIds="CIEL:159450,CIEL:159452,CIEL:1090"
-                             answerCodes="Current,Past,Never"
-                             answerSeparator="" style="radio"/>
-                        <br/>
-
-                        <label>
-                            <uimessage code="pihcore.habits.drugName"/>
-                        </label>
-                        <span class="small">
-                            <obs conceptId="PIH:6489"/>
-                        </span>
-                    </p>
-                </div>
-
-                <div>
-                    <p class="side-by-side">
-                        <label>
-                            <uimessage code="pihcore.habits.ifYesDuration"/>
-                        </label>
-                        <span class="small">
-                            <obs conceptId="PIH:12997" showUnits="pihcore.units.years"/>
-                        </span>
-                    </p>
-                </div>
-            </div>
-
-            <div class="two-columns">
                 <!-- Kush use -->
                 <div>
                     <p class="list-inline">
@@ -557,10 +524,43 @@
                 </div>
             </div>
 
+            <div class="two-columns">
+                <!-- Drug use -->
+                <div>
+                    <p class="list-inline">
+                        <label>
+                            <uimessage code="Other drugs"/>:
+                        </label>
+                        <obs conceptId="CIEL:162556" answerConceptIds="CIEL:159450,CIEL:159452,CIEL:1090"
+                             answerCodes="Current,Past,Never"
+                             answerSeparator="" style="radio"/>
+                        <br/>
+
+                        <label>
+                            <uimessage code="pihcore.habits.drugName"/>
+                        </label>
+                        <span class="small">
+                            <obs conceptId="PIH:6489"/>
+                        </span>
+                    </p>
+                </div>
+
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="pihcore.habits.ifYesDuration"/>
+                        </label>
+                        <span class="small">
+                            <obs conceptId="PIH:12997" showUnits="pihcore.units.years"/>
+                        </span>
+                    </p>
+                </div>
+            </div>
+
             <!-- Drug use -->
             <div class="two-columns">
                 <div>
-                    <p class="list-inline">
+                    <p class="side-by-side">
                         <label>
                             <uimessage code="Traditional medicine"/>:
                         </label>
@@ -570,7 +570,7 @@
                     </p>
                 </div>
                 <div>
-                    <p class="list-inline">
+                    <p class="side-by-side">
                         <label>
                             <uimessage code="pihcore.socioEconomic.homeless"/>:
                         </label>
