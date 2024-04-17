@@ -51,17 +51,13 @@
         }
 
         #where > input[type=text] {
-        display: inline-block;
-        }
-
-        .narrow {
-        width: 200px;
+            display: inline-block;
         }
 
         .field-error {
-        color: #ff6666;
-        font-size: 1.1em;
-        display: block;
+            color: #ff6666;
+            font-size: 1.1em;
+            display: block;
         }
 
         .three-columns, .two-columns {
@@ -81,61 +77,62 @@
         }
 
         .simple-form-ui input {
-        min-width: 80%
+            min-width: 80%
         }
 
         form fieldset {
-        min-width: 90%;
-        display: block;
+            min-width: 90%;
+            display: block;
         }
 
         #calculated-waist-hip-ratio {
-        font-weight: bold;
-        font-size: 1.4em;
+            font-weight: bold;
+            font-size: 1.4em;
         }
 
         .encounter-summary-container #calculated-ratio {
-        font-size: 1em;
-        font-weight: normal;
+            font-size: 1em;
+            font-weight: normal;
         }
 
         #encounterDate input {
-        min-width: 15%
+            min-width: 15%
         }
 
         .half-size-text {
-        color: #ff6666;
-        font-size: 50%;
-        display: block;
+            color: #ff6666;
+            font-size: 50%;
+            display: block;
         }
 
         .section-container {
-        background: #F2F2F2;
-        box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
-        padding: 10px 5px 10px 15px;
-        line-height: 1.5em; /*add this for vertical spacing between elements*/
+            background: #F2F2F2;
+            box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
+            padding: 10px 5px 10px 15px;
+            line-height: 1.5em; /*add this for vertical spacing between elements*/
         }
 
         .section-container input[type="checkbox"] {
-        margin: 0px 5px; /*changed values to vertical, horizontal*/
-        top:5px; /*added to offset the checkbox position to line up*/
+            margin: 0px 5px; /*changed values to vertical, horizontal*/
+            top:5px; /*added to offset the checkbox position to line up*/
         }
 
         .section-container label { /*new definition to override labels inside section-containers*/
-        margin: 0px;
+            margin: 0px;
         }
 
        - .section {
-        width: 100%;
+            width: 100%;
         }
 
         textarea {
-        width: 95%;
+            width: 95%;
         }
 
         .simple-form-ui input {
             min-width: unset;
         }
+
         .simple-form-ui select {
             min-width: unset;
         }
@@ -147,6 +144,25 @@
 
         .side-by-side label {
             display: inline-block;
+        }
+
+        .list-inline label, .list-inline input[type="radio"], .list-inline span,
+        .list-inline-wide label, .list-inline-wide input[type="radio"], .list-inline-wide span,
+        .list-inline-extra-wide label, .list-inline-extra-wide input[type="radio"], .list-inline-extra-wide span {
+            display: inline-block;
+            float: none;
+        }
+
+        .list-inline label:first-child {
+            width: 220px;
+        }
+
+        .list-inline-wide label:first-child {
+            width: 320px;
+        }
+
+        .list-inline-extra-wide label:first-child {
+            width: 420px;
         }
     </style>
 
@@ -376,7 +392,7 @@
         <div class="section-container">
             <div class="two-columns">
                 <div>
-                    <p class="side-by-side">
+                    <p class="list-inline">
                         <label>
                             <uimessage code="pihcore.mch.hivTest"/>
                         </label>
@@ -390,7 +406,7 @@
                 </div>
 
                 <div>
-                    <p class="side-by-side">
+                    <p class="list-inline">
 
                         <label>TB smear result</label>
                         <obs conceptId="PIH:3052"
@@ -414,7 +430,7 @@
             <div class="two-columns">
                 <!-- Alcohol use -->
                 <div>
-                    <p class="side-by-side">
+                    <p class="list-inline">
                         <label>
                             <uimessage code="Alcohol"/>:
                         </label>
@@ -438,7 +454,7 @@
             <div class="two-columns">
                 <!-- Cannabis use -->
                 <div>
-                    <p class="side-by-side">
+                    <p class="list-inline">
                         <label>
                             Jamba (Marijuana):
                         </label>
@@ -463,7 +479,7 @@
             <div class="two-columns">
                 <!-- Drug use -->
                 <div>
-                    <p class="side-by-side">
+                    <p class="list-inline">
                         <label>
                             <uimessage code="Other drugs"/>:
                         </label>
@@ -493,10 +509,58 @@
                 </div>
             </div>
 
+            <div class="two-columns">
+                <!-- Kush use -->
+                <div>
+                    <p class="list-inline">
+                        <label>
+                            <uimessage code="Kush"/>:
+                        </label>
+                        <obs conceptId="PIH:20106" answerConceptIds="CIEL:159450,CIEL:159452,CIEL:1090"
+                             answerCodes="Current,Past,Never"
+                             answerSeparator="" style="radio"/>
+                    </p>
+                </div>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="pihcore.habits.ifYesDuration"/>
+                        </label>
+                        <span class="small">
+                            <obs conceptId="PIH:20109" showUnits="pihcore.units.years"/>
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="two-columns">
+                <!-- Tramadol use -->
+                <div>
+                    <p class="list-inline">
+                        <label>
+                            <uimessage code="Tramadol"/>:
+                        </label>
+                        <obs conceptId="PIH:20107" answerConceptIds="CIEL:159450,CIEL:159452,CIEL:1090"
+                             answerCodes="Current,Past,Never"
+                             answerSeparator="" style="radio"/>
+                    </p>
+                </div>
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="pihcore.habits.ifYesDuration"/>
+                        </label>
+                        <span class="small">
+                            <obs conceptId="PIH:20110" showUnits="pihcore.units.years"/>
+                        </span>
+                    </p>
+                </div>
+            </div>
+
             <!-- Drug use -->
             <div class="two-columns">
                 <div>
-                    <p class="side-by-side">
+                    <p class="list-inline">
                         <label>
                             <uimessage code="Traditional medicine"/>:
                         </label>
@@ -506,7 +570,7 @@
                     </p>
                 </div>
                 <div>
-                    <p class="side-by-side">
+                    <p class="list-inline">
                         <label>
                             <uimessage code="pihcore.socioEconomic.homeless"/>:
                         </label>
@@ -523,23 +587,25 @@
     <section id="mh_familyhistory" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="zl.consultNote.familyHistory.title">
         <div class="section-container">
-            <p class="side-by-side">
+            <p class="list-inline">
                 <label>
                     <uimessage code="ui.i18n.Program.name.69e6a46d-674e-4281-99a0-4004f293ee57"/>
                 </label>
                 <obs conceptId="CIEL:152450"
                      style="radio" answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
                      answerCodes="Yes,No,Unknown" answerSeparator="" required="true"/>
-                <br/>
+            </p>
 
+            <p class="list-inline">
                 <label>
                     <uimessage code="pihcore.mentalIllness"/>
                 </label>
                 <obs conceptId="CIEL:140526"
                      style="radio" answerConceptIds="PIH:YES,PIH:NO,PIH:UNKNOWN"
                      answerCodes="Yes,No,Unknown" answerSeparator="" required="true"/>
-                <br/>
+            </p>
 
+            <p class="list-inline">
                 <label>
                     <uimessage code="pihcore.behavioralProblems"/>
                 </label>
@@ -944,35 +1010,36 @@
 
         <!-- Hide the label for the drug field in view mode -->
         .orderwidget-history-section .order-field-label.order-drug {
-        display:none;
+            display:none;
         }
+
         <!-- Add a colon after the Dose label in view mode -->
         .orderwidget-history-section .order-field-label.order-dose:after {
-        content: ": ";
-        white-space: pre;
+            content: ": ";
+            white-space: pre;
         }
 
         .order-field {
-        display: inline-block;
-        padding: 0px;
+            display: inline-block;
+            padding: 0px;
         }
         .order-field.action {
-        display: block;
+            display: block;
         }
         .order-field.dateActivated {
-        padding-right: 20px;
+            padding-right: 20px;
         }
         .order-field-label {
-        display: inline-block;
-        padding-right: 5px;
-        vertical-align: middle;
+            display: inline-block;
+            padding-right: 5px;
+            vertical-align: middle;
         }
         .order-field-label:after {
-        content: "";
-        white-space: pre;
+            content: "";
+            white-space: pre;
         }
         .order-field-widget {
-        display: inline-block;
+            display: inline-block;
         }
 
     </style>
