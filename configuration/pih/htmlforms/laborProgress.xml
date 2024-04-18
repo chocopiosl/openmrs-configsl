@@ -498,7 +498,7 @@
                     <uimessage code="Labour start date/time"/>
                 </label>
                 <span>
-                    <obs conceptId="CIEL:163444" showTime="true"/>
+                    <obs conceptId="CIEL:163444" showTime="true" allowFutureDates="false" allowFutureTimes="true"/>
                 </span>
             </p>
 
@@ -699,7 +699,7 @@
                         <label>
                             <uimessage code="Induction date/time"/>
                         </label>
-                        <obs conceptId="CIEL:168755" showTime="true"/>
+                        <obs conceptId="CIEL:168755" showTime="true" allowFutureDates="false" allowFutureTimes="true"/>
                     </div>
                     <br/>
 
