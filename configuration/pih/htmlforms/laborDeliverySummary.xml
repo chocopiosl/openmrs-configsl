@@ -383,19 +383,23 @@
              headerCode="Delivery">
         <div class="section-container">
 
-            <!-- ToDo: -->
-            <p>
+            <p class="date-one-line">
                 <label>
-                    <uimessage code="Duration of first stage (in hours+minutes)" />
-                    <i>TBD</i>
+                    <uimessage code="Duration of first stage" />
                 </label>
+                <span class="small">
+                    <obs conceptId="PIH:20114" showUnits="true" />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                    <obs conceptId="PIH:20115" showUnits="true" />
+                </span>
             </p>
-            <!-- ToDo: -->
-            <p>
+
+            <p id="when-2-stage-labor" class="date-one-line">
                 <label>
                     <uimessage code="Second stage start date/time" />
-                    <i>TBD</i>
                 </label>
+                <span>
+                    <obs conceptId="PIH:20113" showTime="true"/>
+                </span>
             </p>
 
             <p>
@@ -521,7 +525,7 @@
                                         </controls>
                                     </obs>
                                 </p>
-                                <div id="other-presentation">
+                                <div id="other-presentation-{0}">
                                     <label>
                                         <uimessage code="zl.ifOtherSpecify"/>
                                     </label>
@@ -552,14 +556,95 @@
                 <uimessage code="pihcore.showLess"/>
             </button>
 
-            <!-- ToDo: -->
-            <p>
-                <br/>
+            <br/><br/>
+            <p class="date-one-line">
                 <label>
-                    <uimessage code="Duration of second stage (in hours+minutes)" />
-                    <i>TBD</i>
+                    <uimessage code="Duration of second stage" />
                 </label>
+                <span class="small">
+                    <!-- ToDo:  Add to OCL export
+                    <obs conceptId="PIH:20116" showUnits="true" />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                    <obs conceptId="PIH:20117" showUnits="true" /> -->
+                </span>
             </p>
+        </div>
+    </section>
+
+    <section id="stage3" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Third stage">
+        <div class="section-container">
+            <p>
+                <!--
+                <obs conceptId="PIH:20122" labelCode="Placenta weight" showUnits="true" />
+                -->
+            </p>
+
+            <repeat>
+                <template>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="{name}" />
+                        </label>
+                        <br/>
+                        <obs conceptId="{concept}"
+                             answerConceptIds="{answers}" answerCodes="{codes}"
+                             style="radio" answerSeparator="" />
+                    </p>
+                </template>
+                <render concept="CIEL:163450" answers="CIEL:1065,CIEL:1066"
+                        name="pihcore.lateCordClamping" codes="emr.yes,emr.no" />
+                <render concept="PIH:13550" answers="CIEL:1115,CIEL:166425"
+                        name="pihcore.placentaDelivery" codes="pihcore.natural,pihcore.artificial" />
+                <render concept="CIEL:163452" answers="CIEL:1065,CIEL:1066"
+                        name="pihcore.fullAMTSL" codes="emr.yes,emr.no" />
+                <render concept="CIEL:163454" answers="CIEL:163455,CIEL:163456"
+                        name="Visual examination of placenta completeness" codes="pihcore.complete,pihcore.incomplete" />
+            </repeat>
+
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Birth attendant" />
+                </label>
+                <obs id="birth-attendant" style="radio"
+                     conceptId="PIH:20118">
+                    <controls>
+                        <when value="CIEL:5622" thenDisplay="#other-ba"/>
+                    </controls>
+                </obs>
+            </p>
+
+            <div id="other-ba">
+                <label>
+                    <uimessage code="if other, specify type of birth attendant"/>
+                </label>
+                <obs conceptId="PIH:20119" style="text" />
+            </div>
+
+            <p class="side-by-side">
+                <label>Perineal Tear</label>
+                <obs conceptId="CIEL:165247" id="perineal tear" style="radio"
+                     answerConceptIds="CIEL:165521,CIEL:165522,CIEL:165523,CIEL:165524"
+                     answerLabels="1st degree,2nd degree,3rd degree,4th degree"/>
+            </p>
+
+
+            <label>
+                <uimessage code="pihcore.consult.procedure" />
+            </label>
+            <repeat>
+                <template>
+                    <obs conceptId="CIEL:1651" answerConceptId="{concept}" />
+                </template>
+                <render concept="CIEL:164157" name="suture perineum" />
+                <render concept="CIEL:5577"   name="episiotomy" />
+            </repeat>
+
+            <p>
+                <!--
+                <obs conceptId="PIH:20121" labelCode="Number of sutures" />
+                -->
+            </p>
+
         </div>
     </section>
 
