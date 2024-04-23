@@ -949,6 +949,11 @@
                      answerCodes="Yes,No" answerSeparator="" required="true"/>
             </p>
 
+            <p class="side-by-side">
+                <div id="disposition">
+                    <encounterDisposition />
+                </div>
+            </p>
 
             <p>
                 <label>

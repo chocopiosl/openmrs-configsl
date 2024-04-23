@@ -1204,6 +1204,11 @@
                      answerCodes="Yes,No" answerSeparator="" required="true"/>
             </p>
 
+            <p class="side-by-side">
+                <div id="disposition">
+                    <encounterDisposition />
+                </div>
+            </p>
 
             <p>
                 <label>
@@ -1213,7 +1218,6 @@
                     <obs id="return-visit-date" conceptId="PIH:RETURN VISIT DATE" allowFutureDates="true" allowPastDates="false" />
                 </span>
             </p>
-
         </div>
     </section>
 
