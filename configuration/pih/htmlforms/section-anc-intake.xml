@@ -368,21 +368,6 @@
             <div class="two-columns">
                 <div>
                     <p>
-                        <!-- for the Mother, Count of babies delivered who died as neonatal -->
-                        <label>
-                            <uimessage code="pihcore.mch.numberNeonatalDeath"/>
-                        </label>
-                        <obs conceptId="PIH:13241" required="true"/>
-                    </p>
-                    <p>
-                        <!-- for the mother, count of stillbirths -->
-                        <label>
-                            <uimessage code="pihcore.mch.numberPriorStillbirth"/>
-                        </label>
-                        <obs conceptId="CIEL:160077" required="true"/>
-                    </p>
-
-                    <p>
                         <label>
                             <uimessage code="Weight of other babies" />
                         </label>
@@ -404,6 +389,23 @@
                             <uimessage code="pihcore.mch.nextofkin"/>
                         </label>
                         <obs conceptId="CIEL:162729"/>
+                    </p>
+
+                    <br/><br/><br/><br/><br/><br/>
+
+                    <p>
+                        <!-- for the Mother, Count of babies delivered who died as neonatal -->
+                        <label>
+                            <uimessage code="pihcore.mch.numberNeonatalDeath"/>
+                        </label>
+                        <obs conceptId="PIH:13241" required="true"/>
+                    </p>
+                    <p>
+                        <!-- for the mother, count of stillbirths -->
+                        <label>
+                            <uimessage code="pihcore.mch.numberPriorStillbirth"/>
+                        </label>
+                        <obs conceptId="CIEL:160077" required="true"/>
                     </p>
                 </div>
 
@@ -470,6 +472,15 @@
                     </label>
                     <obs conceptId="CIEL:1825" required="true"/>
                 </div>
+            </div>
+            <br/>
+            <div>
+                <p>
+                    <label>
+                        <uimessage code="Obstetrics history comment"/>
+                    </label>
+                    <obs conceptId="PIH:14177"/>
+                </p>
             </div>
 
             <br/>
