@@ -404,8 +404,12 @@
 
             <p>
                 <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                    <obs conceptId="PIH:DIAGNOSIS" style="checkbox"
-                         answerConceptId="CIEL:115491" answerCode="Twins or multiple"/>
+                    <obs id="twins" conceptId="PIH:DIAGNOSIS" style="checkbox"
+                         answerConceptId="CIEL:115491" answerCode="Twins or multiple">
+                        <controls>
+                            <when value="CIEL:115491" thenDisplay="#fetus-2"/>
+                        </controls>
+                    </obs>
                 </obsgroup>
             </p>
 
@@ -540,7 +544,7 @@
                                     </label>
                                     <br/>
                                     <obs conceptId="PIH:11663" style="radio"
-                                         answerConceptIds="CIEL:1170,PIH:1172,CIEL:155884,CIEL:159902"
+                                         answerConceptIds="CIEL:1170,CIEL:155884,CIEL:159902"
                                          answerSeparator="&lt;br /&gt;"/>
                                 </p>
                             </div>
@@ -549,12 +553,13 @@
                 </span>
             </repeat>
 
+            <!-- Use checkbox for twin
             <button id="show-more-fetus-button" type="button" style="display:none">
                 <uimessage code="pihcore.showMore"/>
             </button>
             <button id="show-less-fetus-button" type="button" style="display:none">
                 <uimessage code="pihcore.showLess"/>
-            </button>
+            </button> -->
 
             <br/><br/>
             <p class="date-one-line">
@@ -562,9 +567,8 @@
                     <uimessage code="Duration of second stage" />
                 </label>
                 <span class="small">
-                    <!-- ToDo:  Add to OCL export
                     <obs conceptId="PIH:20116" showUnits="true" />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
-                    <obs conceptId="PIH:20117" showUnits="true" /> -->
+                    <obs conceptId="PIH:20117" showUnits="true" />
                 </span>
             </p>
         </div>
@@ -573,11 +577,94 @@
     <section id="stage3" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Third stage">
         <div class="section-container">
-            <p>
-                <!--
-                <obs conceptId="PIH:20122" labelCode="Placenta weight" showUnits="true" />
-                -->
-            </p>
+            <div class="two-columns">
+                <div>
+                    <p class="date-one-line">
+                        <label>
+                            <uimessage code="Blood loss before delivery" />
+                        </label>
+                        <span class="small">
+                            <obs conceptId="PIH:20130" showUnits="L" />
+                        </span>
+                    </p>
+                </div>
+                <div>
+                    <p class="date-one-line">
+                        <label>
+                            <uimessage code="Blood loss after delivery" />
+                        </label>
+                        <span class="small">
+                            <obs conceptId="PIH:20131" showUnits="L" />
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="two-columns">
+                <div>
+                    <h4>Placenta</h4>
+                    <repeat>
+                        <template>
+                            <p class="side-by-side">
+                                <label>
+                                    <uimessage code="{name}" />
+                                </label>
+                                <br/>
+                                <obs conceptId="{concept}"
+                                     answerConceptIds="{answers}" answerCodes="{codes}"
+                                     style="radio" answerSeparator="" />
+                            </p>
+                        </template>
+                        <render concept="PIH:13550" answers="CIEL:1115,CIEL:166425"
+                                name="pihcore.placentaDelivery" codes="pihcore.natural,pihcore.artificial" />
+                        <render concept="CIEL:163454" answers="CIEL:163455,CIEL:163456"
+                                name="Visual examination of placenta completeness" codes="pihcore.complete,pihcore.incomplete" />
+                    </repeat>
+
+                    <p class="date-one-line">
+                        <label>
+                            <uimessage code="Placenta weight" />
+                        </label>
+                        <span class="small">
+                            <obs conceptId="PIH:20122" showUnits="true" />
+                        </span>
+                    </p>
+                </div>
+
+                <div>
+                    <h4>Umbilical cord</h4>
+                    <p class="date-one-line">
+                        <label>
+                            <uimessage code="Cord length" />
+                        </label>
+                        <span class="small">
+                            <obs conceptId="PIH:20129" showUnits="true" />
+                        </span>
+                    </p>
+
+
+                    <p>
+                        <obs conceptId="CIEL:168722" labelCode="Cord exam"  />
+                    </p>
+
+                    <repeat>
+                        <template>
+                            <p class="side-by-side">
+                                <label>
+                                    <uimessage code="{name}" />
+                                </label>
+                                <br/>
+                                <obs conceptId="{concept}"
+                                     answerConceptIds="{answers}" answerCodes="{codes}"
+                                     style="radio" answerSeparator="" />
+                            </p>
+                        </template>
+                        <render concept="CIEL:163450" answers="CIEL:1065,CIEL:1066"
+                                name="pihcore.lateCordClamping" codes="emr.yes,emr.no" />
+                    </repeat>
+                </div>
+            </div>
+            <br/>
 
             <repeat>
                 <template>
@@ -591,22 +678,34 @@
                              style="radio" answerSeparator="" />
                     </p>
                 </template>
-                <render concept="CIEL:163450" answers="CIEL:1065,CIEL:1066"
-                        name="pihcore.lateCordClamping" codes="emr.yes,emr.no" />
-                <render concept="PIH:13550" answers="CIEL:1115,CIEL:166425"
-                        name="pihcore.placentaDelivery" codes="pihcore.natural,pihcore.artificial" />
                 <render concept="CIEL:163452" answers="CIEL:1065,CIEL:1066"
                         name="pihcore.fullAMTSL" codes="emr.yes,emr.no" />
-                <render concept="CIEL:163454" answers="CIEL:163455,CIEL:163456"
-                        name="Visual examination of placenta completeness" codes="pihcore.complete,pihcore.incomplete" />
-            </repeat>
+             </repeat>
+
+            <p class="date-one-line">
+                <label>
+                    <uimessage code="Duration of third stage" />
+                </label>
+                <span class="small">
+                    <obs conceptId="PIH:20124" showUnits="true" />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                    <obs conceptId="PIH:20125" showUnits="true" />
+                </span>
+            </p>
+
+            <p class="date-one-line">
+                <label>
+                    <uimessage code="Total duration of labor" />
+                </label>
+                <span class="small">
+                    <obs conceptId="CIEL:159616" showUnits="hours" />
+                </span>
+            </p>
 
             <p class="side-by-side">
                 <label>
                     <uimessage code="Birth attendant" />
                 </label>
-                <obs id="birth-attendant" style="radio"
-                     conceptId="PIH:20118">
+                <obs id="birth-attendant" style="radio" conceptId="PIH:20118">
                     <controls>
                         <when value="CIEL:5622" thenDisplay="#other-ba"/>
                     </controls>
@@ -627,50 +726,59 @@
                      answerLabels="1st degree,2nd degree,3rd degree,4th degree"/>
             </p>
 
+            <div class="two-columns">
+                <div>
+                    <label>
+                        <uimessage code="pihcore.consult.procedure" />
+                    </label>
+                    <repeat>
+                        <template>
+                            <obs conceptId="CIEL:1651" answerConceptId="{concept}" answerCodes="{name}"/>
+                        </template>
+                        <render concept="CIEL:5577"   name="Episiotomy" />
+                        <render concept="CIEL:164157" name="Suture of perineum" />
+                    </repeat>
+                </div>
+                <div>
+                    <p class="date-one-line">
+                        <label>
+                            <uimessage code="Number of sutures" />
+                        </label>
+                        <span class="small">
+                            <obs conceptId="PIH:20121"  />
+                        </span>
+                    </p>
 
-            <label>
-                <uimessage code="pihcore.consult.procedure" />
-            </label>
-            <repeat>
-                <template>
-                    <obs conceptId="CIEL:1651" answerConceptId="{concept}" />
-                </template>
-                <render concept="CIEL:164157" name="suture perineum" />
-                <render concept="CIEL:5577"   name="episiotomy" />
-            </repeat>
-
-            <p>
-                <!--
-                <obs conceptId="PIH:20121" labelCode="Number of sutures" />
-                -->
-            </p>
+                    <p class="side-by-side">
+                        <obs conceptId="PIH:20126" labelCode="Sutured by" />
+                    </p>
+                </div>
+            </div>
 
         </div>
     </section>
 
-    <section id="outcome" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="Outcome">
+    <section id="perineum" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Perineum">
         <div class="section-container">
-
-            <p class="side-by-side">
-                <label>
-                    <uimessage code="Overall condition"/>
-                </label>
-                <obs id="outcome-condition" conceptId="CIEL:160116" style="radio"
-                     answerConceptIds="CIEL:160113,CIEL:160115"/>
-
-                <div id="disposition">
-                    <encounterDisposition />
+            <div class="two-columns">
+                <div>
+                    <p class="side-by-side">
+                        <obs conceptId="PIH:20127" labelCode="Sutures removed by" />
+                    </p>
                 </div>
-            </p>
+                <div>
+                    <p class="side-by-side">
+                        <obs conceptId="PIH:20128" labelCode="Perineum comments" />
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <p>
-                <label>
-                    <uimessage code="pih.app.notes.summary" />
-                </label>
-                <obs conceptId="CIEL:161011" style="textarea" />
-            </p>
-
+    <section id="documents" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Documents">
+        <div class="section-container">
             <p>
                 <label>
                     <uimessage code="Upload partogram"/>
