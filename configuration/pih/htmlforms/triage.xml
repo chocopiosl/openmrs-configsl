@@ -784,7 +784,7 @@
         </div>
         <div>
             <obs class="normalObs greenObs" conceptId="PIH:20033" style="checkbox"
-                 answerConceptId="CIEL:162108" answerCode="Moving(>24wks)"/>
+                 answerConceptId="CIEL:162108" answerCode="Moving (>24wks)"/>
         </div>
         <div>
             <obs class="abnormalObs yellowObs" conceptId="PIH:20033" style="checkbox"
@@ -835,7 +835,7 @@
     </div>
 
     <label>
-        <uimessage code="pihcore.tbscreen.title"/> <ifMode mode="VIEW" include="false"><font style="color:red">(required)</font> If all 4 symptoms are present, patient isolation and urgent review.</ifMode>
+        <uimessage code="pihcore.tbscreen.title"/> <ifMode mode="VIEW" include="false"> (If all 4 symptoms are present, patient isolation and urgent review.) <font style="color:red">(required)</font></ifMode>
     </label>
     <div class="tbScreen five-columns">
         <div></div>
