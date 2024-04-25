@@ -165,11 +165,15 @@
             const heightConceptUuid = '3ce93cf2-26fe-102b-80cb-0017a47871b2';
             const systolicBPConceptUuid = '3ce934fa-26fe-102b-80cb-0017a47871b2';
             const diastolicBPConceptUuid = '3ce93694-26fe-102b-80cb-0017a47871b2';
+            const systolicBPConceptUuid_second = '55068053-6edf-4887-997a-ba75681ec1a5';
+            const diastolicBPConceptUuid_second = 'd710265f-ddd4-4eef-ab18-28113c8328ae';
             const hrConceptUuid = '3ce93824-26fe-102b-80cb-0017a47871b2';
             const temperatureConceptUuid = '3ce939d2-26fe-102b-80cb-0017a47871b2';
             const muacConceptUuid = 'e3e03a93-de7f-41ea-b8f2-60b220b970e9';
             const respiratoryRateConceptUuid = '3ceb11f8-26fe-102b-80cb-0017a47871b2';
             const o2SatConceptUuid = '3ce9401c-26fe-102b-80cb-0017a47871b2';
+            const fbgConceptUuid = '160912AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
+            const rbgConceptUuid = '3cd4e194-26fe-102b-80cb-0017a47871b2';
 
             const contextPath = window.location.href.split('/')[3];
             const apiBaseUrl =  "/" + contextPath + "/ws/rest/v1";
@@ -214,6 +218,12 @@
             } else if (obs.concept.uuid === diastolicBPConceptUuid) {
             jq("#last_bp_diastolic").text(obs.value);
             jq("#last_bp_diastolic").removeClass("emptyValue").addClass("value");
+            } else if (obs.concept.uuid === systolicBPConceptUuid_second) {
+                jq("#last_bp_systolic_second").text(obs.value);
+                jq("#last_bp_systolic_second").removeClass("emptyValue").addClass("value");
+            } else if (obs.concept.uuid === diastolicBPConceptUuid_second) {
+                jq("#last_bp_diastolic_second").text(obs.value);
+                jq("#last_bp_diastolic_second").removeClass("emptyValue").addClass("value");
             } else if (obs.concept.uuid === hrConceptUuid) {
             jq("#last_heart_rate").text(obs.value);
             jq("#last_heart_rate").removeClass("emptyValue").addClass("value");
@@ -237,6 +247,14 @@
             jq("#last_height").text(obs.value);
             last_height = obs.value;
             jq("#last_height").removeClass("emptyValue").addClass("value");
+            } else if (obs.concept.uuid === fbgConceptUuid) {
+                jq("#last_fbg").text(obs.value);
+                jq("#last_fbg").removeClass("emptyValue").addClass("value");
+            } else if (obs.concept.uuid === rbgConceptUuid) {
+                jq("#last_fbg").text(obs.value);
+                jq("#last_fbg").removeClass("emptyValue").addClass("value");
+                jq("#fbg_span").hide();
+                jq("#rbg_span").show();
             }
             }
 
@@ -588,7 +606,21 @@
                     <tr>
                         <td>
                             <div class="five-columns">
-                                <div></div>
+                                <div>
+                                    <label>
+                                        <uimessage code="mirebalais.vitals.bloodPressure.title"/>&amp;nbsp;#2
+                                    </label>
+                                    <span class="small">
+                                        <span id="last_bp_systolic_second" class="obs-field">
+                                            <span class="emptyValue">____</span>
+                                        </span>
+                                        <span class="append-to-value">/</span>
+                                        <span id="last_bp_diastolic_second" class="obs-field">
+                                            <span class="emptyValue">____</span>
+                                        </span>
+                                        <span class="append-to-value">mm/Hg</span>
+                                    </span>
+                                </div>
                                 <div>
                                     <label>
                                         <uimessage code="mirebalais.vitals.heartRate.title"/>
@@ -638,6 +670,27 @@
                                         </span>
                                     </includeIf>
                                 </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <label>
+                                    <uimessage code="Glucose fingerstick"/>
+                                </label>
+                                <span class="small">
+                                    <span id="fbg_span">
+                                        <uimessage code="Fasting blood glucose (FBG)"/>:&amp;nbsp;&amp;nbsp;
+                                    </span>
+                                    <span id="rbg_span" style="display: none;">
+                                        <uimessage code="Random blood glucose (RBG)"/>:&amp;nbsp;&amp;nbsp;
+                                    </span>
+                                    <span id="last_fbg" class="obs-field">
+                                        <span class="emptyValue">____</span>
+                                    </span>
+                                    <span class="append-to-value">mg/dL</span>
+                                </span>
                             </div>
                         </td>
                     </tr>
