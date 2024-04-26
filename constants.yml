@@ -32,6 +32,10 @@ encounterType:
     uuid: "fec2cc56-e35f-42e1-8ae3-017142c1ca59"
   sierraLeoneMaternalDischarge:
     uuid: "2110a810-db62-4914-ba95-604b96010164"
+  sierraLeoneNewbornDischarge:
+    uuid: "153d3182-c76f-4047-b7f2-d83cf967b206"
+  sierraLeonePostpartumProgress:
+    uuid: "37f04ddf-9653-4a02-98b4-1c23734c2f15"
   mentalHealthFollowup:
     uuid: "9d701a81-bb83-40ea-9efc-af50f05575f2"
   PATIENT_REGISTRATION:

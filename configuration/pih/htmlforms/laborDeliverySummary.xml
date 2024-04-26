@@ -584,7 +584,7 @@
                             <uimessage code="Blood loss before delivery" />
                         </label>
                         <span class="small">
-                            <obs conceptId="PIH:20130" showUnits="L" />
+                            <obs conceptId="PIH:20130" showUnits="true" />
                         </span>
                     </p>
                 </div>
@@ -594,7 +594,7 @@
                             <uimessage code="Blood loss after delivery" />
                         </label>
                         <span class="small">
-                            <obs conceptId="PIH:20131" showUnits="L" />
+                            <obs conceptId="PIH:20131" showUnits="true" />
                         </span>
                     </p>
                 </div>
