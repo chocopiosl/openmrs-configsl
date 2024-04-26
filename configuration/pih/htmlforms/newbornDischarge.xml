@@ -322,7 +322,7 @@
 
     <ifMode mode="VIEW" include="false">
         <section id="Overview" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-                 headerCode="Newborn overview">
+                 headerCode="Overview">
             <div class="section-container">
                 <p id="when" class="date-one-line">
                     <label>
@@ -343,62 +343,151 @@
                         <lookup complexExpression="$deliveryType.valueCoded.name"/>
                     </p>
                 </includeIf>
-
-                <div id="alive-details">
-                        <!-- APGAR -->
-                        <div class="three-columns">
-                            <div class="apgar">
-                                <label>
-                                    <uimessage code="pihcore.mch.apgarScore1"/>
-                                </label>
-                                <!-- APGAR at 1 minutes -->
-                                <lookup complexExpression="#set( $apgarOne = $fn.latestObsBeforeCurrentEncounter('PIH:14419', true) )"/>
-                                <includeIf velocityTest="($apgarOne) ">
-                                    <lookup complexExpression="$apgarOne.valueNumeric"/>
-                                    (<lookup complexExpression="$apgarOne.obsDatetime"/>)
-                                </includeIf>
-                            </div>
-                            <div class="apgar">
-                                <label>
-                                    <uimessage code="pihcore.mch.apgarScore"/>
-                                </label>
-                                <!-- APGAR at 5 minutes <obs conceptId="CIEL:159604"/> -->
-                                <lookup complexExpression="#set( $apgarFive = $fn.latestObsBeforeCurrentEncounter('CIEL:159604', true) )"/>
-                                <includeIf velocityTest="($apgarFive) ">
-                                    <lookup complexExpression="$apgarFive.valueNumeric"/>
-                                    (<lookup complexExpression="$apgarFive.obsDatetime"/>)
-                                </includeIf>
-                            </div>
-
-                            <div class="apgar">
-                                <label>
-                                    <uimessage code="pihcore.mch.apgarScore10"/>
-                                </label>
-                                <!-- APGAR at 10 minutes <obs conceptId="PIH:14785"/> -->
-                                <lookup complexExpression="#set( $apgarTen = $fn.latestObsBeforeCurrentEncounter('PIH:14785', true) )"/>
-                                <includeIf velocityTest="($apgarTen) ">
-                                    <lookup complexExpression="$apgarTen.valueNumeric"/>
-                                    (<lookup complexExpression="$apgarTen.obsDatetime"/>)
-                                </includeIf>
-                            </div>
-                        </div>
-                        <br/>
-                </div>
-
-                <!-- Resuscitated -->
-                <lookup complexExpression="#set( $neoResusc = $fn.latestObsBeforeCurrentEncounter('CIEL:162131', true) )"/>
-                <includeIf velocityTest="($neoResusc) ">
-                    <p class="side-by-side">
-                        <label>
-                            <uimessage code="pihcore.neoResusc"/>:
-                        </label>
-                        <lookup complexExpression="$neoResusc.valueCoded.name"/>
-                        (<lookup complexExpression="$neoResusc.obsDatetime"/>)
-                    </p>
-                </includeIf>
             </div>
         </section>
     </ifMode>
+
+    <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Treatment">
+        <div class="section-container">
+
+            <div class="three-columns">
+                <div>
+                    <ifMode mode="VIEW" include="false">
+                        <lookup complexExpression="#set( $priorEyeDrops = $fn.latestObsInVisitPriorToEncounter('CIEL:1651', 'CIEL:168724') )"/>
+                        <includeIf velocityTest="( $priorEyeDrops )">
+                            <span class="prior-obs-value">[ x ] <lookup complexExpression="$priorEyeDrops.obsDatetime"/></span>
+                        </includeIf>
+                        <br/>
+                    </ifMode>
+                    <obs conceptId="CIEL:1651" style="checkbox"
+                         answerConceptId="CIEL:168724" answerCode="Prophylactic eye drops" />
+                </div>
+
+                <div>
+                    <ifMode mode="VIEW" include="false">
+                        <lookup complexExpression="#set( $priorCordCare = $fn.latestObsInVisitPriorToEncounter('CIEL:1651', 'CIEL:168725') )"/>
+                        <includeIf velocityTest="( $priorCordCare )">
+                            <span class="prior-obs-value">[ x ] <lookup complexExpression="$priorCordCare.obsDatetime"/></span>
+                        </includeIf>
+                        <br/>
+                    </ifMode>
+                    <obs conceptId="CIEL:1651" style="checkbox"
+                         answerConceptId="CIEL:168725" answerCode="Umbilical cord care" />
+                </div>
+
+                <div>
+                    <!-- Vitamin K -->
+                    <ifMode mode="VIEW" include="false">
+                        <lookup complexExpression="#set( $priorSupplement = $fn.latestObsInVisitPriorToEncounter('PIH:SUPPLEMENT RECEIVED', 'CIEL:86352') )"/>
+                        <includeIf velocityTest="( $priorSupplement )">
+                            <span class="prior-obs-value">[ x ] <lookup complexExpression="$priorSupplement.obsDatetime"/></span>
+                        </includeIf>
+                        <br/>
+                    </ifMode>
+                    <obs conceptId="PIH:SUPPLEMENT RECEIVED" style="checkbox"
+                         answerConceptId="CIEL:86352" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="vitals" sectionTag="fieldset" headerTag="legend"
+             headerStyle="title" headerCode="pihcore.vitalSigns">
+        <div class="section-container">
+            <table>
+                <tr>
+                    <td>
+                        <div class="four-columns">
+                            <div>
+                                <p class="side-by-side">
+                                    <label>
+                                        <uimessage code="Weight"/>
+                                    </label>
+                                    <ifMode mode="VIEW" include="false">
+                                        <lookup complexExpression="#set( $lastWt = $fn.latestObsBeforeCurrentEncounter('CIEL:5089', true) )"/>
+                                        <includeIf velocityTest="($lastWt) ">
+                                            <span class="prior-obs-value">
+                                                <lookup complexExpression="$lastWt.valueNumeric"/>kg
+                                                (<lookup complexExpression="$lastWt.obsDatetime"/>)
+                                            </span>
+                                        </includeIf>
+                                        <br/>
+                                    </ifMode>
+                                    <obs conceptId="CIEL:5089" id="weight_kg" showUnits="emr.units.kilograms"
+                                         unitsCssClass="append-to-value"/>
+                                </p>
+
+                                <ifMode mode="VIEW" include="false">
+                                    <lookup complexExpression="#set( $birthWt = $fn.latestObsBeforeCurrentEncounter('CIEL:5916', true) )"/>
+                                    <includeIf velocityTest="($birthWt) ">
+                                        <p class="side-by-side">
+                                            <span class="prior-obs-value">
+                                                <label>
+                                                    <uimessage code="Birth Weight:"/>
+                                                </label>
+                                                <lookup complexExpression="$birthWt.valueNumeric"/>kg
+                                                (<lookup complexExpression="$birthWt.obsDatetime"/>)
+                                            </span>
+                                        </p>
+                                    </includeIf>
+                                </ifMode>
+                            </div>
+                            <div>
+                                <p class="side-by-side">
+                                    <label>
+                                        <uimessage code="Length"/>
+                                    </label>
+                                    <ifMode mode="VIEW" include="false">
+                                        <lookup complexExpression="#set( $lastHt = $fn.latestObsBeforeCurrentEncounter('CIEL:5090', true) )"/>
+                                        <includeIf velocityTest="($lastHt) ">
+                                            <span class="prior-obs-value">
+                                                <lookup complexExpression="$lastHt.valueNumeric"/>kg
+                                                (<lookup complexExpression="$lastHt.obsDatetime"/>)
+                                            </span>
+                                        </includeIf>
+                                        <br/>
+                                    </ifMode>
+                                    <obs conceptId="CIEL:5090" id="height_cm" showUnits="cm"
+                                         unitsCssClass="append-to-value"/>
+                                </p>
+
+                                <ifMode mode="VIEW" include="false">
+                                    <lookup complexExpression="#set( $birthHt = $fn.latestObsBeforeCurrentEncounter('CIEL:163554', true) )"/>
+                                    <includeIf velocityTest="($birthHt) ">
+                                        <p class="side-by-side">
+                                            <span class="prior-obs-value">
+                                                <label>
+                                                    <uimessage code="Birth Height:"/>
+                                                </label>
+                                                <lookup complexExpression="$birthHt.valueNumeric"/>cm
+                                                (<lookup complexExpression="$birthHt.obsDatetime"/>)
+                                            </span>
+                                        </p>
+                                    </includeIf>
+                                </ifMode>
+                            </div>
+                            <div>
+                                <label>
+                                    <uimessage code="Temperature"/>
+                                </label>
+                                <obs conceptId="CIEL:5088" id="temperature_c"
+                                     showUnits="emr.units.degreesCelsius" unitsCssClass="append-to-value"/>
+                            </div>
+
+                            <div>
+                                <label>
+                                    <uimessage code="mirebalais.vitals.short.heartRate.title"/>
+                                </label>
+                                <obs conceptId="CIEL:5087" id="heart_rate"
+                                     showUnits="emr.units.perMinute" unitsCssClass="append-to-value"/>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </section>
 
     <section id="exam" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Physical exam">
@@ -538,114 +627,6 @@
                      answerConceptIds="CIEL:168743,CIEL:168735,CIEL:168742"
                      answerCodes="Tube,Cup,Spoon"/>
             </p>
-        </div>
-    </section>
-
-    <section id="vitals" sectionTag="fieldset" headerTag="legend"
-             headerStyle="title" headerCode="pihcore.vitalSigns">
-        <div class="section-container">
-            <table>
-                <tr>
-                    <td>
-                        <div class="three-columns">
-                            <div>
-                                <p class="side-by-side">
-                                    <label>
-                                        <uimessage code="Weight"/>
-                                    </label>
-                                    <ifMode mode="VIEW" include="false">
-                                        <lookup complexExpression="#set( $lastWt = $fn.latestObsBeforeCurrentEncounter('CIEL:5089', true) )"/>
-                                        <includeIf velocityTest="($lastWt) ">
-                                            <span class="prior-obs-value">
-                                                <lookup complexExpression="$lastWt.valueNumeric"/>kg
-                                                (<lookup complexExpression="$lastWt.obsDatetime"/>)
-                                            </span>
-                                        </includeIf>
-                                        <br/>
-                                    </ifMode>
-                                    <obs conceptId="CIEL:5089" id="weight_kg" showUnits="emr.units.kilograms"
-                                         unitsCssClass="append-to-value"/>
-                                </p>
-
-                                <ifMode mode="VIEW" include="false">
-                                    <lookup complexExpression="#set( $birthWt = $fn.latestObsBeforeCurrentEncounter('CIEL:5916', true) )"/>
-                                    <includeIf velocityTest="($birthWt) ">
-                                        <p class="side-by-side">
-                                            <span class="prior-obs-value">
-                                                <label>
-                                                    <uimessage code="Birth Weight:"/>
-                                                </label>
-                                                <lookup complexExpression="$birthWt.valueNumeric"/>kg
-                                                (<lookup complexExpression="$birthWt.obsDatetime"/>)
-                                            </span>
-                                        </p>
-                                    </includeIf>
-                                </ifMode>
-                            </div>
-                            <div>
-                                <label>
-                                    <uimessage code="Temperature"/>
-                                </label>
-                                <obs conceptId="CIEL:5088" id="temperature_c"
-                                     showUnits="emr.units.degreesCelsius" unitsCssClass="append-to-value"/>
-                            </div>
-
-                            <div>
-                                <label>
-                                    <uimessage code="mirebalais.vitals.short.heartRate.title"/>
-                                </label>
-                                <obs conceptId="CIEL:5087" id="heart_rate"
-                                     showUnits="emr.units.perMinute" unitsCssClass="append-to-value"/>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </section>
-
-    <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="Treatment">
-        <div class="section-container">
-
-            <div class="three-columns">
-                <div>
-                    <ifMode mode="VIEW" include="false">
-                        <lookup complexExpression="#set( $priorEyeDrops = $fn.latestObsInVisitPriorToEncounter('CIEL:1651', 'CIEL:168724') )"/>
-                        <includeIf velocityTest="( $priorEyeDrops )">
-                            <span class="prior-obs-value">[ x ] <lookup complexExpression="$priorEyeDrops.obsDatetime"/></span>
-                        </includeIf>
-                        <br/>
-                    </ifMode>
-                    <obs conceptId="CIEL:1651" style="checkbox"
-                         answerConceptId="CIEL:168724" answerCode="Prophylactic eye drops" />
-                </div>
-
-                <div>
-                    <ifMode mode="VIEW" include="false">
-                        <lookup complexExpression="#set( $priorCordCare = $fn.latestObsInVisitPriorToEncounter('CIEL:1651', 'CIEL:168725') )"/>
-                        <includeIf velocityTest="( $priorCordCare )">
-                            <span class="prior-obs-value">[ x ] <lookup complexExpression="$priorCordCare.obsDatetime"/></span>
-                        </includeIf>
-                        <br/>
-                    </ifMode>
-                    <obs conceptId="CIEL:1651" style="checkbox"
-                         answerConceptId="CIEL:168725" answerCode="Umbilical cord care" />
-                </div>
-
-                <div>
-                    <!-- Vitamin K -->
-                    <ifMode mode="VIEW" include="false">
-                        <lookup complexExpression="#set( $priorSupplement = $fn.latestObsInVisitPriorToEncounter('PIH:SUPPLEMENT RECEIVED', 'CIEL:86352') )"/>
-                        <includeIf velocityTest="( $priorSupplement )">
-                            <span class="prior-obs-value">[ x ] <lookup complexExpression="$priorSupplement.obsDatetime"/></span>
-                        </includeIf>
-                        <br/>
-                    </ifMode>
-                    <obs conceptId="PIH:SUPPLEMENT RECEIVED" style="checkbox"
-                         answerConceptId="CIEL:86352" />
-                </div>
-            </div>
         </div>
     </section>
 
