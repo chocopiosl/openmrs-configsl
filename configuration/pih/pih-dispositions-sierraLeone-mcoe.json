@@ -54,7 +54,7 @@
     "uuid": "transferWithinHospitalNewborn",
     "name": "disposition.emrapi.transferInHospital",
     "conceptCode": "PIH:Transfer within hospital",
-    "encounterTypes": ["6444b8d4-407d-444d-aa15-d6dff204ed83","a8584ab8-cc2a-11e5-9956-625662870761","9d701a81-bb83-40ea-9efc-af50f05575f2",
+    "encounterTypes": ["6444b8d4-407d-444d-aa15-d6dff204ed83",
                        "153d3182-c76f-4047-b7f2-d83cf967b206"],
     "additionalObs": [
       {
@@ -85,7 +85,7 @@
     "uuid": "transferOutOfHospitalNewborn",
     "name": "disposition.emrapi.transferOutOfHospital",
     "conceptCode": "PIH:Transfer out of hospital",
-    "encounterTypes": ["6444b8d4-407d-444d-aa15-d6dff204ed83","a8584ab8-cc2a-11e5-9956-625662870761","9d701a81-bb83-40ea-9efc-af50f05575f2"],
+    "encounterTypes": ["6444b8d4-407d-444d-aa15-d6dff204ed83"],
     "additionalObs": [
       {
         "label": "disposition.emrapi.transferOutOfHospital.sites",
