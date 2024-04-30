@@ -438,6 +438,32 @@
                         <lookup complexExpression="$deliveryType.valueCoded.name"/>
                     </p>
                 </includeIf>
+
+                <!-- Readmission -->
+                <div class="two-columns">
+                    <div>
+                        <p class="side-by-side">
+                            <obs id="readmit" conceptId="PIH:20140" style="checkbox"
+                                 answerConceptId="CIEL:1065"
+                                 answerCode="Readmission during postpartum phase">
+                                <controls>
+                                    <when value="CIEL:1065" thenDisplay="#resume-sex"/>
+                                </controls>
+                            </obs>
+                        </p>
+                    </div>
+                    <div id="resume-sex">
+                        <!-- Resumed sex -->
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="pihcore.restartSex"/>
+                            </label>
+                            <obs conceptId="CIEL:167043" style="radio"
+                                 answerConceptIds="CIEL:1065,CIEL:1066"
+                                 answerCodes="yes,no"/>
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
     </ifMode>
@@ -511,16 +537,6 @@
                         </obsgroup>
                     </p>
 
-                    <!-- Resumed sex -->
-                    <p class="side-by-side">
-                        <label>
-                            <uimessage code="pihcore.restartSex"/>
-                        </label>
-                        <obs conceptId="CIEL:167043" style="radio"
-                             answerConceptIds="CIEL:1065,CIEL:1066"
-                             answerCodes="yes,no"/>
-                    </p>
-
                     <p class="side-by-side">
                         <label>
                             <uimessage code="pihcore.uterusInvolution"/>
@@ -551,6 +567,15 @@
                         <br/>
                         <obs conceptId="CIEL:167035" style="radio"
                              answerConceptIds="CIEL:167036,CIEL:167037"/>
+                    </p>
+
+                    <p class="date-one-line">
+                        <label>
+                            <uimessage code="pihcore.fundalHeight" />
+                        </label>
+                        <span class="small">
+                            <obs conceptId="CIEL:1439" showUnits="true" />
+                        </span>
                     </p>
 
                     <p class="comment-label">
@@ -681,6 +706,16 @@
                     <obs conceptId="CIEL:166363" style="text" />
                 </div>
             </div>
+
+            <p class="list-inline">
+                <obsgroup groupingConceptId="PIH:14875" showIfEmpty="false">
+                    <obs id="leg-pain" style="radio"
+                         conceptIds="PIH:SYMPTOM PRESENT,PIH:SYMPTOM ABSENT"
+                         conceptLabels="yes,no"
+                         answerConceptId="CIEL:114395" labelText="Leg pain">
+                    </obs>
+                </obsgroup>
+            </p>
 
             <p class="date-one-line">
                 <label>
