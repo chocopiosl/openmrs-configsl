@@ -439,6 +439,15 @@
                     </p>
                 </includeIf>
 
+                <p class="date-one-line">
+                    <label>
+                        <uimessage code="Number of days since delivery" />
+                    </label>
+                    <span class="small">
+                        <obs conceptId="CIEL:1879" showUnits="true"/>
+                    </span>
+                </p>
+
                 <!-- Readmission -->
                 <div class="two-columns">
                     <div>
@@ -473,15 +482,6 @@
              headerCode="pihcore.exam.postpartum_exam.title">
 
         <div id="postpartum" class="section-container">
-
-            <p class="date-one-line">
-                <label>
-                    <uimessage code="Number of days since delivery" />
-                </label>
-                <span class="small">
-                    <obs conceptId="CIEL:1879" showUnits="true"/>
-                </span>
-            </p>
 
             <div class="two-columns exam">
                 <div>
