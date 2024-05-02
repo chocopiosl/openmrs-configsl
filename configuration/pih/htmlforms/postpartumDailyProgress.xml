@@ -550,13 +550,10 @@
 
                         <div id="abnormal-involution">
                             <label>
-                                <uimessage code="pihcore.ifAbnormal"/>,
+                                <uimessage code="pihcore.ifAbnormal"/>, measure <uimessage code="pihcore.umbilMeasure"/>
                             </label>
                             <!-- Uterus level from umbilicus during postpartum involution -->
                             <obs conceptId="PIH:14063" showUnits="true"/>
-                            <label>
-                                <uimessage code="pihcore.umbilMeasure"/>
-                            </label>
                         </div>
                     </p>
 
@@ -567,15 +564,6 @@
                         <br/>
                         <obs conceptId="CIEL:167035" style="radio"
                              answerConceptIds="CIEL:167036,CIEL:167037"/>
-                    </p>
-
-                    <p class="date-one-line">
-                        <label>
-                            <uimessage code="pihcore.fundalHeight" />
-                        </label>
-                        <span class="small">
-                            <obs conceptId="CIEL:1439" showUnits="true" />
-                        </span>
                     </p>
 
                     <p class="comment-label">
