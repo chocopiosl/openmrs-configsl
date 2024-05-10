@@ -63,3 +63,6 @@ concept:
     uuid: "167408AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
   waitingForTransfer:
     uuid: "d639afb2-8f85-4774-a623-e6e051cda9c6"
+queue:
+  triage:
+    uuid: "3113f164-68f0-11ee-ab8d-0242ac120002"

@@ -283,7 +283,65 @@
       "defaultTransitionStatus": "${concept.inService.uuid}"
     },
     "visitQueueNumberAttributeUuid": "",
-    "defaultFacilityUrl": ""
+    "defaultFacilityUrl": "",
+    "tablesConfig": {
+      "columnDefinitions": [
+        {
+          "id": "patient-name",
+          "columnType": "patient-name-column"
+        },
+        {
+          "id": "emr-id",
+          "columnType": "patient-identifier-column",
+          "config": {
+            "identifierType": "${patientIdentifierType.kghEmrId.uuid}"
+          },
+          "header": "EMR ID"
+        },
+        {
+          "id": "age",
+          "columnType": "patient-age-column"
+        },
+        {
+          "id": "wait-time",
+          "columnType": "wait-time-column"
+        },
+        {
+          "id": "in-service-time",
+          "columnType": "wait-time-column",
+          "header": "Time in service"
+        },
+        {
+          "id": "check-in-date",
+          "columnType": "visit-start-time-column",
+          "header": "Check-in date"
+        },
+        {
+          "id": "actions",
+          "columnType": "actions-column"
+        }
+      ],
+      "tableDefinitions": [
+        {
+          "columns": ["patient-name", "emr-id", "age", "check-in-date", "wait-time", "actions"],
+          "appliedTo": [
+            {
+              "queue": "${queue.triage.uuid}",
+              "status": "${concept.waiting.uuid}"
+            }
+          ]
+        },
+        {
+          "columns": ["patient-name", "emr-id", "age", "in-service-time", "actions"],
+          "appliedTo": [
+            {
+              "queue": "${queue.triage.uuid}",
+              "status": "${concept.inService.uuid}"
+            }
+          ]
+        }
+      ]
+    }
   }
 }
 
