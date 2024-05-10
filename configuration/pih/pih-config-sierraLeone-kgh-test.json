@@ -57,7 +57,8 @@
     "visitNote",
     "vitals",
     "vitalsHomepageApp",
-    "wristbands"
+    "wristbands",
+    "children"
   ],
 
   "dispositionConfig": "file:configuration/pih/pih-dispositions-sierraLeone-mcoe.json"
