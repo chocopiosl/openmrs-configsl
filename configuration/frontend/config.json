@@ -339,6 +339,9 @@
               "status": "${concept.inService.uuid}"
             }
           ]
+        },
+        {
+          "columns": ["patient-name", "emr-id", "age", "wait-time", "actions"]
         }
       ]
     }
