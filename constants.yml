@@ -36,6 +36,8 @@ encounterType:
     uuid: "153d3182-c76f-4047-b7f2-d83cf967b206"
   sierraLeonePostpartumProgress:
     uuid: "37f04ddf-9653-4a02-98b4-1c23734c2f15"
+  sierraLeoneMaternalAdmission:
+    uuid: "0ef67d23-0cf4-4a3e-8617-ac9d55bdd005"
   mentalHealthFollowup:
     uuid: "9d701a81-bb83-40ea-9efc-af50f05575f2"
   PATIENT_REGISTRATION:
