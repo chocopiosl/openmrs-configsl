@@ -447,32 +447,6 @@
                         <obs conceptId="CIEL:1879" showUnits="true"/>
                     </span>
                 </p>
-
-                <!-- Readmission -->
-                <div class="two-columns">
-                    <div>
-                        <p class="side-by-side">
-                            <obs id="readmit" conceptId="PIH:20140" style="checkbox"
-                                 answerConceptId="CIEL:1065"
-                                 answerCode="Readmission during postpartum phase">
-                                <controls>
-                                    <when value="CIEL:1065" thenDisplay="#resume-sex"/>
-                                </controls>
-                            </obs>
-                        </p>
-                    </div>
-                    <div id="resume-sex">
-                        <!-- Resumed sex -->
-                        <p class="side-by-side">
-                            <label>
-                                <uimessage code="pihcore.restartSex"/>
-                            </label>
-                            <obs conceptId="CIEL:167043" style="radio"
-                                 answerConceptIds="CIEL:1065,CIEL:1066"
-                                 answerCodes="yes,no"/>
-                        </p>
-                    </div>
-                </div>
             </div>
         </section>
     </ifMode>
@@ -513,16 +487,7 @@
                         <obs conceptId="CIEL:167042" style="radio"
                              answerConceptIds="PIH:12270,CIEL:1363,CIEL:1364"
                              answerCodes="+,++,+++"/>
-
-
-                        <div class="exam">
-                            <!-- Postpartum hemorrhage -->
-                            <obs conceptId="CIEL:230" style="checkbox"
-                                 answerConceptId="CIEL:1065"
-                                 answerCode="pihcore.postpartumHemorrhage"/>
-                        </div>
                     </p>
-
 
                     <!-- Pads used -->
                     <p class="side-by-side">
