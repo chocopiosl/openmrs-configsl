@@ -361,7 +361,7 @@
                         <br/>
                     </ifMode>
                     <obs conceptId="CIEL:1651" style="checkbox"
-                         answerConceptId="CIEL:168724" answerCode="Prophylactic eye drops" />
+                         answerConceptId="CIEL:168724" answerCode="Prophylactic eye ointment" />
                 </div>
 
                 <div>
@@ -398,7 +398,7 @@
             <table>
                 <tr>
                     <td>
-                        <div class="four-columns">
+                        <div class="three-columns">
                             <div>
                                 <p class="side-by-side">
                                     <label>
@@ -433,40 +433,7 @@
                                     </includeIf>
                                 </ifMode>
                             </div>
-                            <div>
-                                <p class="side-by-side">
-                                    <label>
-                                        <uimessage code="Length"/>
-                                    </label>
-                                    <ifMode mode="VIEW" include="false">
-                                        <lookup complexExpression="#set( $lastHt = $fn.latestObsBeforeCurrentEncounter('CIEL:5090', true) )"/>
-                                        <includeIf velocityTest="($lastHt) ">
-                                            <span class="prior-obs-value">
-                                                <lookup complexExpression="$lastHt.valueNumeric"/>kg
-                                                (<lookup complexExpression="$lastHt.obsDatetime"/>)
-                                            </span>
-                                        </includeIf>
-                                        <br/>
-                                    </ifMode>
-                                    <obs conceptId="CIEL:5090" id="height_cm" showUnits="cm"
-                                         unitsCssClass="append-to-value"/>
-                                </p>
 
-                                <ifMode mode="VIEW" include="false">
-                                    <lookup complexExpression="#set( $birthHt = $fn.latestObsBeforeCurrentEncounter('CIEL:163554', true) )"/>
-                                    <includeIf velocityTest="($birthHt) ">
-                                        <p class="side-by-side">
-                                            <span class="prior-obs-value">
-                                                <label>
-                                                    <uimessage code="Birth Height:"/>
-                                                </label>
-                                                <lookup complexExpression="$birthHt.valueNumeric"/>cm
-                                                (<lookup complexExpression="$birthHt.obsDatetime"/>)
-                                            </span>
-                                        </p>
-                                    </includeIf>
-                                </ifMode>
-                            </div>
                             <div>
                                 <label>
                                     <uimessage code="Temperature"/>
