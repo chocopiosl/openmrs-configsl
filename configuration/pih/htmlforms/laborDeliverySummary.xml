@@ -355,9 +355,15 @@
 
                 var hideOtherFetus = function() {
                     jq('#fetus-2').hide();
+                    jq('#fetus-3').hide();
                 };
 
                 if (!hasValue('#fetus-2')) {
+                    hideOtherFetus();
+                    jq('#show-more-fetus-button').show();
+                }
+
+                if (!hasValue('#fetus-3')) {
                     hideOtherFetus();
                     jq('#show-more-fetus-button').show();
                 }
@@ -405,15 +411,11 @@
             <p>
                 <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
                     <obs id="twins" conceptId="PIH:DIAGNOSIS" style="checkbox"
-                         answerConceptId="CIEL:115491" answerCode="Twins or multiple">
-                        <controls>
-                            <when value="CIEL:115491" thenDisplay="#fetus-2"/>
-                        </controls>
-                    </obs>
+                         answerConceptId="CIEL:115491" answerCode="twins or triplets"/>
                 </obsgroup>
             </p>
 
-            <repeat with="['1'],['2']">
+            <repeat with="['1'],['2'],['3']">
                 <span id="fetus-{0}" class="fetus">
                     <obsgroup groupingConceptId="PIH:13555" showIfEmpty="false">
                         <h6>------- Infant {0} -------</h6>
@@ -553,13 +555,13 @@
                 </span>
             </repeat>
 
-            <!-- Use checkbox for twin
+            <br/>
             <button id="show-more-fetus-button" type="button" style="display:none">
                 <uimessage code="pihcore.showMore"/>
             </button>
             <button id="show-less-fetus-button" type="button" style="display:none">
                 <uimessage code="pihcore.showLess"/>
-            </button> -->
+            </button>
 
             <br/><br/>
             <p class="date-one-line">
@@ -615,8 +617,6 @@
                                      style="radio" answerSeparator="" />
                             </p>
                         </template>
-                        <render concept="PIH:13550" answers="CIEL:1115,CIEL:166425"
-                                name="pihcore.placentaDelivery" codes="pihcore.natural,pihcore.artificial" />
                         <render concept="CIEL:163454" answers="CIEL:163455,CIEL:163456"
                                 name="Visual examination of placenta completeness" codes="pihcore.complete,pihcore.incomplete" />
                     </repeat>
@@ -628,6 +628,10 @@
                         <span class="small">
                             <obs conceptId="PIH:20122" showUnits="true" />
                         </span>
+                    </p>
+
+                    <p>
+                        <obs conceptId="PIH:20152" labelCode="Placenta abnormality"  />
                     </p>
                 </div>
 
@@ -642,26 +646,9 @@
                         </span>
                     </p>
 
-
                     <p>
-                        <obs conceptId="CIEL:168722" labelCode="Cord exam"  />
+                        <obs conceptId="CIEL:168722" labelCode="Cord abnormality"  />
                     </p>
-
-                    <repeat>
-                        <template>
-                            <p class="side-by-side">
-                                <label>
-                                    <uimessage code="{name}" />
-                                </label>
-                                <br/>
-                                <obs conceptId="{concept}"
-                                     answerConceptIds="{answers}" answerCodes="{codes}"
-                                     style="radio" answerSeparator="" />
-                            </p>
-                        </template>
-                        <render concept="CIEL:163450" answers="CIEL:1065,CIEL:1066"
-                                name="pihcore.lateCordClamping" codes="emr.yes,emr.no" />
-                    </repeat>
                 </div>
             </div>
             <br/>
@@ -761,17 +748,10 @@
     <section id="perineum" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Perineum">
         <div class="section-container">
-            <div class="two-columns">
-                <div>
-                    <p class="side-by-side">
-                        <obs conceptId="PIH:20127" labelCode="Sutures removed by" />
-                    </p>
-                </div>
-                <div>
-                    <p class="side-by-side">
-                        <obs conceptId="PIH:20128" labelCode="Perineum comments" />
-                    </p>
-                </div>
+            <div>
+                <p class="side-by-side">
+                    <obs conceptId="PIH:20128" labelCode="Perineum comments" />
+                </p>
             </div>
         </div>
     </section>
