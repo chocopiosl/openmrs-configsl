@@ -13,7 +13,7 @@
   -->
 
 <htmlform formUuid="2eceee55-4308-41b5-8d76-d5197cf57818" formName="Maternal Admission"
-          formEncounterType="0ef67d23-0cf4-4a3e-8617-ac9d55bdd005" formVersion="1.0">
+          formEncounterType="260566e1-c909-4d61-a96f-c1019291a09d" formVersion="1.0">
 
     <style type="text/css">
         #who-when-where {
@@ -195,11 +195,6 @@
             <obs conceptId="CIEL:161011" style="textarea"/>
         </p>
 
-        <p class="side-by-side">
-            <div id="disposition">
-                <encounterDisposition/>
-            </div>
-        </p>
     </div>
 
     <ifMode mode="VIEW" include="false">
