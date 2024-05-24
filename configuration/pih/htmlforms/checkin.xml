@@ -19,6 +19,11 @@
         font-size: 1em;
         font-weight: normal;
         }
+
+        .appointment-checkbox label {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
     </style>
 
     <macros>
@@ -98,10 +103,24 @@
                          style="dropdown" size="999">
                     </obs>
                 </p>
+
             </fieldset>
 
+            <fieldset>
+                <legend>
+                    <uimessage code="form.checkin.appointments.title"/>
+                </legend>
+                <h3>
+                    <uimessage code="form.checkin.appointments.title"/>
+                </h3>
 
-
+                <p>
+                    <uimessage code="form.checkin.appointments.text"/>
+                </p>
+                <field>
+                    <appointments class="appointment-checkbox"/>
+                </field>
+            </fieldset>
         </section>
 
         <submit/>

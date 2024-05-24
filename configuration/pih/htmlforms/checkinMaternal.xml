@@ -57,13 +57,11 @@
 
         #check-in-form fieldset p {
             vertical-align: top;
-            display: inline-block;
             float: none;
         }
 
         #check-in-form fieldset .left {
             vertical-align: top;
-            display: inline-block;
             float: none;
         }
 
@@ -84,6 +82,11 @@
         }
         .reason-for-referral > p > span > label {
             margin-left: 30px;
+        }
+
+        .appointment-checkbox label {
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
 
     </style>
@@ -340,6 +343,20 @@
                         <obs conceptId="PIH:1301" style="text"/>
                     </p>
                 </div>
+            </fieldset>
+            <fieldset>
+                <legend>
+                    <uimessage code="form.checkin.appointments.title"/>
+                </legend>
+                <h3>
+                    <uimessage code="form.checkin.appointments.title"/>
+                </h3>
+                <p>
+                    <uimessage code="form.checkin.appointments.text"/>
+                </p>
+                <field>
+                    <appointments class="appointment-checkbox"/>
+                </field>
             </fieldset>
         </section>
 
