@@ -346,10 +346,10 @@
             </fieldset>
             <fieldset>
                 <legend>
-                    <uimessage code="form.checkin.appointments.title"/>
+                    <uimessage code="pih.app.appointments.title"/>
                 </legend>
                 <h3>
-                    <uimessage code="form.checkin.appointments.title"/>
+                    <uimessage code="pih.app.appointments.title"/>
                 </h3>
                 <p>
                     <uimessage code="form.checkin.appointments.text"/>
