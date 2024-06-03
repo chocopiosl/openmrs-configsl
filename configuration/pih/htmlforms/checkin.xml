@@ -115,9 +115,7 @@
                 <p>
                     <uimessage code="form.checkin.appointments.text"/>
                 </p>
-                <field>
-                    <appointments class="appointment-checkbox"/>
-                </field>
+                <appointments class="appointment-checkbox"/>
             </fieldset>
         </section>
 
