@@ -26,6 +26,8 @@ encounterType:
     uuid: "78d02c05-5b41-4cb6-8c7c-f2e64773489f"
   sierraLeoneNewbornReferral:
     uuid: "928d21b1-9514-44a0-960f-bdad3551e0eb"
+  sierraLeoneNicuTriage:
+    uuid: "fb4318dd-cca9-4d20-bb31-0d4eba947d74"
   sierraLeoneLaborProgress:
     uuid: "ac5ec970-31b7-4659-9141-284bfbc13c69"
   sierraLeoneLaborDeliverySummary:

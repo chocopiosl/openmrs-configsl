@@ -16,4 +16,5 @@ ${encounterType.sierraLeoneLaborDeliverySummary.uuid},,Labor and Delivery Summar
 ${encounterType.sierraLeoneMaternalDischarge.uuid},,Maternal Discharge,Maternal Discharge in Sierra Leone
 ${encounterType.sierraLeoneNewbornDischarge.uuid},,Newborn Discharge,Newborn Discharge in Sierra Leone
 ${encounterType.sierraLeonePostpartumProgress.uuid},,Postpartum progress,Postpartum Maternal Daily Progress in Sierra Leone
+${encounterType.sierraLeoneNicuTriage.uuid},,NICU Triage,NICU Triage in Sierra Leone
 ${encounterType.sierraLeoneVitalsNCD.uuid},,Vitals for NCD,Vitals modified with glucose measurement for NCD clinic in Sierra Leone
