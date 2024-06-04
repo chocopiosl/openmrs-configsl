@@ -2,7 +2,8 @@
   "@openmrs/esm-appointments-app": {
     "checkInButton": {
       "customUrl": "${openmrsBase}/htmlformentryui/htmlform/enterHtmlFormWithSimpleUi.page?patientId=${patientUuid}&definitionUiResource=file:pih/htmlforms/checkin.xml&createVisit=true&returnUrl=${openmrsSpaBase}%2Fhome%2Fappointments"
-    }
+    },
+    "patientIdentifierType": "KGHEMRID"
   },
   "@openmrs/esm-login-app": {
     "chooseLocation": {
