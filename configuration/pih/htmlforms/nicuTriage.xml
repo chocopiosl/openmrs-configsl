@@ -287,7 +287,7 @@
             <table>
                 <tr>
                     <td>
-                        <div class="five-columns">
+                        <div class="four-columns">
                             <div>
                                 <label>
                                     <uimessage code="Temp"/>
@@ -352,14 +352,20 @@
 
                 <tr>
                     <td>
-                        <div>
-                            <label>
-                                <uimessage code="o2Sat"/>
-                            </label>
-                            <span class="small">
-                                <obs conceptId="CIEL:5092" id="o2_sat"
-                                     showUnits="emr.units.percent" unitsCssClass="append-to-value"/>
-                            </span>
+                        <div class="five-columns">
+                            <div>
+                                <label>
+                                    <uimessage code="o2Sat"/>
+                                </label>
+                                <span class="small">
+                                    <obs conceptId="CIEL:5092" id="o2_sat"
+                                         showUnits="emr.units.percent" unitsCssClass="append-to-value"/>
+                                </span>
+                            </div>
+                            <div></div> <!-- AVPU/Level of consciousness (CIEL:162643) Finding/Coded -->
+                            <div></div> <!-- Hb/Hemoglobin (CIEL:21) Test/Numeric with units -->
+                            <div></div> <!-- Serum glucose (CIEL:887) Test/Numeric with units-->
+                            <div></div> <!-- MRDT Malaria rapid test (CIEL:1643) Test/coded -->
                         </div>
                     </td>
                 </tr>
