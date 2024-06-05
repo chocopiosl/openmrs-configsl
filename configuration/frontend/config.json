@@ -285,46 +285,30 @@
     },
     "visitQueueNumberAttributeUuid": "",
     "defaultFacilityUrl": "",
-    "tablesConfig": {
+   "queueTables": {
       "columnDefinitions": [
         {
-          "id": "patient-name",
-          "columnType": "patient-name-column"
-        },
-        {
           "id": "emr-id",
-          "columnType": "patient-identifier-column",
+          "columnType": "patient-identifier",
           "config": {
-            "identifierType": "${patientIdentifierType.kghEmrId.uuid}"
+            "identifierTypeUuid": "${patientIdentifierType.kghEmrId.uuid}"
           },
           "header": "EMR ID"
         },
         {
-          "id": "age",
-          "columnType": "patient-age-column"
-        },
-        {
-          "id": "wait-time",
-          "columnType": "wait-time-column"
-        },
-        {
           "id": "in-service-time",
-          "columnType": "wait-time-column",
+          "columnType": "wait-time",
           "header": "Time in service"
         },
         {
           "id": "check-in-date",
-          "columnType": "visit-start-time-column",
+          "columnType": "visit-start-time",
           "header": "Check-in date"
-        },
-        {
-          "id": "actions",
-          "columnType": "actions-column"
         }
       ],
       "tableDefinitions": [
         {
-          "columns": ["patient-name", "emr-id", "age", "check-in-date", "wait-time", "actions"],
+          "columns": ["patient-name", "emr-id", "patient-age", "check-in-date", "wait-time", "actions"],
           "appliedTo": [
             {
               "queue": "${queue.triage.uuid}",
@@ -333,7 +317,7 @@
           ]
         },
         {
-          "columns": ["patient-name", "emr-id", "age", "in-service-time", "actions"],
+          "columns": ["patient-name", "emr-id", "patient-age", "in-service-time", "actions"],
           "appliedTo": [
             {
               "queue": "${queue.triage.uuid}",
@@ -342,7 +326,7 @@
           ]
         },
         {
-          "columns": ["patient-name", "emr-id", "age", "wait-time", "actions"]
+          "columns": ["patient-name", "emr-id", "patient-age", "priority", "wait-time", "actions"]
         }
       ]
     }
