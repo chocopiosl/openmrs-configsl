@@ -115,8 +115,8 @@ create temporary table temp_ncd
  asthma_control_GINA                     varchar(255),    
  echocardiogram_obs_group_id             int,             
  echocardiogram_date                     date,            
- diabetic_comma                          boolean,         
- diabetic_without_comma                  boolean,    
+ diabetic_coma                          boolean,         
+ diabetic_without_coma                  boolean,    
  lab_tests_ordered                       text,            
  index_asc                               int,             
  index_desc                              int              
@@ -594,16 +594,16 @@ SET t.lab_order_hba1c= o.lab_order_hba1c;
 
 
 UPDATE temp_ncd t
-SET diabetic_comma = answer_exists_in_encounter(t.encounter_id, 'PIH', '14921', 'PIH','14482');
+SET diabetic_coma = answer_exists_in_encounter(t.encounter_id, 'PIH', '14921', 'PIH','14482');
 UPDATE temp_ncd t
-SET diabetic_comma=NULL 
-WHERE diabetic_comma=FALSE;
+SET diabetic_coma=NULL 
+WHERE diabetic_coma=FALSE;
 
 UPDATE temp_ncd t
-SET diabetic_without_comma = answer_exists_in_encounter(t.encounter_id, 'PIH', '14921', 'PIH','14483');
+SET diabetic_without_coma = answer_exists_in_encounter(t.encounter_id, 'PIH', '14921', 'PIH','14483');
 UPDATE temp_ncd t
-SET diabetic_without_comma=NULL 
-WHERE diabetic_without_comma=FALSE;
+SET diabetic_without_coma=NULL 
+WHERE diabetic_without_coma=FALSE;
 
 -- lab tests
 select order_type_id into @testOrder from order_type ot where uuid = '52a447d3-a64a-11e3-9aeb-50e549534c5e';
