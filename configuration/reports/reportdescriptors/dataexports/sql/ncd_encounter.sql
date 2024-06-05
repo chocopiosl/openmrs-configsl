@@ -93,7 +93,8 @@ create temporary table temp_ncd
  on_on_ace_inhibitor_group_id            int,             
  on_ace_inhibitor                        varchar(255),    
  on_beta_blocker                         varchar(255),    
- secondary_antibiotic_prophylaxis        boolean,         
+ secondary_antibiotic_prophylaxis        boolean,   
+ referred_to_surgery_for_heart_failure   varchar(255), 
  cardiac_surgery_scheduled               varchar(255),    
  type_cardiac_surgery                    varchar(255),    
  cardiac_surgery_performed_date          date,            
@@ -114,8 +115,8 @@ create temporary table temp_ncd
  asthma_control_GINA                     varchar(255),    
  echocardiogram_obs_group_id             int,             
  echocardiogram_date                     date,            
- diabetic_comma                          boolean,         
- diabetic_without_comma                  boolean,         
+ diabetic_coma                          boolean,         
+ diabetic_without_coma                  boolean,    
  lab_tests_ordered                       text,            
  index_asc                               int,             
  index_desc                              int              
@@ -145,6 +146,8 @@ and e.encounter_type in (@NCDInitial,@NCDFollowup)
 and (DATE(encounter_datetime) >=  date(@startDate) or @startDate is null)
 and (DATE(encounter_datetime) <=  date(@endDate) or @endDate is null)
 ;	
+
+create index ncd_encounter_ei on temp_ncd(encounter_id);
 
 -- encounter level columns
 update temp_ncd
@@ -534,6 +537,9 @@ update temp_ncd t
 set cardiac_surgery_performed_date = obs_value_datetime_from_temp(encounter_id, 'PIH','10485');
 
 update temp_ncd t
+set referred_to_surgery_for_heart_failure = obs_value_coded_list_from_temp(encounter_id, 'PIH','14738',@locale);
+
+update temp_ncd t
 set scd_penicillin_treatment = 
 	if(obs_single_value_coded_from_temp(encounter_id, 'PIH','14857','PIH','784')=@yes, 1,null);
 
@@ -588,16 +594,16 @@ SET t.lab_order_hba1c= o.lab_order_hba1c;
 
 
 UPDATE temp_ncd t
-SET diabetic_comma = answer_exists_in_encounter(t.encounter_id, 'PIH', '14921', 'PIH','14482');
+SET diabetic_coma = answer_exists_in_encounter(t.encounter_id, 'PIH', '14921', 'PIH','14482');
 UPDATE temp_ncd t
-SET diabetic_comma=NULL 
-WHERE diabetic_comma=FALSE;
+SET diabetic_coma=NULL 
+WHERE diabetic_coma=FALSE;
 
 UPDATE temp_ncd t
-SET diabetic_without_comma = answer_exists_in_encounter(t.encounter_id, 'PIH', '14921', 'PIH','14483');
+SET diabetic_without_coma = answer_exists_in_encounter(t.encounter_id, 'PIH', '14921', 'PIH','14483');
 UPDATE temp_ncd t
-SET diabetic_without_comma=NULL 
-WHERE diabetic_without_comma=FALSE;
+SET diabetic_without_coma=NULL 
+WHERE diabetic_without_coma=FALSE;
 
 -- lab tests
 select order_type_id into @testOrder from order_type ot where uuid = '52a447d3-a64a-11e3-9aeb-50e549534c5e';
@@ -740,6 +746,7 @@ echocardiogram_findings,
 on_ace_inhibitor,
 on_beta_blocker,
 secondary_antibiotic_prophylaxis,
+referred_to_surgery_for_heart_failure,
 cardiac_surgery_scheduled,
 type_cardiac_surgery,
 cardiac_surgery_performed,
