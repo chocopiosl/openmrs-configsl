@@ -16,6 +16,7 @@
   "components": [
     "activeVisits",
     "allergies",
+    "appointments",
     "ayfsProgram",
     "checkIn",
     "checkInHomepageApp",
