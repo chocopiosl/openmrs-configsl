@@ -362,7 +362,19 @@
                                          showUnits="emr.units.percent" unitsCssClass="append-to-value"/>
                                 </span>
                             </div>
-                            <div></div> <!-- AVPU/Level of consciousness (CIEL:162643) Finding/Coded -->
+
+                            <div>
+                                <label>
+                                    <uimessage code="Level of consciousness"/>
+                                </label>
+                                <p class="side-by-side">
+                                <span class="small radio-group">
+                                    <obs conceptId="CIEL:162643" id="AVPU"
+                                         answerSeparator="&lt;br&gt;"
+                                   style="radio" />
+                                </span>
+                                </p>
+                            </div> <!-- AVPU/Level of consciousness (CIEL:162643) Finding/Coded  Dropdown -->
                             <div></div> <!-- Hb/Hemoglobin (CIEL:21) Test/Numeric with units -->
                             <div></div> <!-- Serum glucose (CIEL:887) Test/Numeric with units-->
                             <div>
