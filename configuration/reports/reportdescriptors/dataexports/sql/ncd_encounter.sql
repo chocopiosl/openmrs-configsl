@@ -76,7 +76,10 @@ create temporary table temp_ncd
  rheumatic_heart_disease                 bit,             
  congenital_heart_disease                bit,             
  nyha_classification                     varchar(255),    
- lung_disease_type                       text,            
+ lung_disease_type                       text,    
+ on_saba                                 bit,
+ on_oral_salbutamol                      bit,
+ on_steroid_inhaler                      bit,
  ckd_stage                               varchar(255),    
  ckd_indicators_obs_group                int(11),         
  ckd_controlled                          varchar(255),    
@@ -462,6 +465,18 @@ and o.concept_id = @dx
 );
 
 update temp_ncd t
+set on_saba = 
+	if(obs_single_value_coded_from_temp(encounter_id, 'PIH','14603','PIH','14604')=@yes, 1,null);
+
+update temp_ncd t
+set on_oral_salbutamol = 
+	if(obs_single_value_coded_from_temp(encounter_id, 'PIH','14603','PIH','15163')=@yes, 1,null);
+
+update temp_ncd t
+set on_steroid_inhaler = 
+	if(obs_single_value_coded_from_temp(encounter_id, 'PIH','14603','PIH','14609')=@yes, 1,null);
+
+update temp_ncd t
 set ckd_stage = obs_value_coded_list_from_temp(encounter_id, 'PIH','12501',@locale);
 
 UPDATE temp_ncd t
@@ -734,6 +749,9 @@ rheumatic_heart_disease,
 congenital_heart_disease,
 nyha_classification,
 lung_disease_type,
+on_saba,
+on_oral_salbutamol,
+on_steroid_inhaler,
 ckd_stage,
 ckd_controlled,
 liver_disease_controlled,
