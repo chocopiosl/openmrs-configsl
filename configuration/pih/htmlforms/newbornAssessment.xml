@@ -620,16 +620,19 @@
                 </div>
                 <div id="type-resuscitation">
                     <label>
-                        <uimessage code="Type of resuscitation"/>
+                        <uimessage code="Method of resuscitation"/>
                     </label>
                     <p>
                         <repeat>
                             <template>
                                 <obs conceptId="CIEL:165995" style="checkbox" answerConceptId="{management}"/>
                             </template>
-                            <render management="CIEL:162738"/>
+                            <render management="CIEL:162738" aLabel="Supplimental oxygen"/>
+                            <render management="CIEL:167383" aLabel="Ventilation bag"/>
+                            <render management="CIEL:165935" aLabel="Endotrachial intubation"/>
+                            <render management="CIEL:167415" aLabel="Heart massage"/>
                         </repeat>
-                        <i>others?</i>
+
                     </p>
                 </div>
         </div>
