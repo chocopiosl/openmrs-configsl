@@ -627,7 +627,7 @@
                             <template>
                                 <obs conceptId="CIEL:165995" style="checkbox" answerConceptId="{management}"/>
                             </template>
-                            <render management="CIEL:162738" aLabel="Supplimental oxygen"/>
+                            <render management="CIEL:162738" aLabel="Supplemental oxygen"/>
                             <render management="CIEL:167383" aLabel="Ventilation bag"/>
                             <render management="CIEL:165935" aLabel="Endotrachial intubation"/>
                             <render management="CIEL:167415" aLabel="Heart massage"/>

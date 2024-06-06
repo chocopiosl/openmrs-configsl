@@ -692,7 +692,9 @@
                 <label>
                     <uimessage code="Birth attendant" />
                 </label>
-                <obs id="birth-attendant" style="radio" conceptId="PIH:20118">
+                <obs id="birth-attendant" style="radio" conceptId="PIH:20118"
+                     answerConceptIds="PIH:9719,PIH:20156,PIH:20157,PIH:20158,PIH:5622"
+                     answerCodes="Doctor,SECHN Midwife,RN Midwife,ESO,other">
                     <controls>
                         <when value="CIEL:5622" thenDisplay="#other-ba"/>
                     </controls>
@@ -704,6 +706,7 @@
                     <uimessage code="if other, specify type of birth attendant"/>
                 </label>
                 <obs conceptId="PIH:20119" style="text" />
+                <br/>
             </div>
 
             <p class="side-by-side">
