@@ -463,23 +463,22 @@
         </div>
     </section>
 
-     <section id="preg-complications" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="Pregnancy complications">
+     <section id="labor-complications" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Labour complications">
         <div class="section-container">
             <repeat>
                 <template>
-                    <obs conceptId="PIH:3334" answerConceptId="{concept}" style="checkbox"/>
+                    <obs conceptId="PIH:6644" answerConceptId="{concept}" style="checkbox"/>
                 </template>
+                <render concept="CIEL:230"    name="Postpartum hemorrhage"/>
+                <render concept="CIEL:113602" name="Prolonged labor"/>
+                <render concept="CIEL:127259" name="Ruptured uterus"/>
+                <render concept="CIEL:127592" name="Retained placenta"/>
+
                 <render concept="CIEL:115491" name="Multiple gestation" />
-                <render concept="CIEL:118256" name="(signs of) Fetal distress"/>
                 <render concept="CIEL:150862" name="Abnormal fetal presentation"/>
-                <render concept="CIEL:1449"   name="Gestational diabetes"/>
-                <render concept="CIEL:134594" name="Malaria in pregnancy"/>
-                <render concept="CIEL:148834" name="Anemia in pregnancy"/>
-                <render concept="CIEL:118744" name="Eclampsia"/>
-                <render concept="CIEL:129251" name="Preeclampsia"/>
-                <render concept="CIEL:165088" name="Victim of GBV (gender-based violence)"/>
-                <render concept="CIEL:117703" name="Sickle-cell"/>
+                <render concept="CIEL:118256" name="(signs of) Fetal distress"/>
+
                 <render concept="CIEL:5622" name="other"/>
             </repeat>
 
