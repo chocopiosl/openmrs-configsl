@@ -638,6 +638,13 @@
         </div>
 
             <p>
+                <!-- Adrenaline administered -->
+                <obs conceptId="PIH:12603" style="checkbox"
+                     answerConceptId="CIEL:154365" answerCode="Adrenaline administered"
+                     commentFieldLabel="if adrenaline administered, enter dosing information:" />
+            </p>
+
+            <p>
                 <label>
                     <uimessage code="Diagnosis at birth"/>
                 </label>
