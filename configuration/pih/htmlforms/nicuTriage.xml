@@ -365,11 +365,11 @@
 
                             <div>
                                 <label>
-                                    <uimessage code="Level of consciousness"/>
+                                    <uimessage code="AVPU"/>
                                 </label>
                                 <p class="side-by-side">
                                 <span class="small radio-group">
-                                    <obs conceptId="CIEL:162643" id="AVPU"
+                                    <obs conceptId="CIEL:162643" id="Level of Consciousness"
                                          answerSeparator="&lt;br&gt;"
                                    style="radio" />
                                 </span>
