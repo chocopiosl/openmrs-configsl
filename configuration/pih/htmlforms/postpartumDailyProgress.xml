@@ -541,6 +541,21 @@
                 </div>
 
                 <div>
+                    <p>
+                        <label>
+                            <uimessage code="Postpartum complications"/>
+                        </label>
+
+                        <repeat>
+                            <template>
+                                <obs conceptId="CIEL:163208" style="checkbox"
+                                     answerConceptId="{csState}" />
+                            </template>
+                            <!-- <render csState="CIEL:xx" csName="Severe infection"/> -->
+                            <render csState="CIEL:126721" csName="Sepsis"/>
+                        </repeat>
+                    </p>
+
                     <p class="exam">
                         <label>
                             <uimessage code="pihcore.csWoundStatus"/>
@@ -681,58 +696,83 @@
         </div>
     </section>
 
-    <section id="postpartum-fp" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="pihcore.familyPlanning.title">
+    <section id="health-ed" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Health education">
         <div class="section-container">
-            <p class="list-inline-wide">
-                <label>
-                    <uimessage code="Family planning counselling"/>
-                </label>
-                <obs conceptId="CIEL:1382" style="radio"
-                     answerConceptIds="CIEL:1065,CIEL:1066"
-                     answerCodes="yes,no" />
-            </p>
-
-            <p class="list-inline-wide">
-                <label>
-                    <uimessage code="Accepts and receives family planning"/>
-                </label>
-                <obs id="accepts-fp" conceptId="CIEL:166421" style="radio"
-                     answerConceptIds="CIEL:1065,CIEL:1066"
-                     answerCodes="yes,no" >
-                    <controls>
-                        <when value="CIEL:1065" thenDisplay="#family-method" />
-                    </controls>
-                </obs>
-            </p>
-
-            <div id="family-method" class="two-columns">
+            <div>
                 <div>
-                    <p class="side-by-side">
+                    <p class="list-inline-wide">
                         <label>
-                            <uimessage code="pihcore.fpMethod" />
+                            <uimessage code="Family planning counselling"/>
                         </label>
-                        <br/>
-                        <obsgroup groupingConceptId="PIH:Family planning construct">
-                            <obs id="fp-meth" conceptId="CIEL:374"
-                                 answerConceptIds="CIEL:159783,CIEL:80784,CIEL:5277,CIEL:190,CIEL:907,CIEL:5275,CIEL:1873,CIEL:1472,CIEL:136163"
-                                 answerCodes="Combined oral contraceptive (COC),Progestin-only pill (POP),pihcore.fp.rhythm,Condoms,Depo-provera,pihcore.fp.iud,Implant,pihcore.fp.tubalLig,pihcore.fp.breast"
-                                 style="radio" answerSeparator="&lt;br /&gt;">
-                                <controls>
-                                    <when value="CIEL:1873" thenDisplay="#implant-date" />
-                                    <when value="CIEL:5275" thenDisplay="#implant-date" />
-                                </controls>
-                            </obs>
-                        </obsgroup>
+                        <obs conceptId="CIEL:1382" style="radio"
+                             answerConceptIds="CIEL:1065,CIEL:1066"
+                             answerCodes="yes,no"/>
+                    </p>
+
+                    <p class="list-inline-wide">
+                        <label>
+                            <uimessage code="Accepts and receives family planning"/>
+                        </label>
+                        <obs id="accepts-fp" conceptId="CIEL:166421" style="radio"
+                             answerConceptIds="CIEL:1065,CIEL:1066"
+                             answerCodes="yes,no">
+                            <controls>
+                                <when value="CIEL:1065" thenDisplay="#family-method"/>
+                            </controls>
+                        </obs>
                     </p>
                 </div>
 
-                <div id="implant-date">
-                    <label>
-                        <uimessage code="pihcore.dateImplant"/>:
-                    </label>
-                    <obs conceptId="PIH:3203" />
+                <div id="family-method" class="two-columns">
+                    <div>
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="pihcore.fpMethod"/>
+                            </label>
+                            <br/>
+                            <obsgroup groupingConceptId="PIH:Family planning construct">
+                                <obs id="fp-meth" conceptId="CIEL:374"
+                                     answerConceptIds="CIEL:159783,CIEL:80784,CIEL:5277,CIEL:190,CIEL:907,CIEL:5275,CIEL:1873,CIEL:1472,CIEL:136163"
+                                     answerCodes="Combined oral contraceptive (COC),Progestin-only pill (POP),pihcore.fp.rhythm,Condoms,Depo-provera,pihcore.fp.iud,Implant,pihcore.fp.tubalLig,pihcore.fp.breast"
+                                     style="radio" answerSeparator="&lt;br /&gt;">
+                                    <controls>
+                                        <when value="CIEL:1873" thenDisplay="#implant-date"/>
+                                        <when value="CIEL:5275" thenDisplay="#implant-date"/>
+                                    </controls>
+                                </obs>
+                            </obsgroup>
+                        </p>
+                    </div>
+
+                    <div id="implant-date">
+                        <label>
+                            <uimessage code="pihcore.dateImplant"/>:
+                        </label>
+                        <obs conceptId="PIH:3203" />
+                    </div>
                 </div>
+            </div>
+
+            <div>
+                <p class="list-inline-wide">
+                    <label>
+                        <uimessage code="Breastfeeding education"/>
+                    </label>
+                    <obs conceptId="CIEL:1910" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"
+                         answerCodes="yes,no" />
+                </p>
+
+                <p class="list-inline-wide">
+                    <label>
+                        <uimessage code="Danger signs education"/>
+                    </label>
+                    <obs conceptId="CIEL:161541" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"
+                         answerCodes="yes,no" />
+                </p>
+
             </div>
         </div>
     </section>
