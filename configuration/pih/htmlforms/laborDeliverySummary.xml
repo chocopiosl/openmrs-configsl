@@ -164,10 +164,46 @@
             }
             // handlers for next and submit buttons, see nextAndSubmitButtons.js
             setUpNextAndSubmitButtons();
+
+                //disable all radio buttons associated with the Register in EMR question
+                // (this obs gets set automatically based on the other questions answers)
+                jq("span[id^='register-baby']").find("input[type='radio']").attr("disabled", true);
+                const aliveConceptId = '<lookup expression="fn.getConcept('CIEL:151849').id"/>';
+                const noConceptId = '<lookup expression="fn.getConcept('CIEL:1066').id"/>';
+
+                jq("span[id^='dead-or-alive-']").find("input[type='radio']").change(function(event) {
+                    if (this.checked) {
+                        // navigate up the DOM to the parent .fetus div for this baby
+                        let parentDiv = jq(this).closest(".fetus");
+                        if (parentDiv) {
+                            //find the enclosed Register in EMR obs associated with this .fetus div
+                            let nextRegisterBaby = jq(parentDiv).find("span[id^='register-baby-']");
+                            if (nextRegisterBaby) {
+                                let obsValue = jq(this).prop('value');
+                                let isRegisteredInEMR = jq(nextRegisterBaby).find("input[type='radio'][value='" + noConceptId + "']");
+                                if (isRegisteredInEMR) {
+                                    if ( obsValue === aliveConceptId) {
+                                        jq(isRegisteredInEMR).prop("checked", true);
+                                    } else {
+                                        jq(isRegisteredInEMR).prop("checked", true);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                beforeSubmit.push(function() {
+                    //re-enable the register patient in EMR obs so they could be saved
+                    jq("span[id^='register-baby']").find("input[type='radio']").attr("disabled", false);
+                    return true;
+
+                });
             });
         </script>
     </ifMode>
 
+    
     <div class="print-form-datestamps" style="display:none">
         <p><uimessage code="pihcore.form.created_on"/>:
             <lookup complexExpression="$form.dateCreated"/>
@@ -512,6 +548,22 @@
 
                                     <!-- APGAR at 10 minutes -->
                                     <obs conceptId="PIH:14785"/>
+                                </div>
+                            </div>
+                            <div class="three-columns">
+                                <div>
+                                    <br/>
+                                    <p class="side-by-side disabled">
+                                        <label>
+                                            <uimessage code="Is baby registered in EMR?"/>
+                                        </label>
+                                        <obs id="register-baby-{0}"
+                                             conceptId="PIH:20150" style="radio"
+                                             answerConceptIds="CIEL:1066,CIEL:1065,CIEL:1175"
+                                             answerCodes="No,Yes,Do not register"
+                                             class="disabled">
+                                        </obs>
+                                    </p>
                                 </div>
                             </div>
                         </div>
