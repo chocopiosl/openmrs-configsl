@@ -9,6 +9,14 @@
         <macro key="mcoeTriageLocation" value="f85feffc-fe54-4648-aa14-01ed6d30b943"/>
     </macros>
 
+    <translations defaultLocale="en">
+        <code name="o2Sat">
+            <variant locale="en" value="O&lt;sub&gt;2&lt;/sub&gt; Sat"/>
+            <variant locale="fr" value="SpO&lt;sub&gt;2&lt;/sub&gt;"/>
+            <variant locale="es" value="SatO&lt;sub&gt;2&lt;/sub&gt;"/>
+        </code>
+    </translations>
+
     <style type="text/css">
         #who-when-where {
             margin-bottom: 6px;
@@ -47,10 +55,15 @@
             margin-top: 20px;
         }
 
-        .five-columns, .four-columns, .three-plus-one, .three-columns, .two-columns {
+        .six-columns, .five-columns, .four-columns, .three-plus-one, .three-columns, .two-columns {
             display: table;
             height: 100%;
             width: 100%;
+        }
+
+        .six-columns > div {
+            display: table-cell;
+            width: 16.6%;
         }
 
         .five-columns > div {
@@ -134,7 +147,7 @@
         }
 
         .vitals-values input[type="text"] {
-            color: #fff;
+            color: black;
         }
 
         #chief_complaint {
@@ -152,6 +165,7 @@
 
         .triage-label-yellow {
             background-color: #e8e457;
+            color: #708090;
         }
 
         .triage-label-red {
@@ -600,7 +614,7 @@
             </div>
     </ifMode>
 
-    <div class="vitals two-columns">
+    <div class="two-columns">
         <div>
             <p class="side-by-side">
                 <label>
@@ -625,180 +639,210 @@
 
     <div class="complaint">
         <p class="side-by-side">
-            <label class="headerLabel"><uimessage code="Main complaint"/>:&amp;nbsp;&amp;nbsp;</label>
+            <label>
+                <uimessage code="Main complaint"/>:&amp;nbsp;&amp;nbsp;
+            </label>
             <obs conceptId="CIEL:160531" id="chief_complaint"/>
         </p>
     </div>
 
-    <div class="vitals">
-        <p class="side-by-side">
-            <label class="headerLabel">
-                <uimessage code="Vitals:&amp;nbsp;&amp;nbsp;" />
-            </label>
+    <div class="vitals six-columns">
+        <div>
             <label>
-                <uimessage code="BP:" />
+                <uimessage code="mirebalais.vitals.bloodPressure.short.title"/>
             </label>
-            <obs conceptId="PIH:SYSTOLIC BLOOD PRESSURE" id="bp_systolic" class="vitals-values"/>
-                /
-            <obs conceptId="PIH:DIASTOLIC BLOOD PRESSURE" id="bp_diastolic" class="vitals-values"/>
-            <label>
-                <uimessage code="&amp;nbsp;&amp;nbsp;&amp;nbsp;HR: " />
-            </label>
-            <obs conceptId="PIH:PULSE" id="heart_rate" class="vitals-values"/>
-            <label>
-                <uimessage code="emr.units.perMinute" />
-            </label>
-            <label>
-                <uimessage code="&amp;nbsp;&amp;nbsp;&amp;nbsp;RR: " />
-            </label>
-            <obs conceptId="PIH:RESPIRATORY RATE" id="respiratory_rate" class="vitals-values"/>
-            <label>
-                <uimessage code="emr.units.perMinute" />
-            </label>
-            <label>
-                <uimessage code="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;T: " />
-            </label>
-            <obs conceptId="PIH:TEMPERATURE (C)" id="temperature_c" class="vitals-values"/>
-            <label>
-                <uimessage code="emr.units.degreesCelsius" />
-            </label>
-            <label>&amp;nbsp;&amp;nbsp;&amp;nbsp;</label>
-            <label>
-                <uimessage code="mirebalais.vitals.o2sat.title" />:
-            </label>
-            <obs conceptId="PIH:BLOOD OXYGEN SATURATION" id="o2_sat" class="vitals-values"/>
-            <label>
-                <uimessage code="emr.units.percent" />
-            </label>
-            <label>
-                <uimessage code="&amp;nbsp;&amp;nbsp;FHR: " />
-            </label>
-            <obs conceptId="CIEL:1440" id="fhr" class="vitals-values"/>
-            <label>
-                <uimessage code="emr.units.perMinute" />
-            </label>
-        </p>
-    </div>
+            <span class="small">
+                <ifMode mode="VIEW" include="true">
+                    <span class="append-to-value">
+                        <obs conceptId="CIEL:5085" id="bp_systolic" />
+                    </span>
+                    <span class="append-to-value">/</span>
+                    <span class="append-to-value">
+                        <obs conceptId="CIEL:5086" id="bp_diastolic" />
+                    </span>
+                    <span class="append-to-value">mm/Hg</span>
+                </ifMode>
+                <ifMode mode="VIEW" include="false">
+                    <span class="append-to-value left">
+                        <obs conceptId="CIEL:5085" id="bp_systolic" class="vitals-values"/>
+                    </span>
+                    <span class="append-to-value left">/</span>
+                    <span class="append-to-value left">
+                        <obs conceptId="CIEL:5086" id="bp_diastolic" class="vitals-values"/>
+                    </span>
+                    <span class="append-to-value">mm/Hg</span>
+                </ifMode>
+            </span>
+        </div>
 
-    <div class="boundary"></div>
+        <div>
+            <label>
+                <uimessage code="mirebalais.vitals.short.heartRate.title"/>
+            </label>
+            <span class="small">
+                <obs conceptId="CIEL:5087" id="heart_rate" class="vitals-values"
+                     showUnits="emr.units.perMinute" unitsCssClass="append-to-value"/>
+            </span>
+        </div>
 
-    <div class="three-plus-one">
         <div>
-            <h3 class="panel-title">Evaluation</h3>
+            <label>
+                <uimessage code="mirebalais.vitals.respiratoryRate.short.title"/>
+            </label>
+            <span class="small">
+                <obs conceptId="CIEL:5242" id="respiratory_rate" class="vitals-values"
+                     showUnits="emr.units.perMinute" unitsCssClass="append-to-value"/>
+            </span>
         </div>
-        <div>
-            <h5 class="panel-title header-col">Normal
-                (Green: 4 hours)</h5>
-        </div>
-        <div>
-            <h5 class="panel-title header-col">Urgent
-                (Yellow: 30 minutes)</h5>
-        </div>
-        <div>
-            <h5 class="panel-title header-col">Emergency
-                (Red: Immediately)</h5>
-        </div>
-    </div>
 
-    <div class="three-plus-one exam">
         <div>
-            <label>Airway</label>
+            <label>
+                <uimessage code="Temp"/>
+            </label>
+            <span class="small">
+                <obs conceptId="CIEL:5088" id="temperature_c" class="vitals-values"
+                     showUnits="emr.units.degreesCelsius" unitsCssClass="append-to-value"/>
+            </span>
         </div>
+
         <div>
-            <obs class="normalObs greenObs" conceptId="PIH:20030" style="checkbox"
-                 answerConceptId="PIH:20032" answerCode="Patent"/>
+            <label>
+                <uimessage code="o2Sat"/>
+            </label>
+            <span class="small">
+                <obs conceptId="CIEL:5092" id="o2_sat" class="vitals-values"
+                     showUnits="emr.units.percent" unitsCssClass="append-to-value"/>
+            </span>
         </div>
+
         <div>
-        </div>
-        <div>
-            <obs class="abnormalObs redObs" conceptId="PIH:20030" style="checkbox"
-                 answerConceptId="CIEL:164348" answerCode="Obstructed Labor"/>
+            <label>
+                <uimessage code="FHR"/>
+            </label>
+            <span class="small">
+                <obs conceptId="CIEL:1440" id="fhr" class="vitals-values"
+                     showUnits="true" unitsCssClass="append-to-value"/>
+            </span>
         </div>
     </div>
 
-    <div class="three-plus-one exam">
-        <div>
-            <label>Disability</label>
-        </div>
-        <div>
-            <obs class="normalObs greenObs" conceptId="CIEL:162558" style="checkbox"
-                 answerConceptId="CIEL:160282" answerCode="Alert"/>
-        </div>
-        <div>
-            <repeat>
-                <template>
-                    <obs class="abnormalObs yellowObs" conceptId="CIEL:162558" style="checkbox"
-                         answerConceptId="{cId}" answerCode="{labelTag}"/>
-                </template>
-                <render cId="CIEL:118938" labelTag="Blurred vision" />
-            </repeat>
-        </div>
-        <div>
-            <repeat>
-                <template>
-                    <obs class="abnormalObs redObs" conceptId="CIEL:162558" style="checkbox"
-                         answerConceptId="{cId}" answerCode="{labelTag}"/>
-                </template>
-                <render cId="CIEL:139081" labelTag="Severe headache" />
-                <render cId="CIEL:113054" labelTag="Convulsing" />
-                <render cId="CIEL:144576" labelTag="Coma" />
-            </repeat>
-        </div>
-    </div>
+    <br/>
 
-    <div class="three-plus-one exam">
-        <div>
-            <label>Events</label>
-        </div>
-        <div>
-            <obs class="normalObs greenObs" conceptId="CIEL:165372" style="checkbox"
-                 answerConceptId="CIEL:1115" answerCode="Uneventful"/>
-        </div>
-        <div>
-            <repeat>
-                <template>
-                    <obs class="abnormalObs yellowObs" conceptId="CIEL:165372" style="checkbox"
-                         answerConceptId="{cId}" answerCode="{labelTag}"/>
-                </template>
-                <render cId="CIEL:110548" labelTag="Spotting" />
-                <render cId="CIEL:162193" labelTag="Labor" />
-                <render cId="PIH:20051" labelTag="SROM &gt;24h" />
-                <render cId="CIEL:151" labelTag="Abd pain" />
-            </repeat>
-        </div>
-        <div>
-            <repeat>
-                <template>
-                    <obs class="abnormalObs redObs" conceptId="CIEL:165372" style="checkbox"
-                         answerConceptId="{cId}" answerCode="{labelTag}"/>
-                </template>
-                <render cId="CIEL:147232" labelTag="Vaginal bleeding" />
-                <render cId="CIEL:165217" labelTag="Labor with imminent delivery" />
-                <render cId="CIEL:165271" labelTag="Severe abd pain" />
-            </repeat>
-        </div>
-    </div>
-    <div class="three-plus-one exam">
-        <div>
-            <label>Fetus</label>
-        </div>
-        <div>
-            <obs class="normalObs greenObs" conceptId="PIH:20033" style="checkbox"
-                 answerConceptId="CIEL:162108" answerCode="Moving (>24wks)"/>
-        </div>
-        <div>
-            <obs class="abnormalObs yellowObs" conceptId="PIH:20033" style="checkbox"
-                 answerConceptId="CIEL:113377" answerCode="Decreased FM"/>
-        </div>
-        <div>
-            <obs class="abnormalObs redObs" conceptId="PIH:20033" style="checkbox"
-            answerConceptId="CIEL:1452" answerCode="Absent FM"/>
-        </div>
-    </div>
+    <table>
+        <tr>
+            <td></td>
+            <th>
+                Normal<br/>(Green: 4 hours)
+            </th>
+            <th>
+                Urgent<br/>(Yellow: 30 minutes)
+            </th>
+            <th>
+                Emergency<br/>(Red: Immediately)
+            </th>
+        </tr>
 
-    <div class="boundary"></div>
-    
-    <p class="side-by-side">
+        <tr class="exam">
+            <th>
+                <label>Airway</label>
+            </th>
+            <td>
+                <obs class="normalObs greenObs" conceptId="PIH:20030" style="checkbox"
+                     answerConceptId="PIH:20032" answerCode="Patent"/>
+            </td>
+            <td>
+            </td>
+            <td>
+                <obs class="abnormalObs redObs" conceptId="PIH:20030" style="checkbox"
+                     answerConceptId="CIEL:164348" answerCode="Obstructed labor"/>
+            </td>
+        </tr>
+
+        <tr class="exam">
+            <th>
+                <label>Disability</label>
+            </th>
+            <td>
+                <obs class="normalObs greenObs" conceptId="CIEL:162558" style="checkbox"
+                     answerConceptId="CIEL:160282" answerCode="Alert"/>
+            </td>
+            <td>
+                <repeat>
+                    <template>
+                        <obs class="abnormalObs yellowObs" conceptId="CIEL:162558" style="checkbox"
+                             answerConceptId="{cId}" answerCode="{labelTag}"/>
+                    </template>
+                    <render cId="CIEL:118938" labelTag="Blurred vision" />
+                </repeat>
+            </td>
+            <td>
+                <repeat>
+                    <template>
+                        <obs class="abnormalObs redObs" conceptId="CIEL:162558" style="checkbox"
+                             answerConceptId="{cId}" answerCode="{labelTag}"/>
+                    </template>
+                    <render cId="CIEL:139081" labelTag="Severe headache" />
+                    <render cId="CIEL:113054" labelTag="Convulsing" />
+                    <render cId="CIEL:144576" labelTag="Coma" />
+                </repeat>
+            </td>
+        </tr>
+
+        <tr class="exam">
+            <th>
+                <label>Events</label>
+            </th>
+            <td>
+                <obs class="normalObs greenObs" conceptId="CIEL:165372" style="checkbox"
+                     answerConceptId="CIEL:1115" answerCode="Uneventful"/>
+            </td>
+            <td>
+                <repeat>
+                    <template>
+                        <obs class="abnormalObs yellowObs" conceptId="CIEL:165372" style="checkbox"
+                             answerConceptId="{cId}" answerCode="{labelTag}"/>
+                    </template>
+                    <render cId="CIEL:110548" labelTag="Spotting" />
+                    <render cId="CIEL:162193" labelTag="Labor" />
+                    <render cId="PIH:20051" labelTag="SROM &gt;24h" />
+                    <render cId="CIEL:151" labelTag="Abdominal pain" />
+                </repeat>
+            </td>
+            <td>
+                <repeat>
+                    <template>
+                        <obs class="abnormalObs redObs" conceptId="CIEL:165372" style="checkbox"
+                             answerConceptId="{cId}" answerCode="{labelTag}"/>
+                    </template>
+                    <render cId="CIEL:147232" labelTag="Vaginal bleeding" />
+                    <render cId="CIEL:165217" labelTag="Labor with imminent delivery" />
+                    <render cId="CIEL:165271" labelTag="Severe abdominal pain" />
+                </repeat>
+            </td>
+        </tr>
+
+        <tr class="exam">
+            <th>
+                <label>Fetus</label>
+            </th>
+            <td>
+                <obs class="normalObs greenObs" conceptId="PIH:20033" style="checkbox"
+                     answerConceptId="CIEL:162108" answerCode="Moving (>24wks)"/>
+            </td>
+            <td>
+                <obs class="abnormalObs yellowObs" conceptId="PIH:20033" style="checkbox"
+                     answerConceptId="CIEL:113377" answerCode="Decreased FM"/>
+            </td>
+            <td>
+                <obs class="abnormalObs redObs" conceptId="PIH:20033" style="checkbox"
+                answerConceptId="CIEL:1452" answerCode="Absent FM"/>
+            </td>
+        </tr>
+    </table>
+
+    <br/>
+
+    <p class="list-inline">
         <label>
             <uimessage code="Other complaints:" />
         </label>
@@ -806,7 +850,7 @@
              id="complaints"
              style="radio"
              answerConceptIds="CIEL:133632,CIEL:133473,PIH:OTHER"
-             answerCodes="Back/Musculo-skeletal pain,Nausea/Vomiting,Other">
+             answerCodes="Back/musculo-skeletal pain,Nausea/vomiting,other">
             <controls>
                 <when value="PIH:OTHER" thenDisplay="#other-complain"/>
             </controls>
@@ -815,9 +859,9 @@
     </p>
 
     <div class="ebolaDiv exam">
-        <p class="side-by-side">
+        <p class="list-inline">
             <label>
-                <uimessage code="Ebola Screen:" />
+                <uimessage code="Ebola screen:" />
             </label>
             <repeat>
                 <template>
@@ -839,7 +883,7 @@
     </label>
     <div class="tbScreen five-columns">
         <div></div>
-        <repeat with="['Cough > 2 weeks','11567'], ['Fever','5945'], ['Night Sweat','6029'],['Weight Loss','6477']">
+        <repeat with="['Cough > 2 weeks','11567'], ['Fever','5945'], ['Night sweat','6029'],['Weight loss','6477']">
             <div>
                 <p class="list-inline">
                     <!-- TB symptom -->
@@ -847,20 +891,20 @@
                     <obs conceptIds="PIH:11563,PIH:11564"
                          style="radio"
                          answerConceptId="PIH:{1}"
-                         conceptLabels="Yes, No"
+                         conceptLabels="yes,no"
                          labelText=""/>
                 </p>
             </div>
         </repeat>
     </div>
-    <div>
-        <span id="isolationMsg" >Patient needs isolation and urgent review by infectious disease team.</span>
+    <div id="isolationMsg">
+        Patient needs isolation and urgent review by infectious disease team.
     </div>
     <div class="boundary"></div>
     <div class="referralService">
-        <p class="side-by-side">
+        <p class="list-inline">
             <label>
-                <uimessage code="Any Red/Yellow Emergency:" />
+                <uimessage code="Any red/yellow emergency:" />
             </label>
             <obs conceptId="CIEL:1272"
                  style="radio"
@@ -869,9 +913,9 @@
                  answerCodes="Pre-Op/PACU,Labour and Delivery,MCCU"/>
         </p>
 
-        <p class="side-by-side">
+        <p class="list-inline">
             <label>
-                <uimessage code="Green/No Emergency:" />
+                <uimessage code="Green/no emergency:" />
             </label>
             <obs conceptId="CIEL:1272"
                  style="radio"
