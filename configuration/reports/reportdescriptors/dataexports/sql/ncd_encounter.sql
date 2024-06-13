@@ -165,12 +165,13 @@ set encounter_type = encounterName(encounter_type_id);
 update temp_ncd
 set provider = provider(encounter_id);
 
-
 -- patient level columns
 drop temporary table if exists temp_ncd_patients;
 create temporary table temp_ncd_patients
 	(patient_id int(11),
 	emr_id varchar(255));
+
+create index temp_ncd_patients_pi on temp_ncd_patients(patient_id);
 
 insert into temp_ncd_patients (patient_id)
 select distinct patient_id from temp_ncd;
@@ -192,11 +193,19 @@ inner join temp_ncd t on t.encounter_id = o.encounter_id
 where o.voided = 0 
 ;
 
+create index temp_obs_oi on temp_obs(obs_id);
+create index temp_obs_ci1 on temp_obs(encounter_id,concept_id);
+create index temp_obs_ci2 on temp_obs(person_id,concept_id);
+create index temp_obs_ci3 on temp_obs(encounter_id, concept_id, value_coded);
+create index temp_obs_ci4 on temp_obs(obs_group_id, concept_id);
+
 DROP TEMPORARY TABLE IF EXISTS limitation_obs_id;
 CREATE TEMPORARY TABLE limitation_obs_id
 SELECT encounter_id, obs_id AS obs_group_id
 FROM temp_obs
 WHERE concept_id=concept_from_mapping('PIH','14587');
+
+create index limitation_obs_id_c1 on limitation_obs_id(encounter_id, obs_group_id);
 
 update temp_ncd t
 set echocardiogram_obs_group_id=obs_group_id_of_value_coded_from_temp(encounter_id,'PIH','8614','PIH','3763');
@@ -256,7 +265,6 @@ set risk_factors = (
 		@ace_inhibitors,@nsaids,@nephrotoxic_drugs,@history_cardiac_disease)
 	group by encounter_id);
 
-
 update temp_ncd t
 set comorbidities = obs_value_coded_list_from_temp(encounter_id, 'PIH','12976',@locale);
 
@@ -276,7 +284,6 @@ set fbg_level = obs_value_numeric_from_temp(encounter_id, 'CIEL','160912');
 
 update temp_ncd t 
 set rbg_level = obs_value_numeric_from_temp(encounter_id, 'CIEL','887');
-
 	
 update temp_ncd t
 set bmi = 
@@ -285,7 +292,6 @@ set bmi =
 		WHEN concept_name(concept_from_mapping('PIH','14455'),@locale) then 'Severe obese'
 		ELSE obs_value_coded_list_from_temp(encounter_id, 'PIH','14126',@locale)
 	END;
-
 
 update temp_ncd t
 set obesity = 
