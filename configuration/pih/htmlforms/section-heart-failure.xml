@@ -176,23 +176,33 @@
                     </div>
                     <div>
                         <div id="cardiomyopathy">
-                            <p class="side-by-side">
+                            <p>
                                 <label>
                                     <uimessage code="pihcore.ncd.cardiomyopathy"/>
                                 </label>
                                 <br/>
-                                <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                                    <obs conceptId="PIH:DIAGNOSIS" style="radio"
-                                         answerConceptIds="CIEL:139529,CIEL:142317,CIEL:168116,CIEL:113918,CIEL:163712,CIEL:168116,CIEL:168128,PIH:14748"
-                                         answerSeparator="&lt;br /&gt;" />
-                                </obsgroup>
+                                <repeat>
+                                    <template>
+                                        <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                            <obs conceptId="PIH:DIAGNOSIS" style="checkbox"
+                                                 answerConceptId="{aId}" />
+                                        </obsgroup>
+
+                                    </template>
+                                    <render aId="CIEL:168116" def="Hypertensive cardiopathy" />
+                                    <render aId="CIEL:139529" def="Ischemic cardiopathy" />
+                                    <render aId="CIEL:142317" def="Alcohol-related cardiopathy" />
+                                    <render aId="CIEL:113918" def="Peripartum cardiopathy" />
+                                    <render aId="CIEL:120148" def="Arrythmia-related cardiopathy" />
+                                    <render aId="CIEL:163712" def="HIV-associated cardiopathy" />
+                                    <render aId="CIEL:168116" def="Chemotherapy-induced cardiopathy" />
+                                    <render aId="CIEL:168182" def="Dilated (viral/iodiopathic) cardiopathy" />
+                                    <render aId="PIH:14753"   def="Cardiopathy due to unknown factors" />
+                                </repeat>
+
                                 <br/>
-                                <obs conceptId="PIH:14752" style="checkbox"
-                                     answerConceptId="PIH:14753" answerCode="unknown" />
-                                <br/>
-                                <obs conceptId="PIH:14752" style="checkbox"
-                                     answerConceptId="PIH:14754" answerCode="other" />
-                                <obs conceptId="PIH:14754" style="text" />
+                                <obs conceptId="PIH:14754"
+                                     labelText="if other cardiomyopathy, specify:" style="text" />
                             </p>
 
                         </div>
@@ -203,9 +213,15 @@
                                     <uimessage code="Rheumatic heart disease"/>
                                 </label>
                                 <br/>
+                                <!-- old
+                                    answerConceptIds="CIEL:127437,CIEL:127438,CIEL:127436,CIEL:127455,CIEL:127456,CIEL:127454,PIH:14750"
+                                    new:
+                                    answerCodes="Pure mitral stenosis,Pure mitral regurgitation,Mixed mitral valve disease (MS+MR),
+                                       Isolated aortic valve disease (AVD), Mixed mitral and aortic valve disease (MMAVD), other, unknown"
+                                    -->
                                 <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
                                     <obs conceptId="PIH:DIAGNOSIS" style="radio"
-                                         answerConceptIds="CIEL:127437,CIEL:127438,CIEL:127436,CIEL:127455,CIEL:127456,CIEL:127454,PIH:14750"
+                                         answerConceptIds="CIEL:127437,CIEL:127438,CIEL:127436, CIEL:127455,CIEL:127456,CIEL:127454,PIH:14750"
                                          answerSeparator="&lt;br /&gt;" />
                                 </obsgroup>
                             </p>
@@ -293,23 +309,26 @@
                         </div>
 
                         <div id="congenitalHeart">
-                            <p class="side-by-side">
+                            <p>
                                 <label>
                                     <uimessage code="Congenital heart disease"/>
                                 </label>
-                                <br/>
-                                <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
-                                    <obs conceptId="PIH:DIAGNOSIS" style="radio"
-                                         answerConceptIds="CIEL:143049,CIEL:149461"
-                                         answerSeparator="&lt;br /&gt;" />
-                                </obsgroup>
-
-                                <br/>
-                                <label>
-                                    <uimessage code="Additional comments:"/>
-                                </label>
-                                <br/>
-                                <obs conceptId="PIH:14742"/>
+                                <repeat>
+                                    <template>
+                                        <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                                            <obs conceptId="PIH:DIAGNOSIS" style="checkbox"
+                                                 answerConceptId="{aId}" answerCode="{def}" />
+                                        </obsgroup>
+                                    </template>
+                                    <render aId="CIEL:148196" def="Atrial septal defect (ASD)" />
+                                    <render aId="CIEL:123240" def="Ventricular septal defect (VSD)" />
+                                    <render aId="CIEL:130715" def="Patent ductus arteriosus (PDA) " />
+                                    <render aId="CIEL:144674" def="Coarctation of aorta" />
+                                    <render aId="CIEL:124944" def="Tetralogy of Fallot" />
+                                    <render aId="PIH:20165"   def="Unspecified congenital heart disease" />
+                                    <render aId="PIH:20164"   def="Other congenital heart disease" />
+                                </repeat>
+                                <obs conceptId="PIH:20164" labelText="if other congenital heart disease, specify:" />
                             </p>
                         </div>
 

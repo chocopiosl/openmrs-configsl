@@ -190,8 +190,7 @@
         }
 
         #isolationMsg {
-            font-size: larger;
-            color: #d9534f;
+            color: red;
             font-weight: bold;
             display:none;
         }
