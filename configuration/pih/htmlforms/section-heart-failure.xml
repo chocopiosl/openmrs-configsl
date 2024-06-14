@@ -180,12 +180,11 @@
                                 <label>
                                     <uimessage code="pihcore.ncd.cardiomyopathy"/>
                                 </label>
-                                <br/>
                                 <repeat>
                                     <template>
                                         <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
                                             <obs conceptId="PIH:DIAGNOSIS" style="checkbox"
-                                                 answerConceptId="{aId}" />
+                                                 answerConceptId="{aId}" answerCode="{def}"/>
                                         </obsgroup>
 
                                     </template>
@@ -193,14 +192,13 @@
                                     <render aId="CIEL:139529" def="Ischemic cardiopathy" />
                                     <render aId="CIEL:142317" def="Alcohol-related cardiopathy" />
                                     <render aId="CIEL:113918" def="Peripartum cardiopathy" />
-                                    <render aId="CIEL:120148" def="Arrythmia-related cardiopathy" />
+                                    <render aId="CIEL:113096" def="Arrythmia-related cardiopathy" />
                                     <render aId="CIEL:163712" def="HIV-associated cardiopathy" />
-                                    <render aId="CIEL:168116" def="Chemotherapy-induced cardiopathy" />
-                                    <render aId="CIEL:168182" def="Dilated (viral/iodiopathic) cardiopathy" />
+                                    <render aId="CIEL:168128" def="Chemotherapy-induced cardiopathy" />
+                                    <render aId="CIEL:168182" def="Dilated (viral/idiopathic) cardiopathy" />
                                     <render aId="PIH:14753"   def="Cardiopathy due to unknown factors" />
                                 </repeat>
 
-                                <br/>
                                 <obs conceptId="PIH:14754"
                                      labelText="if other cardiomyopathy, specify:" style="text" />
                             </p>
@@ -213,17 +211,17 @@
                                     <uimessage code="Rheumatic heart disease"/>
                                 </label>
                                 <br/>
-                                <!-- old
-                                    answerConceptIds="CIEL:127437,CIEL:127438,CIEL:127436,CIEL:127455,CIEL:127456,CIEL:127454,PIH:14750"
-                                    new:
-                                    answerCodes="Pure mitral stenosis,Pure mitral regurgitation,Mixed mitral valve disease (MS+MR),
-                                       Isolated aortic valve disease (AVD), Mixed mitral and aortic valve disease (MMAVD), other, unknown"
-                                    -->
                                 <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
                                     <obs conceptId="PIH:DIAGNOSIS" style="radio"
-                                         answerConceptIds="CIEL:127437,CIEL:127438,CIEL:127436, CIEL:127455,CIEL:127456,CIEL:127454,PIH:14750"
-                                         answerSeparator="&lt;br /&gt;" />
+                                         answerConceptIds="CIEL:127437,CIEL:127438,CIEL:127436,PIH:20166,CIEL:127455,CIEL:127456,CIEL:127454,PIH:14750,PIH:20167,PIH:20168"
+                                         answerCodes="Pure mitral stenosis,Pure mitral regurgitation,Mixed mitral valve disease (MS+MR),Isolated aortic valve disease (AVD),
+                                         Rheumatic aortic stenosis,Rheumatic aortic regurgitation,Rheumatic aortic stenosis with regurgitation,Mixed mitral and aortic valve disease (MMAVD),
+                                         Unspecified rheumatic heart disease, Other rheumatic heart disease"
+                                         answerSeparator="&lt;br/&gt;" />
                                 </obsgroup>
+                                <br/>
+                                <obs conceptId="PIH:14754"
+                                     labelText="if other rheumatic heart disease, specify:" style="text" />
                             </p>
                         </div>
 
