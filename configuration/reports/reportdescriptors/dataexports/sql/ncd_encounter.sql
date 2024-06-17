@@ -104,7 +104,8 @@ create temporary table temp_ncd
  cardiac_surgery_performed               boolean,         
  scd_penicillin_treatment                boolean,         
  scd_folic_acid_treatment                boolean,         
- transfusion_past_12_months              boolean,         
+ transfusion_past_12_months              boolean,  
+ transfusion_date                        date,
  asthma_severity                         varchar(255),    
  nighttime_waking_asthma                 varchar(255),    
  nighttime_count                         int,             
@@ -572,6 +573,9 @@ update temp_ncd t
 set transfusion_past_12_months = value_coded_as_boolean(obs_id_from_temp(encounter_id, 'PIH','7868',0));
 
 update temp_ncd t
+set transfusion_date = obs_value_datetime_from_temp(encounter_id, 'PIH','11064');
+
+update temp_ncd t
 set asthma_severity = obs_value_coded_list_from_temp(encounter_id,'PIH', '7405',@locale);
 
 update temp_ncd t
@@ -778,6 +782,7 @@ cardiac_surgery_performed_date,
 scd_penicillin_treatment,
 scd_folic_acid_treatment,
 transfusion_past_12_months,
+transfusion_date,
 asthma_severity,
 nighttime_waking_asthma,
 symptoms_2x_week_asthma,
