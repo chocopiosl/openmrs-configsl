@@ -116,7 +116,8 @@ create temporary table temp_ncd
  limitation_obs_group_id                 int,             
  activity_limitation_asthma              varchar(255),    
  activity_count                          int,             
- asthma_control_GINA                     varchar(255),    
+ asthma_control_GINA                     varchar(255), 
+ on_esophageal_varices_prophylaxis       varchar(255),
  echocardiogram_obs_group_id             int,             
  echocardiogram_date                     date,            
  diabetic_coma                          boolean,         
@@ -617,6 +618,8 @@ UPDATE temp_ncd t
 INNER JOIN order_hb1ac o ON t.encounter_id=o.encounter_id
 SET t.lab_order_hba1c= o.lab_order_hba1c;
 
+update temp_ncd t
+set on_esophageal_varices_prophylaxis = obs_value_coded_list_from_temp(encounter_id,'PIH', '15164',@locale);
 
 UPDATE temp_ncd t
 SET diabetic_coma = answer_exists_in_encounter(t.encounter_id, 'PIH', '14921', 'PIH','14482');
@@ -789,6 +792,7 @@ symptoms_2x_week_asthma,
 inhaler_for_symptoms_2x_week_asthma,
 activity_limitation_asthma,
 asthma_control_GINA,
+on_esophageal_varices_prophylaxis,
 echocardiogram_date,
 lab_tests_ordered,
 index_asc,
