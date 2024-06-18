@@ -45,7 +45,8 @@ create temporary table temp_ncd
  hospitalization_dka_last_12_months      boolean,         
  diabetes                                bit,             
  hypertension                            bit,             
- heart_failure                           bit,             
+ heart_failure                           bit,   
+ cardiomyopathy                          bit,
  chronic_lung_disease                    bit,             
  chronic_kidney_disease                  bit,             
  liver_cirrhosis_hepb                    bit,             
@@ -338,7 +339,10 @@ set hypertension =
 
 update temp_ncd t
 set hypertension_onset_date =  obs_from_group_id_value_datetime(obs_group_id_of_value_coded(encounter_id, 'PIH','10529','PIH','903'), 'PIH','7538');
- 
+
+update temp_ncd t
+set cardiomyopathy = 
+	if(obs_single_value_coded_from_temp(encounter_id, 'PIH','3064','PIH','5016')=@yes, 1,null);
 
 update temp_ncd t
 set heart_failure = 
@@ -733,6 +737,7 @@ number_hospitalizations_since_visit,
 diabetes,
 hypertension,
 heart_failure,
+cardiomyopathy,
 chronic_lung_disease,
 chronic_kidney_disease,
 liver_cirrhosis_hepb,
