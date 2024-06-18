@@ -189,7 +189,7 @@
                     </label>
                     <span>
                         <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"
-                                           tags="Maternal and Child Location"/>
+                                           tags="MCH Triage Location"/>
                     </span>
                 </p>
                 <p id="when">
@@ -226,7 +226,7 @@
                     </label>
                     <span>
                         <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"
-                                           tags="Maternal and Child Location"/>
+                                           tags="MCH Triage Location"/>
                     </span>
                 </p>
                 <p id="when">
@@ -264,7 +264,7 @@
                             </label>
                             <span>
                                 <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"
-                                                   tags="Maternal and Child Location"/>
+                                                   tags="MCH Triage Location"/>
                             </span>
                         </td>
                         <td>
@@ -282,7 +282,7 @@
     </ifMode>
 
     <section id="vitals" sectionTag="fieldset" headerTag="legend"
-             headerStyle="title" headerCode="pihcore.vitalSigns">
+             headerStyle="title" headerCode="Vital signs and lab tests">
         <div class="section-container">
             <table>
                 <tr>
@@ -364,19 +364,41 @@
                             </div>
 
                             <div>
+                                <!-- AVPU/Level of consciousness (CIEL:162643) -->
                                 <label>
                                     <uimessage code="AVPU"/>
                                 </label>
                                 <p class="side-by-side">
                                 <span class="small radio-group">
-                                    <obs conceptId="CIEL:162643" id="Level of Consciousness"
+                                    <obs conceptId="CIEL:162643" id="avpu"
                                          answerSeparator="&lt;br&gt;"
                                    style="radio" />
                                 </span>
                                 </p>
-                            </div> <!-- AVPU/Level of consciousness (CIEL:162643) Finding/Coded  Dropdown -->
-                            <div></div> <!-- Hb/Hemoglobin (CIEL:21) Test/Numeric with units -->
-                            <div></div> <!-- Serum glucose (CIEL:887) Test/Numeric with units-->
+                            </div>
+
+                            <div>
+                                <!-- Hb/Hemoglobin (CIEL:21) Test/Numeric with units -->
+                                <label>
+                                    <uimessage code="pihcore.lab.Hemoglobin"/>
+                                </label>
+                                <span class="small">
+                                    <obs conceptId="CIEL:21" id="hemoglobin"
+                                         showUnits="true" unitCssClass="append-to-value"/>
+                                </span>
+
+                            </div>
+
+                            <div>
+                                <!-- Serum glucose (CIEL:887) Test/Numeric with units-->
+                                <label>
+                                    <uimessage code="pihcore.lab.glucose" />
+                                </label>
+                                <span class="small">
+                                    <obs conceptId="CIEL:887" id="glucose"
+                                         showUnits="true" unitCssClass="append-to-value"/>
+                                </span>
+                            </div>
                             <div>
                                 <p class="side-by-side">
                                     <!-- MRDT (aka Malaria rapid test) (CIEL:1643) Test/coded -->
