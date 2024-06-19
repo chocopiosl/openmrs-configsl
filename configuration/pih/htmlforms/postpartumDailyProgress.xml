@@ -507,7 +507,8 @@
                             <uimessage code="pihcore.uterusInvolution"/>
                         </label>
                         <obs id="involution" conceptId="CIEL:167038" style="radio"
-                             answerConceptIds="CIEL:1115,CIEL:1116">
+                             answerConceptIds="CIEL:1115,CIEL:1116"
+                             answerCodes="normal,abnormal">
                             <controls>
                                 <when value="CIEL:1116" thenDisplay="#abnormal-involution"/>
                             </controls>
@@ -549,11 +550,21 @@
                         <repeat>
                             <template>
                                 <obs conceptId="CIEL:163208" style="checkbox"
-                                     answerConceptId="{csState}" />
+                                     answerConceptId="{csState}" answerCode="{csName}"/>
                             </template>
-                            <!-- <render csState="CIEL:xx" csName="Severe infection"/> -->
                             <render csState="CIEL:126721" csName="Sepsis"/>
+                            <render csState="CIEL:115812" csName="Postpartum mental disorder (blues, depression, psychosis)"/>
+                            <render csState="CIEL:230"    csName="Postpartum hemorrhage"/>
+                            <render csState="CIEL:140238" csName="Fever > 38 degrees"/>
+                            <render csState="CIEL:115914" csName="Mastitis"/>
+                            <render csState="CIEL:139081" csName="Severe headache"/>
+                            <render csState="CIEL:141540" csName="Postpartum eclampsia" />
+                            <render csState="CIEL:134592" csName="Malaria" />
+                            <render csState="CIEL:5622"   csName="other" />
+
                         </repeat>
+
+                        <obs conceptId="PIH:13094" style="text" labelText="if other, please specify:" />
                     </p>
 
                     <p class="exam">
