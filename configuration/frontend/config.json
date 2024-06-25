@@ -330,6 +330,68 @@
         }
       ]
     }
+  },
+  "@openmrs/esm-ward-app": {
+    "wardPatientCards": {
+      "patientCardElementDefinitions": [
+        {
+          "id": "admissionReason",
+          "elementType": "patient-obs",
+          "config": {
+            "obs": {
+              "conceptUuid": "${concept.admissionReason.uuid}",
+              "label": "REASON",
+              "limit": 1
+            }
+          }
+        },
+        {
+          "id": "gravida",
+          "elementType": "patient-obs",
+          "config": {
+            "obs": {
+              "conceptUuid": "${concept.gravida.uuid}",
+              "limit": 1
+            }
+          }
+        },
+        {
+          "id": "riskFactors",
+          "elementType": "patient-coded-obs-tags",
+          "config": {
+            "codedObsTags": {
+              "conceptUuid": "${concept.complicationsAtDelivery.uuid}",
+              "summaryLabel": "Pregancy Complication(s)",
+              "tags": [
+                {
+                  "color": "red",
+                  "appliedToConceptSets": ["${concept.complicationsAtDelivery.uuid}"]
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "cardDefinitions": [
+        {
+          "id": "default-card",
+          "rows": [
+            {
+              "rowType": "header",
+              "elements": ["bed-number", "patient-name", "patient-age", "patient-address", "admissionReason"]
+            },
+            {
+              "rowType": "header",
+              "elements": ["riskFactors"]
+            },
+            {
+              "rowType": "header",
+              "elements": ["gravida"]
+            }
+          ]
+        }
+      ]
+    }
   }
 }
 

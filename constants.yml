@@ -67,6 +67,12 @@ concept:
     uuid: "167408AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
   waitingForTransfer:
     uuid: "d639afb2-8f85-4774-a623-e6e051cda9c6"
+  complicationsAtDelivery:
+    uuid: "447f14be-4f34-4cba-9f80-8e091e23c6e3"
+  gravida:
+    uuid: "3cee82de-26fe-102b-80cb-0017a47871b2"
+  admissionReason:
+    uuid: "86a2cf11-1ea5-4b8a-9e4b-08f4cdbe1346"
 queue:
   triage:
     uuid: "3113f164-68f0-11ee-ab8d-0242ac120002"
