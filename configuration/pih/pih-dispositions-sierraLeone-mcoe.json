@@ -6,8 +6,9 @@
     "name": "disposition.emrapi.admitToHospital",
     "conceptCode": "PIH:ADMIT TO HOSPITAL",
     "actions": [],
-    "excludedEncounterTypes": ["6444b8d4-407d-444d-aa15-d6dff204ed83","a8584ab8-cc2a-11e5-9956-625662870761","9d701a81-bb83-40ea-9efc-af50f05575f2",
-                              "153d3182-c76f-4047-b7f2-d83cf967b206"]
+    "excludedEncounterTypes": ["6444b8d4-407d-444d-aa15-d6dff204ed83","a8584ab8-cc2a-11e5-9956-625662870761",
+                               "9d701a81-bb83-40ea-9efc-af50f05575f2",
+                               "2110a810-db62-4914-ba95-604b96010164","153d3182-c76f-4047-b7f2-d83cf967b206"]
   },
   {
     "uuid": "edObservation",
@@ -15,8 +16,9 @@
     "conceptCode": "PIH:ED Observation",
     "keepsVisitOpen": "true",
     "actions": [],
-    "excludedEncounterTypes": ["6444b8d4-407d-444d-aa15-d6dff204ed83","a8584ab8-cc2a-11e5-9956-625662870761","9d701a81-bb83-40ea-9efc-af50f05575f2",
-                               "153d3182-c76f-4047-b7f2-d83cf967b206"],
+    "excludedEncounterTypes": ["6444b8d4-407d-444d-aa15-d6dff204ed83","a8584ab8-cc2a-11e5-9956-625662870761",
+                               "9d701a81-bb83-40ea-9efc-af50f05575f2",
+                               "2110a810-db62-4914-ba95-604b96010164","153d3182-c76f-4047-b7f2-d83cf967b206"],
     "additionalObs": []
   },
   {
@@ -24,22 +26,33 @@
     "type": "DISCHARGE",
     "name": "disposition.emrapi.discharge",
     "conceptCode": "PIH:DISCHARGED",
-    "excludedEncounterTypes": ["a8584ab8-cc2a-11e5-9956-625662870761","9d701a81-bb83-40ea-9efc-af50f05575f2"],
+    "excludedEncounterTypes": ["a8584ab8-cc2a-11e5-9956-625662870761","9d701a81-bb83-40ea-9efc-af50f05575f2",
+                               "2110a810-db62-4914-ba95-604b96010164","153d3182-c76f-4047-b7f2-d83cf967b206"],
+    "additionalObs": []
+  },
+  {
+    "uuid": "home",
+    "type": "DISCHARGE",
+    "name": "Home",
+    "conceptCode": "PIH:Home",
+    "encounterTypes": ["2110a810-db62-4914-ba95-604b96010164","153d3182-c76f-4047-b7f2-d83cf967b206"],
     "additionalObs": []
   },
   {
     "uuid": "active",
     "name": "pihcore.active",
     "conceptCode": "CIEL:161636",
-    "excludedEncounterTypes": ["6444b8d4-407d-444d-aa15-d6dff204ed83","a8584ab8-cc2a-11e5-9956-625662870761","9d701a81-bb83-40ea-9efc-af50f05575f2",
-                               "153d3182-c76f-4047-b7f2-d83cf967b206","0ef67d23-0cf4-4a3e-8617-ac9d55bdd005"],
+    "excludedEncounterTypes": ["6444b8d4-407d-444d-aa15-d6dff204ed83","a8584ab8-cc2a-11e5-9956-625662870761",
+                               "9d701a81-bb83-40ea-9efc-af50f05575f2",
+                               "2110a810-db62-4914-ba95-604b96010164","153d3182-c76f-4047-b7f2-d83cf967b206"],
     "additionalObs": []
   },
   {
     "uuid": "transferWithinHospital",
     "name": "disposition.emrapi.transferInHospital",
     "conceptCode": "PIH:Transfer within hospital",
-    "excludedEncounterTypes": ["6444b8d4-407d-444d-aa15-d6dff204ed83","153d3182-c76f-4047-b7f2-d83cf967b206"],
+    "excludedEncounterTypes": ["6444b8d4-407d-444d-aa15-d6dff204ed83",
+                               "2110a810-db62-4914-ba95-604b96010164","153d3182-c76f-4047-b7f2-d83cf967b206"],
     "additionalObs": [
       {
         "label": "pihcore.internalTransferLocation",
@@ -70,8 +83,7 @@
     "uuid": "transferOutOfHospital",
     "name": "disposition.emrapi.transferOutOfHospital",
     "conceptCode": "PIH:Transfer out of hospital",
-    "excludedEncounterTypes": ["6444b8d4-407d-444d-aa15-d6dff204ed83","153d3182-c76f-4047-b7f2-d83cf967b206",
-                               "0ef67d23-0cf4-4a3e-8617-ac9d55bdd005"],
+    "excludedEncounterTypes": ["6444b8d4-407d-444d-aa15-d6dff204ed83","153d3182-c76f-4047-b7f2-d83cf967b206"],
     "additionalObs": [
       {
         "label": "disposition.emrapi.transferOutOfHospital.sites",
@@ -86,7 +98,7 @@
     "uuid": "transferOutOfHospitalNewborn",
     "name": "disposition.emrapi.transferOutOfHospital",
     "conceptCode": "PIH:Transfer out of hospital",
-    "encounterTypes": ["6444b8d4-407d-444d-aa15-d6dff204ed83"],
+    "encounterTypes": ["6444b8d4-407d-444d-aa15-d6dff204ed83","153d3182-c76f-4047-b7f2-d83cf967b206"],
     "additionalObs": [
       {
         "label": "disposition.emrapi.transferOutOfHospital.sites",
@@ -102,16 +114,18 @@
     "name": "disposition.emrapi.medsPrescribed",
     "conceptCode": "PIH:Medications prescribed at end of visit",
     "additionalObs": [],
-    "excludedEncounterTypes": ["6444b8d4-407d-444d-aa15-d6dff204ed83","a8584ab8-cc2a-11e5-9956-625662870761","9d701a81-bb83-40ea-9efc-af50f05575f2",
-                               "153d3182-c76f-4047-b7f2-d83cf967b206","0ef67d23-0cf4-4a3e-8617-ac9d55bdd005"]
+    "excludedEncounterTypes": ["6444b8d4-407d-444d-aa15-d6dff204ed83","a8584ab8-cc2a-11e5-9956-625662870761",
+                               "9d701a81-bb83-40ea-9efc-af50f05575f2",
+                               "2110a810-db62-4914-ba95-604b96010164","153d3182-c76f-4047-b7f2-d83cf967b206"]
   },
   {
     "uuid": "waitingForLabs",
     "name": "disposition.emrapi.waitingForLabs",
     "conceptCode": "PIH:WAITING FOR TEST RESULTS",
     "additionalObs": [],
-    "excludedEncounterTypes": ["6444b8d4-407d-444d-aa15-d6dff204ed83","a8584ab8-cc2a-11e5-9956-625662870761","9d701a81-bb83-40ea-9efc-af50f05575f2",
-                               "153d3182-c76f-4047-b7f2-d83cf967b206","0ef67d23-0cf4-4a3e-8617-ac9d55bdd005"]
+    "excludedEncounterTypes": ["6444b8d4-407d-444d-aa15-d6dff204ed83","a8584ab8-cc2a-11e5-9956-625662870761",
+                               "9d701a81-bb83-40ea-9efc-af50f05575f2",
+                               "2110a810-db62-4914-ba95-604b96010164","153d3182-c76f-4047-b7f2-d83cf967b206"]
   },
   {
     "uuid": "inactiveStatus",
@@ -119,13 +133,32 @@
     "conceptCode": "CIEL:164928",
     "additionalObs": [],
     "excludedEncounterTypes": ["6444b8d4-407d-444d-aa15-d6dff204ed83","a8584ab8-cc2a-11e5-9956-625662870761","9d701a81-bb83-40ea-9efc-af50f05575f2",
-                               "153d3182-c76f-4047-b7f2-d83cf967b206","0ef67d23-0cf4-4a3e-8617-ac9d55bdd005"]
+                               "2110a810-db62-4914-ba95-604b96010164","153d3182-c76f-4047-b7f2-d83cf967b206"]
+  },
+  {
+    "uuid": "leftAgainstMedicalAdvice",
+    "name": "pihcore.disposition.leftAgainstMedicalAdvice",
+    "conceptCode": "CIEL:1694",
+    "encounterTypes": ["2110a810-db62-4914-ba95-604b96010164","153d3182-c76f-4047-b7f2-d83cf967b206"],
+    "actions": [
+      "dischargeIfAdmittedDispositionAction"
+    ],
+    "additionalObs": []
+  },
+  {
+    "uuid": "absconded",
+    "name": "pihcore.disposition.absconded",
+    "conceptCode": "CIEL:160431",
+    "encounterTypes": ["2110a810-db62-4914-ba95-604b96010164","153d3182-c76f-4047-b7f2-d83cf967b206"],
+    "actions": [
+      "dischargeIfAdmittedDispositionAction"
+    ],
+    "additionalObs": []
   },
   {
     "uuid": "markPatientDead",
     "name": "disposition.emrapi.death",
     "conceptCode": "PIH:DEATH",
-    "excludedEncounterTypes": ["2110a810-db62-4914-ba95-604b96010164","0ef67d23-0cf4-4a3e-8617-ac9d55bdd005"],
     "actions": [
       "markPatientDeadDispositionAction"
     ],
