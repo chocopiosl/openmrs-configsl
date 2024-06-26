@@ -19,6 +19,7 @@
           formEncounterType="fb4318dd-cca9-4d20-bb31-0d4eba947d74" formVersion="1.0">
 
     <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.CleanDiagnosisConstructAction"/>
+    <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.ApplyDispositionAction"/>
 
     <translations defaultLocale="en">
         <code name="o2Sat">

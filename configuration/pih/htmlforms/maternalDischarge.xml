@@ -18,6 +18,7 @@
           formName="Maternal Discharge"
           formEncounterType="2110a810-db62-4914-ba95-604b96010164" formVersion="1.0">
 
+    <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.ApplyDispositionAction"/>
 
     <style type="text/css">
 

@@ -18,6 +18,8 @@
           formName="Newborn Daily Progress"
           formEncounterType="7e42e652-89e7-4559-80fd-41f42826c98c" formVersion="1.0">
 
+    <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.ApplyDispositionAction"/>
+
     <translations defaultLocale="en">
         <code name="o2Sat">
             <variant locale="en" value="O&lt;sub&gt;2&lt;/sub&gt; Sat"/>
