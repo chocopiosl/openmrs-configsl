@@ -341,7 +341,8 @@
             "obs": {
               "conceptUuid": "${concept.admissionReason.uuid}",
               "label": "REASON",
-              "limit": 1
+              "onlyWithinCurrentVisit": true,
+              "orderBy": "ascending"
             }
           }
         },
@@ -351,6 +352,8 @@
           "config": {
             "obs": {
               "conceptUuid": "${concept.gravida.uuid}",
+              "onlyWithinCurrentVisit": false,
+              "orderBy": "descending",
               "limit": 1
             }
           }
@@ -381,11 +384,9 @@
               "elements": ["bed-number", "patient-name", "patient-age", "patient-address", "admissionReason"]
             },
             {
-              "rowType": "header",
               "elements": ["riskFactors"]
             },
             {
-              "rowType": "header",
               "elements": ["gravida"]
             }
           ]
