@@ -193,12 +193,12 @@
                                            tags="MCH Triage Location"/>
                     </span>
                 </p>
-                <p id="when">
+                <p id="when" class="date-one-line">
                     <label>
-                        <uimessage code="emr.patientDashBoard.date"/>
+                        <uimessage code="Arrival date/time (required)"/>
                     </label>
                     <span>
-                        <encounterDate id="encounterDate" default="now"/>
+                        <encounterDate id="encounterDate" showTime="true" default="now"/>
                     </span>
                 </p>
             </div>
@@ -286,6 +286,27 @@
              headerStyle="title" headerCode="Vital signs and lab tests">
         <div class="section-container">
             <table>
+                <tr>
+                    <td>
+                        <div class="four-columns">
+                            <div>
+                                <p class="side-by-side">
+                                    <label>
+                                        <uimessage code="Weight"/>
+                                    </label>
+                                    <span class="small">
+                                        <obs conceptId="CIEL:5089" id="weight_kg"
+                                             showUnits="emr.units.kilograms"
+                                             unitsCssClass="append-to-value"/>
+                                    </span>
+                                </p>
+                            </div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </td>
+                </tr>
                 <tr>
                     <td>
                         <div class="four-columns">
@@ -424,38 +445,6 @@
     <section id="assessment" sectionTag="fieldset"
              headerTag="legend" headerStyle="title" headerCode="Assessment">
         <div class="section-container">
-            <!-- Resuscitated -->
-            <div class="two-columns">
-                <div>
-                    <p class="side-by-side">
-                        <label>
-                            <uimessage code="pihcore.neoResusc"/>
-                        </label>
-                        <obs id="resuscitation" conceptId="CIEL:162131"
-                             answerConceptIds="CIEL:1065,CIEL:1066"
-                             style="radio" answerSeparator="">
-                            <controls>
-                                <when value="CIEL:1065" thenDisplay="#type-resuscitation"/>
-                            </controls>
-                        </obs>
-                    </p>
-                </div>
-                <div id="type-resuscitation">
-                    <label>
-                        <uimessage code="Type of resuscitation"/>
-                    </label>
-                    <p>
-                        <repeat>
-                            <template>
-                                <obs conceptId="CIEL:165995" style="checkbox" answerConceptId="{management}"/>
-                            </template>
-                            <render management="CIEL:162738"/>
-                        </repeat>
-                        <i>others?</i>
-                    </p>
-                </div>
-        </div>
-
             <p>
                 <label>
                     <uimessage code="Diagnosis"/>
@@ -496,14 +485,20 @@
                     <obs conceptId="PIH:15086" style="text" />
                 </div>
             </p>
+        </div>
+    </section>
+
+    <section id="remove" sectionTag="fieldset"
+             headerTag="legend" headerStyle="title" headerCode="Remove this?">
+        <div class="section-container">
 
             <!-- birth injury/trauma -->
-            <label>
-                <uimessage code="pihcore.birthInjury" />
-            </label>
             <div class="two-columns">
                 <div>
                     <p class="side-by-side">
+                        <label>
+                            <uimessage code="pihcore.birthInjury" />
+                        </label>
                         <obs id="birthInjury" conceptId="CIEL:147277" style="radio"
                              answerConceptIds="CIEL:1065,CIEL:1066">
                             <controls>
@@ -520,20 +515,50 @@
                 </div>
 
             </div>
+
+            <!-- Resuscitated -->
+            <div class="two-columns">
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="pihcore.neoResusc"/>
+                        </label>
+                        <obs id="resuscitation" conceptId="CIEL:162131"
+                             answerConceptIds="CIEL:1065,CIEL:1066"
+                             style="radio" answerSeparator="">
+                            <controls>
+                                <when value="CIEL:1065" thenDisplay="#type-resuscitation"/>
+                            </controls>
+                        </obs>
+                    </p>
+                </div>
+
+                <div id="type-resuscitation">
+                    <label>
+                        <uimessage code="Method of resuscitation"/>
+                    </label>
+                    <p>
+                        <repeat>
+                            <template>
+                                <obs conceptId="CIEL:165995" style="checkbox" answerConceptId="{management}"/>
+                            </template>
+                            <render management="CIEL:162738" aLabel="Supplemental oxygen"/>
+                            <render management="CIEL:167383" aLabel="Ventilation bag"/>
+                            <render management="CIEL:165935" aLabel="Endotrachial intubation"/>
+                            <render management="CIEL:167415" aLabel="Heart massage"/>
+                        </repeat>
+
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="outcome" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="Outcome">
+    <section id="destination" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Destination">
         <div class="section-container">
 
             <p class="side-by-side">
-                <label>
-                    <uimessage code="Overall condition"/>
-                </label>
-                <obs id="outcome-condition" conceptId="CIEL:160116" style="radio"
-                     answerConceptIds="CIEL:160113,CIEL:160115"/>
-
                 <div id="disposition">
                     <encounterDisposition />
                 </div>
