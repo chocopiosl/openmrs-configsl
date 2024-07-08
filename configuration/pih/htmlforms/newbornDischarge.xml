@@ -131,6 +131,22 @@
         }
 
         <ifMode mode="VIEW" include="false">
+            #data-collection {
+                display: inline-block;
+                width: 58%;
+                vertical-align: top;
+            }
+
+            #encounter-diagnoses-target {
+                display: inline-block;
+                width: 40%;
+                vertical-align: top;
+            }
+
+            #encounter-diagnoses-app {
+                margin-bottom: 20px;
+            }
+
             .date-one-line {
                 display: flex;
             }
@@ -327,11 +343,11 @@
                  headerCode="Overview">
             <div class="section-container">
                 <p id="when" class="date-one-line">
-                    <label>
-                        <uimessage code="Date &amp; time of delivery"/>
-                    </label>
                     <lookup complexExpression="#set( $deliveryDate = $fn.latestObsBeforeCurrentEncounter('CIEL:5599', true) )"/>
                     <includeIf velocityTest="($deliveryDate) ">
+                        <label>
+                            <uimessage code="Date &amp; time of delivery"/>
+                        </label>
                         <lookup complexExpression="$deliveryDate.valueDatetime"  format="dd MMM yyyy h:mm aa"/>
                     </includeIf>
                 </p>
@@ -348,51 +364,6 @@
             </div>
         </section>
     </ifMode>
-
-    <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="Treatment">
-        <div class="section-container">
-
-            <div class="three-columns">
-                <div>
-                    <ifMode mode="VIEW" include="false">
-                        <lookup complexExpression="#set( $priorEyeDrops = $fn.latestObsInVisitPriorToEncounter('CIEL:1651', 'CIEL:168724') )"/>
-                        <includeIf velocityTest="( $priorEyeDrops )">
-                            <span class="prior-obs-value">[ x ] <lookup complexExpression="$priorEyeDrops.obsDatetime"/></span>
-                        </includeIf>
-                        <br/>
-                    </ifMode>
-                    <obs conceptId="CIEL:1651" style="checkbox"
-                         answerConceptId="CIEL:168724" answerCode="Prophylactic eye ointment" />
-                </div>
-
-                <div>
-                    <ifMode mode="VIEW" include="false">
-                        <lookup complexExpression="#set( $priorCordCare = $fn.latestObsInVisitPriorToEncounter('CIEL:1651', 'CIEL:168725') )"/>
-                        <includeIf velocityTest="( $priorCordCare )">
-                            <span class="prior-obs-value">[ x ] <lookup complexExpression="$priorCordCare.obsDatetime"/></span>
-                        </includeIf>
-                        <br/>
-                    </ifMode>
-                    <obs conceptId="CIEL:1651" style="checkbox"
-                         answerConceptId="CIEL:168725" answerCode="Umbilical cord care" />
-                </div>
-
-                <div>
-                    <!-- Vitamin K -->
-                    <ifMode mode="VIEW" include="false">
-                        <lookup complexExpression="#set( $priorSupplement = $fn.latestObsInVisitPriorToEncounter('PIH:SUPPLEMENT RECEIVED', 'CIEL:86352') )"/>
-                        <includeIf velocityTest="( $priorSupplement )">
-                            <span class="prior-obs-value">[ x ] <lookup complexExpression="$priorSupplement.obsDatetime"/></span>
-                        </includeIf>
-                        <br/>
-                    </ifMode>
-                    <obs conceptId="PIH:SUPPLEMENT RECEIVED" style="checkbox"
-                         answerConceptId="CIEL:86352" />
-                </div>
-            </div>
-        </div>
-    </section>
 
     <section id="vitals" sectionTag="fieldset" headerTag="legend"
              headerStyle="title" headerCode="pihcore.vitalSigns">
@@ -455,6 +426,72 @@
                     </td>
                 </tr>
             </table>
+        </div>
+    </section>
+
+    <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Treatment">
+        <div class="section-container">
+
+            <div class="three-columns">
+                <div>
+                    <ifMode mode="VIEW" include="false">
+                        <lookup complexExpression="#set( $priorEyeDrops = $fn.latestObsInVisitPriorToEncounter('CIEL:1651', 'CIEL:168724') )"/>
+                        <includeIf velocityTest="( $priorEyeDrops )">
+                            <span class="prior-obs-value">[ x ] <lookup complexExpression="$priorEyeDrops.obsDatetime"/></span>
+                            <br/>
+                        </includeIf>
+                    </ifMode>
+                    <obs conceptId="CIEL:1651" style="checkbox"
+                         answerConceptId="CIEL:168724" answerCode="Prophylactic eye ointment" />
+                </div>
+
+                <div>
+                    <ifMode mode="VIEW" include="false">
+                        <lookup complexExpression="#set( $priorCordCare = $fn.latestObsInVisitPriorToEncounter('CIEL:1651', 'CIEL:168725') )"/>
+                        <includeIf velocityTest="( $priorCordCare )">
+                            <span class="prior-obs-value">[ x ] <lookup complexExpression="$priorCordCare.obsDatetime"/></span>
+                            <br/>
+                        </includeIf>
+                    </ifMode>
+                    <obs conceptId="CIEL:1651" style="checkbox"
+                         answerConceptId="CIEL:168725" answerCode="Umbilical cord care" />
+                </div>
+
+                <div>
+                    <!-- Vitamin K -->
+                    <ifMode mode="VIEW" include="false">
+                        <lookup complexExpression="#set( $priorSupplement = $fn.latestObsInVisitPriorToEncounter('PIH:SUPPLEMENT RECEIVED', 'CIEL:86352') )"/>
+                        <includeIf velocityTest="( $priorSupplement )">
+                            <span class="prior-obs-value">[ x ] <lookup complexExpression="$priorSupplement.obsDatetime"/></span>
+                            <br/>
+                        </includeIf>
+                    </ifMode>
+                    <obs conceptId="PIH:SUPPLEMENT RECEIVED" style="checkbox"
+                         answerConceptId="CIEL:86352" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="discharge-dx" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Discharge diagnoses">
+        <div class="section-container">
+
+            <div id="data-collection">
+                <encounterDiagnosesByObs selectedDiagnosesTarget="#encounter-diagnoses-target"/>
+            </div>
+
+            <div id="encounter-diagnoses-target">
+            </div>
+
+            <p>
+                <label>
+                    <uimessage code="pih.app.notes.summary"/>
+                </label>
+                <obs conceptId="CIEL:161011" style="textarea"/>
+            </p>
+
         </div>
     </section>
 
@@ -599,6 +636,108 @@
         </div>
     </section>
 
+    <style type="text/css">
+
+        <!-- Hide the label for the drug field in view mode -->
+        .orderwidget-history-section .order-field-label.order-drug {
+            display:none;
+        }
+        <!-- Add a colon after the Dose label in view mode -->
+        .orderwidget-history-section .order-field-label.order-dose:after {
+            content: ": ";
+            white-space: pre;
+        }
+
+        .order-field {
+            display: inline-block;
+            padding: 0px;
+        }
+        .order-field.action {
+            display: block;
+        }
+        .order-field.dateActivated {
+            padding-right: 20px;
+        }
+        .order-field-label {
+            display: inline-block;
+            padding-right: 5px;
+            vertical-align: middle;
+        }
+        .order-field-label:after {
+            content: "";
+            white-space: pre;
+        }
+        .order-field-widget {
+            display: inline-block;
+        }
+    </style>
+
+    <section id="drug-orders" sectionTag="fieldset" headerTag="legend"
+             headerStyle="title" headerCode="pihcore.visitNote.orders.medications">
+        <div class="section-container">
+            <drugOrder format="select" selectLabel="pihcore.drugOrder.addAnotherDrug">
+                <orderTemplate>
+                    <orderProperty name="action" label="pihcore.action">
+                        <option value="NEW" label="pihcore.new"/>
+                        <option value="REVISE" label="pihcore.revise"/>
+                        <option value="RENEW" label="pihcore.renew"/>
+                        <option value="DISCONTINUE" label="pihcore.discontinue"/>
+                    </orderProperty>
+
+                    <div style="padding:0px;font-weight:bold;">
+                        <orderProperty name="drug" label="pihcore.visitNote.plan.medication" style="autocomplete"/>
+                    </div>
+
+                    <div style="padding:0px;font-weight:bold;">
+                        <orderProperty name="dose" label="pihcore.visitNote.plan.dose"/>
+                        <orderProperty name="doseUnits" value="1513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label=" "/>
+                        <orderProperty name="frequency" label=" "/>
+                        <orderProperty name="route" value="CIEL:160240" label=" ">
+                            <option value="CIEL:160240" /> <!-- Oral -->
+                            <option value="CIEL:162797" /> <!-- Topical -->
+                            <option value="CIEL:162392" /> <!-- Vaginally -->
+                        </orderProperty>
+                    </div>
+                    <div style="padding:0px;">
+                        <orderProperty name="dateActivated" label="pihcore.starting"/>
+                        <orderProperty name="duration" label="pihcore.visitNote.for"/>
+                        <orderProperty name="durationUnits" label=" "/>
+                    </div>
+                    <div style="padding:0px;">
+                        <orderProperty name="quantity" label="pihcore.quantity"/>
+                        <orderProperty name="quantityUnits" value="1513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" label=" "/>
+                        <orderProperty name="numRefills" value="0" label="pihcore.refills"/>
+                    </div>
+                    <div style="display:none;">
+                        <orderProperty name="urgency" value="ROUTINE"/>
+                        <orderProperty name="dosingType" value="org.openmrs.SimpleDosingInstructions"/>
+                        <orderProperty name="previousOrder"/>
+                        <orderProperty name="careSetting" value="OUTPATIENT"/>
+                    </div>
+                    <orderProperty name="discontinueReason" label="pihcore.discontinueReason">
+                        <option value="CIEL:843"/>
+                        <option value="CIEL:102"/>
+                        <option value="CIEL:127750"/>
+                        <option value="CIEL:1754"/>
+                        <option value="CIEL:162853"/>
+                        <option value="CIEL:1434"/>
+                        <option value="CIEL:987"/>
+                        <option value="CIEL:1253"/>
+                        <option value="CIEL:1067"/>
+                        <option value="CIEL:5622"/>
+                    </orderProperty>
+                </orderTemplate>
+            </drugOrder>
+        </div>
+        <div class="section-container">
+            <label><b><uimessage code="pihcore.remarks"/></b></label>
+            <p>
+                <obs conceptId="PIH:10637" cols="50" rows="5" />
+            </p>
+        </div>
+    </section>
+
+
     <section id="outcome" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Outcome">
         <div class="section-container">
@@ -609,17 +748,46 @@
                 </label>
                 <obs id="outcome-condition" conceptId="CIEL:160116" style="radio"
                      answerConceptIds="CIEL:160113,CIEL:160115"/>
-
-                <div id="disposition">
-                    <encounterDisposition />
-                </div>
             </p>
 
-            <label>
-                <uimessage code="pih.app.notes.summary" />
-            </label>
-            <obs conceptId="CIEL:161011" style="textarea" />
+            <div class="two-columns">
+                <div>
+                    <p class="side-by-side">
+                        <div id="disposition">
+                            <encounterDisposition />
+                        </div>
+                    </p>
+                </div>
+                <div>
+                    <label>
+                        <uimessage code="Discharge plan" />
+                    </label>
+                    <obs conceptId="PIH:PATIENT PLAN COMMENTS" style="textarea" />
+                </div>
 
+            </div>
+        </div>
+    </section>
+
+    <section id="post-actions" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Post discharge">
+        <div class="section-container">
+            <div class="two-columns">
+                <div>
+                    <label>
+                        <uimessage code="Instructions to caregiver" />
+                    </label>
+                    <obs conceptId="CIEL:163106" style="textarea" />
+                </div>
+
+                <div>
+                    <label>
+                        <uimessage code="Next appointment date"/>
+                    </label>
+                    <obs conceptId="PIH:RETURN VISIT DATE" id="apptDate" required="false"
+                         allowFutureDates="true" allowPastDates="false" />
+                </div>
+            </div>
         </div>
     </section>
 
