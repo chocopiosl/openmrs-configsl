@@ -433,7 +433,7 @@
              headerCode="Treatment">
         <div class="section-container">
 
-            <div class="three-columns">
+            <div class="four-columns">
                 <div>
                     <ifMode mode="VIEW" include="false">
                         <lookup complexExpression="#set( $priorEyeDrops = $fn.latestObsInVisitPriorToEncounter('CIEL:1651', 'CIEL:168724') )"/>
@@ -470,6 +470,12 @@
                     <obs conceptId="PIH:SUPPLEMENT RECEIVED" style="checkbox"
                          answerConceptId="CIEL:86352" />
                 </div>
+            </div>
+            <br/>
+
+            <div>
+                <obs conceptId="PIH:SUPPLEMENT RECEIVED" style="checkbox"
+                     answerConceptId="CIEL:105310" answerCode="Vitamin D"/>
             </div>
         </div>
     </section>
@@ -594,6 +600,13 @@
                         </p>
                     </div>
                     <div>
+                        <label>
+                            <uimessage code="Date &amp; time of 1st urination"/>
+                        </label>
+                        <p id="pee-time" class="date-one-line">
+                            <obs conceptId="PIH:20266" showTime="true" allowFutureDates="false"/>
+                        </p>
+
                         <label>Comments about urination</label>
                         <obs conceptId="CIEL:166363" style="text" />
                     </div>
@@ -615,6 +628,13 @@
                         </p>
                     </div>
                     <div>
+                        <label>
+                            <uimessage code="Date &amp; time of 1st stool"/>
+                        </label>
+                        <p id="poo-time" class="date-one-line">
+                            <obs conceptId="PIH:20267" showTime="true" allowFutureDates="false"/>
+                        </p>
+
                         <label>Comments about stool</label>
                         <obs conceptId="CIEL:160965" style="text" />
                     </div>
@@ -695,7 +715,6 @@
                         <orderProperty name="route" value="CIEL:160240" label=" ">
                             <option value="CIEL:160240" /> <!-- Oral -->
                             <option value="CIEL:162797" /> <!-- Topical -->
-                            <option value="CIEL:162392" /> <!-- Vaginally -->
                         </orderProperty>
                     </div>
                     <div style="padding:0px;">
@@ -760,9 +779,9 @@
                 </div>
                 <div>
                     <label>
-                        <uimessage code="Discharge plan" />
+                        <uimessage code="Treatment plan" />
                     </label>
-                    <obs conceptId="PIH:PATIENT PLAN COMMENTS" style="textarea" />
+                    <obs conceptId="CIEL:163104" style="textarea" />
                 </div>
 
             </div>
