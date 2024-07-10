@@ -18,10 +18,10 @@
         <value>8fcd0b0c-f977-4a66-a1b5-ad7ce68e6770</value>
     </globalProperty>
 
-        <globalProperty>
-            <property>drugOrder.requireOutpatientQuantity</property>
-            <value>true</value>
-        </globalProperty>
+    <globalProperty>
+        <property>drugOrder.requireOutpatientQuantity</property>
+        <value>true</value>
+    </globalProperty>
 
     <!-- Core Apps Global Properties -->
     <globalProperty>
