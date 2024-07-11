@@ -900,11 +900,11 @@
     <div class="referralService">
         <p class="list-inline">
             <label>
-               Admit to:
+               Admission location:
             </label>
             <obsgroup groupingConceptId="PIH:HUM Disposition construct" hiddenConceptId="PIH:HUM Disposition categories" hiddenAnswerConceptId="PIH:ADMIT TO HOSPITAL">
                 <obs conceptId="PIH:Admission location in hospital"
-                     style="location"
+                     style="location_radio"
                      class="emergencyQueue"
                      answerLocationTags="Maternal Admission Location"
                      restrictToCurrentVisitLocation="true"
