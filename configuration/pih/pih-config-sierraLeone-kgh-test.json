@@ -13,6 +13,13 @@
     "Queue Location": ["MCOE Triage", "Labour and Delivery", "MCCU", "NICU", "Obstetric Post-Op", "Obstetric Surgery","Antenatal Ward", "Postnatal Ward", "Loss Ward"]
   },
 
+  "registrationConfig": {
+    "allowUnknownPatients": true,
+    "afterCreatedActions": [
+      "bean:registerBaby"
+    ]
+  },
+
   "components": [
     "activeVisits",
     "allergies",
