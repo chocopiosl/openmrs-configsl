@@ -4,7 +4,6 @@
           formEncounterType="41911448-71a1-43d7-bba8-dc86339850da"
           formVersion="1.0">
 
-    <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.AddPatientToQueueAction"/>
     <macros>
         <macro key="mcoeTriageLocation" value="f85feffc-fe54-4648-aa14-01ed6d30b943"/>
     </macros>
@@ -901,36 +900,19 @@
     <div class="referralService">
         <p class="list-inline">
             <label>
-                <uimessage code="Any red/yellow emergency:" />
+               Admission location:
             </label>
-            <obs conceptId="CIEL:1272"
-                 style="radio"
-                 class="emergencyQueue"
-                 answerConceptIds="PIH:15039,PIH:10377,PIH:15035"
-                 answerCodes="Pre-Op/PACU,Labour and Delivery,MCCU"/>
+            <obsgroup groupingConceptId="PIH:HUM Disposition construct" hiddenConceptId="PIH:HUM Disposition categories" hiddenAnswerConceptId="PIH:ADMIT TO HOSPITAL">
+                <obs conceptId="PIH:Admission location in hospital"
+                     style="location_radio"
+                     class="emergencyQueue"
+                     answerLocationTags="Maternal Admission Location"
+                     restrictToCurrentVisitLocation="true"
+                />
+            </obsgroup>
         </p>
+    </div>
 
-        <p class="list-inline">
-            <label>
-                <uimessage code="Green/no emergency:" />
-            </label>
-            <obs conceptId="CIEL:1272"
-                 style="radio"
-                 class="normalQueue"
-                 answerConceptIds="PIH:6259,PIH:6261"
-                 answerCodes="ANC, Postnatal"/>
-        </p>
-    </div>
-    <div class="hidden">
-        <label>Priority</label>
-        <obs conceptId="PIH:12842"
-             style="radio"
-             id="priority"
-             answerConceptIds="CIEL:1115,PIH:Emergency"
-             answerCodes="Normal,Emergency"
-             answerSeparator=" "/>
-    </div>
-    
     <div class="boundary"></div>
 
     <ifMode mode="VIEW" include="false">
