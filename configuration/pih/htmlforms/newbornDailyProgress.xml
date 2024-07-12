@@ -645,7 +645,7 @@
     </section>
 
     <section id="devices" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="Devices">
+             headerCode="Devices / Treatment support">
         <div class="section-container">
 
             <div class="two-columns">
@@ -654,19 +654,24 @@
                          answerConceptId="CIEL:1765" answerCode="Intravenous (IV) access"
                          style="checkbox"/>
 
-                    <div id="ivf">
-                        <br/>
-                        <label>
-                            <uimessage code="Date of IV placement" />
-                        </label>
-                        <obs conceptId="PIH:20289" allowTime="false" />
+                    <div id="ivf" >
+                        <table style="border: 0px; width: 90%;">
+                            <tr>
+                                <td style="border: 0px;  background-color: #F2F2F2;">
+                                    <label>
+                                        <uimessage code="Date of IV placement" />
+                                    </label>
+                                    <obs conceptId="PIH:20289" allowTime="false" />
 
-                        <p class="side-by-side">
-                            <label>
-                                <uimessage code="Number of days with IV" />
-                            </label>
-                            <obs conceptId="PIH:20290"  />
-                        </p>
+                                    <p class="side-by-side">
+                                        <label>
+                                            <uimessage code="Number of days with IV" />
+                                        </label>
+                                        <obs conceptId="PIH:20290"  />
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
 
@@ -685,28 +690,35 @@
                     </p>
 
                     <div id="type-resuscitation">
-                        <label>
-                            <uimessage code="Method of resuscitation"/>
-                        </label>
-                        <p>
-                            <repeat>
-                                <template>
-                                    <obs conceptId="CIEL:165995" style="checkbox" answerConceptId="{management}"/>
-                                </template>
-                                <render management="CIEL:162738" aLabel="Supplemental oxygen"/>
-                                <render management="CIEL:167383" aLabel="Ventilation bag"/>
-                                <render management="CIEL:165935" aLabel="Endotrachial intubation"/>
-                                <render management="CIEL:167415" aLabel="Heart massage"/>
-                            </repeat>
+                        <table style="border: 0px; width: 90%;">
+                            <tr>
+                                <td style="border: 0px;  background-color: #F2F2F2;">
+                                    <label>
+                                        <uimessage code="Method of resuscitation"/>
+                                    </label>
+                                    <p>
+                                        <repeat>
+                                            <template>
+                                                <obs conceptId="CIEL:165995" style="checkbox"
+                                                     answerConceptId="{management}"/>
+                                            </template>
+                                            <render management="CIEL:162738" aLabel="Supplemental oxygen"/>
+                                            <render management="CIEL:167383" aLabel="Ventilation bag"/>
+                                            <render management="CIEL:165935" aLabel="Endotrachial intubation"/>
+                                            <render management="CIEL:167415" aLabel="Heart massage"/>
+                                        </repeat>
 
-                        </p>
+                                    </p>
 
-                        <p class="side-by-side">
-                            <label>
-                                <uimessage code="Number of days with respiratory support" />
-                            </label>
-                            <obs conceptId="PIH:20291"  />
-                        </p>
+                                    <p class="side-by-side">
+                                        <label>
+                                            <uimessage code="Number of days with respiratory support"/>
+                                        </label>
+                                        <obs conceptId="PIH:20291"/>
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
 
                     <p>
@@ -717,6 +729,11 @@
                     </p>
                 </div>
             </div>
+
+            <p>
+                <obs conceptId="PIH:13273" labelText="Other support" />
+            </p>
+
         </div>
     </section>
 
