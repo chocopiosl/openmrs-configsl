@@ -1,8 +1,4 @@
 {
-  "locationTags": {
-    "Login Location": ["Wellbody Clinic", "Wellbody MCH", "Wellbody NCD", "Wellbody Mental Health", "KGH Triage", "Wellbody Laboratory", "Wellbody Pharmacy"],
-    "Program Location": ["Wellbody MCH", "Wellbody NCD", "Wellbody Mental Health"]
-  },
   "components": [
     "activeVisits",
     "allergies",

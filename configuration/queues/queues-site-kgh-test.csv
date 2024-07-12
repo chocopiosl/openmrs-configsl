@@ -1,11 +1,2 @@
 UUID,Name,Service,Status Concept Set,Priority Concept Set,Location
-3113f164-68f0-11ee-ab8d-0242ac120002,MCOE Triage,PIH:14976,PIH:15072,,MCOE Triage
-845eb883-68f0-11ee-ab8d-0242ac120002,Antenatal Ward,PIH:6259,,,Antenatal Ward
-8bf2e41f-68f3-11ee-ab8d-0242ac120002,Postnatal Ward,PIH:6261,,,Postnatal Ward
-92092528-68f3-11ee-ab8d-0242ac120002,Pre-Op/PACU,PIH:7831,,,Obstetric Surgery
-a8dd41a1-68f0-11ee-ab8d-0242ac120002,Labour and Delivery,PIH:10377,,,Labour and Delivery
-b782a5c0-5d8e-4b86-9b2d-a4f6e4360e87,MCCU,PIH:15035,,,MCCU
-f904c452-4882-45fd-ad21-4321166e549d,NICU,PIH:15036,,,NICU
-92092528-68f3-11ee-ab8d-0242ac120002,Pre-Op/PACU,PIH:15039,,,Obstetric Surgery
-bf2b55c4-4018-413d-b7cd-5ada753ffe52,Post-Op,PIH:15038,,,Obstetric Post-Op
-1c694cbc-6894-415a-ba3c-5436af1a5841,Loss Ward,PIH:15037,,,Loss Ward
+${queue.triage.uuid},MCOE Triage,PIH:14976,PIH:15072,,MCOE Triage
