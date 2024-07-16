@@ -607,17 +607,40 @@
                 </div>
             </p>
 
-            <h4>
-                <uimessage code="Feeding method"/>
-            </h4>
+            <div class="two-columns">
+                <div>
+                    <h4>
+                        <uimessage code="Feeding method"/>
+                    </h4>
+                    <p class="side-by-side">
+                        <obs conceptId="CIEL:1151" style="radio"
+                             answerConceptIds="CIEL:5632,CIEL:5254"
+                             answerCodes="Breastfed,Formula"/>
+                        <br/>
+                        <obs conceptId="CIEL:168734" style="radio"
+                             answerConceptIds="CIEL:168743,CIEL:168735,CIEL:168742"
+                             answerCodes="Tube,Cup,Spoon"/>
+                    </p>
+                </div>
+                <div>
+                    <h4>
+                        <uimessage code="Nutrition" />
+                    </h4>
+                    <p class="side-by-side">
+                        <obs conceptId="CIEL:163301" style="radio"
+                             answerConceptIds="CIEL:1115,CIEL:1116"
+                             answerSeparator="&lt;br /&gt;"/>
+                    </p>
+                </div>
+            </div>
+
             <p class="side-by-side">
-                <obs conceptId="CIEL:1151" style="radio"
-                     answerConceptIds="CIEL:5632,CIEL:5254"
-                     answerCodes="Breastfed,Formula"/>
-                <br/>
-                <obs conceptId="CIEL:168734" style="radio"
-                     answerConceptIds="CIEL:168743,CIEL:168735,CIEL:168742"
-                     answerCodes="Tube,Cup,Spoon"/>
+                <label>
+                    <uimessage code="Seizures" />
+                </label>
+                <obs conceptId="PIH:206" style="radio"
+                     answerConceptIds="CIEL:1065,CIEL:1066"
+                     answerCodes="yes,no" />
             </p>
         </div>
     </section>
@@ -650,6 +673,10 @@
 
             <div class="two-columns">
                 <div>
+                    <strong>
+                        <uimessage code="Fluid inputs"/>
+                    </strong>
+                    <br/>
                     <obs conceptId="CIEL:165995" toggle="ivf"
                          answerConceptId="CIEL:1765" answerCode="Intravenous (IV) access"
                          style="checkbox"/>
@@ -669,6 +696,21 @@
                                         </label>
                                         <obs conceptId="PIH:20290"  />
                                     </p>
+
+                                    <obsgroup groupingConceptId="PIH:IVF construct">
+                                        <label>
+                                            <uimessage code="IVF"/>
+                                        </label>
+                                        <p class="side-by-side">
+                                            <obs conceptId="PIH:IVF administered" style="radio"
+                                                 answerSeparator="&lt;br /&gt;"/>
+                                            <br/>
+                                            <span class="small">
+                                                <obs conceptId="PIH:IVF volume" showUnits="true"/>
+                                            </span>
+                                        </p>
+                                    </obsgroup>
+
                                 </td>
                             </tr>
                         </table>
@@ -676,64 +718,94 @@
                 </div>
 
                 <div>
-                    <p class="side-by-side">
+                    <div>
+                        <strong>
+                            <uimessage code="Fluid outputs"/>
+                        </strong>
                         <label>
-                            <uimessage code="pihcore.neoResusc"/>
+                            <uimessage code="Total urine output"/>
                         </label>
-                        <obs id="resuscitation" conceptId="CIEL:162131"
-                             answerConceptIds="CIEL:1065,CIEL:1066"
-                             style="radio" answerSeparator="">
-                            <controls>
-                                <when value="CIEL:1065" thenDisplay="#type-resuscitation"/>
-                            </controls>
-                        </obs>
-                    </p>
+                        <span class="small">
+                            <obs conceptId="PIH:Urine output" showUnits="true"/>
+                        </span>
 
-                    <div id="type-resuscitation">
-                        <table style="border: 0px; width: 90%;">
-                            <tr>
-                                <td style="border: 0px;  background-color: #F2F2F2;">
-                                    <label>
-                                        <uimessage code="Method of resuscitation"/>
-                                    </label>
-                                    <p>
-                                        <repeat>
-                                            <template>
-                                                <obs conceptId="CIEL:165995" style="checkbox"
-                                                     answerConceptId="{management}"/>
-                                            </template>
-                                            <render management="CIEL:162738" aLabel="Supplemental oxygen"/>
-                                            <render management="CIEL:167383" aLabel="Ventilation bag"/>
-                                            <render management="CIEL:165935" aLabel="Endotrachial intubation"/>
-                                            <render management="CIEL:167415" aLabel="Heart massage"/>
-                                        </repeat>
-
-                                    </p>
-
-                                    <p class="side-by-side">
-                                        <label>
-                                            <uimessage code="Number of days with respiratory support"/>
-                                        </label>
-                                        <obs conceptId="PIH:20291"/>
-                                    </p>
-                                </td>
-                            </tr>
-                        </table>
+                        <label>
+                            <uimessage code="Estimated blood loss"/>
+                        </label>
+                        <span class="small">
+                            <obs conceptId="PIH:Estimated blood loss" showUnits="true"/>
+                        </span>
                     </div>
-
-                    <p>
-                        <!-- Adrenaline administered -->
-                        <obs conceptId="PIH:12603" style="checkbox"
-                             answerConceptId="CIEL:154365" answerCode="Adrenaline administered"
-                             commentFieldLabel="if adrenaline administered, enter dosing information:" />
-                    </p>
                 </div>
+            </div>
+
+            <div>
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="pihcore.neoResusc"/>
+                    </label>
+                    <obs id="resuscitation" conceptId="CIEL:162131"
+                         answerConceptIds="CIEL:1065,CIEL:1066"
+                         answerCodes="yes,no"
+                         style="radio" >
+                        <controls>
+                            <when value="CIEL:1065" thenDisplay="#type-resuscitation"/>
+                        </controls>
+                    </obs>
+                </p>
+
+                <div id="type-resuscitation">
+                    <table style="border: 0px; width: 90%;">
+                        <tr>
+                            <td style="border: 0px;  background-color: #F2F2F2;">
+                                <label>
+                                    <uimessage code="Method of resuscitation"/>
+                                </label>
+                                <p>
+                                    <repeat>
+                                        <template>
+                                            <obs conceptId="CIEL:165995" style="checkbox"
+                                                 answerConceptId="{management}"/>
+                                        </template>
+                                        <render management="CIEL:162738" aLabel="Supplemental oxygen"/>
+                                        <render management="CIEL:167383" aLabel="Ventilation bag"/>
+                                        <render management="CIEL:165935" aLabel="Endotrachial intubation"/>
+                                        <render management="CIEL:167415" aLabel="Heart massage"/>
+                                    </repeat>
+
+                                </p>
+
+                                <p class="side-by-side">
+                                    <label>
+                                        <uimessage code="Number of days with respiratory support"/>
+                                    </label>
+                                    <obs conceptId="PIH:20291"/>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p>
+                    <!-- Adrenaline administered -->
+                    <obs conceptId="PIH:12603" style="checkbox"
+                         answerConceptId="CIEL:154365" answerCode="Adrenaline administered"
+                         commentFieldLabel="if adrenaline administered, enter dosing information:" />
+                </p>
+
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="Surgery recommended" />
+                    </label>
+                    <obs conceptId="CIEL:164258" style="radio"
+                         answerConceptIds="CIEL:1065,CIEL:1066"
+                         answerCodes="yes,no" />
+                </p>
             </div>
 
             <p>
                 <obs conceptId="PIH:13273" labelText="Other support" />
             </p>
-
         </div>
     </section>
 
@@ -854,7 +926,10 @@
                         <orderProperty name="frequency" label=" "/>
                         <orderProperty name="route" value="CIEL:160240" label=" ">
                             <option value="CIEL:160240" /> <!-- Oral -->
+                            <option value="CIEL:160242" /> <!-- iv -->
+                            <option value="CIEL:162390" /> <!-- Both eyes  -->
                             <option value="CIEL:162797" /> <!-- Topical -->
+                            <option value="CIEL:162393" /> <!-- Rectally -->
                         </orderProperty>
                     </div>
                     <div style="padding:0px;">
