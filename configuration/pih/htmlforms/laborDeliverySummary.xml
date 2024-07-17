@@ -144,6 +144,34 @@
         </ifMode>
     </style>
 
+    <ifMode mode="ENTER" include="true">
+        <script type="text/javascript">
+            jq(document).ready(function() {
+                const aliveConceptId = '<lookup expression="fn.getConcept('CIEL:151849').id"/>';
+                const noConceptId = '<lookup expression="fn.getConcept('CIEL:1066').id"/>';
+
+                jq("span[id^='dead-or-alive-']").find("input[type='radio']").change(function(event) {
+                    if (this.checked) {
+                        // navigate up the DOM to the parent .fetus div for this baby
+                        let parentDiv = jq(this).closest(".fetus");
+                        if (parentDiv) {
+                            //find the enclosed Register in EMR obs associated with this .fetus div
+                            let nextRegisterBaby = jq(parentDiv).find("span[id^='register-baby-']");
+                            if (nextRegisterBaby) {
+                                let obsValue = jq(this).prop('value');
+                                let isRegisteredInEMR = jq(nextRegisterBaby).find("input[type='radio'][value='" + noConceptId + "']");
+                                if (isRegisteredInEMR) {
+                                    if ( obsValue === aliveConceptId) {
+                                        jq(isRegisteredInEMR).prop("checked", true);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+    </ifMode>
     <ifMode mode="VIEW" include="false">
 
         <script type="text/javascript">
@@ -168,30 +196,6 @@
                 //disable all radio buttons associated with the Register in EMR question
                 // (this obs gets set automatically based on the other questions answers)
                 jq("span[id^='register-baby']").find("input[type='radio']").attr("disabled", true);
-                const aliveConceptId = '<lookup expression="fn.getConcept('CIEL:151849').id"/>';
-                const noConceptId = '<lookup expression="fn.getConcept('CIEL:1066').id"/>';
-
-                jq("span[id^='dead-or-alive-']").find("input[type='radio']").change(function(event) {
-                    if (this.checked) {
-                        // navigate up the DOM to the parent .fetus div for this baby
-                        let parentDiv = jq(this).closest(".fetus");
-                        if (parentDiv) {
-                            //find the enclosed Register in EMR obs associated with this .fetus div
-                            let nextRegisterBaby = jq(parentDiv).find("span[id^='register-baby-']");
-                            if (nextRegisterBaby) {
-                                let obsValue = jq(this).prop('value');
-                                let isRegisteredInEMR = jq(nextRegisterBaby).find("input[type='radio'][value='" + noConceptId + "']");
-                                if (isRegisteredInEMR) {
-                                    if ( obsValue === aliveConceptId) {
-                                        jq(isRegisteredInEMR).prop("checked", true);
-                                    } else {
-                                        jq(isRegisteredInEMR).prop("checked", true);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
 
                 beforeSubmit.push(function() {
                     //re-enable the register patient in EMR obs so they could be saved
