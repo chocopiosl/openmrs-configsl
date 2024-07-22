@@ -335,6 +335,15 @@
     "wardPatientCards": {
       "patientCardElementDefinitions": [
         {
+          "id": "patientAddress",
+          "elementType": "patient-address",
+            "config": {
+                "address": {
+                  "addressFields": ["countyDistrict"]
+                }
+            }
+        },
+        {
           "id": "admissionReason",
           "elementType": "patient-obs",
           "config": {
@@ -381,7 +390,7 @@
           "rows": [
             {
               "rowType": "header",
-              "elements": ["bed-number", "patient-name", "patient-age", "patient-address", "admissionReason"]
+              "elements": ["bed-number", "patient-name", "patient-age", "patientAddress", "admissionReason"]
             },
             {
               "elements": ["riskFactors"]
