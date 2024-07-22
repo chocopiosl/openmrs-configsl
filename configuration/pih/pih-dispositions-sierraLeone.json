@@ -25,6 +25,7 @@
   },
   {
     "uuid": "transferWithinHospital",
+    "type": "TRANSFER",
     "name": "disposition.emrapi.transferInHospital",
     "conceptCode": "PIH:Transfer within hospital",
     "additionalObs": [

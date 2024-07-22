@@ -50,6 +50,7 @@
   },
   {
     "uuid": "transferWithinHospital",
+    "type": "TRANSFER",
     "name": "disposition.emrapi.transferInHospital",
     "conceptCode": "PIH:Transfer within hospital",
     "excludedEncounterTypes": ["6444b8d4-407d-444d-aa15-d6dff204ed83","fb4318dd-cca9-4d20-bb31-0d4eba947d74",
