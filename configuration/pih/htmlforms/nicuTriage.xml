@@ -478,7 +478,6 @@
                     <render dx="CIEL:5226" name="Weakness"/>
 
                     <render dx="PIH:6019" name="Abdominal distension"/> <!-- Abdominal swelling -->
-                    <render dx="CIEL:143849" name="Congenital malformation" tag="malformation"/>
                     <render dx="CIEL:140476" name="Feeding problem"/> <!-- Feeding problem -->
                     <render dx="PIH:20263" name="Maternal illness"/> <!-- Illness of mother -->
                     <render dx="CIEL:5050" name="Failure to thrive/weight loss"/> <!-- Failure to thrive -->
@@ -491,7 +490,20 @@
                     <render dx="CIEL:146475" name="Head swelling"/> <!-- Caput succedaneum -->
                     <render dx="CIEL:125203" name="Scrotal swelling"/> <!-- Swelling of scrotum -->
                     <render dx="CIEL:112502" name="Infant of a diabetic mother"/>
+                    <render dx="CIEL:143849" name="Congenital malformation" tag="malformation"/>
                 </repeat>
+            </div>
+
+            <div id="malformation-details" class="two-columns">
+                <div></div>
+                <!-- Congenital malformation  -->
+                <div>
+                    <label>
+                        <uimessage code="if congenital malformation(s), specify:"/>
+                    </label>
+                    <obs conceptId="PIH:15086" style="text"/>
+                    <br/>
+                </div>
             </div>
 
             <br/>
@@ -501,18 +513,18 @@
                         <label>
                             <uimessage code="Delivery location"/>
                         </label>
-                        <obs conceptId="PIH:20260" style="radio"
-                             answerConceptIds="PIH:7889,CIEL:1601"
-                             answerCodes="home, in-transit"/>
+                        <br/>
+                        <obs id="d-location" conceptId="PIH:20260" style="radio"
+                             answerConceptIds="PIH:7889,CIEL:1601,CIEL:1588,CIEL:5622"
+                             answerCodes="home, in-transit, health clinic, other">
+                            <controls>
+                                <when value="CIEL:5622" thenDisplay="#delivery-location-other" />
+                            </controls>
+                        </obs>
                     </p>
                 </div>
-
-                <!-- Congenital malformation  -->
-                <div id="malformation-details">
-                    <label>
-                        <uimessage code="Specify congenital malformation(s):"/>
-                    </label>
-                    <obs conceptId="PIH:15086" style="text"/>
+                <div id="delivery-location-other">
+                    <obs conceptId="PIH:1389" labelText="if other, specify delivery location:" />
                     <br/>
                 </div>
             </div>
@@ -538,6 +550,7 @@
                     <render dx="CIEL:143388" name="Convulsions"/>
                     <render dx="CIEL:144576" name="Coma"/>
                     <render dx="CIEL:116334" name="Lethargy"/>
+                    <!-- ToDo: <render dx="PIH:20323" name="Failure to cry at birth" /> -->
                 </repeat>
             </div>
 
@@ -549,58 +562,37 @@
                     <template>
                         <obs conceptId="PIH:12879" style="checkbox" answerConceptId="{dx}"/>
                     </template>
-                    <render dx="CIEL:116222" name="Low birth weight"/>
+                    <render dx="CIEL:116222" nick="lowwt" name="Low birth weight"/>
                     <render dx="CIEL:127639" name="Respiratory distress"/>
                     <render dx="CIEL:113841" name="Premature"/>
                     <render dx="CIEL:140238" name="Fever"/> <!-- Very high temperature or low -->
                     <render dx="CIEL:147277" name="Birth trauma"/>
-                    <render dx="PIH:14517" name="Severe pallor"/>
+                    <render dx="PIH:14517"   name="Severe pallor"/>
                     <render dx="CIEL:143582" name="Excessive crying"/>
                     <render dx="CIEL:152330" name="Restless, irritable, lethargic"/>
-                    <render dx="PIH:14518" name="Urgent referral"/>
-                    <render dx="CIEL:5050" name="Failure to thrive"/>
-                    <render dx="CIEL:460" name="Edema"/> <!-- Edema of both feet or face -->
+                    <render dx="CIEL:5050"   name="Failure to thrive"/>
+                    <render dx="CIEL:460"    name="Edema"/> <!-- Edema of both feet or face -->
                     <render dx="CIEL:165193" name="Edema of hands or face"/>
                     <render dx="CIEL:118729" name="Lower extremity edema"/>
                     <render dx="CIEL:116543" name="Burn"/>
                 </repeat>
+
+                <obs id="tox-t"
+                     conceptId="PIH:12879" style="checkbox" answerConceptId="PIH:83">
+                    <controls>
+                        <when value="PIH:83" thenDisplay="#tox" />
+                    </controls>
+                </obs>
+                <div id="tox">
+                    <obs conceptId="PIH:20328" labelText="if toxicity, specify" />
+                </div>
             </div>
         </div>
 
-    </div>
-</section>
-
-    <section id="remove" sectionTag="fieldset"
-             headerTag="legend" headerStyle="title" headerCode="Remove this?">
-        <div class="section-container">
-
-            <!-- birth injury/trauma -->
+        <br/>
             <div class="two-columns">
-                <div>
-                    <p class="side-by-side">
-                        <label>
-                            <uimessage code="pihcore.birthInjury" />
-                        </label>
-                        <obs id="birthInjury" conceptId="CIEL:147277" style="radio"
-                             answerConceptIds="CIEL:1065,CIEL:1066">
-                            <controls>
-                                <when value="CIEL:1065" thenDisplay="#birthInjury-details"/>
-                            </controls>
-                        </obs>
-                    </p>
-                </div>
-                <div id="birthInjury-details">
-                    <label>
-                        <uimessage code="Birth injury details" />
-                    </label>
-                    <obs conceptId="CIEL:160686" style="textarea" />
-                </div>
-
-            </div>
-
-            <!-- Resuscitated -->
-            <div class="two-columns">
-                <div>
+                 <div>
+                    <!-- Resuscitated -->
                     <p class="side-by-side">
                         <label>
                             <uimessage code="pihcore.neoResusc"/>
@@ -613,24 +605,46 @@
                             </controls>
                         </obs>
                     </p>
+
+                    <div id="type-resuscitation">
+                        <label>
+                            <uimessage code="Method of resuscitation"/>
+                        </label>
+                        <p>
+                            <repeat>
+                                <template>
+                                    <obs conceptId="CIEL:165995" style="checkbox" answerConceptId="{management}"/>
+                                </template>
+                                <render management="CIEL:162738" aLabel="Supplemental oxygen"/>
+                                <render management="CIEL:167383" aLabel="Ventilation bag"/>
+                                <render management="CIEL:165935" aLabel="Endotrachial intubation"/>
+                                <render management="CIEL:167415" aLabel="Heart massage"/>
+                            </repeat>
+
+                        </p>
+                    </div>
                 </div>
 
-                <div id="type-resuscitation">
-                    <label>
-                        <uimessage code="Method of resuscitation"/>
-                    </label>
-                    <p>
-                        <repeat>
-                            <template>
-                                <obs conceptId="CIEL:165995" style="checkbox" answerConceptId="{management}"/>
-                            </template>
-                            <render management="CIEL:162738" aLabel="Supplemental oxygen"/>
-                            <render management="CIEL:167383" aLabel="Ventilation bag"/>
-                            <render management="CIEL:165935" aLabel="Endotrachial intubation"/>
-                            <render management="CIEL:167415" aLabel="Heart massage"/>
-                        </repeat>
-
+                <div>
+                    <!-- birth injury/trauma -->
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="pihcore.birthInjury" />
+                        </label>
+                        <obs id="birthInjury" conceptId="CIEL:147277" style="radio"
+                             answerConceptIds="CIEL:1065,CIEL:1066">
+                            <controls>
+                                <when value="CIEL:1065" thenDisplay="#birthInjury-details"/>
+                            </controls>
+                        </obs>
                     </p>
+
+                    <div id="birthInjury-details">
+                        <label>
+                            <uimessage code="Birth injury details" />
+                        </label>
+                        <obs conceptId="CIEL:160686" style="textarea" />
+                    </div>
                 </div>
             </div>
         </div>
