@@ -458,15 +458,11 @@
             <div class="two-column-old">
                 <repeat>
                     <template>
-                        <obs id="{tag}-q" conceptId="CIEL:167788" style="checkbox"
-                             answerConceptId="{dx}" answerCode="{name}">
-                            <controls>
-                                <when value="CIEL:143849" thenDisplay="#malformation-details"/>
-                            </controls>
-                        </obs>
+                        <obs conceptId="CIEL:167788" style="checkbox"
+                             answerConceptId="{dx}" answerCode="{name}"/>
                     </template>
                     <render dx="CIEL:136443" name="Jaundice"/>
-                    <render dx="CIEL:512" name="Skin rash"/> <!-- Rash -->
+                    <render dx="CIEL:512"    name="Skin rash"/> <!-- Rash -->
                     <render dx="CIEL:165501" name="Runny nose"/> <!-- Rhinorrhea -->
                     <render dx="CIEL:143264" name="Cough"/>
                     <render dx="CIEL:142373" name="Difficulty breathing"/>
@@ -475,29 +471,35 @@
                     <render dx="CIEL:124193" name="Injury/trauma"/> <!-- Trauma -->
                     <render dx="CIEL:143582" name="Restless/persistent crying"/> <!-- Constantly crying -->
                     <render dx="CIEL:122983" name="Vomiting"/>
-                    <render dx="CIEL:5226" name="Weakness"/>
+                    <render dx="CIEL:5226"   name="Weakness"/>
 
-                    <render dx="PIH:6019" name="Abdominal distension"/> <!-- Abdominal swelling -->
+                    <render dx="PIH:6019"    name="Abdominal distension"/> <!-- Abdominal swelling -->
                     <render dx="CIEL:140476" name="Feeding problem"/> <!-- Feeding problem -->
-                    <render dx="PIH:20263" name="Maternal illness"/> <!-- Illness of mother -->
-                    <render dx="CIEL:5050" name="Failure to thrive/weight loss"/> <!-- Failure to thrive -->
-                    <render dx="PIH:20264" name="Not passing meconium"/>
+                    <render dx="PIH:20263"   name="Maternal illness"/> <!-- Illness of mother -->
+                    <render dx="CIEL:5050"   name="Failure to thrive/weight loss"/> <!-- Failure to thrive -->
+                    <render dx="PIH:20264"   name="Not passing meconium"/>
                     <!-- <render dx="" name="Not passing stool/urine"/> -->
                     <render dx="CIEL:148566" name="Not passing urine"/> <!-- Anuria -->
-                    <render dx="CIEL:822" name="HIV exposure"/>
+                    <render dx="CIEL:822"    name="HIV exposure"/>
                     <render dx="CIEL:124068" name="TB exposure"/> <!-- Contact with TB+ person -->
                     <render dx="CIEL:150632" name="Abscess (boil)"/> <!-- Abscess -->
                     <render dx="CIEL:146475" name="Head swelling"/> <!-- Caput succedaneum -->
                     <render dx="CIEL:125203" name="Scrotal swelling"/> <!-- Swelling of scrotum -->
                     <render dx="CIEL:112502" name="Infant of a diabetic mother"/>
-                    <render dx="CIEL:143849" name="Congenital malformation" tag="malformation"/>
                 </repeat>
+
+                <obs id="congenital-q" conceptId="CIEL:167788" style="checkbox"
+                     answerConceptId="CIEL:143849" answerCode="Congenital malformation">
+                    <controls>
+                        <when value="CIEL:143849" thenDisplay="#malformation-details"/>
+                    </controls>
+                </obs>
             </div>
 
-            <div id="malformation-details" class="two-columns">
+            <div class="two-columns">
                 <div></div>
                 <!-- Congenital malformation  -->
-                <div>
+                <div id="malformation-details" >
                     <label>
                         <uimessage code="if congenital malformation(s), specify:"/>
                     </label>
