@@ -550,7 +550,7 @@
                     <render dx="CIEL:143388" name="Convulsions"/>
                     <render dx="CIEL:144576" name="Coma"/>
                     <render dx="CIEL:116334" name="Lethargy"/>
-                    <!-- ToDo: <render dx="PIH:20323" name="Failure to cry at birth" /> -->
+                    <render dx="PIH:20323" name="Failure to cry at birth" />
                 </repeat>
             </div>
 
@@ -584,7 +584,7 @@
                     </controls>
                 </obs>
                 <div id="tox">
-                    <obs conceptId="PIH:20328" labelText="if toxicity, specify" />
+                    <obs conceptId="PIH:20328" labelText="if toxicity, specify:" />
                 </div>
             </div>
         </div>
