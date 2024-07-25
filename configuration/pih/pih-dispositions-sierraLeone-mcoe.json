@@ -11,6 +11,30 @@
                                "2110a810-db62-4914-ba95-604b96010164","153d3182-c76f-4047-b7f2-d83cf967b206"]
   },
   {
+    "uuid": "admitToHospitalWithAutomaticAdmission",
+    "type": "ADMIT",
+    "careSettingTypes": ["OUTPATIENT"],
+    "name": "disposition.emrapi.admitToHospital",
+    "conceptCode": "PIH:Automatic hospital admission",
+    "encounterTypes": ["fb4318dd-cca9-4d20-bb31-0d4eba947d74"],
+    "actions": [
+      "admitToSpecificLocationDispositionAction",
+      "reopenVisitDispositionAction"
+    ],
+    "additionalObs": [
+      {
+        "label": "disposition.emrapi.admitToHospital.admissionLocation",
+        "conceptCode": "org.openmrs.module.emrapi: Admission Location",
+        "params": {
+          "id": "admissionLocation",
+          "style": "location",
+          "answerLocationTags": "MCH Triage Location",
+          "restrictToCurrentVisitLocation": "true"
+        }
+      }
+    ]
+  },
+  {
     "uuid": "edObservation",
     "name": "disposition.mirebalais.edObservation",
     "conceptCode": "PIH:ED Observation",
