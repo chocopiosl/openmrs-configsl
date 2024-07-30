@@ -19,6 +19,7 @@
           formEncounterType="fec2cc56-e35f-42e1-8ae3-017142c1ca59" formVersion="1.0">
 
     <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.CleanDiagnosisConstructAction"/>
+    <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.RegisterBabyAction"/>
 
     <style type="text/css">
 
