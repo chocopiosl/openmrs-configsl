@@ -387,8 +387,8 @@
                     <!-- Information about mother -->
                     <obsgroup groupingConceptId="PIH:13182"
                         hiddenConceptId="CIEL:164352" hiddenAnswerConceptId="CIEL:970">
-                        Mother's name: <obs conceptId="CIEL:160750" />
-                        Mother's age: <obs conceptId="PIH:3467" showUnits="true" /><br/>
+                        Mother's name: <obs conceptId="CIEL:160750" /><br/>
+                        Mother's age: <obs conceptId="PIH:3467" showUnits="true" /><br/><br/>
                         Mother's telephone: <obs conceptId="PIH:6194"/>
                         <br/>
                         <p class="side-by-side">
@@ -461,8 +461,6 @@
                             <obs conceptId="PIH:1301" style="text"/>
                         </p>
                     </div>
-
-                    Maternal/Neonatal History
                 </div>
             </div>
 
