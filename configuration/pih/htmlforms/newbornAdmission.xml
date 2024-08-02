@@ -390,6 +390,7 @@
                         Mother's name: <obs conceptId="CIEL:160750" />
                         Mother's age: <obs conceptId="PIH:3467" showUnits="true" /><br/>
                         Mother's telephone: <obs conceptId="PIH:6194"/>
+                        <br/>
                         <p class="side-by-side">
                         Mother is alive: <obs conceptId="PIH:20363" style="radio"
                             answerConceptIds="CIEL:1065,CIEL:1066,CIEL:1067"
@@ -398,7 +399,8 @@
                         <p class="side-by-side">
                             Number of newborns: <br/>
                             <obs conceptId="CIEL:159949" style="radio"
-                                 answerConceptIds="CIEL:159913,CIEL:159914,CIEL:159915,CIEL:5622,CIEL:1067"/>
+                                 answerConceptIds="CIEL:159913,CIEL:159914,CIEL:159915,CIEL:5622,CIEL:1067"
+                                 answerCodes="singleton,twins,triplets,other,unknown"/>
                         </p>
                     </obsgroup>
                 </div>
@@ -420,11 +422,10 @@
                                     <uimessage code="Delivery location"/>
                                 </label>
                                 <br/>
-                                <!-- ToDo:  Replace health clinic with private facility (clinic) CIEL:160479 -->
 
                                 <obs id="d-location" conceptId="PIH:20260" style="radio"
-                                     answerConceptIds="PIH:7889,CIEL:1601,CIEL:1588,PIH:12368,CIEL:5622"
-                                     answerCodes="home, in-transit, health clinic, phu, other">
+                                     answerConceptIds="PIH:7889,CIEL:1601,CIEL:160479,PIH:12368,CIEL:5622"
+                                     answerCodes="home, in-transit, private clinic, PHU, other">
                                     <controls>
                                         <when value="CIEL:5622" thenDisplay="#delivery-location-other" />
                                     </controls>
@@ -445,7 +446,7 @@
                             <br/>
                             <obs id="transport" conceptId="PIH:975" style="radio"
                                  answerConceptIds="PIH:15074,PIH:MOTORBIKE,PIH:WALKING,PIH:CAR,PIH:OTHER"
-                                 answerCodes="Ambulance,Motorbike,Walking,Car,Other">
+                                 answerCodes="ambulance,motorbike,walking,car,other">
                                 <controls>
                                     <when value="PIH:OTHER" thenDisplay="#other-transport"/>
                                 </controls>
@@ -876,7 +877,7 @@
                         <uimessage code="CPAP machine pressure"/>
                     </label>
                     <span class="small">
-                        <obs conceptId="PIH:20357" showUnits="true"/>
+                        <obs conceptId="PIH:20357" showUnits="cm-h2o"/>
                     </span>
                 </div>
             </div>

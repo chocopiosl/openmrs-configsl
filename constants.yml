@@ -18,6 +18,8 @@ encounterType:
     uuid: "9cc89b83-e32f-410a-947d-aeb3bda37571"
   sierraLeoneMchNewbornRegister:
     uuid: "3790ecc6-bc63-48f8-9104-f81dc90ee21c"
+  sierraLeoneNewbornAdmission:
+    uuid: "093b6ffc-e55a-461a-85cc-c6acf7714a23"
   sierraLeoneNewbornAssessment:
     uuid: "6444b8d4-407d-444d-aa15-d6dff204ed83"
   sierraLeoneNewbornDailyProgress:
