@@ -474,7 +474,7 @@
             <table>
                 <tr>
                     <td>
-                        <div class="two-columns">
+                        <div class="four-columns">
                             <div>
                                 <p class="side-by-side">
                                     <label>
@@ -515,6 +515,35 @@
                                 </label>
                                 <obs conceptId="CIEL:1343" id="muac_c"
                                      showUnits="true" unitsCssClass="append-to-value"/>
+                            </div>
+                            <div>
+                                <p>
+                                    <label>
+                                        <uimessage code="Length"/>
+                                    </label>
+                                    <obs conceptId="CIEL:5090" showUnits="true"/>
+                                </p>
+
+                                <ifMode mode="VIEW" include="false">
+                                    <lookup complexExpression="#set( $birthHt = $fn.latestObs('CIEL:163554') )"/>
+                                    <includeIf velocityTest="($birthHt) ">
+                                        <p class="side-by-side">
+                                            <span class="prior-obs-value">
+                                                <label>
+                                                    <uimessage code="Birth Length:"/>
+                                                </label>
+                                                <lookup complexExpression="$birthHt.valueNumeric"/>cm
+                                                (<lookup complexExpression="$birthHt.obsDatetime"/>)
+                                            </span>
+                                        </p>
+                                    </includeIf>
+                                </ifMode>
+                            </div>
+                            <div>
+                                <label>
+                                    <uimessage code="Head circumference"/>
+                                </label>
+                                <obs conceptId="CIEL:5314" showUnits="true"/>
                             </div>
                         </div>
                     </td>
