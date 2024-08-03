@@ -404,9 +404,6 @@ update temp_ncd t
 set reason_no_hydroxyurea = obs_value_coded_list_from_temp(encounter_id, 'PIH','15169',@locale);
 
 update temp_ncd t
-set diabetes_type = obs_value_coded_list_from_temp(encounter_id, 'PIH','1715',@locale);
-
-update temp_ncd t
 set diabetes_indicators_obs_group = obs_id_from_temp(encounter_id,'PIH','14469',0 );
 
 update temp_ncd t
