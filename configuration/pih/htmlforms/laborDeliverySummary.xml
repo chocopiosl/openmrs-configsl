@@ -538,7 +538,7 @@
                     <uimessage code="Labour start date/time"/>
                 </label>
                 <span>
-                    <obs conceptId="CIEL:163444" showTime="true"/>
+                    <obs conceptId="CIEL:163444" showTime="true" allowFutureTimes="true"/>
                 </span>
             </p>
 
@@ -559,7 +559,7 @@
                         <label>
                             <uimessage code="Induction date/time"/>
                         </label>
-                        <obs conceptId="CIEL:168755" showTime="true"/>
+                        <obs conceptId="CIEL:168755" showTime="true" allowFutureTimes="true"/>
                     </div>
                     <br/>
 
@@ -637,7 +637,7 @@
                     <uimessage code="Second stage start date/time" />
                 </label>
                 <span>
-                    <obs conceptId="PIH:20113" showTime="true"/>
+                    <obs conceptId="PIH:20113" showTime="true" allowFutureTimes="true"/>
                 </span>
             </p>
 
@@ -658,7 +658,7 @@
                                     <uimessage code="Birth date/time"/>
                                 </label>
                                 <br/>
-                                <obs conceptId="PIH:15080" showTime="true"/>
+                                <obs conceptId="PIH:15080" showTime="true" allowFutureTimes="true"/>
                             </p>
                         </div>
 
