@@ -333,75 +333,56 @@
   },
   "@openmrs/esm-ward-app": {
     "wardPatientCards": {
-      "patientCardElementDefinitions": [
+      "obsElementDefinitions": [
         {
-          "id": "patientAddress",
-          "elementType": "patient-address",
-            "config": {
-                "address": {
-                  "addressFields": ["countyDistrict"]
-                }
-            }
+          "conceptUuid": "${concept.gravida.uuid}",
+          "id": "gravida"
         },
         {
-          "id": "admissionReason",
-          "elementType": "patient-obs",
-          "config": {
-            "obs": {
-              "conceptUuid": "${concept.admissionReason.uuid}",
-              "label": "REASON",
-              "onlyWithinCurrentVisit": true,
-              "orderBy": "ascending"
-            }
-          }
-        },
+          "id": "admission-reason",
+          "conceptUuid": "${concept.admissionReason.uuid}",
+          "onlyWithinCurrentVisit": true,
+          "orderBy": "ascending",
+          "label": "REASON"
+        }
+      ],
+      "addressElementDefinitions": [
         {
-          "id": "gravida",
-          "elementType": "patient-obs",
-          "config": {
-            "obs": {
-              "conceptUuid": "${concept.gravida.uuid}",
-              "onlyWithinCurrentVisit": false,
-              "orderBy": "descending",
-              "limit": 1
-            }
-          }
-        },
-        {
-          "id": "riskFactors",
-          "elementType": "patient-coded-obs-tags",
-          "config": {
-            "codedObsTags": {
-              "conceptUuid": "${concept.complicationsAtDelivery.uuid}",
-              "summaryLabel": "Pregancy Complication(s)",
-              "tags": [
-                {
-                  "color": "red",
-                  "appliedToConceptSets": ["${concept.complicationsAtDelivery.uuid}"]
-                }
-              ]
-            }
-          }
+          "id": "patient-address",
+          "fields": [
+            "countyDistrict"
+          ]
         }
       ],
       "cardDefinitions": [
         {
-          "id": "default-card",
-          "rows": [
-            {
-              "rowType": "header",
-              "elements": ["bed-number", "patient-name", "patient-age", "patientAddress", "admissionReason"]
-            },
-            {
-              "elements": ["riskFactors"]
-            },
-            {
-              "elements": ["gravida"]
-            }
-          ]
+          "id": "default",
+          "headerRowElements": [
+            "patient-age",
+            "patient-address",
+            "patient-identifier",
+            "admission-reason"
+          ],
+          "footerRowElements": [
+            "gravida"
+          ],
+          "patientAddressElementFields": [
+            "countyDistrict"
+          ],
+          "appliedTo": []
         }
       ]
     }
+  },
+  "colored-obs-tags-card-row": {
+    "conceptUuid": "${concept.complicationsAtDelivery.uuid}",
+    "summaryLabel": "Pregancy Complication(s)",
+    "tags": [
+      {
+        "color": "red",
+        "appliedToConceptSets": ["${concept.complicationsAtDelivery.uuid}"]
+      }
+    ]
   }
 }
 
