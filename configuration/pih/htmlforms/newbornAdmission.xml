@@ -268,7 +268,7 @@
 
                 <p id="where">
                     <label><uimessage code="mirebalais.admissionNote.admittedTo.label"/></label>
-                    <encounterLocation default="SessionAttribute:emrContext.sessionLocationId" tags="Maternal Admission Location"/>
+                    <encounterLocation default="SessionAttribute:emrContext.sessionLocationId" tags="MCH Triage Location"/>
                 </p>
 
                 <p id="when" class="date-one-line">
@@ -292,7 +292,7 @@
 
                 <p id="where">
                     <label><uimessage code="mirebalais.admissionNote.admittedTo.label"/></label>
-                    <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"  tags="Maternal Admission Location"/>
+                    <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"  tags="MCH Triage Location"/>
                 </p>
 
                 <p id="when" class="date-one-line">
@@ -326,7 +326,7 @@
                             </label>
                             <span>
                                 <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"
-                                                   tags="Maternal and Child Location"/>
+                                                   tags="MCH Triage Location"/>
                             </span>
                         </td>
                         <td>
