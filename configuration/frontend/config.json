@@ -361,10 +361,11 @@
             "patient-age",
             "patient-address",
             "patient-identifier",
-            "admission-reason"
+            "admission-reason",
+            "time-since-admission"
           ],
           "footerRowElements": [
-            "gravida"
+            "time-on-ward", "gravida"
           ],
           "patientAddressElementFields": [
             "countyDistrict"
