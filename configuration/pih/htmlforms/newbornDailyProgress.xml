@@ -702,10 +702,21 @@
                         <table style="border: 0px; width: 90%;">
                             <tr>
                                 <td style="border: 0px;  background-color: #F2F2F2;">
-                                    <label>
-                                        <uimessage code="Date of IV placement" />
-                                    </label>
-                                    <obs conceptId="PIH:20289" allowTime="false" />
+                                    <p>
+                                        <label>
+                                            <uimessage code="Date of IV placement" />
+                                        </label>
+                                        <obs conceptId="PIH:20289" allowTime="false" />
+                                    </p>
+
+                                    <p class="side-by-side">
+                                        <label>
+                                            <uimessage code="Site of IV" />
+                                        </label>
+                                        <br/>
+                                        <obs conceptId="CIEL:166006" style="radio"
+                                             answerConceptIds="CIEL:166309,CIEL:164385,CIEL:166241,CIEL:164387"/>
+                                    </p>
 
                                     <p class="side-by-side">
                                         <label>
@@ -716,12 +727,15 @@
 
                                     <obsgroup groupingConceptId="PIH:IVF construct">
                                         <label>
-                                            <uimessage code="IVF"/>
+                                            <uimessage code="pihcore.ivf"/>
                                         </label>
                                         <p class="side-by-side">
                                             <obs conceptId="PIH:IVF administered" style="radio"
                                                  answerSeparator="&lt;br /&gt;"/>
-                                            <br/>
+                                            <br/><br/>
+                                            <label>
+                                                <uimessage code="pihcore.ivfVol" />
+                                            </label>
                                             <span class="small">
                                                 <obs conceptId="PIH:IVF volume" showUnits="true"/>
                                             </span>
