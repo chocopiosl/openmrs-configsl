@@ -18,6 +18,7 @@
           formName="Newborn Daily Progress"
           formEncounterType="7e42e652-89e7-4559-80fd-41f42826c98c" formVersion="1.0">
 
+    <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.CleanDiagnosisConstructAction"/>
     <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.ApplyDispositionAction"/>
 
     <translations defaultLocale="en">
@@ -25,6 +26,25 @@
             <variant locale="en" value="O&lt;sub&gt;2&lt;/sub&gt; Sat"/>
             <variant locale="fr" value="SpO&lt;sub&gt;2&lt;/sub&gt;"/>
             <variant locale="es" value="SatO&lt;sub&gt;2&lt;/sub&gt;"/>
+        </code>
+
+        <code name="o2">
+            <variant locale="en" value="O&lt;sub&gt;2&lt;/sub&gt;"/>
+            <variant locale="fr" value="O&lt;sub&gt;2&lt;/sub&gt;"/>
+            <variant locale="es" value="O&lt;sub&gt;2&lt;/sub&gt;"/>
+        </code>
+        <code name="cm-h2o">
+            <variant locale="en" value="cm H&lt;sub&gt;2&lt;/sub&gt;O"/>
+            <variant locale="fr" value="cm H&lt;sub&gt;2&lt;/sub&gt;O"/>
+            <variant locale="es" value="cm H&lt;sub&gt;2&lt;/sub&gt;O"/>
+        </code>
+        <code name="transfusion">
+            <variant locale="en" value="Blood transfusion"/>
+            <variant locale="fr" value="Transfusion sanguine"/>
+        </code>
+        <code name="type_and_volume">
+            <variant locale="en" value="If yes, specify type and volume"/>
+            <variant locale="fr" value="Si oui, préciser le type et le volume"/>
         </code>
     </translations>
 
@@ -92,6 +112,25 @@
 
         .side-by-side label {
             display: inline-block;
+        }
+
+        .list-inline label, .list-inline input[type="radio"], .list-inline span,
+        .list-inline-wide label, .list-inline-wide input[type="radio"], .list-inline-wide span,
+        .list-inline-extra-wide label, .list-inline-extra-wide input[type="radio"], .list-inline-extra-wide span {
+            display: inline-block;
+            float: none;
+        }
+
+        .list-inline label:first-child {
+            width: 220px;
+        }
+
+        .list-inline-wide label:first-child {
+            width: 320px;
+        }
+
+        .list-inline-extra-wide label:first-child {
+            width: 420px;
         }
 
         form input[type="radio"], .form input[type="radio"] {
@@ -424,14 +463,14 @@
             <table>
                 <tr>
                     <td>
-                        <div class="three-columns">
+                        <div class="four-columns">
                             <div>
                                 <p class="side-by-side">
                                     <label>
                                         <uimessage code="Weight"/>
                                     </label>
                                     <ifMode mode="VIEW" include="false">
-                                        <lookup complexExpression="#set( $lastWt = $fn.latestObsBeforeCurrentEncounter('CIEL:5089', true) )"/>
+                                        <lookup complexExpression="#set( $lastWt = $fn.latestObs('CIEL:5089') )"/>
                                         <includeIf velocityTest="($lastWt) ">
                                             <span class="prior-obs-value">
                                                 <lookup complexExpression="$lastWt.valueNumeric"/>kg
@@ -445,7 +484,7 @@
                                 </p>
 
                                 <ifMode mode="VIEW" include="false">
-                                    <lookup complexExpression="#set( $birthWt = $fn.latestObsBeforeCurrentEncounter('CIEL:5916', true) )"/>
+                                    <lookup complexExpression="#set( $birthWt = $fn.latestObs('CIEL:5916') )"/>
                                     <includeIf velocityTest="($birthWt) ">
                                         <p class="side-by-side">
                                             <span class="prior-obs-value">
@@ -461,18 +500,113 @@
                             </div>
                             <div>
                                 <label>
-                                    <uimessage code="Temperature"/>
+                                    <uimessage code="mirebalais.vitals.muac.navigation.title"/>
                                 </label>
-                                <obs conceptId="CIEL:5088" id="temperature_c"
-                                     showUnits="emr.units.degreesCelsius" unitsCssClass="append-to-value"/>
+                                <obs conceptId="CIEL:1343" id="muac_c"
+                                     showUnits="true" unitsCssClass="append-to-value"/>
                             </div>
+                            <div>
+                                <p>
+                                    <label>
+                                        <uimessage code="Length"/>
+                                    </label>
+                                    <obs conceptId="CIEL:5090" showUnits="true"/>
+                                </p>
 
+                                <ifMode mode="VIEW" include="false">
+                                    <lookup complexExpression="#set( $birthHt = $fn.latestObs('CIEL:163554') )"/>
+                                    <includeIf velocityTest="($birthHt) ">
+                                        <p class="side-by-side">
+                                            <span class="prior-obs-value">
+                                                <label>
+                                                    <uimessage code="Birth Length:"/>
+                                                </label>
+                                                <lookup complexExpression="$birthHt.valueNumeric"/>cm
+                                                (<lookup complexExpression="$birthHt.obsDatetime"/>)
+                                            </span>
+                                        </p>
+                                    </includeIf>
+                                </ifMode>
+                            </div>
+                            <div>
+                                <label>
+                                    <uimessage code="Head circumference"/>
+                                </label>
+                                <obs conceptId="CIEL:5314" showUnits="true"/>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="five-columns">
                             <div>
                                 <label>
                                     <uimessage code="mirebalais.vitals.short.heartRate.title"/>
                                 </label>
-                                <obs conceptId="CIEL:5087" id="heart_rate"
-                                     showUnits="emr.units.perMinute" unitsCssClass="append-to-value"/>
+                                <span class="small">
+                                    <obs conceptId="CIEL:5087" id="heart_rate"
+                                         showUnits="emr.units.perMinute" unitsCssClass="append-to-value"/>
+                                </span>
+                            </div>
+
+                            <div>
+                                <label>
+                                    <uimessage code="mirebalais.vitals.bloodPressure.short.title"/>
+                                </label>
+                                <span class="small">
+                                    <ifMode mode="VIEW" include="true">
+                                        <span class="append-to-value">
+                                            <obs conceptId="CIEL:5085" id="bp_systolic"/>
+                                        </span>
+                                        <span class="append-to-value">/</span>
+                                        <span class="append-to-value">
+                                            <obs conceptId="CIEL:5086" id="bp_diastolic" />
+                                        </span>
+                                        <span class="append-to-value">mm/Hg</span>
+                                    </ifMode>
+                                    <ifMode mode="VIEW" include="false">
+                                        <span class="append-to-value left">
+                                            <obs conceptId="CIEL:5085" id="bp_systolic"/>
+                                        </span>
+                                        <span class="append-to-value left">/</span>
+                                        <span class="append-to-value left">
+                                            <obs conceptId="CIEL:5086" id="bp_diastolic" />
+                                        </span>
+                                        <span class="append-to-value">mm/Hg</span>
+                                    </ifMode>
+                                </span>
+                            </div>
+
+                            <div>
+                                <label>
+                                    <uimessage code="mirebalais.vitals.respiratoryRate.short.title"/>
+                                </label>
+                                <span class="small">
+                                    <obs conceptId="CIEL:5242" id="respiratory_rate"
+                                         showUnits="emr.units.perMinute" unitsCssClass="append-to-value"/>
+                                </span>
+                            </div>
+
+                            <div>
+                                <label>
+                                    <uimessage code="o2Sat"/>
+                                </label>
+                                <span class="small">
+                                    <obs conceptId="CIEL:5092" id="o2_sat"
+                                         showUnits="emr.units.percent" unitsCssClass="append-to-value"/>
+                                </span>
+                            </div>
+
+                            <div>
+                                <label>
+                                    <uimessage code="Temp"/>
+                                </label>
+                                <span class="small">
+                                    <obs conceptId="CIEL:5088" id="temperature_c"
+                                         showUnits="emr.units.degreesCelsius" unitsCssClass="append-to-value"/>
+                                </span>
                             </div>
                         </div>
                     </td>
@@ -631,22 +765,7 @@
                              answerConceptIds="CIEL:1115,CIEL:1116"
                              answerSeparator="&lt;br /&gt;"/>
                     </p>
-                </div>
-            </div>
 
-            <div class="two-columns">
-                <div>
-                    <h4>
-                        <uimessage code="Nutrition" />
-                    </h4>
-                    <p class="side-by-side">
-                        <obs conceptId="CIEL:163301" style="radio"
-                             answerConceptIds="CIEL:1115,CIEL:1116"
-                             answerSeparator="&lt;br /&gt;"/>
-                    </p>
-                </div>
-
-                <div>
                     <h4>
                         <uimessage code="Seizures" />
                     </h4>
@@ -770,8 +889,69 @@
                 </div>
             </div>
 
+            <div class="two-columns">
+                <div>
+                    <p class="side-by-side">
+                        <label>
+                            <uimessage code="Air supply" />
+                        </label>
+                        <br/>
+                        <obs id="air" conceptId="CIEL:162739" style="radio"
+                             answerConceptIds="CIEL:162735,CIEL:162738,CIEL:165944"
+                             answerSeparator="&lt;br /&gt;">
+                            <controls>
+                                <when value="CIEL:165944" thenDisplay="#cpap"/>
+                                <when value="CIEL:162738" thenDisplay="#oxy2"/>
+                            </controls>
+                        </obs>
+                    </p>
+                </div>
+                <div>
+                    <div id="oxy2">
+                        <label>
+                            <uimessage code="o2"/> flow rate
+                        </label>
+                        <span class="small">
+                            <obs conceptId="CIEL:165986" showUnits="true"/>
+                        </span>
+                    </div>
+                    <div id="cpap">
+                        <label>
+                            <uimessage code="CPAP machine pressure"/>
+                        </label>
+                        <span class="small">
+                            <obs conceptId="PIH:20357" showUnits="cm-h2o"/>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Apnea -->
+            <div class="two-columns">
+                <div>
+                    <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                        <obs id="apnea-q" conceptId="PIH:DIAGNOSIS" style="checkbox"
+                             answerConceptId="CIEL:121519" >
+                            <controls>
+                                <when value="CIEL:121519" thenDisplay="#apnea-duration" />
+                            </controls>
+                        </obs>
+                    </obsgroup>
+                    <br/>
+                </div>
+
+                <div id="apnea-duration">
+                    <label>
+                        <uimessage code="if apnea, specify apnea duration:" />
+                    </label>
+                    <obs conceptId="PIH:20460" showUnits="true"/>
+                </div>
+            </div>
+
             <div>
-                <p class="side-by-side">
+                <p class="list-inline">
                     <label>
                         <uimessage code="pihcore.neoResusc"/>
                     </label>
@@ -817,6 +997,54 @@
                     </table>
                 </div>
 
+                <p class="list-inline">
+                    <label>
+                        <uimessage code="transfusion"/>
+                    </label>
+                    <obs id="transfusion-q" conceptId="PIH:Transfusion status" style="radio"
+                         answerConceptIds="PIH:YES,PIH:NO" answerCodes="yes,no">
+                        <controls>
+                            <when value="CIEL:1065" thenDisplay="#transfusion-details" />
+                        </controls>
+                    </obs>
+                </p>
+
+                <div id="transfusion-details" >
+                    <p class="list-inline">
+                        <label>
+                            <uimessage code="Type of transfusion"/>
+                        </label>
+                        <obs conceptId="PIH:20464" style="radio"
+                             answerConceptIds="PIH:20463,CIEL:167423"
+                             answerCodes="simple,exchange"/>
+                    </p>
+
+                    <div class="four-columns">
+                        <repeat>
+                            <template>
+                                <div>
+                                    <obsgroup groupingConceptId="PIH:Transfusion construct">
+                                        <obs conceptId="PIH:Transfusion of fluid" answerConceptId="PIH:{answer}"/>
+                                        <span class="small">
+                                            <obs conceptId="PIH:Volume of transfusion" showUnits="true"/>
+                                        </span>
+                                    </obsgroup>
+                                </div>
+                            </template>
+                            <render answer="Whole blood" />
+                            <render answer="Packed red blood cells" />
+                            <render answer="Plasma" />
+                            <render answer="Platelets" />
+                        </repeat>
+                    </div>
+
+                    <obsgroup groupingConceptId="PIH:Visit Diagnoses" showIfEmpty="false">
+                        <obs id="blood-reaction" conceptId="PIH:DIAGNOSIS" style="checkbox"
+                             answerConceptId="CIEL:147119" />
+                    </obsgroup>
+                    <br/>
+                </div>
+
                 <p>
                     <!-- Adrenaline administered -->
                     <obs conceptId="PIH:12603" style="checkbox"
@@ -824,7 +1052,7 @@
                          commentFieldLabel="if adrenaline administered, enter dosing information:" />
                 </p>
 
-                <p class="side-by-side">
+                <p class="list-inline">
                     <label>
                         <uimessage code="Surgery recommended" />
                     </label>
