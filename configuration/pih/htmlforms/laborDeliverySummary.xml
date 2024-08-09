@@ -229,91 +229,104 @@
             const monthOption = { month: 'short'};
 
             const patientUuid = '<lookup expression="patient.uuid"/>';
-            let currentEncounterDate = new Date();
-            let lookupEncDate = '<lookup expression="encounter.getEncounterDatetime().getTime()"/>';
-            if ( lookupEncDate ) {
-                currentEncounterDate = new Date(+lookupEncDate);
+            let currentEncounterDate = '';
+            
+            // look for the encounterDate datepicker widget
+            let encounterDateValue = jq("#encounterDate .hasDatepicker");
+            if (encounterDateValue) {
+                let getDate = encounterDateValue.datepicker('getDate');
+                if (getDate) {
+                    currentEncounterDate = new Date(getDate);
+                }
             }
 
-            let serverEncounterDate = '<lookup complexExpression="#if ($encounter) #set ($encounterDate = $encounter.encounterDatetime) #else #set ($encounterDate = $visit.startDatetime) #end"/>';
-
-            const visitUuid = '<lookup expression="encounter.getVisit().getUuid()"/>';
-
-            jq.getJSON(apiBaseUrl + "/visit/" + visitUuid, {
-                v: 'custom:(uuid,id,startDatetime,encounters:(uuid,display,encounterDatetime,encounterType:(uuid,name),obs:(uuid,display,concept:(uuid,display),obsDatetime,value)))'
-            },
-            function( data ) {
-                if (data.encounters &amp;&amp; data.encounters.length &gt; 0) {
-                    for (let index=0; index &lt; data.encounters.length; ++index) {
-                        let encounter = data.encounters[index];
-                        if (encounter.encounterType.uuid === laborProgressEncounterType) {
-                            // From a Labor progress encounter on this visit
-                            let encounterDate = new Date(encounter.encounterDatetime);
-                            let month = new Intl.DateTimeFormat(undefined, monthOption).format(encounterDate);
-                            jq("#lastLaborProgressEncounterDate").text(encounterDate.getDate() + "-" + month + "-" + encounterDate.getFullYear());
-                            jq("#lastLaborProgressEncounterTime").text(encounterDate.toLocaleTimeString());
-
-                            let last_labor_startdate = null;
-                            let last_induced         = null;
-                            let last_induced_datetime = null;
-                            let last_induction_method = null;
-
-                            if (encounter.obs &amp;&amp; encounter.obs.length &gt; 0) {
-                                jq('#lastOnset').show();
-                                for (let j=0; j &lt; encounter.obs.length; ++j) {
-                                    let obs = encounter.obs[j];
-                                    if (obs.concept.uuid === laborStartDatetimeConceptUuid) {
-                                        if ( obs.valueDatetime ) {
-                                            let laborStartDate = new Date(obs.valueDatetime);
-                                            jq("#last_labor_startdate").text(laborStartDate.getDate() + " " + new Intl.DateTimeFormat(undefined, monthOption).format(periodDate) + " " + periodDate.getFullYear());
-                                            jq("#last_labor_startdate").removeClass("emptyValue").addClass("value");
-                                        }
-                                    } else if (obs.concept.uuid === inducedConceptUuid) {
-                                        if ( obs.valueCoded ) {
-                                            switch ( obs.valueCoded.uuid ) {
-                                                case yesConceptUuid:
-                                                    jq("#yes_induction").text("[X] " + obs.valueCoded.display);
-                                                    jq("#yes_induction").removeClass("emptyValue").addClass("value");
-                                                    break;
-                                                case noConceptUuid:
-                                                    jq("#no_induction").text("[X] " + obs.valueCoded.display);
-                                                    jq("#no_induction").removeClass("emptyValue").addClass("value");
-                                                    break;
+            if ( currentEncounterDate ) {                
+                let restEncMonth = currentEncounterDate.getMonth() + 1;
+                let restEncDate = currentEncounterDate.getFullYear() + '-' + restEncMonth + '-' + currentEncounterDate.getDate();
+                // looking for a previous Labour Progress encounter within the same visit
+                jq.getJSON(apiBaseUrl + "/encounter", {                    
+                    patient: patientUuid,
+                    encounterType: laborProgressEncounterType,
+                    todate: restEncDate,
+                    order: 'desc',
+                    v: 'custom:(uuid,patient:(uuid),encounterType:(uuid),visit:(uuid,startDatetime,stopDatetime),encounterDatetime,voided,obs:(uuid,display,concept:(uuid,display),obsDatetime,valueCoded:(uuid,display),valueDatetime,valueNumeric,valueText,groupMembers:(uuid,display,person:(uuid),concept:(uuid,display),obsDatetime,valueCoded:(uuid,display),valueDatetime,valueNumeric,valueText,voided),voided)'                    
+                  }, function( data ) {
+                    if (data.results.length &gt; 0) {
+                        for (let index = 0; index &lt; data.results.length; index++) {
+                            let laborProgressEnc = data.results[index];
+                            let encDatetime = new Date(laborProgressEnc.encounterDatetime);
+                            if ( laborProgressEnc.visit &amp;&amp; laborProgressEnc.visit.startDatetime ) {                                
+                                let visitStartDatetime = new Date(laborProgressEnc.visit.startDatetime);
+                                if ( (visitStartDatetime.getTime()  &lt;=  currentEncounterDate.getTime()) &amp;&amp; (!laborProgressEnc.visit.stopDatetime || (new Date(laborProgressEnc.visit.stopDatetime)).getTime() &gt;=  currentEncounterDate.getTime()) ) {
+                                    //our form's encounter date falls within this visit
+                                    jq("#lastOnset").show();
+                                    jq("#enter_labour_progress").hide();
+                                    let month = new Intl.DateTimeFormat(undefined, monthOption).format(encDatetime);    
+                                    jq("#lastLaborProgressEncounterDate").text(encDatetime.getDate() + "-" + month + "-" + encDatetime.getFullYear());
+                                    jq("#lastLaborProgressEncounterTime").text(encDatetime.toLocaleTimeString());  
+                                    jq("#lastLaborProgressEncounterDate").removeClass("emptyValue").addClass("value");    
+                                    jq("#lastLaborProgressEncounterTime").removeClass("emptyValue").addClass("value");  
+                                    if (laborProgressEnc.obs &amp;&amp; laborProgressEnc.obs.length &gt; 0) {
+                                        for (let j=0; j &lt; laborProgressEnc.obs.length; j++) { 
+                                            let obs = laborProgressEnc.obs[j];
+                                            if (obs.concept.uuid === laborStartDatetimeConceptUuid) {
+                                                if ( obs.valueDatetime ) {
+                                                    let laborStartDate = new Date(obs.valueDatetime);
+                                                    jq("#last_labor_start_date").text(laborStartDate.getDate() + " " + new Intl.DateTimeFormat(undefined, monthOption).format(laborStartDate) + " " + laborStartDate.getFullYear());
+                                                    jq("#last_labor_start_date").removeClass("emptyValue").addClass("value");
+                                                    jq("#last_labor_start_time").text(laborStartDate.toLocaleTimeString());  
+                                                    jq("#last_labor_start_time").removeClass("emptyValue").addClass("value");
+                                                }
+                                            } else if (obs.concept.uuid === inducedConceptUuid) {
+                                                if ( obs.valueCoded ) {
+                                                    switch ( obs.valueCoded.uuid ) {
+                                                        case yesConceptUuid:
+                                                            jq("#yes_induction").text("[X] " + obs.valueCoded.display);
+                                                            jq("#yes_induction").removeClass("emptyValue").addClass("value");
+                                                            break;
+                                                        case noConceptUuid:
+                                                            jq("#no_induction").text("[X] " + obs.valueCoded.display);
+                                                            jq("#no_induction").removeClass("emptyValue").addClass("value");
+                                                            break;
+                                                    }
+                                                }                                                
+                                            } else if (obs.concept.uuid === inducedDatetimeConceptUuid) {
+                                                if ( obs.valueDatetime ) {
+                                                    let inducedDatetime = new Date(obs.valueDatetime);
+                                                    jq("#last_induced_date").text(inducedDatetime.getDate() + " " + new Intl.DateTimeFormat(undefined, monthOption).format(inducedDatetime) + " " + inducedDatetime.getFullYear());
+                                                    jq("#last_induced_date").removeClass("emptyValue").addClass("value");
+                                                    jq("#last_induced_time").text(inducedDatetime.toLocaleTimeString());  
+                                                    jq("#last_induced_time").removeClass("emptyValue").addClass("value");  
+                                                }
+                                            } else if (obs.concept.uuid === inductionMethodConceptUuid) {
+                                                if ( obs.valueCoded ) {
+                                                    switch ( obs.valueCoded.uuid ) {
+                                                        case mechInducConceptUuid:
+                                                            jq("#mech_induction").text("[X] Mechanical induction");
+                                                            jq("#mech_induction").removeClass("emptyValue").addClass("value");
+                                                            break;
+                                                        case oxyConceptUuid:
+                                                            jq("#oxy_induction").text("[X] Oxytocin" );
+                                                            jq("#oxy_induction").removeClass("emptyValue").addClass("value");
+                                                            break;
+                                                        case misoConceptUuid:
+                                                            jq("#miso_induction").text("[X] Misoprostol");
+                                                            jq("#miso_induction").removeClass("emptyValue").addClass("value");
+                                                            break;
+                                                    }
+                                                }
                                             }
                                         }
-                                        jq("#last_induced").text(obs.value);
-                                        jq("#last_induced").removeClass("emptyValue").addClass("value");
-                                    } else if (obs.concept.uuid === inducedDatetimeConceptUuid) {
-                                        if ( obs.valueDatetime ) {
-                                            let inducedDatetime = new Date(obs.valueDatetime);
-                                            jq("#last_induced_datetime").text(inducedDatetime.getDate() + " " + new Intl.DateTimeFormat(undefined, monthOption).format(periodDate) + " " + periodDate.getFullYear());
-                                            jq("#last_induced_datetime").removeClass("emptyValue").addClass("value");
-                                        }
-                                    } else if (obs.concept.uuid === inductionMethodConceptUuid) {
-                                        if ( obs.valueCoded ) {
-                                            switch ( obs.valueCoded.uuid ) {
-                                                case mechInducConceptUuid:
-                                                    jq("#mech_induction").text("[X] " + obs.valueCoded.display);
-                                                    jq("#mech_induction").removeClass("emptyValue").addClass("value");
-                                                    break;
-                                                case oxyConceptUuid:
-                                                    jq("#oxy_induction").text("[X] " + obs.valueCoded.display);
-                                                    jq("#oxy_induction").removeClass("emptyValue").addClass("value");
-                                                    break;
-                                                case misoConceptUuid:
-                                                    jq("#miso_induction").text("[X] " + obs.valueCoded.display);
-                                                    jq("#miso_induction").removeClass("emptyValue").addClass("value");
-                                                    break;
-                                            }
-                                        }
-                                    }
+                                    }    
+                                    // no need to continue iterating over the list of encounters. 
+                                    // we are only interested in the last Labor Progress encounter   
+                                    break;
                                 }
-                                break;
                             }
                         }
                     }
-                }
-            });
+                  });
+            }
         });
     </script>
     
@@ -452,7 +465,7 @@
 
             <ifMode mode="VIEW" include="false">
                 <!-- Previous labor data from labor progress during the same visit -->
-                <div id="lastOnset">
+                <div id="lastOnset" class="hidden">
                     <table style="color:grey">
                         <tr>
                             <td>
@@ -474,8 +487,13 @@
                                     <p class="side-by-side">
                                         <label>
                                             <uimessage code="Labour start date/time"/>
-                                        </label>
-                                        <span id="last_labor_startdate" class="emptyValue"></span>
+                                        </label>                                        
+                                        <span class="date-span ng-binding">
+                                            <i class="icon-calendar"></i><span id="last_labor_start_date" class="emptyValue"></span>
+                                        </span>
+                                        <span class="time-span ng-binding">
+                                            <i class="icon-time"></i><span id="last_labor_start_time" class="emptyValue"></span>
+                                        </span>
                                     </p>
                                 </div>
                             </td>
@@ -503,8 +521,13 @@
                                     <p class="side-by-side">
                                         <label>
                                             <uimessage code="Induction date/time"/>
-                                        </label>
-                                        <span id="last_induced_datetime" class="emptyValue"></span>
+                                        </label>                                        
+                                        <span class="date-span ng-binding">
+                                            <i class="icon-calendar"></i><span id="last_induced_date" class="emptyValue"></span>
+                                        </span>
+                                        <span class="time-span ng-binding">
+                                            <i class="icon-time"></i><span id="last_induced_time" class="emptyValue"></span>
+                                        </span>
                                     </p>
                                 </div>
                             </td>
@@ -533,6 +556,7 @@
                 <br/>
             </ifMode>
 
+            <div id="enter_labour_progress">
             <p id="when-labor" class="date-one-line">
                 <label>
                     <uimessage code="Labour start date/time"/>
@@ -553,7 +577,6 @@
                     </controls>
                 </obs>
                 <br/>
-
                 <div id="induced-details">
                     <div id="induced-date" class="date-one-line">
                         <label>
@@ -573,7 +596,7 @@
                     </p>
                 </div>
             </p>
-
+            </div>
         </div>
     </section>
 
