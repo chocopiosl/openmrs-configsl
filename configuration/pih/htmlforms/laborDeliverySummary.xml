@@ -198,6 +198,34 @@
                 // (this obs gets set automatically based on the other questions answers)
                 jq("span[id^='register-baby']").find("input[type='radio']").attr("disabled", true);
 
+                function calculateTotalLaborTime() {
+                    let totalHours = 0;
+                    let totalMinutes = 0;
+                    jq(".labor_stage_hours").find("input[type='text']").each( function() {
+                        totalHours = +totalHours + +(jq(this).val());
+                    });
+
+                    jq(".labor_stage_minutes").find("input[type='text']").each( function() {
+                        totalMinutes = +totalMinutes + +(jq(this).val());
+                    });
+
+                    if ( totalHours ) {
+                        if ( totalMinutes  &amp;&amp; totalMinutes  &gt;= 60) {
+                            totalHours = +totalHours + Math.floor(totalMinutes / 60);
+                            totalMinutes = +(totalMinutes % 60);
+                        }
+                    }
+                    jq("#totalDuration_hours").find("input[type='text']").val(totalHours);
+                    jq("#totalDuration_minutes").find("input[type='text']").val(totalMinutes);
+                }
+
+                jq(".labor_stage_hours").find("input[type='text']").change( function(event) {
+                    calculateTotalLaborTime();
+                });
+                jq(".labor_stage_minutes").find("input[type='text']").change( function(event) {
+                    calculateTotalLaborTime();
+                });
+
                 beforeSubmit.push(function() {
                     //re-enable the register patient in EMR obs so they could be saved
                     jq("span[id^='register-baby']").find("input[type='radio']").attr("disabled", false);
@@ -229,103 +257,130 @@
             const monthOption = { month: 'short'};
 
             const patientUuid = '<lookup expression="patient.uuid"/>';
-            let currentEncounterDate = '';
-            
-            // look for the encounterDate datepicker widget
-            let encounterDateValue = jq("#encounterDate .hasDatepicker");
-            if (encounterDateValue) {
-                let getDate = encounterDateValue.datepicker('getDate');
-                if (getDate) {
-                    currentEncounterDate = new Date(getDate);
+            const currentEncUuid = '<lookup expression="encounter.uuid"/>';
+            let editingCurrentObs = false;
+            if (currentEncUuid) {
+                let encHasLabourStartObs = false;
+                const lbrStartField = jq("#labourStartDateTime .hasDatepicker");
+                if ( lbrStartField.length &gt; 0) {
+                    if (lbrStartField.datepicker('getDate') ) {
+                        encHasLabourStartObs = true;
+                     }
+               }
+                if ( encHasLabourStartObs || getValue('induced.value')) {
+                    // the current encounter already has Labour Progress obs
+                    editingCurrentObs = true;
                 }
             }
+            if ( !editingCurrentObs ) {                        
+        
+                let currentEncounterDate = '';
+                // look for the encounterDate datepicker widget
+                let encounterDateValue = jq("#encounterDate .hasDatepicker");
+                if (encounterDateValue) {
+                    let getDate = encounterDateValue.datepicker('getDate');
+                    if (getDate) {
+                        currentEncounterDate = new Date(getDate);
+                    }
+                }
 
-            if ( currentEncounterDate ) {                
-                let restEncMonth = currentEncounterDate.getMonth() + 1;
-                let restEncDate = currentEncounterDate.getFullYear() + '-' + restEncMonth + '-' + currentEncounterDate.getDate();
-                // looking for a previous Labour Progress encounter within the same visit
-                jq.getJSON(apiBaseUrl + "/encounter", {                    
-                    patient: patientUuid,
-                    encounterType: laborProgressEncounterType,
-                    todate: restEncDate,
-                    order: 'desc',
-                    v: 'custom:(uuid,patient:(uuid),encounterType:(uuid),visit:(uuid,startDatetime,stopDatetime),encounterDatetime,voided,obs:(uuid,display,concept:(uuid,display),obsDatetime,valueCoded:(uuid,display),valueDatetime,valueNumeric,valueText,groupMembers:(uuid,display,person:(uuid),concept:(uuid,display),obsDatetime,valueCoded:(uuid,display),valueDatetime,valueNumeric,valueText,voided),voided)'                    
-                  }, function( data ) {
-                    if (data.results.length &gt; 0) {
-                        for (let index = 0; index &lt; data.results.length; index++) {
-                            let laborProgressEnc = data.results[index];
-                            let encDatetime = new Date(laborProgressEnc.encounterDatetime);
-                            if ( laborProgressEnc.visit &amp;&amp; laborProgressEnc.visit.startDatetime ) {                                
-                                let visitStartDatetime = new Date(laborProgressEnc.visit.startDatetime);
-                                if ( (visitStartDatetime.getTime()  &lt;=  currentEncounterDate.getTime()) &amp;&amp; (!laborProgressEnc.visit.stopDatetime || (new Date(laborProgressEnc.visit.stopDatetime)).getTime() &gt;=  currentEncounterDate.getTime()) ) {
-                                    //our form's encounter date falls within this visit
-                                    jq("#lastOnset").show();
-                                    jq("#enter_labour_progress").hide();
-                                    let month = new Intl.DateTimeFormat(undefined, monthOption).format(encDatetime);    
-                                    jq("#lastLaborProgressEncounterDate").text(encDatetime.getDate() + "-" + month + "-" + encDatetime.getFullYear());
-                                    jq("#lastLaborProgressEncounterTime").text(encDatetime.toLocaleTimeString());  
-                                    jq("#lastLaborProgressEncounterDate").removeClass("emptyValue").addClass("value");    
-                                    jq("#lastLaborProgressEncounterTime").removeClass("emptyValue").addClass("value");  
-                                    if (laborProgressEnc.obs &amp;&amp; laborProgressEnc.obs.length &gt; 0) {
-                                        for (let j=0; j &lt; laborProgressEnc.obs.length; j++) { 
-                                            let obs = laborProgressEnc.obs[j];
-                                            if (obs.concept.uuid === laborStartDatetimeConceptUuid) {
-                                                if ( obs.valueDatetime ) {
-                                                    let laborStartDate = new Date(obs.valueDatetime);
-                                                    jq("#last_labor_start_date").text(laborStartDate.getDate() + " " + new Intl.DateTimeFormat(undefined, monthOption).format(laborStartDate) + " " + laborStartDate.getFullYear());
-                                                    jq("#last_labor_start_date").removeClass("emptyValue").addClass("value");
-                                                    jq("#last_labor_start_time").text(laborStartDate.toLocaleTimeString());  
-                                                    jq("#last_labor_start_time").removeClass("emptyValue").addClass("value");
-                                                }
-                                            } else if (obs.concept.uuid === inducedConceptUuid) {
-                                                if ( obs.valueCoded ) {
-                                                    switch ( obs.valueCoded.uuid ) {
-                                                        case yesConceptUuid:
-                                                            jq("#yes_induction").text("[X] " + obs.valueCoded.display);
-                                                            jq("#yes_induction").removeClass("emptyValue").addClass("value");
-                                                            break;
-                                                        case noConceptUuid:
-                                                            jq("#no_induction").text("[X] " + obs.valueCoded.display);
-                                                            jq("#no_induction").removeClass("emptyValue").addClass("value");
-                                                            break;
+                if ( currentEncounterDate ) {
+                    const today = new Date();
+                    if ( (today.getFullYear() == currentEncounterDate.getFullYear())
+                            &amp;&amp; (today.getMonth() == currentEncounterDate.getMonth())
+                            &amp;&amp; (today.getDate() == currentEncounterDate.getDate())) {
+                        // encounter is from today, therefore we need to add the time component, the current time of the day
+                        currentEncounterDate = today;
+                    }
+                    let restEncMonth = currentEncounterDate.getMonth() + 1;
+                    let restEncDay = currentEncounterDate.getDate() + 1; // to catch all encounters from today
+                    let restEncDate = currentEncounterDate.getFullYear() + '-' + restEncMonth + '-' + restEncDay;
+                    // looking for a previous Labour Progress encounter within the same visit
+                    jq.getJSON(apiBaseUrl + "/encounter", {                    
+                        patient: patientUuid,
+                        encounterType: laborProgressEncounterType,
+                        todate: restEncDate,
+                        order: 'desc',
+                        v: 'custom:(uuid,patient:(uuid),encounterType:(uuid),visit:(uuid,startDatetime,stopDatetime),encounterDatetime,voided,obs:(uuid,display,concept:(uuid,display),obsDatetime,valueCoded:(uuid,display),valueDatetime,valueNumeric,valueText,groupMembers:(uuid,display,person:(uuid),concept:(uuid,display),obsDatetime,valueCoded:(uuid,display),valueDatetime,valueNumeric,valueText,voided),voided)'                    
+                      }, function( data ) {
+                        if (data.results.length &gt; 0) {
+                            for (let index = 0; index &lt; data.results.length; index++) {
+                                let laborProgressEnc = data.results[index];
+                                let encDatetime = new Date(laborProgressEnc.encounterDatetime);
+                                if ( laborProgressEnc.visit &amp;&amp; laborProgressEnc.visit.startDatetime ) {                                
+                                    let visitStartDatetime = new Date(laborProgressEnc.visit.startDatetime);
+                                    if ( (visitStartDatetime.getTime()  &lt;=  currentEncounterDate.getTime())
+                                        &amp;&amp; (!laborProgressEnc.visit.stopDatetime || (new Date(laborProgressEnc.visit.stopDatetime)).getTime() &gt;=  currentEncounterDate.getTime())
+                                        &amp;&amp; (encDatetime.getTime() &lt;= currentEncounterDate.getTime())) {
+                                        //our form's encounter date falls within this visit
+                                        jq("#lastOnset").show();
+                                        jq("#enter_labour_progress").hide();
+                                        let month = new Intl.DateTimeFormat(undefined, monthOption).format(encDatetime);    
+                                        jq("#lastLaborProgressEncounterDate").text(encDatetime.getDate() + "-" + month + "-" + encDatetime.getFullYear());
+                                        jq("#lastLaborProgressEncounterTime").text(encDatetime.toLocaleTimeString());  
+                                        jq("#lastLaborProgressEncounterDate").removeClass("emptyValue").addClass("value");    
+                                        jq("#lastLaborProgressEncounterTime").removeClass("emptyValue").addClass("value");  
+                                        if (laborProgressEnc.obs &amp;&amp; laborProgressEnc.obs.length &gt; 0) {
+                                            for (let j=0; j &lt; laborProgressEnc.obs.length; j++) { 
+                                                let obs = laborProgressEnc.obs[j];
+                                                if (obs.concept.uuid === laborStartDatetimeConceptUuid) {
+                                                    if ( obs.valueDatetime ) {
+                                                        let laborStartDate = new Date(obs.valueDatetime);
+                                                        jq("#last_labor_start_date").text(laborStartDate.getDate() + " " + new Intl.DateTimeFormat(undefined, monthOption).format(laborStartDate) + " " + laborStartDate.getFullYear());
+                                                        jq("#last_labor_start_date").removeClass("emptyValue").addClass("value");
+                                                        jq("#last_labor_start_time").text(laborStartDate.toLocaleTimeString());  
+                                                        jq("#last_labor_start_time").removeClass("emptyValue").addClass("value");
                                                     }
-                                                }                                                
-                                            } else if (obs.concept.uuid === inducedDatetimeConceptUuid) {
-                                                if ( obs.valueDatetime ) {
-                                                    let inducedDatetime = new Date(obs.valueDatetime);
-                                                    jq("#last_induced_date").text(inducedDatetime.getDate() + " " + new Intl.DateTimeFormat(undefined, monthOption).format(inducedDatetime) + " " + inducedDatetime.getFullYear());
-                                                    jq("#last_induced_date").removeClass("emptyValue").addClass("value");
-                                                    jq("#last_induced_time").text(inducedDatetime.toLocaleTimeString());  
-                                                    jq("#last_induced_time").removeClass("emptyValue").addClass("value");  
-                                                }
-                                            } else if (obs.concept.uuid === inductionMethodConceptUuid) {
-                                                if ( obs.valueCoded ) {
-                                                    switch ( obs.valueCoded.uuid ) {
-                                                        case mechInducConceptUuid:
-                                                            jq("#mech_induction").text("[X] Mechanical induction");
-                                                            jq("#mech_induction").removeClass("emptyValue").addClass("value");
-                                                            break;
-                                                        case oxyConceptUuid:
-                                                            jq("#oxy_induction").text("[X] Oxytocin" );
-                                                            jq("#oxy_induction").removeClass("emptyValue").addClass("value");
-                                                            break;
-                                                        case misoConceptUuid:
-                                                            jq("#miso_induction").text("[X] Misoprostol");
-                                                            jq("#miso_induction").removeClass("emptyValue").addClass("value");
-                                                            break;
+                                                } else if (obs.concept.uuid === inducedConceptUuid) {
+                                                    if ( obs.valueCoded ) {
+                                                        switch ( obs.valueCoded.uuid ) {
+                                                            case yesConceptUuid:
+                                                                jq("#yes_induction").text("[X] " + obs.valueCoded.display);
+                                                                jq("#yes_induction").removeClass("emptyValue").addClass("value");
+                                                                break;
+                                                            case noConceptUuid:
+                                                                jq("#no_induction").text("[X] " + obs.valueCoded.display);
+                                                                jq("#no_induction").removeClass("emptyValue").addClass("value");
+                                                                break;
+                                                        }
+                                                    }                                                
+                                                } else if (obs.concept.uuid === inducedDatetimeConceptUuid) {
+                                                    if ( obs.valueDatetime ) {
+                                                        let inducedDatetime = new Date(obs.valueDatetime);
+                                                        jq("#last_induced_date").text(inducedDatetime.getDate() + " " + new Intl.DateTimeFormat(undefined, monthOption).format(inducedDatetime) + " " + inducedDatetime.getFullYear());
+                                                        jq("#last_induced_date").removeClass("emptyValue").addClass("value");
+                                                        jq("#last_induced_time").text(inducedDatetime.toLocaleTimeString());  
+                                                        jq("#last_induced_time").removeClass("emptyValue").addClass("value");  
+                                                    }
+                                                } else if (obs.concept.uuid === inductionMethodConceptUuid) {
+                                                    if ( obs.valueCoded ) {
+                                                        switch ( obs.valueCoded.uuid ) {
+                                                            case mechInducConceptUuid:
+                                                                jq("#mech_induction").text("[X] Mechanical induction");
+                                                                jq("#mech_induction").removeClass("emptyValue").addClass("value");
+                                                                break;
+                                                            case oxyConceptUuid:
+                                                                jq("#oxy_induction").text("[X] Oxytocin" );
+                                                                jq("#oxy_induction").removeClass("emptyValue").addClass("value");
+                                                                break;
+                                                            case misoConceptUuid:
+                                                                jq("#miso_induction").text("[X] Misoprostol");
+                                                                jq("#miso_induction").removeClass("emptyValue").addClass("value");
+                                                                break;
+                                                        }
                                                     }
                                                 }
                                             }
-                                        }
-                                    }    
-                                    // no need to continue iterating over the list of encounters. 
-                                    // we are only interested in the last Labor Progress encounter   
-                                    break;
+                                        }    
+                                        // no need to continue iterating over the list of encounters. 
+                                        // we are only interested in the last Labor Progress encounter   
+                                        break;
+                                    }
                                 }
                             }
                         }
-                    }
-                  });
+                      });
+                }
             }
         });
     </script>
@@ -562,7 +617,7 @@
                     <uimessage code="Labour start date/time"/>
                 </label>
                 <span>
-                    <obs conceptId="CIEL:163444" showTime="true" allowFutureTimes="true"/>
+                    <obs id="labourStartDateTime" conceptId="CIEL:163444" showTime="true" allowFutureTimes="true"/>
                 </span>
             </p>
 
@@ -582,7 +637,7 @@
                         <label>
                             <uimessage code="Induction date/time"/>
                         </label>
-                        <obs conceptId="CIEL:168755" showTime="true" allowFutureTimes="true"/>
+                        <obs id="inductionDateTime" conceptId="CIEL:168755" showTime="true" allowFutureTimes="true"/>
                     </div>
                     <br/>
 
@@ -590,7 +645,7 @@
                         <label>
                             <uimessage code="Method of induction" />
                         </label>
-                        <obs conceptId="CIEL:168751" style="radio"
+                        <obs id="methodOfInduction" conceptId="CIEL:168751" style="radio"
                              answerConceptIds="CIEL:168752,CIEL:168753,CIEL:168754"
                              answerCodes="Mechanical induction,Oxytocin,Misoprostol"/>
                     </p>
@@ -650,8 +705,8 @@
                     <uimessage code="Duration of first stage" />
                 </label>
                 <span class="small">
-                    <obs conceptId="PIH:20114" showUnits="true" />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
-                    <obs conceptId="PIH:20115" showUnits="true" />
+                    <obs class="labor_stage_hours" conceptId="PIH:20114" showUnits="true" />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                    <obs class="labor_stage_minutes" conceptId="PIH:20115" showUnits="true" />
                 </span>
             </p>
 
@@ -841,8 +896,8 @@
                     <uimessage code="Duration of second stage" />
                 </label>
                 <span class="small">
-                    <obs conceptId="PIH:20116" showUnits="true" />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
-                    <obs conceptId="PIH:20117" showUnits="true" />
+                    <obs class="labor_stage_hours" conceptId="PIH:20116" showUnits="true" />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                    <obs class="labor_stage_minutes" conceptId="PIH:20117" showUnits="true" />
                 </span>
             </p>
         </div>
@@ -946,8 +1001,8 @@
                     <uimessage code="Duration of third stage" />
                 </label>
                 <span class="small">
-                    <obs conceptId="PIH:20124" showUnits="true" />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
-                    <obs conceptId="PIH:20125" showUnits="true" />
+                    <obs class="labor_stage_hours" conceptId="PIH:20124" showUnits="true" />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                    <obs class="labor_stage_minutes" conceptId="PIH:20125" showUnits="true" />
                 </span>
             </p>
 
@@ -956,7 +1011,8 @@
                     <uimessage code="Total duration of labor" />
                 </label>
                 <span class="small">
-                    <obs conceptId="CIEL:159616" showUnits="hours" />
+                    <obs id="totalDuration_hours" conceptId="PIH:20457" showUnits="true" />&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                    <obs id="totalDuration_minutes" conceptId="PIH:20458" showUnits="true" />
                 </span>
             </p>
 
