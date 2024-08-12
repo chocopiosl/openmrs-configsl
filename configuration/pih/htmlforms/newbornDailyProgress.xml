@@ -169,6 +169,10 @@
             font-size: smaller;
         }
 
+        .small-input input {
+            min-width: 7em;
+        }
+
         <ifMode mode="VIEW" include="false">
             .date-one-line {
                 display: flex;
@@ -803,92 +807,91 @@
         </div>
     </section>
 
-    <section id="devices" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="Devices / Treatment support">
+    <section id="treatment-support" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Treatment support">
         <div class="section-container">
 
-            <div class="two-columns">
-                <div>
+            <div>
+                <strong>
+                    <uimessage code="Fluid outputs"/>
+                </strong>
+                <label>
+                    <uimessage code="Total urine output"/>
+                </label>
+                <p class="small-input">
+                    <obs conceptId="PIH:Urine output" showUnits="true"/>
+                </p>
+            </div>
+
+            <div>
+                <p>
                     <strong>
-                        <uimessage code="Fluid inputs"/>
+                        <uimessage code="IV"/>
                     </strong>
-                    <br/>
+
                     <obs conceptId="CIEL:165995" toggle="ivf"
                          answerConceptId="CIEL:1765" answerCode="Intravenous (IV) access"
                          style="checkbox"/>
+                </p>
 
-                    <div id="ivf" >
-                        <table style="border: 0px; width: 90%;">
-                            <tr>
-                                <td style="border: 0px;  background-color: #F2F2F2;">
-                                    <p>
-                                        <label>
-                                            <uimessage code="Date of IV placement" />
-                                        </label>
-                                        <obs conceptId="PIH:20289" allowTime="false" />
-                                    </p>
+                <div id="ivf">
+                    <table style="border: 0px; width: 90%;">
+                        <tr style="border: 0px;  background-color: #F2F2F2;">
+                            <td style="border: 0px;  background-color: #F2F2F2;">
+                                <p>
+                                    <label>
+                                        <uimessage code="Date of IV placement" />
+                                    </label>
+                                    <obs conceptId="PIH:20289" allowTime="false" />
+                                </p>
 
+                                <p class="side-by-side">
+                                    <label>
+                                        <uimessage code="Site of IV" />
+                                    </label>
+                                    <br/>
+                                    <obs conceptId="CIEL:166006" style="radio"
+                                         answerConceptIds="CIEL:166309,CIEL:164385,CIEL:166241,CIEL:164387"/>
+                                </p>
+                            </td>
+                            <td style="border: 0px;  background-color: #F2F2F2; vertical-align: top">
+                                <p class="side-by-side">
+                                    <label>
+                                        <uimessage code="Number of days with IV" />
+                                    </label>
+                                    <obs conceptId="PIH:20290" size="3"  />
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="border: 0px;  background-color: #F2F2F2;">
+                                <obsgroup groupingConceptId="PIH:IVF construct">
+                                    <label>
+                                        <uimessage code="pihcore.ivf"/>
+                                    </label>
                                     <p class="side-by-side">
+                                        <obs conceptId="PIH:IVF administered" style="radio"
+                                             answerConceptIds="CIEL:74653,CIEL:80804,PIH:7898,CIEL:161250,CIEL:161922,CIEL:161924,CIEL:78617,PIH:20465,PIH:20466"
+                                             answerCodes="Dextran,Normal saline (NS) 0.9%,Dextrose (D) 5% in Sodium Chloride 0.45%,Dextrose (D) 5% in water,Dextrose (D) 10% in water,Mannitol 20%,Ringer's lactate (RL),1 part RL to 4 parts D10%,75mL D5% + 5mL D50% + 20mL NS + 1mL calcium gluconate"
+                                             answerSeparator="&lt;br /&gt;"/>
+                                        <br/><br/>
                                         <label>
-                                            <uimessage code="Site of IV" />
+                                            <uimessage code="pihcore.ivfVol" />
                                         </label>
-                                        <br/>
-                                        <obs conceptId="CIEL:166006" style="radio"
-                                             answerConceptIds="CIEL:166309,CIEL:164385,CIEL:166241,CIEL:164387"/>
-                                    </p>
-
-                                    <p class="side-by-side">
-                                        <label>
-                                            <uimessage code="Number of days with IV" />
-                                        </label>
-                                        <obs conceptId="PIH:20290"  />
-                                    </p>
-
-                                    <obsgroup groupingConceptId="PIH:IVF construct">
-                                        <label>
-                                            <uimessage code="pihcore.ivf"/>
-                                        </label>
-                                        <p class="side-by-side">
-                                            <obs conceptId="PIH:IVF administered" style="radio"
-                                                 answerSeparator="&lt;br /&gt;"/>
-                                            <br/><br/>
-                                            <label>
-                                                <uimessage code="pihcore.ivfVol" />
-                                            </label>
-                                            <span class="small">
-                                                <obs conceptId="PIH:IVF volume" showUnits="true"/>
-                                            </span>
+                                        <p class="small-input">
+                                            <obs conceptId="PIH:IVF volume" showUnits="true"/>
                                         </p>
-                                    </obsgroup>
-
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-
-                <div>
-                    <div>
-                        <strong>
-                            <uimessage code="Fluid outputs"/>
-                        </strong>
-                        <label>
-                            <uimessage code="Total urine output"/>
-                        </label>
-                        <span class="small">
-                            <obs conceptId="PIH:Urine output" showUnits="true"/>
-                        </span>
-
-                        <label>
-                            <uimessage code="Estimated blood loss"/>
-                        </label>
-                        <span class="small">
-                            <obs conceptId="PIH:Estimated blood loss" showUnits="true"/>
-                        </span>
-                    </div>
+                                    </p>
+                                </obsgroup>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
 
+            <strong>
+                <uimessage code="Respiration" />
+            </strong>
             <div class="two-columns">
                 <div>
                     <p class="side-by-side">
@@ -926,7 +929,6 @@
                 </div>
 
             </div>
-
 
             <!-- Apnea -->
             <div class="two-columns">
@@ -997,17 +999,33 @@
                     </table>
                 </div>
 
-                <p class="list-inline">
-                    <label>
-                        <uimessage code="transfusion"/>
-                    </label>
-                    <obs id="transfusion-q" conceptId="PIH:Transfusion status" style="radio"
-                         answerConceptIds="PIH:YES,PIH:NO" answerCodes="yes,no">
-                        <controls>
-                            <when value="CIEL:1065" thenDisplay="#transfusion-details" />
-                        </controls>
-                    </obs>
-                </p>
+                <strong>
+                    <uimessage code="Blood"/>
+                </strong>
+                <div class="two-columns">
+                    <div>
+                        <p class="list-inline">
+                            <label>
+                                <uimessage code="transfusion"/>
+                            </label>
+                            <obs id="transfusion-q" conceptId="PIH:Transfusion status" style="radio"
+                                 answerConceptIds="PIH:YES,PIH:NO" answerCodes="yes,no">
+                                <controls>
+                                    <when value="CIEL:1065" thenDisplay="#transfusion-details" />
+                                </controls>
+                            </obs>
+                        </p>
+                    </div>
+                    <div>
+                        <label>
+                            <uimessage code="Estimated blood loss"/>
+                        </label>
+                        <p class="small-input">
+                            <obs conceptId="PIH:Estimated blood loss" showUnits="true"/>
+                        </p>
+                    </div>
+                </div>
+
 
                 <div id="transfusion-details" >
                     <p class="list-inline">
@@ -1045,13 +1063,9 @@
                     <br/>
                 </div>
 
-                <p>
-                    <!-- Adrenaline administered -->
-                    <obs conceptId="PIH:12603" style="checkbox"
-                         answerConceptId="CIEL:154365" answerCode="Adrenaline administered"
-                         commentFieldLabel="if adrenaline administered, enter dosing information:" />
-                </p>
-
+                <strong>
+                    <uimessage code="Surgery" />
+                </strong>
                 <p class="list-inline">
                     <label>
                         <uimessage code="Surgery recommended" />
@@ -1060,19 +1074,13 @@
                          answerConceptIds="CIEL:1065,CIEL:1066"
                          answerCodes="yes,no" />
                 </p>
+
             </div>
 
-            <p>
-                <obs conceptId="PIH:13273" labelText="Other support" />
-            </p>
-        </div>
-    </section>
-
-    <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="Treatment">
-        <div class="section-container">
-
-            <div class="three-columns">
+            <strong>
+                <uimessage code="Birth plan" />
+            </strong>
+            <div class="four-columns">
                 <div>
                     <ifMode mode="VIEW" include="false">
                         <lookup complexExpression="#set( $priorEyeDrops = $fn.latestObsInVisitPriorToEncounter('CIEL:1651', 'CIEL:168724') )"/>
@@ -1083,18 +1091,6 @@
                     </ifMode>
                     <obs conceptId="CIEL:1651" style="checkbox"
                          answerConceptId="CIEL:168724" answerCode="Prophylactic eye drops" />
-                </div>
-
-                <div>
-                    <ifMode mode="VIEW" include="false">
-                        <lookup complexExpression="#set( $priorCordCare = $fn.latestObsInVisitPriorToEncounter('CIEL:1651', 'CIEL:168725') )"/>
-                        <includeIf velocityTest="( $priorCordCare )">
-                            <span class="prior-obs-value">[ x ] <lookup complexExpression="$priorCordCare.obsDatetime"/></span>
-                        </includeIf>
-                        <br/>
-                    </ifMode>
-                    <obs conceptId="CIEL:1651" style="checkbox"
-                         answerConceptId="CIEL:168725" answerCode="Umbilical cord care" />
                 </div>
 
                 <div>
@@ -1109,13 +1105,28 @@
                     <obs conceptId="PIH:SUPPLEMENT RECEIVED" style="checkbox"
                          answerConceptId="CIEL:86352" />
                 </div>
+
+                <div>
+                    <ifMode mode="VIEW" include="false">
+                        <br/>
+                    </ifMode>
+                    <obs conceptId="PIH:SUPPLEMENT RECEIVED" style="checkbox"
+                         answerConceptId="CIEL:105310" answerCode="Vitamin D"/>
+                </div>
+
+                <div>
+                    <ifMode mode="VIEW" include="false">
+                        <lookup complexExpression="#set( $priorCordCare = $fn.latestObsInVisitPriorToEncounter('CIEL:1651', 'CIEL:168725') )"/>
+                        <includeIf velocityTest="( $priorCordCare )">
+                            <span class="prior-obs-value">[ x ] <lookup complexExpression="$priorCordCare.obsDatetime"/></span>
+                        </includeIf>
+                        <br/>
+                    </ifMode>
+                    <obs conceptId="CIEL:1651" style="checkbox"
+                         answerConceptId="CIEL:168725" answerCode="Umbilical cord care" />
+                </div>
             </div>
             <br/>
-
-            <div>
-                <obs conceptId="PIH:SUPPLEMENT RECEIVED" style="checkbox"
-                     answerConceptId="CIEL:105310" answerCode="Vitamin D"/>
-            </div>
 
             <div>
                 <br/>
@@ -1166,6 +1177,13 @@
     <section id="drug-orders" sectionTag="fieldset" headerTag="legend"
              headerStyle="title" headerCode="pihcore.visitNote.orders.medications">
         <div class="section-container">
+            <p>
+                <!-- Adrenaline administered -->
+                <obs conceptId="PIH:12603" style="checkbox"
+                     answerConceptId="CIEL:154365" answerCode="Adrenaline administered"
+                     commentFieldLabel="if adrenaline administered, enter dosing information:" />
+            </p>
+
             <drugOrder format="select" selectLabel="pihcore.drugOrder.addAnotherDrug">
                 <orderTemplate>
                     <orderProperty name="action" label="pihcore.action">
