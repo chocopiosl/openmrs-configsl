@@ -205,6 +205,132 @@
         </script>
     </ifMode>
 
+    <ifMode mode="VIEW" include="true">
+        <script type="text/javascript">
+            jq(document).ready(function() {
+                jq("#csWoundStatus").show();
+            });
+        </script>
+    </ifMode>
+
+    <ifMode mode="VIEW" include="false">
+        <script type="text/javascript">
+            jq(document).ready(function() {
+                const laborAndDeliveryEncounterType = 'fec2cc56-e35f-42e1-8ae3-017142c1ca59';
+                const newbornDetailsConceptUuid='<lookup expression="fn.getConcept('CIEL:1585').uuid"/>';
+                const typeOfDeliveryConceptUuid='<lookup expression="fn.getConcept('PIH:11663').uuid"/>';
+                const birthDateTimeConceptUuid='<lookup expression="fn.getConcept('PIH:15080').uuid"/>';
+                const cSectionDeliveryConceptUuid='<lookup expression="fn.getConcept('CIEL:155884').uuid"/>';
+                const contextPath = window.location.href.split('/')[3];
+                const apiBaseUrl =  "/" + contextPath + "/ws/rest/v1";
+                const patientUuid = '<lookup expression="patient.uuid"/>';
+
+                const currentEncUuid = '<lookup expression="encounter.uuid"/>';
+                if (currentEncUuid) {
+                    //look for existing C/S wound obs
+                    jq("#csWoundStatus input[type='checkbox']").each(function(){
+                            if (jq(this).prop('checked')) {
+                                console.log("value: " + this.value);
+                                jq("#csWoundStatus").show();
+                            }
+                    });
+                }
+
+                let currentEncounterDate = '';
+                // look for the encounterDate datepicker widget
+                let encounterDateValue = jq("#encounterDate .hasDatepicker");
+                if (encounterDateValue) {
+                    let getDate = encounterDateValue.datepicker('getDate');
+                    if (getDate) {
+                        currentEncounterDate = new Date(getDate);
+                    }
+                }
+
+                if ( currentEncounterDate ) {
+                    const today = new Date();
+                    if ( (today.getFullYear() == currentEncounterDate.getFullYear())
+                            &amp;&amp; (today.getMonth() == currentEncounterDate.getMonth())
+                            &amp;&amp; (today.getDate() == currentEncounterDate.getDate())) {
+                        // encounter is from today, therefore we need to add the time component, the current time of the day
+                        currentEncounterDate = today;
+                    }
+                    let restEncMonth = currentEncounterDate.getMonth() + 1;
+                    let restEncDay = currentEncounterDate.getDate() + 1; // to catch all encounters from today
+                    let restEncDate = currentEncounterDate.getFullYear() + '-' + restEncMonth + '-' + restEncDay;
+                    let deliveryTime = '';
+                    let methodsOfDelivery = '';
+                    // looking for a previous Labour Progress encounter within the same visit
+                    jq.getJSON(apiBaseUrl + "/encounter", {
+                        patient: patientUuid,
+                        encounterType: laborAndDeliveryEncounterType,
+                        todate: restEncDate,
+                        order: 'desc',
+                        v: 'custom:(uuid,patient:(uuid),encounterType:(uuid),visit:(uuid,startDatetime,stopDatetime),encounterDatetime,voided,obs:(uuid,display,concept:(uuid,display),obsDatetime,valueCoded:(uuid,display),valueDatetime,valueNumeric,valueText,groupMembers:(uuid,display,person:(uuid),concept:(uuid,display),obsDatetime,valueCoded:(uuid,display),valueDatetime,valueNumeric,valueText,voided),voided)'
+                      }, function( data ) {
+                        if (data.results.length &gt; 0) {
+                            for (let index = 0; index &lt; data.results.length; index++) {
+                                let laborEnc = data.results[index];
+                                let encDatetime = new Date(laborEnc.encounterDatetime);
+                                if ( laborEnc.visit &amp;&amp; laborEnc.visit.startDatetime ) {
+                                    let visitStartDatetime = new Date(laborEnc.visit.startDatetime);
+                                    if ( (visitStartDatetime.getTime()  &lt;=  currentEncounterDate.getTime())
+                                        &amp;&amp; (!laborEnc.visit.stopDatetime || (new Date(laborEnc.visit.stopDatetime)).getTime() &gt;=  currentEncounterDate.getTime())
+                                        &amp;&amp; (encDatetime.getTime() &lt;= currentEncounterDate.getTime())) {
+                                        //our form's encounter date falls within this visit
+                                        jq("#lastOnset").show();
+                                        jq("#enter_labour_progress").hide();
+                                        if (laborEnc.obs &amp;&amp; laborEnc.obs.length &gt; 0) {
+                                            for (let j=0; j &lt; laborEnc.obs.length; j++) {
+                                                let obs = laborEnc.obs[j];
+                                                if (obs.concept.uuid === newbornDetailsConceptUuid) {
+                                                    if ( obs.groupMembers ) {
+                                                        for (let index=0; index &lt; obs.groupMembers.length; index++) {
+                                                            let member = obs.groupMembers[index];
+                                                            if ( member.concept.uuid === typeOfDeliveryConceptUuid &amp;&amp; member.valueCoded.uuid ) {
+                                                                if ( member.valueCoded.uuid === cSectionDeliveryConceptUuid ) {
+                                                                    // enable the C/S wound questions if we are not editing existing values
+                                                                    jq("#csWoundStatus").show();
+                                                                }
+                                                                if( methodsOfDelivery.length &gt; 0 ) {
+                                                                    methodsOfDelivery = methodsOfDelivery + "; " + member.valueCoded.display;
+                                                                } else {
+                                                                    methodsOfDelivery = member.valueCoded.display;
+                                                                }
+                                                            } else if ( member.concept.uuid === birthDateTimeConceptUuid &amp;&amp; member.valueDatetime) {
+                                                                let birthDate = new Date(member.valueDatetime);
+                                                                let birthDateString = birthDate.toLocaleDateString() + " " + birthDate.toLocaleTimeString();
+                                                                if( deliveryTime.length &gt; 0 ) {
+                                                                    deliveryTime = deliveryTime + "; " + birthDateString;
+                                                                } else {
+                                                                    deliveryTime = birthDateString;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        // no need to continue iterating over the list of encounters.
+                                        // we are only interested in the last Labor and Delivery encounter
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        if( deliveryTime.length &gt; 0 ) {
+                            jq("#timeOfDelivery").text(deliveryTime);
+                            jq("#timeOfDelivery").removeClass("emptyValue").addClass("value");
+                        }
+                        if( methodsOfDelivery.length &gt; 0 ) {
+                            jq("#typeOfDelivery").text(methodsOfDelivery);
+                            jq("#typeOfDelivery").removeClass("emptyValue").addClass("value");
+                        }
+
+                      });
+                }
+            });
+        </script>
+    </ifMode>
     <div class="print-form-datestamps" style="display:none">
         <p><uimessage code="pihcore.form.created_on"/>:
             <lookup complexExpression="$form.dateCreated"/>
@@ -418,27 +544,22 @@
         <section id="Overview" sectionTag="fieldset" headerTag="legend" headerStyle="title"
                  headerCode="Overview">
             <div class="section-container">
-
-                <lookup complexExpression="#set( $deliveryDate = $fn.latestObsBeforeCurrentEncounter('CIEL:5599', true) )"/>
-                <includeIf velocityTest="($deliveryDate) ">
+                <div id="deliveryDateAndMethod">
                     <p id="when" class="date-one-line">
                         <label>
                             <uimessage code="Date &amp; time of delivery"/>
+                            <i class="icon-time"></i>
                         </label>
-                        <lookup complexExpression="$deliveryDate.valueDatetime"  format="dd MMM yyyy h:mm aa"/>
+                        <span id="timeOfDelivery"></span>
                     </p>
-                </includeIf>
 
-                <lookup complexExpression="#set( $deliveryType = $fn.latestObsBeforeCurrentEncounter('PIH:11663', true) )"/>
-                <includeIf velocityTest="($deliveryType) ">
                     <p class="side-by-side">
                         <label>
                             <uimessage code="Type of delivery"/>:
                         </label>
-                        <lookup complexExpression="$deliveryType.valueCoded.name"/>
+                        <span id="typeOfDelivery"></span>
                     </p>
-                </includeIf>
-
+                </div>
                 <p class="date-one-line">
                     <label>
                         <uimessage code="Number of days since delivery" />
@@ -567,7 +688,7 @@
                         <obs conceptId="PIH:13094" style="text" labelText="if other, please specify:" />
                     </p>
 
-                    <p class="exam">
+                    <p id="csWoundStatus" class="exam hidden">
                         <label>
                             <uimessage code="pihcore.csWoundStatus"/>
                         </label>
