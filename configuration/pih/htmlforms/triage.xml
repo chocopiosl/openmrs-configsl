@@ -610,6 +610,71 @@
             </div>
     </ifMode>
 
+    <div id="refer-from" >
+        <div>
+            <p class="side-by-side">
+                <label>
+                    <uimessage code="Referral from:"/>
+                </label>
+                <br/>
+                <obs id="role-refer" conceptId="PIH:10647"  style="radio"
+                     answerConceptIds="PIH:12368,CIEL:1555,CIEL:1575,CIEL:978,CIEL:5622">
+                    <controls>
+                        <when value="CIEL:5622" thenDisplay="#other-referee"/>
+                    </controls>
+                </obs>
+            </p>
+            <div id="other-referee">
+                <label>
+                    <uimessage code="Specify other referral role/place:"/>
+                </label>
+                <obs conceptId="PIH:6421" id="other-referee-obs" style="text"/>
+            </div>
+        </div>
+
+        <div class="two-columns">
+            <div>
+                <label>
+                    <uimessage code="Referral address:"/>
+                </label>
+                <obs conceptId="PIH:10155" id="referral-address" style="text"/>
+            </div>
+
+            <div>
+                <label>
+                    <uimessage code="Referral phone number:"/>
+                </label>
+                <obs conceptId="PIH:6194" id="referral-phone-number" style="text"/>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <p class="side-by-side">
+                <obs id="transport" conceptId="PIH:975" style="radio"
+                     labelText="Method of transport"
+                     answerConceptIds="PIH:15074,PIH:MOTORBIKE,PIH:WALKING,PIH:CAR,PIH:OTHER"
+                     answerCodes="Ambulance,Motorbike,Walking,Car,Other">
+                    <controls>
+                        <when value="PIH:OTHER" thenDisplay="#other-transport"/>
+                    </controls>
+                </obs>
+
+                <div id="other-transport">
+                    <p>
+                        <label>
+                            <uimessage code="Specify other transport method:"/>
+                        </label>
+                        <obs conceptId="PIH:1301" style="text"/>
+                    </p>
+                </div>
+            </p>
+        </div>
+    </div>
+
+    <hr style="height:1px;border-width:0;color:lightgray;background-color:lightgray"/>
+
     <div class="two-columns">
         <div>
             <p class="side-by-side">
