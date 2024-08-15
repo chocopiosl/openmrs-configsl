@@ -5,6 +5,25 @@
     },
     "patientIdentifierType": "KGHEMRID"
   },
+  "@openmrs/esm-patient-forms-app": {
+    "htmlFormEntryForms": [
+      {
+        "formUuid": "569f6534-fb05-4d8d-aa2e-1b832223e1b8",
+        "formName": "Postpartum Daily Progress",
+        "formUiResource": "file:configuration/pih/htmlforms/postpartumDailyProgress.xml",
+        "formUiPage": "enterHtmlFormWithStandardUi",
+        "_comment": "Sierra Leone specific"
+      },
+      {
+        "formUuid": "6575f0e6-fcae-47ef-9838-4129e60e2cbb",
+        "formName": "Newborn Daily Progress",
+        "formUiResource": "file:configuration/pih/htmlforms/newbornDailyProgress.xml",
+        "formUiPage": "enterHtmlFormWithStandardUi",
+        "_comment": "Sierra Leone specific"
+      }
+    ],
+    "showHtmlFormEntryForms": true
+  },
   "@openmrs/esm-login-app": {
     "chooseLocation": {
       "enabled": true,
