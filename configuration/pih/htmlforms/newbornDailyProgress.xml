@@ -248,6 +248,30 @@
             // handlers for next and submit buttons, see nextAndSubmitButtons.js
             setUpNextAndSubmitButtons();
 
+            let lastWeight = '<lookup complexExpression="$fn.latestObs('CIEL:5089').valueNumeric "/>';
+            jq("#weight_kg").find("input[type='text']").change( function(event) {
+                jq("#weight_kg").find(".field-error").html(' ').hide();
+                let weight = jq(this).val();
+                if ( lastWeight &amp;&amp; weight) {
+                    let errorMessage = '';
+                    if (Number.isNaN(weight)) {
+                        //invalid number
+                        errorMessage = "Not a valid number";
+                    } else {
+                        //valid number
+                        let weightPercent = (weight / lastWeight) * 100;
+                        if ( weightPercent &lt;= 90) {
+                            errorMessage = "Weight is 10% less than birth weight";
+                        }
+                    }
+                    if ( errorMessage ) {
+                        setTimeout( () => {
+                            jq("#weight_kg").find(".field-error").html(errorMessage).show();
+                        } , 100);
+                    }
+                }
+            });
+
             });
         </script>
     </ifMode>
