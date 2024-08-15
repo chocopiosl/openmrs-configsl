@@ -1,0 +1,244 @@
+[
+  {
+    "id": "pregnancy.dashboard.visits",
+    "extensions": [
+      {
+        "extensionPointId": "${program.pregnancy.uuid}.firstColumnFragments",
+        "order": 1,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": null,
+        "extensionParams": {
+          "provider": "coreapps",
+          "fragment": "clinicianfacing/visitsSection"
+        }
+      }
+    ],
+    "config": {
+      "label": "RECENT VISITS"
+    }
+  },
+  {
+    "id": "pregnancy.dashboard.ancInitialEncounters",
+    "icon": "fas fa-fw fa-user-md",
+    "label": "ANC INITIAL FORM",
+    "url": "/pihcore/visit/visit.page?patient={{patient.uuid}}#/visitList",
+    "extensions": [
+      {
+        "extensionPointId": "${program.pregnancy.uuid}.firstColumnFragments",
+        "order": 2,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": "!some(activeProgramStates, function(s) { return s.stateUuid === '${programWorkflow.pregnancyProgramTypeOfTreatment.state.postpartum.uuid}'; })",
+        "extensionParams": {
+          "provider": "pihcore",
+          "fragment": "dashboardwidgets/encounters"
+        }
+      }
+    ],
+    "config": {
+      "encounterTypes": [
+        {
+          "encounterType": "${encounterType.ANC_INTAKE.uuid}",
+          "url": "/pihcore/visit/visit.page?patient={{patient.uuid}}&visit={{visit.uuid}}#/overview"
+        }
+      ],
+      "duringCurrentEnrollmentInProgram": "${program.pregnancy.uuid}"
+    }
+  },
+  {
+    "id": "pregnancy.dashboard.ancFollowupEncounters",
+    "icon": "fas fa-fw fa-user-md",
+    "label": "ANC FOLLOWUP FORM",
+    "url": "/pihcore/visit/visit.page?patient={{patient.uuid}}#/visitList",
+    "extensions": [
+      {
+        "extensionPointId": "${program.pregnancy.uuid}.firstColumnFragments",
+        "order": 3,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": "!some(activeProgramStates, function(s) { return s.stateUuid === '${programWorkflow.pregnancyProgramTypeOfTreatment.state.postpartum.uuid}'; })",
+        "extensionParams": {
+          "provider": "pihcore",
+          "fragment": "dashboardwidgets/encounters"
+        }
+      }
+    ],
+    "config": {
+      "encounterTypes": [
+        {
+          "encounterType": "${encounterType.ANC_FOLLOWUP.uuid}",
+          "url": "/pihcore/visit/visit.page?patient={{patient.uuid}}&visit={{visit.uuid}}#/overview"
+        }
+      ],
+      "duringCurrentEnrollmentInProgram": "${program.pregnancy.uuid}"
+    }
+  },
+  {
+    "id": "pregnancy.dashboard.postpartumDailyProgressEncounters",
+    "icon": "fas fa-fw fa-user-md",
+    "label": "POSTPARTUM DAILY PROGRESS",
+    "url": "/pihcore/visit/visit.page?patient={{patient.uuid}}#/visitList",
+    "extensions": [
+      {
+        "extensionPointId": "${program.pregnancy.uuid}.firstColumnFragments",
+        "order": 2,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": "some(activeProgramStates, function(s) { return s.stateUuid === '${programWorkflow.pregnancyProgramTypeOfTreatment.state.postpartum.uuid}'; })",
+        "extensionParams": {
+          "provider": "pihcore",
+          "fragment": "dashboardwidgets/encounters"
+        }
+      }
+    ],
+    "config": {
+      "encounterTypes": [
+        {
+          "encounterType": "${encounterType.sierraLeonePostpartumProgress.uuid}",
+          "url": "/pihcore/visit/visit.page?patient={{patient.uuid}}&visit={{visit.uuid}}#/overview"
+        }
+      ],
+      "duringCurrentEnrollmentInProgram": "${program.pregnancy.uuid}"
+    }
+  },
+  {
+    "id": "pregnancy.dashboard.laborAndDeliverySummaryEncounters",
+    "icon": "fas fa-fw fa-user-md",
+    "label": "LABOR AND DELIVERY SUMMARY",
+    "url": "/pihcore/visit/visit.page?patient={{patient.uuid}}#/visitList",
+    "extensions": [
+      {
+        "extensionPointId": "${program.pregnancy.uuid}.firstColumnFragments",
+        "order": 3,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": "some(activeProgramStates, function(s) { return s.stateUuid === '${programWorkflow.pregnancyProgramTypeOfTreatment.state.postpartum.uuid}'; })",
+        "extensionParams": {
+          "provider": "pihcore",
+          "fragment": "dashboardwidgets/encounters"
+        }
+      }
+    ],
+    "config": {
+      "encounterTypes": [
+        {
+          "encounterType": "${encounterType.sierraLeoneLaborDeliverySummary.uuid}",
+          "url": "/pihcore/visit/visit.page?patient={{patient.uuid}}&visit={{visit.uuid}}#/overview"
+        }
+      ],
+      "duringCurrentEnrollmentInProgram": "${program.pregnancy.uuid}"
+    }
+  },
+  {
+    "id": "pregnancy.dashboard.maternalAdmissionEncounters",
+    "icon": "fas fa-fw fa-user-md",
+    "label": "MATERNAL ADMISSION",
+    "url": "/pihcore/visit/visit.page?patient={{patient.uuid}}#/visitList",
+    "extensions": [
+      {
+        "extensionPointId": "${program.pregnancy.uuid}.firstColumnFragments",
+        "order": 4,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": "some(activeProgramStates, function(s) { return s.stateUuid === '${programWorkflow.pregnancyProgramTypeOfTreatment.state.postpartum.uuid}'; })",
+        "extensionParams": {
+          "provider": "pihcore",
+          "fragment": "dashboardwidgets/encounters"
+        }
+      }
+    ],
+    "config": {
+      "encounterTypes": [
+        {
+          "encounterType": "${encounterType.ADMISSION.uuid}",
+          "url": "/pihcore/visit/visit.page?patient={{patient.uuid}}&visit={{visit.uuid}}#/overview"
+        }
+      ],
+      "duringCurrentEnrollmentInProgram": "${program.pregnancy.uuid}"
+    }
+  },
+  {
+    "id": "pregnancy.dashboard.currentEnrollment",
+    "extensions": [
+      {
+        "extensionPointId": "${program.pregnancy.uuid}.secondColumnFragments",
+        "order": 1,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": null,
+        "extensionParams": {
+          "provider": "coreapps",
+          "fragment": "dashboardwidgets/dashboardWidget"
+        }
+      }
+    ],
+    "config": {
+      "widget": "programstatus",
+      "icon": "fas fa-fw fa-stethoscope",
+      "label": "coreapps.currentEnrollmentDashboardWidget.label",
+      "program": "${program.pregnancy.uuid}",
+      "locationTag": "Program Location",
+      "markPatientDeadOutcome": "${concept.patientDied.uuid}",
+      "dashboard": "${program.pregnancy.uuid}"
+    }
+  },
+  {
+    "id": "pregnancy.dashboard.previousEnrollments",
+    "extensions": [
+      {
+        "extensionPointId": "${program.pregnancy.uuid}.secondColumnFragments",
+        "order": 2,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": null,
+        "extensionParams": {
+          "provider": "coreapps",
+          "fragment": "program/programHistory"
+        }
+      }
+    ],
+    "config": {
+      "widget": "programstatus",
+      "icon": "fas fa-fw fa-stethoscope",
+      "label": "coreapps.programHistoryDashboardWidget.label",
+      "program": "${program.pregnancy.uuid}",
+      "includeActive": false,
+      "locationTag": "Program Location",
+      "markPatientDeadOutcome": "${concept.patientDied.uuid}",
+      "dashboard": "${program.pregnancy.uuid}"
+    }
+  },
+  {
+    "id": "pregnancy.dashboard.allergies",
+    "icon": "fas fa-fw fa-allergies",
+    "label": "allergyui.allergies",
+    "extensions": [
+      {
+        "extensionPointId": "${program.pregnancy.uuid}.secondColumnFragments",
+        "order": 3,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": null,
+        "extensionParams": {
+          "provider": "allergyui",
+          "fragment": "allergies"
+        }
+      }
+    ],
+    "config": {}
+  },
+  {
+    "id": "pregnancy.dashboard.dispensedMeds",
+    "icon": "fas fa-fw fa-pills",
+    "label": "mirebalais.dispensing.title",
+    "url": "dispensing/patient.page?patientId={{patient.uuid}}",
+    "extensions": [
+      {
+        "extensionPointId": "${program.pregnancy.uuid}.secondColumnFragments",
+        "order": 4,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": null,
+        "extensionParams": {
+          "provider": "pihcore",
+          "fragment": "dashboardwidgets/medsDispensed"
+        }
+      }
+    ],
+    "config": {
+      "maxDatesToShow": 5,
+      "detailsUrl": "pihcore/meds/dispensingSummary.page?patientId={{patient.uuid}}"
+    }
+  }
+]
