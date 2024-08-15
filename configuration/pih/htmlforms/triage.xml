@@ -977,7 +977,15 @@
             </obsgroup>
         </p>
     </div>
-
+    <div class="hidden">
+        <label>Priority</label>
+        <obs conceptId="PIH:12842"
+             style="radio"
+             id="priority"
+             answerConceptIds="CIEL:1115,PIH:Emergency"
+             answerCodes="Normal,Emergency"
+             answerSeparator=" "/>
+    </div>
     <div class="boundary"></div>
 
     <ifMode mode="VIEW" include="false">
