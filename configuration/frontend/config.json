@@ -403,6 +403,9 @@
         "appliedToConceptSets": ["${concept.complicationsAtDelivery.uuid}"]
       }
     ]
+  },
+  "admission-request-note-card-row": {
+    "conceptUuid": "${concept.freeTextComment.uuid}"
   }
 }
 
