@@ -720,6 +720,7 @@
                             </template>
                             <render normAb="normalObs"   answer="PIH:3236"    comment="Clear" />
                             <render normAb="abnormalObs" answer="CIEL:127777" comment="Red eyes" />
+                            <render normAb="abnormalObs" answer="CIEL:160910" comment="Yellow eyes" />
                             <render normAb="abnormalObs" answer="CIEL:168745" comment="Sticky eyes"/>
                             <render normAb="abnormalObs" answer="CIEL:168747" comment="Sticky right eye"/>
                             <render normAb="abnormalObs" answer="CIEL:168746" comment="Sticky left eye"/>
@@ -826,14 +827,6 @@
 
             <div class="two-columns">
                 <div>
-                    <h4>
-                        <uimessage code="Nutrition" />
-                    </h4>
-                    <p class="side-by-side">
-                        <obs conceptId="CIEL:163301" style="radio"
-                             answerConceptIds="CIEL:1115,CIEL:1116"
-                             answerSeparator="&lt;br /&gt;"/>
-                    </p>
                 </div>
 
                 <div>
