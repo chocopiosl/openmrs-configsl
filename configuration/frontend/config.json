@@ -22,7 +22,13 @@
         "_comment": "Sierra Leone specific"
       }
     ],
-    "showHtmlFormEntryForms": true
+    "showHtmlFormEntryForms": true,
+    "formSections": [
+      {
+        "name": "Maternal Forms",
+        "forms": [ "569f6534-fb05-4d8d-aa2e-1b832223e1b8", "6575f0e6-fcae-47ef-9838-4129e60e2cbb" ]
+      }
+    ]
   },
   "@openmrs/esm-login-app": {
     "chooseLocation": {
