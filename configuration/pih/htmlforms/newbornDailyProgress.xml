@@ -306,9 +306,11 @@
                         // encounter is from today, therefore we need to add the time component, the current time of the day
                         currentEncounterDate = today;
                     }
-                    let restEncMonth = currentEncounterDate.getMonth() + 1;
-                    let restEncDay = currentEncounterDate.getDate() + 1; // to catch all encounters from today
-                    let restEncDate = currentEncounterDate.getFullYear() + '-' + restEncMonth + '-' + restEncDay;
+                    let nextDayFromEncDate = new Date(currentEncounterDate);
+                    nextDayFromEncDate.setDate(nextDayFromEncDate.getDate() + 1);
+                    let restEncMonth = nextDayFromEncDate.getMonth() + 1;
+                    let restEncDay = nextDayFromEncDate.getDate(); // to catch all encounters from today
+                    let restEncDate = nextDayFromEncDate.getFullYear() + '-' + restEncMonth + '-' + restEncDay;
 
                     // looking for a previous weight obs within the same visit
                     jq.getJSON(apiBaseUrl + "/encounter", {
@@ -341,7 +343,7 @@
                                                     &amp;&amp; !lastWeight ) {
                                                     lastWeight = obs.valueNumeric;
                                                     lastWeightDatetime = new Date(obs.obsDatetime);
-                                                    jq("#lastWeightKg").text(lastWeight + "kg (" + lastWeightDatetime.toLocaleDateString() + " " + lastWeightDatetime.toLocaleTimeString() + ")");
+                                                    jq("#lastWeightKg").html(lastWeight + "kg <br></br>(" + lastWeightDatetime.toLocaleDateString() + " " + lastWeightDatetime.toLocaleTimeString() + ")");
                                                 }
                                             }
                                         }
