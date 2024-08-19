@@ -333,25 +333,23 @@
                                                 if (obs.concept.uuid === birthWeightConceptUuid &amp;&amp; !lastBirthWeight) {
                                                     lastBirthWeight = obs.valueNumeric;
                                                     lastBirthWeightDatetime = new Date(obs.obsDatetime);
+                                                    jq("#birthWeightBox").show();
+                                                    jq("#birthWeightInfo").html(lastBirthWeight + "kg <br></br>(" + lastBirthWeightDatetime.toLocaleDateString() + " " + lastBirthWeightDatetime.toLocaleTimeString() + ")");
                                                 } else if (obs.concept.uuid === weightConceptUuid
                                                     &amp;&amp; (encDatetime.getTime() &lt;= currentEncounterDate.getTime())
                                                     &amp;&amp; (!currentEncUuid || (currentEncUuid !==newbornEnc.uuid))
                                                     &amp;&amp; !lastWeight ) {
                                                     lastWeight = obs.valueNumeric;
                                                     lastWeightDatetime = new Date(obs.obsDatetime);
+                                                    jq("#lastWeightKg").text(lastWeight + "kg (" + lastWeightDatetime.toLocaleDateString() + " " + lastWeightDatetime.toLocaleTimeString() + ")");
                                                 }
                                             }
                                         }
-
                                         if (lastBirthWeight &amp;&amp; lastWeight ) {
                                             // no need to continue iterating over the list of encounters.
                                             // we already found the latest weight obs values
-                                            jq("#lastWeightKg").text(lastWeight + "kg (" + lastWeightDatetime.toLocaleDateString() + " " + lastWeightDatetime.toLocaleTimeString() + ")");
-                                            jq("#birthWeightBox").show();
-                                            jq("#birthWeightInfo").html(lastBirthWeight + "kg <br></br>(" + lastBirthWeightDatetime.toLocaleDateString() + " " + lastBirthWeightDatetime.toLocaleTimeString() + ")");
                                             break;
                                         }
-
                                     }
                                 }
                             }
