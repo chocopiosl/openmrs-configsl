@@ -254,9 +254,11 @@
                         // encounter is from today, therefore we need to add the time component, the current time of the day
                         currentEncounterDate = today;
                     }
-                    let restEncMonth = currentEncounterDate.getMonth() + 1;
-                    let restEncDay = currentEncounterDate.getDate() + 1; // to catch all encounters from today
-                    let restEncDate = currentEncounterDate.getFullYear() + '-' + restEncMonth + '-' + restEncDay;
+                    let nextDayFromEncDate = new Date(currentEncounterDate);
+                    nextDayFromEncDate.setDate(nextDayFromEncDate.getDate() + 1);
+                    let restEncMonth = nextDayFromEncDate.getMonth() + 1;
+                    let restEncDay = nextDayFromEncDate.getDate(); // to catch all encounters from today
+                    let restEncDate = nextDayFromEncDate.getFullYear() + '-' + restEncMonth + '-' + restEncDay;
                     let deliveryTime = '';
                     let methodsOfDelivery = '';
                     // looking for a previous Labour Progress encounter within the same visit
