@@ -80,3 +80,18 @@ concept:
 queue:
   triage:
     uuid: "3113f164-68f0-11ee-ab8d-0242ac120002"
+
+program:
+  pregnancy:
+    uuid: "6a5713c2-3fd5-46e7-8f25-36a0f7871e12"
+
+programWorkflow:
+  pregnancyProgramTypeOfTreatment:
+    # this is referred to by UUID because the concept used it fairly generic (and likely to be reused elsewhere?)
+    uuid: "9a3f8252-1588-4f7b-b02c-9e99c437d4ef"
+    state:
+      antenatal:
+        uuid: "a83896bf-9094-4a3c-b843-e75509a52b32"
+      postpartum:
+        uuid: "a735b5f6-0b63-4d9a-ae2e-70d08c947aed"
+
