@@ -253,10 +253,13 @@
             const patientUuid = '<lookup expression="patient.uuid"/>';
             const birthWeightConceptUuid='<lookup expression="fn.getConcept('CIEL:5916').uuid"/>';
             const weightConceptUuid='<lookup expression="fn.getConcept('CIEL:5089').uuid"/>';
+            const birthLengthConceptUuid='<lookup expression="fn.getConcept('CIEL:163554').uuid"/>';
             let lastBirthWeight = 0;
             let lastBirthWeightDatetime = 0;
             let lastWeight = 0;
             let lastWeightDatetime = '';
+            let lastBirthLength = 0;
+            let lastBirthLengthDatetime = 0;
 
 
             jq("#weight_kg").find("input[type='text']").change( function(event) {
@@ -337,6 +340,11 @@
                                                     lastBirthWeightDatetime = new Date(obs.obsDatetime);
                                                     jq("#birthWeightBox").show();
                                                     jq("#birthWeightInfo").html(lastBirthWeight + "kg <br></br>(" + lastBirthWeightDatetime.toLocaleDateString() + " " + lastBirthWeightDatetime.toLocaleTimeString() + ")");
+                                                } else if (obs.concept.uuid === birthLengthConceptUuid &amp;&amp; !lastBirthLength) {
+                                                    lastBirthLength = obs.valueNumeric;
+                                                    lastBirthLengthDatetime = new Date(obs.obsDatetime);
+                                                    jq("#birthLengthBox").show();
+                                                    jq("#birthLengthInfo").html(lastBirthLength + "cm <br></br>(" + lastBirthLengthDatetime.toLocaleDateString() + " " + lastBirthLengthDatetime.toLocaleTimeString() + ")");
                                                 } else if (obs.concept.uuid === weightConceptUuid
                                                     &amp;&amp; (encDatetime.getTime() &lt;= currentEncounterDate.getTime())
                                                     &amp;&amp; (!currentEncUuid || (currentEncUuid !==newbornEnc.uuid))
@@ -347,9 +355,9 @@
                                                 }
                                             }
                                         }
-                                        if (lastBirthWeight &amp;&amp; lastWeight ) {
+                                        if (lastBirthWeight &amp;&amp; lastWeight &amp;&amp; lastBirthLength ) {
                                             // no need to continue iterating over the list of encounters.
-                                            // we already found the latest weight obs values
+                                            // we already found the latest weight and length obs values
                                             break;
                                         }
                                     }
@@ -584,7 +592,7 @@
                                         <uimessage code="Weight"/>
                                     </label>
                                     <ifMode mode="VIEW" include="false">
-                                            <span id="lastWeightKg" class="prior-obs-value"></span>
+                                            <span id="lastWeightKg" class="prior-obs-value"> </span>
                                         <br/>
                                     </ifMode>
                                     <obs conceptId="CIEL:5089" id="weight_kg" showUnits="emr.units.kilograms"
@@ -599,7 +607,6 @@
                                         <span id="birthWeightInfo"></span>
                                     </span>
                                 </p>
-
                             </div>
                             <div>
                                 <label>
@@ -617,21 +624,14 @@
                                     <br/>
                                     <obs conceptId="CIEL:5090" showUnits="true"/>
                                 </p>
-
-                                <ifMode mode="VIEW" include="false">
-                                    <lookup complexExpression="#set( $birthHt = $fn.latestObs('CIEL:163554') )"/>
-                                    <includeIf velocityTest="($birthHt) ">
-                                        <p class="side-by-side">
-                                            <span class="prior-obs-value">
-                                                <label>
-                                                    <uimessage code="Birth Length:"/>
-                                                </label>
-                                                <lookup complexExpression="$birthHt.valueNumeric"/>cm
-                                                (<lookup complexExpression="$birthHt.obsDatetime"/>)
-                                            </span>
-                                        </p>
-                                    </includeIf>
-                                </ifMode>
+                                <p id="birthLengthBox" class="side-by-side hidden" >
+                                    <span class="prior-obs-value">
+                                        <label>
+                                            <uimessage code="Birth Length:"/>
+                                        </label>
+                                        <span id="birthLengthInfo"></span>
+                                    </span>
+                                </p>
                             </div>
                             <div>
                                 <label>

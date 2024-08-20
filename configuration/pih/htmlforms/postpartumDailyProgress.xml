@@ -255,7 +255,7 @@
                         currentEncounterDate = today;
                     }
                     let nextDayFromEncDate = new Date(currentEncounterDate);
-                    nextDayFromEncDate.setDate(nextDayFromEncDate.getDate() + 1);
+                    nextDayFromEncDate.setDate(nextDayFromEncDate.getDate() + 2);
                     let restEncMonth = nextDayFromEncDate.getMonth() + 1;
                     let restEncDay = nextDayFromEncDate.getDate(); // to catch all encounters from today
                     let restEncDate = nextDayFromEncDate.getFullYear() + '-' + restEncMonth + '-' + restEncDay;
