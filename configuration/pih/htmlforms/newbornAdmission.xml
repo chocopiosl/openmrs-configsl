@@ -461,6 +461,13 @@
                             <obs conceptId="PIH:1301" style="text"/>
                         </p>
                     </div>
+                    <p>
+                        <obs conceptId="PIH:13094" style="textarea"
+                             labelText="Maternal history"/>
+                    </p>
+                    <div>
+
+                    </div>
                 </div>
             </div>
 
@@ -632,7 +639,7 @@
             <table>
                 <tr>
                     <td>
-                        <div class="three-columns">
+                        <div class="four-columns">
                             <div>
                                 <!-- Hb/Hemoglobin (CIEL:21) Test/Numeric with units -->
                                 <label>
@@ -648,13 +655,14 @@
                             <div>
                                 <!-- Serum glucose (CIEL:887) Test/Numeric with units-->
                                 <label>
-                                    <uimessage code="Random blood glucose (RBG)" />
+                                    <uimessage code="Blood glucose (RBG)" />
                                 </label>
                                 <span class="small">
                                     <obs conceptId="CIEL:887" id="glucose"
                                          showUnits="true" unitCssClass="append-to-value"/>
                                 </span>
                             </div>
+
                             <div>
                                 <p class="side-by-side">
                                     <!-- MRDT (aka Malaria rapid test) (CIEL:1643) Test/coded -->
@@ -668,6 +676,17 @@
                                              answerSeparator="&lt;br&gt;"/>
                                     </span>
                                 </p>
+                            </div>
+
+                            <div>
+                                <!-- Total Bilirubin-->
+                                <label>
+                                    <uimessage code="pihcore.lab.bilirubin" />
+                                </label>
+                                <span class="small">
+                                    <obs conceptId="CIEL:655" id="tbilirubin"
+                                         showUnits="false" />
+                                </span>
                             </div>
                         </div>
 
@@ -798,49 +817,32 @@
                 </div>
             </p>
 
-            <div class="two-columns">
-                <div>
-                    <h4>
-                        <uimessage code="Feeding method"/>
-                    </h4>
-                    <p class="side-by-side">
-                        <obs conceptId="CIEL:1151" style="radio"
-                             answerConceptIds="CIEL:5632,CIEL:5254"
-                             answerCodes="Breastfed,Formula"/>
-                        <br/>
-                        <obs conceptId="CIEL:168734" style="radio"
-                             answerConceptIds="CIEL:168743,CIEL:168735,CIEL:168742"
-                             answerCodes="Tube,Cup,Spoon"/>
-                    </p>
-                </div>
-                <div>
-                    <h4>
-                        <uimessage code="Neurological" />
-                    </h4>
-                    <p class="side-by-side">
-                        <obs conceptId="CIEL:1129" style="radio"
-                             answerConceptIds="CIEL:1115,CIEL:1116"
-                             answerSeparator="&lt;br /&gt;"/>
-                    </p>
-                </div>
-            </div>
+            <p class="side-by-side">
+                <h4>
+                    <uimessage code="pihcore.exam.neuro_exam"/>
+                </h4>
+                <div class="two-columns">
+                    <div>
+                        <p class="side-by-side">
+                            <obs conceptId="CIEL:1129" style="radio"
+                                 answerConceptIds="CIEL:1115,CIEL:1116"/>
+                        </p>
 
-            <div class="two-columns">
-                <div>
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Seizures" />
+                            </label>
+                            <obs conceptId="PIH:206" style="radio"
+                                 answerConceptIds="CIEL:1065,CIEL:1066"
+                                 answerCodes="yes,no"/>
+                        </p>
+                    </div>
+                    <div>
+                        <label>Comments about neurological exam</label>
+                        <obs conceptId="PIH:11570" style="text" />
+                    </div>
                 </div>
-
-                <div>
-                    <h4>
-                        <uimessage code="Seizures" />
-                    </h4>
-                    <p class="side-by-side">
-                        <obs conceptId="PIH:206" style="radio"
-                             answerConceptIds="CIEL:1065,CIEL:1066"
-                             answerCodes="yes,no"
-                             answerSeparator="&lt;br /&gt;"/>
-                    </p>
-                </div>
-            </div>
+            </p>
 
         </div>
     </section>
@@ -870,6 +872,22 @@
     <section id="treatment" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Treatment">
         <div class="section-container">
+            <div>
+                <p class="side-by-side">
+                    <label>
+                        <uimessage code="Feeding method"/>
+                    </label>
+                    <br/>
+                    <obs conceptId="CIEL:1151" style="radio"
+                         answerConceptIds="CIEL:5632,CIEL:5254"
+                         answerCodes="Breastfed,Formula"/>
+                    <br/>
+                    <obs conceptId="CIEL:168734" style="radio"
+                         answerConceptIds="CIEL:168743,CIEL:168735,CIEL:168742"
+                         answerCodes="Tube,Cup,Spoon"/>
+                </p>
+            </div>
+
             <p class="side-by-side">
                 <label>
                     <uimessage code="Air supply" />
