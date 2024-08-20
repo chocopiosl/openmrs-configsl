@@ -307,7 +307,7 @@
                         currentEncounterDate = today;
                     }
                     let nextDayFromEncDate = new Date(currentEncounterDate);
-                    nextDayFromEncDate.setDate(nextDayFromEncDate.getDate() + 1);
+                    nextDayFromEncDate.setDate(nextDayFromEncDate.getDate() + 2); //to overcome the annoying problem when the client and the server are in different time zones
                     let restEncMonth = nextDayFromEncDate.getMonth() + 1;
                     let restEncDay = nextDayFromEncDate.getDate(); // to catch all encounters from today
                     let restEncDate = nextDayFromEncDate.getFullYear() + '-' + restEncMonth + '-' + restEncDay;
