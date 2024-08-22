@@ -571,7 +571,7 @@
                         <repeat>
                             <template>
                                 <obs class="{normAb}" style="checkbox"
-                                     conceptId="CIEL:168721"
+                                     conceptId="CIEL:1120"
                                      answerConceptId="{answer}" answerCode="{comment}"/>
                             </template>
                             <render normAb="normalObs" answer="CIEL:1115" comment="Normal (pink)" />
