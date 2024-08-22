@@ -12,6 +12,7 @@
         "formName": "Postpartum Daily Progress",
         "formUiResource": "file:configuration/pih/htmlforms/postpartumDailyProgress.xml",
         "formUiPage": "enterHtmlFormWithStandardUi",
+        "formEditUiPage": "editHtmlFormWithStandardUi",
         "_comment": "Sierra Leone specific"
       },
       {
@@ -19,6 +20,7 @@
         "formName": "Newborn Daily Progress",
         "formUiResource": "file:configuration/pih/htmlforms/newbornDailyProgress.xml",
         "formUiPage": "enterHtmlFormWithStandardUi",
+        "formEditUiPage": "editHtmlFormWithStandardUi",
         "_comment": "Sierra Leone specific"
       }
     ],
