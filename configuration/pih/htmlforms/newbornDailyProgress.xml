@@ -410,13 +410,9 @@
                                            tags="Maternal and Child Location"/>
                     </span>
                 </p>
-                <p id="when">
-                    <label>
-                        <uimessage code="emr.patientDashBoard.date"/>
-                    </label>
-                    <span>
-                        <encounterDate id="encounterDate" default="now"/>
-                    </span>
+                <p id="when" class="date-one-line">
+                    <label><uimessage code="emr.patientDashBoard.date"/></label>
+                    <encounterDate id="encounterDate" showTime="true" default="now"/>
                 </p>
             </div>
         </includeIf>
@@ -452,7 +448,7 @@
                         <uimessage code="emr.patientDashBoard.date"/>
                     </label>
                     <span>
-                        <encounterDate id="encounterDate" default="now"/>
+                        <encounterDate id="encounterDate" showTime="true" default="now"/>
                     </span>
                 </p>
             </div>
