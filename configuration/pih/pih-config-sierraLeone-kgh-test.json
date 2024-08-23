@@ -3,7 +3,7 @@
 
   "locationTags": {
     "Login Location": ["KGH Triage", "KGH MCH", "KGH NCD", "KGH Mental Health", "KGH Laboratory", "KGH Pharmacy", "Antenatal Ward", "Labour and Delivery", "MCCU", "MCOE Triage", "NICU", "Obstetric Post-Op", "Obstetric Surgery", "Postnatal Ward", "Loss Ward"],
-    "Program Location": [ "KGH MCH", "KGH NCD", "KGH Mental Health" ]
+    "Program Location": [ "KGH MCH", "KGH NCD", "KGH Mental Health", "Antenatal Ward", "Labour and Delivery", "MCCU", "NICU", "Obstetric Surgery", "Postnatal Ward"]
   },
 
   "registrationConfig": {
