@@ -203,10 +203,32 @@
         </ifMode>
     </style>
 
+    <ifMode mode="ENTER" include="true">
+        <script type="text/javascript">
+            jq(document).ready(function() {
+                let encounterDateValue = jq("#encounterDate .hasDatepicker");
+                if (encounterDateValue) {
+                    const today = new Date();
+                    let getDate = encounterDateValue.datepicker('getDate');
+                    if (getDate) {
+                        currentEncounterDate = new Date(getDate);
+                        if (  (today.getFullYear() !== currentEncounterDate.getFullYear())
+                            || (today.getMonth() !== currentEncounterDate.getMonth())
+                            || (today.getDate() !== currentEncounterDate.getDate()) ) {
+                            // this is retrospective data entry, therefore the encounter datetime needs to be set at midnight by default
+                            jq('#encounterDate .hfe-hours').val('0');
+                            jq('#encounterDate .hfe-minutes').val('0');
+                            currentEncounterDate.setHours(0, 0, 0);
+                        }
+                    }
+                }
+            });
+        </script>
+    </ifMode>
+
     <ifMode mode="VIEW" include="false">
         <script type="text/javascript">
             jq(document).ready(function() {
-
             jq('.normalObs').change(function(event) {
                 // get the Obs checkbox value
                 var firstCheckbox = jq(this).children(":checkbox:first").prop('checked');
@@ -234,6 +256,101 @@
 
             // handlers for next and submit buttons, see nextAndSubmitButtons.js
             setUpNextAndSubmitButtons();
+
+                const contextPath = window.location.href.split('/')[3];
+                const apiBaseUrl =  "/" + contextPath + "/ws/rest/v1";
+                const patientUuid = '<lookup expression="patient.uuid"/>';
+                const birthWeightConceptUuid='<lookup expression="fn.getConcept('CIEL:5916').uuid"/>';
+                const weightConceptUuid='<lookup expression="fn.getConcept('CIEL:5089').uuid"/>';
+                const birthLengthConceptUuid='<lookup expression="fn.getConcept('CIEL:163554').uuid"/>';
+                let lastBirthWeight = 0;
+                let lastBirthWeightDatetime = 0;
+                let lastWeight = 0;
+                let lastWeightDatetime = '';
+                let lastBirthLength = 0;
+                let lastBirthLengthDatetime = 0;
+
+                let currentEncounterDate = '';
+                let encounterDate = '<lookup expression="encounter.getEncounterDatetime().getTime()"/>';
+                const currentEncUuid = '<lookup expression="encounter.uuid"/>';
+                if (typeof encounterDate !== "undefined" &amp;&amp; encounterDate !== null &amp;&amp; (encounterDate.length > 0)) {
+                    currentEncounterDate = new Date(+encounterDate);
+                } else {
+                    // look for the encounterDate datepicker widget
+                    let encounterDateValue = jq("#encounterDate .hasDatepicker");
+                    if (encounterDateValue) {
+                        let getDate = encounterDateValue.datepicker('getDate');
+                        if (getDate) {
+                            currentEncounterDate = new Date(getDate);
+                        }
+                    }
+                }
+                if ( currentEncounterDate ) {
+                        const today = new Date();
+                        if ( (currentEncounterDate.getHours() === 0 ) &amp;&amp;  (currentEncounterDate.getMinutes() === 0)
+                                &amp;&amp;  (today.getFullYear() == currentEncounterDate.getFullYear())
+                                &amp;&amp; (today.getMonth() == currentEncounterDate.getMonth())
+                                &amp;&amp; (today.getDate() == currentEncounterDate.getDate()) ) {
+                            // encounter is from today, therefore we need to add the time component, the current time of the day
+                            currentEncounterDate = today;
+                        }
+                        let nextDayFromEncDate = new Date(currentEncounterDate);
+                        nextDayFromEncDate.setDate(nextDayFromEncDate.getDate() + 2); //to overcome the annoying problem when the client and the server are in different time zones
+                        let restEncMonth = nextDayFromEncDate.getMonth() + 1;
+                        let restEncDay = nextDayFromEncDate.getDate(); // to catch all encounters from today
+                        let restEncDate = nextDayFromEncDate.getFullYear() + '-' + restEncMonth + '-' + restEncDay;
+
+                        // looking for a previous weight obs within the same visit
+                        jq.getJSON(apiBaseUrl + "/encounter", {
+                            patient: patientUuid,                        
+                            todate: restEncDate,
+                            order: 'desc',
+                            v: 'custom:(id,uuid,patient:(uuid),encounterType:(uuid,display),visit:(uuid,startDatetime,stopDatetime),encounterDatetime,voided,obs:(uuid,display,concept:(uuid,display),obsDatetime,valueCoded:(uuid,display),valueDatetime,valueNumeric,valueText,groupMembers:(uuid,display,person:(uuid),concept:(uuid,display),obsDatetime,valueCoded:(uuid,display),valueDatetime,valueNumeric,valueText,voided),voided)'
+                          }, function( data ) {
+                            if (data.results.length &gt; 0) {
+                                for (let index = 0; index &lt; data.results.length; index++) {
+                                    let newbornEnc = data.results[index];
+                                    let encDatetime = new Date(newbornEnc.encounterDatetime);
+                                    if ( newbornEnc.visit &amp;&amp; newbornEnc.visit.startDatetime ) {
+                                        let visitStartDatetime = new Date(newbornEnc.visit.startDatetime);
+                                        if ( (visitStartDatetime.getTime()  &lt;=  currentEncounterDate.getTime())
+                                            &amp;&amp; (!newbornEnc.visit.stopDatetime || (new Date(newbornEnc.visit.stopDatetime)).getTime() &gt;=  currentEncounterDate.getTime())
+                                            ) {
+                                            //our form's encounter date falls within this visit
+                                            if (newbornEnc.obs &amp;&amp; newbornEnc.obs.length &gt; 0) {
+                                                for (let j=0; j &lt; newbornEnc.obs.length; j++) {
+                                                    let obs = newbornEnc.obs[j];
+                                                    if (obs.concept.uuid === birthWeightConceptUuid &amp;&amp; !lastBirthWeight) {
+                                                        lastBirthWeight = obs.valueNumeric;
+                                                        lastBirthWeightDatetime = new Date(obs.obsDatetime);
+                                                        jq("#birthWeightBox").show();
+                                                        jq("#birthWeightInfo").html(lastBirthWeight + "kg <br></br>(" + lastBirthWeightDatetime.toLocaleDateString() + " " + lastBirthWeightDatetime.toLocaleTimeString() + ")");
+                                                    } else if (obs.concept.uuid === birthLengthConceptUuid &amp;&amp; !lastBirthLength) {
+                                                        lastBirthLength = obs.valueNumeric;
+                                                        lastBirthLengthDatetime = new Date(obs.obsDatetime);
+                                                        jq("#birthLengthBox").show();
+                                                        jq("#birthLengthInfo").html(lastBirthLength + "cm <br></br>(" + lastBirthLengthDatetime.toLocaleDateString() + " " + lastBirthLengthDatetime.toLocaleTimeString() + ")");
+                                                    } else if (obs.concept.uuid === weightConceptUuid
+                                                        &amp;&amp; (encDatetime.getTime() &lt;= currentEncounterDate.getTime())
+                                                        &amp;&amp; (!currentEncUuid || (currentEncUuid !==newbornEnc.uuid))
+                                                        &amp;&amp; !lastWeight ) {
+                                                        lastWeight = obs.valueNumeric;
+                                                        lastWeightDatetime = new Date(obs.obsDatetime);
+                                                        jq("#lastWeightKg").html(lastWeight + "kg <br></br>(" + lastWeightDatetime.toLocaleDateString() + " " + lastWeightDatetime.toLocaleTimeString() + ")");
+                                                    }
+                                                }
+                                            }
+                                            if (lastBirthWeight &amp;&amp; lastWeight &amp;&amp; lastBirthLength ) {
+                                                // no need to continue iterating over the list of encounters.
+                                                // we already found the latest weight and length obs values
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                          });
+                    }    
 
             });
         </script>
@@ -488,33 +605,21 @@
                                         <uimessage code="Weight"/>
                                     </label>
                                     <ifMode mode="VIEW" include="false">
-                                        <lookup complexExpression="#set( $lastWt = $fn.latestObs('CIEL:5089') )"/>
-                                        <includeIf velocityTest="($lastWt) ">
-                                            <span class="prior-obs-value">
-                                                <lookup complexExpression="$lastWt.valueNumeric"/>kg
-                                                (<lookup complexExpression="$lastWt.obsDatetime"/>)
-                                            </span>
-                                        </includeIf>
+                                        <span id="lastWeightKg" class="prior-obs-value"> </span>
                                         <br/>
                                     </ifMode>
                                     <obs conceptId="CIEL:5089" id="weight_kg" showUnits="emr.units.kilograms"
                                          unitsCssClass="append-to-value"/>
                                 </p>
 
-                                <ifMode mode="VIEW" include="false">
-                                    <lookup complexExpression="#set( $birthWt = $fn.latestObs('CIEL:5916') )"/>
-                                    <includeIf velocityTest="($birthWt) ">
-                                        <p class="side-by-side">
-                                            <span class="prior-obs-value">
-                                                <label>
-                                                    <uimessage code="Birth Weight:"/>
-                                                </label>
-                                                <lookup complexExpression="$birthWt.valueNumeric"/>kg
-                                                (<lookup complexExpression="$birthWt.obsDatetime"/>)
-                                            </span>
-                                        </p>
-                                    </includeIf>
-                                </ifMode>
+                                <p id="birthWeightBox" class="side-by-side hidden" >
+                                    <span class="prior-obs-value">
+                                        <label>
+                                            <uimessage code="Birth Weight:"/>
+                                        </label>
+                                        <span id="birthWeightInfo"></span>
+                                    </span>
+                                </p>
                             </div>
                             <div>
                                 <label>
@@ -528,23 +633,17 @@
                                     <label>
                                         <uimessage code="Length"/>
                                     </label>
+                                    <br/>
                                     <obs conceptId="CIEL:5090" showUnits="true"/>
                                 </p>
-
-                                <ifMode mode="VIEW" include="false">
-                                    <lookup complexExpression="#set( $birthHt = $fn.latestObs('CIEL:163554') )"/>
-                                    <includeIf velocityTest="($birthHt) ">
-                                        <p class="side-by-side">
-                                            <span class="prior-obs-value">
-                                                <label>
-                                                    <uimessage code="Birth Length:"/>
-                                                </label>
-                                                <lookup complexExpression="$birthHt.valueNumeric"/>cm
-                                                (<lookup complexExpression="$birthHt.obsDatetime"/>)
-                                            </span>
-                                        </p>
-                                    </includeIf>
-                                </ifMode>
+                                <p id="birthLengthBox" class="side-by-side hidden" >
+                                    <span class="prior-obs-value">
+                                        <label>
+                                            <uimessage code="Birth Length:"/>
+                                        </label>
+                                        <span id="birthLengthInfo"></span>
+                                    </span>
+                                </p>
                             </div>
                             <div>
                                 <label>

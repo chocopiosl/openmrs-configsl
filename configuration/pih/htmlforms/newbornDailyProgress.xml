@@ -215,7 +215,28 @@
             }
         </ifMode>
     </style>
-
+<ifMode mode="ENTER" include="true">
+    <script type="text/javascript">
+        jq(document).ready(function() {
+            let encounterDateValue = jq("#encounterDate .hasDatepicker");
+            if (encounterDateValue) {
+                const today = new Date();
+                let getDate = encounterDateValue.datepicker('getDate');
+                if (getDate) {
+                    currentEncounterDate = new Date(getDate);
+                    if (  (today.getFullYear() !== currentEncounterDate.getFullYear())
+                    || (today.getMonth() !== currentEncounterDate.getMonth())
+                    || (today.getDate() !== currentEncounterDate.getDate()) ) {
+                        // this is retrospective data entry, therefore the encounter datetime needs to be set at midnight by default
+                        jq('#encounterDate .hfe-hours').val('0');
+                        jq('#encounterDate .hfe-minutes').val('0');
+                        currentEncounterDate.setHours(0, 0, 0);
+                    }
+                }
+            }
+        });
+    </script>
+</ifMode>
 <ifMode mode="VIEW" include="false">
     <script type="text/javascript">
         jq(document).ready(function() {
