@@ -41,6 +41,10 @@
 
     <style type="text/css">
 
+        #general-form-error {
+            color: red;
+        }
+
         #who-when-where {
             margin-bottom: 6px;
             border-bottom: 1px solid #ccc;
