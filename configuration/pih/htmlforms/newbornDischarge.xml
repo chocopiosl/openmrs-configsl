@@ -501,16 +501,25 @@
         </div>
     </section>
 
+    <section id="labs" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Lab results">
+        <div class="section-container" >
+            <div style="width: 30%">
+                <!-- Serum glucose (CIEL:887) Test/Numeric with units-->
+                <label>
+                    <uimessage code="Blood glucose (RBG)" />
+                </label>
+                <span class="small">
+                    <obs conceptId="CIEL:887" id="glucose"
+                         showUnits="true" unitCssClass="append-to-value" />
+                </span>
+            </div>
+        </div>
+    </section>
+
     <section id="exam" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Physical exam">
         <div class="section-container">
-            <p id="rbg">
-                <label>
-                    <uimessage code="Random blood glucose (RBG)" />
-                </label>
-                <obs conceptId="CIEL:887" showUnits="true"/>
-            </p>
-
             <p>
                 <h4>
                     <uimessage code="Umbilical cord stump"/>
@@ -550,6 +559,7 @@
                             </template>
                             <render normAb="normalObs"   answer="PIH:3236"    comment="Clear" />
                             <render normAb="abnormalObs" answer="CIEL:127777" comment="Red eyes" />
+                            <render normAb="abnormalObs" answer="CIEL:160910" comment="Yellow eyes" />
                             <render normAb="abnormalObs" answer="CIEL:168745" comment="Sticky eyes"/>
                             <render normAb="abnormalObs" answer="CIEL:168747" comment="Sticky right eye"/>
                             <render normAb="abnormalObs" answer="CIEL:168746" comment="Sticky left eye"/>
@@ -641,17 +651,31 @@
                 </div>
             </p>
 
-            <h4>
-                <uimessage code="Feeding method"/>
-            </h4>
             <p class="side-by-side">
-                <obs conceptId="CIEL:1151" style="radio"
-                     answerConceptIds="CIEL:5632,CIEL:5254"
-                     answerCodes="Breastfed,Formula"/>
-                <br/>
-                <obs conceptId="CIEL:168734" style="radio"
-                     answerConceptIds="CIEL:168743,CIEL:168735,CIEL:168742"
-                     answerCodes="Tube,Cup,Spoon"/>
+                <h4>
+                    <uimessage code="pihcore.exam.neuro_exam"/>
+                </h4>
+                <div class="two-columns">
+                    <div>
+                        <p class="side-by-side">
+                            <obs conceptId="CIEL:1129" style="radio"
+                                 answerConceptIds="CIEL:1115,CIEL:1116"/>
+                        </p>
+
+                        <p class="side-by-side">
+                            <label>
+                                <uimessage code="Seizures" />
+                            </label>
+                            <obs conceptId="PIH:206" style="radio"
+                                 answerConceptIds="CIEL:1065,CIEL:1066"
+                                 answerCodes="yes,no"/>
+                        </p>
+                    </div>
+                    <div>
+                        <label>Comments about neurological exam</label>
+                        <obs conceptId="PIH:11570" style="text" />
+                    </div>
+                </div>
             </p>
         </div>
     </section>
@@ -756,6 +780,20 @@
         </div>
     </section>
 
+    <section id="feeding" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Feeding method">
+        <div class="section-container">
+            <p class="side-by-side">
+                <obs conceptId="CIEL:1151" style="radio"
+                     answerConceptIds="CIEL:5632,CIEL:5254"
+                     answerCodes="Breastfed,Formula"/>
+                <br/>
+                <obs conceptId="CIEL:168734" style="radio"
+                     answerConceptIds="CIEL:168743,CIEL:168735,CIEL:168742"
+                     answerCodes="Tube,Cup,Spoon"/>
+            </p>
+        </div>
+    </section>
 
     <section id="outcome" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Outcome">

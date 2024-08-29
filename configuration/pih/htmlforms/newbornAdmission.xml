@@ -625,19 +625,12 @@
                                     </span>
                                 </p>
                             </div>
-                            <div>
-                                <label>
-                                    <uimessage code="mirebalais.vitals.muac.navigation.title"/>
-                                </label>
-                                <obs conceptId="CIEL:1343" id="muac_c"
-                                     showUnits="true" unitsCssClass="append-to-value"/>
-                            </div>
+
                             <div>
                                 <p>
                                     <label>
                                         <uimessage code="Length"/>
                                     </label>
-                                    <br/>
                                     <obs conceptId="CIEL:5090" showUnits="true"/>
                                 </p>
                                 <p id="birthLengthBox" class="side-by-side hidden" >
@@ -649,11 +642,20 @@
                                     </span>
                                 </p>
                             </div>
+
                             <div>
                                 <label>
                                     <uimessage code="Head circumference"/>
                                 </label>
                                 <obs conceptId="CIEL:5314" showUnits="true"/>
+                            </div>
+
+                            <div>
+                                <label>
+                                    <uimessage code="mirebalais.vitals.muac.navigation.title"/>
+                                </label>
+                                <obs conceptId="CIEL:1343" id="muac_c"
+                                     showUnits="true" unitsCssClass="append-to-value"/>
                             </div>
                         </div>
                     </td>

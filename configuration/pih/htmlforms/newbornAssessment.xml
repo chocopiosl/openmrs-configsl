@@ -385,6 +385,15 @@
                     <div>
                         <p class="side-by-side">
                             <label>
+                                <uimessage code="Birth weight"/>
+                            </label>
+                            <obs conceptId="CIEL:5916" showUnits="true"/>
+                        </p>
+                    </div>
+
+                    <div>
+                        <p class="side-by-side">
+                            <label>
                                 <uimessage code="Birth length"/>
                             </label>
                             <obs conceptId="CIEL:163554" showUnits="true"/>
@@ -396,15 +405,6 @@
                                 <uimessage code="Head circumference"/>
                             </label>
                             <obs conceptId="CIEL:163555" showUnits="true"/>
-                        </p>
-                    </div>
-
-                    <div>
-                        <p class="side-by-side">
-                            <label>
-                                <uimessage code="Birth Weight"/>
-                            </label>
-                            <obs conceptId="CIEL:5916" showUnits="true"/>
                         </p>
                     </div>
                 </div>
