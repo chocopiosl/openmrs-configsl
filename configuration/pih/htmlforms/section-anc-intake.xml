@@ -512,7 +512,7 @@
                         <span id="calculated-gestational-age-label">
                             <uimessage code="pihcore.calculatedGestationalAge"/>:&#160;
                         </span>
-                        <span id='calculated-gestational-age-value' class="value"></span>
+                        <span id='calculated-gestational-age-value' class="calculated-gestational-age-value value"></span>
                     </span>
                 </div>
                 <div>
@@ -520,7 +520,7 @@
                         <span id="calculated-edd-label">
                             <uimessage code="pihcore.calculatedEstimatedDeliveryDate"/>:&#160;
                         </span>
-                        <span id='calculated-edd' class="value"></span>
+                        <span id='calculated-edd' class="calculated-edd value"></span>
                     </span>
                 </div>
             </div>
