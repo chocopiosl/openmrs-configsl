@@ -72,6 +72,32 @@
     }
   },
   {
+    "id": "pregnancy.dashboard.weightGraph",
+    "icon": "fas fa-fw fa-chart-bar",
+    "label": "WEIGHT",
+    "url": "/pihcore/visit/visit.page?patient={{patient.uuid}}#/visitList",
+    "extensions": [
+      {
+        "extensionPointId": "${program.pregnancy.uuid}.firstColumnFragments",
+        "order": 4,
+        "requiredPrivilege": "${privilege.app_coreapps_patient_dashboard}",
+        "require": null,
+        "extensionParams": {
+          "provider": "coreapps",
+          "fragment": "dashboardwidgets/dashboardWidget"
+        }
+      }
+    ],
+    "config": {
+      "widget": "obsgraph",
+      "icon": "fas fa-fw fa-chart-bar",
+      "label": "pih.app.hivWeightGraph.title",
+      "conceptId": "${concept.weightKG.uuid}",
+      "duringCurrentEnrollmentInProgram": "${program.pregnancy.uuid}",
+      "maxResults": "100"
+    }
+  },
+  {
     "id": "pregnancy.dashboard.postpartumDailyProgressEncounters",
     "icon": "fas fa-fw fa-user-md",
     "label": "POSTPARTUM DAILY PROGRESS",
