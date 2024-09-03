@@ -362,8 +362,11 @@
     "wardPatientCards": {
       "obsElementDefinitions": [
         {
+          "id": "gravida",
           "conceptUuid": "${concept.gravida.uuid}",
-          "id": "gravida"
+          "onlyWithinCurrentVisit": true,
+          "orderBy": "descending",
+          "limit": 1
         },
         {
           "id": "admission-reason",
