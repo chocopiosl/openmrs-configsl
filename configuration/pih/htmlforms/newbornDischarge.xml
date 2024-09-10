@@ -503,17 +503,63 @@
 
     <section id="labs" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Lab results">
-        <div class="section-container" >
-            <div style="width: 30%">
-                <!-- Serum glucose (CIEL:887) Test/Numeric with units-->
-                <label>
-                    <uimessage code="Blood glucose (RBG)" />
-                </label>
-                <span class="small">
-                    <obs conceptId="CIEL:887" id="glucose"
-                         showUnits="true" unitCssClass="append-to-value" />
-                </span>
-            </div>
+        <div class="section-container">
+            <table>
+                <tr>
+                    <td>
+                        <div class="four-columns">
+                            <div>
+                                <!-- Hb/Hemoglobin (CIEL:21) Test/Numeric with units -->
+                                <label>
+                                    <uimessage code="pihcore.lab.Hemoglobin"/>
+                                </label>
+                                <span class="small">
+                                    <obs conceptId="CIEL:21" id="hemoglobin"
+                                         showUnits="true" unitCssClass="append-to-value"/>
+                                </span>
+
+                            </div>
+
+                            <div>
+                                <!-- Serum glucose (CIEL:887) Test/Numeric with units-->
+                                <label>
+                                    <uimessage code="Blood glucose (RBG)" />
+                                </label>
+                                <span class="small">
+                                    <obs conceptId="CIEL:887" id="glucose"
+                                         showUnits="true" unitCssClass="append-to-value"/>
+                                </span>
+                            </div>
+
+                            <div>
+                                <p class="side-by-side">
+                                    <!-- MRDT (aka Malaria rapid test) (CIEL:1643) Test/coded -->
+                                    <label>
+                                        <uimessage code="MRDT"/>
+                                    </label>
+                                    <br/>
+                                    <span class="small">
+                                        <obs conceptId="CIEL:1643" style="radio"
+                                             answerConceptIds="CIEL:703,CIEL:664,CIEL:1138"
+                                             answerSeparator="&lt;br&gt;"/>
+                                    </span>
+                                </p>
+                            </div>
+
+                            <div>
+                                <!-- Total Bilirubin-->
+                                <label>
+                                    <uimessage code="pihcore.lab.bilirubin" />
+                                </label>
+                                <span class="small">
+                                    <obs conceptId="CIEL:655" id="tbilirubin"
+                                         showUnits="false" />
+                                </span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
     </section>
 
@@ -795,8 +841,8 @@
         </div>
     </section>
 
-    <section id="outcome" sectionTag="fieldset" headerTag="legend" headerStyle="title"
-             headerCode="Outcome">
+    <section id="plan" sectionTag="fieldset" headerTag="legend" headerStyle="title"
+             headerCode="Plan">
         <div class="section-container">
 
             <p class="side-by-side">
@@ -817,6 +863,19 @@
                 </div>
                 <div>
                     <label>
+                        <uimessage code="Social support recommendations" />
+                    </label>
+                    <repeat>
+                        <template>
+                            <obs conceptId="PIH:2157" style="checkbox"
+                                 answerConceptId="{answer}" />
+                        </template>
+                        <render answer="PIH:990"   name="Transport" />
+                        <render answer="CIEL:5254" name="Formula" />
+                    </repeat>
+                    <br/>
+
+                    <label>
                         <uimessage code="Treatment plan" />
                     </label>
                     <obs conceptId="CIEL:163104" style="textarea" />
@@ -829,6 +888,8 @@
     <section id="post-actions" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Post discharge">
         <div class="section-container">
+            <h3>Post discharge</h3>
+
             <div class="two-columns">
                 <div>
                     <label>

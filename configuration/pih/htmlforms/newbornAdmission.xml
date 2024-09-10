@@ -612,7 +612,7 @@
                         <render answer="CIEL:129559" name="Polyhydramnios" />
                         <render answer="CIEL:117703" name="Sickle cell anaemia" />
                         <render answer="CIEL:127459" name="Isoimmunization (Rhesus negative)" />
-                        <render answer="CIEL:124718" name="Thyroid disease." /> 
+                        <render answer="CIEL:124718" name="Thyroid disease." />
                         <render answer="CIEL:145438" name="Renal disease" />
                         <render answer="CIEL:111633" name="Urinary tract infection" />
                     </repeat>
@@ -843,7 +843,6 @@
             </table>
         </div>
     </section>
-
 
     <section id="exam" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Physical exam">
