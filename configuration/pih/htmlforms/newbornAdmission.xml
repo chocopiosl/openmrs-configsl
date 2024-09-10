@@ -601,7 +601,8 @@
                 <div>
                     <repeat>
                         <template>
-                            <obs conceptId="PIH:20542" style="checkbox"
+                            <!-- PIH:20542 -->
+                            <obs conceptId="PIH:3334" style="checkbox"
                                  answerConceptId="{answer}" />
                         </template>
                         <render answer="CIEL:129251" name="Pre-eclampsia" />
