@@ -338,6 +338,8 @@
         </includeIf>
     </ifMode>
 
+    <enrollInProgram programId="Infant" locationTag="Program Location " />
+
     <ifMode mode="VIEW" include="false">
         <section id="Overview" sectionTag="fieldset" headerTag="legend" headerStyle="title"
                  headerCode="Overview">

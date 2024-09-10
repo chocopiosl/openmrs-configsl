@@ -282,6 +282,8 @@
         </includeIf>
     </ifMode>
 
+    <enrollInProgram programId="Infant" locationTag="Program Location " />
+
      <section id="preg-complications" sectionTag="fieldset" headerTag="legend" headerStyle="title"
              headerCode="Pregnancy complications">
         <div class="section-container">
