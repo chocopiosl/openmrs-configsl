@@ -18,10 +18,6 @@ encounterType:
     uuid: "9cc89b83-e32f-410a-947d-aeb3bda37571"
   sierraLeoneMchNewbornRegister:
     uuid: "3790ecc6-bc63-48f8-9104-f81dc90ee21c"
-  sierraLeoneNewbornAdmission:
-    uuid: "093b6ffc-e55a-461a-85cc-c6acf7714a23"
-  sierraLeoneNewbornAssessment:
-    uuid: "6444b8d4-407d-444d-aa15-d6dff204ed83"
   sierraLeoneNewbornDailyProgress:
     uuid: "7e42e652-89e7-4559-80fd-41f42826c98c"
   sierraLeoneNewbornObs:
@@ -32,16 +28,8 @@ encounterType:
     uuid: "fb4318dd-cca9-4d20-bb31-0d4eba947d74"
   sierraLeoneLaborProgress:
     uuid: "ac5ec970-31b7-4659-9141-284bfbc13c69"
-  sierraLeoneLaborDeliverySummary:
-    uuid: "fec2cc56-e35f-42e1-8ae3-017142c1ca59"
-  sierraLeoneMaternalDischarge:
-    uuid: "2110a810-db62-4914-ba95-604b96010164"
-  sierraLeoneNewbornDischarge:
-    uuid: "153d3182-c76f-4047-b7f2-d83cf967b206"
   sierraLeonePostpartumProgress:
     uuid: "37f04ddf-9653-4a02-98b4-1c23734c2f15"
-  sierraLeoneMaternalAdmission:
-    uuid: "0ef67d23-0cf4-4a3e-8617-ac9d55bdd005"
   mentalHealthFollowup:
     uuid: "9d701a81-bb83-40ea-9efc-af50f05575f2"
   PATIENT_REGISTRATION:

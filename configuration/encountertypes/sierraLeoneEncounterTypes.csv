@@ -1,21 +1,15 @@
 Uuid,Void/Retire,Name,Description
 ${encounterType.sierraLeoneMaternalCheckin.uuid},,Sierra Leone Maternal Check-in,The check-in form for maternal health (MCOE) in Sierra Leone
 ${encounterType.sierraLeoneMCHTriage.uuid},,Sierra Leone MCH Triage,The triage form for maternal health (MCOE) in Sierra Leone
-${encounterType.sierraLeoneMaternalAdmission.uuid},TRUE,Sierra Leone Maternal Admission,The admission form for maternal health (MCOE) in Sierra Leone
 ${encounterType.sierraLeoneOutpatientInitial.uuid},,Sierra Leone Outpatient Initial,The outpatient intake form for Sierra Leone
 ${encounterType.sierraLeoneOutpatientFollowup.uuid},,Sierra Leone Outpatient Followup,The outpatient visit form for Sierra Leone
 ${encounterType.sierraLeoneMchDeliveryRegister.uuid},,Maternity and Delivery Register,The maternal delivery register for Sierra Leone
 ${encounterType.sierraLeoneMchNewbornRegister.uuid},,SCBU Newborn Register,The newborn (SCBU) register for Sierra Leone
 ${encounterType.mentalHealthFollowup.uuid},,Mental Health Follow-up,The followup form for mental health
-${encounterType.sierraLeoneNewbornAdmission.uuid},,Newborn Admission,Newborn admission at MCOE in Sierra Leone
-${encounterType.sierraLeoneNewbornAssessment.uuid},,Newborn Assessment,Newborn assessment at MCOE in Sierra Leone
 ${encounterType.sierraLeoneNewbornDailyProgress.uuid},,Newborn Daily Progress,Newborn daily progress at MCOE in Sierra Leone
 ${encounterType.sierraLeoneNewbornObs.uuid},,Newborn Observations,Newborn daily observations at MCOE in Sierra Leone
 ${encounterType.sierraLeoneNewbornReferral.uuid},,Newborn Referral,Newborn referral to NICU or SCBU at MCOE in Sierra Leone
 ${encounterType.sierraLeoneLaborProgress.uuid},,Labour Progress,Labor progression note at MCOE in Sierra Leone
-${encounterType.sierraLeoneLaborDeliverySummary.uuid},,Labor and Delivery Summary,Labor and Delivery Summary at MCOE in Sierra Leone
-${encounterType.sierraLeoneMaternalDischarge.uuid},,Maternal Discharge,Maternal Discharge in Sierra Leone
-${encounterType.sierraLeoneNewbornDischarge.uuid},,Newborn Discharge,Newborn Discharge in Sierra Leone
 ${encounterType.sierraLeonePostpartumProgress.uuid},,Postpartum progress,Postpartum Maternal Daily Progress in Sierra Leone
 ${encounterType.sierraLeoneNicuTriage.uuid},,NICU Triage,NICU Triage in Sierra Leone
 ${encounterType.sierraLeoneVitalsNCD.uuid},,Vitals for NCD,Vitals modified with glucose measurement for NCD clinic in Sierra Leone
