@@ -20,6 +20,7 @@
 
     <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.CleanDiagnosisConstructAction"/>
     <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.ApplyDispositionAction"/>
+    <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.PregnancyProgramEnrollmentAction"/>
 
     <translations defaultLocale="en">
         <code name="o2Sat">
