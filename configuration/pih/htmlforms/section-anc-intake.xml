@@ -16,6 +16,8 @@
           formName="Antenatal intake section"
           formVersion="1.1">
 
+    <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.PregnancyProgramEnrollmentAction"/>
+
     <style type="text/css">
 
         form fieldset {

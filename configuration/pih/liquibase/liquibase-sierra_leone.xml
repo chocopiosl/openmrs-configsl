@@ -103,4 +103,19 @@
          </comment>
          <sqlFile endDelimiter=";" path="sql/fix_data_from_wrong_htmlform_tags.sql" relativeToChangelogFile="true" stripComments="true" />
     </changeSet>
+    <changeSet id="20240913-migrate-program-locations" author="mgoodrich">
+        <comment>
+            SL-761 Fix Program Enrollment Locations for KGH and Wellbody
+        </comment>
+        <sql>
+            update program p, patient_program pp, location l, location pl
+                set pp.location_id = pl.location_id, pp.date_changed = now(), pp.changed_by = 1
+                where pp.location_id = l.location_id and pl.location_id = l.parent_location
+                and (pl.uuid = '0561303b-9868-4a1d-933d-fe52ce1b8c9f' or pl.uuid = '074b2ab0-716a-11eb-8aa6-0242ac110002' or pl.uuid = '067c83ad-6850-11ee-ab8d-0242ac120002');
+            update program p, patient_program pp, location l, location pl
+                set pp.location_id = pl.location_id, pp.date_changed = now(), pp.changed_by = 1
+                where pp.location_id = l.location_id and pl.location_id = l.parent_location
+                and (pl.uuid = '0561303b-9868-4a1d-933d-fe52ce1b8c9f' or pl.uuid = '074b2ab0-716a-11eb-8aa6-0242ac110002' or pl.uuid = '067c83ad-6850-11ee-ab8d-0242ac120002');
+        </sql>
+    </changeSet>
 </databaseChangeLog>

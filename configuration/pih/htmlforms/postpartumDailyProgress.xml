@@ -18,6 +18,8 @@
           formName="Postpartum Daily Progress"
           formEncounterType="37f04ddf-9653-4a02-98b4-1c23734c2f15" formVersion="1.0">
 
+    <postSubmissionAction class="org.openmrs.module.pihcore.htmlformentry.action.PregnancyProgramPostpartumTransitionAction"/>
+
     <translations defaultLocale="en">
         <code name="o2Sat">
             <variant locale="en" value="O&lt;sub&gt;2&lt;/sub&gt; Sat"/>

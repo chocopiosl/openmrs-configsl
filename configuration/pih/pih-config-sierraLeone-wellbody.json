@@ -7,7 +7,7 @@
 
   "locationTags": {
     "Login Location": ["Wellbody Clinic", "Wellbody MCH", "Wellbody NCD", "Wellbody Mental Health", "Wellbody Laboratory", "Wellbody Pharmacy"],
-    "Program Location": ["Wellbody MCH", "Wellbody NCD", "Wellbody Mental Health"]
+    "Program Location": ["Wellbody"]
   },
 
   "components": [
