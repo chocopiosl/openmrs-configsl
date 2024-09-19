@@ -384,13 +384,20 @@
           ]
         }
       ],
+      "identifierElementDefinitions": [
+        {
+          "id": "patient-kgh-emr-id",
+          "identifierTypeUuid": "${patientIdentifierType.kghEmrId.uuid}",
+          "label": ""
+        }
+      ],
       "cardDefinitions": [
         {
           "id": "default",
           "headerRowElements": [
+            "patient-kgh-emr-id",
             "patient-age",
             "patient-address",
-            "patient-identifier",
             "admission-reason",
             "time-since-admission"
           ],
@@ -417,6 +424,9 @@
   },
   "admission-request-note-card-row": {
     "conceptUuid": "${concept.freeTextComment.uuid}"
+  },
+  "mother-child-card-row": {
+    "rowElements": ["patient-kgh-emr-id", "patient-age", "patient-location"]
   }
 }
 
