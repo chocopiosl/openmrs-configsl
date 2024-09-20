@@ -72,6 +72,8 @@ queue:
 program:
   pregnancy:
     uuid: "6a5713c2-3fd5-46e7-8f25-36a0f7871e12"
+  infant:
+    uuid: "dc1b588a-9b94-45e4-8346-71b7c9a24845"
 
 programWorkflow:
   pregnancyProgramTypeOfTreatment:
@@ -82,4 +84,3 @@ programWorkflow:
         uuid: "a83896bf-9094-4a3c-b843-e75509a52b32"
       postpartum:
         uuid: "a735b5f6-0b63-4d9a-ae2e-70d08c947aed"
-
