@@ -199,7 +199,6 @@
                 // (this obs gets set automatically based on the other questions answers)
                 jq("span[id^='register-baby']").find("input[type='radio']").attr("disabled", true);
 
-<<<<<<< Updated upstream
                 function calculateTotalLaborTime() {
                     let totalHours = 0;
                     let totalMinutes = 0;
@@ -215,28 +214,6 @@
                         if ( totalMinutes  &amp;&amp; totalMinutes  &gt;= 60) {
                             totalHours = +totalHours + Math.floor(totalMinutes / 60);
                             totalMinutes = +(totalMinutes % 60);
-=======
-                jq("span[id^='dead-or-alive-']").find("input[type='radio']").change(function(event) {
-                    if (this.checked) {
-                        // navigate up the DOM to the parent .fetus div for this baby
-                        let parentDiv = jq(this).closest(".fetus");
-                        if (parentDiv) {
-                            //find the enclosed Register in EMR obs associated with this .fetus div
-                            let nextRegisterBaby = jq(parentDiv).find("span[id^='register-baby-']");
-                            let existingValue = getValue('register-baby-1.value');
-                            console.log("existingValue= " + existingValue);
-                            if (nextRegisterBaby) {
-                                let obsValue = jq(this).prop('value');
-                                let isRegisteredInEMR = jq(nextRegisterBaby).find("input[type='radio'][value='" + noConceptId + "']");
-                                if (isRegisteredInEMR) {
-                                    if ( obsValue === aliveConceptId) {
-                                        jq(isRegisteredInEMR).prop("checked", true);
-                                    } else {
-                                        jq(isRegisteredInEMR).prop("checked", true);
-                                    }
-                                }
-                            }
->>>>>>> Stashed changes
                         }
                     }
                     jq("#totalDuration_hours").find("input[type='text']").val(totalHours);
